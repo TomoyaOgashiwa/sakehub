@@ -1,0 +1,17 @@
+{
+  "name": "sakehub",
+  "private": true,
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "type-check": "turbo type-check",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "turbo": "latest",
+    "prettier": "latest",
+    "prettier-plugin-tailwindcss": "latest"
+  },
+  "packageManager": "pnpm@9.15.4"
+}

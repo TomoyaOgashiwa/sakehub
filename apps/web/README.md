@@ -1,5 +1,9 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Prerequisites
+
+Node.js 24+ and pnpm 11+ (see the repository root `README.md`).
+
 ## Getting Started
 
 First, run the development server:

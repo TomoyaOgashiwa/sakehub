@@ -16,30 +16,74 @@ A community platform for sake and spirits enthusiasts.
 
 ### Prerequisites
 
-- Node.js 20+
-- pnpm 9+
-- Go 1.23+
-- Docker & Docker Compose
-- Supabase CLI
+以下をあらかじめインストールしてください。
 
-### Setup
+- [Node.js 24+](https://nodejs.org/)
+- [pnpm 11+](https://pnpm.io/) — `corepack enable` のうえ `packageManager` に従う、または `npm install -g pnpm@11`
+- [Go 1.26+](https://go.dev/dl/)
+- [Docker](https://www.docker.com/)（Supabase CLI のローカルスタックが使用します）
+- [Supabase CLI](https://supabase.com/docs/guides/cli) — `brew install supabase/tap/supabase`
+
+### 1. リポジトリのセットアップ
 
 ```bash
-# Install dependencies
+# 依存関係インストール
 pnpm install
 
-# Copy environment variables
+# 環境変数ファイルを作成
 cp .env.example .env
-
-# Start Supabase local stack
-supabase start
-
-# Start Go API (via Docker)
-docker compose up api
-
-# Start web & mobile dev servers
-pnpm dev
 ```
+
+### 2. Supabase ローカル環境を起動
+
+```bash
+supabase start
+```
+
+起動後、ターミナルにキーが表示されます。`.env` の以下の値を更新してください。
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=http://localhost:54321
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<表示された anon / publishable key>
+SUPABASE_JWT_SECRET=<表示された JWT secret>
+DATABASE_URL=postgresql://postgres:postgres@127.0.0.1:54322/postgres
+```
+
+`anon` と `DATABASE_URL`、`JWT secret` は `supabase status` で再表示できます。
+
+### 3. Go API を起動
+
+Supabase が起動した状態で、ホスト上から API を実行します。
+
+```bash
+cd apps/api && air
+```
+
+ホットリロードが不要なら `go run ./cmd/server` でも構いません。本番コンテナビルド用の `Dockerfile` は `apps/api/Dockerfile` にあります。
+
+API は `http://localhost:8080` で起動します。  
+`GET /api/health` でレスポンスを確認できます。
+
+### 4. Web / Mobile 開発サーバーを起動
+
+```bash
+# Web と Mobile を同時に起動
+pnpm dev
+
+# 個別に起動する場合
+pnpm --filter @sakehub/web dev       # Web: http://localhost:3000
+pnpm --filter @sakehub/mobile dev    # Mobile: Expo DevTools が起動
+```
+
+### ローカル URL まとめ
+
+| サービス | URL |
+|---|---|
+| Web | http://localhost:3000 |
+| Go API | http://localhost:8080 |
+| Supabase API | http://localhost:54321 |
+| Supabase Studio | http://localhost:54323 |
+| PostgreSQL | localhost:54322 |
 
 ## Project Structure
 
@@ -53,6 +97,5 @@ sakehub/
 │   ├── types/      # Shared TypeScript types
 │   ├── utils/      # Shared utilities
 │   └── eslint-config/
-├── supabase/       # Supabase CLI project
-└── docker-compose.yml
+└── supabase/       # Supabase CLI project
 ```

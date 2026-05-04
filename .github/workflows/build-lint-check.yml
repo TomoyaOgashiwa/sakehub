@@ -30,8 +30,8 @@ jobs:
       # lintチェック（ESLintなど）
       - run: pnpm lint
 
-      # テスト実行（あれば）
-      - run: pnpm test
+      # TODO:テスト実行（今後テストコードを追加する場合）
+      # - run: pnpm test
 
       # buildチェック（壊れてないか確認）
       - run: pnpm build

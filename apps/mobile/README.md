@@ -4,13 +4,13 @@ Expo（React Native）製モバイルアプリ。iOS・Android・Web に対応�
 
 ## 技術スタック
 
-| 項目 | 技術 |
-|---|---|
-| フレームワーク | Expo ~54 / React Native 0.81 |
-| ルーティング | Expo Router v6（ファイルベース） |
-| スタイリング | NativeWind v4（Tailwind CSS） |
-| 認証 / DB | Supabase JS v2 |
-| データフェッチ | SWR v2 |
+| 項目           | 技術                                     |
+| -------------- | ---------------------------------------- |
+| フレームワーク | Expo ~54 / React Native 0.81             |
+| ルーティング   | Expo Router v6（ファイルベース）         |
+| スタイリング   | NativeWind v5 preview（Tailwind CSS v4） |
+| 認証 / DB      | Supabase JS v2                           |
+| データフェッチ | SWR v2                                   |
 
 ### 前提
 
@@ -42,11 +42,11 @@ apps/mobile/
 
 ルートの `.env` ファイルを参照します。Expo では `EXPO_PUBLIC_` プレフィックスが必要です。
 
-| 変数名 | 説明 |
-|---|---|
-| `EXPO_PUBLIC_SUPABASE_URL` | Supabase の URL（ローカル: `http://localhost:54321`） |
-| `EXPO_PUBLIC_SUPABASE_ANON_KEY` | Supabase の Anon Key |
-| `EXPO_PUBLIC_API_URL` | Go API の URL（ローカル: `http://localhost:8080`） |
+| 変数名                          | 説明                                                  |
+| ------------------------------- | ----------------------------------------------------- |
+| `EXPO_PUBLIC_SUPABASE_URL`      | Supabase の URL（ローカル: `http://localhost:54321`） |
+| `EXPO_PUBLIC_SUPABASE_ANON_KEY` | Supabase の Anon Key                                  |
+| `EXPO_PUBLIC_API_URL`           | Go API の URL（ローカル: `http://localhost:8080`）    |
 
 ## 起動方法
 
@@ -62,12 +62,12 @@ cd apps/mobile && npx expo start
 
 起動後、ターミナルに QR コードが表示されます。
 
-| 操作 | コマンド |
-|---|---|
-| iOS シミュレーター | `i` キーを押す |
-| Android エミュレーター | `a` キーを押す |
-| Web ブラウザ | `w` キーを押す |
-| 実機（Expo Go） | QR コードをスキャン |
+| 操作                   | コマンド            |
+| ---------------------- | ------------------- |
+| iOS シミュレーター     | `i` キーを押す      |
+| Android エミュレーター | `a` キーを押す      |
+| Web ブラウザ           | `w` キーを押す      |
+| 実機（Expo Go）        | QR コードをスキャン |
 
 ## Supabase との連携
 

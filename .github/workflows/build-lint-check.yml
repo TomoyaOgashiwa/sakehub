@@ -1,0 +1,39 @@
+name: CI
+
+# いつ実行するか
+on:
+  pull_request: # PR作成・更新時
+  push:
+    branches:
+      - main   # mainにpushされた時
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      # リポジトリを取得
+      - uses: actions/checkout@v4
+
+      # pnpmをセットアップ
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      # Node.jsをセットアップ
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "pnpm" # pnpmのcache有効化（高速化）
+
+      # 依存インストール（lockfile厳密）
+      - run: pnpm install --frozen-lockfile
+
+      # lintチェック（ESLintなど）
+      - run: pnpm lint
+
+      # テスト実行（あれば）
+      - run: pnpm test
+
+      # buildチェック（壊れてないか確認）
+      - run: pnpm build

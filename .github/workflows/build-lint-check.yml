@@ -1,4 +1,4 @@
-name: CI
+name: Build & Lint Check
 
 # いつ実行するか
 on:
@@ -17,13 +17,11 @@ jobs:
 
       # pnpmをセットアップ
       - uses: pnpm/action-setup@v4
-        with:
-          version: 10
 
       # Node.jsをセットアップ
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: "pnpm" # pnpmのcache有効化（高速化）
 
       # 依存インストール（lockfile厳密）
@@ -32,8 +30,8 @@ jobs:
       # lintチェック（ESLintなど）
       - run: pnpm lint
 
-      # テスト実行（あれば）
-      - run: pnpm test
+      # TODO:テスト実行（今後テストコードを追加する場合）
+      # - run: pnpm test
 
       # buildチェック（壊れてないか確認）
       - run: pnpm build

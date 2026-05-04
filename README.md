@@ -4,13 +4,13 @@ A community platform for sake and spirits enthusiasts.
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Monorepo | pnpm workspaces + Turborepo |
-| Web | Next.js 15 (App Router) + Tailwind CSS + shadcn/ui + SWR |
-| Mobile | Expo + React Native + NativeWind |
-| Backend | Go + Chi router |
-| Database | Supabase (PostgreSQL) |
+| Layer    | Technology                                               |
+| -------- | -------------------------------------------------------- |
+| Monorepo | pnpm workspaces + Turborepo                              |
+| Web      | Next.js 15 (App Router) + Tailwind CSS + shadcn/ui + SWR |
+| Mobile   | Expo + React Native + NativeWind                         |
+| Backend  | Go + Chi router                                          |
+| Database | Supabase (PostgreSQL)                                    |
 
 ## Getting Started
 
@@ -77,13 +77,13 @@ pnpm --filter @sakehub/mobile dev    # Mobile: Expo DevTools が起動
 
 ### ローカル URL まとめ
 
-| サービス | URL |
-|---|---|
-| Web | http://localhost:3000 |
-| Go API | http://localhost:8080 |
-| Supabase API | http://localhost:54321 |
+| サービス        | URL                    |
+| --------------- | ---------------------- |
+| Web             | http://localhost:3000  |
+| Go API          | http://localhost:8080  |
+| Supabase API    | http://localhost:54321 |
 | Supabase Studio | http://localhost:54323 |
-| PostgreSQL | localhost:54322 |
+| PostgreSQL      | localhost:54322        |
 
 ## Project Structure
 

@@ -4,13 +4,13 @@ Go 製 REST API サーバー。Chi ルーターを使用し、Supabase（Postgre
 
 ## 技術スタック
 
-| 項目 | 技術 |
-|---|---|
-| 言語 | Go 1.26+ |
-| ルーター | go-chi/chi v5 |
-| DB ドライバ | lib/pq |
-| ロガー | go.uber.org/zap |
-| ホットリロード | Air |
+| 項目           | 技術            |
+| -------------- | --------------- |
+| 言語           | Go 1.26+        |
+| ルーター       | go-chi/chi v5   |
+| DB ドライバ    | lib/pq          |
+| ロガー         | go.uber.org/zap |
+| ホットリロード | Air             |
 
 ## ディレクトリ構成
 
@@ -39,11 +39,11 @@ apps/api/
 
 ルートの `.env` ファイルで管理します。
 
-| 変数名 | デフォルト値 | 説明 |
-|---|---|---|
-| `API_PORT` | `8080` | サーバーのリッスンポート |
-| `DATABASE_URL` | `postgresql://postgres:postgres@127.0.0.1:54322/postgres` | Supabase CLI ローカル DB（`supabase status` と一致させる） |
-| `SUPABASE_JWT_SECRET` | ― | Supabase JWT 検証用シークレット |
+| 変数名                | デフォルト値                                              | 説明                                                       |
+| --------------------- | --------------------------------------------------------- | ---------------------------------------------------------- |
+| `API_PORT`            | `8080`                                                    | サーバーのリッスンポート                                   |
+| `DATABASE_URL`        | `postgresql://postgres:postgres@127.0.0.1:54322/postgres` | Supabase CLI ローカル DB（`supabase status` と一致させる） |
+| `SUPABASE_JWT_SECRET` | ―                                                         | Supabase JWT 検証用シークレット                            |
 
 ## 起動方法
 
@@ -70,10 +70,10 @@ go run ./cmd/server
 
 ## API エンドポイント
 
-| メソッド | パス | 説明 |
-|---|---|---|
-| `GET` | `/ping` | ヘルスチェック（Chi Heartbeat） |
-| `GET` | `/api/health` | アプリケーションヘルスチェック |
+| メソッド | パス          | 説明                            |
+| -------- | ------------- | ------------------------------- |
+| `GET`    | `/ping`       | ヘルスチェック（Chi Heartbeat） |
+| `GET`    | `/api/health` | アプリケーションヘルスチェック  |
 
 ## CORS 設定
 

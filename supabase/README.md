@@ -4,11 +4,11 @@ Supabase CLI で管理するローカル開発環境の設定・マイグレー�
 
 ## ローカル環境の構成
 
-| サービス | URL | 説明 |
-|---|---|---|
+| サービス         | URL                    | 説明                           |
+| ---------------- | ---------------------- | ------------------------------ |
 | API（PostgREST） | http://localhost:54321 | REST API / Auth エンドポイント |
-| PostgreSQL | localhost:54322 | データベース直接接続 |
-| Studio | http://localhost:54323 | Supabase ダッシュボード |
+| PostgreSQL       | localhost:54322        | データベース直接接続           |
+| Studio           | http://localhost:54323 | Supabase ダッシュボード        |
 
 設定は `config.toml` で管理しています。
 

@@ -17,8 +17,6 @@ jobs:
 
       # pnpmをセットアップ
       - uses: pnpm/action-setup@v4
-        with:
-          version: 11
 
       # Node.jsをセットアップ
       - uses: actions/setup-node@v4

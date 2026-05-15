@@ -6,7 +6,8 @@
     "build": "turbo build",
     "lint": "turbo lint",
     "type-check": "turbo type-check",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "supabase:seed": "supabase db query --local --file supabase/seed.sql"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

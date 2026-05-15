@@ -56,7 +56,7 @@ cd apps/api && go mod tidy
 
 ---
 
-## 3. ディレクトリ構成（クリーンアーキテクチャ）
+## 3. ディレクトリ構成（フィーチャーベース + 共有レイヤ）
 
 ```
 apps/api/
@@ -64,12 +64,19 @@ apps/api/
 │   └── server/
 │       └── main.go              # エントリポイント（HTTP サーバー起動 / graceful shutdown）
 ├── internal/
-│   ├── handler/                 # HTTP ハンドラ（リクエスト → service 呼び出し → レスポンス）
-│   ├── middleware/              # 認証・ロギング・リクエスト ID など
-│   ├── model/                   # ドメインモデル / DTO
-│   ├── repository/              # SQL（lib/pq）。インターフェース + 実装
-│   ├── router/                  # chi ルート定義
-│   └── service/                 # ビジネスロジック（repository を受け取る）
+│   ├── user/                    # user フィーチャー
+│   │   ├── handler.go           #   HTTP ハンドラ
+│   │   ├── model.go             #   ドメインモデル / DTO
+│   │   ├── service.go           #   ビジネスロジック
+│   │   └── repository.go        #   インターフェース + SQL 実装
+│   ├── drink/                   # drink フィーチャー
+│   │   ├── handler.go
+│   │   ├── model.go
+│   │   ├── service.go
+│   │   └── repository.go
+│   ├── middleware/              # 共有: 認証・ロギング等（フィーチャー化しない）
+│   ├── router/                  # 共有: chi ルート定義（フィーチャー化しない）
+│   └── handler/                 # 共有: インフラ系ハンドラ（health 等、フィーチャー化しない）
 ├── pkg/
 │   ├── config/                  # 環境変数読み込み（Config struct）
 │   ├── response/                # JSON レスポンスヘルパー
@@ -81,7 +88,26 @@ apps/api/
 └── go.sum
 ```
 
-**レイヤ依存方向**: `handler → service → repository → DB`。逆方向の import は禁止。
+### フィーチャーベースにするもの
+
+ドメインロジックを持つ機能単位ごとにディレクトリを切る。各フィーチャーの Go パッケージ名はフィーチャー名そのもの（`package user`, `package drink`）。
+
+- `handler.go` — HTTP ハンドラ（入出力のみ）
+- `model.go` — ドメインモデル / DTO
+- `service.go` — ビジネスロジック（repository をインターフェースで受け取る）
+- `repository.go` — インターフェース定義 + SQL 実装
+
+ファイルが大きくなった場合は `handler_create.go`, `handler_get.go` のようにサフィックスで分割する。
+
+### フィーチャーベースにしないもの（共有関心事）
+
+- **`internal/router/`** — 全フィーチャーのルートを集約する場所。各フィーチャーの handler をインポートして配線する。
+- **`internal/middleware/`** — 認証（JWT 検証）、ロギング等。複数フィーチャーで共有される横断的関心事。
+- **`internal/handler/`** — health check のようなドメインロジックを持たないインフラ系ハンドラ。
+
+### レイヤ依存ルール
+
+フィーチャーベースでも各フィーチャー内のレイヤ依存方向は維持する:
 
 ```
 handler (net/http)
@@ -93,16 +119,19 @@ repository (database/sql)
 PostgreSQL (Supabase)
 ```
 
-`internal/` 配下は **外部からの import 禁止** が Go 言語標準で保証される。再利用したいコードは `pkg/` に置く。
+- **フィーチャー間の直接 import は原則禁止**。フィーチャー間連携が必要な場合は service 層で interface を定義してインジェクトする。
+- `router` は各フィーチャーの handler を import する**唯一の集約ポイント**。
+- `middleware` はどのフィーチャーからも import 可能（ただし handler 層のみ）。
+- `internal/` 配下は **外部からの import 禁止** が Go 言語標準で保証される。再利用したいコードは `pkg/` に置く。
 
 ---
 
 ## 4. ルーティング規約（chi v5）
 
-`internal/router/router.go` の現状:
+`internal/router/router.go` の構成:
 
 ```go
-func New(logger *zap.Logger) *chi.Mux {
+func New(logger *zap.Logger, db *sql.DB) *chi.Mux {
   r := chi.NewRouter()
 
   r.Use(chimw.RequestID)
@@ -112,9 +141,14 @@ func New(logger *zap.Logger) *chi.Mux {
 
   r.Use(cors.Handler(cors.Options{ /* ... */ }))
 
+  // フィーチャーごとに DI を組み立て
+  userH := user.NewHandler(user.NewService(user.NewRepository(db)))
+  drinkH := drink.NewHandler(drink.NewService(drink.NewRepository(db)))
+
   r.Route("/api", func(r chi.Router) {
     r.Get("/health", handler.Health)
-    // 新規エンドポイントはここに追加
+    r.Route("/users", userH.Routes)
+    r.Route("/drinks", drinkH.Routes)
   })
 
   return r
@@ -140,53 +174,57 @@ func New(logger *zap.Logger) *chi.Mux {
 ## 5. ハンドラ実装パターン
 
 ```go
-// internal/handler/drink.go
-package handler
+// internal/drink/handler.go
+package drink
 
 import (
   "encoding/json"
   "net/http"
 
   "github.com/go-chi/chi/v5"
-  "github.com/sakehub/api/internal/service"
   "github.com/sakehub/api/pkg/response"
 )
 
-type DrinkHandler struct {
-  svc *service.DrinkService
+type Handler struct {
+  svc *Service
 }
 
-func NewDrinkHandler(svc *service.DrinkService) *DrinkHandler {
-  return &DrinkHandler{svc: svc}
+func NewHandler(svc *Service) *Handler {
+  return &Handler{svc: svc}
 }
 
-func (h *DrinkHandler) Get(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) Routes(r chi.Router) {
+  r.Get("/{id}", h.Get)
+  r.Post("/", h.Create)
+}
+
+func (h *Handler) Get(w http.ResponseWriter, r *http.Request) {
   id := chi.URLParam(r, "id")
 
-  drink, err := h.svc.GetByID(r.Context(), id)
+  d, err := h.svc.GetByID(r.Context(), id)
   if err != nil {
-    response.Error(w, r, err) // 内部で適切なステータスにマッピング
+    response.Error(w, http.StatusInternalServerError, err.Error())
     return
   }
 
-  response.JSON(w, http.StatusOK, drink)
+  response.JSON(w, http.StatusOK, d)
 }
 
-func (h *DrinkHandler) Create(w http.ResponseWriter, r *http.Request) {
-  var req service.CreateDrinkInput
+func (h *Handler) Create(w http.ResponseWriter, r *http.Request) {
+  var req CreateInput
   if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-    response.Error(w, r, response.ErrBadRequest("invalid json"))
+    response.Error(w, http.StatusBadRequest, "invalid json")
     return
   }
   defer r.Body.Close()
 
-  drink, err := h.svc.Create(r.Context(), req)
+  d, err := h.svc.Create(r.Context(), req)
   if err != nil {
-    response.Error(w, r, err)
+    response.Error(w, http.StatusInternalServerError, err.Error())
     return
   }
 
-  response.JSON(w, http.StatusCreated, drink)
+  response.JSON(w, http.StatusCreated, d)
 }
 ```
 
@@ -207,26 +245,23 @@ func (h *DrinkHandler) Create(w http.ResponseWriter, r *http.Request) {
 ## 6. サービス層
 
 ```go
-// internal/service/drink.go
-package service
+// internal/drink/service.go
+package drink
 
 import (
   "context"
   "fmt"
-
-  "github.com/sakehub/api/internal/model"
-  "github.com/sakehub/api/internal/repository"
 )
 
-type DrinkService struct {
-  repo repository.DrinkRepository
+type Service struct {
+  repo Repository
 }
 
-func NewDrinkService(repo repository.DrinkRepository) *DrinkService {
-  return &DrinkService{repo: repo}
+func NewService(repo Repository) *Service {
+  return &Service{repo: repo}
 }
 
-func (s *DrinkService) GetByID(ctx context.Context, id string) (*model.Drink, error) {
+func (s *Service) GetByID(ctx context.Context, id string) (*Drink, error) {
   d, err := s.repo.FindByID(ctx, id)
   if err != nil {
     return nil, fmt.Errorf("drink.GetByID: %w", err)
@@ -246,34 +281,32 @@ func (s *DrinkService) GetByID(ctx context.Context, id string) (*model.Drink, er
 ## 7. リポジトリ層（lib/pq）
 
 ```go
-// internal/repository/drink.go
-package repository
+// internal/drink/repository.go
+package drink
 
 import (
   "context"
   "database/sql"
   "errors"
-
-  "github.com/sakehub/api/internal/model"
 )
 
-type DrinkRepository interface {
-  FindByID(ctx context.Context, id string) (*model.Drink, error)
-  Insert(ctx context.Context, d *model.Drink) error
+type Repository interface {
+  FindByID(ctx context.Context, id string) (*Drink, error)
+  Insert(ctx context.Context, d *Drink) error
 }
 
-type drinkRepo struct {
+type repository struct {
   db *sql.DB
 }
 
-func NewDrinkRepository(db *sql.DB) DrinkRepository {
-  return &drinkRepo{db: db}
+func NewRepository(db *sql.DB) Repository {
+  return &repository{db: db}
 }
 
-func (r *drinkRepo) FindByID(ctx context.Context, id string) (*model.Drink, error) {
+func (r *repository) FindByID(ctx context.Context, id string) (*Drink, error) {
   const q = `SELECT id, name, category, abv FROM drinks WHERE id = $1`
 
-  var d model.Drink
+  var d Drink
   err := r.db.QueryRowContext(ctx, q, id).Scan(&d.ID, &d.Name, &d.Category, &d.ABV)
   if errors.Is(err, sql.ErrNoRows) {
     return nil, ErrNotFound
@@ -418,7 +451,7 @@ func Load() Config {
 
 ## 11. テスト方針
 
-- ユニット: `internal/service/*_test.go` で repository をインターフェースモック化してテスト。
+- ユニット: `internal/<feature>/service_test.go` で repository をインターフェースモック化してテスト。
 - ハンドラ: `httptest.NewRecorder` + `httptest.NewRequest` でルータを叩く。
 - DB を実際に叩く統合テストは `testcontainers-go` か **Supabase ローカル**を `supabase start` した状態で別パッケージに分離（`//go:build integration` タグ）。
 - `t.Cleanup` で資源を解放し、`t.Parallel()` を可能な限り付ける。

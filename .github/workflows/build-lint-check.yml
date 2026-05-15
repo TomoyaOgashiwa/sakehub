@@ -5,7 +5,7 @@ on:
   pull_request: # PR作成・更新時
   push:
     branches:
-      - main   # mainにpushされた時
+      - main # mainにpushされた時
 
 jobs:
   check:
@@ -22,7 +22,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: "pnpm" # pnpmのcache有効化（高速化）
+          cache: 'pnpm' # pnpmのcache有効化（高速化）
 
       # 依存インストール（lockfile厳密）
       - run: pnpm install --frozen-lockfile

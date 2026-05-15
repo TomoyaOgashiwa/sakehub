@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"database/sql"
 	"fmt"
 	"net/http"
 	"os"
@@ -10,6 +11,7 @@ import (
 	"time"
 
 	"github.com/joho/godotenv"
+	_ "github.com/lib/pq"
 	"go.uber.org/zap"
 
 	"github.com/sakehub/api/internal/router"
@@ -24,7 +26,20 @@ func main() {
 
 	cfg := config.Load()
 
-	r := router.New(logger)
+	db, err := sql.Open("postgres", cfg.DatabaseURL)
+	if err != nil {
+		logger.Fatal("failed to open database", zap.Error(err))
+	}
+	defer db.Close()
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	if err := db.PingContext(ctx); err != nil {
+		logger.Fatal("failed to ping database", zap.Error(err))
+	}
+	logger.Info("database connected")
+
+	r := router.New(logger, db)
 
 	srv := &http.Server{
 		Addr:         fmt.Sprintf(":%s", cfg.Port),
@@ -47,10 +62,10 @@ func main() {
 
 	logger.Info("shutting down server...")
 
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
+	shutdownCtx, shutdownCancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer shutdownCancel()
 
-	if err := srv.Shutdown(ctx); err != nil {
+	if err := srv.Shutdown(shutdownCtx); err != nil {
 		logger.Fatal("server forced to shutdown", zap.Error(err))
 	}
 

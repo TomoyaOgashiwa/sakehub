@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"net/http"
+	"strconv"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/sakehub/api/pkg/response"
@@ -18,8 +19,39 @@ func NewHandler(svc *Service) *Handler {
 }
 
 func (h *Handler) Routes(r chi.Router) {
+	r.Get("/", h.List)
 	r.Get("/{id}", h.Get)
 	r.Post("/", h.Create)
+}
+
+func (h *Handler) List(w http.ResponseWriter, r *http.Request) {
+	q := r.URL.Query()
+
+	limit, _ := strconv.Atoi(q.Get("limit"))
+	if limit <= 0 {
+		limit = 20
+	}
+	offset, _ := strconv.Atoi(q.Get("offset"))
+
+	params := ListParams{
+		Category: q.Get("category"),
+		Query:    q.Get("q"),
+		Limit:    limit,
+		Offset:   offset,
+	}
+
+	drinks, total, err := h.svc.List(r.Context(), params)
+	if err != nil {
+		response.Error(w, http.StatusInternalServerError, "internal server error")
+		return
+	}
+
+	response.JSON(w, http.StatusOK, map[string]any{
+		"data":   drinks,
+		"total":  total,
+		"limit":  limit,
+		"offset": offset,
+	})
 }
 
 func (h *Handler) Get(w http.ResponseWriter, r *http.Request) {

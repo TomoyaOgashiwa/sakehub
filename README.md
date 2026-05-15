@@ -51,6 +51,9 @@ DATABASE_URL=postgresql://postgres:postgres@127.0.0.1:54322/postgres
 
 `anon` と `DATABASE_URL`、`JWT secret` は `supabase status` で再表示できます。
 
+スキーマとシードをまとめて当てたいときは **`supabase db reset`**（DB が空に近い状態から、migrations → `seed.sql` の順で適用）を使います。  
+マイグレーションは済んでおり **`seed.sql` だけ載せたい**ときは、リポジトリルートで **`pnpm supabase:seed`** です。
+
 ### 3. Go API を起動
 
 Supabase が起動した状態で、ホスト上から API を実行します。

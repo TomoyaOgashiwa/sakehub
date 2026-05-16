@@ -20,6 +20,7 @@ func NewHandler(svc *Service) *Handler {
 
 func (h *Handler) Routes(r chi.Router) {
 	r.Get("/", h.List)
+	r.Get("/by-slug/{slug}", h.GetBySlug)
 	r.Get("/{id}", h.Get)
 	r.Post("/", h.Create)
 }
@@ -58,6 +59,22 @@ func (h *Handler) Get(w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
 
 	d, err := h.svc.GetByID(r.Context(), id)
+	if err != nil {
+		if errors.Is(err, ErrNotFound) {
+			response.Error(w, http.StatusNotFound, "drink not found")
+			return
+		}
+		response.Error(w, http.StatusInternalServerError, "internal server error")
+		return
+	}
+
+	response.JSON(w, http.StatusOK, d)
+}
+
+func (h *Handler) GetBySlug(w http.ResponseWriter, r *http.Request) {
+	slug := chi.URLParam(r, "slug")
+
+	d, err := h.svc.GetBySlug(r.Context(), slug)
 	if err != nil {
 		if errors.Is(err, ErrNotFound) {
 			response.Error(w, http.StatusNotFound, "drink not found")

@@ -1,5 +1,10 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+
+import { Footer } from '@/components/layouts/footer';
+import { Header } from '@/components/layouts/header';
+
+import { SWRProvider } from './swr-config';
 import './globals.css';
 
 const geistSans = Geist({
@@ -34,7 +39,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col">
+        <SWRProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </SWRProvider>
+      </body>
     </html>
   );
 }

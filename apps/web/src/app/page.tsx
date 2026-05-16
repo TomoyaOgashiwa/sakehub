@@ -5,6 +5,8 @@ import { DrinkListClient } from '@/components/drinks/drink-list-client';
 import { DrinkGridSkeleton } from '@/components/drinks/drink-card-skeleton';
 import { fetchDrinksServer } from '@/lib/drinks-api.server';
 
+export const dynamic = 'force-dynamic';
+
 export default function Home() {
   return (
     <>

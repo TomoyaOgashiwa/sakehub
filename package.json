@@ -10,7 +10,7 @@
     "supabase:seed": "supabase db query --local --file supabase/seed.sql"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.1",
+    "@eslint/js": "^10.0.1",
     "@typescript-eslint/eslint-plugin": "^8.46.3",
     "@typescript-eslint/parser": "^8.46.3",
     "eslint": "^9.39.1",

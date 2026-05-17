@@ -2,8 +2,8 @@
 
 import { useSearchParams } from 'next/navigation';
 
-import type { DrinkListResult } from '@/lib/drinks-api';
-import { useDrinks } from '@/hooks/use-drinks';
+import type { DrinkListResult } from '@/application/drinks-api';
+import { useDrinks } from '@/application/use-drinks';
 
 import { CategoryFilter } from './category-filter';
 import { DrinkSearch } from './drink-search';

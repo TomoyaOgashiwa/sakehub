@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from 'next/navigation';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils/utils';
 import { MAIN_FILTER_CATEGORIES } from '@/config/drinks';
 
 export function CategoryFilter() {

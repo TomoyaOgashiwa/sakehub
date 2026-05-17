@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useRef, useState, useTransition } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import { Search } from 'lucide-react';
 
 import { Input } from '@/components/ui/input';
@@ -21,14 +21,14 @@ interface DrinkSearchInputProps {
 function DrinkSearchInput({ initialQuery }: DrinkSearchInputProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const isComposingRef = useRef(false);
+  const [isComposing, setIsComposing] = useState(false);
   const [isPending, startTransition] = useTransition();
 
   const [query, setQuery] = useState(initialQuery);
   const debouncedQuery = useDebounce(query, 300);
 
   useEffect(() => {
-    if (isComposingRef.current) {
+    if (isComposing) {
       return;
     }
 
@@ -46,18 +46,18 @@ function DrinkSearchInput({ initialQuery }: DrinkSearchInputProps) {
       params.delete('offset');
       router.replace(`/?${params.toString()}`, { scroll: false });
     });
-  }, [debouncedQuery, initialQuery, router, searchParams, startTransition]);
+  }, [debouncedQuery, isComposing, initialQuery, router, searchParams, startTransition]);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setQuery(e.target.value);
   }
 
   function handleCompositionStart() {
-    isComposingRef.current = true;
+    setIsComposing(true);
   }
 
   function handleCompositionEnd(e: React.CompositionEvent<HTMLInputElement>) {
-    isComposingRef.current = false;
+    setIsComposing(false);
     setQuery(e.currentTarget.value);
   }
 

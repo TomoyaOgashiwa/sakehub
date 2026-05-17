@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 
-import { fetchDrinksServer } from '@/lib/drinks-api.server';
+import { fetchDrinksServer } from '@/application/drinks-api.server';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:3000';

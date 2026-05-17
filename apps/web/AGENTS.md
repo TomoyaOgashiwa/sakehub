@@ -65,11 +65,17 @@ apps/web/
 │   ├── components/
 │   │   ├── layouts/         # header, footer など枠
 │   │   └── ui/              # shadcn 生成コンポーネント
+│   ├── application/         # API / SWR / fetch に関わる処理
+│   │   ├── api-client.ts
+│   │   ├── server-api.ts
+│   │   ├── drinks-api.ts
+│   │   ├── drinks-api.server.ts
+│   │   └── use-drinks.ts
 │   ├── config/              # サイト全体の定数（メニュー定義等）
-│   ├── hooks/               # カスタム React Hooks
+│   ├── hooks/               # API 非依存の use* カスタム Hooks
 │   ├── lib/
-│   │   ├── api-client.ts    # Go API 呼び出し
-│   │   ├── supabase/{client,server}.ts
+│   │   └── supabase/{client,server}.ts
+│   ├── utils/               # API 非依存かつ use* 以外のユーティリティ
 │   │   └── utils.ts         # cn() など
 │   └── types/
 ├── components.json          # shadcn 設定
@@ -78,6 +84,12 @@ apps/web/
 ├── postcss.config.mjs       # @tailwindcss/postcss
 └── tsconfig.json            # paths: { "@/*": ["./src/*"] }
 ```
+
+**配置ルール（優先順位つき）**:
+
+1. `useSWR` 使用、または `fetch` を使うファイルはすべて `src/application/` 配下に置く（`use*` 命名でもこちらを優先）。
+2. それ以外で `use` から始まるファイル名は `src/hooks/` 配下に置く。
+3. それ以外（`use*` 以外）は `src/utils/` 配下に置く。
 
 **ルーティング規約**:
 
@@ -212,7 +224,7 @@ export default async function Page({ params }: PageProps) {
   "iconLibrary": "lucide",
   "aliases": {
     "components": "@/components",
-    "utils": "@/lib/utils",
+    "utils": "@/utils/utils",
     "ui": "@/components/ui",
     "lib": "@/lib",
     "hooks": "@/hooks"
@@ -227,7 +239,7 @@ export default async function Page({ params }: PageProps) {
   ```
 - 生成された `src/components/ui/*.tsx` は手で大胆に書き換えてよい（コピーオン書き込み）。
 - アイコンは `lucide-react` 一択。Heroicons / FontAwesome を混ぜない。
-- バリアントは `class-variance-authority`、結合は `tailwind-merge` + `clsx` をラップした `cn()`（`@/lib/utils`）を使う。
+- バリアントは `class-variance-authority`、結合は `tailwind-merge` + `clsx` をラップした `cn()`（`@/utils/utils`）を使う。
 
 ---
 
@@ -257,7 +269,7 @@ export default async function DrinksPage() {
 
 ### Go API 呼び出し
 
-- 共通クライアント `src/lib/api-client.ts` を経由する。
+- 共通クライアント `src/application/api-client.ts` を経由する。
 - ベース URL は `process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8080'`。
 - 認証必須エンドポイントは `Authorization: Bearer ${supabaseAccessToken}` を付与。
 

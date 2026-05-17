@@ -1,37 +1,64 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useRef, useTransition } from 'react';
+import { useEffect, useRef, useState, useTransition } from 'react';
 import { Search } from 'lucide-react';
 
 import { Input } from '@/components/ui/input';
+import { useDebounce } from '@/hooks/use-debounce';
 
 export function DrinkSearch() {
+  const searchParams = useSearchParams();
+  const currentQuery = searchParams.get('q') ?? '';
+
+  return <DrinkSearchInput key={currentQuery} initialQuery={currentQuery} />;
+}
+
+interface DrinkSearchInputProps {
+  initialQuery: string;
+}
+
+function DrinkSearchInput({ initialQuery }: DrinkSearchInputProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const timerRef = useRef<ReturnType<typeof setTimeout>>(null);
+  const isComposingRef = useRef(false);
   const [isPending, startTransition] = useTransition();
 
-  const defaultValue = searchParams.get('q') ?? '';
+  const [query, setQuery] = useState(initialQuery);
+  const debouncedQuery = useDebounce(query, 300);
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    if (timerRef.current) {
-      clearTimeout(timerRef.current);
+  useEffect(() => {
+    if (isComposingRef.current) {
+      return;
     }
 
-    const value = e.target.value;
-    timerRef.current = setTimeout(() => {
-      startTransition(() => {
-        const params = new URLSearchParams(searchParams.toString());
-        if (value) {
-          params.set('q', value);
-        } else {
-          params.delete('q');
-        }
-        params.delete('offset');
-        router.push(`/?${params.toString()}`, { scroll: false });
-      });
-    }, 300);
+    if (debouncedQuery === initialQuery) {
+      return;
+    }
+
+    startTransition(() => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (debouncedQuery) {
+        params.set('q', debouncedQuery);
+      } else {
+        params.delete('q');
+      }
+      params.delete('offset');
+      router.replace(`/?${params.toString()}`, { scroll: false });
+    });
+  }, [debouncedQuery, initialQuery, router, searchParams, startTransition]);
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setQuery(e.target.value);
+  }
+
+  function handleCompositionStart() {
+    isComposingRef.current = true;
+  }
+
+  function handleCompositionEnd(e: React.CompositionEvent<HTMLInputElement>) {
+    isComposingRef.current = false;
+    setQuery(e.currentTarget.value);
   }
 
   return (
@@ -43,8 +70,10 @@ export function DrinkSearch() {
       <Input
         type="search"
         placeholder="お酒を検索..."
-        defaultValue={defaultValue}
+        value={query}
         onChange={handleChange}
+        onCompositionStart={handleCompositionStart}
+        onCompositionEnd={handleCompositionEnd}
         className="h-10 pl-9"
         aria-label="お酒をキーワードで検索"
         data-pending={isPending || undefined}

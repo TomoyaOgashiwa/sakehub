@@ -7,7 +7,7 @@ import { ArrowLeft, Wine } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { JsonLd } from '@/components/json-ld';
-import { fetchDrinkBySlugServer } from '@/lib/drinks-api.server';
+import { fetchDrinkBySlugServer } from '@/application/drinks-api.server';
 
 type PageProps = {
   params: Promise<{ slug: string }>;

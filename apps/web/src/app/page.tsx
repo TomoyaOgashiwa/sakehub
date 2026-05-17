@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 import { JsonLd } from '@/components/json-ld';
 import { DrinkListClient } from '@/components/drinks/drink-list-client';
 import { DrinkGridSkeleton } from '@/components/drinks/drink-card-skeleton';
-import { fetchDrinksServer } from '@/lib/drinks-api.server';
+import { fetchDrinksServer } from '@/application/drinks-api.server';
 
 export const dynamic = 'force-dynamic';
 

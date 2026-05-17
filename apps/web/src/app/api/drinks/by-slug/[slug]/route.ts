@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { serverFetch } from '@/lib/server-api';
+import { serverFetch } from '@/application/server-api';
 
 type RouteParams = {
   params: Promise<{ slug: string }>;

@@ -5,6 +5,7 @@ import (
 	"errors"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/sakehub/api/pkg/response"
@@ -36,7 +37,7 @@ func (h *Handler) List(w http.ResponseWriter, r *http.Request) {
 
 	params := ListParams{
 		Category: q.Get("category"),
-		Query:    q.Get("q"),
+		Query:    strings.TrimSpace(q.Get("q")),
 		Limit:    limit,
 		Offset:   offset,
 	}

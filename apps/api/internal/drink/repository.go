@@ -71,7 +71,9 @@ func (r *repository) FindBySlug(ctx context.Context, slug string) (*Drink, error
 }
 
 // List returns drinks matching the given filters along with the total count.
-// Filtering by category and full-text search query are both optional.
+// Filtering by category is optional. Search matches full-text (simple) plus
+// case-insensitive substring on name/name_en/manufacturer/description (Japanese-friendly).
+// COUNT(*) OVER() is used so that the total and the page data are fetched in a single query.
 func (r *repository) List(ctx context.Context, params ListParams) ([]Drink, int, error) {
 	var (
 		conditions []string
@@ -87,19 +89,22 @@ func (r *repository) List(ctx context.Context, params ListParams) ([]Drink, int,
 
 	if params.Query != "" {
 		argIdx++
-		conditions = append(conditions, fmt.Sprintf("search_vector @@ plainto_tsquery('simple', $%d)", argIdx))
+		ph := fmt.Sprintf("$%d", argIdx)
+		// FTS (simple) is weak on unsegmented CJK; OR with strpos enables Japanese name substring matches.
+		match := fmt.Sprintf(`(
+(search_vector @@ plainto_tsquery('simple', %s))
+OR strpos(name, %s) > 0
+OR strpos(lower(COALESCE(name_en, '')), lower(%s)) > 0
+OR strpos(lower(COALESCE(manufacturer, '')), lower(%s)) > 0
+OR strpos(lower(description), lower(%s)) > 0
+)`, ph, ph, ph, ph, ph)
+		conditions = append(conditions, match)
 		args = append(args, params.Query)
 	}
 
 	where := ""
 	if len(conditions) > 0 {
 		where = "WHERE " + strings.Join(conditions, " AND ")
-	}
-
-	countQ := fmt.Sprintf(`SELECT COUNT(*) FROM drinks %s`, where)
-	var total int
-	if err := r.db.QueryRowContext(ctx, countQ, args...).Scan(&total); err != nil {
-		return nil, 0, err
 	}
 
 	limit := params.Limit
@@ -117,8 +122,10 @@ func (r *repository) List(ctx context.Context, params ListParams) ([]Drink, int,
 	offsetPlaceholder := fmt.Sprintf("$%d", argIdx)
 	args = append(args, limit, offset)
 
+	// COUNT(*) OVER() returns the total matching rows alongside each data row,
+	// eliminating the need for a separate COUNT query.
 	q := fmt.Sprintf(
-		`SELECT %s FROM drinks %s ORDER BY created_at DESC LIMIT %s OFFSET %s`,
+		`SELECT %s, COUNT(*) OVER() AS total FROM drinks %s ORDER BY created_at DESC LIMIT %s OFFSET %s`,
 		allColumns, where, limitPlaceholder, offsetPlaceholder,
 	)
 
@@ -128,13 +135,17 @@ func (r *repository) List(ctx context.Context, params ListParams) ([]Drink, int,
 	}
 	defer rows.Close()
 
-	var drinks []Drink
+	var (
+		drinks []Drink
+		total  int
+	)
 	for rows.Next() {
 		var d Drink
 		if err := rows.Scan(
 			&d.ID, &d.Slug, &d.Name, &d.NameEn, &d.Category, &d.Subcategory,
 			&d.Description, &d.ImageURL, &d.ABV, &d.OriginCountry, &d.Manufacturer,
 			&d.AverageRating, &d.TotalReviews, &d.CreatedAt, &d.UpdatedAt,
+			&total,
 		); err != nil {
 			return nil, 0, err
 		}

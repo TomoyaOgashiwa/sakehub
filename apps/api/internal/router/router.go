@@ -10,10 +10,12 @@ import (
 
 	"github.com/sakehub/api/internal/drink"
 	"github.com/sakehub/api/internal/handler"
+	"github.com/sakehub/api/internal/middleware"
 	"github.com/sakehub/api/internal/user"
+	"github.com/sakehub/api/pkg/config"
 )
 
-func New(logger *zap.Logger, db *sql.DB) *chi.Mux {
+func New(logger *zap.Logger, db *sql.DB, cfg *config.Config) *chi.Mux {
 	r := chi.NewRouter()
 
 	r.Use(chimw.RequestID)
@@ -35,8 +37,12 @@ func New(logger *zap.Logger, db *sql.DB) *chi.Mux {
 
 	r.Route("/api", func(r chi.Router) {
 		r.Get("/health", handler.Health)
-		r.Route("/users", userH.Routes)
 		r.Route("/drinks", drinkH.Routes)
+
+		r.Group(func(r chi.Router) {
+			r.Use(middleware.RequireAuth(cfg.JWTSecret))
+			r.Route("/users", userH.Routes)
+		})
 	})
 
 	return r

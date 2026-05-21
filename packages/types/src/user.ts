@@ -3,6 +3,7 @@ export type User = {
   email: string;
   displayName: string;
   avatarUrl?: string;
+  loginType: string;
   createdAt: string;
   updatedAt: string;
 };

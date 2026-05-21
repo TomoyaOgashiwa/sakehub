@@ -39,7 +39,7 @@ func main() {
 	}
 	logger.Info("database connected")
 
-	r := router.New(logger, db)
+	r := router.New(logger, db, cfg)
 
 	srv := &http.Server{
 		Addr:         fmt.Sprintf(":%s", cfg.Port),

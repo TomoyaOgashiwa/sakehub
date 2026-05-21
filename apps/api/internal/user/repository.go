@@ -21,11 +21,11 @@ func NewRepository(db *sql.DB) Repository {
 }
 
 func (r *repository) FindByID(ctx context.Context, id string) (*User, error) {
-	const q = `SELECT id, email, username, avatar_url, created_at, updated_at FROM users WHERE id = $1`
+	const q = `SELECT id, email, display_name, avatar_url, login_type, created_at, updated_at FROM users WHERE id = $1`
 
 	var u User
 	err := r.db.QueryRowContext(ctx, q, id).Scan(
-		&u.ID, &u.Email, &u.Username, &u.AvatarURL, &u.CreatedAt, &u.UpdatedAt,
+		&u.ID, &u.Email, &u.DisplayName, &u.AvatarURL, &u.LoginType, &u.CreatedAt, &u.UpdatedAt,
 	)
 	if errors.Is(err, sql.ErrNoRows) {
 		return nil, ErrNotFound

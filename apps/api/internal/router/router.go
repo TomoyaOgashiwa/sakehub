@@ -8,6 +8,7 @@ import (
 	"github.com/go-chi/cors"
 	"go.uber.org/zap"
 
+	"github.com/sakehub/api/internal/cocktail"
 	"github.com/sakehub/api/internal/drink"
 	"github.com/sakehub/api/internal/handler"
 	"github.com/sakehub/api/internal/middleware"
@@ -34,6 +35,7 @@ func New(logger *zap.Logger, db *sql.DB, cfg *config.Config) *chi.Mux {
 
 	userH := user.NewHandler(user.NewService(user.NewRepository(db)))
 	drinkH := drink.NewHandler(drink.NewService(drink.NewRepository(db)))
+	cocktailH := cocktail.NewHandler(cocktail.NewService(cocktail.NewRepository(db)))
 
 	r.Route("/api", func(r chi.Router) {
 		r.Get("/health", handler.Health)
@@ -42,6 +44,7 @@ func New(logger *zap.Logger, db *sql.DB, cfg *config.Config) *chi.Mux {
 		r.Group(func(r chi.Router) {
 			r.Use(middleware.RequireAuth(cfg.JWTSecret))
 			r.Route("/users", userH.Routes)
+			r.Route("/cocktail-recipes", cocktailH.Routes)
 		})
 	})
 

@@ -78,6 +78,7 @@ flowchart TD
 Create via `supabase migration new create_users` then write SQL.
 
 **Table schema** (`public.users`):
+
 - `id` UUID PK, references `auth.users(id)` ON DELETE CASCADE
 - `email` TEXT UNIQUE NOT NULL
 - `display_name` TEXT NOT NULL DEFAULT ''
@@ -88,6 +89,7 @@ Create via `supabase migration new create_users` then write SQL.
 **Trigger**: `handle_new_user()` -- on `auth.users` INSERT, auto-creates a `public.users` row extracting `id`, `email`, and determining `login_type` from `raw_app_meta_data->>'provider'`.
 
 **RLS Policies**:
+
 - `SELECT`: authenticated users can read any user (`USING (true)` for authenticated role)
 - `UPDATE`: only own row (`USING (auth.uid() = id)`)
 - No INSERT from client (trigger handles it)
@@ -109,7 +111,7 @@ Match all routes except static assets (`_next/static`, `_next/image`, `favicon.i
 
 ### 3. Web: Auth Server Actions
 
-Create [`apps/web/src/app/(auth)/actions.ts`](apps/web/src/app/(auth)/actions.ts) with `'use server'` directive:
+Create [`apps/web/src/app/(auth)/actions.ts`](<apps/web/src/app/(auth)/actions.ts>) with `'use server'` directive:
 
 - **`signIn(prevState, formData)`** -- calls `supabase.auth.signInWithPassword()`, redirects to `/` on success, returns `{ ok: false, error }` on failure
 - **`signUp(prevState, formData)`** -- calls `supabase.auth.signUp()`, redirects to `/` on success, returns error object on failure
@@ -121,17 +123,20 @@ All actions use the server Supabase client from [`apps/web/src/lib/supabase/serv
 
 ### 4. Web: Auth Pages (route group `(auth)`)
 
-**Layout** -- [`apps/web/src/app/(auth)/layout.tsx`](apps/web/src/app/(auth)/layout.tsx):
+**Layout** -- [`apps/web/src/app/(auth)/layout.tsx`](<apps/web/src/app/(auth)/layout.tsx>):
+
 - Server Component, checks `getUser()` -- if user exists, redirect to `/`
 - Minimal centered layout wrapper (no Header/Footer, clean auth form presentation)
 
-**Login page** -- [`apps/web/src/app/(auth)/login/page.tsx`](apps/web/src/app/(auth)/login/page.tsx):
+**Login page** -- [`apps/web/src/app/(auth)/login/page.tsx`](<apps/web/src/app/(auth)/login/page.tsx>):
+
 - Client Component form using `useActionState(signIn, initialState)`
 - Email + password inputs using existing shadcn `Input` and `Button`
 - Link to `/signup`
 - Add shadcn `label` component (needed for form fields)
 
-**Signup page** -- [`apps/web/src/app/(auth)/signup/page.tsx`](apps/web/src/app/(auth)/signup/page.tsx):
+**Signup page** -- [`apps/web/src/app/(auth)/signup/page.tsx`](<apps/web/src/app/(auth)/signup/page.tsx>):
+
 - Same pattern as login, calls `signUp` action
 - Email + password + confirm password
 - Link to `/login`
@@ -179,6 +184,7 @@ Update [`apps/api/internal/user/repository.go`](apps/api/internal/user/repositor
 ### 8. Shared types alignment
 
 Update [`packages/types/src/user.ts`](packages/types/src/user.ts):
+
 - Add `loginType` field to `User` type
 - Ensure field names match the API JSON (camelCase in TS, snake_case from Go API)
 
@@ -194,22 +200,22 @@ Update [`packages/types/src/user.ts`](packages/types/src/user.ts):
 
 ## Files created/modified summary
 
-| Action | File |
-|--------|------|
-| Create | `supabase/migrations/YYYYMMDD_create_users.sql` |
-| Create | `apps/web/src/middleware.ts` |
-| Create | `apps/web/src/app/(auth)/layout.tsx` |
-| Create | `apps/web/src/app/(auth)/actions.ts` |
-| Create | `apps/web/src/app/(auth)/login/page.tsx` |
-| Create | `apps/web/src/app/(auth)/signup/page.tsx` |
-| Create | `apps/web/src/app/profile/page.tsx` |
-| Create | `apps/api/internal/middleware/auth.go` |
-| Modify | `apps/web/src/components/layouts/header.tsx` |
+| Action | File                                                                                     |
+| ------ | ---------------------------------------------------------------------------------------- |
+| Create | `supabase/migrations/YYYYMMDD_create_users.sql`                                          |
+| Create | `apps/web/src/middleware.ts`                                                             |
+| Create | `apps/web/src/app/(auth)/layout.tsx`                                                     |
+| Create | `apps/web/src/app/(auth)/actions.ts`                                                     |
+| Create | `apps/web/src/app/(auth)/login/page.tsx`                                                 |
+| Create | `apps/web/src/app/(auth)/signup/page.tsx`                                                |
+| Create | `apps/web/src/app/profile/page.tsx`                                                      |
+| Create | `apps/api/internal/middleware/auth.go`                                                   |
+| Modify | `apps/web/src/components/layouts/header.tsx`                                             |
 | Modify | `apps/web/src/app/layout.tsx` (no change needed -- Header is already a Server Component) |
-| Modify | `apps/api/internal/user/model.go` |
-| Modify | `apps/api/internal/user/repository.go` |
-| Modify | `apps/api/internal/user/service.go` |
-| Modify | `apps/api/internal/router/router.go` |
-| Modify | `apps/api/go.mod` (add `golang-jwt/jwt/v5`) |
-| Modify | `packages/types/src/user.ts` |
-| Add    | shadcn `label` component via CLI |
+| Modify | `apps/api/internal/user/model.go`                                                        |
+| Modify | `apps/api/internal/user/repository.go`                                                   |
+| Modify | `apps/api/internal/user/service.go`                                                      |
+| Modify | `apps/api/internal/router/router.go`                                                     |
+| Modify | `apps/api/go.mod` (add `golang-jwt/jwt/v5`)                                              |
+| Modify | `packages/types/src/user.ts`                                                             |
+| Add    | shadcn `label` component via CLI                                                         |

@@ -4,11 +4,11 @@ Supabase CLI で管理するローカル開発環境の設定・マイグレー�
 
 ## ローカル環境の構成
 
-| サービス         | URL                    | 説明                           |
-| ---------------- | ---------------------- | ------------------------------ |
-| API（PostgREST） | http://localhost:54321 | REST API / Auth エンドポイント |
-| PostgreSQL       | localhost:54322        | データベース直接接続           |
-| Studio           | http://localhost:54323 | Supabase ダッシュボード        |
+| サービス         | URL                                              | 説明                           |
+| ---------------- | ------------------------------------------------ | ------------------------------ |
+| API（PostgREST） | [http://localhost:54321](http://localhost:54321) | REST API / Auth エンドポイント |
+| PostgreSQL       | localhost:54322                                  | データベース直接接続           |
+| Studio           | [http://localhost:54323](http://localhost:54323) | Supabase ダッシュボード        |
 
 設定は `config.toml` で管理しています。
 
@@ -66,7 +66,7 @@ service_role key: eyJ...
 | **ローカルの Supabase**      | `supabase start` で Docker 上に立つ Postgres（ホストでは `localhost:54322`）                              |
 | **実行場所**                 | 必ず **リポジトリのルート**（`pnpm-workspace.yaml` があるディレクトリ）で CLI を実行する                  |
 
-Docker Desktop（または同等）が動いていることと、事前に **`supabase start`** が成功していることを前提にしてください。未起動の場合は、この README の「起動 / 停止」を先に済ませます。
+Docker Desktop（または同等）が動いていることと、事前に `**supabase start`\*\* が成功していることを前提にしてください。未起動の場合は、この README の「起動 / 停止」を先に済ませます。
 
 ---
 
@@ -74,20 +74,21 @@ Docker Desktop（または同等）が動いていることと、事前に **`su
 
 1. プロジェクトルートでローカルスタックを起動する
 
-   ```bash
-   supabase start
-   ```
+```bash
+ supabase start
+```
 
 2. **ローカル DB を migrations の内容まで作り直し**、`seed.sql` も流す
 
-   ```bash
-   supabase db reset
-   ```
+```bash
+ supabase db reset
+```
 
-   このときに起きることの要点:
-   - ローカル Postgres が **現在の migrations セットに準拠した状態までリセット**される
-   - `migrations/` 内のファイルが **ファイル名順（タイムスタンプ順）で順番に適用**される
-   - 処理の最後に **`supabase/seed.sql`** が自動実行される（初期データ投入）
+このときに起きることの要点:
+
+- ローカル Postgres が **現在の migrations セットに準拠した状態までリセット**される
+- `migrations/` 内のファイルが **ファイル名順（タイムスタンプ順）で順番に適用**される
+- 処理の最後に `**supabase/seed.sql`\*\* が自動実行される（初期データ投入）
 
 起動状態やキーを再確認するときは `supabase status` を使えます。
 
@@ -137,15 +138,15 @@ supabase migration list
 
 1. 空の migration を作る（ファイル名は CLI がタイムスタンプで付与します）
 
-   ```bash
-   supabase migration new add_something
-   ```
+```bash
+ supabase migration new add_something
+```
 
 2. 生成された `supabase/migrations/<timestamp>_add_something.sql` に `CREATE TABLE` などを書く
-
 3. ローカルに反映する
-   - いつも通り全体を揃える: `supabase db reset`
-   - または: `supabase migration up`
+
+- いつも通り全体を揃える: `supabase db reset`
+- または: `supabase migration up`
 
 4. うまくいったか確認する（次節）
 
@@ -153,13 +154,11 @@ supabase migration list
 
 ### Studio や SQL で「反映されたか」確認する
 
-- **Studio**: http://localhost:54323 → Table Editor でテーブル一覧を確認
+- **Studio**: [http://localhost:54323](http://localhost:54323) → Table Editor でテーブル一覧を確認
 - **任意の SQL**（ローカル DB が既定対象。必要なら `--local` を明示）:
-
   ```bash
   supabase db query "SELECT tablename FROM pg_tables WHERE schemaname = 'public' ORDER BY 1;"
   ```
-
   `supabase db query --help` でリモート `--linked` や `-f` でファイル指定などを確認できます。
 
 ---
@@ -228,8 +227,8 @@ supabase db query --local --file supabase/seed.sql
 
 ### 注意（重複 INSERT）
 
-現在の `seed.sql` は **`INSERT` のみ**です。既に同じ行がテーブルに入っている状態で実行すると **主キーや UNIQUE 制約で失敗**します。そのときは `db reset` で空の状態から入れるか、`drinks` などを事前に `TRUNCATE` するなどしてから再実行してください。
+現在の `seed.sql` は `**INSERT` のみ**です。既に同じ行がテーブルに入っている状態で実行すると **主キーや UNIQUE 制約で失敗\*\*します。そのときは `db reset` で空の状態から入れるか、`drinks` などを事前に `TRUNCATE` するなどしてから再実行してください。
 
 ## Studio（管理画面）
 
-起動中は http://localhost:54323 でテーブルの確認・編集、Auth ユーザーの管理、SQL エディタなどが利用できます。
+起動中は [http://localhost:54323](http://localhost:54323) でテーブルの確認・編集、Auth ユーザーの管理、SQL エディタなどが利用できます。

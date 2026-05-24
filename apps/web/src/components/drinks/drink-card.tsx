@@ -5,6 +5,7 @@ import { Wine } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { StarRatingDisplay } from '@/components/ui/star-rating';
 
 interface DrinkCardProps {
   drink: Drink;
@@ -50,9 +51,14 @@ export function DrinkCard({ drink }: DrinkCardProps) {
           {drink.abv != null && <span>{drink.abv}%</span>}
           {drink.originCountry && <span>{drink.originCountry}</span>}
           {drink.averageRating > 0 && (
-            <span className="ml-auto">
-              {'★'} {drink.averageRating.toFixed(1)}
-            </span>
+            <div className="ml-auto">
+              <StarRatingDisplay
+                value={drink.averageRating}
+                size="sm"
+                showValue={false}
+                className="gap-0.5"
+              />
+            </div>
           )}
         </CardFooter>
       </Card>

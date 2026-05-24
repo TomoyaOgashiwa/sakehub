@@ -6,8 +6,12 @@ import { ArrowLeft, Wine } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { StarRatingDisplay } from '@/components/ui/star-rating';
 import { JsonLd } from '@/components/json-ld';
 import { fetchDrinkBySlugServer } from '@/application/drinks-api.server';
+import { fetchMyReview, fetchReviewsByDrinkId } from '@/application/reviews-api.server';
+import { createClient } from '@/lib/supabase/server';
+import { DrinkReviewWidget } from './drink-review-widget';
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -44,6 +48,20 @@ export default async function DrinkDetailPage({ params }: PageProps) {
   } catch {
     notFound();
   }
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  const [reviews, myReview] = await Promise.all([
+    fetchReviewsByDrinkId(drink.id),
+    user && session ? fetchMyReview(drink.id, session.access_token) : Promise.resolve(null),
+  ]);
 
   const displayName = drink.nameEn ? `${drink.name} (${drink.nameEn})` : drink.name;
 
@@ -112,14 +130,55 @@ export default async function DrinkDetailPage({ params }: PageProps) {
 
               <Separator />
 
-              {/* Reviews section placeholder */}
-              <section aria-labelledby="reviews-heading" className="space-y-4">
-                <h2 id="reviews-heading" className="text-xl font-semibold">
-                  レビュー
-                </h2>
-                <div className="rounded-lg border border-dashed p-8 text-center">
-                  <p className="text-muted-foreground text-sm">レビュー機能は近日公開予定です</p>
+              {/* Reviews section */}
+              <section aria-labelledby="reviews-heading" className="space-y-6">
+                <div className="flex flex-wrap items-center gap-4">
+                  <h2 id="reviews-heading" className="text-xl font-semibold">
+                    評価
+                  </h2>
+                  <StarRatingDisplay
+                    value={drink.averageRating}
+                    count={drink.totalReviews}
+                    size="md"
+                  />
                 </div>
+
+                {user ? (
+                  <div className="bg-muted/40 rounded-xl border p-4">
+                    <DrinkReviewWidget drinkId={drink.id} initialReview={myReview} />
+                  </div>
+                ) : (
+                  <div className="bg-muted/40 rounded-xl border p-4">
+                    <p className="text-muted-foreground text-sm">
+                      <Link href="/login" className="text-foreground font-medium underline">
+                        ログイン
+                      </Link>
+                      すると星評価を付けられます
+                    </p>
+                  </div>
+                )}
+
+                {reviews.length > 0 && (
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">みんなの評価 ({reviews.length}件)</h3>
+                    <div className="space-y-2">
+                      {reviews.map((review) => (
+                        <div
+                          key={review.id}
+                          className="flex items-start gap-3 rounded-lg border p-3 text-sm"
+                        >
+                          <StarRatingDisplay value={review.rating} size="sm" showValue={false} />
+                          <span className="text-foreground font-medium tabular-nums">
+                            {review.rating}.0
+                          </span>
+                          {review.comment && (
+                            <p className="text-muted-foreground flex-1">{review.comment}</p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </section>
 
               <Separator />
@@ -188,12 +247,14 @@ export default async function DrinkDetailPage({ params }: PageProps) {
                       </div>
                     )}
                     <Separator />
-                    <div className="flex justify-between">
+                    <div className="flex flex-col gap-1">
                       <dt className="text-muted-foreground">評価</dt>
-                      <dd className="font-medium">
-                        {drink.averageRating > 0
-                          ? `${'★'} ${drink.averageRating.toFixed(1)} (${drink.totalReviews}件)`
-                          : 'まだ評価がありません'}
+                      <dd>
+                        <StarRatingDisplay
+                          value={drink.averageRating}
+                          count={drink.totalReviews}
+                          size="sm"
+                        />
                       </dd>
                     </div>
                   </dl>

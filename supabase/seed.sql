@@ -3,7 +3,7 @@
 -- supabase db reset で自動適用される
 -- =============================================================================
 
-INSERT INTO drinks (slug, name, name_en, category, subcategory, description, image_url, abv, origin_country, manufacturer) VALUES
+INSERT INTO drinks (slug, name, name_en, category, subcategory, description, image_url, abv, origin_country, manufacturer, average_rating, total_reviews) VALUES
 
 -- -------------------------------------------------------------------------
 -- Beer (5件)
@@ -18,7 +18,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   5.0,
   'Japan',
-  'アサヒビール'
+  'アサヒビール',
+  4.2,
+  128
 ),
 (
   'sapporo-premium',
@@ -30,7 +32,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   5.0,
   'Japan',
-  'サッポロビール'
+  'サッポロビール',
+  4.0,
+  95
 ),
 (
   'yebisu-premium',
@@ -42,7 +46,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   5.0,
   'Japan',
-  'サッポロビール'
+  'サッポロビール',
+  4.3,
+  110
 ),
 (
   'guinness-draught',
@@ -54,7 +60,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   4.2,
   'Ireland',
-  'Guinness'
+  'Guinness',
+  4.5,
+  203
 ),
 (
   'brewdog-punk-ipa',
@@ -66,7 +74,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   5.4,
   'United Kingdom',
-  'BrewDog'
+  'BrewDog',
+  4.1,
+  87
 ),
 
 -- -------------------------------------------------------------------------
@@ -82,7 +92,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   14.5,
   'United States',
-  'Opus One Winery'
+  'Opus One Winery',
+  4.8,
+  45
 ),
 (
   'chateau-margaux-2015',
@@ -94,7 +106,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   13.5,
   'France',
-  'Chateau Margaux'
+  'Chateau Margaux',
+  4.9,
+  67
 ),
 (
   'cloudy-bay-sauvignon-blanc',
@@ -106,7 +120,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   13.0,
   'New Zealand',
-  'Cloudy Bay'
+  'Cloudy Bay',
+  4.4,
+  156
 ),
 (
   'grace-koshu',
@@ -118,7 +134,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   12.0,
   'Japan',
-  '中央葡萄酒'
+  '中央葡萄酒',
+  4.2,
+  89
 ),
 
 -- -------------------------------------------------------------------------
@@ -134,7 +152,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   43.0,
   'Japan',
-  'サントリー'
+  'サントリー',
+  4.7,
+  312
 ),
 (
   'hibiki-harmony',
@@ -146,7 +166,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   43.0,
   'Japan',
-  'サントリー'
+  'サントリー',
+  4.6,
+  278
 ),
 (
   'macallan-12-sherry-oak',
@@ -158,7 +180,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   40.0,
   'United Kingdom',
-  'The Macallan'
+  'The Macallan',
+  4.5,
+  198
 ),
 (
   'makers-mark',
@@ -170,7 +194,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   45.0,
   'United States',
-  'Maker''s Mark Distillery'
+  'Maker''s Mark Distillery',
+  4.3,
+  245
 ),
 (
   'jameson',
@@ -182,7 +208,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   40.0,
   'Ireland',
-  'Jameson'
+  'Jameson',
+  4.0,
+  189
 ),
 
 -- -------------------------------------------------------------------------
@@ -198,7 +226,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   16.0,
   'Japan',
-  '旭酒造'
+  '旭酒造',
+  4.8,
+  421
 ),
 (
   'kubota-manju',
@@ -210,7 +240,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   15.5,
   'Japan',
-  '朝日酒造'
+  '朝日酒造',
+  4.6,
+  356
 ),
 (
   'juyondai-honmaru',
@@ -222,7 +254,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   15.0,
   'Japan',
-  '高木酒造'
+  '高木酒造',
+  4.9,
+  89
 ),
 (
   'hakkaisan-junmai-daiginjo',
@@ -234,7 +268,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   15.5,
   'Japan',
-  '八海醸造'
+  '八海醸造',
+  4.4,
+  267
 ),
 (
   'kokuryu-ryu',
@@ -246,7 +282,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   15.0,
   'Japan',
-  '黒龍酒造'
+  '黒龍酒造',
+  4.7,
+  134
 ),
 
 -- -------------------------------------------------------------------------
@@ -262,7 +300,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   25.0,
   'Japan',
-  '三和酒類'
+  '三和酒類',
+  4.2,
+  178
 ),
 (
   'mori-izo',
@@ -274,7 +314,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   25.0,
   'Japan',
-  '森伊蔵酒造'
+  '森伊蔵酒造',
+  4.8,
+  56
 ),
 
 -- -------------------------------------------------------------------------
@@ -290,7 +332,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   40.0,
   'France',
-  'Grey Goose'
+  'Grey Goose',
+  4.1,
+  134
 ),
 
 -- -------------------------------------------------------------------------
@@ -306,7 +350,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   41.4,
   'United Kingdom',
-  'Hendrick''s'
+  'Hendrick''s',
+  4.5,
+  223
 ),
 (
   'roku-gin',
@@ -318,7 +364,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   47.0,
   'Japan',
-  'サントリー'
+  'サントリー',
+  4.3,
+  167
 ),
 
 -- -------------------------------------------------------------------------
@@ -334,7 +382,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   40.0,
   'Guatemala',
-  'Ron Zacapa'
+  'Ron Zacapa',
+  4.6,
+  98
 ),
 
 -- -------------------------------------------------------------------------
@@ -350,7 +400,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   38.0,
   'Mexico',
-  'Don Julio'
+  'Don Julio',
+  4.7,
+  145
 ),
 
 -- -------------------------------------------------------------------------
@@ -366,7 +418,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   40.0,
   'France',
-  'Hennessy'
+  'Hennessy',
+  4.5,
+  112
 ),
 
 -- -------------------------------------------------------------------------
@@ -382,7 +436,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   17.0,
   'Ireland',
-  'Baileys'
+  'Baileys',
+  4.0,
+  345
 ),
 (
   'kahlua',
@@ -394,7 +450,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   20.0,
   'Mexico',
-  'Kahlua'
+  'Kahlua',
+  3.9,
+  267
 ),
 
 -- -------------------------------------------------------------------------
@@ -410,7 +468,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   10.0,
   'Cuba',
-  NULL
+  NULL,
+  4.2,
+  189
 ),
 (
   'old-fashioned',
@@ -422,7 +482,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   32.0,
   'United States',
-  NULL
+  NULL,
+  4.4,
+  156
 ),
 (
   'negroni',
@@ -434,7 +496,9 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   24.0,
   'Italy',
-  NULL
+  NULL,
+  4.3,
+  134
 ),
 
 -- -------------------------------------------------------------------------
@@ -450,5 +514,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   4.5,
   'Denmark',
-  'Carlsberg'
+  'Carlsberg',
+  3.8,
+  78
 );

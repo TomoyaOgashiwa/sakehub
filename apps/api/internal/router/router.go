@@ -12,6 +12,7 @@ import (
 	"github.com/sakehub/api/internal/drink"
 	"github.com/sakehub/api/internal/handler"
 	"github.com/sakehub/api/internal/middleware"
+	"github.com/sakehub/api/internal/review"
 	"github.com/sakehub/api/internal/user"
 	"github.com/sakehub/api/pkg/config"
 )
@@ -36,10 +37,20 @@ func New(logger *zap.Logger, db *sql.DB, cfg *config.Config) *chi.Mux {
 	userH := user.NewHandler(user.NewService(user.NewRepository(db)))
 	drinkH := drink.NewHandler(drink.NewService(drink.NewRepository(db)))
 	cocktailH := cocktail.NewHandler(cocktail.NewService(cocktail.NewRepository(db)))
+	reviewH := review.NewHandler(review.NewService(review.NewRepository(db)))
 
 	r.Route("/api", func(r chi.Router) {
 		r.Get("/health", handler.Health)
 		r.Route("/drinks", drinkH.Routes)
+
+		r.Route("/public", func(r chi.Router) {
+			r.Route("/reviews", reviewH.PublicRoutes)
+		})
+
+		r.Route("/auth", func(r chi.Router) {
+			r.Use(middleware.RequireAuth(cfg.JWTSecret))
+			r.Route("/reviews", reviewH.AuthRoutes)
+		})
 
 		r.Group(func(r chi.Router) {
 			r.Use(middleware.RequireAuth(cfg.JWTSecret))

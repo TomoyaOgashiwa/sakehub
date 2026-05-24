@@ -11,10 +11,13 @@ import (
 var ErrNotFound = errors.New("drink not found")
 
 // allColumns is the shared SELECT column list for drinks.
+// average_rating and total_reviews are computed dynamically from the ratings table.
 // search_vector is excluded because it is a generated column used only for queries.
 const allColumns = `id, slug, name, name_en, category, subcategory, description,
 	image_url, abv, origin_country, manufacturer,
-	average_rating, total_reviews, created_at, updated_at`
+	COALESCE((SELECT AVG(r.rating)::NUMERIC(3,2) FROM ratings r WHERE r.drink_id = id), 0) AS average_rating,
+	COALESCE((SELECT COUNT(*) FROM ratings r WHERE r.drink_id = id), 0)::INTEGER AS total_reviews,
+	created_at, updated_at`
 
 type Repository interface {
 	FindByID(ctx context.Context, id string) (*Drink, error)
@@ -161,10 +164,16 @@ OR strpos(lower(description), lower(%s)) > 0
 func (r *repository) Insert(ctx context.Context, d *Drink) error {
 	const q = `INSERT INTO drinks (slug, name, name_en, category, subcategory, description, image_url, abv, origin_country, manufacturer)
 		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
-		RETURNING id, average_rating, total_reviews, created_at, updated_at`
+		RETURNING id, created_at, updated_at`
 
-	return r.db.QueryRowContext(ctx, q,
+	if err := r.db.QueryRowContext(ctx, q,
 		d.Slug, d.Name, d.NameEn, d.Category, d.Subcategory,
 		d.Description, d.ImageURL, d.ABV, d.OriginCountry, d.Manufacturer,
-	).Scan(&d.ID, &d.AverageRating, &d.TotalReviews, &d.CreatedAt, &d.UpdatedAt)
+	).Scan(&d.ID, &d.CreatedAt, &d.UpdatedAt); err != nil {
+		return err
+	}
+	// New drinks have no ratings yet.
+	d.AverageRating = 0
+	d.TotalReviews = 0
+	return nil
 }

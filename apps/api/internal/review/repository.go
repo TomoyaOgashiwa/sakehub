@@ -27,7 +27,7 @@ func NewRepository(db *sql.DB) Repository {
 func (r *repository) FindByDrinkAndUser(ctx context.Context, drinkID, userID string) (*Review, error) {
 	const q = `
 		SELECT id, drink_id, user_id, rating, comment, created_at, updated_at
-		FROM drink_reviews
+		FROM ratings
 		WHERE drink_id = $1 AND user_id = $2`
 
 	var rev Review
@@ -47,7 +47,7 @@ func (r *repository) FindByDrinkAndUser(ctx context.Context, drinkID, userID str
 func (r *repository) ListByDrink(ctx context.Context, drinkID string) ([]Review, error) {
 	const q = `
 		SELECT id, drink_id, user_id, rating, comment, created_at, updated_at
-		FROM drink_reviews
+		FROM ratings
 		WHERE drink_id = $1
 		ORDER BY created_at DESC`
 
@@ -71,14 +71,14 @@ func (r *repository) ListByDrink(ctx context.Context, drinkID string) ([]Review,
 	return reviews, rows.Err()
 }
 
-// Upsert inserts a new review or updates the rating/comment when the
+// Upsert inserts a new rating or updates the rating/comment when the
 // (drink_id, user_id) pair already exists.
 func (r *repository) Upsert(ctx context.Context, rev *Review) error {
 	const q = `
-		INSERT INTO drink_reviews (drink_id, user_id, rating, comment)
+		INSERT INTO ratings (drink_id, user_id, rating, comment)
 		VALUES ($1, $2, $3, $4)
 		ON CONFLICT (drink_id, user_id)
-		DO UPDATE SET rating = EXCLUDED.rating, comment = EXCLUDED.comment
+		DO UPDATE SET rating = EXCLUDED.rating, comment = EXCLUDED.comment, updated_at = now()
 		RETURNING id, created_at, updated_at`
 
 	return r.db.QueryRowContext(ctx, q,
@@ -86,9 +86,9 @@ func (r *repository) Upsert(ctx context.Context, rev *Review) error {
 	).Scan(&rev.ID, &rev.CreatedAt, &rev.UpdatedAt)
 }
 
-// Delete removes the review only if it belongs to userID.
+// Delete removes the rating only if it belongs to userID.
 func (r *repository) Delete(ctx context.Context, id, userID string) error {
-	const q = `DELETE FROM drink_reviews WHERE id = $1 AND user_id = $2`
+	const q = `DELETE FROM ratings WHERE id = $1 AND user_id = $2`
 
 	result, err := r.db.ExecContext(ctx, q, id, userID)
 	if err != nil {

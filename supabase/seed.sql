@@ -3,7 +3,7 @@
 -- supabase db reset で自動適用される
 -- =============================================================================
 
-INSERT INTO drinks (slug, name, name_en, category, subcategory, description, image_url, abv, origin_country, manufacturer, average_rating, total_reviews) VALUES
+INSERT INTO drinks (slug, name, name_en, category, subcategory, description, image_url, abv, origin_country, manufacturer) VALUES
 
 -- -------------------------------------------------------------------------
 -- Beer (5件)
@@ -18,9 +18,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   5.0,
   'Japan',
-  'アサヒビール',
-  4.2,
-  128
+  'アサヒビール'
 ),
 (
   'sapporo-premium',
@@ -32,9 +30,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   5.0,
   'Japan',
-  'サッポロビール',
-  4.0,
-  95
+  'サッポロビール'
 ),
 (
   'yebisu-premium',
@@ -46,9 +42,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   5.0,
   'Japan',
-  'サッポロビール',
-  4.3,
-  110
+  'サッポロビール'
 ),
 (
   'guinness-draught',
@@ -60,9 +54,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   4.2,
   'Ireland',
-  'Guinness',
-  4.5,
-  203
+  'Guinness'
 ),
 (
   'brewdog-punk-ipa',
@@ -74,9 +66,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   5.4,
   'United Kingdom',
-  'BrewDog',
-  4.1,
-  87
+  'BrewDog'
 ),
 
 -- -------------------------------------------------------------------------
@@ -92,9 +82,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   14.5,
   'United States',
-  'Opus One Winery',
-  4.8,
-  45
+  'Opus One Winery'
 ),
 (
   'chateau-margaux-2015',
@@ -106,9 +94,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   13.5,
   'France',
-  'Chateau Margaux',
-  4.9,
-  67
+  'Chateau Margaux'
 ),
 (
   'cloudy-bay-sauvignon-blanc',
@@ -120,9 +106,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   13.0,
   'New Zealand',
-  'Cloudy Bay',
-  4.4,
-  156
+  'Cloudy Bay'
 ),
 (
   'grace-koshu',
@@ -134,9 +118,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   12.0,
   'Japan',
-  '中央葡萄酒',
-  4.2,
-  89
+  '中央葡萄酒'
 ),
 
 -- -------------------------------------------------------------------------
@@ -152,9 +134,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   43.0,
   'Japan',
-  'サントリー',
-  4.7,
-  312
+  'サントリー'
 ),
 (
   'hibiki-harmony',
@@ -166,9 +146,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   43.0,
   'Japan',
-  'サントリー',
-  4.6,
-  278
+  'サントリー'
 ),
 (
   'macallan-12-sherry-oak',
@@ -180,9 +158,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   40.0,
   'United Kingdom',
-  'The Macallan',
-  4.5,
-  198
+  'The Macallan'
 ),
 (
   'makers-mark',
@@ -194,9 +170,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   45.0,
   'United States',
-  'Maker''s Mark Distillery',
-  4.3,
-  245
+  'Maker''s Mark Distillery'
 ),
 (
   'jameson',
@@ -208,9 +182,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   40.0,
   'Ireland',
-  'Jameson',
-  4.0,
-  189
+  'Jameson'
 ),
 
 -- -------------------------------------------------------------------------
@@ -226,9 +198,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   16.0,
   'Japan',
-  '旭酒造',
-  4.8,
-  421
+  '旭酒造'
 ),
 (
   'kubota-manju',
@@ -240,9 +210,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   15.5,
   'Japan',
-  '朝日酒造',
-  4.6,
-  356
+  '朝日酒造'
 ),
 (
   'juyondai-honmaru',
@@ -254,9 +222,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   15.0,
   'Japan',
-  '高木酒造',
-  4.9,
-  89
+  '高木酒造'
 ),
 (
   'hakkaisan-junmai-daiginjo',
@@ -268,9 +234,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   15.5,
   'Japan',
-  '八海醸造',
-  4.4,
-  267
+  '八海醸造'
 ),
 (
   'kokuryu-ryu',
@@ -282,9 +246,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   15.0,
   'Japan',
-  '黒龍酒造',
-  4.7,
-  134
+  '黒龍酒造'
 ),
 
 -- -------------------------------------------------------------------------
@@ -300,9 +262,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   25.0,
   'Japan',
-  '三和酒類',
-  4.2,
-  178
+  '三和酒類'
 ),
 (
   'mori-izo',
@@ -314,9 +274,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   25.0,
   'Japan',
-  '森伊蔵酒造',
-  4.8,
-  56
+  '森伊蔵酒造'
 ),
 
 -- -------------------------------------------------------------------------
@@ -332,9 +290,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   40.0,
   'France',
-  'Grey Goose',
-  4.1,
-  134
+  'Grey Goose'
 ),
 
 -- -------------------------------------------------------------------------
@@ -350,9 +306,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   41.4,
   'United Kingdom',
-  'Hendrick''s',
-  4.5,
-  223
+  'Hendrick''s'
 ),
 (
   'roku-gin',
@@ -364,9 +318,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   47.0,
   'Japan',
-  'サントリー',
-  4.3,
-  167
+  'サントリー'
 ),
 
 -- -------------------------------------------------------------------------
@@ -382,9 +334,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   40.0,
   'Guatemala',
-  'Ron Zacapa',
-  4.6,
-  98
+  'Ron Zacapa'
 ),
 
 -- -------------------------------------------------------------------------
@@ -400,9 +350,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   38.0,
   'Mexico',
-  'Don Julio',
-  4.7,
-  145
+  'Don Julio'
 ),
 
 -- -------------------------------------------------------------------------
@@ -418,9 +366,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   40.0,
   'France',
-  'Hennessy',
-  4.5,
-  112
+  'Hennessy'
 ),
 
 -- -------------------------------------------------------------------------
@@ -436,9 +382,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   17.0,
   'Ireland',
-  'Baileys',
-  4.0,
-  345
+  'Baileys'
 ),
 (
   'kahlua',
@@ -450,9 +394,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   20.0,
   'Mexico',
-  'Kahlua',
-  3.9,
-  267
+  'Kahlua'
 ),
 
 -- -------------------------------------------------------------------------
@@ -468,9 +410,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   10.0,
   'Cuba',
-  NULL,
-  4.2,
-  189
+  NULL
 ),
 (
   'old-fashioned',
@@ -482,9 +422,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   32.0,
   'United States',
-  NULL,
-  4.4,
-  156
+  NULL
 ),
 (
   'negroni',
@@ -496,9 +434,7 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   24.0,
   'Italy',
-  NULL,
-  4.3,
-  134
+  NULL
 ),
 
 -- -------------------------------------------------------------------------
@@ -514,7 +450,105 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   4.5,
   'Denmark',
-  'Carlsberg',
-  3.8,
-  78
+  'Carlsberg'
 );
+
+-- =============================================================================
+-- Seed: demo users + ratings（開発・デモ用）
+-- 全ドリンク × 複数ユーザーで ratings を投入し、平均評価・件数を表示可能にする
+-- ログイン: rater01@example.com 〜 rater20@example.com / password: password123
+-- =============================================================================
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+-- ---------------------------------------------------------------------------
+-- 1. デモユーザー（auth.users + auth.identities）
+--    public.users は on_auth_user_created トリガーで自動作成される
+-- ---------------------------------------------------------------------------
+INSERT INTO auth.users (
+  instance_id,
+  id,
+  aud,
+  role,
+  email,
+  encrypted_password,
+  email_confirmed_at,
+  recovery_sent_at,
+  last_sign_in_at,
+  raw_app_meta_data,
+  raw_user_meta_data,
+  created_at,
+  updated_at,
+  confirmation_token,
+  email_change,
+  email_change_token_new,
+  recovery_token
+)
+SELECT
+  '00000000-0000-0000-0000-000000000000',
+  ('a1000000-0000-4000-8000-' || lpad(n::text, 12, '0'))::uuid,
+  'authenticated',
+  'authenticated',
+  'rater' || lpad(n::text, 2, '0') || '@example.com',
+  crypt('password123', gen_salt('bf')),
+  now(),
+  now(),
+  now(),
+  '{"provider":"email","providers":["email"]}'::jsonb,
+  jsonb_build_object('display_name', '評価者' || lpad(n::text, 2, '0')),
+  now(),
+  now(),
+  '',
+  '',
+  '',
+  ''
+FROM generate_series(1, 20) AS n;
+
+INSERT INTO auth.identities (
+  id,
+  user_id,
+  identity_data,
+  provider,
+  provider_id,
+  last_sign_in_at,
+  created_at,
+  updated_at
+)
+SELECT
+  ('a1000000-0000-4000-8000-' || lpad(n::text, 12, '0'))::uuid,
+  ('a1000000-0000-4000-8000-' || lpad(n::text, 12, '0'))::uuid,
+  jsonb_build_object(
+    'sub', ('a1000000-0000-4000-8000-' || lpad(n::text, 12, '0'))::text,
+    'email', 'rater' || lpad(n::text, 2, '0') || '@example.com'
+  ),
+  'email',
+  'rater' || lpad(n::text, 2, '0') || '@example.com',
+  now(),
+  now(),
+  now()
+FROM generate_series(1, 20) AS n;
+
+UPDATE public.users u
+SET display_name = '評価者' || lpad(substring(u.email from 'rater([0-9]+)'), 2, '0')
+WHERE u.email LIKE 'rater%@example.com';
+
+-- ---------------------------------------------------------------------------
+-- 2. ratings（20ユーザー × 32ドリンク = 640件）
+--    rating は 3〜5 に偏らせ、一部ユーザーはコメント付き
+-- ---------------------------------------------------------------------------
+INSERT INTO ratings (user_id, drink_id, rating, comment)
+SELECT
+  u.id,
+  d.id,
+  (3 + (abs(hashtext(u.id::text || d.slug)) % 3))::smallint AS rating,
+  CASE abs(hashtext(d.slug || u.email)) % 5
+    WHEN 0 THEN '香りが素晴らしく、また飲みたいと思いました。'
+    WHEN 1 THEN '食事との相性が良く、定番の一本です。'
+    WHEN 2 THEN '初めて飲みましたが、想像以上に美味しかったです。'
+    WHEN 3 THEN '友人に勧められて試しました。満足です。'
+    ELSE ''
+  END AS comment
+FROM auth.users u
+CROSS JOIN drinks d
+WHERE u.email LIKE 'rater%@example.com';
+

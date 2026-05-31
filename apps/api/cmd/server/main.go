@@ -10,6 +10,7 @@ import (
 	"syscall"
 	"time"
 
+	keyfunc "github.com/MicahParks/keyfunc/v3"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 	"go.uber.org/zap"
@@ -39,7 +40,16 @@ func main() {
 	}
 	logger.Info("database connected")
 
-	r := router.New(logger, db, cfg)
+	jwksCtx, jwksCancel := context.WithCancel(context.Background())
+	defer jwksCancel()
+
+	kf, err := keyfunc.NewDefaultCtx(jwksCtx, []string{cfg.JWKSUrl()})
+	if err != nil {
+		logger.Fatal("failed to initialize JWKS keyfunc", zap.String("jwks_url", cfg.JWKSUrl()), zap.Error(err))
+	}
+	logger.Info("JWKS keyfunc initialized", zap.String("jwks_url", cfg.JWKSUrl()))
+
+	r := router.New(logger, db, cfg, kf)
 
 	srv := &http.Server{
 		Addr:         fmt.Sprintf(":%s", cfg.Port),

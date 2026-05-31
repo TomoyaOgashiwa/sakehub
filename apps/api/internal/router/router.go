@@ -3,6 +3,7 @@ package router
 import (
 	"database/sql"
 
+	keyfunc "github.com/MicahParks/keyfunc/v3"
 	"github.com/go-chi/chi/v5"
 	chimw "github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"
@@ -17,7 +18,7 @@ import (
 	"github.com/sakehub/api/pkg/config"
 )
 
-func New(logger *zap.Logger, db *sql.DB, cfg *config.Config) *chi.Mux {
+func New(logger *zap.Logger, db *sql.DB, cfg *config.Config, kf keyfunc.Keyfunc) *chi.Mux {
 	r := chi.NewRouter()
 
 	r.Use(chimw.RequestID)
@@ -48,12 +49,12 @@ func New(logger *zap.Logger, db *sql.DB, cfg *config.Config) *chi.Mux {
 		})
 
 		r.Route("/auth", func(r chi.Router) {
-			r.Use(middleware.RequireAuth(cfg.JWTSecret))
+			r.Use(middleware.RequireAuth(kf))
 			r.Route("/reviews", reviewH.AuthRoutes)
 		})
 
 		r.Group(func(r chi.Router) {
-			r.Use(middleware.RequireAuth(cfg.JWTSecret))
+			r.Use(middleware.RequireAuth(kf))
 			r.Route("/users", userH.Routes)
 			r.Route("/cocktail-recipes", cocktailH.Routes)
 		})

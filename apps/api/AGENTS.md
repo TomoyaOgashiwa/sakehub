@@ -330,7 +330,7 @@ func (r *repository) FindByID(ctx context.Context, id string) (*Drink, error) {
 
 ## 8. 認証ミドルウェア（Supabase JWT 検証）
 
-`Authorization: Bearer <access_token>` ヘッダーから JWT を取り出し、`SUPABASE_JWT_SECRET` で検証して `user_id`, `role` を `context.Context` に載せる。
+`Authorization: Bearer <access_token>` ヘッダーから JWT を取り出し、Supabase Auth の JWKS エンドポイント（`{SUPABASE_URL}/auth/v1/.well-known/jwks.json`）から取得した公開鍵（ES256）で検証して `user_id`, `role` を `context.Context` に載せる。
 
 ```go
 // internal/middleware/auth.go
@@ -339,10 +339,11 @@ package middleware
 import (
   "context"
   "net/http"
-  "os"
   "strings"
 
+  keyfunc "github.com/MicahParks/keyfunc/v3"
   "github.com/golang-jwt/jwt/v5"
+  "github.com/sakehub/api/pkg/response"
 )
 
 type ctxKey string
@@ -352,48 +353,48 @@ const (
   CtxRole   ctxKey = "role"
 )
 
-func RequireAuth(next http.Handler) http.Handler {
-  return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-    h := r.Header.Get("Authorization")
-    raw := strings.TrimPrefix(h, "Bearer ")
-    if raw == "" || raw == h {
-      http.Error(w, "missing bearer token", http.StatusUnauthorized)
-      return
-    }
-
-    secret := []byte(os.Getenv("SUPABASE_JWT_SECRET"))
-    token, err := jwt.Parse(raw, func(t *jwt.Token) (any, error) {
-      if _, ok := t.Method.(*jwt.SigningMethodHMAC); !ok {
-        return nil, jwt.ErrSignatureInvalid
+func RequireAuth(kf keyfunc.Keyfunc) func(http.Handler) http.Handler {
+  return func(next http.Handler) http.Handler {
+    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+      h := r.Header.Get("Authorization")
+      raw := strings.TrimPrefix(h, "Bearer ")
+      if raw == "" || raw == h {
+        response.Error(w, http.StatusUnauthorized, "missing bearer token")
+        return
       }
-      return secret, nil
+
+      token, err := jwt.Parse(raw, kf.Keyfunc,
+        jwt.WithValidMethods([]string{"ES256", "RS256"}),
+        jwt.WithExpirationRequired(),
+      )
+      if err != nil || !token.Valid {
+        response.Error(w, http.StatusUnauthorized, "invalid token")
+        return
+      }
+
+      claims, ok := token.Claims.(jwt.MapClaims)
+      if !ok {
+        response.Error(w, http.StatusUnauthorized, "invalid claims")
+        return
+      }
+
+      ctx := r.Context()
+      if sub, ok := claims["sub"].(string); ok {
+        ctx = context.WithValue(ctx, CtxUserID, sub)
+      }
+      if role, ok := claims["role"].(string); ok {
+        ctx = context.WithValue(ctx, CtxRole, role)
+      }
+      next.ServeHTTP(w, r.WithContext(ctx))
     })
-    if err != nil || !token.Valid {
-      http.Error(w, "invalid token", http.StatusUnauthorized)
-      return
-    }
-
-    claims, ok := token.Claims.(jwt.MapClaims)
-    if !ok {
-      http.Error(w, "invalid claims", http.StatusUnauthorized)
-      return
-    }
-
-    ctx := r.Context()
-    if sub, ok := claims["sub"].(string); ok {
-      ctx = context.WithValue(ctx, CtxUserID, sub)
-    }
-    if role, ok := claims["role"].(string); ok {
-      ctx = context.WithValue(ctx, CtxRole, role)
-    }
-    next.ServeHTTP(w, r.WithContext(ctx))
-  })
+  }
 }
 ```
 
 **規約**:
 
-- 検証アルゴリズムは現状 **HS256（対称鍵）**。Supabase が非対称鍵（RS256/ES256）に切り替わった環境では JWKS 取得 + 検証へ更新する（`github.com/MicahParks/keyfunc/v3` 等が利用可能）。
+- Supabase Auth は **ES256（非対称鍵）** で access token を署名する。`SUPABASE_JWT_SECRET`（HS256 共有シークレット）は存在しないため使わない。
+- JWKS は `github.com/MicahParks/keyfunc/v3` がバックグラウンドで自動リフレッシュ・キャッシュする。`keyfunc.NewDefaultCtx(ctx, []string{cfg.JWKSUrl()})` を起動時に一度だけ生成し、DI で渡す。
 - ハンドラからユーザー ID を取り出すヘルパーを作る:
   ```go
   func UserID(ctx context.Context) string {
@@ -415,15 +416,19 @@ func RequireAuth(next http.Handler) http.Handler {
 type Config struct {
   Port        string
   DatabaseURL string
-  JWTSecret   string
+  SupabaseURL string
 }
 
-func Load() Config {
-  return Config{
+func Load() *Config {
+  return &Config{
     Port:        getEnv("API_PORT", "8080"),
     DatabaseURL: getEnv("DATABASE_URL", ""),
-    JWTSecret:   getEnv("SUPABASE_JWT_SECRET", ""),
+    SupabaseURL: getEnv("SUPABASE_URL", "http://127.0.0.1:54321"),
   }
+}
+
+func (c *Config) JWKSUrl() string {
+  return c.SupabaseURL + "/auth/v1/.well-known/jwks.json"
 }
 ```
 

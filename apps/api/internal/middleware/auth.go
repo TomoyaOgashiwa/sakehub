@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strings"
 
+	keyfunc "github.com/MicahParks/keyfunc/v3"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/sakehub/api/pkg/response"
 )
@@ -16,9 +17,7 @@ const (
 	CtxRole   ctxKey = "role"
 )
 
-func RequireAuth(jwtSecret string) func(http.Handler) http.Handler {
-	secret := []byte(jwtSecret)
-
+func RequireAuth(kf keyfunc.Keyfunc) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			h := r.Header.Get("Authorization")
@@ -28,12 +27,10 @@ func RequireAuth(jwtSecret string) func(http.Handler) http.Handler {
 				return
 			}
 
-			token, err := jwt.Parse(raw, func(t *jwt.Token) (any, error) {
-				if _, ok := t.Method.(*jwt.SigningMethodHMAC); !ok {
-					return nil, jwt.ErrSignatureInvalid
-				}
-				return secret, nil
-			})
+			token, err := jwt.Parse(raw, kf.Keyfunc,
+				jwt.WithValidMethods([]string{"ES256", "RS256"}),
+				jwt.WithExpirationRequired(),
+			)
 			if err != nil || !token.Valid {
 				response.Error(w, http.StatusUnauthorized, "invalid token")
 				return

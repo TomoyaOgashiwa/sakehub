@@ -97,7 +97,7 @@ sakehub/
 | `NEXT_PUBLIC_SUPABASE_URL`                                                           | Supabase エンドポイント                            | `http://localhost:54321`                                  |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY`                                                      | Supabase publishable key                           | `supabase status` から取得                                |
 | `SUPABASE_SERVICE_ROLE_KEY`                                                          | サーバー側でのみ使用（**クライアントに露出禁止**） | –                                                         |
-| `SUPABASE_JWT_SECRET`                                                                | Go API の JWT 検証                                 | `supabase status` から取得                                |
+| `SUPABASE_URL`                                                                       | Go API の JWT 検証（JWKS 取得）                    | `http://127.0.0.1:54321`                                  |
 | `DATABASE_URL`                                                                       | Go API の DB 接続                                  | `postgresql://postgres:postgres@127.0.0.1:54322/postgres` |
 | `API_PORT`                                                                           | Go API ポート                                      | `8080`                                                    |
 | `EXPO_PUBLIC_SUPABASE_URL` / `EXPO_PUBLIC_SUPABASE_ANON_KEY` / `EXPO_PUBLIC_API_URL` | Mobile 用（バンドルに埋め込まれる）                | –                                                         |

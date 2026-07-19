@@ -7,12 +7,6 @@
     "icon": "./assets/icon.png",
     "scheme": "sakehub",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
-    "splash": {
-      "image": "./assets/splash-icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#1a1a1a"
-    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.sakehub.app"
@@ -22,13 +16,22 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#1a1a1a"
       },
-      "package": "com.sakehub.app",
-      "edgeToEdgeEnabled": true
+      "package": "com.sakehub.app"
     },
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
     },
-    "plugins": ["expo-router"]
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#1a1a1a"
+        }
+      ]
+    ]
   }
 }

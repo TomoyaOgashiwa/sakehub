@@ -15,8 +15,10 @@ jobs:
       # リポジトリを取得
       - uses: actions/checkout@v7
 
-      # pnpmをセットアップ
+      # pnpmをセットアップ（packageManager と揃える）
       - uses: pnpm/action-setup@v4
+        with:
+          version: 11.0.4
 
       # Node.jsをセットアップ
       - uses: actions/setup-node@v6
@@ -29,6 +31,11 @@ jobs:
 
       # lintチェック（ESLintなど）
       - run: pnpm lint
+
+      # Mobile: Expo SDK 互換性チェック
+      - name: Expo Doctor (mobile)
+        working-directory: apps/mobile
+        run: npx expo-doctor@latest
 
       # TODO:テスト実行（今後テストコードを追加する場合）
       # - run: pnpm test

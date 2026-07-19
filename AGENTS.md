@@ -16,7 +16,7 @@ Claude Code / Cursor / OpenAI Codex / Gemini など [agents.md](https://agents.m
 | --------------- | ---------------------------------------------------------------------------------- | ------------------------- |
 | Monorepo        | pnpm workspaces + Turborepo                                                        | `pnpm@11`, `turbo` latest |
 | Web             | **Next.js 16.2 (App Router) + React 19.2 + Tailwind CSS v4 + shadcn/ui v4 + SWR**  | RSC ファースト            |
-| Mobile          | **Expo SDK 54 + React Native 0.81 + NativeWind v4 (Tailwind v3) + Expo Router v6** | New Architecture 有効     |
+| Mobile          | **Expo SDK 56 + React Native 0.85 + NativeWind v5 (Tailwind v4) + Expo Router ~56** | New Architecture 強制     |
 | Backend         | **Go 1.26 + chi v5 + zap + lib/pq**                                                | クリーンアーキテクチャ    |
 | Database / Auth | Supabase (PostgreSQL 15 + GoTrue)                                                  | RLS + 非対称 JWT          |
 | Tooling         | Prettier (latest), prettier-plugin-tailwindcss, ESLint 9 (flat config)             | Node.js 24+ 必須          |
@@ -153,7 +153,7 @@ sakehub/
 ### Tailwind / CSS
 
 - **Web は Tailwind CSS v4（CSS-first）**: `tailwind.config.{js,ts}` は **存在しません**。設定はすべて `apps/web/src/app/globals.css` の `@theme` ブロックに集約。
-- **Mobile は NativeWind v4 + Tailwind CSS v3**: ここだけは `apps/mobile/tailwind.config.ts` を維持（NativeWind v4 は Tailwind v4 非対応）。
+- **Mobile は NativeWind v5 (preview) + Tailwind CSS v4（CSS-first）**: `postcss.config.mjs` + `global.css` の `@import` / `@theme`。`tailwind.config.ts` は使わない。ルートの `pnpm.overrides.lightningcss` を `1.30.1` に固定する。
 - 任意値や独自プロパティは `@theme` 内で `--color-foo` / `--font-bar` / `--radius-xl` 形式の CSS 変数として宣言する。
 - `prettier-plugin-tailwindcss` がクラス順を自動整形するため、手動でクラス順を変更しない。
 
@@ -189,7 +189,7 @@ sakehub/
 - 変更前に該当 app の `AGENTS.md` を読む。
 - 既存ファイルを編集することを優先し、無闇に新規ファイルを作らない。
 - Server Components / Server Actions など **サーバー側で完結できる処理はサーバー側で書く**。
-- LLM が古い API を提案してきたら、必ず公式ドキュメントの 2025–2026 版を参照しなおす（特に Next.js 16 / React 19 / Tailwind v4 / Expo 54）。
+- LLM が古い API を提案してきたら、必ず公式ドキュメントの 2025–2026 版を参照しなおす（特に Next.js 16 / React 19 / Tailwind v4 / Expo 56）。
 
 ❌ **Don't**
 
@@ -220,9 +220,9 @@ sakehub/
 - Next.js 16 リリースノート: <https://nextjs.org/blog/next-16>
 - React 19: <https://react.dev/blog/2024/12/05/react-19>
 - Tailwind CSS v4: <https://tailwindcss.com/blog/tailwindcss-v4>
-- Expo SDK 54: <https://expo.dev/changelog/sdk-54>
+- Expo SDK 56: <https://expo.dev/changelog/sdk-56>
 - React Native New Architecture: <https://docs.expo.dev/guides/new-architecture/>
-- NativeWind v4: <https://www.nativewind.dev/>
+- NativeWind v5: <https://www.nativewind.dev/v5/guides/migrate-from-v4>
 - Go 1.26 Release Notes: <https://go.dev/doc/go1.26>
 - chi v5: <https://github.com/go-chi/chi>
 - Supabase SSR (Next.js): <https://supabase.com/docs/guides/auth/server-side/nextjs>

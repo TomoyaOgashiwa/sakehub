@@ -35,7 +35,7 @@ jobs:
       # Mobile: Expo SDK 互換性チェック
       - name: Expo Doctor (mobile)
         working-directory: apps/mobile
-        run: npx expo-doctor@latest
+        run: pnpm exec expo-doctor
 
       # TODO:テスト実行（今後テストコードを追加する場合）
       # - run: pnpm test

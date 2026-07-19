@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.110.3",
-    "expo": "^56.0.16",
+    "expo": "~56.0.16",
     "expo-constants": "~56.0.21",
     "expo-linking": "~56.0.13",
     "expo-router": "~56.2.15",
@@ -34,6 +34,7 @@
     "@tailwindcss/postcss": "^4.3.2",
     "@types/node": "^24.12.2",
     "@types/react": "~19.2.17",
+    "expo-doctor": "^1.20.1",
     "postcss": "^8.5.19",
     "tailwindcss": "^4.3.2",
     "typescript": "~6.0.3"

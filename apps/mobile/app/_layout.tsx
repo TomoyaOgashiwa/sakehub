@@ -1,15 +1,16 @@
 import '../global.css';
 
 import { Stack } from 'expo-router';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+import { AppProviders } from '@/components/providers/app-providers';
 
 export default function RootLayout() {
   return (
-    <SafeAreaProvider>
+    <AppProviders>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="(auth)" options={{ headerShown: false }} />
       </Stack>
-    </SafeAreaProvider>
+    </AppProviders>
   );
 }

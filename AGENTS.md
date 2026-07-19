@@ -14,12 +14,12 @@ Claude Code / Cursor / OpenAI Codex / Gemini など [agents.md](https://agents.m
 
 | Layer           | 技術                                                                               | 補足                      |
 | --------------- | ---------------------------------------------------------------------------------- | ------------------------- |
-| Monorepo        | pnpm workspaces + Turborepo                                                        | `pnpm@11`, `turbo` latest |
+| Monorepo        | pnpm workspaces + Turborepo                                                        | `pnpm@11`, `turbo@^2`     |
 | Web             | **Next.js 16.2 (App Router) + React 19.2 + Tailwind CSS v4 + shadcn/ui v4 + SWR**  | RSC ファースト            |
 | Mobile          | **Expo SDK 56 + React Native 0.85 + NativeWind v5 (Tailwind v4) + Expo Router ~56** | New Architecture 強制     |
 | Backend         | **Go 1.26 + chi v5 + zap + lib/pq**                                                | クリーンアーキテクチャ    |
 | Database / Auth | Supabase (PostgreSQL 15 + GoTrue)                                                  | RLS + 非対称 JWT          |
-| Tooling         | Prettier (latest), prettier-plugin-tailwindcss, ESLint 9 (flat config)             | Node.js 24+ 必須          |
+| Tooling         | Prettier `^3`, prettier-plugin-tailwindcss `^0.8`, ESLint 9 (flat config)         | Node.js 24+ 必須          |
 
 > ⚠️ **注意**: 現状のスタックはほぼすべて _最新メジャー_ です。古い記事や LLM 内部知識（Next.js 14、Tailwind v3 JS config、React 18、Expo 53、Go 1.21 など）の前提でコードを書かないでください。
 

@@ -32,7 +32,7 @@ jobs:
       # lintチェック（ESLintなど）
       - run: pnpm lint
 
-      # Mobile: Expo SDK 互換性チェック
+      # Mobile: Expo SDK 互換性チェック（expo-doctor は package.json で exact pin）
       - name: Expo Doctor (mobile)
         working-directory: apps/mobile
         run: pnpm exec expo-doctor

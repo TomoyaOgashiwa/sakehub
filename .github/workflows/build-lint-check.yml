@@ -21,7 +21,7 @@ jobs:
           version: 11.0.4
 
       # Node.jsをセットアップ
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: 'pnpm' # pnpmのcache有効化（高速化）

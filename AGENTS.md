@@ -33,12 +33,9 @@ Claude Code / Cursor / OpenAI Codex / Gemini など [agents.md](https://agents.m
 # 依存関係
 pnpm install
 
-# 開発サーバー（Web + Mobile を Turbo が並列起動）
-pnpm dev
-
-# 個別起動
-pnpm --filter web dev              # Web → http://localhost:3000
-pnpm --filter @sakehub/mobile dev  # Mobile → Expo DevTools
+# 開発サーバー（Web / Mobile は別コマンド）
+pnpm dev:web     # Web → http://localhost:3000
+pnpm dev:mobile  # Mobile → Expo DevTools
 
 # Go API（別ターミナル、ホスト実行）
 cd apps/api && air                 # ホットリロード（推奨）

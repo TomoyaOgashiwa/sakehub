@@ -2,7 +2,8 @@
   "name": "sakehub",
   "private": true,
   "scripts": {
-    "dev": "turbo dev",
+    "dev:web": "pnpm --filter web dev",
+    "dev:mobile": "pnpm --filter @sakehub/mobile dev",
     "build": "turbo build",
     "lint": "turbo lint",
     "type-check": "turbo type-check",
@@ -15,7 +16,6 @@
     "@typescript-eslint/eslint-plugin": "^8.63.0",
     "@typescript-eslint/parser": "^8.63.0",
     "eslint": "^9.39.1",
-    "globals": "^16.4.0",
     "lightningcss": "1.32.0",
     "globals": "^17.7.0",
     "prettier": "^3.8.3",

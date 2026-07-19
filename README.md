@@ -70,12 +70,8 @@ API は `http://localhost:8080` で起動します。
 ### 4. Web / Mobile 開発サーバーを起動
 
 ```bash
-# Web と Mobile を同時に起動
-pnpm dev
-
-# 個別に起動する場合
-pnpm --filter @sakehub/web dev       # Web: http://localhost:3000
-pnpm --filter @sakehub/mobile dev    # Mobile: Expo DevTools が起動
+pnpm dev:web     # Web: http://localhost:3000
+pnpm dev:mobile  # Mobile: Expo DevTools が起動
 ```
 
 ### ローカル URL まとめ

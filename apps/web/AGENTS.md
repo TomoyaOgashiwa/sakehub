@@ -28,8 +28,9 @@
 ## 2. コマンド
 
 ```bash
-# 開発
-pnpm --filter web dev          # http://localhost:3000
+# 開発（リポジトリルート推奨）
+pnpm dev:web                   # http://localhost:3000
+pnpm --filter web dev
 
 # ビルド / 本番起動
 pnpm --filter web build

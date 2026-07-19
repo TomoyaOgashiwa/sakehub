@@ -20,6 +20,17 @@ updates:
       prefix: 'chore' # chore(deps): みたいなcommitになる
       include: 'scope'
 
+    # Expo / RN はルートの無秩序バンプを禁止（apps/mobile 側 + expo install --fix）
+    ignore:
+      - dependency-name: 'expo'
+      - dependency-name: 'expo-*'
+      - dependency-name: 'react-native'
+      - dependency-name: 'react-native-*'
+      - dependency-name: 'nativewind'
+      - dependency-name: 'react-native-css'
+      - dependency-name: 'react-native-reanimated'
+      - dependency-name: 'react-native-worklets'
+
     # PRをまとめる（重要：PR爆発防止）
     groups:
       react:
@@ -47,7 +58,7 @@ updates:
   # ② mobile（React Native / Expo系）
   # =========================================
   - package-ecosystem: 'npm'
-    directory: '/mobile'
+    directory: '/apps/mobile'
     schedule:
       interval: 'weekly'
       day: 'monday'
@@ -72,6 +83,7 @@ updates:
           - 'nativewind'
           - 'react-native-css'
           - 'react-native-reanimated'
+          - 'react-native-worklets'
 
       # RN系は壊れやすいのでpatch/minorまとめる
       minor-and-patch:
@@ -83,7 +95,7 @@ updates:
   # ③ web（Next.js / React / UI）
   # =========================================
   - package-ecosystem: 'npm'
-    directory: '/web'
+    directory: '/apps/web'
     schedule:
       interval: 'weekly'
       day: 'monday'

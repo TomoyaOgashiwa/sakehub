@@ -32,6 +32,9 @@ jobs:
       # lintチェック（ESLintなど）
       - run: pnpm lint
 
+      # 型チェック（turbo: 各 workspace の type-check）
+      - run: pnpm type-check
+
       # Mobile: Expo SDK 互換性チェック（expo-doctor は package.json で exact pin）
       - name: Expo Doctor (mobile)
         working-directory: apps/mobile

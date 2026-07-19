@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { ArrowLeft, Wine } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
+import { Heading } from '@/components/ui/heading';
 import { Separator } from '@/components/ui/separator';
 import { StarRatingDisplay } from '@/components/ui/star-rating';
 import { JsonLd } from '@/components/json-ld';
@@ -106,7 +107,7 @@ export default async function DrinkDetailPage({ params }: PageProps) {
         <article>
           <header className="mb-8">
             <div className="flex flex-wrap items-start gap-3">
-              <h1 className="text-3xl font-bold tracking-tight">{drink.name}</h1>
+              <Heading level="h1">{drink.name}</Heading>
               <Badge variant="outline" className="mt-1 capitalize">
                 {drink.category}
               </Badge>
@@ -122,9 +123,9 @@ export default async function DrinkDetailPage({ params }: PageProps) {
           <div className="grid gap-8 md:grid-cols-[1fr_300px]">
             <div className="space-y-8">
               <section aria-labelledby="description-heading">
-                <h2 id="description-heading" className="sr-only">
+                <Heading level="h2" id="description-heading" className="sr-only">
                   説明
-                </h2>
+                </Heading>
                 <p className="text-foreground/90 leading-relaxed">{drink.description}</p>
               </section>
 
@@ -133,9 +134,9 @@ export default async function DrinkDetailPage({ params }: PageProps) {
               {/* Reviews section */}
               <section aria-labelledby="reviews-heading" className="space-y-6">
                 <div className="flex flex-wrap items-center gap-4">
-                  <h2 id="reviews-heading" className="text-xl font-semibold">
+                  <Heading level="h2" id="reviews-heading">
                     評価
-                  </h2>
+                  </Heading>
                   <StarRatingDisplay
                     value={drink.averageRating}
                     count={drink.totalReviews}
@@ -160,7 +161,7 @@ export default async function DrinkDetailPage({ params }: PageProps) {
 
                 {reviews.length > 0 && (
                   <div className="space-y-3">
-                    <h3 className="text-sm font-medium">みんなの評価 ({reviews.length}件)</h3>
+                    <Heading level="h3">みんなの評価 ({reviews.length}件)</Heading>
                     <div className="space-y-2">
                       {reviews.map((review) => (
                         <div
@@ -185,9 +186,9 @@ export default async function DrinkDetailPage({ params }: PageProps) {
 
               {/* Flavor profile placeholder */}
               <section aria-labelledby="flavor-heading" className="space-y-4">
-                <h2 id="flavor-heading" className="text-xl font-semibold">
+                <Heading level="h2" id="flavor-heading">
                   フレーバープロファイル
-                </h2>
+                </Heading>
                 <div className="rounded-lg border border-dashed p-8 text-center">
                   <p className="text-muted-foreground text-sm">
                     フレーバー評価機能は近日公開予定です
@@ -218,9 +219,9 @@ export default async function DrinkDetailPage({ params }: PageProps) {
                 </figure>
 
                 <section aria-labelledby="details-heading">
-                  <h2 id="details-heading" className="mb-3 text-lg font-semibold">
+                  <Heading level="h2" id="details-heading" className="mb-3">
                     基本情報
-                  </h2>
+                  </Heading>
                   <dl className="space-y-3 text-sm">
                     {drink.abv != null && (
                       <div className="flex justify-between">

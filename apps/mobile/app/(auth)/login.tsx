@@ -1,9 +1,11 @@
-import { View, Text } from 'react-native';
+import { Text } from 'react-native';
+
+import { Screen } from '@/components/ui/screen';
 
 export default function LoginScreen() {
   return (
-    <View className="flex-1 items-center justify-center">
-      <Text className="text-xl font-bold">Login</Text>
-    </View>
+    <Screen className="items-center justify-center px-6">
+      <Text className="text-xl font-bold text-neutral-900 dark:text-neutral-50">Login</Text>
+    </Screen>
   );
 }

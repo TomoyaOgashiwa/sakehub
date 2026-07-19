@@ -54,9 +54,10 @@ apps/mobile/
 # 依存関係インストール（プロジェクトルートで）
 pnpm install
 
-# Expo 開発サーバー起動
-pnpm --filter @sakehub/mobile dev
+# Expo 開発サーバー起動（リポジトリルート）
+pnpm dev:mobile
 # または
+pnpm --filter @sakehub/mobile dev
 cd apps/mobile && npx expo start
 ```
 

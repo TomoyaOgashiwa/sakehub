@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import { JsonLd } from '@/components/json-ld';
 import { DrinkListClient } from '@/components/drinks/drink-list-client';
 import { DrinkGridSkeleton } from '@/components/drinks/drink-card-skeleton';
+import { Heading } from '@/components/ui/heading';
 import { fetchDrinksServer } from '@/application/drinks-api.server';
 
 export const dynamic = 'force-dynamic';
@@ -10,6 +11,11 @@ export const dynamic = 'force-dynamic';
 export default function Home() {
   return (
     <>
+      {/*
+        SEO: Schema.org の WebSite 構造化データ（JSON-LD）を埋め込む。
+        検索エンジンがサイト名・説明・検索 URL を機械可読に解釈でき、
+        サイトリンク検索ボックス等のリッチリザルト表示につながりやすい。
+      */}
       <JsonLd
         data={{
           '@context': 'https://schema.org',
@@ -27,7 +33,7 @@ export default function Home() {
       />
       <div className="mx-auto max-w-7xl px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold tracking-tight">Discover Spirits</h1>
+          <Heading level="h1">Discover Spirits</Heading>
           <p className="text-muted-foreground mt-2">
             お気に入りのお酒を見つけて、レビューを共有しましょう
           </p>

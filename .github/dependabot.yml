@@ -2,25 +2,27 @@ version: 2
 
 updates:
   # =========================================
-  # ① ルート（pnpm workspace / 共通依存）
+  # ① ルートのみ（pnpm workspace + lockfile）
   # =========================================
-  - package-ecosystem: 'npm' # pnpmでもnpmとして扱う
-    directory: '/' # ルート（pnpm-lock.yamlがある場所）
+  # pnpm の lockfile はルートだけなので、/apps/* に別エントリを置くと
+  # package.json だけ更新されて pnpm-lock.yaml が追従せず CI が落ちる。
+  # Expo / RN は SDK 互換が必要なため Dependabot 対象外（手動で expo install）。
+  - package-ecosystem: 'npm' # pnpm でも npm として扱う
+    directory: '/' # ルート（pnpm-lock.yaml がある場所）
     schedule:
-      interval: 'weekly' # 週1回アップデートチェック
+      interval: 'weekly'
       day: 'monday'
       time: '09:00'
       timezone: 'America/Vancouver'
-    open-pull-requests-limit: 5 # PRが増えすぎないよう制限
-    versioning-strategy: increase # package.jsonのバージョンも更新
+    open-pull-requests-limit: 5
+    versioning-strategy: increase
     labels:
       - 'dependencies'
       - 'javascript'
     commit-message:
-      prefix: 'chore' # chore(deps): みたいなcommitになる
+      prefix: 'chore'
       include: 'scope'
 
-    # Expo / RN はルートの無秩序バンプを禁止（apps/mobile 側 + expo install --fix）
     ignore:
       - dependency-name: 'expo'
       - dependency-name: 'expo-*'
@@ -31,7 +33,6 @@ updates:
       - dependency-name: 'react-native-reanimated'
       - dependency-name: 'react-native-worklets'
 
-    # PRをまとめる（重要：PR爆発防止）
     groups:
       react:
         patterns:
@@ -40,101 +41,37 @@ updates:
           - '@types/react'
           - '@types/react-dom'
 
-      frontend-tooling:
-        patterns:
-          - 'vite'
-          - 'eslint*'
-          - '@eslint/*'
-          - 'typescript'
-          - 'prettier'
-
-      # minor / patchはまとめてOK（安全）
-      minor-and-patch:
-        update-types:
-          - 'minor'
-          - 'patch'
-
-  # =========================================
-  # ② mobile（React Native / Expo系）
-  # =========================================
-  - package-ecosystem: 'npm'
-    directory: '/apps/mobile'
-    schedule:
-      interval: 'weekly'
-      day: 'monday'
-      time: '09:00'
-      timezone: 'America/Vancouver'
-    open-pull-requests-limit: 5
-    versioning-strategy: increase
-    labels:
-      - 'dependencies'
-      - 'mobile'
-    commit-message:
-      prefix: 'chore'
-      include: 'scope'
-
-    groups:
-      react-native:
-        patterns:
-          - 'react-native'
-          - 'react-native-*'
-          - 'expo'
-          - 'expo-*'
-          - 'nativewind'
-          - 'react-native-css'
-          - 'react-native-reanimated'
-          - 'react-native-worklets'
-
-      # RN系は壊れやすいのでpatch/minorまとめる
-      minor-and-patch:
-        update-types:
-          - 'minor'
-          - 'patch'
-
-  # =========================================
-  # ③ web（Next.js / React / UI）
-  # =========================================
-  - package-ecosystem: 'npm'
-    directory: '/apps/web'
-    schedule:
-      interval: 'weekly'
-      day: 'monday'
-      time: '09:00'
-      timezone: 'America/Vancouver'
-    open-pull-requests-limit: 5
-    versioning-strategy: increase
-    labels:
-      - 'dependencies'
-      - 'web'
-    commit-message:
-      prefix: 'chore'
-      include: 'scope'
-
-    groups:
-      next-react:
+      next:
         patterns:
           - 'next'
-          - 'react'
-          - 'react-dom'
-          - '@types/react'
-          - '@types/react-dom'
+          - 'eslint-config-next'
 
       ui:
         patterns:
           - '@radix-ui/*'
           - 'lucide-react'
           - 'tailwindcss'
+          - '@tailwindcss/*'
           - 'class-variance-authority'
           - 'clsx'
           - 'tailwind-merge'
 
+      frontend-tooling:
+        patterns:
+          - 'eslint*'
+          - '@eslint/*'
+          - 'typescript'
+          - 'prettier'
+          - 'prettier-*'
+
+      # minor / patch はまとめてOK
       minor-and-patch:
         update-types:
           - 'minor'
           - 'patch'
 
   # =========================================
-  # ④ GitHub Actions（CIの依存更新）
+  # ② GitHub Actions（CIの依存更新）
   # =========================================
   - package-ecosystem: 'github-actions'
     directory: '/'

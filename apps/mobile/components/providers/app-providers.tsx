@@ -3,18 +3,10 @@ import type { ReactNode } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { SWRConfig } from 'swr';
 
-import { useAuth } from '@/hooks/use-auth';
-import { useSplashScreen } from '@/hooks/use-splash-screen';
+import { AuthProvider } from '@/hooks/use-auth';
 
 interface AppProvidersProps {
   children: ReactNode;
-}
-
-function AuthGate({ children }: Readonly<{ children: ReactNode }>) {
-  const { isLoading } = useAuth();
-  // Keep Stack mounted so route segments resolve while splash covers the first paint.
-  useSplashScreen(!isLoading);
-  return children;
 }
 
 export function AppProviders({ children }: Readonly<AppProvidersProps>) {
@@ -26,7 +18,7 @@ export function AppProviders({ children }: Readonly<AppProvidersProps>) {
           shouldRetryOnError: false,
         }}
       >
-        <AuthGate>{children}</AuthGate>
+        <AuthProvider>{children}</AuthProvider>
       </SWRConfig>
     </SafeAreaProvider>
   );

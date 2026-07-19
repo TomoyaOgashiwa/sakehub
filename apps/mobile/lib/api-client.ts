@@ -1,14 +1,29 @@
 import { env } from '@/lib/env';
 import { supabase } from '@/lib/supabase';
 
+type AuthMode = boolean | 'required' | 'optional';
+
 type FetchOptions = RequestInit & {
   params?: Record<string, string>;
-  /** When true (default), attach the current Supabase access token if present. */
-  auth?: boolean;
+  /**
+   * Auth mode for the Go API:
+   * - `true` / `'required'` (default): attach Bearer token; throw if missing
+   * - `'optional'`: attach Bearer token when a session exists
+   * - `false`: never attach Authorization
+   */
+  auth?: AuthMode;
 };
 
+function isAuthRequired(auth: AuthMode): boolean {
+  return auth === true || auth === 'required';
+}
+
+function shouldAttachAuth(auth: AuthMode): boolean {
+  return auth !== false;
+}
+
 export async function apiClient<T>(endpoint: string, options: FetchOptions = {}): Promise<T> {
-  const { params, auth = true, headers: initHeaders, ...fetchOptions } = options;
+  const { params, auth = 'required', headers: initHeaders, ...fetchOptions } = options;
 
   const url = new URL(`${env.apiUrl}${endpoint}`);
   if (params) {
@@ -18,16 +33,20 @@ export async function apiClient<T>(endpoint: string, options: FetchOptions = {})
   }
 
   const headers = new Headers(initHeaders);
-  if (!headers.has('Content-Type')) {
+  if (!headers.has('Content-Type') && fetchOptions.body != null) {
     headers.set('Content-Type', 'application/json');
   }
 
-  if (auth) {
+  if (shouldAttachAuth(auth)) {
     const {
       data: { session },
     } = await supabase.auth.getSession();
-    if (session?.access_token) {
-      headers.set('Authorization', `Bearer ${session.access_token}`);
+    const accessToken = session?.access_token;
+
+    if (accessToken) {
+      headers.set('Authorization', `Bearer ${accessToken}`);
+    } else if (isAuthRequired(auth)) {
+      throw new Error('Not authenticated');
     }
   }
 

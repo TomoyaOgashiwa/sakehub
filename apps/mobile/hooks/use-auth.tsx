@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
+import type { ReactNode } from 'react';
 
 import type { Session } from '@supabase/supabase-js';
 import { useRouter, useSegments } from 'expo-router';
 
+import { useSplashScreen } from '@/hooks/use-splash-screen';
 import { supabase } from '@/lib/supabase';
 
 interface UseAuthResult {
@@ -10,11 +12,12 @@ interface UseAuthResult {
   isLoading: boolean;
 }
 
+const AuthContext = createContext<UseAuthResult | null>(null);
+
 /**
- * Subscribes to Supabase auth and redirects between `(auth)` / `(tabs)`.
- * Returns loading state so splash can wait until the first session resolve.
+ * Single auth subscription + route gate. Mount once under AppProviders.
  */
-export function useAuth(): UseAuthResult {
+export function AuthProvider({ children }: Readonly<{ children: ReactNode }>) {
   const router = useRouter();
   const segments = useSegments();
   const [session, setSession] = useState<Session | null>(null);
@@ -64,5 +67,22 @@ export function useAuth(): UseAuthResult {
     }
   }, [session, segments, isLoading, router]);
 
-  return { session, isLoading };
+  // Keep Stack mounted so route segments resolve while splash covers the first paint.
+  useSplashScreen(!isLoading);
+
+  return (
+    <AuthContext.Provider value={{ session, isLoading }}>{children}</AuthContext.Provider>
+  );
+}
+
+/**
+ * Reads the shared auth session from AuthProvider.
+ * Do not subscribe to Supabase auth here — that lives in AuthProvider only.
+ */
+export function useAuth(): UseAuthResult {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within AuthProvider');
+  }
+  return context;
 }

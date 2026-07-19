@@ -3,6 +3,8 @@ import type { ReactNode } from 'react';
 import { View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { cn } from '@/lib/cn';
+
 interface ScreenProps {
   children: ReactNode;
   /** Extra className applied to the inner content container. */
@@ -15,9 +17,7 @@ interface ScreenProps {
  * Edge-to-edge screen shell. Prefer this over hard-coded status-bar padding.
  */
 export function Screen({ children, className, safe = true }: Readonly<ScreenProps>) {
-  const content = (
-    <View className={['flex-1', className].filter(Boolean).join(' ')}>{children}</View>
-  );
+  const content = <View className={cn('flex-1', className)}>{children}</View>;
 
   if (!safe) {
     return content;

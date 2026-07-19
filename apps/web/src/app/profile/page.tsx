@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
 
+import { Heading } from '@/components/ui/heading';
 import { createClient } from '@/lib/supabase/server';
 
 import { SignOutButton } from './sign-out-button';
@@ -26,7 +27,9 @@ export default async function ProfilePage() {
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-12">
-      <h1 className="mb-8 text-2xl font-bold">Profile</h1>
+      <Heading level="h1" className="mb-8">
+        Profile
+      </Heading>
 
       <div className="space-y-6">
         <div className="flex items-center gap-4">

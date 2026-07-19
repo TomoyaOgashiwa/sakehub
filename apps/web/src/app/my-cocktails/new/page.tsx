@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
+import { Heading } from '@/components/ui/heading';
 import { createClient } from '@/lib/supabase/server';
 
 import { CocktailRecipeForm } from './cocktail-recipe-form';
@@ -23,11 +24,11 @@ export default async function NewCocktailRecipePage() {
   return (
     <div className="mx-auto max-w-2xl px-4 py-10">
       <div className="mb-10 space-y-1">
-        <h1 className="text-3xl font-bold tracking-tight">
+        <Heading level="h1">
           新しいレシピを
           <br />
           <span className="text-amber">登録する</span>
-        </h1>
+        </Heading>
         <p className="text-muted-foreground text-sm">
           あなたのオリジナルカクテルをライブラリに追加しましょう
         </p>

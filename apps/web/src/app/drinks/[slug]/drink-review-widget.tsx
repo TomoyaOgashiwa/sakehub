@@ -16,8 +16,6 @@ interface DrinkReviewWidgetProps {
 const initialState: ReviewState = { ok: false, error: '' };
 
 export function DrinkReviewWidget({ drinkId, drinkSlug, initialReview }: DrinkReviewWidgetProps) {
-  const pathname = `/drinks/${drinkSlug}`;
-
   return (
     <EntityRatingWidget
       initialRating={initialReview}
@@ -34,12 +32,12 @@ export function DrinkReviewWidget({ drinkId, drinkSlug, initialReview }: DrinkRe
       onSubmit={async (rating, comment) => {
         const fd = new FormData();
         fd.set('drink_id', drinkId);
+        fd.set('drink_slug', drinkSlug);
         fd.set('rating', String(rating));
         fd.set('comment', comment);
-        fd.set('pathname', pathname);
         return submitReview(initialState, fd);
       }}
-      onDelete={(id) => deleteReview(id, pathname)}
+      onDelete={(id) => deleteReview(id, drinkSlug)}
     />
   );
 }

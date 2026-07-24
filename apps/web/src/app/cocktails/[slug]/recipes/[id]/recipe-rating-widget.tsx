@@ -20,8 +20,6 @@ export function RecipeRatingWidget({
   cocktailSlug,
   initialRating,
 }: RecipeRatingWidgetProps) {
-  const pathname = `/cocktails/${cocktailSlug}/recipes/${recipeId}`;
-
   return (
     <EntityRatingWidget
       initialRating={initialRating}
@@ -38,12 +36,12 @@ export function RecipeRatingWidget({
       onSubmit={async (rating, comment) => {
         const fd = new FormData();
         fd.set('recipe_id', recipeId);
+        fd.set('cocktail_slug', cocktailSlug);
         fd.set('rating', String(rating));
         fd.set('comment', comment);
-        fd.set('pathname', pathname);
         return submitRecipeRating(emptyState, fd);
       }}
-      onDelete={(id) => deleteRecipeRating(id, pathname)}
+      onDelete={(id) => deleteRecipeRating(id, cocktailSlug, recipeId)}
     />
   );
 }

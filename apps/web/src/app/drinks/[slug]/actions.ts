@@ -2,35 +2,15 @@
 
 import type { DrinkReview } from '@sakehub/types';
 
+import { toDrinkReview, type ApiDrinkReview } from '@/application/drink-mappers';
 import {
   deleteEntityRating,
+  drinkRevalidatePath,
   upsertEntityRating,
   type RatingActionState,
 } from '@/application/rating-action-helpers';
 
 export type ReviewState = RatingActionState<DrinkReview>;
-
-interface ApiDrinkReview {
-  id: string;
-  drink_id: string;
-  user_id: string;
-  rating: number;
-  comment: string;
-  created_at: string;
-  updated_at: string;
-}
-
-function toDrinkReview(api: ApiDrinkReview): DrinkReview {
-  return {
-    id: api.id,
-    drinkId: api.drink_id,
-    userId: api.user_id,
-    rating: api.rating,
-    comment: api.comment,
-    createdAt: api.created_at,
-    updatedAt: api.updated_at,
-  };
-}
 
 export async function submitReview(
   _prevState: ReviewState,
@@ -42,16 +22,18 @@ export async function submitReview(
     missingIdError: 'drink_id が見つかりません。',
     upsertPath: '/api/auth/reviews',
     bodyKey: 'drink_id',
-    pathPrefix: '/drinks/',
+    resolveRevalidatePath: (_drinkId, fd) => {
+      const slug = ((fd.get('drink_slug') as string | null) ?? '').trim();
+      return drinkRevalidatePath(slug);
+    },
     mapResponse: toDrinkReview,
   });
 }
 
-export async function deleteReview(reviewId: string, pathname?: string): Promise<ReviewState> {
+export async function deleteReview(reviewId: string, drinkSlug: string): Promise<ReviewState> {
   return deleteEntityRating<DrinkReview>({
     ratingId: reviewId,
     deletePath: `/api/auth/reviews/${encodeURIComponent(reviewId)}`,
-    pathname,
-    pathPrefix: '/drinks/',
+    pathToRevalidate: drinkRevalidatePath(drinkSlug),
   });
 }

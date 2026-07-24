@@ -1,6 +1,7 @@
 'use client';
 
 import { useOptimistic, useState, useTransition } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -49,6 +50,7 @@ export function EntityRatingWidget<T extends EntityRatingValue>({
   onSubmit,
   onDelete,
 }: EntityRatingWidgetProps<T>) {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState('');
@@ -85,6 +87,8 @@ export function EntityRatingWidget<T extends EntityRatingValue>({
       const result = await onSubmit(rating, comment);
       if (result.ok && result.data) {
         setConfirmedRating(result.data);
+        // Refresh RSC props (averages / public rating list) after mutation.
+        router.refresh();
         return;
       }
       setError(result.error);
@@ -100,6 +104,7 @@ export function EntityRatingWidget<T extends EntityRatingValue>({
       const result = await onDelete(id);
       if (result.ok) {
         setConfirmedRating(null);
+        router.refresh();
         return;
       }
       setError(result.error);

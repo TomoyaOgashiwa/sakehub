@@ -4,6 +4,7 @@ import type { CocktailRecipeRating } from '@sakehub/types';
 
 import { toRecipeRating, type ApiRecipeRating } from '@/application/cocktail-mappers';
 import {
+  cocktailRecipeRevalidatePath,
   deleteEntityRating,
   upsertEntityRating,
   type RatingActionState,
@@ -21,19 +22,22 @@ export async function submitRecipeRating(
     missingIdError: 'recipe_id が見つかりません。',
     upsertPath: '/api/auth/cocktail-recipe-ratings',
     bodyKey: 'recipe_id',
-    pathPrefix: '/cocktails/',
+    resolveRevalidatePath: (recipeId, fd) => {
+      const slug = ((fd.get('cocktail_slug') as string | null) ?? '').trim();
+      return cocktailRecipeRevalidatePath(slug, recipeId);
+    },
     mapResponse: toRecipeRating,
   });
 }
 
 export async function deleteRecipeRating(
   ratingId: string,
-  pathname?: string,
+  cocktailSlug: string,
+  recipeId: string,
 ): Promise<RecipeRatingState> {
   return deleteEntityRating<CocktailRecipeRating>({
     ratingId,
     deletePath: `/api/auth/cocktail-recipe-ratings/${encodeURIComponent(ratingId)}`,
-    pathname,
-    pathPrefix: '/cocktails/',
+    pathToRevalidate: cocktailRecipeRevalidatePath(cocktailSlug, recipeId),
   });
 }

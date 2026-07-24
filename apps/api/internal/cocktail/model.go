@@ -10,8 +10,15 @@ var (
 	ErrCocktailNotFound = errors.New("cocktail not found")
 	ErrValidation       = errors.New("validation error")
 	ErrInvalidRating    = errors.New("rating must be between 1 and 5")
+	ErrInvalidUUID      = errors.New("invalid uuid")
 	ErrRatingNotFound   = errors.New("rating not found")
 	ErrForbidden        = errors.New("not allowed to modify this rating")
+)
+
+// Default list caps keep detail payloads bounded as recipes/ratings grow.
+const (
+	DefaultPublishedRecipeLimit = 50
+	DefaultRatingListLimit      = 20
 )
 
 // Cocktail is a master record for a cocktail genre (e.g. レモンサワー, マンハッタン).

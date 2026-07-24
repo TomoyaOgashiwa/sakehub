@@ -45,6 +45,12 @@ CREATE POLICY "cocktails_select_public" ON cocktails
 -- 2. cocktail_recipes に cocktail_id を追加
 -- ---------------------------------------------------------------------------
 -- ローカル開発のみのため supabase db reset 前提で NOT NULL を付与する。
+-- 本番 / 共有 DB に既存 cocktail_recipes 行がある場合、この ALTER は失敗する。
+-- その場合は別 migration で:
+--   1) nullable で ADD COLUMN
+--   2) バックフィル
+--   3) SET NOT NULL
+-- の段階適用が必要（本 migration をそのまま本番適用しないこと）。
 -- マスタ行の削除はレシピが残っている限り禁止（ON DELETE RESTRICT）。
 -- ---------------------------------------------------------------------------
 ALTER TABLE cocktail_recipes

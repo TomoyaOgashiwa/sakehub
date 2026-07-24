@@ -78,6 +78,10 @@ func (h *Handler) GetRecipe(w http.ResponseWriter, r *http.Request) {
 			response.Error(w, http.StatusNotFound, "cocktail recipe not found")
 			return
 		}
+		if errors.Is(err, ErrInvalidUUID) {
+			response.Error(w, http.StatusBadRequest, "invalid recipe id")
+			return
+		}
 		response.Error(w, http.StatusInternalServerError, "internal server error")
 		return
 	}

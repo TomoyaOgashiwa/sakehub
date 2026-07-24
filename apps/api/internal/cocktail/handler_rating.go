@@ -35,6 +35,10 @@ func (h *Handler) ListRatingsByRecipe(w http.ResponseWriter, r *http.Request) {
 
 	ratings, err := h.svc.ListRatingsByRecipe(r.Context(), recipeID)
 	if err != nil {
+		if errors.Is(err, ErrInvalidUUID) {
+			response.Error(w, http.StatusBadRequest, "invalid recipe_id")
+			return
+		}
 		response.Error(w, http.StatusInternalServerError, "internal server error")
 		return
 	}
@@ -61,6 +65,10 @@ func (h *Handler) GetMyRating(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		if errors.Is(err, ErrRatingNotFound) {
 			response.JSON(w, http.StatusOK, map[string]any{"data": nil})
+			return
+		}
+		if errors.Is(err, ErrInvalidUUID) {
+			response.Error(w, http.StatusBadRequest, "invalid recipe_id")
 			return
 		}
 		response.Error(w, http.StatusInternalServerError, "internal server error")
@@ -93,8 +101,12 @@ func (h *Handler) UpsertRating(w http.ResponseWriter, r *http.Request) {
 
 	rating, err := h.svc.UpsertRating(r.Context(), input, userID)
 	if err != nil {
-		if errors.Is(err, ErrInvalidRating) || errors.Is(err, ErrValidation) {
+		if errors.Is(err, ErrInvalidRating) || errors.Is(err, ErrValidation) || errors.Is(err, ErrInvalidUUID) {
 			response.Error(w, http.StatusBadRequest, err.Error())
+			return
+		}
+		if errors.Is(err, ErrNotFound) {
+			response.Error(w, http.StatusNotFound, "cocktail recipe not found")
 			return
 		}
 		response.Error(w, http.StatusInternalServerError, "internal server error")
@@ -115,6 +127,10 @@ func (h *Handler) DeleteRating(w http.ResponseWriter, r *http.Request) {
 
 	id := chi.URLParam(r, "id")
 	if err := h.svc.DeleteRating(r.Context(), id, userID); err != nil {
+		if errors.Is(err, ErrInvalidUUID) {
+			response.Error(w, http.StatusBadRequest, "invalid rating id")
+			return
+		}
 		if errors.Is(err, ErrForbidden) {
 			response.Error(w, http.StatusForbidden, "not allowed")
 			return

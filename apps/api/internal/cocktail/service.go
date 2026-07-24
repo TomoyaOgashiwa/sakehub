@@ -3,6 +3,7 @@ package cocktail
 import (
 	"context"
 	"fmt"
+	"regexp"
 	"strings"
 )
 
@@ -14,6 +15,8 @@ var validUnits = map[string]bool{
 var validStatuses = map[string]bool{
 	"draft": true, "published": true,
 }
+
+var uuidPattern = regexp.MustCompile(`(?i)^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$`)
 
 type Service struct {
 	repo Repository
@@ -39,7 +42,7 @@ func (s *Service) GetCocktailBySlug(ctx context.Context, slug string) (*Cocktail
 		return nil, fmt.Errorf("cocktail.GetCocktailBySlug: %w", err)
 	}
 
-	recipes, err := s.repo.ListPublishedRecipes(ctx, c.ID)
+	recipes, err := s.repo.ListPublishedRecipes(ctx, c.ID, DefaultPublishedRecipeLimit)
 	if err != nil {
 		return nil, fmt.Errorf("cocktail.GetCocktailBySlug recipes: %w", err)
 	}
@@ -48,6 +51,10 @@ func (s *Service) GetCocktailBySlug(ctx context.Context, slug string) (*Cocktail
 }
 
 func (s *Service) GetRecipeByID(ctx context.Context, id string) (*Recipe, error) {
+	if !isUUID(id) {
+		return nil, ErrInvalidUUID
+	}
+
 	recipe, err := s.repo.FindPublishedRecipeByID(ctx, id)
 	if err != nil {
 		return nil, fmt.Errorf("cocktail.GetRecipeByID: %w", err)
@@ -68,7 +75,11 @@ func (s *Service) Create(ctx context.Context, input CreateInput) (*Recipe, error
 }
 
 func (s *Service) ListRatingsByRecipe(ctx context.Context, recipeID string) ([]RecipeRating, error) {
-	ratings, err := s.repo.ListRatingsByRecipe(ctx, recipeID)
+	if !isUUID(recipeID) {
+		return nil, ErrInvalidUUID
+	}
+
+	ratings, err := s.repo.ListRatingsByRecipe(ctx, recipeID, DefaultRatingListLimit)
 	if err != nil {
 		return nil, fmt.Errorf("cocktail.ListRatingsByRecipe: %w", err)
 	}
@@ -76,6 +87,10 @@ func (s *Service) ListRatingsByRecipe(ctx context.Context, recipeID string) ([]R
 }
 
 func (s *Service) GetRatingByRecipeAndUser(ctx context.Context, recipeID, userID string) (*RecipeRating, error) {
+	if !isUUID(recipeID) {
+		return nil, ErrInvalidUUID
+	}
+
 	rating, err := s.repo.FindRatingByRecipeAndUser(ctx, recipeID, userID)
 	if err != nil {
 		return nil, fmt.Errorf("cocktail.GetRatingByRecipeAndUser: %w", err)
@@ -84,11 +99,19 @@ func (s *Service) GetRatingByRecipeAndUser(ctx context.Context, recipeID, userID
 }
 
 func (s *Service) UpsertRating(ctx context.Context, input RatingUpsertInput, userID string) (*RecipeRating, error) {
+	if !isUUID(input.RecipeID) {
+		return nil, ErrInvalidUUID
+	}
 	if input.Rating < 1 || input.Rating > 5 {
 		return nil, ErrInvalidRating
 	}
 	if len([]rune(input.Comment)) > 1000 {
 		return nil, fmt.Errorf("%w: comment must be 1000 characters or fewer", ErrValidation)
+	}
+
+	// Only published recipes are rateable (align with the public GET endpoint).
+	if err := s.repo.PublishedRecipeExists(ctx, input.RecipeID); err != nil {
+		return nil, fmt.Errorf("cocktail.UpsertRating: %w", err)
 	}
 
 	rating := &RecipeRating{
@@ -105,15 +128,23 @@ func (s *Service) UpsertRating(ctx context.Context, input RatingUpsertInput, use
 }
 
 func (s *Service) DeleteRating(ctx context.Context, id, userID string) error {
+	if !isUUID(id) {
+		return ErrInvalidUUID
+	}
+
 	if err := s.repo.DeleteRating(ctx, id, userID); err != nil {
 		return fmt.Errorf("cocktail.DeleteRating: %w", err)
 	}
 	return nil
 }
 
+func isUUID(v string) bool {
+	return uuidPattern.MatchString(strings.TrimSpace(v))
+}
+
 func validate(input CreateInput) error {
-	if strings.TrimSpace(input.CocktailID) == "" {
-		return fmt.Errorf("%w: cocktail_id is required", ErrValidation)
+	if !isUUID(strings.TrimSpace(input.CocktailID)) {
+		return fmt.Errorf("%w: cocktail_id must be a valid uuid", ErrValidation)
 	}
 
 	name := strings.TrimSpace(input.Name)

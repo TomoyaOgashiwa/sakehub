@@ -31,12 +31,13 @@ const recipeAggregates = `COALESCE((SELECT AVG(rt.rating)::NUMERIC(3,2) FROM coc
 type Repository interface {
 	ListCocktails(ctx context.Context) ([]Cocktail, error)
 	FindCocktailBySlug(ctx context.Context, slug string) (*Cocktail, error)
-	ListPublishedRecipes(ctx context.Context, cocktailID string) ([]RecipeSummary, error)
+	ListPublishedRecipes(ctx context.Context, cocktailID string, limit int) ([]RecipeSummary, error)
 	FindPublishedRecipeByID(ctx context.Context, id string) (*Recipe, error)
+	PublishedRecipeExists(ctx context.Context, id string) error
 	Insert(ctx context.Context, input CreateInput) (*Recipe, error)
 
 	FindRatingByRecipeAndUser(ctx context.Context, recipeID, userID string) (*RecipeRating, error)
-	ListRatingsByRecipe(ctx context.Context, recipeID string) ([]RecipeRating, error)
+	ListRatingsByRecipe(ctx context.Context, recipeID string, limit int) ([]RecipeRating, error)
 	UpsertRating(ctx context.Context, rating *RecipeRating) error
 	DeleteRating(ctx context.Context, id, userID string) error
 }
@@ -97,15 +98,20 @@ func (r *repository) FindCocktailBySlug(ctx context.Context, slug string) (*Cock
 	return c, nil
 }
 
-func (r *repository) ListPublishedRecipes(ctx context.Context, cocktailID string) ([]RecipeSummary, error) {
+func (r *repository) ListPublishedRecipes(ctx context.Context, cocktailID string, limit int) ([]RecipeSummary, error) {
+	if limit <= 0 {
+		limit = DefaultPublishedRecipeLimit
+	}
+
 	q := fmt.Sprintf(`
 		SELECT r.id, r.cocktail_id, r.user_id, r.name, r.memo, r.image_url, r.status,
 			%s, r.created_at, r.updated_at
 		FROM cocktail_recipes r
 		WHERE r.cocktail_id = $1 AND r.status = 'published'
-		ORDER BY r.created_at DESC`, recipeAggregates)
+		ORDER BY r.created_at DESC
+		LIMIT $2`, recipeAggregates)
 
-	rows, err := r.db.QueryContext(ctx, q, cocktailID)
+	rows, err := r.db.QueryContext(ctx, q, cocktailID, limit)
 	if err != nil {
 		return nil, err
 	}
@@ -177,6 +183,18 @@ func (r *repository) FindPublishedRecipeByID(ctx context.Context, id string) (*R
 	}
 
 	return &rec, nil
+}
+
+// PublishedRecipeExists returns ErrNotFound when the id is missing or not published.
+func (r *repository) PublishedRecipeExists(ctx context.Context, id string) error {
+	const q = `SELECT 1 FROM cocktail_recipes WHERE id = $1 AND status = 'published'`
+
+	var one int
+	err := r.db.QueryRowContext(ctx, q, id).Scan(&one)
+	if errors.Is(err, sql.ErrNoRows) {
+		return ErrNotFound
+	}
+	return err
 }
 
 func (r *repository) Insert(ctx context.Context, input CreateInput) (*Recipe, error) {
@@ -262,14 +280,19 @@ func (r *repository) FindRatingByRecipeAndUser(ctx context.Context, recipeID, us
 	return &rating, nil
 }
 
-func (r *repository) ListRatingsByRecipe(ctx context.Context, recipeID string) ([]RecipeRating, error) {
+func (r *repository) ListRatingsByRecipe(ctx context.Context, recipeID string, limit int) ([]RecipeRating, error) {
+	if limit <= 0 {
+		limit = DefaultRatingListLimit
+	}
+
 	const q = `
 		SELECT id, recipe_id, user_id, rating, comment, created_at, updated_at
 		FROM cocktail_recipe_ratings
 		WHERE recipe_id = $1
-		ORDER BY created_at DESC`
+		ORDER BY created_at DESC
+		LIMIT $2`
 
-	rows, err := r.db.QueryContext(ctx, q, recipeID)
+	rows, err := r.db.QueryContext(ctx, q, recipeID, limit)
 	if err != nil {
 		return nil, err
 	}

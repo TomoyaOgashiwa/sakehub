@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState, useOptimistic, useTransition, useState } from 'react';
+import { useOptimistic, useState, useTransition } from 'react';
 
 import type { CocktailRecipeRating } from '@sakehub/types';
 
@@ -21,20 +21,28 @@ import type { RecipeRatingState } from './actions';
 
 interface RecipeRatingWidgetProps {
   recipeId: string;
+  cocktailSlug: string;
   initialRating: CocktailRecipeRating | null;
 }
 
-const initialState: RecipeRatingState = { ok: false, error: '' };
+const emptyState: RecipeRatingState = { ok: false, error: '' };
 
-export function RecipeRatingWidget({ recipeId, initialRating }: RecipeRatingWidgetProps) {
+export function RecipeRatingWidget({
+  recipeId,
+  cocktailSlug,
+  initialRating,
+}: RecipeRatingWidgetProps) {
+  const pathname = `/cocktails/${cocktailSlug}/recipes/${recipeId}`;
   const [open, setOpen] = useState(false);
-  const [state, formAction, isPending] = useActionState(submitRecipeRating, initialState);
-  const [, startTransition] = useTransition();
+  const [isPending, startTransition] = useTransition();
+  const [error, setError] = useState('');
 
+  // Confirmed server-aligned state. useOptimistic alone would snap back when the
+  // transition ends unless we keep a local confirmed value to feed it.
+  const [confirmedRating, setConfirmedRating] = useState<CocktailRecipeRating | null>(initialRating);
   const [optimisticRating, setOptimisticRating] =
-    useOptimistic<CocktailRecipeRating | null>(initialRating);
+    useOptimistic<CocktailRecipeRating | null>(confirmedRating);
 
-  // Local draft state inside the modal (reset when modal opens)
   const [draftRating, setDraftRating] = useState<number | null>(null);
   const [draftComment, setDraftComment] = useState('');
 
@@ -42,6 +50,7 @@ export function RecipeRatingWidget({ recipeId, initialRating }: RecipeRatingWidg
     if (isOpen) {
       setDraftRating(optimisticRating?.rating ?? null);
       setDraftComment(optimisticRating?.comment ?? '');
+      setError('');
     }
     setOpen(isOpen);
   };
@@ -55,7 +64,7 @@ export function RecipeRatingWidget({ recipeId, initialRating }: RecipeRatingWidg
     const next: CocktailRecipeRating = {
       id: optimisticRating?.id ?? '',
       recipeId,
-      userId: '',
+      userId: optimisticRating?.userId ?? '',
       rating,
       comment,
       createdAt: optimisticRating?.createdAt ?? new Date().toISOString(),
@@ -65,12 +74,20 @@ export function RecipeRatingWidget({ recipeId, initialRating }: RecipeRatingWidg
     startTransition(async () => {
       setOptimisticRating(next);
       setOpen(false);
+      setError('');
 
       const fd = new FormData();
       fd.set('recipe_id', recipeId);
       fd.set('rating', String(rating));
       fd.set('comment', comment);
-      await formAction(fd);
+      fd.set('pathname', pathname);
+
+      const result = await submitRecipeRating(emptyState, fd);
+      if (result.ok && result.data) {
+        setConfirmedRating(result.data);
+        return;
+      }
+      setError(result.error);
     });
   };
 
@@ -79,7 +96,13 @@ export function RecipeRatingWidget({ recipeId, initialRating }: RecipeRatingWidg
     const id = optimisticRating.id;
     startTransition(async () => {
       setOptimisticRating(null);
-      await deleteRecipeRating(id);
+      setError('');
+      const result = await deleteRecipeRating(id, pathname);
+      if (result.ok) {
+        setConfirmedRating(null);
+        return;
+      }
+      setError(result.error);
     });
   };
 
@@ -108,7 +131,7 @@ export function RecipeRatingWidget({ recipeId, initialRating }: RecipeRatingWidg
               onCommentChange={setDraftComment}
               onSubmit={handleSubmit}
               isPending={isPending}
-              error={!state.ok && state.error ? state.error : ''}
+              error={error}
             />
           </Dialog>
           {!isPending && (
@@ -123,6 +146,7 @@ export function RecipeRatingWidget({ recipeId, initialRating }: RecipeRatingWidg
           {isPending && (
             <span className="text-muted-foreground animate-pulse text-xs">送信中…</span>
           )}
+          {!open && error && <p className="text-destructive w-full text-sm">{error}</p>}
         </div>
       ) : (
         <div className="flex flex-col gap-2">
@@ -137,10 +161,11 @@ export function RecipeRatingWidget({ recipeId, initialRating }: RecipeRatingWidg
               onCommentChange={setDraftComment}
               onSubmit={handleSubmit}
               isPending={isPending}
-              error={!state.ok && state.error ? state.error : ''}
+              error={error}
             />
           </Dialog>
           <p className="text-muted-foreground text-xs">ボタンをタップして評価できます</p>
+          {!open && error && <p className="text-destructive text-sm">{error}</p>}
         </div>
       )}
     </div>

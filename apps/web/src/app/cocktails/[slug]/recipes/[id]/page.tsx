@@ -7,7 +7,10 @@ import { ArrowLeft, Martini } from 'lucide-react';
 import { Heading } from '@/components/ui/heading';
 import { Separator } from '@/components/ui/separator';
 import { StarRatingDisplay } from '@/components/ui/star-rating';
-import { fetchCocktailRecipeServer } from '@/application/cocktails-api.server';
+import {
+  fetchCocktailBySlugServer,
+  fetchCocktailRecipeServer,
+} from '@/application/cocktails-api.server';
 import { fetchMyRecipeRating, fetchRatingsByRecipeId } from '@/application/recipe-ratings-api.server';
 import { createClient } from '@/lib/supabase/server';
 import { RecipeRatingWidget } from './recipe-rating-widget';
@@ -17,10 +20,16 @@ type PageProps = {
 };
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { id } = await params;
+  const { slug, id } = await params;
 
   try {
-    const recipe = await fetchCocktailRecipeServer(id);
+    const [cocktail, recipe] = await Promise.all([
+      fetchCocktailBySlugServer(slug),
+      fetchCocktailRecipeServer(id),
+    ]);
+    if (recipe.cocktailId !== cocktail.id) {
+      return { title: 'レシピが見つかりません' };
+    }
     return {
       title: recipe.name,
       description: recipe.memo ?? `${recipe.name} のレシピと評価`,
@@ -35,7 +44,14 @@ export default async function CocktailRecipeDetailPage({ params }: PageProps) {
 
   let recipe;
   try {
-    recipe = await fetchCocktailRecipeServer(id);
+    const [cocktail, fetchedRecipe] = await Promise.all([
+      fetchCocktailBySlugServer(slug),
+      fetchCocktailRecipeServer(id),
+    ]);
+    if (fetchedRecipe.cocktailId !== cocktail.id) {
+      notFound();
+    }
+    recipe = fetchedRecipe;
   } catch {
     notFound();
   }
@@ -49,10 +65,12 @@ export default async function CocktailRecipeDetailPage({ params }: PageProps) {
     data: { session },
   } = await supabase.auth.getSession();
 
-  const [ratings, myRating] = await Promise.all([
+  const [ratingsResult, myRatingResult] = await Promise.allSettled([
     fetchRatingsByRecipeId(recipe.id),
     user && session ? fetchMyRecipeRating(recipe.id, session.access_token) : Promise.resolve(null),
   ]);
+  const ratings = ratingsResult.status === 'fulfilled' ? ratingsResult.value : [];
+  const myRating = myRatingResult.status === 'fulfilled' ? myRatingResult.value : null;
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8">
@@ -130,7 +148,12 @@ export default async function CocktailRecipeDetailPage({ params }: PageProps) {
 
               {user ? (
                 <div className="bg-muted/40 rounded-xl border p-4">
-                  <RecipeRatingWidget recipeId={recipe.id} initialRating={myRating} />
+                  <RecipeRatingWidget
+                    key={myRating?.updatedAt ?? 'none'}
+                    recipeId={recipe.id}
+                    cocktailSlug={slug}
+                    initialRating={myRating}
+                  />
                 </div>
               ) : (
                 <div className="bg-muted/40 rounded-xl border p-4">

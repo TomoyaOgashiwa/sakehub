@@ -22,7 +22,8 @@ export function DrinkListClient({ fallbackData }: DrinkListClientProps) {
   const category = searchParams.get('category') ?? '';
   const q = searchParams.get('q') ?? '';
 
-  // 'cocktail' はカクテルマスタ（ジャンル）一覧を表示する特別なカテゴリ
+  // 暫定導線: drinks カテゴリ UI に cocktail マスタ一覧を載せている。
+  // 本来は別ドメインなので、将来は /cocktails ルートへ分離する。
   const isCocktail = category === 'cocktail';
 
   const { data, isLoading } = useDrinks({ category, q, limit: 20 }, fallbackData, !isCocktail);

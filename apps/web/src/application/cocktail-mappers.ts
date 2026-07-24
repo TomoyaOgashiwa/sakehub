@@ -45,6 +45,7 @@ export interface ApiRecipeIngredient {
 }
 
 export interface ApiRecipe extends ApiRecipeSummary {
+  cocktail_slug?: string;
   ingredients: ApiRecipeIngredient[];
 }
 
@@ -99,6 +100,7 @@ export function toRecipeSummary(api: ApiRecipeSummary): CocktailRecipeSummary {
 export function toCocktailRecipe(api: ApiRecipe): CocktailRecipe {
   return {
     ...toRecipeSummary(api),
+    cocktailSlug: api.cocktail_slug ?? '',
     ingredients: (api.ingredients ?? []).map((ing) => ({
       id: ing.id,
       recipeId: ing.recipe_id,

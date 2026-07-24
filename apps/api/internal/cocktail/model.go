@@ -98,6 +98,7 @@ type Ingredient struct {
 type Recipe struct {
 	ID            string       `json:"id"`
 	CocktailID    string       `json:"cocktail_id"`
+	CocktailSlug  string       `json:"cocktail_slug,omitempty"`
 	UserID        string       `json:"user_id"`
 	Name          string       `json:"name"`
 	Memo          *string      `json:"memo,omitempty"`

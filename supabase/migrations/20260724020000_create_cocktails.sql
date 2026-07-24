@@ -56,9 +56,9 @@ CREATE POLICY "cocktails_select_public" ON cocktails
 ALTER TABLE cocktail_recipes
   ADD COLUMN cocktail_id UUID NOT NULL REFERENCES cocktails(id) ON DELETE RESTRICT;
 
--- ジャンル別のレシピ一覧（published のみ）取得を1インデックスでカバーする複合インデックス
+-- ジャンル別のレシピ一覧（published + created_at DESC LIMIT/OFFSET）をカバーする複合インデックス
 CREATE INDEX idx_cocktail_recipes_cocktail_id
-  ON cocktail_recipes (cocktail_id, status);
+  ON cocktail_recipes (cocktail_id, status, created_at DESC);
 
 -- ---------------------------------------------------------------------------
 -- 3. cocktail_recipe_ratings テーブル（レシピ専用評価）
@@ -83,8 +83,8 @@ ALTER TABLE cocktail_recipe_ratings ADD CONSTRAINT chk_recipe_ratings_rating
 ALTER TABLE cocktail_recipe_ratings ADD CONSTRAINT chk_recipe_ratings_comment_length
   CHECK (char_length(comment) <= 1000);
 
--- 評価一覧・平均評価の集計をカバーするインデックス
-CREATE INDEX idx_cocktail_recipe_ratings_recipe_id ON cocktail_recipe_ratings (recipe_id);
+-- 評価一覧（recipe_id + created_at DESC LIMIT/OFFSET）と集計をカバーするインデックス
+CREATE INDEX idx_cocktail_recipe_ratings_recipe_id ON cocktail_recipe_ratings (recipe_id, created_at DESC);
 CREATE INDEX idx_cocktail_recipe_ratings_user_id ON cocktail_recipe_ratings (user_id);
 
 CREATE TRIGGER cocktail_recipe_ratings_updated_at

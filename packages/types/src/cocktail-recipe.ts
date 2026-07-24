@@ -27,6 +27,8 @@ export interface CocktailRecipeIngredient {
 export interface CocktailRecipe {
   id: string;
   cocktailId: string;
+  /** Canonical cocktail master slug; used for URL validation without a second fetch. */
+  cocktailSlug: string;
   userId: string;
   name: string;
   memo?: string;

@@ -146,17 +146,19 @@ func (r *repository) ListPublishedRecipes(ctx context.Context, cocktailID string
 
 // FindPublishedRecipeByID returns a published recipe with its ingredients and
 // rating aggregates. Drafts are treated as not found because this feeds a
-// public endpoint.
+// public endpoint. cocktail_slug is joined so callers can validate canonical URLs
+// without a second master+recipes fetch.
 func (r *repository) FindPublishedRecipeByID(ctx context.Context, id string) (*Recipe, error) {
 	recipeQ := fmt.Sprintf(`
-		SELECT r.id, r.cocktail_id, r.user_id, r.name, r.memo, r.image_url, r.status,
+		SELECT r.id, r.cocktail_id, c.slug, r.user_id, r.name, r.memo, r.image_url, r.status,
 			%s, r.created_at, r.updated_at
 		FROM cocktail_recipes r
+		INNER JOIN cocktails c ON c.id = r.cocktail_id
 		WHERE r.id = $1 AND r.status = 'published'`, recipeAggregates)
 
 	var rec Recipe
 	err := r.db.QueryRowContext(ctx, recipeQ, id).Scan(
-		&rec.ID, &rec.CocktailID, &rec.UserID, &rec.Name, &rec.Memo, &rec.ImageURL,
+		&rec.ID, &rec.CocktailID, &rec.CocktailSlug, &rec.UserID, &rec.Name, &rec.Memo, &rec.ImageURL,
 		&rec.Status, &rec.AverageRating, &rec.TotalRatings,
 		&rec.CreatedAt, &rec.UpdatedAt,
 	)

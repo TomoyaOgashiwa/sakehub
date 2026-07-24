@@ -43,20 +43,30 @@ func New(logger *zap.Logger, db *sql.DB, cfg *config.Config, kf keyfunc.Keyfunc)
 	r.Route("/api", func(r chi.Router) {
 		r.Get("/health", handler.Health)
 		r.Route("/drinks", drinkH.Routes)
+		r.Route("/cocktails", cocktailH.CocktailRoutes)
+
+		r.Route("/cocktail-recipes", func(r chi.Router) {
+			r.Group(func(r chi.Router) {
+				r.Use(middleware.RequireAuth(kf))
+				cocktailH.AuthRecipeRoutes(r)
+			})
+			cocktailH.PublicRecipeRoutes(r)
+		})
 
 		r.Route("/public", func(r chi.Router) {
 			r.Route("/reviews", reviewH.PublicRoutes)
+			r.Route("/cocktail-recipe-ratings", cocktailH.RatingPublicRoutes)
 		})
 
 		r.Route("/auth", func(r chi.Router) {
 			r.Use(middleware.RequireAuth(kf))
 			r.Route("/reviews", reviewH.AuthRoutes)
+			r.Route("/cocktail-recipe-ratings", cocktailH.RatingAuthRoutes)
 		})
 
 		r.Group(func(r chi.Router) {
 			r.Use(middleware.RequireAuth(kf))
 			r.Route("/users", userH.Routes)
-			r.Route("/cocktail-recipes", cocktailH.Routes)
 		})
 	})
 

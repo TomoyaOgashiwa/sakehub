@@ -26,11 +26,14 @@ export interface CocktailRecipeIngredient {
 
 export interface CocktailRecipe {
   id: string;
+  cocktailId: string;
   userId: string;
   name: string;
   memo?: string;
   imageUrl?: string;
   status: CocktailRecipeStatus;
+  averageRating: number;
+  totalRatings: number;
   ingredients: CocktailRecipeIngredient[];
   createdAt: string;
   updatedAt: string;
@@ -44,6 +47,7 @@ export interface CreateCocktailRecipeIngredientInput {
 }
 
 export interface CreateCocktailRecipeInput {
+  cocktailId: string;
   name: string;
   memo?: string;
   imageUrl?: string;

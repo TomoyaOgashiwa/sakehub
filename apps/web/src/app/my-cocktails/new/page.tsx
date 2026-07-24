@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 
 import { Heading } from '@/components/ui/heading';
 import { createClient } from '@/lib/supabase/server';
+import { fetchCocktailsServer } from '@/application/cocktails-api.server';
 
 import { CocktailRecipeForm } from './cocktail-recipe-form';
 
@@ -21,6 +22,8 @@ export default async function NewCocktailRecipePage() {
     redirect('/login');
   }
 
+  const cocktails = await fetchCocktailsServer();
+
   return (
     <div className="mx-auto max-w-2xl px-4 py-10">
       <div className="mb-10 space-y-1">
@@ -34,7 +37,7 @@ export default async function NewCocktailRecipePage() {
         </p>
       </div>
 
-      <CocktailRecipeForm />
+      <CocktailRecipeForm cocktails={cocktails} />
     </div>
   );
 }

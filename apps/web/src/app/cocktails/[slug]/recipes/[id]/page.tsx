@@ -7,10 +7,7 @@ import { ArrowLeft, Martini } from 'lucide-react';
 import { Heading } from '@/components/ui/heading';
 import { Separator } from '@/components/ui/separator';
 import { StarRatingDisplay } from '@/components/ui/star-rating';
-import {
-  fetchCocktailBySlugServer,
-  fetchCocktailRecipeServer,
-} from '@/application/cocktails-api.server';
+import { fetchCocktailRecipeServer } from '@/application/cocktails-api.server';
 import { getOptionalAccessToken } from '@/application/require-access-token';
 import {
   fetchMyRecipeRating,
@@ -18,19 +15,25 @@ import {
 } from '@/application/recipe-ratings-api.server';
 import { RecipeRatingWidget } from './recipe-rating-widget';
 
+const RATING_PAGE_SIZE = 20;
+
 type PageProps = {
   params: Promise<{ slug: string; id: string }>;
+  searchParams: Promise<{ ratings_offset?: string }>;
 };
+
+function parseOffset(raw: string | undefined): number {
+  const n = Number(raw);
+  if (!Number.isFinite(n) || n < 0) return 0;
+  return Math.floor(n);
+}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug, id } = await params;
 
   try {
-    const [cocktail, recipe] = await Promise.all([
-      fetchCocktailBySlugServer(slug),
-      fetchCocktailRecipeServer(id),
-    ]);
-    if (recipe.cocktailId !== cocktail.id) {
+    const recipe = await fetchCocktailRecipeServer(id);
+    if (recipe.cocktailSlug !== slug) {
       return { title: 'レシピが見つかりません' };
     }
     return {
@@ -42,33 +45,47 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 }
 
-export default async function CocktailRecipeDetailPage({ params }: PageProps) {
+export default async function CocktailRecipeDetailPage({ params, searchParams }: PageProps) {
   const { slug, id } = await params;
+  const { ratings_offset: ratingsOffsetRaw } = await searchParams;
+  const ratingsOffset = parseOffset(ratingsOffsetRaw);
 
   let recipe;
   try {
-    const [cocktail, fetchedRecipe] = await Promise.all([
-      fetchCocktailBySlugServer(slug),
-      fetchCocktailRecipeServer(id),
-    ]);
-    if (fetchedRecipe.cocktailId !== cocktail.id) {
+    recipe = await fetchCocktailRecipeServer(id);
+    if (recipe.cocktailSlug !== slug) {
       notFound();
     }
-    recipe = fetchedRecipe;
   } catch {
     notFound();
   }
 
   const { user, accessToken } = await getOptionalAccessToken();
 
-  const [ratingsResult, myRatingResult] = await Promise.allSettled([
-    fetchRatingsByRecipeId(recipe.id),
-    user && accessToken ? fetchMyRecipeRating(recipe.id, accessToken) : Promise.resolve(null),
-  ]);
-  const ratingPage =
-    ratingsResult.status === 'fulfilled' ? ratingsResult.value : { ratings: [], hasMore: false };
+  let ratingPage: Awaited<ReturnType<typeof fetchRatingsByRecipeId>>;
+  let ratingsLoadFailed = false;
+  try {
+    ratingPage = await fetchRatingsByRecipeId(recipe.id, {
+      limit: RATING_PAGE_SIZE,
+      offset: ratingsOffset,
+    });
+  } catch {
+    ratingPage = { ratings: [], hasMore: false };
+    ratingsLoadFailed = true;
+  }
+
+  let myRating = null;
+  if (user && accessToken) {
+    try {
+      myRating = await fetchMyRecipeRating(recipe.id, accessToken);
+    } catch {
+      myRating = null;
+    }
+  }
+
   const ratings = ratingPage.ratings;
-  const myRating = myRatingResult.status === 'fulfilled' ? myRatingResult.value : null;
+  const nextRatingsOffset = ratingsOffset + ratings.length;
+  const prevRatingsOffset = Math.max(0, ratingsOffset - RATING_PAGE_SIZE);
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8">
@@ -164,31 +181,62 @@ export default async function CocktailRecipeDetailPage({ params }: PageProps) {
                 </div>
               )}
 
-              {ratings.length > 0 && (
-                <div className="space-y-3">
-                  <Heading level="h3">みんなの評価 ({recipe.totalRatings}件)</Heading>
-                  {(ratingPage.hasMore || recipe.totalRatings > ratings.length) && (
-                    <p className="text-muted-foreground text-sm">
-                      新しい {ratings.length} 件を表示（全 {recipe.totalRatings} 件）
-                    </p>
-                  )}
-                  <div className="space-y-2">
-                    {ratings.map((rating) => (
-                      <div
-                        key={rating.id}
-                        className="flex items-start gap-3 rounded-lg border p-3 text-sm"
-                      >
-                        <StarRatingDisplay value={rating.rating} size="sm" showValue={false} />
-                        <span className="text-foreground font-medium tabular-nums">
-                          {rating.rating}.0
-                        </span>
-                        {rating.comment && (
-                          <p className="text-muted-foreground flex-1">{rating.comment}</p>
-                        )}
-                      </div>
-                    ))}
+              {ratingsLoadFailed ? (
+                <p className="text-destructive text-sm" role="alert">
+                  評価一覧を取得できませんでした。しばらくしてから再読み込みしてください。
+                </p>
+              ) : (
+                ratings.length > 0 && (
+                  <div className="space-y-3">
+                    <Heading level="h3">みんなの評価 ({recipe.totalRatings}件)</Heading>
+                    {(ratingPage.hasMore ||
+                      recipe.totalRatings > ratings.length ||
+                      ratingsOffset > 0) && (
+                      <p className="text-muted-foreground text-sm">
+                        {ratingsOffset + 1}〜{ratingsOffset + ratings.length} 件を表示（全{' '}
+                        {recipe.totalRatings} 件）
+                      </p>
+                    )}
+                    <div className="space-y-2">
+                      {ratings.map((rating) => (
+                        <div
+                          key={rating.id}
+                          className="flex items-start gap-3 rounded-lg border p-3 text-sm"
+                        >
+                          <StarRatingDisplay value={rating.rating} size="sm" showValue={false} />
+                          <span className="text-foreground font-medium tabular-nums">
+                            {rating.rating}.0
+                          </span>
+                          {rating.comment && (
+                            <p className="text-muted-foreground flex-1">{rating.comment}</p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                    <div className="flex flex-wrap gap-3">
+                      {ratingsOffset > 0 && (
+                        <Link
+                          href={
+                            prevRatingsOffset === 0
+                              ? `/cocktails/${slug}/recipes/${id}`
+                              : `/cocktails/${slug}/recipes/${id}?ratings_offset=${prevRatingsOffset}`
+                          }
+                          className="text-muted-foreground hover:text-foreground text-sm underline underline-offset-2"
+                        >
+                          前の評価
+                        </Link>
+                      )}
+                      {ratingPage.hasMore && (
+                        <Link
+                          href={`/cocktails/${slug}/recipes/${id}?ratings_offset=${nextRatingsOffset}`}
+                          className="text-foreground text-sm font-medium underline underline-offset-2"
+                        >
+                          もっと見る
+                        </Link>
+                      )}
+                    </div>
                   </div>
-                </div>
+                )
               )}
             </section>
           </div>

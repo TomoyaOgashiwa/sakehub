@@ -10,15 +10,25 @@ import { Separator } from '@/components/ui/separator';
 import { StarRatingDisplay } from '@/components/ui/star-rating';
 import { fetchCocktailBySlugServer } from '@/application/cocktails-api.server';
 
+const RECIPE_PAGE_SIZE = 50;
+
 type PageProps = {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<{ recipes_offset?: string }>;
 };
+
+function parseOffset(raw: string | undefined): number {
+  const n = Number(raw);
+  if (!Number.isFinite(n) || n < 0) return 0;
+  return Math.floor(n);
+}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
 
   try {
-    const cocktail = await fetchCocktailBySlugServer(slug);
+    // Metadata only needs master fields; skip recipe page payload.
+    const cocktail = await fetchCocktailBySlugServer(slug, { limit: 1, offset: 0 });
     const title = cocktail.nameEn ? `${cocktail.name} (${cocktail.nameEn})` : cocktail.name;
 
     return {
@@ -36,15 +46,23 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 }
 
-export default async function CocktailDetailPage({ params }: PageProps) {
+export default async function CocktailDetailPage({ params, searchParams }: PageProps) {
   const { slug } = await params;
+  const { recipes_offset: recipesOffsetRaw } = await searchParams;
+  const recipesOffset = parseOffset(recipesOffsetRaw);
 
   let cocktail;
   try {
-    cocktail = await fetchCocktailBySlugServer(slug);
+    cocktail = await fetchCocktailBySlugServer(slug, {
+      limit: RECIPE_PAGE_SIZE,
+      offset: recipesOffset,
+    });
   } catch {
     notFound();
   }
+
+  const nextRecipesOffset = recipesOffset + cocktail.recipes.length;
+  const prevRecipesOffset = Math.max(0, recipesOffset - RECIPE_PAGE_SIZE);
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8">
@@ -134,14 +152,27 @@ export default async function CocktailDetailPage({ params }: PageProps) {
           {cocktail.recipes.length === 0 ? (
             <div className="rounded-lg border border-dashed p-8 text-center">
               <p className="text-muted-foreground text-sm">
-                まだレシピがありません。最初のレシピを投稿してみましょう。
+                {recipesOffset > 0
+                  ? 'このページにはレシピがありません。'
+                  : 'まだレシピがありません。最初のレシピを投稿してみましょう。'}
               </p>
+              {recipesOffset > 0 && (
+                <Link
+                  href={`/cocktails/${cocktail.slug}`}
+                  className="text-foreground mt-3 inline-block text-sm underline underline-offset-2"
+                >
+                  最初のページへ戻る
+                </Link>
+              )}
             </div>
           ) : (
             <>
-              {(cocktail.hasMoreRecipes || cocktail.recipeCount > cocktail.recipes.length) && (
+              {(cocktail.hasMoreRecipes ||
+                cocktail.recipeCount > cocktail.recipes.length ||
+                recipesOffset > 0) && (
                 <p className="text-muted-foreground text-sm">
-                  新しい {cocktail.recipes.length} 件を表示（全 {cocktail.recipeCount} 件）
+                  {recipesOffset + 1}〜{recipesOffset + cocktail.recipes.length} 件を表示（全{' '}
+                  {cocktail.recipeCount} 件）
                 </p>
               )}
               <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2" role="list">
@@ -180,6 +211,28 @@ export default async function CocktailDetailPage({ params }: PageProps) {
                   </li>
                 ))}
               </ul>
+              <div className="flex flex-wrap gap-3">
+                {recipesOffset > 0 && (
+                  <Link
+                    href={
+                      prevRecipesOffset === 0
+                        ? `/cocktails/${cocktail.slug}`
+                        : `/cocktails/${cocktail.slug}?recipes_offset=${prevRecipesOffset}`
+                    }
+                    className="text-muted-foreground hover:text-foreground text-sm underline underline-offset-2"
+                  >
+                    前のレシピ
+                  </Link>
+                )}
+                {cocktail.hasMoreRecipes && (
+                  <Link
+                    href={`/cocktails/${cocktail.slug}?recipes_offset=${nextRecipesOffset}`}
+                    className="text-foreground text-sm font-medium underline underline-offset-2"
+                  >
+                    もっと見る
+                  </Link>
+                )}
+              </div>
             </>
           )}
         </section>

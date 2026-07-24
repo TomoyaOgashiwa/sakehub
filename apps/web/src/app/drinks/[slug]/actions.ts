@@ -1,15 +1,44 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
+
 import type { DrinkReview } from '@sakehub/types';
 
-import { createClient } from '@/lib/supabase/server';
-
-const API_URL = process.env.API_URL ?? 'http://localhost:8080';
+import { requireAccessToken } from '@/application/require-access-token';
+import { authServerFetch } from '@/application/server-api';
 
 export interface ReviewState {
   ok: boolean;
   error: string;
   data?: DrinkReview;
+}
+
+interface ApiDrinkReview {
+  id: string;
+  drink_id: string;
+  user_id: string;
+  rating: number;
+  comment: string;
+  created_at: string;
+  updated_at: string;
+}
+
+function toDrinkReview(api: ApiDrinkReview): DrinkReview {
+  return {
+    id: api.id,
+    drinkId: api.drink_id,
+    userId: api.user_id,
+    rating: api.rating,
+    comment: api.comment,
+    createdAt: api.created_at,
+    updatedAt: api.updated_at,
+  };
+}
+
+function revalidateDrinkPath(pathname: string | null) {
+  if (pathname && pathname.startsWith('/drinks/')) {
+    revalidatePath(pathname);
+  }
 }
 
 export async function submitReview(
@@ -19,6 +48,7 @@ export async function submitReview(
   const drinkId = formData.get('drink_id') as string | null;
   const ratingRaw = formData.get('rating') as string | null;
   const comment = ((formData.get('comment') as string | null) ?? '').trim();
+  const pathname = (formData.get('pathname') as string | null) ?? null;
 
   if (!drinkId) {
     return { ok: false, error: 'drink_id が見つかりません。' };
@@ -33,78 +63,41 @@ export async function submitReview(
     return { ok: false, error: 'コメントは1000文字以内で入力してください。' };
   }
 
-  const supabase = await createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) {
-    return { ok: false, error: '評価するにはログインが必要です。' };
+  const auth = await requireAccessToken();
+  if (!auth.ok) {
+    return { ok: false, error: auth.error };
   }
 
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-  if (!session) {
-    return { ok: false, error: 'セッションが見つかりません。再ログインしてください。' };
+  const result = await authServerFetch<ApiDrinkReview>('/api/auth/reviews', {
+    method: 'POST',
+    accessToken: auth.accessToken,
+    body: { drink_id: drinkId, rating, comment },
+  });
+
+  if (!result.ok) {
+    return { ok: false, error: result.error || '評価の送信に失敗しました。' };
   }
 
-  let apiRes: Response;
-  try {
-    apiRes = await fetch(`${API_URL}/api/auth/reviews`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${session.access_token}`,
-      },
-      body: JSON.stringify({ drink_id: drinkId, rating, comment }),
-    });
-  } catch {
-    return {
-      ok: false,
-      error: 'サーバーへの接続に失敗しました。しばらくしてから再試行してください。',
-    };
-  }
-
-  if (!apiRes.ok) {
-    const body = (await apiRes.json().catch(() => ({ error: '' }))) as { error?: string };
-    return { ok: false, error: body.error || '評価の送信に失敗しました。' };
-  }
-
-  const data = (await apiRes.json()) as DrinkReview;
-  return { ok: true, error: '', data };
+  revalidateDrinkPath(pathname);
+  return { ok: true, error: '', data: toDrinkReview(result.data) };
 }
 
-export async function deleteReview(reviewId: string): Promise<ReviewState> {
-  const supabase = await createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) {
-    return { ok: false, error: '認証が必要です。' };
+export async function deleteReview(reviewId: string, pathname?: string): Promise<ReviewState> {
+  const auth = await requireAccessToken();
+  if (!auth.ok) {
+    return { ok: false, error: auth.error };
   }
 
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-  if (!session) {
-    return { ok: false, error: 'セッションが見つかりません。' };
+  const result = await authServerFetch(`/api/auth/reviews/${encodeURIComponent(reviewId)}`, {
+    method: 'DELETE',
+    accessToken: auth.accessToken,
+    emptyResponse: true,
+  });
+
+  if (!result.ok) {
+    return { ok: false, error: result.error || '評価の削除に失敗しました。' };
   }
 
-  let apiRes: Response;
-  try {
-    apiRes = await fetch(`${API_URL}/api/auth/reviews/${encodeURIComponent(reviewId)}`, {
-      method: 'DELETE',
-      headers: { Authorization: `Bearer ${session.access_token}` },
-    });
-  } catch {
-    return { ok: false, error: 'サーバーへの接続に失敗しました。' };
-  }
-
-  if (!apiRes.ok && apiRes.status !== 204) {
-    return { ok: false, error: '評価の削除に失敗しました。' };
-  }
-
+  revalidateDrinkPath(pathname ?? null);
   return { ok: true, error: '' };
 }

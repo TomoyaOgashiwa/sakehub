@@ -168,7 +168,7 @@ export default async function CocktailRecipeDetailPage({ params }: PageProps) {
 
               {ratings.length > 0 && (
                 <div className="space-y-3">
-                  <Heading level="h3">みんなの評価 ({ratings.length}件)</Heading>
+                  <Heading level="h3">みんなの評価 ({recipe.totalRatings}件)</Heading>
                   <div className="space-y-2">
                     {ratings.map((rating) => (
                       <div

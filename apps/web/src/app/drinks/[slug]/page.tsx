@@ -146,7 +146,12 @@ export default async function DrinkDetailPage({ params }: PageProps) {
 
                 {user ? (
                   <div className="bg-muted/40 rounded-xl border p-4">
-                    <DrinkReviewWidget drinkId={drink.id} initialReview={myReview} />
+                    <DrinkReviewWidget
+                      key={myReview?.updatedAt ?? 'none'}
+                      drinkId={drink.id}
+                      drinkSlug={slug}
+                      initialReview={myReview}
+                    />
                   </div>
                 ) : (
                   <div className="bg-muted/40 rounded-xl border p-4">

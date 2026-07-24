@@ -121,7 +121,7 @@ export default async function CocktailDetailPage({ params }: PageProps) {
         <section aria-labelledby="recipes-heading" className="space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <Heading level="h2" id="recipes-heading">
-              みんなのレシピ ({cocktail.recipes.length}件)
+              みんなのレシピ ({cocktail.recipeCount}件)
             </Heading>
             <Link
               href="/my-cocktails/new"

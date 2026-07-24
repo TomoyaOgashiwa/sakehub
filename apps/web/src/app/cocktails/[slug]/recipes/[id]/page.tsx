@@ -11,8 +11,11 @@ import {
   fetchCocktailBySlugServer,
   fetchCocktailRecipeServer,
 } from '@/application/cocktails-api.server';
-import { fetchMyRecipeRating, fetchRatingsByRecipeId } from '@/application/recipe-ratings-api.server';
-import { createClient } from '@/lib/supabase/server';
+import { getOptionalAccessToken } from '@/application/require-access-token';
+import {
+  fetchMyRecipeRating,
+  fetchRatingsByRecipeId,
+} from '@/application/recipe-ratings-api.server';
 import { RecipeRatingWidget } from './recipe-rating-widget';
 
 type PageProps = {
@@ -56,20 +59,15 @@ export default async function CocktailRecipeDetailPage({ params }: PageProps) {
     notFound();
   }
 
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+  const { user, accessToken } = await getOptionalAccessToken();
 
   const [ratingsResult, myRatingResult] = await Promise.allSettled([
     fetchRatingsByRecipeId(recipe.id),
-    user && session ? fetchMyRecipeRating(recipe.id, session.access_token) : Promise.resolve(null),
+    user && accessToken ? fetchMyRecipeRating(recipe.id, accessToken) : Promise.resolve(null),
   ]);
-  const ratings = ratingsResult.status === 'fulfilled' ? ratingsResult.value : [];
+  const ratingPage =
+    ratingsResult.status === 'fulfilled' ? ratingsResult.value : { ratings: [], hasMore: false };
+  const ratings = ratingPage.ratings;
   const myRating = myRatingResult.status === 'fulfilled' ? myRatingResult.value : null;
 
   return (
@@ -169,6 +167,11 @@ export default async function CocktailRecipeDetailPage({ params }: PageProps) {
               {ratings.length > 0 && (
                 <div className="space-y-3">
                   <Heading level="h3">みんなの評価 ({recipe.totalRatings}件)</Heading>
+                  {(ratingPage.hasMore || recipe.totalRatings > ratings.length) && (
+                    <p className="text-muted-foreground text-sm">
+                      新しい {ratings.length} 件を表示（全 {recipe.totalRatings} 件）
+                    </p>
+                  )}
                   <div className="space-y-2">
                     {ratings.map((rating) => (
                       <div

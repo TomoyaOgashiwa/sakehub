@@ -50,6 +50,7 @@ export interface ApiRecipe extends ApiRecipeSummary {
 
 export interface ApiCocktailDetail extends ApiCocktail {
   recipes: ApiRecipeSummary[];
+  has_more_recipes?: boolean;
 }
 
 export interface ApiRecipeRating {

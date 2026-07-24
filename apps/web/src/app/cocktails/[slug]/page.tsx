@@ -138,39 +138,49 @@ export default async function CocktailDetailPage({ params }: PageProps) {
               </p>
             </div>
           ) : (
-            <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2" role="list">
-              {cocktail.recipes.map((recipe) => (
-                <li key={recipe.id}>
-                  <Link
-                    href={`/cocktails/${cocktail.slug}/recipes/${recipe.id}`}
-                    className="group block h-full"
-                  >
-                    <div className="hover:bg-muted/40 flex h-full flex-col gap-2 rounded-xl border p-4 transition-colors">
-                      <div className="flex items-start justify-between gap-2">
-                        <p className="text-foreground font-medium group-hover:underline">
-                          {recipe.name}
-                        </p>
-                        {recipe.averageRating > 0 && (
-                          <StarRatingDisplay
-                            value={recipe.averageRating}
-                            size="sm"
-                            showValue={false}
-                            className="shrink-0 gap-0.5"
-                          />
+            <>
+              {(cocktail.hasMoreRecipes || cocktail.recipeCount > cocktail.recipes.length) && (
+                <p className="text-muted-foreground text-sm">
+                  新しい {cocktail.recipes.length} 件を表示（全 {cocktail.recipeCount} 件）
+                </p>
+              )}
+              <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2" role="list">
+                {cocktail.recipes.map((recipe) => (
+                  <li key={recipe.id}>
+                    <Link
+                      href={`/cocktails/${cocktail.slug}/recipes/${recipe.id}`}
+                      className="group block h-full"
+                    >
+                      <div className="hover:bg-muted/40 flex h-full flex-col gap-2 rounded-xl border p-4 transition-colors">
+                        <div className="flex items-start justify-between gap-2">
+                          <p className="text-foreground font-medium group-hover:underline">
+                            {recipe.name}
+                          </p>
+                          {recipe.averageRating > 0 && (
+                            <StarRatingDisplay
+                              value={recipe.averageRating}
+                              size="sm"
+                              showValue={false}
+                              className="shrink-0 gap-0.5"
+                            />
+                          )}
+                        </div>
+                        {recipe.memo && (
+                          <p className="text-muted-foreground line-clamp-2 text-sm">
+                            {recipe.memo}
+                          </p>
                         )}
+                        <p className="text-muted-foreground mt-auto text-xs">
+                          評価 {recipe.totalRatings}件
+                          {recipe.averageRating > 0 &&
+                            ` ・ 平均 ${recipe.averageRating.toFixed(1)}`}
+                        </p>
                       </div>
-                      {recipe.memo && (
-                        <p className="text-muted-foreground line-clamp-2 text-sm">{recipe.memo}</p>
-                      )}
-                      <p className="text-muted-foreground mt-auto text-xs">
-                        評価 {recipe.totalRatings}件
-                        {recipe.averageRating > 0 && ` ・ 平均 ${recipe.averageRating.toFixed(1)}`}
-                      </p>
-                    </div>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </>
           )}
         </section>
       </article>

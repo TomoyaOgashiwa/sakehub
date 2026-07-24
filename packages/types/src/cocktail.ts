@@ -37,6 +37,8 @@ export interface CocktailRecipeSummary {
 /** カクテルマスタ + 紐づく published レシピ一覧。 */
 export interface CocktailDetail extends Cocktail {
   recipes: CocktailRecipeSummary[];
+  /** true when more published recipes exist beyond the returned page. */
+  hasMoreRecipes: boolean;
 }
 
 /** ユーザー作成レシピへの星評価。 */

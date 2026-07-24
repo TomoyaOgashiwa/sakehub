@@ -93,9 +93,15 @@ CREATE TRIGGER cocktail_recipe_ratings_updated_at
 
 ALTER TABLE cocktail_recipe_ratings ENABLE ROW LEVEL SECURITY;
 
--- 既存 ratings に準拠: 全評価は公開閲覧可、書き込みは本人のみ
+-- Go API の公開境界と揃え、published レシピの評価のみ公開閲覧可。
+-- （unpublished / draft レシピの評価を Supabase 直読みで漏らさない）
 CREATE POLICY "cocktail_recipe_ratings_select_public" ON cocktail_recipe_ratings
-  FOR SELECT USING (true);
+  FOR SELECT USING (
+    EXISTS (
+      SELECT 1 FROM cocktail_recipes r
+      WHERE r.id = recipe_id AND r.status = 'published'
+    )
+  );
 
 -- Go API の PublishedRecipeExists と揃え、published レシピのみ評価可能にする。
 -- （Supabase クライアント直書き込みで draft 評価を付けられないようにする）

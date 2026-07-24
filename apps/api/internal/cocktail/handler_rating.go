@@ -4,25 +4,35 @@ import (
 	"encoding/json"
 	"errors"
 	"net/http"
-	"strings"
+	"strconv"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/sakehub/api/internal/middleware"
 	"github.com/sakehub/api/pkg/response"
 )
 
-// clientValidationMessage returns a stable, client-safe validation detail
-// without service-layer wrap prefixes (e.g. "cocktail.UpsertRating: ...").
+// clientValidationMessage returns a stable, client-safe validation detail.
 func clientValidationMessage(err error) string {
-	const prefix = "validation error: "
-	msg := err.Error()
-	if i := strings.LastIndex(msg, prefix); i >= 0 {
-		detail := strings.TrimSpace(msg[i+len(prefix):])
-		if detail != "" {
-			return detail
-		}
+	var ve *ValidationError
+	if errors.As(err, &ve) && ve.Detail != "" {
+		return ve.Detail
 	}
 	return "validation error"
+}
+
+func parseLimitOffset(r *http.Request, defaultLimit, maxLimit int) (limit, offset int) {
+	limit = defaultLimit
+	if raw := r.URL.Query().Get("limit"); raw != "" {
+		if n, err := strconv.Atoi(raw); err == nil {
+			limit = n
+		}
+	}
+	if raw := r.URL.Query().Get("offset"); raw != "" {
+		if n, err := strconv.Atoi(raw); err == nil {
+			offset = n
+		}
+	}
+	return clampListBounds(limit, offset, defaultLimit, maxLimit)
 }
 
 // RatingPublicRoutes registers rating routes that do not require authentication.
@@ -39,8 +49,8 @@ func (h *Handler) RatingAuthRoutes(r chi.Router) {
 	r.Delete("/{id}", h.DeleteRating)
 }
 
-// ListRatingsByRecipe returns all ratings for a recipe.
-// GET /api/public/cocktail-recipe-ratings?recipe_id={uuid}
+// ListRatingsByRecipe returns a page of ratings for a recipe.
+// GET /api/public/cocktail-recipe-ratings?recipe_id={uuid}&limit=&offset=
 func (h *Handler) ListRatingsByRecipe(w http.ResponseWriter, r *http.Request) {
 	recipeID := r.URL.Query().Get("recipe_id")
 	if recipeID == "" {
@@ -48,7 +58,9 @@ func (h *Handler) ListRatingsByRecipe(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	ratings, err := h.svc.ListRatingsByRecipe(r.Context(), recipeID)
+	limit, offset := parseLimitOffset(r, DefaultRatingListLimit, MaxRatingListLimit)
+
+	result, err := h.svc.ListRatingsByRecipe(r.Context(), recipeID, limit, offset)
 	if err != nil {
 		if errors.Is(err, ErrInvalidUUID) {
 			response.Error(w, http.StatusBadRequest, "invalid recipe_id")
@@ -62,7 +74,7 @@ func (h *Handler) ListRatingsByRecipe(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response.JSON(w, http.StatusOK, map[string]any{"data": ratings})
+	response.JSON(w, http.StatusOK, result)
 }
 
 // GetMyRating returns the authenticated user's rating for a recipe (if any).

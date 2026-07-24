@@ -2,6 +2,7 @@ package cocktail
 
 import (
 	"errors"
+	"fmt"
 	"time"
 )
 
@@ -19,7 +20,29 @@ var (
 const (
 	DefaultPublishedRecipeLimit = 50
 	DefaultRatingListLimit      = 20
+	MaxPublishedRecipeLimit     = 100
+	MaxRatingListLimit          = 50
 )
+
+// ValidationError carries a client-safe detail without service wrap prefixes.
+type ValidationError struct {
+	Detail string
+}
+
+func (e *ValidationError) Error() string {
+	if e == nil || e.Detail == "" {
+		return ErrValidation.Error()
+	}
+	return ErrValidation.Error() + ": " + e.Detail
+}
+
+func (e *ValidationError) Unwrap() error {
+	return ErrValidation
+}
+
+func validationErrorf(format string, args ...any) error {
+	return &ValidationError{Detail: fmt.Sprintf(format, args...)}
+}
 
 // Cocktail is a master record for a cocktail genre (e.g. レモンサワー, マンハッタン).
 // User-created recipes (cocktail_recipes) belong to exactly one Cocktail.
@@ -58,7 +81,8 @@ type RecipeSummary struct {
 // detail page can be rendered from a single API call.
 type CocktailDetail struct {
 	Cocktail
-	Recipes []RecipeSummary `json:"recipes"`
+	Recipes        []RecipeSummary `json:"recipes"`
+	HasMoreRecipes bool            `json:"has_more_recipes"`
 }
 
 type Ingredient struct {
@@ -120,4 +144,10 @@ type RatingUpsertInput struct {
 	RecipeID string `json:"recipe_id"`
 	Rating   int    `json:"rating"`
 	Comment  string `json:"comment"`
+}
+
+// RatingListResult is a bounded page of ratings with a has-more flag.
+type RatingListResult struct {
+	Data    []RecipeRating `json:"data"`
+	HasMore bool           `json:"has_more"`
 }

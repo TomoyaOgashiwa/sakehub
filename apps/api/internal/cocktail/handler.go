@@ -49,12 +49,13 @@ func (h *Handler) ListCocktails(w http.ResponseWriter, r *http.Request) {
 	response.JSON(w, http.StatusOK, map[string]any{"data": cocktails})
 }
 
-// GetCocktailBySlug returns a cocktail master record with its published recipes.
-// GET /api/cocktails/by-slug/{slug}
+// GetCocktailBySlug returns a cocktail master record with a page of published recipes.
+// GET /api/cocktails/by-slug/{slug}?limit=&offset=
 func (h *Handler) GetCocktailBySlug(w http.ResponseWriter, r *http.Request) {
 	slug := chi.URLParam(r, "slug")
+	limit, offset := parseLimitOffset(r, DefaultPublishedRecipeLimit, MaxPublishedRecipeLimit)
 
-	detail, err := h.svc.GetCocktailBySlug(r.Context(), slug)
+	detail, err := h.svc.GetCocktailBySlug(r.Context(), slug, limit, offset)
 	if err != nil {
 		if errors.Is(err, ErrCocktailNotFound) {
 			response.Error(w, http.StatusNotFound, "cocktail not found")
@@ -131,7 +132,7 @@ func (h *Handler) Create(w http.ResponseWriter, r *http.Request) {
 	recipe, err := h.svc.Create(r.Context(), input)
 	if err != nil {
 		if errors.Is(err, ErrValidation) {
-			response.Error(w, http.StatusBadRequest, err.Error())
+			response.Error(w, http.StatusBadRequest, clientValidationMessage(err))
 			return
 		}
 		response.Error(w, http.StatusInternalServerError, "internal server error")

@@ -31,13 +31,13 @@ const recipeAggregates = `COALESCE((SELECT AVG(rt.rating)::NUMERIC(3,2) FROM coc
 type Repository interface {
 	ListCocktails(ctx context.Context) ([]Cocktail, error)
 	FindCocktailBySlug(ctx context.Context, slug string) (*Cocktail, error)
-	ListPublishedRecipes(ctx context.Context, cocktailID string, limit int) ([]RecipeSummary, error)
+	ListPublishedRecipes(ctx context.Context, cocktailID string, limit, offset int) ([]RecipeSummary, bool, error)
 	FindPublishedRecipeByID(ctx context.Context, id string) (*Recipe, error)
 	PublishedRecipeExists(ctx context.Context, id string) error
 	Insert(ctx context.Context, input CreateInput) (*Recipe, error)
 
 	FindRatingByRecipeAndUser(ctx context.Context, recipeID, userID string) (*RecipeRating, error)
-	ListRatingsByRecipe(ctx context.Context, recipeID string, limit int) ([]RecipeRating, error)
+	ListRatingsByRecipe(ctx context.Context, recipeID string, limit, offset int) ([]RecipeRating, bool, error)
 	UpsertRating(ctx context.Context, rating *RecipeRating) error
 	DeleteRating(ctx context.Context, id, userID string) error
 }
@@ -98,26 +98,30 @@ func (r *repository) FindCocktailBySlug(ctx context.Context, slug string) (*Cock
 	return c, nil
 }
 
-func (r *repository) ListPublishedRecipes(ctx context.Context, cocktailID string, limit int) ([]RecipeSummary, error) {
+func (r *repository) ListPublishedRecipes(ctx context.Context, cocktailID string, limit, offset int) ([]RecipeSummary, bool, error) {
 	if limit <= 0 {
 		limit = DefaultPublishedRecipeLimit
 	}
+	if offset < 0 {
+		offset = 0
+	}
 
+	// Fetch one extra row to detect whether another page exists.
 	q := fmt.Sprintf(`
 		SELECT r.id, r.cocktail_id, r.user_id, r.name, r.memo, r.image_url, r.status,
 			%s, r.created_at, r.updated_at
 		FROM cocktail_recipes r
 		WHERE r.cocktail_id = $1 AND r.status = 'published'
 		ORDER BY r.created_at DESC
-		LIMIT $2`, recipeAggregates)
+		LIMIT $2 OFFSET $3`, recipeAggregates)
 
-	rows, err := r.db.QueryContext(ctx, q, cocktailID, limit)
+	rows, err := r.db.QueryContext(ctx, q, cocktailID, limit+1, offset)
 	if err != nil {
-		return nil, err
+		return nil, false, err
 	}
 	defer rows.Close()
 
-	recipes := make([]RecipeSummary, 0)
+	recipes := make([]RecipeSummary, 0, limit)
 	for rows.Next() {
 		var rec RecipeSummary
 		if err := rows.Scan(
@@ -125,11 +129,19 @@ func (r *repository) ListPublishedRecipes(ctx context.Context, cocktailID string
 			&rec.Status, &rec.AverageRating, &rec.TotalRatings,
 			&rec.CreatedAt, &rec.UpdatedAt,
 		); err != nil {
-			return nil, err
+			return nil, false, err
 		}
 		recipes = append(recipes, rec)
 	}
-	return recipes, rows.Err()
+	if err := rows.Err(); err != nil {
+		return nil, false, err
+	}
+
+	hasMore := len(recipes) > limit
+	if hasMore {
+		recipes = recipes[:limit]
+	}
+	return recipes, hasMore, nil
 }
 
 // FindPublishedRecipeByID returns a published recipe with its ingredients and
@@ -225,7 +237,7 @@ func (r *repository) Insert(ctx context.Context, input CreateInput) (*Recipe, er
 		var pqErr *pq.Error
 		// 23503 = foreign_key_violation: the referenced cocktail does not exist.
 		if errors.As(err, &pqErr) && pqErr.Code == "23503" {
-			return nil, fmt.Errorf("%w: cocktail_id does not exist", ErrValidation)
+			return nil, validationErrorf("cocktail_id does not exist")
 		}
 		return nil, fmt.Errorf("cocktail.Insert recipe: %w", err)
 	}
@@ -280,9 +292,12 @@ func (r *repository) FindRatingByRecipeAndUser(ctx context.Context, recipeID, us
 	return &rating, nil
 }
 
-func (r *repository) ListRatingsByRecipe(ctx context.Context, recipeID string, limit int) ([]RecipeRating, error) {
+func (r *repository) ListRatingsByRecipe(ctx context.Context, recipeID string, limit, offset int) ([]RecipeRating, bool, error) {
 	if limit <= 0 {
 		limit = DefaultRatingListLimit
+	}
+	if offset < 0 {
+		offset = 0
 	}
 
 	const q = `
@@ -290,34 +305,44 @@ func (r *repository) ListRatingsByRecipe(ctx context.Context, recipeID string, l
 		FROM cocktail_recipe_ratings
 		WHERE recipe_id = $1
 		ORDER BY created_at DESC
-		LIMIT $2`
+		LIMIT $2 OFFSET $3`
 
-	rows, err := r.db.QueryContext(ctx, q, recipeID, limit)
+	rows, err := r.db.QueryContext(ctx, q, recipeID, limit+1, offset)
 	if err != nil {
-		return nil, err
+		return nil, false, err
 	}
 	defer rows.Close()
 
-	var ratings []RecipeRating
+	ratings := make([]RecipeRating, 0, limit)
 	for rows.Next() {
 		var rating RecipeRating
 		if err := rows.Scan(
 			&rating.ID, &rating.RecipeID, &rating.UserID, &rating.Rating, &rating.Comment,
 			&rating.CreatedAt, &rating.UpdatedAt,
 		); err != nil {
-			return nil, err
+			return nil, false, err
 		}
 		ratings = append(ratings, rating)
 	}
-	return ratings, rows.Err()
+	if err := rows.Err(); err != nil {
+		return nil, false, err
+	}
+
+	hasMore := len(ratings) > limit
+	if hasMore {
+		ratings = ratings[:limit]
+	}
+	return ratings, hasMore, nil
 }
 
-// UpsertRating inserts a new rating or updates the rating/comment when the
-// (recipe_id, user_id) pair already exists.
+// UpsertRating inserts or updates a rating only when the recipe is published.
+// The published check is in the same statement to avoid TOCTOU races (Go bypasses RLS).
 func (r *repository) UpsertRating(ctx context.Context, rating *RecipeRating) error {
 	const q = `
 		INSERT INTO cocktail_recipe_ratings (recipe_id, user_id, rating, comment)
-		VALUES ($1, $2, $3, $4)
+		SELECT $1, $2, $3, $4
+		FROM cocktail_recipes r
+		WHERE r.id = $1 AND r.status = 'published'
 		ON CONFLICT (recipe_id, user_id)
 		DO UPDATE SET rating = EXCLUDED.rating, comment = EXCLUDED.comment, updated_at = now()
 		RETURNING id, created_at, updated_at`
@@ -325,10 +350,13 @@ func (r *repository) UpsertRating(ctx context.Context, rating *RecipeRating) err
 	err := r.db.QueryRowContext(ctx, q,
 		rating.RecipeID, rating.UserID, rating.Rating, rating.Comment,
 	).Scan(&rating.ID, &rating.CreatedAt, &rating.UpdatedAt)
+	if errors.Is(err, sql.ErrNoRows) {
+		return ErrNotFound
+	}
 	if err != nil {
 		var pqErr *pq.Error
 		if errors.As(err, &pqErr) && pqErr.Code == "23503" {
-			return fmt.Errorf("%w: recipe_id does not exist", ErrValidation)
+			return validationErrorf("recipe_id does not exist")
 		}
 		return err
 	}

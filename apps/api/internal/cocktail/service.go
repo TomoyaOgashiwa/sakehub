@@ -2,6 +2,7 @@ package cocktail
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"regexp"
 	"strings"
@@ -78,6 +79,10 @@ func (s *Service) ListRatingsByRecipe(ctx context.Context, recipeID string) ([]R
 	if !isUUID(recipeID) {
 		return nil, ErrInvalidUUID
 	}
+	// Align with public recipe GET: draft / unknown IDs must not leak ratings.
+	if err := s.repo.PublishedRecipeExists(ctx, recipeID); err != nil {
+		return nil, err
+	}
 
 	ratings, err := s.repo.ListRatingsByRecipe(ctx, recipeID, DefaultRatingListLimit)
 	if err != nil {
@@ -90,10 +95,13 @@ func (s *Service) GetRatingByRecipeAndUser(ctx context.Context, recipeID, userID
 	if !isUUID(recipeID) {
 		return nil, ErrInvalidUUID
 	}
+	if err := s.repo.PublishedRecipeExists(ctx, recipeID); err != nil {
+		return nil, err
+	}
 
 	rating, err := s.repo.FindRatingByRecipeAndUser(ctx, recipeID, userID)
 	if err != nil {
-		return nil, fmt.Errorf("cocktail.GetRatingByRecipeAndUser: %w", err)
+		return nil, err
 	}
 	return rating, nil
 }
@@ -110,8 +118,9 @@ func (s *Service) UpsertRating(ctx context.Context, input RatingUpsertInput, use
 	}
 
 	// Only published recipes are rateable (align with the public GET endpoint).
+	// Return domain errors unwrapped so handlers can expose safe client messages.
 	if err := s.repo.PublishedRecipeExists(ctx, input.RecipeID); err != nil {
-		return nil, fmt.Errorf("cocktail.UpsertRating: %w", err)
+		return nil, err
 	}
 
 	rating := &RecipeRating{
@@ -122,6 +131,9 @@ func (s *Service) UpsertRating(ctx context.Context, input RatingUpsertInput, use
 	}
 
 	if err := s.repo.UpsertRating(ctx, rating); err != nil {
+		if errors.Is(err, ErrValidation) {
+			return nil, err
+		}
 		return nil, fmt.Errorf("cocktail.UpsertRating: %w", err)
 	}
 	return rating, nil
@@ -133,6 +145,9 @@ func (s *Service) DeleteRating(ctx context.Context, id, userID string) error {
 	}
 
 	if err := s.repo.DeleteRating(ctx, id, userID); err != nil {
+		if errors.Is(err, ErrForbidden) {
+			return err
+		}
 		return fmt.Errorf("cocktail.DeleteRating: %w", err)
 	}
 	return nil

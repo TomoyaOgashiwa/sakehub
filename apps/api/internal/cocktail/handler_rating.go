@@ -4,11 +4,26 @@ import (
 	"encoding/json"
 	"errors"
 	"net/http"
+	"strings"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/sakehub/api/internal/middleware"
 	"github.com/sakehub/api/pkg/response"
 )
+
+// clientValidationMessage returns a stable, client-safe validation detail
+// without service-layer wrap prefixes (e.g. "cocktail.UpsertRating: ...").
+func clientValidationMessage(err error) string {
+	const prefix = "validation error: "
+	msg := err.Error()
+	if i := strings.LastIndex(msg, prefix); i >= 0 {
+		detail := strings.TrimSpace(msg[i+len(prefix):])
+		if detail != "" {
+			return detail
+		}
+	}
+	return "validation error"
+}
 
 // RatingPublicRoutes registers rating routes that do not require authentication.
 // Mounted at /api/public/cocktail-recipe-ratings
@@ -37,6 +52,10 @@ func (h *Handler) ListRatingsByRecipe(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		if errors.Is(err, ErrInvalidUUID) {
 			response.Error(w, http.StatusBadRequest, "invalid recipe_id")
+			return
+		}
+		if errors.Is(err, ErrNotFound) {
+			response.Error(w, http.StatusNotFound, "cocktail recipe not found")
 			return
 		}
 		response.Error(w, http.StatusInternalServerError, "internal server error")
@@ -71,6 +90,10 @@ func (h *Handler) GetMyRating(w http.ResponseWriter, r *http.Request) {
 			response.Error(w, http.StatusBadRequest, "invalid recipe_id")
 			return
 		}
+		if errors.Is(err, ErrNotFound) {
+			response.Error(w, http.StatusNotFound, "cocktail recipe not found")
+			return
+		}
 		response.Error(w, http.StatusInternalServerError, "internal server error")
 		return
 	}
@@ -101,8 +124,16 @@ func (h *Handler) UpsertRating(w http.ResponseWriter, r *http.Request) {
 
 	rating, err := h.svc.UpsertRating(r.Context(), input, userID)
 	if err != nil {
-		if errors.Is(err, ErrInvalidRating) || errors.Is(err, ErrValidation) || errors.Is(err, ErrInvalidUUID) {
-			response.Error(w, http.StatusBadRequest, err.Error())
+		if errors.Is(err, ErrInvalidRating) {
+			response.Error(w, http.StatusBadRequest, "rating must be between 1 and 5")
+			return
+		}
+		if errors.Is(err, ErrInvalidUUID) {
+			response.Error(w, http.StatusBadRequest, "invalid recipe_id")
+			return
+		}
+		if errors.Is(err, ErrValidation) {
+			response.Error(w, http.StatusBadRequest, clientValidationMessage(err))
 			return
 		}
 		if errors.Is(err, ErrNotFound) {

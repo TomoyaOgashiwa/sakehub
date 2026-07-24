@@ -97,14 +97,28 @@ ALTER TABLE cocktail_recipe_ratings ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "cocktail_recipe_ratings_select_public" ON cocktail_recipe_ratings
   FOR SELECT USING (true);
 
+-- Go API の PublishedRecipeExists と揃え、published レシピのみ評価可能にする。
+-- （Supabase クライアント直書き込みで draft 評価を付けられないようにする）
 CREATE POLICY "cocktail_recipe_ratings_insert_own" ON cocktail_recipe_ratings
   FOR INSERT TO authenticated
-  WITH CHECK (auth.uid() = user_id);
+  WITH CHECK (
+    auth.uid() = user_id
+    AND EXISTS (
+      SELECT 1 FROM cocktail_recipes r
+      WHERE r.id = recipe_id AND r.status = 'published'
+    )
+  );
 
 CREATE POLICY "cocktail_recipe_ratings_update_own" ON cocktail_recipe_ratings
   FOR UPDATE TO authenticated
   USING (auth.uid() = user_id)
-  WITH CHECK (auth.uid() = user_id);
+  WITH CHECK (
+    auth.uid() = user_id
+    AND EXISTS (
+      SELECT 1 FROM cocktail_recipes r
+      WHERE r.id = recipe_id AND r.status = 'published'
+    )
+  );
 
 CREATE POLICY "cocktail_recipe_ratings_delete_own" ON cocktail_recipe_ratings
   FOR DELETE TO authenticated

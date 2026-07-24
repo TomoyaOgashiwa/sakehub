@@ -11,7 +11,6 @@ export const DRINK_CATEGORIES = [
   'tequila',
   'brandy',
   'liqueur',
-  'cocktail',
   'other',
 ] as const;
 

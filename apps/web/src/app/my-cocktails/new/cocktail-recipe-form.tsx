@@ -1,6 +1,7 @@
 'use client';
 
 import { useActionState, useRef, useState } from 'react';
+import type { Cocktail } from '@sakehub/types';
 import { PlusIcon, Trash2Icon, UploadIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -27,7 +28,11 @@ function makeIngredient(): IngredientRow {
   return { id: crypto.randomUUID(), name: '', amount: '', unit: 'ml' };
 }
 
-export function CocktailRecipeForm() {
+interface CocktailRecipeFormProps {
+  cocktails: Cocktail[];
+}
+
+export function CocktailRecipeForm({ cocktails }: CocktailRecipeFormProps) {
   const [state, formAction, isPending] = useActionState(createCocktailRecipe, initialState);
   const [ingredients, setIngredients] = useState<IngredientRow[]>([makeIngredient()]);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -136,6 +141,33 @@ export function CocktailRecipeForm() {
             写真を削除
           </button>
         )}
+      </div>
+
+      {/* Cocktail genre */}
+      <div className="space-y-2">
+        <Label htmlFor="cocktail_id">
+          カクテルの種類 <span className="text-destructive">*</span>
+        </Label>
+        <select
+          id="cocktail_id"
+          name="cocktail_id"
+          required
+          defaultValue=""
+          className="border-input dark:bg-input/30 h-12 w-full rounded-lg border bg-transparent px-3 text-sm outline-none focus-visible:ring-2"
+        >
+          <option value="" disabled>
+            種類を選択してください
+          </option>
+          {cocktails.map((cocktail) => (
+            <option key={cocktail.id} value={cocktail.id}>
+              {cocktail.name}
+              {cocktail.nameEn ? ` (${cocktail.nameEn})` : ''}
+            </option>
+          ))}
+        </select>
+        <p className="text-muted-foreground text-xs">
+          レシピはこの種類（ジャンル）に紐づいて一覧表示されます
+        </p>
       </div>
 
       {/* Cocktail name */}

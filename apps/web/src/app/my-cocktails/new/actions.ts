@@ -15,12 +15,16 @@ export async function createCocktailRecipe(
   _prevState: RecipeFormState,
   formData: FormData,
 ): Promise<RecipeFormState> {
+  const cocktailId = (formData.get('cocktail_id') as string | null)?.trim() ?? '';
   const name = (formData.get('name') as string | null)?.trim() ?? '';
   const memo = (formData.get('memo') as string | null)?.trim() || undefined;
   const status = (formData.get('status') as string | null) ?? 'draft';
   const ingredientsJson = (formData.get('ingredients') as string | null) ?? '[]';
   const imageFile = formData.get('image') as File | null;
 
+  if (!cocktailId) {
+    return { ok: false, error: 'カクテルの種類を選択してください。' };
+  }
   if (!name) {
     return { ok: false, error: 'カクテル名は必須です。' };
   }
@@ -89,6 +93,7 @@ export async function createCocktailRecipe(
         Authorization: `Bearer ${session.access_token}`,
       },
       body: JSON.stringify({
+        cocktail_id: cocktailId,
         name,
         memo,
         image_url: imageUrl,

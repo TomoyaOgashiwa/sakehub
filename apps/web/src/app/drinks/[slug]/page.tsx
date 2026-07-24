@@ -10,8 +10,8 @@ import { Separator } from '@/components/ui/separator';
 import { StarRatingDisplay } from '@/components/ui/star-rating';
 import { JsonLd } from '@/components/json-ld';
 import { fetchDrinkBySlugServer } from '@/application/drinks-api.server';
+import { getOptionalAccessToken } from '@/application/require-access-token';
 import { fetchMyReview, fetchReviewsByDrinkId } from '@/application/reviews-api.server';
-import { createClient } from '@/lib/supabase/server';
 import { DrinkReviewWidget } from './drink-review-widget';
 
 type PageProps = {
@@ -50,18 +50,11 @@ export default async function DrinkDetailPage({ params }: PageProps) {
     notFound();
   }
 
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+  const { user, accessToken } = await getOptionalAccessToken();
 
   const [reviews, myReview] = await Promise.all([
     fetchReviewsByDrinkId(drink.id),
-    user && session ? fetchMyReview(drink.id, session.access_token) : Promise.resolve(null),
+    user && accessToken ? fetchMyReview(drink.id, accessToken) : Promise.resolve(null),
   ]);
 
   const displayName = drink.nameEn ? `${drink.name} (${drink.nameEn})` : drink.name;
@@ -146,7 +139,12 @@ export default async function DrinkDetailPage({ params }: PageProps) {
 
                 {user ? (
                   <div className="bg-muted/40 rounded-xl border p-4">
-                    <DrinkReviewWidget drinkId={drink.id} initialReview={myReview} />
+                    <DrinkReviewWidget
+                      key={myReview?.updatedAt ?? 'none'}
+                      drinkId={drink.id}
+                      drinkSlug={slug}
+                      initialReview={myReview}
+                    />
                   </div>
                 ) : (
                   <div className="bg-muted/40 rounded-xl border p-4">

@@ -13,19 +13,19 @@
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@types/node": "^26.1.1",
-    "@typescript-eslint/eslint-plugin": "^8.63.0",
-    "@typescript-eslint/parser": "^8.63.0",
+    "@typescript-eslint/eslint-plugin": "^8.65.0",
+    "@typescript-eslint/parser": "^8.65.0",
     "eslint": "^9.39.1",
-    "lightningcss": "1.32.0",
-    "globals": "^17.7.0",
-    "prettier": "^3.8.3",
+    "lightningcss": "1.33.0",
+    "globals": "^17.8.0",
+    "prettier": "^3.9.6",
     "prettier-plugin-tailwindcss": "^0.8.1",
-    "turbo": "^2.10.5"
+    "turbo": "^2.10.7"
   },
   "packageManager": "pnpm@11.0.4",
   "pnpm": {
     "overrides": {
-      "lightningcss": "1.32.0"
+      "lightningcss": "1.33.0"
     }
   }
 }

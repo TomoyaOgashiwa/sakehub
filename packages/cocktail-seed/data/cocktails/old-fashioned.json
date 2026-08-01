@@ -1,0 +1,44 @@
+{
+  "slug": "old-fashioned",
+  "id": "c0c00000-0000-4000-8000-000000000006",
+  "name": "オールドファッションド",
+  "nameEn": "Old Fashioned",
+  "description": "バーボンまたはライウイスキーに角砂糖とビターズを加えた、カクテルの原点。シンプルだが奥深い大人の味わい。",
+  "baseSpirit": "Whisky",
+  "abv": 32,
+  "originCountry": "United States",
+  "aliases": [
+    "オールドファッション"
+  ],
+  "officialRecipe": {
+    "name": "オールドファッションド（基本レシピ）",
+    "memo": "角砂糖にビターズを染み込ませてから潰すのが本式。",
+    "ingredients": [
+      {
+        "name": "バーボンウイスキー",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "角砂糖",
+        "amount": 1,
+        "unit": "piece"
+      },
+      {
+        "name": "アンゴスチュラビターズ",
+        "amount": 2,
+        "unit": "dash"
+      },
+      {
+        "name": "水",
+        "amount": 5,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに角砂糖とビターズ、少量の水を入れ、マドラーで溶かす。",
+      "大きな氷を入れ、バーボンを注ぐ。",
+      "軽くステアし、オレンジピールを飾る。"
+    ]
+  }
+}

@@ -24,19 +24,30 @@ export interface CocktailRecipeIngredient {
   createdAt: string;
 }
 
+export interface CocktailRecipeStep {
+  id: string;
+  recipeId: string;
+  body: string;
+  sortOrder: number;
+  createdAt: string;
+}
+
 export interface CocktailRecipe {
   id: string;
   cocktailId: string;
   /** Canonical cocktail master slug; used for URL validation without a second fetch. */
   cocktailSlug: string;
   userId: string;
+  authorName?: string;
   name: string;
   memo?: string;
   imageUrl?: string;
   status: CocktailRecipeStatus;
+  isOfficial: boolean;
   averageRating: number;
   totalRatings: number;
   ingredients: CocktailRecipeIngredient[];
+  steps: CocktailRecipeStep[];
   createdAt: string;
   updatedAt: string;
 }
@@ -48,6 +59,11 @@ export interface CreateCocktailRecipeIngredientInput {
   sortOrder: number;
 }
 
+export interface CreateCocktailRecipeStepInput {
+  body: string;
+  sortOrder: number;
+}
+
 export interface CreateCocktailRecipeInput {
   cocktailId: string;
   name: string;
@@ -55,4 +71,5 @@ export interface CreateCocktailRecipeInput {
   imageUrl?: string;
   status: CocktailRecipeStatus;
   ingredients: CreateCocktailRecipeIngredientInput[];
+  steps: CreateCocktailRecipeStepInput[];
 }

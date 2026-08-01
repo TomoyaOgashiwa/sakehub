@@ -1,0 +1,44 @@
+{
+  "slug": "cosmopolitan",
+  "id": null,
+  "name": "コスモポリタン",
+  "nameEn": "Cosmopolitan",
+  "description": "ウォッカ、コアントロー、クランベリー、ライムをシェイクした鮮やかなピンクのモダンクラシック。",
+  "baseSpirit": "Vodka",
+  "abv": 20,
+  "originCountry": "United States",
+  "aliases": [
+    "コスモ"
+  ],
+  "officialRecipe": {
+    "name": "コスモポリタン（基本レシピ）",
+    "memo": null,
+    "ingredients": [
+      {
+        "name": "シトラスウォッカ",
+        "amount": 40,
+        "unit": "ml"
+      },
+      {
+        "name": "コアントロー",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "クランベリージュース",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "ライム果汁",
+        "amount": 10,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェイカーに材料と氷を入れる。",
+      "よくシェイクする。",
+      "クーペグラスに注ぎ、オレンジピールを飾る。"
+    ]
+  }
+}

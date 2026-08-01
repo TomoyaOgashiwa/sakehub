@@ -1,0 +1,39 @@
+{
+  "slug": "lemon-sour",
+  "id": "c0c00000-0000-4000-8000-000000000001",
+  "name": "レモンサワー",
+  "nameEn": "Lemon Sour",
+  "description": "焼酎やウォッカをベースにレモン果汁と炭酸で割った日本の居酒屋定番カクテル。すっきり爽快で食事にも合う。",
+  "baseSpirit": "Shochu",
+  "abv": 5,
+  "originCountry": "Japan",
+  "aliases": [
+    "レモンサワ"
+  ],
+  "officialRecipe": {
+    "name": "レモンサワー（基本レシピ）",
+    "memo": "氷はたっぷり入れ、炭酸は最後に静かに注ぐ。",
+    "ingredients": [
+      {
+        "name": "甲類焼酎",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "レモン果汁",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "炭酸水",
+        "amount": 120,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷をたっぷり入れる。",
+      "甲類焼酎とレモン果汁を注ぎ、軽く混ぜる。",
+      "炭酸水を静かに注ぎ、縦に一度だけステアする。"
+    ]
+  }
+}

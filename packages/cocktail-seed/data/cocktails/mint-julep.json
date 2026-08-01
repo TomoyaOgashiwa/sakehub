@@ -1,0 +1,37 @@
+{
+  "slug": "mint-julep",
+  "id": null,
+  "name": "ミントジュレップ",
+  "nameEn": "Mint Julep",
+  "description": "バーボン、ミント、砂糖を砕氷で仕上げるケンタッキーダービーの公式ドリンク。",
+  "baseSpirit": "Whisky",
+  "abv": 25,
+  "originCountry": "United States",
+  "aliases": [],
+  "officialRecipe": {
+    "name": "ミントジュレップ（基本レシピ）",
+    "memo": "ミントは叩きすぎず香りだけを立たせる。",
+    "ingredients": [
+      {
+        "name": "バーボンウイスキー",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "ミントの葉",
+        "amount": 10,
+        "unit": "piece"
+      },
+      {
+        "name": "シュガーシロップ",
+        "amount": 15,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスでミントとシロップを軽く押す。",
+      "砕氷を高く盛り、バーボンを注ぐ。",
+      "軽く混ぜ、ミントの穂を飾る。"
+    ]
+  }
+}

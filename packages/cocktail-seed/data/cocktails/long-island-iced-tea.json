@@ -1,0 +1,64 @@
+{
+  "slug": "long-island-iced-tea",
+  "id": null,
+  "name": "ロングアイランドアイスティー",
+  "nameEn": "Long Island Iced Tea",
+  "description": "複数のスピリッツにレモンとコーラを合わせた強度のあるアメリカンカクテル。見た目はアイスティーに近い。",
+  "baseSpirit": "Vodka",
+  "abv": 22,
+  "originCountry": "United States",
+  "aliases": [
+    "LIIT"
+  ],
+  "officialRecipe": {
+    "name": "ロングアイランドアイスティー（基本レシピ）",
+    "memo": "スピリッツが多いので飲み過ぎに注意。",
+    "ingredients": [
+      {
+        "name": "ウォッカ",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "ドライジン",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "ホワイトラム",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "テキーラ",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "ホワイトキュラソー",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "レモン果汁",
+        "amount": 25,
+        "unit": "ml"
+      },
+      {
+        "name": "シュガーシロップ",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "コーラ",
+        "amount": 30,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェイカーにコーラ以外の材料と氷を入れてシェイクする。",
+      "氷入りグラスに注ぐ。",
+      "コーラを静かに注いで仕上げる。"
+    ]
+  }
+}

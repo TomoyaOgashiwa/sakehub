@@ -1,0 +1,52 @@
+{
+  "slug": "bloody-mary",
+  "id": null,
+  "name": "ブラッディメアリー",
+  "nameEn": "Bloody Mary",
+  "description": "ウォッカとトマトジュースをベースにしたスパイシーなロングドリンク。朝食カクテルの定番。",
+  "baseSpirit": "Vodka",
+  "abv": 12,
+  "originCountry": "France",
+  "aliases": [],
+  "officialRecipe": {
+    "name": "ブラッディメアリー（基本レシピ）",
+    "memo": "スパイスは好みで調整する。",
+    "ingredients": [
+      {
+        "name": "ウォッカ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "トマトジュース",
+        "amount": 90,
+        "unit": "ml"
+      },
+      {
+        "name": "レモン果汁",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "ウスターソース",
+        "amount": 2,
+        "unit": "dash"
+      },
+      {
+        "name": "タバスコ",
+        "amount": 2,
+        "unit": "dash"
+      },
+      {
+        "name": "塩・こしょう",
+        "amount": null,
+        "unit": null
+      }
+    ],
+    "steps": [
+      "ハイボールグラスに氷を入れる。",
+      "材料をすべて注ぎ、軽く混ぜる。",
+      "セロリやレモンスライスを飾る。"
+    ]
+  }
+}

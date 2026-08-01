@@ -97,6 +97,7 @@ type createRequest struct {
 	ImageURL    *string           `json:"image_url,omitempty"`
 	Status      string            `json:"status"`
 	Ingredients []IngredientInput `json:"ingredients"`
+	Steps       []StepInput       `json:"steps"`
 }
 
 // Create registers a new recipe owned by the authenticated user.
@@ -127,6 +128,7 @@ func (h *Handler) Create(w http.ResponseWriter, r *http.Request) {
 		ImageURL:    req.ImageURL,
 		Status:      req.Status,
 		Ingredients: req.Ingredients,
+		Steps:       req.Steps,
 	}
 
 	recipe, err := h.svc.Create(r.Context(), input)

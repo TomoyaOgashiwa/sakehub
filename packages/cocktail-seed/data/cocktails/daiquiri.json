@@ -1,0 +1,39 @@
+{
+  "slug": "daiquiri",
+  "id": null,
+  "name": "ダイキリ",
+  "nameEn": "Daiquiri",
+  "description": "ホワイトラム、ライム、砂糖の三素材で構成されるキューバの名作。シンプルゆえにバランスが命。",
+  "baseSpirit": "Rum",
+  "abv": 22,
+  "originCountry": "Cuba",
+  "aliases": [
+    "ダイキリ"
+  ],
+  "officialRecipe": {
+    "name": "ダイキリ（基本レシピ）",
+    "memo": "甘酸っぱさのバランスを好みで微調整する。",
+    "ingredients": [
+      {
+        "name": "ホワイトラム",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ライム果汁",
+        "amount": 22.5,
+        "unit": "ml"
+      },
+      {
+        "name": "シュガーシロップ",
+        "amount": 15,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェイカーに材料と氷を入れる。",
+      "しっかりシェイクする。",
+      "クーペグラスに注ぐ。"
+    ]
+  }
+}

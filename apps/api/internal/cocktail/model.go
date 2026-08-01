@@ -67,10 +67,12 @@ type RecipeSummary struct {
 	ID            string    `json:"id"`
 	CocktailID    string    `json:"cocktail_id"`
 	UserID        string    `json:"user_id"`
+	AuthorName    *string   `json:"author_name,omitempty"`
 	Name          string    `json:"name"`
 	Memo          *string   `json:"memo,omitempty"`
 	ImageURL      *string   `json:"image_url,omitempty"`
 	Status        string    `json:"status"`
+	IsOfficial    bool      `json:"is_official"`
 	AverageRating float64   `json:"average_rating"`
 	TotalRatings  int       `json:"total_ratings"`
 	CreatedAt     time.Time `json:"created_at"`
@@ -81,6 +83,7 @@ type RecipeSummary struct {
 // detail page can be rendered from a single API call.
 type CocktailDetail struct {
 	Cocktail
+	OfficialRecipe *Recipe         `json:"official_recipe,omitempty"`
 	Recipes        []RecipeSummary `json:"recipes"`
 	HasMoreRecipes bool            `json:"has_more_recipes"`
 }
@@ -95,18 +98,29 @@ type Ingredient struct {
 	CreatedAt time.Time `json:"created_at"`
 }
 
+type Step struct {
+	ID        string    `json:"id"`
+	RecipeID  string    `json:"recipe_id"`
+	Body      string    `json:"body"`
+	SortOrder int       `json:"sort_order"`
+	CreatedAt time.Time `json:"created_at"`
+}
+
 type Recipe struct {
 	ID            string       `json:"id"`
 	CocktailID    string       `json:"cocktail_id"`
 	CocktailSlug  string       `json:"cocktail_slug,omitempty"`
 	UserID        string       `json:"user_id"`
+	AuthorName    *string      `json:"author_name,omitempty"`
 	Name          string       `json:"name"`
 	Memo          *string      `json:"memo,omitempty"`
 	ImageURL      *string      `json:"image_url,omitempty"`
 	Status        string       `json:"status"`
+	IsOfficial    bool         `json:"is_official"`
 	AverageRating float64      `json:"average_rating"`
 	TotalRatings  int          `json:"total_ratings"`
 	Ingredients   []Ingredient `json:"ingredients"`
+	Steps         []Step       `json:"steps"`
 	CreatedAt     time.Time    `json:"created_at"`
 	UpdatedAt     time.Time    `json:"updated_at"`
 }
@@ -118,6 +132,13 @@ type IngredientInput struct {
 	SortOrder int      `json:"sort_order"`
 }
 
+type StepInput struct {
+	Body      string `json:"body"`
+	SortOrder int    `json:"sort_order"`
+}
+
+// CreateInput is the user-facing create payload. is_official is intentionally
+// omitted so posts always get DEFAULT false; official recipes are seed-only.
 type CreateInput struct {
 	UserID      string            `json:"user_id"`
 	CocktailID  string            `json:"cocktail_id"`
@@ -126,6 +147,7 @@ type CreateInput struct {
 	ImageURL    *string           `json:"image_url,omitempty"`
 	Status      string            `json:"status"`
 	Ingredients []IngredientInput `json:"ingredients"`
+	Steps       []StepInput       `json:"steps"`
 }
 
 // RecipeRating is a user's star rating and optional comment for a recipe.

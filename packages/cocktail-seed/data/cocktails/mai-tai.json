@@ -1,0 +1,47 @@
+{
+  "slug": "mai-tai",
+  "id": null,
+  "name": "マイタイ",
+  "nameEn": "Mai Tai",
+  "description": "ラムを主体にオレンジリキュールとライム、オルジェアで仕上げるトロピカルクラシック。",
+  "baseSpirit": "Rum",
+  "abv": 22,
+  "originCountry": "United States",
+  "aliases": [],
+  "officialRecipe": {
+    "name": "マイタイ（基本レシピ）",
+    "memo": "フロートでダークラムを浮かせてもよい。",
+    "ingredients": [
+      {
+        "name": "ホワイトラム",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "ダークラム",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "オレンジキュラソー",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "ライム果汁",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "オルジェアシロップ",
+        "amount": 10,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェイカーに氷と材料を入れる。",
+      "シェイクしてロックグラスに注ぐ。",
+      "ミントとライムを飾る。"
+    ]
+  }
+}

@@ -41,6 +41,7 @@ export async function fetchCocktailBySlugServer(
   );
   return {
     ...toCocktail(res),
+    officialRecipe: res.official_recipe ? toCocktailRecipe(res.official_recipe) : undefined,
     recipes: (res.recipes ?? []).map(toRecipeSummary),
     hasMoreRecipes: Boolean(res.has_more_recipes),
   };

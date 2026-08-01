@@ -1,0 +1,37 @@
+{
+  "slug": "caipirinha",
+  "id": null,
+  "name": "カイピリーニャ",
+  "nameEn": "Caipirinha",
+  "description": "カシャッサ、ライム、砂糖で作るブラジルの国民的カクテル。果皮の香りが決め手。",
+  "baseSpirit": "Cachaca",
+  "abv": 20,
+  "originCountry": "Brazil",
+  "aliases": [],
+  "officialRecipe": {
+    "name": "カイピリーニャ（基本レシピ）",
+    "memo": "白い部分の苦味が強いときは種と白い皮を取り除く。",
+    "ingredients": [
+      {
+        "name": "カシャッサ",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "ライム",
+        "amount": 1,
+        "unit": "piece"
+      },
+      {
+        "name": "砂糖",
+        "amount": 2,
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      "ライムをくし切りにし、グラスで砂糖と軽く潰す。",
+      "砕氷を入れる。",
+      "カシャッサを注ぎ、軽く混ぜる。"
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "slug": "paloma",
+  "id": null,
+  "name": "パロマ",
+  "nameEn": "Paloma",
+  "description": "テキーラとグレープフルーツソーダの爽やかなロングドリンク。メキシコでマルガリータ以上に親しまれる。",
+  "baseSpirit": "Tequila",
+  "abv": 12,
+  "originCountry": "Mexico",
+  "aliases": [],
+  "officialRecipe": {
+    "name": "パロマ（基本レシピ）",
+    "memo": null,
+    "ingredients": [
+      {
+        "name": "テキーラ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ライム果汁",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "グレープフルーツソーダ",
+        "amount": 120,
+        "unit": "ml"
+      },
+      {
+        "name": "塩",
+        "amount": null,
+        "unit": null
+      }
+    ],
+    "steps": [
+      "グラスの縁に塩を付け、氷を入れる。",
+      "テキーラとライム果汁を注ぐ。",
+      "グレープフルーツソーダを注ぎ、軽く混ぜる。"
+    ]
+  }
+}

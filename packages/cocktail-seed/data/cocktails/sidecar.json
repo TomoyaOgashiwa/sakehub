@@ -1,0 +1,37 @@
+{
+  "slug": "sidecar",
+  "id": null,
+  "name": "サイドカー",
+  "nameEn": "Sidecar",
+  "description": "コニャック、オレンジリキュール、レモン果汁をシェイクしたエレガントなサワー系クラシック。",
+  "baseSpirit": "Brandy",
+  "abv": 25,
+  "originCountry": "France",
+  "aliases": [],
+  "officialRecipe": {
+    "name": "サイドカー（基本レシピ）",
+    "memo": "好みでグラスの縁にシュガーリムを付けてもよい。",
+    "ingredients": [
+      {
+        "name": "コニャック",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ホワイトキュラソー",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "レモン果汁",
+        "amount": 20,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェイカーに材料と氷を入れる。",
+      "よくシェイクする。",
+      "クーペグラスに注ぐ。"
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "slug": "aperol-spritz",
+  "id": null,
+  "name": "アペロールスプリッツ",
+  "nameEn": "Aperol Spritz",
+  "description": "アペロール、プロセッコ、ソーダで作るイタリアの軽快なアペリティーボ。",
+  "baseSpirit": "Liqueur",
+  "abv": 8,
+  "originCountry": "Italy",
+  "aliases": [
+    "スプマンテ"
+  ],
+  "officialRecipe": {
+    "name": "アペロールスプリッツ（基本レシピ）",
+    "memo": "比率は 3:2:1（プロセッコ:アペロール:ソーダ）も定番。",
+    "ingredients": [
+      {
+        "name": "アペロール",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "プロセッコ",
+        "amount": 90,
+        "unit": "ml"
+      },
+      {
+        "name": "炭酸水",
+        "amount": 30,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "ワイングラスに氷をたっぷり入れる。",
+      "アペロール、プロセッコ、ソーダを注ぐ。",
+      "軽く混ぜ、オレンジスライスを飾る。"
+    ]
+  }
+}

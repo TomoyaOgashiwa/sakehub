@@ -1,0 +1,39 @@
+{
+  "slug": "cuba-libre",
+  "id": null,
+  "name": "キューバリブレ",
+  "nameEn": "Cuba Libre",
+  "description": "ラムとコーラ、ライムで作るシンプルなロングドリンク。自由を願う名を持つキューバの定番。",
+  "baseSpirit": "Rum",
+  "abv": 10,
+  "originCountry": "Cuba",
+  "aliases": [
+    "ラムコーラ"
+  ],
+  "officialRecipe": {
+    "name": "キューバリブレ（基本レシピ）",
+    "memo": null,
+    "ingredients": [
+      {
+        "name": "ホワイトラム",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "コーラ",
+        "amount": 120,
+        "unit": "ml"
+      },
+      {
+        "name": "ライム果汁",
+        "amount": 10,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "ラムとライム果汁を注ぐ。",
+      "コーラを注ぎ、軽く混ぜる。"
+    ]
+  }
+}

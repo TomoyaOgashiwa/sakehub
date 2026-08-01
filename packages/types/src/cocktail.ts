@@ -19,6 +19,31 @@ export interface Cocktail {
   updatedAt: string;
 }
 
+/** GET /api/cocktails list response (paginated). */
+export interface CocktailListResult {
+  cocktails: Cocktail[];
+  total: number;
+  limit: number;
+  offset: number;
+}
+
+export interface CocktailListParams {
+  q?: string;
+  baseSpirit?: string;
+  limit?: number;
+  offset?: number;
+}
+
+/** Zero-hit search log payload (POST /api/search-misses). */
+export type SearchMissScope = 'cocktail' | 'drink' | 'ingredient';
+
+export interface SearchMissCreateInput {
+  scope: SearchMissScope;
+  queryRaw: string;
+  resultCount: number;
+  clientHash?: string;
+}
+
 /** ジャンル詳細ページの一覧表示用レシピ（材料・手順を含まない軽量版）。 */
 export interface CocktailRecipeSummary {
   id: string;

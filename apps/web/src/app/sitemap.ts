@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 
 import { fetchDrinksServer } from '@/application/drinks-api.server';
-import { fetchCocktailsServer } from '@/application/cocktails-api.server';
+import { fetchCocktailItemsServer } from '@/application/cocktails-api.server';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:3000';
@@ -12,6 +12,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 1,
+    },
+    {
+      url: `${baseUrl}/cocktails`,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.9,
     },
   ];
 
@@ -28,7 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         ),
       )
       .catch((): MetadataRoute.Sitemap => []),
-    fetchCocktailsServer()
+    fetchCocktailItemsServer({ limit: 1000 })
       .then((cocktails) =>
         cocktails.map(
           (cocktail): MetadataRoute.Sitemap[number] => ({

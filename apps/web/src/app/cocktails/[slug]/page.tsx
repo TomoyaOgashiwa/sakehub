@@ -74,7 +74,7 @@ export default async function CocktailDetailPage({ params, searchParams }: PageP
       <div className="mx-auto max-w-4xl px-4 py-8">
         <nav aria-label="パンくずリスト" className="mb-6">
           <Link
-            href="/?category=cocktail"
+            href="/cocktails"
             className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1 text-sm transition-colors"
           >
             <ArrowLeft className="size-4" aria-hidden="true" />

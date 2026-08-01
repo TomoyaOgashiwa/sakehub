@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation';
 
 import { Heading } from '@/components/ui/heading';
 import { createClient } from '@/lib/supabase/server';
-import { fetchCocktailsServer } from '@/application/cocktails-api.server';
+import { fetchCocktailItemsServer } from '@/application/cocktails-api.server';
 
 import { CocktailRecipeForm } from './cocktail-recipe-form';
 
@@ -27,7 +27,7 @@ export default async function NewCocktailRecipePage({ searchParams }: PageProps)
   }
 
   const { cocktail_id: cocktailIdRaw } = await searchParams;
-  const cocktails = await fetchCocktailsServer();
+  const cocktails = await fetchCocktailItemsServer({ limit: 200 });
   const defaultCocktailId =
     cocktailIdRaw && cocktails.some((c) => c.id === cocktailIdRaw) ? cocktailIdRaw : undefined;
 

@@ -27,12 +27,18 @@ func NewService(repo Repository) *Service {
 	return &Service{repo: repo}
 }
 
-func (s *Service) ListCocktails(ctx context.Context) ([]Cocktail, error) {
-	cocktails, err := s.repo.ListCocktails(ctx)
+func (s *Service) ListCocktails(ctx context.Context, params ListParams) ([]Cocktail, int, error) {
+	params.Query = strings.TrimSpace(params.Query)
+	params.BaseSpirit = strings.TrimSpace(params.BaseSpirit)
+	params.Limit, params.Offset = clampListBounds(
+		params.Limit, params.Offset, DefaultCocktailListLimit, MaxCocktailListLimit,
+	)
+
+	cocktails, total, err := s.repo.ListCocktails(ctx, params)
 	if err != nil {
-		return nil, fmt.Errorf("cocktail.ListCocktails: %w", err)
+		return nil, 0, fmt.Errorf("cocktail.ListCocktails: %w", err)
 	}
-	return cocktails, nil
+	return cocktails, total, nil
 }
 
 // GetCocktailBySlug returns the master record together with a page of its

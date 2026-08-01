@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"net/http"
+	"strings"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/sakehub/api/internal/middleware"
@@ -37,16 +38,31 @@ func (h *Handler) AuthRecipeRoutes(r chi.Router) {
 	r.Post("/", h.Create)
 }
 
-// ListCocktails returns all cocktail master records with published recipe counts.
-// GET /api/cocktails
+// ListCocktails returns cocktail master records with published recipe counts.
+// GET /api/cocktails?q=&base_spirit=&limit=&offset=
+// Default sort: recipe_count DESC, name ASC.
 func (h *Handler) ListCocktails(w http.ResponseWriter, r *http.Request) {
-	cocktails, err := h.svc.ListCocktails(r.Context())
+	limit, offset := parseLimitOffset(r, DefaultCocktailListLimit, MaxCocktailListLimit)
+
+	params := ListParams{
+		Query:      strings.TrimSpace(r.URL.Query().Get("q")),
+		BaseSpirit: strings.TrimSpace(r.URL.Query().Get("base_spirit")),
+		Limit:      limit,
+		Offset:     offset,
+	}
+
+	cocktails, total, err := h.svc.ListCocktails(r.Context(), params)
 	if err != nil {
 		response.Error(w, http.StatusInternalServerError, "internal server error")
 		return
 	}
 
-	response.JSON(w, http.StatusOK, map[string]any{"data": cocktails})
+	response.JSON(w, http.StatusOK, map[string]any{
+		"data":   cocktails,
+		"total":  total,
+		"limit":  params.Limit,
+		"offset": params.Offset,
+	})
 }
 
 // GetCocktailBySlug returns a cocktail master record with a page of published recipes.

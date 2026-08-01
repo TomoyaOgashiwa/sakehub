@@ -20,9 +20,20 @@ var (
 const (
 	DefaultPublishedRecipeLimit = 50
 	DefaultRatingListLimit      = 20
+	DefaultCocktailListLimit    = 100
 	MaxPublishedRecipeLimit     = 100
 	MaxRatingListLimit          = 50
+	MaxCocktailListLimit        = 200
 )
+
+// ListParams filters and paginates the cocktails master list.
+// Default sort: recipe_count DESC, then name ASC.
+type ListParams struct {
+	Query      string
+	BaseSpirit string
+	Limit      int
+	Offset     int
+}
 
 // ValidationError carries a client-safe detail without service wrap prefixes.
 type ValidationError struct {

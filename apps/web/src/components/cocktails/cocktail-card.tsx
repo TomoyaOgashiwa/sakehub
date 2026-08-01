@@ -1,6 +1,7 @@
 import type { Cocktail } from '@sakehub/types';
 import { Martini } from 'lucide-react';
 
+import { Badge } from '@/components/ui/badge';
 import { EntityCatalogCard } from '@/components/catalog/entity-catalog-card';
 
 interface CocktailCardProps {
@@ -8,6 +9,8 @@ interface CocktailCardProps {
 }
 
 export function CocktailCard({ cocktail }: CocktailCardProps) {
+  const recruiting = cocktail.recipeCount === 0;
+
   return (
     <EntityCatalogCard
       href={`/cocktails/${cocktail.slug}`}
@@ -20,9 +23,19 @@ export function CocktailCard({ cocktail }: CocktailCardProps) {
       fallbackIcon={<Martini className="text-muted-foreground/40 size-12" aria-hidden="true" />}
       footer={
         <>
-          {cocktail.abv != null && <span>{cocktail.abv}%</span>}
-          {cocktail.originCountry && <span>{cocktail.originCountry}</span>}
-          <span className="ml-auto font-medium">レシピ {cocktail.recipeCount}件</span>
+          {recruiting ? (
+            <Badge variant="secondary" className="font-medium">
+              レシピ募集中
+            </Badge>
+          ) : (
+            <span className="font-medium">レシピ {cocktail.recipeCount}件</span>
+          )}
+          {cocktail.abv != null && <span className="ml-auto">{cocktail.abv}%</span>}
+          {cocktail.originCountry && (
+            <span className={cocktail.abv == null ? 'ml-auto' : undefined}>
+              {cocktail.originCountry}
+            </span>
+          )}
         </>
       }
     />

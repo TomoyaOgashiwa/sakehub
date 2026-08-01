@@ -27,31 +27,54 @@ func RequireAuth(kf keyfunc.Keyfunc) func(http.Handler) http.Handler {
 				return
 			}
 
-			token, err := jwt.Parse(raw, kf.Keyfunc,
-				jwt.WithValidMethods([]string{"ES256", "RS256"}),
-				jwt.WithExpirationRequired(),
-			)
-			if err != nil || !token.Valid {
+			ctx, ok := parseToken(r.Context(), raw, kf)
+			if !ok {
 				response.Error(w, http.StatusUnauthorized, "invalid token")
 				return
-			}
-
-			claims, ok := token.Claims.(jwt.MapClaims)
-			if !ok {
-				response.Error(w, http.StatusUnauthorized, "invalid claims")
-				return
-			}
-
-			ctx := r.Context()
-			if sub, ok := claims["sub"].(string); ok {
-				ctx = context.WithValue(ctx, CtxUserID, sub)
-			}
-			if role, ok := claims["role"].(string); ok {
-				ctx = context.WithValue(ctx, CtxRole, role)
 			}
 			next.ServeHTTP(w, r.WithContext(ctx))
 		})
 	}
+}
+
+// OptionalAuth extracts user_id/role when a valid Bearer token is present.
+// Missing or invalid tokens are ignored so public endpoints stay open.
+func OptionalAuth(kf keyfunc.Keyfunc) func(http.Handler) http.Handler {
+	return func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			h := r.Header.Get("Authorization")
+			raw := strings.TrimPrefix(h, "Bearer ")
+			if raw != "" && raw != h {
+				if ctx, ok := parseToken(r.Context(), raw, kf); ok {
+					r = r.WithContext(ctx)
+				}
+			}
+			next.ServeHTTP(w, r)
+		})
+	}
+}
+
+func parseToken(ctx context.Context, raw string, kf keyfunc.Keyfunc) (context.Context, bool) {
+	token, err := jwt.Parse(raw, kf.Keyfunc,
+		jwt.WithValidMethods([]string{"ES256", "RS256"}),
+		jwt.WithExpirationRequired(),
+	)
+	if err != nil || !token.Valid {
+		return ctx, false
+	}
+
+	claims, ok := token.Claims.(jwt.MapClaims)
+	if !ok {
+		return ctx, false
+	}
+
+	if sub, ok := claims["sub"].(string); ok {
+		ctx = context.WithValue(ctx, CtxUserID, sub)
+	}
+	if role, ok := claims["role"].(string); ok {
+		ctx = context.WithValue(ctx, CtxRole, role)
+	}
+	return ctx, true
 }
 
 func UserID(ctx context.Context) string {

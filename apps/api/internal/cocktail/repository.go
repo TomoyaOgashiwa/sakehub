@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"strings"
 
 	"github.com/lib/pq"
 )
@@ -29,7 +30,7 @@ const recipeAggregates = `COALESCE((SELECT AVG(rt.rating)::NUMERIC(3,2) FROM coc
 	COALESCE((SELECT COUNT(*) FROM cocktail_recipe_ratings rt WHERE rt.recipe_id = r.id), 0)::INTEGER AS total_ratings`
 
 type Repository interface {
-	ListCocktails(ctx context.Context) ([]Cocktail, error)
+	ListCocktails(ctx context.Context, params ListParams) ([]Cocktail, int, error)
 	FindCocktailBySlug(ctx context.Context, slug string) (*Cocktail, error)
 	ListPublishedRecipes(ctx context.Context, cocktailID string, limit, offset int) ([]RecipeSummary, bool, error)
 	FindPublishedRecipeByID(ctx context.Context, id string) (*Recipe, error)
@@ -64,25 +65,94 @@ func (r *repository) scanCocktail(row interface{ Scan(dest ...any) error }) (*Co
 	return &c, nil
 }
 
-func (r *repository) ListCocktails(ctx context.Context) ([]Cocktail, error) {
-	q := fmt.Sprintf(`SELECT %s FROM cocktails c %s ORDER BY c.name`,
-		cocktailColumns, cocktailRecipeCountJoin)
+// ListCocktails returns cocktails matching filters plus the total match count.
+// Search uses search_vector (simple) OR Japanese-friendly substring matches,
+// mirroring drinks.List. Sort is recipe_count DESC, name ASC.
+func (r *repository) ListCocktails(ctx context.Context, params ListParams) ([]Cocktail, int, error) {
+	var (
+		conditions []string
+		args       []any
+		argIdx     int
+	)
 
-	rows, err := r.db.QueryContext(ctx, q)
+	if params.BaseSpirit != "" {
+		argIdx++
+		conditions = append(conditions, fmt.Sprintf("c.base_spirit = $%d", argIdx))
+		args = append(args, params.BaseSpirit)
+	}
+
+	if params.Query != "" {
+		argIdx++
+		ph := fmt.Sprintf("$%d", argIdx)
+		// FTS (simple) is weak on unsegmented CJK; OR with strpos for JP names.
+		match := fmt.Sprintf(`(
+(c.search_vector @@ plainto_tsquery('simple', %s))
+OR strpos(c.name, %s) > 0
+OR strpos(lower(COALESCE(c.name_en, '')), lower(%s)) > 0
+OR strpos(lower(COALESCE(c.base_spirit, '')), lower(%s)) > 0
+OR strpos(lower(c.description), lower(%s)) > 0
+)`, ph, ph, ph, ph, ph)
+		conditions = append(conditions, match)
+		args = append(args, params.Query)
+	}
+
+	where := ""
+	if len(conditions) > 0 {
+		where = "WHERE " + strings.Join(conditions, " AND ")
+	}
+
+	limit := params.Limit
+	if limit <= 0 {
+		limit = DefaultCocktailListLimit
+	}
+	offset := params.Offset
+	if offset < 0 {
+		offset = 0
+	}
+
+	argIdx++
+	limitPlaceholder := fmt.Sprintf("$%d", argIdx)
+	argIdx++
+	offsetPlaceholder := fmt.Sprintf("$%d", argIdx)
+	args = append(args, limit, offset)
+
+	q := fmt.Sprintf(
+		`SELECT %s, COUNT(*) OVER() AS total
+		FROM cocktails c %s
+		%s
+		ORDER BY recipe_count DESC, c.name ASC
+		LIMIT %s OFFSET %s`,
+		cocktailColumns, cocktailRecipeCountJoin, where, limitPlaceholder, offsetPlaceholder,
+	)
+
+	rows, err := r.db.QueryContext(ctx, q, args...)
 	if err != nil {
-		return nil, err
+		return nil, 0, err
 	}
 	defer rows.Close()
 
-	var cocktails []Cocktail
+	var (
+		cocktails []Cocktail
+		total     int
+	)
 	for rows.Next() {
-		c, err := r.scanCocktail(rows)
-		if err != nil {
-			return nil, err
+		var c Cocktail
+		if err := rows.Scan(
+			&c.ID, &c.Slug, &c.Name, &c.NameEn, &c.Description, &c.ImageURL,
+			&c.BaseSpirit, &c.ABV, &c.OriginCountry, &c.RecipeCount,
+			&c.CreatedAt, &c.UpdatedAt, &total,
+		); err != nil {
+			return nil, 0, err
 		}
-		cocktails = append(cocktails, *c)
+		cocktails = append(cocktails, c)
 	}
-	return cocktails, rows.Err()
+	if err := rows.Err(); err != nil {
+		return nil, 0, err
+	}
+	if cocktails == nil {
+		cocktails = []Cocktail{}
+	}
+	return cocktails, total, nil
 }
 
 func (r *repository) FindCocktailBySlug(ctx context.Context, slug string) (*Cocktail, error) {

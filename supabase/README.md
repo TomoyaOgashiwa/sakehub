@@ -12,6 +12,8 @@ Supabase CLI で管理するローカル開発環境の設定・マイグレー�
 
 設定は `config.toml` で管理しています。
 
+ローカル Postgres のメジャーバージョンは `config.toml` の `db.major_version`（現在 **17**）です。メジャー変更後はデータディレクトリが非互換のため、`supabase stop --no-backup` → `supabase start` → `supabase db reset` でスタックを作り直してください。
+
 ## ディレクトリ構成
 
 ```

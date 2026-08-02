@@ -1,0 +1,37 @@
+{
+  "slug": "bees-knees",
+  "id": null,
+  "name": "ビーズニーズ",
+  "nameEn": "Bee's Knees",
+  "description": "ジン、レモン、はちみつシロップの禁酒法時代生まれのクラシック。はちみつのまろやかさが特徴。",
+  "baseSpirit": "Gin",
+  "abv": 20,
+  "originCountry": "United States",
+  "aliases": [],
+  "officialRecipe": {
+    "name": "ビーズニーズ（基本レシピ）",
+    "memo": "はちみつシロップははちみつと同量の湯で溶いて冷まして使う。",
+    "ingredients": [
+      {
+        "name": "ドライジン",
+        "amount": 50,
+        "unit": "ml"
+      },
+      {
+        "name": "レモン果汁",
+        "amount": 22.5,
+        "unit": "ml"
+      },
+      {
+        "name": "はちみつシロップ",
+        "amount": 22.5,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェイカーに材料と氷を入れる。",
+      "よくシェイクする。",
+      "クーペグラスに注ぐ。"
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "slug": "dry-martini",
+  "id": null,
+  "name": "ドライマティーニ",
+  "nameEn": "Dry Martini",
+  "description": "ジンとドライベルモットをステアしたカクテルの王様。比率とステアの加減で個性が出る。",
+  "baseSpirit": "Gin",
+  "abv": 30,
+  "originCountry": "United States",
+  "aliases": [
+    "マティーニ",
+    "Martini"
+  ],
+  "officialRecipe": {
+    "name": "ドライマティーニ（基本レシピ）",
+    "memo": "グラスはあらかじめ冷やしておく。",
+    "ingredients": [
+      {
+        "name": "ドライジン",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "ドライベルモット",
+        "amount": 10,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "ミキシンググラスに氷と材料を入れる。",
+      "静かにステアして冷やす。",
+      "冷やしたカクテルグラスに注ぎ、オリーブまたはレモンピールを飾る。"
+    ]
+  }
+}

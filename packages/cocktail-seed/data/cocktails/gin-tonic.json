@@ -1,0 +1,40 @@
+{
+  "slug": "gin-tonic",
+  "id": "c0c00000-0000-4000-8000-000000000004",
+  "name": "ジントニック",
+  "nameEn": "Gin and Tonic",
+  "description": "ジンをトニックウォーターで割るだけのシンプルカクテル。ジンのボタニカルとトニックの苦味が織りなす永遠の定番。",
+  "baseSpirit": "Gin",
+  "abv": 8,
+  "originCountry": "United Kingdom",
+  "aliases": [
+    "ジン・トニック",
+    "G&T"
+  ],
+  "officialRecipe": {
+    "name": "ジントニック（基本レシピ）",
+    "memo": "氷はたっぷり、炭酸は最後に静かに注ぐ。",
+    "ingredients": [
+      {
+        "name": "ドライジン",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "トニックウォーター",
+        "amount": 135,
+        "unit": "ml"
+      },
+      {
+        "name": "ライム",
+        "amount": 0.25,
+        "unit": "piece"
+      }
+    ],
+    "steps": [
+      "ハイボールグラスに氷をたっぷり入れる。",
+      "ジンを注ぐ。",
+      "トニックウォーターを静かに注ぎ、ライムを絞って落とす。"
+    ]
+  }
+}

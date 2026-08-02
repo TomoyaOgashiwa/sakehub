@@ -14,6 +14,7 @@ import (
 	"github.com/sakehub/api/internal/handler"
 	"github.com/sakehub/api/internal/middleware"
 	"github.com/sakehub/api/internal/review"
+	"github.com/sakehub/api/internal/searchmiss"
 	"github.com/sakehub/api/internal/user"
 	"github.com/sakehub/api/pkg/config"
 )
@@ -39,11 +40,17 @@ func New(logger *zap.Logger, db *sql.DB, cfg *config.Config, kf keyfunc.Keyfunc)
 	drinkH := drink.NewHandler(drink.NewService(drink.NewRepository(db)))
 	cocktailH := cocktail.NewHandler(cocktail.NewService(cocktail.NewRepository(db)))
 	reviewH := review.NewHandler(review.NewService(review.NewRepository(db)))
+	searchMissH := searchmiss.NewHandler(searchmiss.NewService(searchmiss.NewRepository(db)))
 
 	r.Route("/api", func(r chi.Router) {
 		r.Get("/health", handler.Health)
 		r.Route("/drinks", drinkH.Routes)
 		r.Route("/cocktails", cocktailH.CocktailRoutes)
+
+		r.Route("/search-misses", func(r chi.Router) {
+			r.Use(middleware.OptionalAuth(kf))
+			searchMissH.Routes(r)
+		})
 
 		r.Route("/cocktail-recipes", func(r chi.Router) {
 			r.Group(func(r chi.Router) {

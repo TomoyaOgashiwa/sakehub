@@ -8,7 +8,10 @@
     "lint": "turbo lint",
     "type-check": "turbo type-check",
     "format": "prettier --write .",
-    "supabase:seed": "supabase db query --local --file supabase/seed.sql"
+    "supabase:seed": "supabase db query --local --file supabase/seeds/official_cocktails.sql && supabase db query --local --file supabase/seed.sql",
+    "seed:cocktails:validate": "pnpm --filter @sakehub/cocktail-seed validate",
+    "seed:cocktails:build": "pnpm --filter @sakehub/cocktail-seed build",
+    "seed:cocktails:draft": "pnpm --filter @sakehub/cocktail-seed draft"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

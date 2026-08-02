@@ -1,0 +1,39 @@
+{
+  "slug": "pina-colada",
+  "id": null,
+  "name": "ピニャコラーダ",
+  "nameEn": "Piña Colada",
+  "description": "ラム、パイナップル、ココナッツミルクのトロピカルカクテル。プエルトリコ発祥の国民的一杯。",
+  "baseSpirit": "Rum",
+  "abv": 13,
+  "originCountry": "Puerto Rico",
+  "aliases": [
+    "ピナコラーダ"
+  ],
+  "officialRecipe": {
+    "name": "ピニャコラーダ（基本レシピ）",
+    "memo": "フローズンにする場合はクラッシュアイスを多めに。",
+    "ingredients": [
+      {
+        "name": "ホワイトラム",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ココナッツクリーム",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "パイナップルジュース",
+        "amount": 90,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "ブレンダーまたはシェイカーに材料と氷を入れる。",
+      "滑らかになるまで混ぜる。",
+      "グラスに注ぎ、パイナップルを飾る。"
+    ]
+  }
+}

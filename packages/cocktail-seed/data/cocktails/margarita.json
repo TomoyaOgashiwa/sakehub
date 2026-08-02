@@ -1,0 +1,42 @@
+{
+  "slug": "margarita",
+  "id": "c0c00000-0000-4000-8000-000000000007",
+  "name": "マルガリータ",
+  "nameEn": "Margarita",
+  "description": "テキーラ、ホワイトキュラソー、ライムをシェイクし、塩でスノースタイルにしたメキシコ生まれの世界的カクテル。",
+  "baseSpirit": "Tequila",
+  "abv": 25,
+  "originCountry": "Mexico",
+  "aliases": [],
+  "officialRecipe": {
+    "name": "マルガリータ（基本レシピ）",
+    "memo": "グラスの縁に塩を付けるスノースタイルで。シェイクは強めに。",
+    "ingredients": [
+      {
+        "name": "テキーラ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ホワイトキュラソー",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "ライム果汁",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "塩",
+        "amount": null,
+        "unit": null
+      }
+    ],
+    "steps": [
+      "クーペグラスの縁をライムで湿らせ、塩を付ける。",
+      "シェイカーに氷と材料を入れ、強くシェイクする。",
+      "グラスに注ぐ。"
+    ]
+  }
+}

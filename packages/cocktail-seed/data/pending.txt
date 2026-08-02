@@ -1,0 +1,2 @@
+# One cocktail per line. Optional slug hint: 日本語名|kebab-slug
+# After drafting, review data/drafts/ and move to data/cocktails/.

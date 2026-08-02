@@ -15,9 +15,22 @@ export async function Header() {
   return (
     <header className="border-b">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
-        <Link href="/" className="text-xl font-bold">
-          SakeHub
-        </Link>
+        <div className="flex items-center gap-6">
+          <Link href="/" className="text-xl font-bold">
+            SakeHub
+          </Link>
+          <nav className="hidden items-center gap-4 text-sm font-medium sm:flex" aria-label="メイン">
+            <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors">
+              お酒
+            </Link>
+            <Link
+              href="/cocktails"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
+              カクテル
+            </Link>
+          </nav>
+        </div>
         <nav className="flex items-center gap-6">
           {user ? (
             <Link href="/profile" className="flex items-center">

@@ -1,0 +1,34 @@
+{
+  "slug": "highball",
+  "id": "c0c00000-0000-4000-8000-000000000008",
+  "name": "ハイボール",
+  "nameEn": "Highball",
+  "description": "ウイスキーをソーダで割った軽快なロングドリンク。食中酒の定番として日本で絶大な人気を誇る。",
+  "baseSpirit": "Whisky",
+  "abv": 7,
+  "originCountry": "Japan",
+  "aliases": [
+    "ウィスキーハイボール"
+  ],
+  "officialRecipe": {
+    "name": "ハイボール（基本レシピ）",
+    "memo": "混ぜるのは縦に1回だけ。炭酸を潰さない。",
+    "ingredients": [
+      {
+        "name": "ウイスキー",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "炭酸水",
+        "amount": 120,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "ハイボールグラスに氷をたっぷり入れる。",
+      "ウイスキーを注ぐ。",
+      "炭酸水を注ぎ、マドラーで縦に一度だけステアする。"
+    ]
+  }
+}

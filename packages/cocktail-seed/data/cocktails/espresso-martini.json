@@ -1,0 +1,42 @@
+{
+  "slug": "espresso-martini",
+  "id": null,
+  "name": "エスプレッソマティーニ",
+  "nameEn": "Espresso Martini",
+  "description": "ウォッカ、コーヒーリキュール、エスプレッソをシェイクしたモダンクラシック。クレマが魅力。",
+  "baseSpirit": "Vodka",
+  "abv": 18,
+  "originCountry": "United Kingdom",
+  "aliases": [],
+  "officialRecipe": {
+    "name": "エスプレッソマティーニ（基本レシピ）",
+    "memo": "エスプレッソは抽出したてを少し冷まして使う。",
+    "ingredients": [
+      {
+        "name": "ウォッカ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "コーヒーリキュール",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "エスプレッソ",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "シュガーシロップ",
+        "amount": 10,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェイカーに材料と氷を入れる。",
+      "強くシェイクしてクレマを立てる。",
+      "クーペに注ぎ、コーヒー豆を飾る。"
+    ]
+  }
+}

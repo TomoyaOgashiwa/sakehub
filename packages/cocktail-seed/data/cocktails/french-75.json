@@ -1,0 +1,42 @@
+{
+  "slug": "french-75",
+  "id": null,
+  "name": "フレンチ75",
+  "nameEn": "French 75",
+  "description": "ジン、レモン、シロップにシャンパンを注ぐ華やかな発泡系クラシック。",
+  "baseSpirit": "Gin",
+  "abv": 15,
+  "originCountry": "France",
+  "aliases": [],
+  "officialRecipe": {
+    "name": "フレンチ75（基本レシピ）",
+    "memo": "シャンパンは最後に注ぎ、泡を潰さない。",
+    "ingredients": [
+      {
+        "name": "ドライジン",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "レモン果汁",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "シュガーシロップ",
+        "amount": 10,
+        "unit": "ml"
+      },
+      {
+        "name": "シャンパン",
+        "amount": 60,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェイカーでジン、レモン、シロップをシェイクする。",
+      "フルートグラスに注ぐ。",
+      "シャンパンを静かに加えて飾る。"
+    ]
+  }
+}

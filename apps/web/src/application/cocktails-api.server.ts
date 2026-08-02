@@ -1,6 +1,12 @@
 import 'server-only';
 
-import type { Cocktail, CocktailDetail, CocktailRecipe } from '@sakehub/types';
+import type {
+  Cocktail,
+  CocktailDetail,
+  CocktailListParams,
+  CocktailListResult,
+  CocktailRecipe,
+} from '@sakehub/types';
 
 import {
   toCocktail,
@@ -14,11 +20,40 @@ import { serverFetch } from './server-api';
 
 interface ApiCocktailListResponse {
   data: ApiCocktail[] | null;
+  total: number;
+  limit: number;
+  offset: number;
 }
 
-export async function fetchCocktailsServer(): Promise<Cocktail[]> {
-  const res = await serverFetch<ApiCocktailListResponse>('/api/cocktails');
-  return (res.data ?? []).map(toCocktail);
+function toParams(params: CocktailListParams = {}): Record<string, string> | undefined {
+  const query: Record<string, string> = {};
+  if (params.q) query.q = params.q;
+  if (params.baseSpirit) query.base_spirit = params.baseSpirit;
+  if (params.limit != null) query.limit = String(params.limit);
+  if (params.offset != null) query.offset = String(params.offset);
+  return Object.keys(query).length > 0 ? query : undefined;
+}
+
+export async function fetchCocktailsServer(
+  params: CocktailListParams = {},
+): Promise<CocktailListResult> {
+  const res = await serverFetch<ApiCocktailListResponse>('/api/cocktails', {
+    params: toParams(params),
+  });
+  return {
+    cocktails: (res.data ?? []).map(toCocktail),
+    total: res.total ?? 0,
+    limit: res.limit ?? params.limit ?? 0,
+    offset: res.offset ?? params.offset ?? 0,
+  };
+}
+
+/** Flat list helper for sitemap / form options. */
+export async function fetchCocktailItemsServer(
+  params: CocktailListParams = {},
+): Promise<Cocktail[]> {
+  const { cocktails } = await fetchCocktailsServer(params);
+  return cocktails;
 }
 
 interface FetchCocktailBySlugOptions {
@@ -41,6 +76,7 @@ export async function fetchCocktailBySlugServer(
   );
   return {
     ...toCocktail(res),
+    officialRecipe: res.official_recipe ? toCocktailRecipe(res.official_recipe) : undefined,
     recipes: (res.recipes ?? []).map(toRecipeSummary),
     hasMoreRecipes: Boolean(res.has_more_recipes),
   };

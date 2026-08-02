@@ -24,10 +24,12 @@ export interface ApiRecipeSummary {
   id: string;
   cocktail_id: string;
   user_id: string;
+  author_name?: string;
   name: string;
   memo?: string;
   image_url?: string;
   status: 'draft' | 'published';
+  is_official: boolean;
   average_rating: number;
   total_ratings: number;
   created_at: string;
@@ -44,12 +46,22 @@ export interface ApiRecipeIngredient {
   created_at: string;
 }
 
+export interface ApiRecipeStep {
+  id: string;
+  recipe_id: string;
+  body: string;
+  sort_order: number;
+  created_at: string;
+}
+
 export interface ApiRecipe extends ApiRecipeSummary {
   cocktail_slug?: string;
   ingredients: ApiRecipeIngredient[];
+  steps: ApiRecipeStep[];
 }
 
 export interface ApiCocktailDetail extends ApiCocktail {
+  official_recipe?: ApiRecipe | null;
   recipes: ApiRecipeSummary[];
   has_more_recipes?: boolean;
 }
@@ -86,10 +98,12 @@ export function toRecipeSummary(api: ApiRecipeSummary): CocktailRecipeSummary {
     id: api.id,
     cocktailId: api.cocktail_id,
     userId: api.user_id,
+    authorName: api.author_name,
     name: api.name,
     memo: api.memo,
     imageUrl: api.image_url,
     status: api.status,
+    isOfficial: Boolean(api.is_official),
     averageRating: api.average_rating,
     totalRatings: api.total_ratings,
     createdAt: api.created_at,
@@ -109,6 +123,13 @@ export function toCocktailRecipe(api: ApiRecipe): CocktailRecipe {
       unit: ing.unit as CocktailRecipe['ingredients'][number]['unit'],
       sortOrder: ing.sort_order,
       createdAt: ing.created_at,
+    })),
+    steps: (api.steps ?? []).map((step) => ({
+      id: step.id,
+      recipeId: step.recipe_id,
+      body: step.body,
+      sortOrder: step.sort_order,
+      createdAt: step.created_at,
     })),
   };
 }

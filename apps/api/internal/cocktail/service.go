@@ -27,16 +27,22 @@ func NewService(repo Repository) *Service {
 	return &Service{repo: repo}
 }
 
-func (s *Service) ListCocktails(ctx context.Context) ([]Cocktail, error) {
-	cocktails, err := s.repo.ListCocktails(ctx)
+func (s *Service) ListCocktails(ctx context.Context, params ListParams) ([]Cocktail, int, error) {
+	params.Query = strings.TrimSpace(params.Query)
+	params.BaseSpirit = strings.TrimSpace(params.BaseSpirit)
+	params.Limit, params.Offset = clampListBounds(
+		params.Limit, params.Offset, DefaultCocktailListLimit, MaxCocktailListLimit,
+	)
+
+	cocktails, total, err := s.repo.ListCocktails(ctx, params)
 	if err != nil {
-		return nil, fmt.Errorf("cocktail.ListCocktails: %w", err)
+		return nil, 0, fmt.Errorf("cocktail.ListCocktails: %w", err)
 	}
-	return cocktails, nil
+	return cocktails, total, nil
 }
 
 // GetCocktailBySlug returns the master record together with a page of its
-// published recipes so the genre detail page needs only one API call.
+// published (non-official) recipes and the official basic recipe when present.
 func (s *Service) GetCocktailBySlug(ctx context.Context, slug string, limit, offset int) (*CocktailDetail, error) {
 	c, err := s.repo.FindCocktailBySlug(ctx, slug)
 	if err != nil {
@@ -50,11 +56,23 @@ func (s *Service) GetCocktailBySlug(ctx context.Context, slug string, limit, off
 		return nil, fmt.Errorf("cocktail.GetCocktailBySlug recipes: %w", err)
 	}
 
-	return &CocktailDetail{
+	detail := &CocktailDetail{
 		Cocktail:       *c,
 		Recipes:        recipes,
 		HasMoreRecipes: hasMore,
-	}, nil
+	}
+
+	// Unregistered official recipes are normal until the seed batch covers all
+	// cocktails; treat ErrNotFound as OfficialRecipe = nil, not a 404.
+	official, err := s.repo.FindOfficialRecipeByCocktailID(ctx, c.ID)
+	if err != nil && !errors.Is(err, ErrNotFound) {
+		return nil, fmt.Errorf("cocktail.GetCocktailBySlug official: %w", err)
+	}
+	if err == nil {
+		detail.OfficialRecipe = official
+	}
+
+	return detail, nil
 }
 
 func (s *Service) GetRecipeByID(ctx context.Context, id string) (*Recipe, error) {
@@ -88,8 +106,8 @@ func (s *Service) ListRatingsByRecipe(ctx context.Context, recipeID string, limi
 	if !isUUID(recipeID) {
 		return nil, ErrInvalidUUID
 	}
-	// Align with public recipe GET: draft / unknown IDs must not leak ratings.
-	if err := s.repo.PublishedRecipeExists(ctx, recipeID); err != nil {
+	// Align with public recipe GET: draft / official / unknown IDs must not leak ratings.
+	if err := s.repo.RatableRecipeExists(ctx, recipeID); err != nil {
 		return nil, err
 	}
 
@@ -106,7 +124,7 @@ func (s *Service) GetRatingByRecipeAndUser(ctx context.Context, recipeID, userID
 	if !isUUID(recipeID) {
 		return nil, ErrInvalidUUID
 	}
-	if err := s.repo.PublishedRecipeExists(ctx, recipeID); err != nil {
+	if err := s.repo.RatableRecipeExists(ctx, recipeID); err != nil {
 		return nil, err
 	}
 
@@ -135,7 +153,7 @@ func (s *Service) UpsertRating(ctx context.Context, input RatingUpsertInput, use
 		Comment:  input.Comment,
 	}
 
-	// Published check is atomic inside UpsertRating (INSERT ... SELECT WHERE published).
+	// Published + non-official check is atomic inside UpsertRating.
 	if err := s.repo.UpsertRating(ctx, rating); err != nil {
 		if errors.Is(err, ErrValidation) || errors.Is(err, ErrNotFound) {
 			return nil, err
@@ -197,8 +215,15 @@ func validate(input CreateInput) error {
 		return validationErrorf("status must be 'draft' or 'published'")
 	}
 
-	if len(input.Ingredients) == 0 {
-		return validationErrorf("at least one ingredient is required")
+	// published requires ≥1 ingredient and ≥1 step (SEO / recipeInstructions).
+	// draft may have empty ingredients and steps.
+	if input.Status == "published" {
+		if len(input.Ingredients) == 0 {
+			return validationErrorf("at least one ingredient is required")
+		}
+		if len(input.Steps) == 0 {
+			return validationErrorf("at least one step is required")
+		}
 	}
 
 	for i, ing := range input.Ingredients {
@@ -214,6 +239,16 @@ func validate(input CreateInput) error {
 		}
 		if ing.Amount != nil && *ing.Amount <= 0 {
 			return validationErrorf("ingredient[%d] amount must be positive", i)
+		}
+	}
+
+	for i, step := range input.Steps {
+		body := strings.TrimSpace(step.Body)
+		if body == "" {
+			return validationErrorf("step[%d] body is required", i)
+		}
+		if len([]rune(body)) > 500 {
+			return validationErrorf("step[%d] body must be 500 characters or fewer", i)
 		}
 	}
 

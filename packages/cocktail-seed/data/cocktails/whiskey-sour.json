@@ -1,0 +1,37 @@
+{
+  "slug": "whiskey-sour",
+  "id": null,
+  "name": "ウイスキーサワー",
+  "nameEn": "Whiskey Sour",
+  "description": "ウイスキー、レモン果汁、シロップをシェイクした古典的サワー。卵白を加えるバリエーションも人気。",
+  "baseSpirit": "Whisky",
+  "abv": 20,
+  "originCountry": "United States",
+  "aliases": [],
+  "officialRecipe": {
+    "name": "ウイスキーサワー（基本レシピ）",
+    "memo": "好みで卵白を加えてドライシェイクすると泡立ちが美しい。",
+    "ingredients": [
+      {
+        "name": "バーボンウイスキー",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "レモン果汁",
+        "amount": 22.5,
+        "unit": "ml"
+      },
+      {
+        "name": "シュガーシロップ",
+        "amount": 15,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェイカーに材料と氷を入れる。",
+      "よくシェイクして冷やす。",
+      "ロックグラスまたはクーペに注ぐ。"
+    ]
+  }
+}

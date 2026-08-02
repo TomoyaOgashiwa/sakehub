@@ -1,0 +1,62 @@
+{
+  "slug": "singapore-sling",
+  "id": null,
+  "name": "シンガポールスリング",
+  "nameEn": "Singapore Sling",
+  "description": "ジンをベースにリキュールと果汁を重ねた華やかなロングドリンク。ラッフルズホテル発祥。",
+  "baseSpirit": "Gin",
+  "abv": 15,
+  "originCountry": "Singapore",
+  "aliases": [],
+  "officialRecipe": {
+    "name": "シンガポールスリング（基本レシピ）",
+    "memo": null,
+    "ingredients": [
+      {
+        "name": "ドライジン",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "チェリーブランデー",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "コアントロー",
+        "amount": 7.5,
+        "unit": "ml"
+      },
+      {
+        "name": "ベネディクティン",
+        "amount": 7.5,
+        "unit": "ml"
+      },
+      {
+        "name": "パイナップルジュース",
+        "amount": 120,
+        "unit": "ml"
+      },
+      {
+        "name": "ライム果汁",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "グレナデン",
+        "amount": 10,
+        "unit": "ml"
+      },
+      {
+        "name": "アンゴスチュラビターズ",
+        "amount": 1,
+        "unit": "dash"
+      }
+    ],
+    "steps": [
+      "シェイカーに材料と氷を入れる。",
+      "よくシェイクする。",
+      "氷入りのハイボールグラスに注ぎ、飾りを添える。"
+    ]
+  }
+}

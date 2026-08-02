@@ -20,6 +20,7 @@ export async function createCocktailRecipe(
   const memo = (formData.get('memo') as string | null)?.trim() || undefined;
   const status = (formData.get('status') as string | null) ?? 'draft';
   const ingredientsJson = (formData.get('ingredients') as string | null) ?? '[]';
+  const stepsJson = (formData.get('steps') as string | null) ?? '[]';
   const imageFile = formData.get('image') as File | null;
 
   if (!cocktailId) {
@@ -32,7 +33,7 @@ export async function createCocktailRecipe(
     return { ok: false, error: 'カクテル名は100文字以内で入力してください。' };
   }
   if (memo && [...memo].length > 1000) {
-    return { ok: false, error: 'メモは1000文字以内で入力してください。' };
+    return { ok: false, error: 'コツ・ポイントは1000文字以内で入力してください。' };
   }
   if (status !== 'draft' && status !== 'published') {
     return { ok: false, error: '不正なステータスです。' };
@@ -47,8 +48,23 @@ export async function createCocktailRecipe(
     return { ok: false, error: '材料データが不正です。' };
   }
 
-  if (ingredients.length === 0) {
-    return { ok: false, error: '材料を1つ以上追加してください。' };
+  let steps: unknown[];
+  try {
+    const parsed = JSON.parse(stepsJson);
+    if (!Array.isArray(parsed)) throw new Error('not array');
+    steps = parsed;
+  } catch {
+    return { ok: false, error: '手順データが不正です。' };
+  }
+
+  // published requires ≥1 ingredient and ≥1 step; draft may be empty.
+  if (status === 'published') {
+    if (ingredients.length === 0) {
+      return { ok: false, error: '材料を1つ以上追加してください。' };
+    }
+    if (steps.length === 0) {
+      return { ok: false, error: '作り方を1つ以上追加してください。' };
+    }
   }
 
   const supabase = await createClient();
@@ -99,6 +115,7 @@ export async function createCocktailRecipe(
         image_url: imageUrl,
         status,
         ingredients,
+        steps,
       }),
     });
   } catch {

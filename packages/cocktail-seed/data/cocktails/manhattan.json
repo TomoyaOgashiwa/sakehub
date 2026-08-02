@@ -1,0 +1,42 @@
+{
+  "slug": "manhattan",
+  "id": "c0c00000-0000-4000-8000-000000000002",
+  "name": "マンハッタン",
+  "nameEn": "Manhattan",
+  "description": "ウイスキーとスイートベルモットをステアした「カクテルの女王」。芳醇で気品ある甘みとビターズの香りが特徴。",
+  "baseSpirit": "Whisky",
+  "abv": 30,
+  "originCountry": "United States",
+  "aliases": [],
+  "officialRecipe": {
+    "name": "マンハッタン（基本レシピ）",
+    "memo": "ステアは静かに丁寧に。チェリーはマラスキーノを添える。",
+    "ingredients": [
+      {
+        "name": "ライウイスキー",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "スイートベルモット",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "アンゴスチュラビターズ",
+        "amount": 1,
+        "unit": "dash"
+      },
+      {
+        "name": "マラスキーノチェリー",
+        "amount": 1,
+        "unit": "piece"
+      }
+    ],
+    "steps": [
+      "ミキシンググラスに氷を入れ、材料を注ぐ。",
+      "静かにステアして冷やす。",
+      "カクテルグラスに注ぎ、チェリーを飾る。"
+    ]
+  }
+}

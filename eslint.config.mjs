@@ -40,6 +40,7 @@ export default defineConfig([
       'apps/mobile/**/*.{ts,tsx}',
       'packages/types/**/*.{ts,tsx}',
       'packages/utils/**/*.{ts,tsx}',
+      'packages/cocktail-seed/**/*.{ts,tsx}',
     ],
     languageOptions: {
       parser: tsParser,

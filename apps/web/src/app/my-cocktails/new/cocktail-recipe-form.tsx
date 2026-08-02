@@ -22,19 +22,30 @@ interface IngredientRow {
   unit: Unit;
 }
 
+interface StepRow {
+  id: string;
+  body: string;
+}
+
 const initialState: RecipeFormState = { ok: false, error: '' };
 
 function makeIngredient(): IngredientRow {
   return { id: crypto.randomUUID(), name: '', amount: '', unit: 'ml' };
 }
 
-interface CocktailRecipeFormProps {
-  cocktails: Cocktail[];
+function makeStep(): StepRow {
+  return { id: crypto.randomUUID(), body: '' };
 }
 
-export function CocktailRecipeForm({ cocktails }: CocktailRecipeFormProps) {
+interface CocktailRecipeFormProps {
+  cocktails: Cocktail[];
+  defaultCocktailId?: string;
+}
+
+export function CocktailRecipeForm({ cocktails, defaultCocktailId }: CocktailRecipeFormProps) {
   const [state, formAction, isPending] = useActionState(createCocktailRecipe, initialState);
   const [ingredients, setIngredients] = useState<IngredientRow[]>([makeIngredient()]);
+  const [steps, setSteps] = useState<StepRow[]>([makeStep()]);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -43,6 +54,13 @@ export function CocktailRecipeForm({ cocktails }: CocktailRecipeFormProps) {
       name: ing.name,
       amount: ing.amount ? parseFloat(ing.amount) : undefined,
       unit: ing.amount ? ing.unit : undefined,
+      sort_order: idx,
+    })),
+  );
+
+  const serializedSteps = JSON.stringify(
+    steps.map((step, idx) => ({
+      body: step.body,
       sort_order: idx,
     })),
   );
@@ -83,9 +101,22 @@ export function CocktailRecipeForm({ cocktails }: CocktailRecipeFormProps) {
     setIngredients((prev) => prev.map((ing) => (ing.id === id ? { ...ing, [field]: value } : ing)));
   }
 
+  function addStep() {
+    setSteps((prev) => [...prev, makeStep()]);
+  }
+
+  function removeStep(id: string) {
+    setSteps((prev) => prev.filter((step) => step.id !== id));
+  }
+
+  function updateStep(id: string, body: string) {
+    setSteps((prev) => prev.map((step) => (step.id === id ? { ...step, body } : step)));
+  }
+
   return (
-    <form action={formAction} encType="multipart/form-data" className="space-y-8">
+    <form action={formAction} className="space-y-8">
       <input type="hidden" name="ingredients" value={serializedIngredients} readOnly />
+      <input type="hidden" name="steps" value={serializedSteps} readOnly />
 
       {/* Image upload */}
       <div className="space-y-2">
@@ -152,7 +183,7 @@ export function CocktailRecipeForm({ cocktails }: CocktailRecipeFormProps) {
           id="cocktail_id"
           name="cocktail_id"
           required
-          defaultValue=""
+          defaultValue={defaultCocktailId ?? ''}
           className="border-input dark:bg-input/30 h-12 w-full rounded-lg border bg-transparent px-3 text-sm outline-none focus-visible:ring-2"
         >
           <option value="" disabled>
@@ -185,19 +216,6 @@ export function CocktailRecipeForm({ cocktails }: CocktailRecipeFormProps) {
         />
       </div>
 
-      {/* Memo */}
-      <div className="space-y-2">
-        <Label htmlFor="memo">メモ・説明</Label>
-        <Textarea
-          id="memo"
-          name="memo"
-          placeholder="作り方の手順やコツを記入..."
-          maxLength={1000}
-          rows={4}
-          className="resize-none"
-        />
-      </div>
-
       {/* Ingredients */}
       <div className="space-y-4">
         <Label>
@@ -205,7 +223,6 @@ export function CocktailRecipeForm({ cocktails }: CocktailRecipeFormProps) {
         </Label>
 
         <div className="space-y-3">
-          {/* Column headers */}
           <div className="grid grid-cols-[1fr_120px_120px_40px] gap-2 px-1">
             <span className="text-muted-foreground text-xs font-medium">材料名</span>
             <span className="text-muted-foreground text-xs font-medium">数量</span>
@@ -262,6 +279,64 @@ export function CocktailRecipeForm({ cocktails }: CocktailRecipeFormProps) {
           <PlusIcon className="size-4" />
           材料を追加
         </Button>
+      </div>
+
+      {/* Steps */}
+      <div className="space-y-4">
+        <Label>
+          作り方 <span className="text-destructive">*</span>
+        </Label>
+
+        <div className="space-y-3">
+          {steps.map((step, idx) => (
+            <div key={step.id} className="flex items-start gap-2">
+              <span
+                className="bg-muted text-muted-foreground mt-2 flex size-7 shrink-0 items-center justify-center rounded-full text-xs font-medium tabular-nums"
+                aria-hidden="true"
+              >
+                {idx + 1}
+              </span>
+              <Textarea
+                placeholder={`手順 ${idx + 1}（例: グラスに氷をたっぷり入れる）`}
+                value={step.body}
+                onChange={(e) => updateStep(step.id, e.target.value)}
+                maxLength={500}
+                rows={2}
+                required
+                className="resize-none"
+              />
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                onClick={() => removeStep(step.id)}
+                disabled={steps.length === 1}
+                aria-label="手順を削除"
+                className="text-muted-foreground mt-1"
+              >
+                <Trash2Icon className="size-4" />
+              </Button>
+            </div>
+          ))}
+        </div>
+
+        <Button type="button" variant="outline" onClick={addStep} className="w-full gap-2">
+          <PlusIcon className="size-4" />
+          手順を追加
+        </Button>
+      </div>
+
+      {/* Tips */}
+      <div className="space-y-2">
+        <Label htmlFor="memo">コツ・ポイント</Label>
+        <Textarea
+          id="memo"
+          name="memo"
+          placeholder="氷は大きめのものを使うと薄まりにくい..."
+          maxLength={1000}
+          rows={4}
+          className="resize-none"
+        />
       </div>
 
       {/* Error */}

@@ -1,0 +1,39 @@
+{
+  "slug": "moscow-mule",
+  "id": null,
+  "name": "モスコミュール",
+  "nameEn": "Moscow Mule",
+  "description": "ウォッカ、ジンジャービア、ライムで作るアメリカ発のモダンクラシック。銅マグで出すスタイルが象徴的。",
+  "baseSpirit": "Vodka",
+  "abv": 12,
+  "originCountry": "United States",
+  "aliases": [
+    "モスクワミュール"
+  ],
+  "officialRecipe": {
+    "name": "モスコミュール（基本レシピ）",
+    "memo": "ジンジャービアはよく冷やしたものを使う。",
+    "ingredients": [
+      {
+        "name": "ウォッカ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ライム果汁",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "ジンジャービア",
+        "amount": 120,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "銅マグまたはグラスに氷を入れる。",
+      "ウォッカとライム果汁を注ぐ。",
+      "ジンジャービアを注ぎ、軽く混ぜてライムを飾る。"
+    ]
+  }
+}

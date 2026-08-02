@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation';
 
 import { Heading } from '@/components/ui/heading';
 import { createClient } from '@/lib/supabase/server';
-import { fetchCocktailsServer } from '@/application/cocktails-api.server';
+import { fetchCocktailItemsServer } from '@/application/cocktails-api.server';
 
 import { CocktailRecipeForm } from './cocktail-recipe-form';
 
@@ -12,7 +12,11 @@ export const metadata: Metadata = {
   description: 'あなたのオリジナルカクテルをライブラリに追加しましょう',
 };
 
-export default async function NewCocktailRecipePage() {
+type PageProps = {
+  searchParams: Promise<{ cocktail_id?: string }>;
+};
+
+export default async function NewCocktailRecipePage({ searchParams }: PageProps) {
   const supabase = await createClient();
   const {
     data: { user },
@@ -22,7 +26,10 @@ export default async function NewCocktailRecipePage() {
     redirect('/login');
   }
 
-  const cocktails = await fetchCocktailsServer();
+  const { cocktail_id: cocktailIdRaw } = await searchParams;
+  const cocktails = await fetchCocktailItemsServer({ limit: 200 });
+  const defaultCocktailId =
+    cocktailIdRaw && cocktails.some((c) => c.id === cocktailIdRaw) ? cocktailIdRaw : undefined;
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-10">
@@ -37,7 +44,7 @@ export default async function NewCocktailRecipePage() {
         </p>
       </div>
 
-      <CocktailRecipeForm cocktails={cocktails} />
+      <CocktailRecipeForm cocktails={cocktails} defaultCocktailId={defaultCocktailId} />
     </div>
   );
 }

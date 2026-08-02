@@ -5,13 +5,14 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"strings"
 
 	"github.com/lib/pq"
 )
 
 // cocktailColumns is the shared SELECT column list for the cocktails master.
-// recipe_count only counts published recipes so the listing reflects what a
-// visitor can actually open.
+// recipe_count only counts published non-official recipes so the listing
+// matches ListPublishedRecipes.
 const cocktailColumns = `c.id, c.slug, c.name, c.name_en, c.description, c.image_url,
 	c.base_spirit, c.abv, c.origin_country,
 	COALESCE(rc.cnt, 0)::INTEGER AS recipe_count,
@@ -20,7 +21,7 @@ const cocktailColumns = `c.id, c.slug, c.name, c.name_en, c.description, c.image
 const cocktailRecipeCountJoin = `LEFT JOIN LATERAL (
 	SELECT COUNT(*) AS cnt
 	FROM cocktail_recipes r
-	WHERE r.cocktail_id = c.id AND r.status = 'published'
+	WHERE r.cocktail_id = c.id AND r.status = 'published' AND NOT r.is_official
 ) rc ON true`
 
 // recipeAggregates computes rating aggregates per recipe in SQL to avoid N+1
@@ -29,11 +30,12 @@ const recipeAggregates = `COALESCE((SELECT AVG(rt.rating)::NUMERIC(3,2) FROM coc
 	COALESCE((SELECT COUNT(*) FROM cocktail_recipe_ratings rt WHERE rt.recipe_id = r.id), 0)::INTEGER AS total_ratings`
 
 type Repository interface {
-	ListCocktails(ctx context.Context) ([]Cocktail, error)
+	ListCocktails(ctx context.Context, params ListParams) ([]Cocktail, int, error)
 	FindCocktailBySlug(ctx context.Context, slug string) (*Cocktail, error)
 	ListPublishedRecipes(ctx context.Context, cocktailID string, limit, offset int) ([]RecipeSummary, bool, error)
 	FindPublishedRecipeByID(ctx context.Context, id string) (*Recipe, error)
-	PublishedRecipeExists(ctx context.Context, id string) error
+	FindOfficialRecipeByCocktailID(ctx context.Context, cocktailID string) (*Recipe, error)
+	RatableRecipeExists(ctx context.Context, id string) error
 	Insert(ctx context.Context, input CreateInput) (*Recipe, error)
 
 	FindRatingByRecipeAndUser(ctx context.Context, recipeID, userID string) (*RecipeRating, error)
@@ -63,25 +65,94 @@ func (r *repository) scanCocktail(row interface{ Scan(dest ...any) error }) (*Co
 	return &c, nil
 }
 
-func (r *repository) ListCocktails(ctx context.Context) ([]Cocktail, error) {
-	q := fmt.Sprintf(`SELECT %s FROM cocktails c %s ORDER BY c.name`,
-		cocktailColumns, cocktailRecipeCountJoin)
+// ListCocktails returns cocktails matching filters plus the total match count.
+// Search uses search_vector (simple) OR Japanese-friendly substring matches,
+// mirroring drinks.List. Sort is recipe_count DESC, name ASC.
+func (r *repository) ListCocktails(ctx context.Context, params ListParams) ([]Cocktail, int, error) {
+	var (
+		conditions []string
+		args       []any
+		argIdx     int
+	)
 
-	rows, err := r.db.QueryContext(ctx, q)
+	if params.BaseSpirit != "" {
+		argIdx++
+		conditions = append(conditions, fmt.Sprintf("c.base_spirit = $%d", argIdx))
+		args = append(args, params.BaseSpirit)
+	}
+
+	if params.Query != "" {
+		argIdx++
+		ph := fmt.Sprintf("$%d", argIdx)
+		// FTS (simple) is weak on unsegmented CJK; OR with strpos for JP names.
+		match := fmt.Sprintf(`(
+(c.search_vector @@ plainto_tsquery('simple', %s))
+OR strpos(c.name, %s) > 0
+OR strpos(lower(COALESCE(c.name_en, '')), lower(%s)) > 0
+OR strpos(lower(COALESCE(c.base_spirit, '')), lower(%s)) > 0
+OR strpos(lower(c.description), lower(%s)) > 0
+)`, ph, ph, ph, ph, ph)
+		conditions = append(conditions, match)
+		args = append(args, params.Query)
+	}
+
+	where := ""
+	if len(conditions) > 0 {
+		where = "WHERE " + strings.Join(conditions, " AND ")
+	}
+
+	limit := params.Limit
+	if limit <= 0 {
+		limit = DefaultCocktailListLimit
+	}
+	offset := params.Offset
+	if offset < 0 {
+		offset = 0
+	}
+
+	argIdx++
+	limitPlaceholder := fmt.Sprintf("$%d", argIdx)
+	argIdx++
+	offsetPlaceholder := fmt.Sprintf("$%d", argIdx)
+	args = append(args, limit, offset)
+
+	q := fmt.Sprintf(
+		`SELECT %s, COUNT(*) OVER() AS total
+		FROM cocktails c %s
+		%s
+		ORDER BY recipe_count DESC, c.name ASC
+		LIMIT %s OFFSET %s`,
+		cocktailColumns, cocktailRecipeCountJoin, where, limitPlaceholder, offsetPlaceholder,
+	)
+
+	rows, err := r.db.QueryContext(ctx, q, args...)
 	if err != nil {
-		return nil, err
+		return nil, 0, err
 	}
 	defer rows.Close()
 
-	var cocktails []Cocktail
+	var (
+		cocktails []Cocktail
+		total     int
+	)
 	for rows.Next() {
-		c, err := r.scanCocktail(rows)
-		if err != nil {
-			return nil, err
+		var c Cocktail
+		if err := rows.Scan(
+			&c.ID, &c.Slug, &c.Name, &c.NameEn, &c.Description, &c.ImageURL,
+			&c.BaseSpirit, &c.ABV, &c.OriginCountry, &c.RecipeCount,
+			&c.CreatedAt, &c.UpdatedAt, &total,
+		); err != nil {
+			return nil, 0, err
 		}
-		cocktails = append(cocktails, *c)
+		cocktails = append(cocktails, c)
 	}
-	return cocktails, rows.Err()
+	if err := rows.Err(); err != nil {
+		return nil, 0, err
+	}
+	if cocktails == nil {
+		cocktails = []Cocktail{}
+	}
+	return cocktails, total, nil
 }
 
 func (r *repository) FindCocktailBySlug(ctx context.Context, slug string) (*Cocktail, error) {
@@ -107,11 +178,15 @@ func (r *repository) ListPublishedRecipes(ctx context.Context, cocktailID string
 	}
 
 	// Fetch one extra row to detect whether another page exists.
+	// Official recipes are excluded; they surface via OfficialRecipe instead.
 	q := fmt.Sprintf(`
-		SELECT r.id, r.cocktail_id, r.user_id, r.name, r.memo, r.image_url, r.status,
+		SELECT r.id, r.cocktail_id, r.user_id,
+			NULLIF(TRIM(u.display_name), '') AS author_name,
+			r.name, r.memo, r.image_url, r.status, r.is_official,
 			%s, r.created_at, r.updated_at
 		FROM cocktail_recipes r
-		WHERE r.cocktail_id = $1 AND r.status = 'published'
+		LEFT JOIN public.users u ON u.id = r.user_id
+		WHERE r.cocktail_id = $1 AND r.status = 'published' AND NOT r.is_official
 		ORDER BY r.created_at DESC
 		LIMIT $2 OFFSET $3`, recipeAggregates)
 
@@ -125,8 +200,9 @@ func (r *repository) ListPublishedRecipes(ctx context.Context, cocktailID string
 	for rows.Next() {
 		var rec RecipeSummary
 		if err := rows.Scan(
-			&rec.ID, &rec.CocktailID, &rec.UserID, &rec.Name, &rec.Memo, &rec.ImageURL,
-			&rec.Status, &rec.AverageRating, &rec.TotalRatings,
+			&rec.ID, &rec.CocktailID, &rec.UserID, &rec.AuthorName,
+			&rec.Name, &rec.Memo, &rec.ImageURL, &rec.Status, &rec.IsOfficial,
+			&rec.AverageRating, &rec.TotalRatings,
 			&rec.CreatedAt, &rec.UpdatedAt,
 		); err != nil {
 			return nil, false, err
@@ -144,44 +220,20 @@ func (r *repository) ListPublishedRecipes(ctx context.Context, cocktailID string
 	return recipes, hasMore, nil
 }
 
-// FindPublishedRecipeByID returns a published recipe with its ingredients and
-// rating aggregates. Drafts are treated as not found because this feeds a
-// public endpoint. cocktail_slug is joined so callers can validate canonical URLs
-// without a second master+recipes fetch.
-func (r *repository) FindPublishedRecipeByID(ctx context.Context, id string) (*Recipe, error) {
-	recipeQ := fmt.Sprintf(`
-		SELECT r.id, r.cocktail_id, c.slug, r.user_id, r.name, r.memo, r.image_url, r.status,
-			%s, r.created_at, r.updated_at
-		FROM cocktail_recipes r
-		INNER JOIN cocktails c ON c.id = r.cocktail_id
-		WHERE r.id = $1 AND r.status = 'published'`, recipeAggregates)
-
-	var rec Recipe
-	err := r.db.QueryRowContext(ctx, recipeQ, id).Scan(
-		&rec.ID, &rec.CocktailID, &rec.CocktailSlug, &rec.UserID, &rec.Name, &rec.Memo, &rec.ImageURL,
-		&rec.Status, &rec.AverageRating, &rec.TotalRatings,
-		&rec.CreatedAt, &rec.UpdatedAt,
-	)
-	if errors.Is(err, sql.ErrNoRows) {
-		return nil, ErrNotFound
-	}
-	if err != nil {
-		return nil, err
-	}
-
-	const ingQ = `
+func (r *repository) findIngredients(ctx context.Context, recipeID string) ([]Ingredient, error) {
+	const q = `
 		SELECT id, recipe_id, name, amount, unit, sort_order, created_at
 		FROM cocktail_recipe_ingredients
 		WHERE recipe_id = $1
-		ORDER BY sort_order`
+		ORDER BY sort_order, id`
 
-	rows, err := r.db.QueryContext(ctx, ingQ, id)
+	rows, err := r.db.QueryContext(ctx, q, recipeID)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
 
-	rec.Ingredients = make([]Ingredient, 0)
+	ingredients := make([]Ingredient, 0)
 	for rows.Next() {
 		var ing Ingredient
 		if err := rows.Scan(
@@ -190,18 +242,127 @@ func (r *repository) FindPublishedRecipeByID(ctx context.Context, id string) (*R
 		); err != nil {
 			return nil, err
 		}
-		rec.Ingredients = append(rec.Ingredients, ing)
+		ingredients = append(ingredients, ing)
 	}
-	if err := rows.Err(); err != nil {
+	return ingredients, rows.Err()
+}
+
+func (r *repository) findSteps(ctx context.Context, recipeID string) ([]Step, error) {
+	const q = `
+		SELECT id, recipe_id, body, sort_order, created_at
+		FROM cocktail_recipe_steps
+		WHERE recipe_id = $1
+		ORDER BY sort_order, id`
+
+	rows, err := r.db.QueryContext(ctx, q, recipeID)
+	if err != nil {
 		return nil, err
 	}
+	defer rows.Close()
 
+	steps := make([]Step, 0)
+	for rows.Next() {
+		var step Step
+		if err := rows.Scan(
+			&step.ID, &step.RecipeID, &step.Body, &step.SortOrder, &step.CreatedAt,
+		); err != nil {
+			return nil, err
+		}
+		steps = append(steps, step)
+	}
+	return steps, rows.Err()
+}
+
+func (r *repository) scanRecipeRow(row interface{ Scan(dest ...any) error }) (*Recipe, error) {
+	var rec Recipe
+	err := row.Scan(
+		&rec.ID, &rec.CocktailID, &rec.CocktailSlug, &rec.UserID, &rec.AuthorName,
+		&rec.Name, &rec.Memo, &rec.ImageURL, &rec.Status, &rec.IsOfficial,
+		&rec.AverageRating, &rec.TotalRatings,
+		&rec.CreatedAt, &rec.UpdatedAt,
+	)
+	if err != nil {
+		return nil, err
+	}
 	return &rec, nil
 }
 
-// PublishedRecipeExists returns ErrNotFound when the id is missing or not published.
-func (r *repository) PublishedRecipeExists(ctx context.Context, id string) error {
-	const q = `SELECT 1 FROM cocktail_recipes WHERE id = $1 AND status = 'published'`
+func (r *repository) loadRecipeChildren(ctx context.Context, rec *Recipe) error {
+	ingredients, err := r.findIngredients(ctx, rec.ID)
+	if err != nil {
+		return err
+	}
+	rec.Ingredients = ingredients
+
+	steps, err := r.findSteps(ctx, rec.ID)
+	if err != nil {
+		return err
+	}
+	rec.Steps = steps
+	return nil
+}
+
+// FindPublishedRecipeByID returns a published recipe with its ingredients,
+// steps, and rating aggregates. Drafts are treated as not found because this
+// feeds a public endpoint. cocktail_slug is joined so callers can validate
+// canonical URLs without a second master+recipes fetch.
+func (r *repository) FindPublishedRecipeByID(ctx context.Context, id string) (*Recipe, error) {
+	recipeQ := fmt.Sprintf(`
+		SELECT r.id, r.cocktail_id, c.slug, r.user_id,
+			NULLIF(TRIM(u.display_name), '') AS author_name,
+			r.name, r.memo, r.image_url, r.status, r.is_official,
+			%s, r.created_at, r.updated_at
+		FROM cocktail_recipes r
+		INNER JOIN cocktails c ON c.id = r.cocktail_id
+		LEFT JOIN public.users u ON u.id = r.user_id
+		WHERE r.id = $1 AND r.status = 'published'`, recipeAggregates)
+
+	rec, err := r.scanRecipeRow(r.db.QueryRowContext(ctx, recipeQ, id))
+	if errors.Is(err, sql.ErrNoRows) {
+		return nil, ErrNotFound
+	}
+	if err != nil {
+		return nil, err
+	}
+
+	if err := r.loadRecipeChildren(ctx, rec); err != nil {
+		return nil, err
+	}
+	return rec, nil
+}
+
+// FindOfficialRecipeByCocktailID returns the official (basic) recipe for a
+// cocktail, or ErrNotFound when none exists yet.
+func (r *repository) FindOfficialRecipeByCocktailID(ctx context.Context, cocktailID string) (*Recipe, error) {
+	recipeQ := fmt.Sprintf(`
+		SELECT r.id, r.cocktail_id, c.slug, r.user_id,
+			NULLIF(TRIM(u.display_name), '') AS author_name,
+			r.name, r.memo, r.image_url, r.status, r.is_official,
+			%s, r.created_at, r.updated_at
+		FROM cocktail_recipes r
+		INNER JOIN cocktails c ON c.id = r.cocktail_id
+		LEFT JOIN public.users u ON u.id = r.user_id
+		WHERE r.cocktail_id = $1 AND r.is_official`, recipeAggregates)
+
+	rec, err := r.scanRecipeRow(r.db.QueryRowContext(ctx, recipeQ, cocktailID))
+	if errors.Is(err, sql.ErrNoRows) {
+		return nil, ErrNotFound
+	}
+	if err != nil {
+		return nil, err
+	}
+
+	if err := r.loadRecipeChildren(ctx, rec); err != nil {
+		return nil, err
+	}
+	return rec, nil
+}
+
+// RatableRecipeExists returns ErrNotFound when the id is missing, draft, or official.
+func (r *repository) RatableRecipeExists(ctx context.Context, id string) error {
+	const q = `
+		SELECT 1 FROM cocktail_recipes
+		WHERE id = $1 AND status = 'published' AND NOT is_official`
 
 	var one int
 	err := r.db.QueryRowContext(ctx, q, id).Scan(&one)
@@ -218,10 +379,11 @@ func (r *repository) Insert(ctx context.Context, input CreateInput) (*Recipe, er
 	}
 	defer tx.Rollback() //nolint:errcheck
 
+	// is_official is intentionally omitted so DB DEFAULT false applies.
 	const recipeQ = `
 		INSERT INTO cocktail_recipes (user_id, cocktail_id, name, memo, image_url, status)
 		VALUES ($1, $2, $3, $4, $5, $6)
-		RETURNING id, created_at, updated_at`
+		RETURNING id, is_official, created_at, updated_at`
 
 	recipe := &Recipe{
 		UserID:     input.UserID,
@@ -234,7 +396,7 @@ func (r *repository) Insert(ctx context.Context, input CreateInput) (*Recipe, er
 
 	err = tx.QueryRowContext(ctx, recipeQ,
 		input.UserID, input.CocktailID, input.Name, input.Memo, input.ImageURL, input.Status,
-	).Scan(&recipe.ID, &recipe.CreatedAt, &recipe.UpdatedAt)
+	).Scan(&recipe.ID, &recipe.IsOfficial, &recipe.CreatedAt, &recipe.UpdatedAt)
 	if err != nil {
 		var pqErr *pq.Error
 		// 23503 = foreign_key_violation: the referenced cocktail does not exist.
@@ -265,6 +427,27 @@ func (r *repository) Insert(ctx context.Context, input CreateInput) (*Recipe, er
 			return nil, fmt.Errorf("cocktail.Insert ingredient: %w", err)
 		}
 		recipe.Ingredients = append(recipe.Ingredients, inserted)
+	}
+
+	recipe.Steps = make([]Step, 0, len(input.Steps))
+	for _, stepIn := range input.Steps {
+		const stepQ = `
+			INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order)
+			VALUES ($1, $2, $3)
+			RETURNING id, created_at`
+
+		var inserted Step
+		inserted.RecipeID = recipe.ID
+		inserted.Body = stepIn.Body
+		inserted.SortOrder = stepIn.SortOrder
+
+		err = tx.QueryRowContext(ctx, stepQ,
+			recipe.ID, stepIn.Body, stepIn.SortOrder,
+		).Scan(&inserted.ID, &inserted.CreatedAt)
+		if err != nil {
+			return nil, fmt.Errorf("cocktail.Insert step: %w", err)
+		}
+		recipe.Steps = append(recipe.Steps, inserted)
 	}
 
 	if err := tx.Commit(); err != nil {
@@ -337,14 +520,15 @@ func (r *repository) ListRatingsByRecipe(ctx context.Context, recipeID string, l
 	return ratings, hasMore, nil
 }
 
-// UpsertRating inserts or updates a rating only when the recipe is published.
-// The published check is in the same statement to avoid TOCTOU races (Go bypasses RLS).
+// UpsertRating inserts or updates a rating only when the recipe is published
+// and not official. The check is in the same statement to avoid TOCTOU races
+// (Go bypasses RLS).
 func (r *repository) UpsertRating(ctx context.Context, rating *RecipeRating) error {
 	const q = `
 		INSERT INTO cocktail_recipe_ratings (recipe_id, user_id, rating, comment)
 		SELECT $1, $2, $3, $4
 		FROM cocktail_recipes r
-		WHERE r.id = $1 AND r.status = 'published'
+		WHERE r.id = $1 AND r.status = 'published' AND NOT r.is_official
 		ON CONFLICT (recipe_id, user_id)
 		DO UPDATE SET rating = EXCLUDED.rating, comment = EXCLUDED.comment, updated_at = now()
 		RETURNING id, created_at, updated_at`

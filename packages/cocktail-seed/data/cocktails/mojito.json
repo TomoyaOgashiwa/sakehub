@@ -1,0 +1,47 @@
+{
+  "slug": "mojito",
+  "id": "c0c00000-0000-4000-8000-000000000003",
+  "name": "モヒート",
+  "nameEn": "Mojito",
+  "description": "ホワイトラム、ライム、ミント、砂糖、ソーダで作るキューバ生まれの定番カクテル。爽やかで飲みやすい夏の一杯。",
+  "baseSpirit": "Rum",
+  "abv": 10,
+  "originCountry": "Cuba",
+  "aliases": [],
+  "officialRecipe": {
+    "name": "モヒート（基本レシピ）",
+    "memo": "ミントは潰しすぎず香りを立たせる。",
+    "ingredients": [
+      {
+        "name": "ホワイトラム",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ライム果汁",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "砂糖",
+        "amount": 2,
+        "unit": "tsp"
+      },
+      {
+        "name": "ミントの葉",
+        "amount": 10,
+        "unit": "piece"
+      },
+      {
+        "name": "炭酸水",
+        "amount": 60,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスにミント、砂糖、ライム果汁を入れ、軽くマドラーで押す。",
+      "砕氷を入れ、ホワイトラムを注ぐ。",
+      "炭酸水を加えて軽く混ぜ、ミントを飾る。"
+    ]
+  }
+}

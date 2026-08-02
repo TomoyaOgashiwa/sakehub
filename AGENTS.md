@@ -231,3 +231,54 @@ sakehub/
 - 🌐 Web: [`apps/web/AGENTS.md`](apps/web/AGENTS.md)
 - 📱 Mobile: [`apps/mobile/AGENTS.md`](apps/mobile/AGENTS.md)
 - ⚙️ API: [`apps/api/AGENTS.md`](apps/api/AGENTS.md)
+
+---
+
+## Cursor Cloud specific instructions
+
+Toolchain (Node 24, pnpm 11 via corepack, Go 1.26, Docker, Supabase CLI, `air`) is
+pre-installed in the VM image; the startup update script only refreshes deps
+(`pnpm install` + `go mod download`). The notes below are the non-obvious runtime
+caveats — standard commands live in the root README / section 2 and each app's `AGENTS.md`.
+
+### Toolchain / PATH gotcha
+
+- The exec-daemon injects an older Node (v22) early on `PATH`. `~/.bashrc` prepends
+  Node 24 + `/usr/local/go/bin` + `$HOME/go/bin` to override it, so **run Node/Go/pnpm
+  commands from a login shell** (e.g. `bash -lc '…'`). A bare non-login `node` may resolve
+  to v22.
+- `pnpm` is a corepack shim; if it is ever missing, run `corepack enable`.
+
+### Services are NOT auto-started (start them in this order)
+
+1. **Docker daemon** — not running on boot. Start it (backgrounded, e.g. in tmux):
+   `sudo dockerd > /tmp/dockerd.log 2>&1 &`. If the socket is not accessible, run
+   `sudo chmod 666 /var/run/docker.sock`. `/etc/docker/daemon.json` is already configured
+   for this VM (`storage-driver: fuse-overlayfs`, `containerd-snapshotter: false` — required
+   for Docker 29 here) and iptables is set to legacy; do not change these.
+2. **Supabase** — `supabase start` (needs Docker). Migrations + `seed.sql` are applied
+   automatically. Keys shown by `supabase status` are the standard deterministic local-dev
+   keys (safe to hardcode locally).
+3. **Go API** — `cd apps/api && air`. It **hard-fails at startup unless Supabase is up**
+   (fatal DB ping + JWKS fetch). Auth verifies Supabase user JWTs (ES256) via the local
+   JWKS endpoint, which serves an ES256 key — so real signup tokens verify.
+4. **Web** — `pnpm dev:web` (http://localhost:3000).
+
+### Environment file gotchas (the two things that block startup)
+
+- Root `.env` is the single source of truth and is **git-ignored**, so it is not in a fresh
+  checkout. If missing, copy `.env.example` → `.env` and fill Supabase keys from
+  `supabase status` (use the `sb_publishable_…` key for `*_ANON_KEY` and `sb_secret_…` for
+  `SUPABASE_SERVICE_ROLE_KEY`).
+- **`DATABASE_URL` must end with `?sslmode=disable`**, otherwise the Go API dies with
+  `pq: SSL is not enabled on the server` (local Supabase Postgres has no SSL). `.env.example`
+  omits this — add it.
+- **Next.js does not read the root `.env`.** `apps/web/.env.local` is symlinked to the root
+  `.env` (`ln -sf ../../.env apps/web/.env.local`); recreate the symlink if it is missing,
+  or Supabase env vars will be undefined and every page 500s from `src/proxy.ts`.
+
+### Notes
+
+- `pnpm type-check` only covers `mobile`/`types`/`utils` (the `web` package has no
+  `type-check` script — expected). `apps/api` has no Go tests yet (`go test ./...` = no test files).
+- Mobile (Expo) is optional for validating the web product and is not started by default.

@@ -20,7 +20,11 @@ Supabase CLI で管理するローカル開発環境の設定・マイグレー�
 supabase/
 ├── config.toml     # Supabase CLI プロジェクト設定
 ├── migrations/     # SQLマイグレーションファイル（連番管理）
-└── seed.sql        # ローカル開発用シードデータ
+├── seed.sql        # 分割案内のみ（実体は seeds/）
+└── seeds/
+    ├── official_cocktails.sql  # 公式カクテル（ローカル / 本番 共通）
+    ├── drinks.sql              # drinks マスタ（ローカル / 本番 共通）
+    └── local_demo.sql          # デモユーザー・評価・個別レシピ（ローカル専用）
 ```
 
 ## 必要なツール
@@ -80,7 +84,7 @@ Docker Desktop（または同等）が動いていることと、事前に `**su
  supabase start
 ```
 
-2. **ローカル DB を migrations の内容まで作り直し**、`seed.sql` も流す
+2. **ローカル DB を migrations の内容まで作り直し**、`[db.seed]` の SQL も流す
 
 ```bash
  supabase db reset
@@ -90,7 +94,7 @@ Docker Desktop（または同等）が動いていることと、事前に `**su
 
 - ローカル Postgres が **現在の migrations セットに準拠した状態までリセット**される
 - `migrations/` 内のファイルが **ファイル名順（タイムスタンプ順）で順番に適用**される
-- 処理の最後に `**supabase/seed.sql`\*\* が自動実行される（初期データ投入）
+- 処理の最後に `config.toml` の `[db.seed].sql_paths`（公式カクテル → drinks → local_demo）が自動実行される
 
 起動状態やキーを再確認するときは `supabase status` を使えます。
 
@@ -126,7 +130,7 @@ supabase migration up
 ```
 
 - デフォルトで **ローカル DB**（`--local` が既定）に、未適用の migration を順に適用します
-- **seed.sql は自動では流れません**。初期データを入れ直したいときは手動で SQL を流すか、必要なら `db reset` を使います
+- **seed は自動では流れません**。初期データを入れ直したいときは `pnpm supabase:seed` か `db reset` を使います
 
 適用状況の確認:
 
@@ -202,34 +206,36 @@ supabase db push
 
 ## シードデータ
 
-`seed.sql` にローカル開発用の初期データを記述します。
+シードは用途別に `supabase/seeds/` へ分割しています。
+
+| ファイル | 内容 | ローカル | 本番 |
+| -------- | ---- | -------- | ---- |
+| `seeds/official_cocktails.sql` | 公式カクテルマスタ・公式レシピ（生成物） | ✅ | ✅ |
+| `seeds/drinks.sql` | drinks マスタ | ✅ | ✅ |
+| `seeds/local_demo.sql` | デモユーザー・ドリンク評価・個別レシピ・レシピ評価 | ✅ | ❌ |
+
+`config.toml` の `[db.seed].sql_paths` はローカル用に上記 3 ファイルを順に指定しています。
 
 ### いつ実行されるか
 
-| 方法                 | 内容                                                                                                                |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `supabase db reset`  | ローカル DB を作り直したあと、**migrations 適用の直後に `seed.sql` が自動実行**される（`--no-seed` を付けない限り） |
-| 下記の「シード単体」 | **いまの DB に対して** `seed.sql` だけを流す（テーブルはすでに存在している前提）                                    |
+| 方法 | 内容 |
+| ---- | ---- |
+| `supabase db reset` | ローカル DB を作り直したあと、migrations の直後に `[db.seed]` の SQL が自動実行される（`--no-seed` を付けない限り） |
+| 下記の「シード単体」 | **いまの DB に対して** seed だけを流す（テーブルはすでに存在している前提） |
 
 ### シードだけ再実行したい（リポジトリルートで）
 
-pnpm から（中身は Supabase CLI の `db query`）:
-
 ```bash
-pnpm supabase:seed
-```
-
-CLI を直接使う場合:
-
-```bash
-supabase db query --local --file supabase/seed.sql
+pnpm supabase:seed          # ローカル: 共通 + local_demo
+pnpm supabase:seed:shared   # ローカル: 共通のみ（評価・個別レシピなし）
+pnpm supabase:seed:prod     # リンク済みリモート: 共通のみ（local_demo なし）
 ```
 
 `migration up` だけでは seed は走りません。初期データが欲しいときは上記か `db reset` を使ってください。
 
 ### 注意（重複 INSERT）
 
-現在の `seed.sql` は `**INSERT` のみ**です。既に同じ行がテーブルに入っている状態で実行すると **主キーや UNIQUE 制約で失敗\*\*します。そのときは `db reset` で空の状態から入れるか、`drinks` などを事前に `TRUNCATE` するなどしてから再実行してください。
+`drinks.sql` / `local_demo.sql` は基本的に **INSERT のみ**です。既に同じ行がある状態で再実行すると UNIQUE 制約で失敗します。空の状態から入れるなら `db reset`、共通シードだけなら `pnpm supabase:seed:shared` の前に該当テーブルを整理してください。`official_cocktails.sql` は upsert 寄りで冪等です。
 
 ## Studio（管理画面）
 

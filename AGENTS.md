@@ -256,9 +256,9 @@ caveats — standard commands live in the root README / section 2 and each app's
    `sudo chmod 666 /var/run/docker.sock`. `/etc/docker/daemon.json` is already configured
    for this VM (`storage-driver: fuse-overlayfs`, `containerd-snapshotter: false` — required
    for Docker 29 here) and iptables is set to legacy; do not change these.
-2. **Supabase** — `supabase start` (needs Docker). Migrations + `seed.sql` are applied
-   automatically. Keys shown by `supabase status` are the standard deterministic local-dev
-   keys (safe to hardcode locally).
+2. **Supabase** — `supabase start` (needs Docker). Migrations + `[db.seed]` SQL
+ (`official_cocktails` → `drinks` → `local_demo`) are applied automatically. Keys shown by
+ `supabase status` are the standard deterministic local-dev keys (safe to hardcode locally).
 3. **Go API** — `cd apps/api && air`. It **hard-fails at startup unless Supabase is up**
    (fatal DB ping + JWKS fetch). Auth verifies Supabase user JWTs (ES256) via the local
    JWKS endpoint, which serves an ES256 key — so real signup tokens verify.

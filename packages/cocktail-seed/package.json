@@ -11,7 +11,7 @@
     "draft": "node --experimental-strip-types --disable-warning=ExperimentalWarning ./src/draft.ts"
   },
   "devDependencies": {
-    "@types/node": "^24.0.0",
+    "@types/node": "^26.1.2",
     "typescript": "^6.0.3"
   }
 }

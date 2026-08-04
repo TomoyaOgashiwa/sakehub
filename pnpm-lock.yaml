@@ -12,8 +12,8 @@ importers:
         specifier: ^9.39.1
         version: 9.39.4
       '@types/node':
-        specifier: ^26.1.1
-        version: 26.1.1
+        specifier: ^26.1.2
+        version: 26.1.2
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.65.0
         version: 8.65.0(@typescript-eslint/parser@8.65.0(eslint@9.39.4(jiti@2.7.0))(typescript@6.0.3))(eslint@9.39.4(jiti@2.7.0))(typescript@6.0.3)
@@ -186,7 +186,7 @@ importers:
         version: 4.3.3
       '@types/node':
         specifier: ^26
-        version: 26.1.1
+        version: 26.1.2
       '@types/react':
         specifier: ^19
         version: 19.2.17
@@ -209,8 +209,8 @@ importers:
   packages/cocktail-seed:
     devDependencies:
       '@types/node':
-        specifier: ^24.0.0
-        version: 24.13.3
+        specifier: ^26.1.2
+        version: 26.1.2
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -1785,11 +1785,8 @@ packages:
   '@types/ms@2.1.0':
     resolution: {integrity: sha512-GsCCIZDE/p3i96vtEqx+7dBUGXrc7zeSK3wwPHIaRThS+9OhWIXRqzs4d6k1SVU8g91DrNRWxWUGhp5KXQb2VA==}
 
-  '@types/node@24.13.3':
-    resolution: {integrity: sha512-Dh8vAsV36ig5wa9OX4pXvMc9D3Veibfw2wix0CUwYODLD8nkj9UsLjASr49nPg+2eKzxhBV+v7L8pXvT4e639Q==}
-
-  '@types/node@26.1.1':
-    resolution: {integrity: sha512-nxAkRSVkN1Y0JC1W8ky/fTfkGsMmcrRsbx+3XoZE+rMOX71kLYTV7fLXpqud1GpbpP5TuffXFqfX7fH2GgZREw==}
+  '@types/node@26.1.2':
+    resolution: {integrity: sha512-Vu4a5UFA9rIIFJ7rB/Vaafh9lrCQszopTCx6KjFboXTGQbPNasehVR5TEiithSDGyd1DEiUByggTZsg8jukeIg==}
 
   '@types/react-dom@19.2.3':
     resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
@@ -5236,9 +5233,6 @@ packages:
     resolution: {integrity: sha512-nWJ91DjeOkej/TA8pXQ3myruKpKEYgqvpw9lz4OPHj/NWFNluYrjbz9j01CJ8yKQd2g4jFoOkINCTW2I5LEEyw==}
     engines: {node: '>= 0.4'}
 
-  undici-types@7.18.2:
-    resolution: {integrity: sha512-AsuCzffGHJybSaRrmr5eHr81mwJU3kjw6M+uprWvCXiNeN9SOGwQ3Jn8jb8m3Z6izVgknn1R0FTCEAP2QrLY/w==}
-
   undici-types@8.3.0:
     resolution: {integrity: sha512-j375ScV60dom+YkPFIfTLcOiPxkN/buHz5GobjLhixFuANaNs3C9l4GmrWqejgXWJ7BbJcFYpTEUkS1Ge8bpZQ==}
 
@@ -6672,7 +6666,7 @@ snapshots:
       '@jest/schemas': 29.6.3
       '@types/istanbul-lib-coverage': 2.0.6
       '@types/istanbul-reports': 3.0.4
-      '@types/node': 26.1.1
+      '@types/node': 26.1.2
       '@types/yargs': 17.0.35
       chalk: 4.1.2
 
@@ -7313,11 +7307,7 @@ snapshots:
 
   '@types/ms@2.1.0': {}
 
-  '@types/node@24.13.3':
-    dependencies:
-      undici-types: 7.18.2
-
-  '@types/node@26.1.1':
+  '@types/node@26.1.2':
     dependencies:
       undici-types: 8.3.0
 
@@ -7894,7 +7884,7 @@ snapshots:
 
   chrome-launcher@0.15.2:
     dependencies:
-      '@types/node': 26.1.1
+      '@types/node': 26.1.2
       escape-string-regexp: 4.0.0
       is-wsl: 2.2.0
       lighthouse-logger: 1.4.2
@@ -7903,7 +7893,7 @@ snapshots:
 
   chromium-edge-launcher@0.3.0:
     dependencies:
-      '@types/node': 26.1.1
+      '@types/node': 26.1.2
       escape-string-regexp: 4.0.0
       is-wsl: 2.2.0
       lighthouse-logger: 1.4.2
@@ -9353,7 +9343,7 @@ snapshots:
   jest-util@29.7.0:
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 26.1.1
+      '@types/node': 26.1.2
       chalk: 4.1.2
       ci-info: 3.9.0
       graceful-fs: 4.2.11
@@ -9370,7 +9360,7 @@ snapshots:
 
   jest-worker@29.7.0:
     dependencies:
-      '@types/node': 26.1.1
+      '@types/node': 26.1.2
       jest-util: 29.7.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
@@ -11141,8 +11131,6 @@ snapshots:
       has-bigints: 1.1.0
       has-symbols: 1.1.0
       which-boxed-primitive: 1.1.1
-
-  undici-types@7.18.2: {}
 
   undici-types@8.3.0: {}
 

@@ -11,7 +11,12 @@ major_version = 17
 
 [db.seed]
 enabled = true
-sql_paths = ["./seeds/official_cocktails.sql", "./seed.sql"]
+# official + drinks は本番でも可。local_demo はローカル専用（評価・個別レシピ）。
+sql_paths = [
+  "./seeds/official_cocktails.sql",
+  "./seeds/drinks.sql",
+  "./seeds/local_demo.sql",
+]
 
 [studio]
 enabled = true

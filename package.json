@@ -8,7 +8,9 @@
     "lint": "turbo lint",
     "type-check": "turbo type-check",
     "format": "prettier --write .",
-    "supabase:seed": "supabase db query --local --file supabase/seeds/official_cocktails.sql && supabase db query --local --file supabase/seed.sql",
+    "supabase:seed": "supabase db query --local --file supabase/seeds/official_cocktails.sql && supabase db query --local --file supabase/seeds/drinks.sql && supabase db query --local --file supabase/seeds/local_demo.sql",
+    "supabase:seed:shared": "supabase db query --local --file supabase/seeds/official_cocktails.sql && supabase db query --local --file supabase/seeds/drinks.sql",
+    "supabase:seed:prod": "supabase db query --linked --file supabase/seeds/official_cocktails.sql && supabase db query --linked --file supabase/seeds/drinks.sql",
     "seed:cocktails:validate": "pnpm --filter @sakehub/cocktail-seed validate",
     "seed:cocktails:build": "pnpm --filter @sakehub/cocktail-seed build",
     "seed:cocktails:draft": "pnpm --filter @sakehub/cocktail-seed draft"

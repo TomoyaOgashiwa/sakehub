@@ -22,7 +22,9 @@ pnpm seed:cocktails:build      # official_cocktails.sql を再生成
 pnpm seed:cocktails:draft      # OPENAI_API_KEY 必須。下書きのみ
 ```
 
-`supabase db reset` 時は `config.toml` の `[db.seed]` が生成 SQL → `seed.sql` の順で流す。
+`supabase db reset` 時は `config.toml` の `[db.seed]` が
+`official_cocktails.sql` → `drinks.sql` → `local_demo.sql` の順で流す。
+本番向けは `pnpm supabase:seed:prod`（公式カクテル + drinks のみ）。
 
 ## レビュー運用
 

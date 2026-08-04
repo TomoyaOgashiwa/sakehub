@@ -7,7 +7,7 @@ A community platform for sake and spirits enthusiasts.
 | Layer    | Technology                                               |
 | -------- | -------------------------------------------------------- |
 | Monorepo | pnpm workspaces + Turborepo                              |
-| Web      | Next.js 15 (App Router) + Tailwind CSS + shadcn/ui + SWR |
+| Web      | Next.js 16 (App Router, Turbopack) + React 19 + Tailwind CSS + shadcn/ui + SWR |
 | Mobile   | Expo + React Native + NativeWind                         |
 | Backend  | Go + Chi router                                          |
 | Database | Supabase (PostgreSQL)                                    |

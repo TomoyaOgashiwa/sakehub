@@ -259,6 +259,10 @@ caveats — standard commands live in the root README / section 2 and each app's
 2. **Supabase** — `supabase start` (needs Docker). Migrations + `[db.seed]` SQL
  (`official_cocktails` → `drinks` → `local_demo`) are applied automatically. Keys shown by
  `supabase status` are the standard deterministic local-dev keys (safe to hardcode locally).
+ Caveat: `supabase db reset` currently fails in this VM with `LegacyDbBootstrapError: Could
+ not find the supabase-go binary`. To rebuild the DB (e.g. after a PG major bump such as
+ 15→17), use `supabase stop --no-backup` then `supabase start` (a fresh start re-applies all
+ migrations + `[db.seed]`); reseed an existing DB with `pnpm supabase:seed`.
 3. **Go API** — `cd apps/api && air`. It **hard-fails at startup unless Supabase is up**
    (fatal DB ping + JWKS fetch). Auth verifies Supabase user JWTs (ES256) via the local
    JWKS endpoint, which serves an ES256 key — so real signup tokens verify.

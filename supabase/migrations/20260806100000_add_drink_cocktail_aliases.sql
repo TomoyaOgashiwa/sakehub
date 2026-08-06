@@ -14,6 +14,9 @@
 --
 --              array_to_string は STABLE のため GENERATED 式では使えない。
 --              text[] → text の結合は入力だけで決まるので IMMUTABLE ラッパーを置く。
+--              GENERATED 列から呼ばれる関数のため SET search_path で
+--              search_path ハイジャックの余地を塞ぐ（array_to_string 自体は
+--              pg_catalog 組み込みだが、明示しておくことで将来の変更にも安全）。
 -- =============================================================================
 
 CREATE OR REPLACE FUNCTION array_to_string_immutable(arg text[], separator text)
@@ -21,6 +24,7 @@ RETURNS text
 LANGUAGE sql
 IMMUTABLE
 PARALLEL SAFE
+SET search_path = pg_catalog
 AS $$
   SELECT array_to_string(arg, separator);
 $$;

@@ -2,12 +2,14 @@ package router
 
 import (
 	"database/sql"
+	"time"
 
 	keyfunc "github.com/MicahParks/keyfunc/v3"
 	"github.com/go-chi/chi/v5"
 	chimw "github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"
 	"go.uber.org/zap"
+	"golang.org/x/time/rate"
 
 	"github.com/sakehub/api/internal/cocktail"
 	"github.com/sakehub/api/internal/drink"
@@ -17,6 +19,7 @@ import (
 	"github.com/sakehub/api/internal/searchmiss"
 	"github.com/sakehub/api/internal/user"
 	"github.com/sakehub/api/pkg/config"
+	"github.com/sakehub/api/pkg/ratelimit"
 )
 
 func New(logger *zap.Logger, db *sql.DB, cfg *config.Config, kf keyfunc.Keyfunc) *chi.Mux {
@@ -42,6 +45,11 @@ func New(logger *zap.Logger, db *sql.DB, cfg *config.Config, kf keyfunc.Keyfunc)
 	reviewH := review.NewHandler(review.NewService(review.NewRepository(db)))
 	searchMissH := searchmiss.NewHandler(searchmiss.NewService(searchmiss.NewRepository(db)))
 
+	// client_hash 回転による unique_searchers 水増しを緩和する目的の
+	// IP 単位レート制限。1 req/3s（バースト 10）は確定検索を連続で行う
+	// 通常利用は妨げず、スクリプトによる連打だけを弾く想定。
+	searchMissLimiter := ratelimit.NewKeyLimiter(rate.Every(3*time.Second), 10, 10*time.Minute)
+
 	r.Route("/api", func(r chi.Router) {
 		r.Get("/health", handler.Health)
 		r.Route("/drinks", drinkH.Routes)
@@ -49,6 +57,7 @@ func New(logger *zap.Logger, db *sql.DB, cfg *config.Config, kf keyfunc.Keyfunc)
 
 		r.Route("/search-misses", func(r chi.Router) {
 			r.Use(middleware.OptionalAuth(kf))
+			r.Use(searchMissLimiter.Middleware)
 			searchMissH.Routes(r)
 		})
 

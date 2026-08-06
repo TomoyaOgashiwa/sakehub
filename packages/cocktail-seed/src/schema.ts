@@ -51,3 +51,6 @@ export const OFFICIAL_DISPLAY_NAME = 'SakeHub公式';
 
 /** slug: lowercase kebab-case, 1–80 chars. */
 export const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
+/** Mirrors chk_cocktails_aliases_length (migrations/20260806100000_add_drink_cocktail_aliases.sql). */
+export const MAX_ALIASES = 20;

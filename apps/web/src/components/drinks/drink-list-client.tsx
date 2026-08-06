@@ -38,12 +38,12 @@ export function DrinkListClient({ fallbackData }: DrinkListClientProps) {
 
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <CategoryFilter />
-        <div className="w-full sm:max-w-xs">
+        <div className="w-full sm:max-w-md">
           <DrinkSearch />
         </div>
       </div>
 
-      {q && !isLoading && result.total === 0 && (
+      {q && !category && !isLoading && result.total === 0 && (
         <SearchMissLogger scope="drink" query={q} total={result.total} />
       )}
 

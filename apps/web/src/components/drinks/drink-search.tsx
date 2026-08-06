@@ -1,83 +1,71 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState, useTransition } from 'react';
+import { useState, useTransition } from 'react';
 import { Search } from 'lucide-react';
 
 import { Input } from '@/components/ui/input';
-import { useDebounce } from '@/hooks/use-debounce';
+import { Button } from '@/components/ui/button';
 
+/**
+ * 確定検索の入力欄: `q` は submit（Enter / ボタン押下）でのみ更新する。
+ * （ゼロヒットのミスログは1キー入力ごとに発火してはならない。CocktailSearch と同じ方針）
+ */
 export function DrinkSearch() {
   const searchParams = useSearchParams();
   const currentQuery = searchParams.get('q') ?? '';
 
-  return <DrinkSearchInput key={currentQuery} initialQuery={currentQuery} />;
+  return <DrinkSearchForm key={currentQuery} initialQuery={currentQuery} />;
 }
 
-interface DrinkSearchInputProps {
+interface DrinkSearchFormProps {
   initialQuery: string;
 }
 
-function DrinkSearchInput({ initialQuery }: DrinkSearchInputProps) {
+function DrinkSearchForm({ initialQuery }: DrinkSearchFormProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [isComposing, setIsComposing] = useState(false);
+  const [query, setQuery] = useState(initialQuery);
   const [isPending, startTransition] = useTransition();
 
-  const [query, setQuery] = useState(initialQuery);
-  const debouncedQuery = useDebounce(query, 300);
-
-  useEffect(() => {
-    if (isComposing) {
-      return;
-    }
-
-    if (debouncedQuery === initialQuery) {
-      return;
-    }
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const next = query.trim();
 
     startTransition(() => {
       const params = new URLSearchParams(searchParams.toString());
-      if (debouncedQuery) {
-        params.set('q', debouncedQuery);
+      if (next) {
+        params.set('q', next);
       } else {
         params.delete('q');
       }
       params.delete('offset');
-      router.replace(`/?${params.toString()}`, { scroll: false });
+      const qs = params.toString();
+      router.push(qs ? `/?${qs}` : '/', { scroll: false });
     });
-  }, [debouncedQuery, isComposing, initialQuery, router, searchParams, startTransition]);
-
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setQuery(e.target.value);
-  }
-
-  function handleCompositionStart() {
-    setIsComposing(true);
-  }
-
-  function handleCompositionEnd(e: React.CompositionEvent<HTMLInputElement>) {
-    setIsComposing(false);
-    setQuery(e.currentTarget.value);
   }
 
   return (
-    <div className="relative">
-      <Search
-        className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2"
-        aria-hidden="true"
-      />
-      <Input
-        type="search"
-        placeholder="お酒を検索..."
-        value={query}
-        onChange={handleChange}
-        onCompositionStart={handleCompositionStart}
-        onCompositionEnd={handleCompositionEnd}
-        className="h-10 pl-9"
-        aria-label="お酒をキーワードで検索"
-        data-pending={isPending || undefined}
-      />
-    </div>
+    <form onSubmit={handleSubmit} className="flex w-full gap-2" role="search">
+      <div className="relative min-w-0 flex-1">
+        <Search
+          className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2"
+          aria-hidden="true"
+        />
+        <Input
+          type="search"
+          name="q"
+          placeholder="お酒を検索..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          className="h-10 pl-9"
+          aria-label="お酒をキーワードで検索"
+          data-pending={isPending || undefined}
+        />
+      </div>
+      <Button type="submit" variant="secondary" disabled={isPending}>
+        検索
+      </Button>
+    </form>
   );
 }

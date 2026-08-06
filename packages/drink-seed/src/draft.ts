@@ -22,6 +22,7 @@
  * validate → build する。
  */
 
+import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -63,14 +64,27 @@ function parsePending(text: string): PendingItem[] {
     });
 }
 
+/**
+ * 「獺祭」「ジン・トニック」のような CJK 専用の名前は ASCII 除去で空文字に
+ * なる（`slice(0, 80)` 前で既に空）。空になった場合は `SLUG_PATTERN` を満たす
+ * 決定的なフォールバック（name の SHA-1 先頭8桁）に切り替える。
+ */
 function slugify(name: string): string {
-  return name
+  const base = name
     .normalize('NFKD')
     .replace(/[^\u0020-\u007E]/g, '')
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
     .slice(0, 80);
+
+  if (base) return base;
+
+  const hash = createHash('sha1').update(name).digest('hex').slice(0, 8);
+  console.warn(
+    `slugify: "${name}" produced an empty ASCII slug; falling back to drink-${hash}`,
+  );
+  return `drink-${hash}`;
 }
 
 async function sleep(ms: number): Promise<void> {
@@ -156,9 +170,15 @@ ${items.map((it, i) => `${i + 1}. ${it.name}${it.slugHint ? ` (slug hint: ${it.s
 }
 
 function toDraftSeed(identity: DraftIdentity): DrinkSeed {
-  const category = DRINK_CATEGORIES.includes(identity.category as (typeof DRINK_CATEGORIES)[number])
-    ? (identity.category as (typeof DRINK_CATEGORIES)[number])
-    : 'other';
+  const isValidCategory = DRINK_CATEGORIES.includes(
+    identity.category as (typeof DRINK_CATEGORIES)[number],
+  );
+  if (!isValidCategory) {
+    console.warn(
+      `toDraftSeed: "${identity.slug}" has invalid category "${identity.category}"; falling back to "other". Review before moving to data/drinks/.`,
+    );
+  }
+  const category = isValidCategory ? (identity.category as (typeof DRINK_CATEGORIES)[number]) : 'other';
 
   return {
     slug: identity.slug,

@@ -1,5 +1,8 @@
 const STORAGE_KEY = 'sakehub:client-hash';
 
+/** crypto.randomUUID() が生成する標準 UUID 形式。API 側の検証と同じ形。 */
+const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 /**
  * 未ログインユーザーのゼロヒット検索を `search_miss_ranking.unique_searchers`
  * でグルーピングするための、ブラウザ単位の安定した匿名識別子を返す。
@@ -23,7 +26,10 @@ export function getOrCreateClientHash(): string | undefined {
 
   try {
     const existing = window.localStorage.getItem(STORAGE_KEY);
-    if (existing) return existing;
+    // 修正前（Date.now()+Math.random() フォールバック）の値や、DevTools 等で
+    // 仕込まれた任意文字列は API 側で黙って破棄され unique_searchers への
+    // 帰属が失われる。読み出し時にも形式を検証し、不正なら再生成する。
+    if (existing && UUID_PATTERN.test(existing)) return existing;
 
     const id = crypto.randomUUID();
     window.localStorage.setItem(STORAGE_KEY, id);

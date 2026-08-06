@@ -43,8 +43,13 @@ export function DrinkListClient({ fallbackData }: DrinkListClientProps) {
         </div>
       </div>
 
-      {q && !category && !isLoading && result.total === 0 && (
-        <SearchMissLogger scope="drink" query={q} total={result.total} />
+      {q && !isLoading && (
+        <SearchMissLogger
+          scope="drink"
+          query={q}
+          total={result.total}
+          filtersActive={category !== ''}
+        />
       )}
 
       {isLoading ? <DrinkGridSkeleton /> : <DrinkGrid drinks={result.drinks} />}

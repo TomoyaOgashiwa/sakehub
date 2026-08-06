@@ -92,8 +92,13 @@ async function CocktailListLoader({ searchParams }: PageProps) {
 
   return (
     <div className="space-y-6">
-      {q && !baseSpirit && result.total === 0 && (
-        <SearchMissLogger scope="cocktail" query={q} total={result.total} />
+      {q && (
+        <SearchMissLogger
+          scope="cocktail"
+          query={q}
+          total={result.total}
+          filtersActive={baseSpirit !== ''}
+        />
       )}
 
       <CocktailGrid cocktails={result.cocktails} />

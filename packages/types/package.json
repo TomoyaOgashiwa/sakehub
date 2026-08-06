@@ -8,6 +8,9 @@
     "type-check": "tsc --noEmit",
     "lint": "eslint ."
   },
+  "dependencies": {
+    "@sakehub/seed-utils": "workspace:*"
+  },
   "devDependencies": {
     "typescript": "^6.0.3"
   }

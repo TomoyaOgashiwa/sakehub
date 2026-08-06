@@ -6,7 +6,7 @@ import { Heading } from '@/components/ui/heading';
 import { CocktailGrid } from '@/components/cocktails/cocktail-grid';
 import { CocktailSearch } from '@/components/cocktails/cocktail-search';
 import { BaseSpiritFilter } from '@/components/cocktails/base-spirit-filter';
-import { SearchMissLogger } from '@/components/cocktails/search-miss-logger';
+import { SearchMissLogger } from '@/components/catalog/search-miss-logger';
 import { DrinkGridSkeleton } from '@/components/drinks/drink-card-skeleton';
 import { fetchCocktailsServer } from '@/application/cocktails-api.server';
 import { COCKTAIL_LIST_PAGE_SIZE } from '@/config/cocktails';
@@ -92,7 +92,9 @@ async function CocktailListLoader({ searchParams }: PageProps) {
 
   return (
     <div className="space-y-6">
-      {q && result.total === 0 && <SearchMissLogger query={q} total={result.total} />}
+      {q && result.total === 0 && (
+        <SearchMissLogger scope="cocktail" query={q} total={result.total} />
+      )}
 
       <CocktailGrid cocktails={result.cocktails} />
 

@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 import type { DrinkListResult } from '@/application/drinks-api';
 import { useDrinks } from '@/application/use-drinks';
+import { SearchMissLogger } from '@/components/catalog/search-miss-logger';
 
 import { CategoryFilter } from './category-filter';
 import { DrinkSearch } from './drink-search';
@@ -41,6 +42,10 @@ export function DrinkListClient({ fallbackData }: DrinkListClientProps) {
           <DrinkSearch />
         </div>
       </div>
+
+      {q && !isLoading && result.total === 0 && (
+        <SearchMissLogger scope="drink" query={q} total={result.total} />
+      )}
 
       {isLoading ? <DrinkGridSkeleton /> : <DrinkGrid drinks={result.drinks} />}
 

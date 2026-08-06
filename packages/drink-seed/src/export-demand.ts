@@ -86,22 +86,51 @@ async function fetchDemand(client: Client, limit: number): Promise<DemandRow[]> 
  * 「獺祭」という漢字表記との類似度が低く出て、既に aliases に
  * かな読みが登録済みでも「要確認」に落ちない。aliases の各要素との
  * 類似度も取り、より高い方を採用する。
+ *
+ * `queries` は demand 行ごとにまとめて渡す。以前は行ごとに個別クエリを
+ * 発行していた（N+1）が、`unnest(...) WITH ORDINALITY` + `LATERAL` で
+ * 1 回のラウンドトリップに集約する。返り値は入力 `queries` と同じ順序の
+ * 配列（各要素がその queries[i] に対する重複候補リスト）。
  */
-async function fetchDbDuplicates(client: Client, query: string): Promise<DuplicateCandidate[]> {
-  const { rows } = await client.query<{ slug: string; name: string; similarity: number }>(
-    `SELECT slug, name,
-       GREATEST(
-         similarity(name, $1),
-         COALESCE((SELECT max(similarity(a, $1)) FROM unnest(aliases) a), 0)
-       ) AS similarity
-     FROM drinks
-     WHERE similarity(name, $1) > $2
-        OR EXISTS (SELECT 1 FROM unnest(aliases) a WHERE similarity(a, $1) > $2)
-     ORDER BY similarity DESC
-     LIMIT $3`,
-    [query, SIMILARITY_THRESHOLD, MAX_DUPLICATE_CANDIDATES],
+async function fetchDbDuplicatesBatch(
+  client: Client,
+  queries: string[],
+): Promise<DuplicateCandidate[][]> {
+  if (queries.length === 0) return [];
+
+  const { rows } = await client.query<{
+    idx: string;
+    slug: string;
+    name: string;
+    similarity: number;
+  }>(
+    `SELECT t.idx, d.slug, d.name, d.similarity
+     FROM unnest($1::text[]) WITH ORDINALITY AS t(term, idx)
+     JOIN LATERAL (
+       SELECT slug, name,
+         GREATEST(
+           similarity(name, t.term),
+           COALESCE((SELECT max(similarity(a, t.term)) FROM unnest(aliases) a), 0)
+         ) AS similarity
+       FROM drinks
+       WHERE similarity(name, t.term) > $2
+          OR EXISTS (SELECT 1 FROM unnest(aliases) a WHERE similarity(a, t.term) > $2)
+       ORDER BY similarity DESC
+       LIMIT $3
+     ) d ON true
+     ORDER BY t.idx, d.similarity DESC`,
+    [queries, SIMILARITY_THRESHOLD, MAX_DUPLICATE_CANDIDATES],
   );
-  return rows;
+
+  const byIdx = new Map<number, DuplicateCandidate[]>();
+  for (const row of rows) {
+    const idx = Number(row.idx) - 1; // WITH ORDINALITY is 1-indexed
+    const list = byIdx.get(idx) ?? [];
+    list.push({ slug: row.slug, name: row.name, similarity: row.similarity });
+    byIdx.set(idx, list);
+  }
+
+  return queries.map((_, i) => byIdx.get(i) ?? []);
 }
 
 interface LocalDrinkTerm {
@@ -187,19 +216,34 @@ async function main(): Promise<void> {
     );
     lines.push('');
 
+    // ローカル完全一致でスキップ確定な行は DB 側の類似度チェックが不要。
+    // 残りだけをまとめて1回のクエリで引く（N+1 回避）。
+    const localMatches = demand.map((row) => findLocalMatch(row.queryNormalized, localTerms));
+    const needsDbCheckIndexes = demand
+      .map((_, i) => i)
+      .filter((i) => localMatches[i] === null);
+    const dbDuplicatesBatch = await fetchDbDuplicatesBatch(
+      client,
+      needsDbCheckIndexes.map((i) => demand[i].sampleQueryRaw),
+    );
+    const dbDuplicatesByIndex = new Map<number, DuplicateCandidate[]>();
+    needsDbCheckIndexes.forEach((originalIdx, batchIdx) => {
+      dbDuplicatesByIndex.set(originalIdx, dbDuplicatesBatch[batchIdx]);
+    });
+
     let actionable = 0;
-    for (const row of demand) {
+    demand.forEach((row, i) => {
       const stats = `miss=${row.missCount} unique=${row.uniqueSearchers} last_seen=${row.lastSeenAt}`;
-      const localMatch = findLocalMatch(row.queryNormalized, localTerms);
-      const dbDuplicates = await fetchDbDuplicates(client, row.sampleQueryRaw);
+      const localMatch = localMatches[i];
 
       if (localMatch) {
         lines.push(
           `# スキップ "${row.sampleQueryRaw}" (${stats}) — data/drinks/${localMatch.slug}.json（「${localMatch.name}」）で既にカバー済みの可能性が高い。再追加する前に aliases を確認すること。`,
         );
-        continue;
+        return;
       }
 
+      const dbDuplicates = dbDuplicatesByIndex.get(i) ?? [];
       if (dbDuplicates.length > 0) {
         const candidateList = dbDuplicates
           .map((d) => `${d.slug}（「${d.name}」, sim=${d.similarity.toFixed(2)}）`)
@@ -207,13 +251,13 @@ async function main(): Promise<void> {
         lines.push(
           `# 要確認 "${row.sampleQueryRaw}" (${stats}) — 既存候補: ${candidateList}。重複なら新規レコードではなくその drinks に alias を追加すること。`,
         );
-        continue;
+        return;
       }
 
       lines.push(`# ${stats}`);
       lines.push(row.sampleQueryRaw);
       actionable++;
-    }
+    });
 
     await writeFile(PENDING_PATH, lines.join('\n') + '\n', 'utf8');
     console.log(

@@ -55,38 +55,61 @@ pnpm seed:drinks:build                              # supabase/seeds/drinks.sql 
    かな畳み込みロジックで）正規化し、完全一致すればスキップ。
 2. **DB**: `pg_trgm` の `similarity()` で `drinks.name` **および `aliases` の各要素**との
    類似度（`GREATEST`）が閾値を超えるものを「要確認」として `data/pending.txt` に
-   コメントアウトで残す（自動では除外しない。最終判断は人が行う）。`pg_trgm` 拡張は
-   `migrations/20260806110000_enable_pg_trgm.sql` で有効化済みが前提
-   （`export-demand.ts` 自体は DDL を発行しない）。
+   コメントアウトで残す（自動では除外しない。最終判断は人が行う）。demand 行が複数
+   あっても DB ラウンドトリップは `unnest(...) WITH ORDINALITY` + `LATERAL` で 1 回に
+   まとめている。`pg_trgm` 拡張は `migrations/20260806110000_enable_pg_trgm.sql` で
+   有効化済みが前提（`export-demand.ts` 自体は DDL を発行しない）。
 
 いずれも新規登録前に「本当に未登録か」を確認するためのヒントであり、確定判定ではない。
 
-## TODO（低優先度・follow-up）
+## 品質保証（テスト / 契約）
 
-現時点の規模（drinks 30件前後）では投資対効果が低いため未着手。カタログや
-トラフィックが増えたタイミングで着手を検討する。
+- `pnpm seed:drinks:validate` — DB CHECK 制約と同等の検証（aliases の空文字・重複・
+  上限、ファイル名と `slug` の一致など）。
+- `pnpm check:normalize-sync`（`pnpm --filter @sakehub/drink-seed test`）—
+  `normalizeJa`（TS）が `NormalizeQuery`（Go, `apps/api/internal/searchmiss`）と
+  同じ結果を返すかを、共有フィクスチャ `testdata/normalize-cases.json`
+  （リポジトリルート）に対して検証する契約テスト。ケースを追加・変更したら
+  Go 側（`cd apps/api && go test ./internal/searchmiss/...`）も忘れずに実行する。
 
-- **検索のスケーラビリティ**: `apps/api/internal/drink/repository.go` /
+## 解決済み・現在の設計
+
+過去のレビューで指摘された以下は対応済み:
+
+- **`quoteLiteral` 系 / `assertAliases` / `slugifyAsciiOrFallback` の共通化**:
+  `packages/seed-utils` に集約し、`packages/drink-seed` / `packages/cocktail-seed`
+  の両方から利用する（バイト一致の二重管理を解消）。
+- **`DRINK_CATEGORIES` の single source化**: 実体は `packages/seed-utils` の
+  `DRINK_CATEGORIES`。`@sakehub/types`（`['all', ...DRINK_CATEGORIES]`）と
+  `packages/drink-seed/src/schema.ts` はここから re-export する。
+  `apps/web/src/config/drinks.ts` の `MAIN_FILTER_CATEGORIES` も
+  `@sakehub/types` の `DRINK_CATEGORIES` から値を導出し、ラベルだけを
+  `Record<DrinkCategory, string>` で管理する（カテゴリ追加時にラベル未設定なら
+  コンパイルエラーになる）。
+- **Go/TS normalize の契約テスト**: 上記「品質保証」参照。
+- **`export-demand.ts` の N+1**: 上記「重複検知」参照（LATERAL で 1 クエリ化済み）。
+- **`/api/search-misses` のレート制限**: `apps/api/pkg/ratelimit` で IP 単位の
+  トークンバケット（1 req/3s, バースト10）を実装し、`/api/search-misses` に適用済み。
+  単一インスタンス前提のインメモリ実装なので、複数インスタンスへスケールする際は
+  共有ストア（Redis 等）への切り替えが必要になる。
+- **`slugify` の弱い slug**: `slugifyAsciiOrFallback`（`packages/seed-utils`）が
+  空文字だけでなく「英字を含まない」「3文字未満」の弱い slug（例:
+  `slugify('山崎12年') === '12'`）も検出し、決定的フォールバックに切り替える。
+- **ファイル名と `slug` の不一致検知**: `validate.ts` が
+  `${slug}.json !== ファイル名` を検出する（drink/cocktail 両方）。
+- **モバイルのカテゴリチップ折り返し**: `apps/web/src/components/drinks/category-filter.tsx`
+  は `flex flex-wrap gap-2` 済みで、13チップでも折り返し表示される（コードレビューで確認）。
+- **pg_trgm GIN インデックス**: `migrations/20260806120000_add_trgm_indexes_for_name_aliases.sql`
+  で `drinks.name` / `cocktails.name` / aliases（`array_to_string_immutable` 経由）に
+  追加済み。ただし下記「未着手」の通り、List クエリ自体はまだこのインデックスを
+  使う形に書き換えていない（`export-demand.ts` の `similarity()` は既に高速化される）。
+
+## TODO（低優先度・未着手）
+
+- **List クエリの `strpos` → `pg_trgm` 移行**: `apps/api/internal/drink/repository.go` /
   `apps/api/internal/cocktail/repository.go` の `unnest(aliases) + strpos` は
-  インデックスが効きにくく、カタログ増加でフルスキャン寄りになる。
-  まず `search_vector`（FTS）だけでヒット率が足りるか計測し、かな部分一致が
-  必要なら `pg_trgm` GIN（`name` / `array_to_string(aliases, ' ')`）へ寄せる。
-- **export-demand.ts の N+1**: demand 行ごとに `similarity()` クエリを発行している。
-  週次の処理件数が増えたら `LATERAL` で 1 クエリにまとめる。
-- **`/api/search-misses` のレート制限**: 現状 IP / `client_hash` 単位の
-  レート制限がない。公開後のトラフィックを見て導入を検討する
-  （`client_hash` は UUID 形式のみ受理するようになった。詳細は
-  `apps/api/internal/searchmiss/model.go` の `clientHashPattern`）。
-- **共通化リファクタ**:
-  - `packages/drink-seed/src/sql.ts` と `packages/cocktail-seed/src/sql.ts`
-    がバイト一致で二重管理。`quoteLiteral` / `quoteTextArrayLiteral` /
-    `assertAliases()` を共通パッケージ（例: `packages/seed-utils`）へ集約する。
-  - `DRINK_CATEGORIES` が `packages/types/src/drink.ts` /
-    `packages/drink-seed/src/schema.ts` / `apps/web/src/config/drinks.ts` の
-    3箇所に分かれている。`@sakehub/types` を single source にし、Web は
-    表示ラベルのマップだけ持つようにする。
-  - `apps/api/internal/searchmiss/normalize.go`（Go）と
-    `packages/drink-seed/src/normalize.ts`（TS）は意図的な二重実装。
-    テストケースを JSON で共有する軽量な契約テストを追加し、同期ずれを防ぐ。
-- **UI 確認**: `apps/web/src/config/drinks.ts` のカテゴリチップが13個に
-  増えたため、モバイル幅での折り返し / 横スクロール体験を確認する。
+  上記の GIN インデックスがあっても現状使われない（`strpos` はインデックスを
+  使わないため）。まず `search_vector`（FTS）だけでヒット率が足りるか本番トラフィックで
+  計測し、かな部分一致が本当に必要なら `similarity() > 閾値` や `ILIKE` ベースの
+  クエリへ書き換えてインデックスを効かせる。クエリの挙動（部分一致 → 類似度ベースの
+  ファジーマッチ）が変わるため、切り替えは計測とセットで行うこと。

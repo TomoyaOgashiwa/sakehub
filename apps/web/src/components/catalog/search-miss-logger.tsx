@@ -19,6 +19,13 @@ interface SearchMissLoggerProps {
    * 新しい一覧を追加したときに漏れやすいので、契約としてここに内蔵する。
    */
   filtersActive?: boolean;
+  /**
+   * false の間はログしない。SWR の keepPreviousData などで
+   * `total` がまだ前クエリの値のときに使う。アンマウントで止めると
+   * 再検証のたびに loggedKey がリセットされ二重送信になるため、
+   * マウントを維持したまま ready でゲートする。
+   */
+  ready?: boolean;
 }
 
 /**
@@ -37,10 +44,13 @@ export function SearchMissLogger({
   query,
   total,
   filtersActive = false,
+  ready = true,
 }: SearchMissLoggerProps) {
   const loggedKey = useRef<string | null>(null);
 
   useEffect(() => {
+    if (!ready) return;
+
     const q = query.trim();
     if (!q || total > 0 || filtersActive) return;
 
@@ -54,7 +64,7 @@ export function SearchMissLogger({
       resultCount: 0,
       clientHash: getOrCreateClientHash(),
     });
-  }, [scope, query, total, filtersActive]);
+  }, [scope, query, total, filtersActive, ready]);
 
   return null;
 }

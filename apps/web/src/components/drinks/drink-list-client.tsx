@@ -22,8 +22,11 @@ export function DrinkListClient({ fallbackData }: DrinkListClientProps) {
   const category = searchParams.get('category') ?? '';
   const q = searchParams.get('q') ?? '';
 
-  const { data, isLoading } = useDrinks({ category, q, limit: 20 }, fallbackData);
+  const { data, isLoading, isValidating } = useDrinks({ category, q, limit: 20 }, fallbackData);
   const result = data ?? fallbackData;
+  // keepPreviousData 中は旧クエリの total=0 が残り得るので、現キーの取得が
+  // 終わるまでミスログしない。
+  const missLogReady = !isLoading && !isValidating;
 
   return (
     <div className="space-y-6">
@@ -43,12 +46,13 @@ export function DrinkListClient({ fallbackData }: DrinkListClientProps) {
         </div>
       </div>
 
-      {q && !isLoading && (
+      {q && (
         <SearchMissLogger
           scope="drink"
           query={q}
           total={result.total}
           filtersActive={category !== ''}
+          ready={missLogReady}
         />
       )}
 

@@ -1,0 +1,13 @@
+{
+  "slug": "jameson",
+  "name": "ジェムソン",
+  "nameEn": "Jameson Irish Whiskey",
+  "category": "whisky",
+  "subcategory": "Blended",
+  "description": "3回蒸留のスムースなアイリッシュウイスキー。バニラ、ナッツ、かすかなスパイスが織りなす軽やかな味わい。",
+  "imageUrl": null,
+  "abv": 40.0,
+  "originCountry": "Ireland",
+  "manufacturer": "Jameson",
+  "aliases": ["じぇむそん"]
+}

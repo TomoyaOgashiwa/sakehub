@@ -1,0 +1,13 @@
+{
+  "slug": "guinness-draught",
+  "name": "ギネス ドラフト",
+  "nameEn": "Guinness Draught",
+  "category": "beer",
+  "subcategory": "Stout",
+  "description": "アイルランド生まれの世界的スタウトビール。クリーミーな泡立ちとローストモルトのほのかな苦味が特徴。",
+  "imageUrl": null,
+  "abv": 4.2,
+  "originCountry": "Ireland",
+  "manufacturer": "Guinness",
+  "aliases": ["ぎねす", "ぎねすどらふと"]
+}

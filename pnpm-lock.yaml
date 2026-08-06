@@ -207,6 +207,10 @@ importers:
         version: 6.0.3
 
   packages/cocktail-seed:
+    dependencies:
+      '@sakehub/seed-utils':
+        specifier: workspace:*
+        version: link:../seed-utils
     devDependencies:
       '@types/node':
         specifier: ^26.1.2
@@ -217,6 +221,9 @@ importers:
 
   packages/drink-seed:
     dependencies:
+      '@sakehub/seed-utils':
+        specifier: workspace:*
+        version: link:../seed-utils
       pg:
         specifier: ^8.16.3
         version: 8.22.0
@@ -243,7 +250,20 @@ importers:
         specifier: ^9.0.0
         version: 9.39.4(jiti@2.7.0)
 
+  packages/seed-utils:
+    devDependencies:
+      '@types/node':
+        specifier: ^26.1.2
+        version: 26.1.2
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
   packages/types:
+    dependencies:
+      '@sakehub/seed-utils':
+        specifier: workspace:*
+        version: link:../seed-utils
     devDependencies:
       typescript:
         specifier: ^6.0.3

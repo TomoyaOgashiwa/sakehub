@@ -7,7 +7,8 @@ import {
   quoteNullableLiteral,
   quoteNullableNumber,
   quoteTextArrayLiteral,
-} from './sql.ts';
+} from '@sakehub/seed-utils';
+
 import { loadAndValidateDrinks } from './validate.ts';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');

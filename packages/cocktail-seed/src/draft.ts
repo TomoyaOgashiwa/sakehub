@@ -13,10 +13,11 @@
  * Move approved files to data/cocktails/ after human review, then validate + build.
  */
 
-import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+
+import { slugifyAsciiOrFallback } from '@sakehub/seed-utils';
 
 import { INGREDIENT_UNITS, SLUG_PATTERN, type CocktailSeed } from './schema.ts';
 
@@ -45,29 +46,6 @@ function parsePending(text: string): PendingItem[] {
         slugHint: slugPart && SLUG_PATTERN.test(slugPart) ? slugPart : null,
       };
     });
-}
-
-/**
- * CJK-only names (e.g. "獺祭") become empty after ASCII stripping. Fall back
- * to a deterministic slug (SHA-1 of the name, first 8 hex chars) that still
- * satisfies SLUG_PATTERN, instead of writing an unusable empty-slug draft.
- */
-function slugify(name: string): string {
-  const base = name
-    .normalize('NFKD')
-    .replace(/[^\u0020-\u007E]/g, '')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .slice(0, 80);
-
-  if (base) return base;
-
-  const hash = createHash('sha1').update(name).digest('hex').slice(0, 8);
-  console.warn(
-    `slugify: "${name}" produced an empty ASCII slug; falling back to cocktail-${hash}`,
-  );
-  return `cocktail-${hash}`;
 }
 
 async function sleep(ms: number): Promise<void> {
@@ -162,7 +140,7 @@ ${items.map((it, i) => `${i + 1}. ${it.name}${it.slugHint ? ` (slug hint: ${it.s
     return list.map((c) => ({
       ...c,
       id: null,
-      slug: c.slug && SLUG_PATTERN.test(c.slug) ? c.slug : slugify(c.name),
+      slug: c.slug && SLUG_PATTERN.test(c.slug) ? c.slug : slugifyAsciiOrFallback(c.name, 'cocktail'),
     }));
   }
 

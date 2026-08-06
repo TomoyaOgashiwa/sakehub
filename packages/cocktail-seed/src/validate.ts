@@ -2,6 +2,8 @@ import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { assertAliases, type ValidationIssue } from '@sakehub/seed-utils';
+
 import {
   INGREDIENT_UNITS,
   MAX_ALIASES,
@@ -18,73 +20,12 @@ const UUID_PATTERN =
 
 const UNIT_SET = new Set<string>(INGREDIENT_UNITS);
 
-/** Max length per alias entry — a loose bound for kana/romaji/abbreviation variants. */
-const MAX_ALIAS_LENGTH = 100;
-
-interface ValidationIssue {
-  file: string;
-  field: string;
-  message: string;
-}
-
 function isRecord(v: unknown): v is Record<string, unknown> {
   return typeof v === 'object' && v !== null && !Array.isArray(v);
 }
 
 function runeLength(s: string): number {
   return [...s].length;
-}
-
-/**
- * aliases quality check: rejects empty/whitespace-only entries, entries over
- * MAX_ALIAS_LENGTH, and case-insensitive duplicates. `max` should match the
- * DB's chk_*_aliases_length constraint. Mirrors drink-seed/src/validate.ts's
- * assertAliases (shared package extraction is a follow-up, see README TODO).
- */
-function assertAliases(
-  file: string,
-  aliases: unknown,
-  max: number,
-  issues: ValidationIssue[],
-): void {
-  if (!Array.isArray(aliases) || !aliases.every((a) => typeof a === 'string')) {
-    issues.push({ file, field: 'aliases', message: 'must be an array of strings' });
-    return;
-  }
-
-  if (aliases.length > max) {
-    issues.push({
-      file,
-      field: 'aliases',
-      message: `must have at most ${max} entries (chk_cocktails_aliases_length)`,
-    });
-  }
-
-  const seen = new Set<string>();
-  aliases.forEach((alias, i) => {
-    const trimmed = alias.trim();
-    if (trimmed === '') {
-      issues.push({
-        file,
-        field: `aliases[${i}]`,
-        message: 'must not be empty or whitespace-only',
-      });
-      return;
-    }
-    if (runeLength(trimmed) > MAX_ALIAS_LENGTH) {
-      issues.push({
-        file,
-        field: `aliases[${i}]`,
-        message: `must be at most ${MAX_ALIAS_LENGTH} characters`,
-      });
-    }
-    const key = trimmed.toLowerCase();
-    if (seen.has(key)) {
-      issues.push({ file, field: `aliases[${i}]`, message: `duplicate alias "${trimmed}"` });
-    } else {
-      seen.add(key);
-    }
-  });
 }
 
 function validateCocktail(file: string, raw: unknown, issues: ValidationIssue[]): CocktailSeed | null {
@@ -99,6 +40,15 @@ function validateCocktail(file: string, raw: unknown, issues: ValidationIssue[])
       file,
       field: 'slug',
       message: 'must match /^[a-z0-9]+(?:-[a-z0-9]+)*$/',
+    });
+  } else if (`${slug}.json` !== file) {
+    // build-seed.ts UPSERTs by the JSON's slug, so a filename/slug mismatch
+    // (e.g. old-fashioned.json containing "slug": "negroni") would silently
+    // write to a different row than the one a reviewer thinks they're editing.
+    issues.push({
+      file,
+      field: 'slug',
+      message: `must match filename (expected ${slug}.json, got ${file})`,
     });
   }
 

@@ -2,6 +2,8 @@ import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { assertAliases, type ValidationIssue } from '@sakehub/seed-utils';
+
 import { DRINK_CATEGORIES, MAX_ALIASES, SLUG_PATTERN, type DrinkSeed } from './schema.ts';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -9,74 +11,12 @@ const DATA_DIR = path.join(ROOT, 'data', 'drinks');
 
 const CATEGORY_SET = new Set<string>(DRINK_CATEGORIES);
 
-/** 個々の alias の最大長。かな読み・ローマ字表記・略称を想定した緩めの上限。 */
-const MAX_ALIAS_LENGTH = 100;
-
-interface ValidationIssue {
-  file: string;
-  field: string;
-  message: string;
-}
-
 function isRecord(v: unknown): v is Record<string, unknown> {
   return typeof v === 'object' && v !== null && !Array.isArray(v);
 }
 
 function runeLength(s: string): number {
   return [...s].length;
-}
-
-/**
- * aliases の品質チェック。空文字・空白のみ・要素ごとの最大長・重複
- * （大小文字を無視）を検出する。件数上限は `chk_drinks_aliases_length`
- * / `chk_cocktails_aliases_length` と同期させた `max` を渡すこと。
- * drink-seed / cocktail-seed 両方の validate.ts に同型で置く
- * （共通パッケージ化は follow-up、README の TODO を参照）。
- */
-function assertAliases(
-  file: string,
-  aliases: unknown,
-  max: number,
-  issues: ValidationIssue[],
-): void {
-  if (!Array.isArray(aliases) || !aliases.every((a) => typeof a === 'string')) {
-    issues.push({ file, field: 'aliases', message: 'must be an array of strings' });
-    return;
-  }
-
-  if (aliases.length > max) {
-    issues.push({
-      file,
-      field: 'aliases',
-      message: `must have at most ${max} entries (chk_drinks_aliases_length)`,
-    });
-  }
-
-  const seen = new Set<string>();
-  aliases.forEach((alias, i) => {
-    const trimmed = alias.trim();
-    if (trimmed === '') {
-      issues.push({
-        file,
-        field: `aliases[${i}]`,
-        message: 'must not be empty or whitespace-only',
-      });
-      return;
-    }
-    if (runeLength(trimmed) > MAX_ALIAS_LENGTH) {
-      issues.push({
-        file,
-        field: `aliases[${i}]`,
-        message: `must be at most ${MAX_ALIAS_LENGTH} characters`,
-      });
-    }
-    const key = trimmed.toLowerCase();
-    if (seen.has(key)) {
-      issues.push({ file, field: `aliases[${i}]`, message: `duplicate alias "${trimmed}"` });
-    } else {
-      seen.add(key);
-    }
-  });
 }
 
 function validateDrink(file: string, raw: unknown, issues: ValidationIssue[]): DrinkSeed | null {
@@ -88,6 +28,15 @@ function validateDrink(file: string, raw: unknown, issues: ValidationIssue[]): D
   const slug = raw.slug;
   if (typeof slug !== 'string' || !SLUG_PATTERN.test(slug)) {
     issues.push({ file, field: 'slug', message: 'must match /^[a-z0-9]+(?:-[a-z0-9]+)*$/' });
+  } else if (`${slug}.json` !== file) {
+    // build-seed.ts は JSON の slug で ON CONFLICT (slug) するため、ファイル名と
+    // slug がずれると「レビュー時に見ていたファイル」と「実際の UPSERT 先」が
+    // 一致しなくなる（dassai-23.json の中身が yamazaki-12 を指す、等の事故）。
+    issues.push({
+      file,
+      field: 'slug',
+      message: `must match filename (expected ${slug}.json, got ${file})`,
+    });
   }
 
   if (typeof raw.name !== 'string' || runeLength(raw.name) < 1 || runeLength(raw.name) > 200) {

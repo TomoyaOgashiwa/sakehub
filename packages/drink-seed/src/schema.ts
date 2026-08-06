@@ -1,24 +1,13 @@
 /**
  * drinks.category の CHECK 制約
- * （supabase/migrations/20260515210611_create_drinks.sql）および
- * packages/types/src/drink.ts の DRINK_CATEGORIES（'all' を除く）と一致させる。
+ * （supabase/migrations/20260515210611_create_drinks.sql）と一致させる single
+ * source は `@sakehub/seed-utils`。`packages/types/src/drink.ts` の
+ * `DRINK_CATEGORIES`（'all' を含む UI 向け一覧）も同じ起点から導出している。
+ * import 元をこのファイルのまま保つため、ここで re-export する。
  */
-export const DRINK_CATEGORIES = [
-  'beer',
-  'wine',
-  'whisky',
-  'sake',
-  'shochu',
-  'vodka',
-  'gin',
-  'rum',
-  'tequila',
-  'brandy',
-  'liqueur',
-  'other',
-] as const;
+import { DRINK_CATEGORIES, type DrinkCategory } from '@sakehub/seed-utils';
 
-export type DrinkCategory = (typeof DRINK_CATEGORIES)[number];
+export { DRINK_CATEGORIES, type DrinkCategory };
 
 /**
  * 粒度ルール（AGENTS.md 参照）: 1レコード = 商品（SKU / expression）レベル。

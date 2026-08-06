@@ -2,13 +2,14 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { OFFICIAL_DISPLAY_NAME, OFFICIAL_USER_EMAIL } from './schema.ts';
 import {
   quoteLiteral,
   quoteNullableLiteral,
   quoteNullableNumber,
   quoteTextArrayLiteral,
-} from './sql.ts';
+} from '@sakehub/seed-utils';
+
+import { OFFICIAL_DISPLAY_NAME, OFFICIAL_USER_EMAIL } from './schema.ts';
 import { officialRecipeIdFromSlug, resolveCocktailId } from './uuid.ts';
 import { loadAndValidateCocktails } from './validate.ts';
 

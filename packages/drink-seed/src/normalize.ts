@@ -1,8 +1,8 @@
 /**
- * TypeScript mirror of apps/api/internal/searchmiss/normalize.go's NormalizeQuery.
- * Duplicated intentionally (see packages/cocktail-seed's "zero shared deps"
- * convention) so this offline dev tool has no runtime dependency on the Go
- * module. Keep in sync if the Go implementation changes.
+ * apps/api/internal/searchmiss/normalize.go の NormalizeQuery の TypeScript 実装。
+ * packages/cocktail-seed の「ランタイム共有依存ゼロ」方針に合わせ、意図的に
+ * 複製している（Go モジュールへの実行時依存を持たせない）。Go 側の実装を
+ * 変えた場合はここも同期すること。
  */
 
 const KATAKANA_TO_HIRAGANA_OFFSET = 0x60;

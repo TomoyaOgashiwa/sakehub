@@ -14,10 +14,9 @@ interface SearchMissLoggerProps {
 }
 
 /**
- * Logs a zero-hit catalog search once per confirmed query (URL `q`).
- * Only runs when the fetched result set is empty. Shared across scopes
- * (drink / cocktail / ingredient) so search_miss_ranking captures demand
- * consistently regardless of which catalog was searched.
+ * 確定した検索クエリ（URL の `q`）がゼロヒットだったとき、1回だけログする。
+ * drink / cocktail / ingredient のいずれのカタログでも共通で使い、
+ * search_miss_ranking が検索対象によらず一貫して需要を拾えるようにする。
  */
 export function SearchMissLogger({ scope, query, total }: SearchMissLoggerProps) {
   const loggedKey = useRef<string | null>(null);

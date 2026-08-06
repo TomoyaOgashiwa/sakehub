@@ -1,16 +1,16 @@
 const STORAGE_KEY = 'sakehub:client-hash';
 
 /**
- * Returns a stable, anonymous per-browser identifier for grouping unread
- * (unauthenticated) search-miss telemetry in `search_miss_ranking.unique_searchers`.
+ * 未ログインユーザーのゼロヒット検索を `search_miss_ranking.unique_searchers`
+ * でグルーピングするための、ブラウザ単位の安定した匿名識別子を返す。
  *
- * Without this, every anonymous visitor's zero-hit searches collapse into a
- * single `NULL` bucket (`COALESCE(user_id, client_hash)` in the ranking view),
- * so demand from non-logged-in users is undercounted. The value never leaves
- * `localStorage` except as an opaque token attached to search-miss logs; it
- * carries no PII and is not derived from any device fingerprint.
+ * これがないと匿名訪問者のゼロヒットはすべて `NULL` バケット
+ * （ランキングビューの `COALESCE(user_id, client_hash)`）に潰れ、
+ * 未ログイン由来の需要が過少に見える。値は search-miss ログに付く不透明な
+ * トークンとしてだけ `localStorage` の外に出る。個人情報は含まず、
+ * 端末指紋からも導出しない。
  *
- * Returns `undefined` when `localStorage` is unavailable (SSR, privacy mode, etc.).
+ * `localStorage` が使えない場合（SSR・プライバシーモードなど）は `undefined`。
  */
 export function getOrCreateClientHash(): string | undefined {
   if (typeof window === 'undefined') return undefined;
@@ -27,7 +27,7 @@ export function getOrCreateClientHash(): string | undefined {
     window.localStorage.setItem(STORAGE_KEY, id);
     return id;
   } catch {
-    // Storage disabled/unavailable; fall back to unattributed logging.
+    // ストレージが無効 / 利用不可のときは帰属なしのログにフォールバックする。
     return undefined;
   }
 }

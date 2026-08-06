@@ -12,7 +12,7 @@ func TestNormalizeQuery(t *testing.T) {
 		{"Gin Tonic", "gintonic"},
 		{"ジン・トニック", "じんとにっく"},
 		{"　モヒート　", "もひと"},
-		{"ＡＢＣ", "abc"}, // NFKC full-width latin
+		{"ＡＢＣ", "abc"}, // NFKC 全角ラテン文字
 		{"Whisky", "whisky"},
 
 		// カタカナ → ひらがな畳み込み（表記ゆれの吸収）

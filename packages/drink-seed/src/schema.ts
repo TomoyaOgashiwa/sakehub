@@ -1,6 +1,7 @@
 /**
- * Mirrors drinks.category CHECK constraint (supabase/migrations/20260515210611_create_drinks.sql)
- * and packages/types/src/drink.ts DRINK_CATEGORIES (excluding 'all').
+ * drinks.category の CHECK 制約
+ * （supabase/migrations/20260515210611_create_drinks.sql）および
+ * packages/types/src/drink.ts の DRINK_CATEGORIES（'all' を除く）と一致させる。
  */
 export const DRINK_CATEGORIES = [
   'beer',
@@ -46,5 +47,5 @@ export interface DrinkSeed {
 
 export const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
-/** Mirrors chk_drinks_aliases_length (migrations/20260806100000_add_drink_cocktail_aliases.sql). */
+/** chk_drinks_aliases_length（migrations/20260806100000_add_drink_cocktail_aliases.sql）と一致。 */
 export const MAX_ALIASES = 20;

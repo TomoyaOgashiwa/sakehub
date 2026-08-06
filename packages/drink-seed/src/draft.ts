@@ -1,25 +1,25 @@
 /**
- * Offline LLM draft generator for drink data files.
+ * drinks データファイル向けのオフライン LLM 下書き生成。
  *
- * This is a **development tool**, not part of the production runtime.
- * AGENTS.md's "LLM calls go through the Go API" rule applies to the product;
- * this script is intentionally opt-in and never runs during `supabase db reset`.
+ * これは **開発ツール** であり、本番ランタイムの一部ではない。
+ * AGENTS.md の「LLM 呼び出しは Go API 経由」はプロダクト向けの規約で、
+ * 本スクリプトは意図的にオプトインであり `supabase db reset` では動かない。
  *
- * IMPORTANT — restricted fields:
- * LLMs confidently fabricate facts about sake/whisky (ABV, brewery/distillery,
- * origin prefecture, aging years). This script therefore only asks the model
- * for identity/searchability fields (name, nameEn, category, slug, aliases)
- * and always leaves abv / manufacturer / originCountry / description as null.
- * A human must fill those in from a primary source (official product page,
- * label, etc.) before the file moves from data/drafts/ to data/drinks/.
+ * 重要 — 生成フィールドの制限:
+ * LLM は日本酒・ウイスキーの事実（ABV、蔵元・蒸留所、産地、熟成年数）を
+ * 自信満々に捏造しやすい。そのため本スクリプトは識別・検索性に関わる
+ * フィールド（name, nameEn, category, slug, aliases）だけをモデルに依頼し、
+ * abv / manufacturer / originCountry / description は常に null のままにする。
+ * data/drafts/ から data/drinks/ へ移す前に、人が一次ソース（公式商品ページ、
+ * ラベル等）からこれらを埋めること。
  *
- * Usage:
+ * 使い方:
  *   OPENAI_API_KEY=... pnpm --filter @sakehub/drink-seed draft
  *
- * Reads data/pending.txt (one drink name per line, "Name|slug" optional,
- * lines starting with "#" ignored — see export-demand.ts), writes drafts to
- * data/drafts/*.json in batches of 10. Move approved + fact-checked files to
- * data/drinks/ after human review, then validate + build.
+ * data/pending.txt を読む（1行1ドリンク名。"Name|slug" 可。`#` 始まりは無視。
+ * 詳細は export-demand.ts）。10件バッチで data/drafts/*.json に書き出す。
+ * 人手レビューと事実確認のあと、承認済みファイルを data/drinks/ へ移し、
+ * validate → build する。
  */
 
 import { mkdir, readFile, writeFile } from 'node:fs/promises';

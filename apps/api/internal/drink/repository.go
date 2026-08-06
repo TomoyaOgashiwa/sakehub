@@ -93,9 +93,9 @@ func (r *repository) List(ctx context.Context, params ListParams) ([]Drink, int,
 	if params.Query != "" {
 		argIdx++
 		ph := fmt.Sprintf("$%d", argIdx)
-		// FTS (simple) is weak on unsegmented CJK; OR with strpos enables Japanese name substring matches.
-		// aliases (かな/ローマ字表記の別名候補) is checked the same way so e.g. "だっさい"
-		// matches a drink registered under the kanji name "獺祭".
+		// FTS (simple) は分かち書きされない CJK に弱いため、strpos で日本語名の部分一致も OR する。
+		// aliases（かな/ローマ字表記の別名候補）も同様にチェックし、例: 「だっさい」で
+		// 漢字名「獺祭」として登録されたドリンクにヒットさせる。
 		match := fmt.Sprintf(`(
 (search_vector @@ plainto_tsquery('simple', %s))
 OR strpos(name, %s) > 0

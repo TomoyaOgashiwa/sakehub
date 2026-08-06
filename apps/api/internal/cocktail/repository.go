@@ -84,8 +84,8 @@ func (r *repository) ListCocktails(ctx context.Context, params ListParams) ([]Co
 	if params.Query != "" {
 		argIdx++
 		ph := fmt.Sprintf("$%d", argIdx)
-		// FTS (simple) is weak on unsegmented CJK; OR with strpos for JP names.
-		// aliases (かな/ローマ字表記の別名候補) も同様にチェックし、表記ゆれで
+		// FTS (simple) は分かち書きされない CJK に弱いため、strpos で日本語名の部分一致も OR する。
+		// aliases（かな/ローマ字表記の別名候補）も同様にチェックし、表記ゆれで
 		// 引けない「登録済みだが未ヒット」なゼロヒットを減らす（drinks と同パターン）。
 		match := fmt.Sprintf(`(
 (c.search_vector @@ plainto_tsquery('simple', %s))

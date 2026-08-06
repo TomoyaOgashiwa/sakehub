@@ -1,4 +1,4 @@
-/** Escape a string as a PostgreSQL single-quoted literal (apostrophes doubled). */
+/** 文字列を PostgreSQL のシングルクォートリテラルとしてエスケープする（' は二重化）。 */
 export function quoteLiteral(value: string): string {
   return `'${value.replace(/'/g, "''")}'`;
 }
@@ -16,7 +16,7 @@ export function quoteNullableNumber(value: number | null | undefined): string {
   return String(value);
 }
 
-/** Render a string array as a PostgreSQL `ARRAY[...]::TEXT[]` literal. */
+/** 文字列配列を PostgreSQL の `ARRAY[...]::TEXT[]` リテラルとして出力する。 */
 export function quoteTextArrayLiteral(values: string[]): string {
   if (values.length === 0) return "'{}'::TEXT[]";
   return `ARRAY[${values.map(quoteLiteral).join(', ')}]::TEXT[]`;

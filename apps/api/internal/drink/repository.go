@@ -160,6 +160,9 @@ OR EXISTS (SELECT 1 FROM unnest(aliases) AS alias WHERE strpos(lower(alias), low
 	if err := rows.Err(); err != nil {
 		return nil, 0, err
 	}
+	if drinks == nil {
+		drinks = []Drink{}
+	}
 
 	return drinks, total, nil
 }

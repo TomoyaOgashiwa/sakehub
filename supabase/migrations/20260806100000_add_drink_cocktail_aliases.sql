@@ -11,7 +11,19 @@
 --              search_vector は GENERATED ALWAYS カラムのため生成式を直接
 --              ALTER できない。GIN インデックス → カラムの順に一度 DROP し、
 --              aliases を合流させた生成式で再作成する。
+--
+--              array_to_string は STABLE のため GENERATED 式では使えない。
+--              text[] → text の結合は入力だけで決まるので IMMUTABLE ラッパーを置く。
 -- =============================================================================
+
+CREATE OR REPLACE FUNCTION array_to_string_immutable(arg text[], separator text)
+RETURNS text
+LANGUAGE sql
+IMMUTABLE
+PARALLEL SAFE
+AS $$
+  SELECT array_to_string(arg, separator);
+$$;
 
 -- ---------------------------------------------------------------------------
 -- 1. drinks.aliases
@@ -32,7 +44,7 @@ ALTER TABLE drinks ADD COLUMN search_vector tsvector
   GENERATED ALWAYS AS (
     setweight(to_tsvector('simple', coalesce(name, '')), 'A') ||
     setweight(to_tsvector('simple', coalesce(name_en, '')), 'A') ||
-    setweight(to_tsvector('simple', array_to_string(aliases, ' ')), 'A') ||
+    setweight(to_tsvector('simple', array_to_string_immutable(aliases, ' ')), 'A') ||
     setweight(to_tsvector('simple', coalesce(manufacturer, '')), 'B') ||
     setweight(to_tsvector('simple', coalesce(description, '')), 'C')
   ) STORED;
@@ -54,7 +66,7 @@ ALTER TABLE cocktails ADD COLUMN search_vector tsvector
   GENERATED ALWAYS AS (
     setweight(to_tsvector('simple', coalesce(name, '')), 'A') ||
     setweight(to_tsvector('simple', coalesce(name_en, '')), 'A') ||
-    setweight(to_tsvector('simple', array_to_string(aliases, ' ')), 'A') ||
+    setweight(to_tsvector('simple', array_to_string_immutable(aliases, ' ')), 'A') ||
     setweight(to_tsvector('simple', coalesce(base_spirit, '')), 'B') ||
     setweight(to_tsvector('simple', coalesce(description, '')), 'C')
   ) STORED;

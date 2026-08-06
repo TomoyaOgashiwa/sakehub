@@ -81,7 +81,7 @@ export async function fetchDrinksServer(params: FetchDrinksParams = {}): Promise
   const res = await serverFetch<ApiDrinkListResponse>('/api/drinks', { params: queryParams });
 
   return {
-    drinks: res.data.map(toDrink),
+    drinks: (res.data ?? []).map(toDrink),
     total: res.total,
     limit: res.limit,
     offset: res.offset,

@@ -5,6 +5,7 @@ import { useEffect, useRef } from 'react';
 import type { SearchMissScope } from '@sakehub/types';
 
 import { logSearchMiss } from '@/application/search-misses-api';
+import { getOrCreateClientHash } from '@/utils/client-hash';
 
 interface SearchMissLoggerProps {
   scope: SearchMissScope;
@@ -33,6 +34,7 @@ export function SearchMissLogger({ scope, query, total }: SearchMissLoggerProps)
       scope,
       queryRaw: q,
       resultCount: 0,
+      clientHash: getOrCreateClientHash(),
     });
   }, [scope, query, total]);
 

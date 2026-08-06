@@ -2,6 +2,7 @@ package searchmiss
 
 import (
 	"errors"
+	"regexp"
 	"time"
 )
 
@@ -15,6 +16,11 @@ const (
 	MaxNormalizedLen = 40
 	MaxRawLen        = 200
 )
+
+// clientHashPattern は crypto.randomUUID() が生成する標準 UUID 形式のみを受理する。
+// 低エントロピーな自由形式の文字列を許すと、client_hash を回転させて
+// unique_searchers を水増しできてしまうため、形式を固定して真正性を担保する。
+var clientHashPattern = regexp.MustCompile(`^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$`)
 
 var validScopes = map[string]bool{
 	"cocktail":   true,

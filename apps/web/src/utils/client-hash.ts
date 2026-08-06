@@ -11,19 +11,21 @@ const STORAGE_KEY = 'sakehub:client-hash';
  * 端末指紋からも導出しない。
  *
  * `localStorage` が使えない場合（SSR・プライバシーモードなど）は `undefined`。
+ *
+ * 値は必ず `crypto.randomUUID()` で生成する（API 側も UUID 形式のみ受理）。
+ * `Date.now()` 等の低エントロピーなフォールバックは `client_hash` を安易に
+ * 量産・回転させやすく、`unique_searchers` を水増しする経路になるため使わない。
+ * `randomUUID` が使えない環境では帰属なしのログにフォールバックする。
  */
 export function getOrCreateClientHash(): string | undefined {
   if (typeof window === 'undefined') return undefined;
+  if (typeof crypto === 'undefined' || !('randomUUID' in crypto)) return undefined;
 
   try {
     const existing = window.localStorage.getItem(STORAGE_KEY);
     if (existing) return existing;
 
-    const id =
-      typeof crypto !== 'undefined' && 'randomUUID' in crypto
-        ? crypto.randomUUID()
-        : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
-
+    const id = crypto.randomUUID();
     window.localStorage.setItem(STORAGE_KEY, id);
     return id;
   } catch {

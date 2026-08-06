@@ -80,12 +80,23 @@ async function fetchDemand(client: Client, limit: number): Promise<DemandRow[]> 
   }));
 }
 
-/** drinks.name に対する pg_trgm similarity() による DB 側の重複候補チェック。 */
+/**
+ * drinks.name と aliases に対する pg_trgm similarity() による DB 側の
+ * 重複候補チェック。name だけを見ると、「だっさい」のようなかなクエリは
+ * 「獺祭」という漢字表記との類似度が低く出て、既に aliases に
+ * かな読みが登録済みでも「要確認」に落ちない。aliases の各要素との
+ * 類似度も取り、より高い方を採用する。
+ */
 async function fetchDbDuplicates(client: Client, query: string): Promise<DuplicateCandidate[]> {
   const { rows } = await client.query<{ slug: string; name: string; similarity: number }>(
-    `SELECT slug, name, similarity(name, $1) AS similarity
+    `SELECT slug, name,
+       GREATEST(
+         similarity(name, $1),
+         COALESCE((SELECT max(similarity(a, $1)) FROM unnest(aliases) a), 0)
+       ) AS similarity
      FROM drinks
      WHERE similarity(name, $1) > $2
+        OR EXISTS (SELECT 1 FROM unnest(aliases) a WHERE similarity(a, $1) > $2)
      ORDER BY similarity DESC
      LIMIT $3`,
     [query, SIMILARITY_THRESHOLD, MAX_DUPLICATE_CANDIDATES],

@@ -32,10 +32,5 @@
     "prettier-plugin-tailwindcss": "^0.8.1",
     "turbo": "^2.10.8"
   },
-  "packageManager": "pnpm@11.0.4",
-  "pnpm": {
-    "overrides": {
-      "lightningcss": "1.33.0"
-    }
-  }
+  "packageManager": "pnpm@11.0.4"
 }

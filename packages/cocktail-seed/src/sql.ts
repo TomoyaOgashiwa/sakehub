@@ -15,3 +15,9 @@ export function quoteNullableNumber(value: number | null | undefined): string {
   }
   return String(value);
 }
+
+/** Render a string array as a PostgreSQL `ARRAY[...]::TEXT[]` literal. */
+export function quoteTextArrayLiteral(values: string[]): string {
+  if (values.length === 0) return "'{}'::TEXT[]";
+  return `ARRAY[${values.map(quoteLiteral).join(', ')}]::TEXT[]`;
+}

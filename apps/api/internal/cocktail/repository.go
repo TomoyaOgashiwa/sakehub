@@ -85,13 +85,16 @@ func (r *repository) ListCocktails(ctx context.Context, params ListParams) ([]Co
 		argIdx++
 		ph := fmt.Sprintf("$%d", argIdx)
 		// FTS (simple) is weak on unsegmented CJK; OR with strpos for JP names.
+		// aliases (かな/ローマ字表記の別名候補) も同様にチェックし、表記ゆれで
+		// 引けない「登録済みだが未ヒット」なゼロヒットを減らす（drinks と同パターン）。
 		match := fmt.Sprintf(`(
 (c.search_vector @@ plainto_tsquery('simple', %s))
 OR strpos(c.name, %s) > 0
 OR strpos(lower(COALESCE(c.name_en, '')), lower(%s)) > 0
 OR strpos(lower(COALESCE(c.base_spirit, '')), lower(%s)) > 0
 OR strpos(lower(c.description), lower(%s)) > 0
-)`, ph, ph, ph, ph, ph)
+OR EXISTS (SELECT 1 FROM unnest(c.aliases) AS alias WHERE strpos(lower(alias), lower(%s)) > 0)
+)`, ph, ph, ph, ph, ph, ph)
 		conditions = append(conditions, match)
 		args = append(args, params.Query)
 	}

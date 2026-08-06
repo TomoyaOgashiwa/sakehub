@@ -1,9 +1,15 @@
 -- =============================================================================
 -- Seed: drinks マスタ（ローカル / 本番 共通）
 -- 公式カクテルは seeds/official_cocktails.sql。デモ評価・個別レシピは local_demo.sql。
+--
+-- aliases: かな読み・ローマ字表記などの別名候補。「獺祭」で登録されていても
+-- 「だっさい」で検索するとヒットしない、といった表記ゆれを吸収するために
+-- search_vector（migrations/20260806100000_add_drink_cocktail_aliases.sql）に
+-- 合流させている。新規追加時は packages/drink-seed（Phase 3）のパイプラインで
+-- 付与する想定だが、既存 seed には手動で最低限のひらがな読みを付与する。
 -- =============================================================================
 
-INSERT INTO drinks (slug, name, name_en, category, subcategory, description, image_url, abv, origin_country, manufacturer) VALUES
+INSERT INTO drinks (slug, name, name_en, category, subcategory, description, image_url, abv, origin_country, manufacturer, aliases) VALUES
 
 -- -------------------------------------------------------------------------
 -- Beer (5件)
@@ -18,7 +24,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   5.0,
   'Japan',
-  'アサヒビール'
+  'アサヒビール',
+  ARRAY['あさひすーぱーどらい', 'あさひびーる']
 ),
 (
   'sapporo-premium',
@@ -30,7 +37,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   5.0,
   'Japan',
-  'サッポロビール'
+  'サッポロビール',
+  ARRAY['さっぽろくろらべる', 'くろらべる']
 ),
 (
   'yebisu-premium',
@@ -42,7 +50,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   5.0,
   'Japan',
-  'サッポロビール'
+  'サッポロビール',
+  ARRAY['えびすびーる', 'えびす']
 ),
 (
   'guinness-draught',
@@ -54,7 +63,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   4.2,
   'Ireland',
-  'Guinness'
+  'Guinness',
+  ARRAY['ぎねす', 'ぎねすどらふと']
 ),
 (
   'brewdog-punk-ipa',
@@ -66,7 +76,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   5.4,
   'United Kingdom',
-  'BrewDog'
+  'BrewDog',
+  ARRAY['ぶりゅーどっぐ', 'ぱんくいぱ']
 ),
 
 -- -------------------------------------------------------------------------
@@ -82,7 +93,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   14.5,
   'United States',
-  'Opus One Winery'
+  'Opus One Winery',
+  ARRAY['おーぱすわん']
 ),
 (
   'chateau-margaux-2015',
@@ -94,7 +106,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   13.5,
   'France',
-  'Chateau Margaux'
+  'Chateau Margaux',
+  ARRAY['しゃとーまるごー']
 ),
 (
   'cloudy-bay-sauvignon-blanc',
@@ -106,7 +119,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   13.0,
   'New Zealand',
-  'Cloudy Bay'
+  'Cloudy Bay',
+  ARRAY['くらうでぃーべい']
 ),
 (
   'grace-koshu',
@@ -118,7 +132,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   12.0,
   'Japan',
-  '中央葡萄酒'
+  '中央葡萄酒',
+  ARRAY['ぐれいすこうしゅう']
 ),
 
 -- -------------------------------------------------------------------------
@@ -134,7 +149,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   43.0,
   'Japan',
-  'サントリー'
+  'サントリー',
+  ARRAY['やまざき', 'やまざき12ねん']
 ),
 (
   'hibiki-harmony',
@@ -146,7 +162,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   43.0,
   'Japan',
-  'サントリー'
+  'サントリー',
+  ARRAY['ひびき', 'ひびきはーもにー']
 ),
 (
   'macallan-12-sherry-oak',
@@ -158,7 +175,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   40.0,
   'United Kingdom',
-  'The Macallan'
+  'The Macallan',
+  ARRAY['まっからん']
 ),
 (
   'makers-mark',
@@ -170,7 +188,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   45.0,
   'United States',
-  'Maker''s Mark Distillery'
+  'Maker''s Mark Distillery',
+  ARRAY['めーかーずまーく']
 ),
 (
   'jameson',
@@ -182,7 +201,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   40.0,
   'Ireland',
-  'Jameson'
+  'Jameson',
+  ARRAY['じぇむそん']
 ),
 
 -- -------------------------------------------------------------------------
@@ -198,7 +218,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   16.0,
   'Japan',
-  '旭酒造'
+  '旭酒造',
+  ARRAY['だっさい', 'だっさい23', 'だっさいにわりさんぶ']
 ),
 (
   'kubota-manju',
@@ -210,7 +231,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   15.5,
   'Japan',
-  '朝日酒造'
+  '朝日酒造',
+  ARRAY['くぼた', 'くぼたまんじゅ']
 ),
 (
   'juyondai-honmaru',
@@ -222,7 +244,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   15.0,
   'Japan',
-  '高木酒造'
+  '高木酒造',
+  ARRAY['じゅうよんだい', 'じゅうよんだいほんまる']
 ),
 (
   'hakkaisan-junmai-daiginjo',
@@ -234,7 +257,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   15.5,
   'Japan',
-  '八海醸造'
+  '八海醸造',
+  ARRAY['はっかいさん']
 ),
 (
   'kokuryu-ryu',
@@ -246,7 +270,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   15.0,
   'Japan',
-  '黒龍酒造'
+  '黒龍酒造',
+  ARRAY['こくりゅう']
 ),
 
 -- -------------------------------------------------------------------------
@@ -262,7 +287,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   25.0,
   'Japan',
-  '三和酒類'
+  '三和酒類',
+  ARRAY['いいちこ', 'ふらすこぼとる']
 ),
 (
   'mori-izo',
@@ -274,7 +300,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   25.0,
   'Japan',
-  '森伊蔵酒造'
+  '森伊蔵酒造',
+  ARRAY['もりいぞう']
 ),
 
 -- -------------------------------------------------------------------------
@@ -290,7 +317,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   40.0,
   'France',
-  'Grey Goose'
+  'Grey Goose',
+  ARRAY['ぐれいぐーす']
 ),
 
 -- -------------------------------------------------------------------------
@@ -306,7 +334,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   41.4,
   'United Kingdom',
-  'Hendrick''s'
+  'Hendrick''s',
+  ARRAY['へんどりっくす']
 ),
 (
   'roku-gin',
@@ -318,7 +347,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   47.0,
   'Japan',
-  'サントリー'
+  'サントリー',
+  ARRAY['ろくじん', '六']
 ),
 
 -- -------------------------------------------------------------------------
@@ -334,7 +364,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   40.0,
   'Guatemala',
-  'Ron Zacapa'
+  'Ron Zacapa',
+  ARRAY['ろんさかぱ']
 ),
 
 -- -------------------------------------------------------------------------
@@ -350,7 +381,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   38.0,
   'Mexico',
-  'Don Julio'
+  'Don Julio',
+  ARRAY['どんふりお']
 ),
 
 -- -------------------------------------------------------------------------
@@ -366,7 +398,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   40.0,
   'France',
-  'Hennessy'
+  'Hennessy',
+  ARRAY['へねしー']
 ),
 
 -- -------------------------------------------------------------------------
@@ -382,7 +415,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   17.0,
   'Ireland',
-  'Baileys'
+  'Baileys',
+  ARRAY['べいりーず']
 ),
 (
   'kahlua',
@@ -394,7 +428,8 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   20.0,
   'Mexico',
-  'Kahlua'
+  'Kahlua',
+  ARRAY['かるーあ']
 ),
 
 -- -------------------------------------------------------------------------
@@ -410,5 +445,6 @@ INSERT INTO drinks (slug, name, name_en, category, subcategory, description, ima
   NULL,
   4.5,
   'Denmark',
-  'Carlsberg'
+  'Carlsberg',
+  ARRAY['さまーすびー']
 );

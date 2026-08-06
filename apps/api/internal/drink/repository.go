@@ -94,13 +94,16 @@ func (r *repository) List(ctx context.Context, params ListParams) ([]Drink, int,
 		argIdx++
 		ph := fmt.Sprintf("$%d", argIdx)
 		// FTS (simple) is weak on unsegmented CJK; OR with strpos enables Japanese name substring matches.
+		// aliases (かな/ローマ字表記の別名候補) is checked the same way so e.g. "だっさい"
+		// matches a drink registered under the kanji name "獺祭".
 		match := fmt.Sprintf(`(
 (search_vector @@ plainto_tsquery('simple', %s))
 OR strpos(name, %s) > 0
 OR strpos(lower(COALESCE(name_en, '')), lower(%s)) > 0
 OR strpos(lower(COALESCE(manufacturer, '')), lower(%s)) > 0
 OR strpos(lower(description), lower(%s)) > 0
-)`, ph, ph, ph, ph, ph)
+OR EXISTS (SELECT 1 FROM unnest(aliases) AS alias WHERE strpos(lower(alias), lower(%s)) > 0)
+)`, ph, ph, ph, ph, ph, ph)
 		conditions = append(conditions, match)
 		args = append(args, params.Query)
 	}

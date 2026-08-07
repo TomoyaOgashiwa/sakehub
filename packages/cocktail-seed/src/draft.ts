@@ -17,6 +17,8 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { slugifyAsciiOrFallback } from '@sakehub/seed-utils';
+
 import { INGREDIENT_UNITS, SLUG_PATTERN, type CocktailSeed } from './schema.ts';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -44,16 +46,6 @@ function parsePending(text: string): PendingItem[] {
         slugHint: slugPart && SLUG_PATTERN.test(slugPart) ? slugPart : null,
       };
     });
-}
-
-function slugify(name: string): string {
-  return name
-    .normalize('NFKD')
-    .replace(/[^\u0020-\u007E]/g, '')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .slice(0, 80);
 }
 
 async function sleep(ms: number): Promise<void> {
@@ -148,7 +140,7 @@ ${items.map((it, i) => `${i + 1}. ${it.name}${it.slugHint ? ` (slug hint: ${it.s
     return list.map((c) => ({
       ...c,
       id: null,
-      slug: c.slug && SLUG_PATTERN.test(c.slug) ? c.slug : slugify(c.name),
+      slug: c.slug && SLUG_PATTERN.test(c.slug) ? c.slug : slugifyAsciiOrFallback(c.name, 'cocktail'),
     }));
   }
 

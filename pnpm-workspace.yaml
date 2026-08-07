@@ -7,3 +7,6 @@ allowBuilds:
   msw: false
   sharp: false
   unrs-resolver: false
+overrides:
+  lightningcss: 1.33.0
+  expo-constants: 56.0.23

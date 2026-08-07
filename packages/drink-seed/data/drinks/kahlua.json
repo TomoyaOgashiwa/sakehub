@@ -1,0 +1,13 @@
+{
+  "slug": "kahlua",
+  "name": "カルーア コーヒーリキュール",
+  "nameEn": "Kahlua",
+  "category": "liqueur",
+  "subcategory": "Coffee",
+  "description": "アラビカ種コーヒー豆とサトウキビスピリッツをベースにしたリキュール。カクテルのベースとしても絶大な人気。",
+  "imageUrl": null,
+  "abv": 20.0,
+  "originCountry": "Mexico",
+  "manufacturer": "Kahlua",
+  "aliases": ["かるーあ"]
+}

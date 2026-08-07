@@ -2,8 +2,11 @@ import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { assertAliases, type ValidationIssue } from '@sakehub/seed-utils';
+
 import {
   INGREDIENT_UNITS,
+  MAX_ALIASES,
   SLUG_PATTERN,
   type CocktailSeed,
   type IngredientUnit,
@@ -16,12 +19,6 @@ const UUID_PATTERN =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 const UNIT_SET = new Set<string>(INGREDIENT_UNITS);
-
-interface ValidationIssue {
-  file: string;
-  field: string;
-  message: string;
-}
 
 function isRecord(v: unknown): v is Record<string, unknown> {
   return typeof v === 'object' && v !== null && !Array.isArray(v);
@@ -43,6 +40,15 @@ function validateCocktail(file: string, raw: unknown, issues: ValidationIssue[])
       file,
       field: 'slug',
       message: 'must match /^[a-z0-9]+(?:-[a-z0-9]+)*$/',
+    });
+  } else if (`${slug}.json` !== file) {
+    // build-seed.ts UPSERTs by the JSON's slug, so a filename/slug mismatch
+    // (e.g. old-fashioned.json containing "slug": "negroni") would silently
+    // write to a different row than the one a reviewer thinks they're editing.
+    issues.push({
+      file,
+      field: 'slug',
+      message: `must match filename (expected ${slug}.json, got ${file})`,
     });
   }
 
@@ -76,9 +82,7 @@ function validateCocktail(file: string, raw: unknown, issues: ValidationIssue[])
     issues.push({ file, field: 'originCountry', message: 'must be string or null' });
   }
 
-  if (!Array.isArray(raw.aliases) || !raw.aliases.every((a) => typeof a === 'string')) {
-    issues.push({ file, field: 'aliases', message: 'must be an array of strings' });
-  }
+  assertAliases(file, raw.aliases, MAX_ALIASES, issues);
 
   if (!isRecord(raw.officialRecipe)) {
     issues.push({ file, field: 'officialRecipe', message: 'must be an object' });

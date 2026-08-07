@@ -1,0 +1,4 @@
+# 1行に1ドリンク。任意で slug ヒント: 日本語名|kebab-slug
+# 通常は search_misses（scope=drink）から "pnpm seed:drinks:demand" で生成する。
+# 下書き後、abv / manufacturer / originCountry / description を人手で事実確認して埋め、
+# data/drafts/*.json を data/drinks/ へ移動する。

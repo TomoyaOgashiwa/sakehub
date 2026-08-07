@@ -1,0 +1,13 @@
+{
+  "slug": "makers-mark",
+  "name": "メーカーズマーク",
+  "nameEn": "Maker's Mark",
+  "category": "whisky",
+  "subcategory": "Bourbon",
+  "description": "冬小麦を使用したまろやかなバーボン。キャラメルとバニラの甘い香りに、口当たりの柔らかさが際立つ。",
+  "imageUrl": null,
+  "abv": 45.0,
+  "originCountry": "United States",
+  "manufacturer": "Maker's Mark Distillery",
+  "aliases": ["めーかーずまーく"]
+}

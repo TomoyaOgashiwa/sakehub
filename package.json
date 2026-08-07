@@ -8,12 +8,17 @@
     "lint": "turbo lint",
     "type-check": "turbo type-check",
     "format": "prettier --write .",
+    "check:normalize-sync": "pnpm --filter @sakehub/drink-seed test",
     "supabase:seed": "supabase db query --local --file supabase/seeds/official_cocktails.sql && supabase db query --local --file supabase/seeds/drinks.sql && supabase db query --local --file supabase/seeds/local_demo.sql",
     "supabase:seed:shared": "supabase db query --local --file supabase/seeds/official_cocktails.sql && supabase db query --local --file supabase/seeds/drinks.sql",
     "supabase:seed:prod": "supabase db query --linked --file supabase/seeds/official_cocktails.sql && supabase db query --linked --file supabase/seeds/drinks.sql",
     "seed:cocktails:validate": "pnpm --filter @sakehub/cocktail-seed validate",
     "seed:cocktails:build": "pnpm --filter @sakehub/cocktail-seed build",
-    "seed:cocktails:draft": "pnpm --filter @sakehub/cocktail-seed draft"
+    "seed:cocktails:draft": "pnpm --filter @sakehub/cocktail-seed draft",
+    "seed:drinks:demand": "pnpm --filter @sakehub/drink-seed demand",
+    "seed:drinks:validate": "pnpm --filter @sakehub/drink-seed validate",
+    "seed:drinks:build": "pnpm --filter @sakehub/drink-seed build",
+    "seed:drinks:draft": "pnpm --filter @sakehub/drink-seed draft"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
@@ -27,10 +32,5 @@
     "prettier-plugin-tailwindcss": "^0.8.1",
     "turbo": "^2.10.8"
   },
-  "packageManager": "pnpm@11.0.4",
-  "pnpm": {
-    "overrides": {
-      "lightningcss": "1.33.0"
-    }
-  }
+  "packageManager": "pnpm@11.0.4"
 }

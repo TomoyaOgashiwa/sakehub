@@ -1,0 +1,13 @@
+{
+  "slug": "yebisu-premium",
+  "name": "ヱビスビール",
+  "nameEn": "Yebisu Beer",
+  "category": "beer",
+  "subcategory": "Pilsner",
+  "description": "ドイツ「ビール純粋令」に則った麦芽100%の本格プレミアムビール。深いコクと豊かな香りが楽しめる。",
+  "imageUrl": null,
+  "abv": 5.0,
+  "originCountry": "Japan",
+  "manufacturer": "サッポロビール",
+  "aliases": ["えびすびーる", "えびす"]
+}

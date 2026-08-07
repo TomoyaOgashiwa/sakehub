@@ -53,7 +53,7 @@ func (s *Service) Create(ctx context.Context, input CreateInput, userID string) 
 	}
 	if input.ClientHash != nil {
 		h := strings.TrimSpace(*input.ClientHash)
-		if h != "" && utf8.RuneCountInString(h) <= 128 {
+		if clientHashPattern.MatchString(h) {
 			miss.ClientHash = &h
 		}
 	}

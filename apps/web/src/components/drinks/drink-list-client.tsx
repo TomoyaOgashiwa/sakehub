@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 import type { DrinkListResult } from '@/application/drinks-api';
 import { useDrinks } from '@/application/use-drinks';
+import { SearchMissLogger } from '@/components/catalog/search-miss-logger';
 
 import { CategoryFilter } from './category-filter';
 import { DrinkSearch } from './drink-search';
@@ -21,8 +22,11 @@ export function DrinkListClient({ fallbackData }: DrinkListClientProps) {
   const category = searchParams.get('category') ?? '';
   const q = searchParams.get('q') ?? '';
 
-  const { data, isLoading } = useDrinks({ category, q, limit: 20 }, fallbackData);
+  const { data, isLoading, isValidating } = useDrinks({ category, q, limit: 20 }, fallbackData);
   const result = data ?? fallbackData;
+  // keepPreviousData 中は旧クエリの total=0 が残り得るので、現キーの取得が
+  // 終わるまでミスログしない。
+  const missLogReady = !isLoading && !isValidating;
 
   return (
     <div className="space-y-6">
@@ -37,10 +41,20 @@ export function DrinkListClient({ fallbackData }: DrinkListClientProps) {
 
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <CategoryFilter />
-        <div className="w-full sm:max-w-xs">
+        <div className="w-full sm:max-w-md">
           <DrinkSearch />
         </div>
       </div>
+
+      {q && (
+        <SearchMissLogger
+          scope="drink"
+          query={q}
+          total={result.total}
+          filtersActive={category !== ''}
+          ready={missLogReady}
+        />
+      )}
 
       {isLoading ? <DrinkGridSkeleton /> : <DrinkGrid drinks={result.drinks} />}
 

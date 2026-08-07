@@ -1,0 +1,24 @@
+{
+  "name": "@sakehub/drink-seed",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "node --experimental-strip-types --disable-warning=ExperimentalWarning ./src/normalize.check.ts",
+    "validate": "node --experimental-strip-types --disable-warning=ExperimentalWarning ./src/validate.ts",
+    "build": "node --experimental-strip-types --disable-warning=ExperimentalWarning ./src/build-seed.ts",
+    "draft": "node --experimental-strip-types --disable-warning=ExperimentalWarning ./src/draft.ts",
+    "demand": "node --experimental-strip-types --disable-warning=ExperimentalWarning ./src/export-demand.ts"
+  },
+  "dependencies": {
+    "@sakehub/seed-utils": "workspace:*",
+    "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.2",
+    "@types/pg": "^8.15.6",
+    "typescript": "^6.0.3"
+  }
+}

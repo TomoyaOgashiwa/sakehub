@@ -10,6 +10,9 @@
     "build": "node --experimental-strip-types --disable-warning=ExperimentalWarning ./src/build-seed.ts",
     "draft": "node --experimental-strip-types --disable-warning=ExperimentalWarning ./src/draft.ts"
   },
+  "dependencies": {
+    "@sakehub/seed-utils": "workspace:*"
+  },
   "devDependencies": {
     "@types/node": "^26.1.2",
     "typescript": "^6.0.3"

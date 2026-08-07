@@ -176,10 +176,15 @@ sakehub/
    - サーバー状態: SWR（Web/Mobile 共通）。`useEffect` での fetch は基本書かない。
    - クライアント状態: React Hooks（`useState`/`useReducer`）が第一選択。グローバル状態が真に必要なときだけ Context を導入。
 5. **型の共有**: フロントとバックで共通の DTO は `packages/types` に置く。Supabase 由来の型は `supabase gen types typescript` で生成し、`apps/web/src/types/database.ts` などに配置（未生成なら都度作成）。
+6. **`drinks` / `cocktails` マスタの粒度ルール**（カタログ拡充時に必ず参照）:
+   - **1レコード = 商品（SKU / expression）レベル**。例: 「獺祭 純米大吟醸45」「山崎12年」はそれぞれ別レコード。
+   - **年数・特定名称・度数（ABV）が異なれば別レコード**にする（例: 「山崎12年」と「山崎NAS」は別）。
+   - **限定ラベル・ロット違い・パッケージ違いは同一レコードに寄せる**（別レコード化しない）。
+   - この粒度が曖昧なまま新規登録・重複判定・AI下書き生成を行うと、評価（`ratings`）が分散/混在し、マスタが継続的に壊れる。判断に迷う場合は既存 seed（`supabase/seeds/drinks.sql` の `dassai-23`, `yamazaki-12` 等）を基準にする。
 
 ---
 
-## 7. Do / Don't
+## 8. Do / Don't
 
 ✅ **Do**
 
@@ -199,7 +204,7 @@ sakehub/
 
 ---
 
-## 8. ローカル URL チートシート
+## 9. ローカル URL チートシート
 
 | サービス        | URL                                                 |
 | --------------- | --------------------------------------------------- |
@@ -212,7 +217,7 @@ sakehub/
 
 ---
 
-## 9. 参考リンク（最新情報の一次ソース）
+## 10. 参考リンク（最新情報の一次ソース）
 
 - Next.js 16 リリースノート: <https://nextjs.org/blog/next-16>
 - React 19: <https://react.dev/blog/2024/12/05/react-19>
@@ -226,7 +231,7 @@ sakehub/
 
 ---
 
-## 10. 各 app へのポインタ
+## 11. 各 app へのポインタ
 
 - 🌐 Web: [`apps/web/AGENTS.md`](apps/web/AGENTS.md)
 - 📱 Mobile: [`apps/mobile/AGENTS.md`](apps/mobile/AGENTS.md)

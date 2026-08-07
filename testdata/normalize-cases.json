@@ -1,0 +1,16 @@
+{
+  "$comment": "検索クエリ正規化の契約テスト用ケース。apps/api/internal/searchmiss/normalize.go の NormalizeQuery と packages/drink-seed/src/normalize.ts の normalizeJa は意図的な二重実装（ゼロランタイム依存方針のため）。同期ずれを防ぐため、両方の実装をこの共有フィクスチャに対してテストする。ケースを追加・変更したら両方のテスト（go test ./internal/searchmiss/..., pnpm --filter @sakehub/drink-seed test）を実行して確認すること。",
+  "cases": [
+    { "in": "Gin Tonic", "want": "gintonic" },
+    { "in": "ジン・トニック", "want": "じんとにっく" },
+    { "in": "　モヒート　", "want": "もひと" },
+    { "in": "ＡＢＣ", "want": "abc" },
+    { "in": "Whisky", "want": "whisky" },
+    { "in": "ダッサイ", "want": "だっさい" },
+    { "in": "だっさい", "want": "だっさい" },
+    { "in": "獺祭", "want": "獺祭" },
+    { "in": "ウイスキー", "want": "ういすき" },
+    { "in": "ｳｲｽｷｰ", "want": "ういすき" },
+    { "in": "ヴィンテージ", "want": "ゔぃんてじ" }
+  ]
+}

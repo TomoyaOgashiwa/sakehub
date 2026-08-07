@@ -41,6 +41,8 @@ export default defineConfig([
       'packages/types/**/*.{ts,tsx}',
       'packages/utils/**/*.{ts,tsx}',
       'packages/cocktail-seed/**/*.{ts,tsx}',
+      'packages/drink-seed/**/*.{ts,tsx}',
+      'packages/seed-utils/**/*.{ts,tsx}',
     ],
     languageOptions: {
       parser: tsParser,

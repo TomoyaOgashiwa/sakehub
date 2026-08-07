@@ -41,7 +41,7 @@ export interface CocktailSeed {
   baseSpirit: string | null;
   abv: number | null;
   originCountry: string | null;
-  /** Reserved for future search_vector; not emitted to SQL yet. */
+  /** かな読み・ローマ字表記などの別名候補。cocktails.search_vector に合流する。 */
   aliases: string[];
   officialRecipe: OfficialRecipeSeed;
 }
@@ -51,3 +51,6 @@ export const OFFICIAL_DISPLAY_NAME = 'SakeHub公式';
 
 /** slug: lowercase kebab-case, 1–80 chars. */
 export const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
+/** Mirrors chk_cocktails_aliases_length (migrations/20260806100000_add_drink_cocktail_aliases.sql). */
+export const MAX_ALIASES = 20;

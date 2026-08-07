@@ -4,6 +4,7 @@
 
 Report only **merge-blocking or clearly harmful issues** in the PR diff.
 
+- GitHub review comments: **Japanese**. Severity tags: English `High` / `Medium` / `Low` only.
 - Prefer false negatives over false positives. When unsure, do **not** report.
 - Do not discuss taste, micro-refactors, or re-litigate existing style.
 - Style guides and coding conventions live elsewhere; this file is a **report filter**, not a style guide.
@@ -64,13 +65,15 @@ Report **only** when the finding matches High / Medium / Low above **and**:
 
 ## 5. Comment format
 
+**Language:** Write all GitHub PR review comments in **Japanese**. This policy file may stay in English; severity labels stay English (`High` / `Medium` / `Low`). Field labels below may stay English; the title and body text must be Japanese.
+
 Every finding **must** use:
 
 ```text
-[High|Medium|Low] <short title>
-Why it matters: <one sentence of real harm>
-Evidence: <path and locus in the diff>
-Suggested fix: <minimal fix, 1–3 lines>
+[High|Medium|Low] <短いタイトル（日本語）>
+Why it matters: <実害を1文（日本語）>
+Evidence: <差分上のファイルパスと該当箇所>
+Suggested fix: <最小修正を1〜3行（日本語で説明可。コードはそのまま）>
 ```
 
 Rules:
@@ -78,7 +81,7 @@ Rules:
 - Priority label is exactly `High`, `Medium`, or `Low`.
 - Deduplicate by root cause.
 - No evidence in the diff → no comment.
-- If there are no High or Medium findings: reply with only `No actionable findings`.
+- If there are no High or Medium findings: reply with only `対応が必要な指摘はありません` (or `No actionable findings`).
 - Do not pad with Low items to fill a quota.
 
 ## 6. Project-specific assumptions

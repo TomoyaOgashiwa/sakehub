@@ -16,7 +16,7 @@ todos:
     status: completed
   - id: verify
     content: pnpm -v / lint / type-check（必要なら build）で動作確認
-    status: in_progress
+    status: completed
 isProject: false
 ---
 

@@ -12,9 +12,12 @@
 import { access, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
+import { loadRootEnv } from './load-env.ts';
 import { STAGING_DIR, stagingFile } from './paths.ts';
 import { loadPriority } from './priority.ts';
 import { buildPrompt } from './prompts.ts';
+
+loadRootEnv();
 
 const MODEL = process.env.OPENAI_IMAGE_MODEL ?? 'gpt-image-1.5';
 const QUALITY = 'medium' as const;

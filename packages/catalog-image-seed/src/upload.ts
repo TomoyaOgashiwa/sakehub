@@ -13,6 +13,7 @@ import path from 'node:path';
 
 import { createClient } from '@supabase/supabase-js';
 
+import { loadRootEnv } from './load-env.ts';
 import {
   BUCKET,
   objectPath,
@@ -23,13 +24,15 @@ import {
 } from './paths.ts';
 import { loadPriority } from './priority.ts';
 
-function requireEnv(name: string): string {
-  const value = process.env[name];
-  if (!value) {
-    console.error(`${name} is required`);
-    process.exit(1);
+loadRootEnv();
+
+function requireEnv(name: string, aliases: string[] = []): string {
+  for (const key of [name, ...aliases]) {
+    const value = process.env[key];
+    if (value) return value;
   }
-  return value;
+  console.error(`${name} is required${aliases.length ? ` (or ${aliases.join(', ')})` : ''}`);
+  process.exit(1);
 }
 
 async function setImageUrl(kind: 'drink' | 'cocktail', slug: string, imageUrl: string): Promise<void> {
@@ -60,7 +63,8 @@ async function setImageUrl(kind: 'drink' | 'cocktail', slug: string, imageUrl: s
 }
 
 async function main(): Promise<void> {
-  const supabaseUrl = requireEnv('SUPABASE_URL');
+  // Public URL base should be the hosted project URL (not localhost) for prod seed imageUrl.
+  const supabaseUrl = requireEnv('SUPABASE_URL', ['NEXT_PUBLIC_SUPABASE_URL']);
   const serviceRoleKey = requireEnv('SUPABASE_SERVICE_ROLE_KEY');
 
   const supabase = createClient(supabaseUrl, serviceRoleKey, {

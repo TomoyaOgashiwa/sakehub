@@ -181,3 +181,100 @@ export const DRINK_CATEGORIES = [
 ] as const;
 
 export type DrinkCategory = (typeof DRINK_CATEGORIES)[number];
+
+// ---------------------------------------------------------------------------
+// manufacturer quality (drink-seed validate / migration scripts)
+// ---------------------------------------------------------------------------
+
+const MANUFACTURER_CATEGORY_TOKENS = new Set([
+  'Gin',
+  'Vodka',
+  'Rum',
+  'Beer',
+  'Wine',
+  'Whisky',
+  'Whiskey',
+  'Tequila',
+  'Brandy',
+  'Liqueur',
+  'Cider',
+  'Shochu',
+  'Sake',
+]);
+
+const MANUFACTURER_PRODUCT_WORDS = new Set([
+  'Original',
+  'Reserve',
+  'Classic',
+  'Premium',
+  'Single',
+  'Blended',
+  'Select',
+  'Special',
+  'Limited',
+]);
+
+/**
+ * Truncated / token manufacturers that must not land in production seed.
+ * `null` is allowed (unknown). Brand-as-name (e.g. Heineken) is allowed.
+ */
+export function assertManufacturerQuality(
+  file: string,
+  manufacturer: unknown,
+  issues: ValidationIssue[],
+  description?: unknown,
+): void {
+  if (typeof description === 'string' && /\bfrom null\b/.test(description)) {
+    issues.push({
+      file,
+      field: 'description',
+      message: 'must not embed literal "from null" (assemble description after manufacturer is known)',
+    });
+  }
+
+  if (manufacturer === null || manufacturer === undefined) return;
+
+  if (typeof manufacturer !== 'string') {
+    issues.push({ file, field: 'manufacturer', message: 'must be string or null' });
+    return;
+  }
+
+  const m = manufacturer.trim();
+  if (m === '') {
+    issues.push({
+      file,
+      field: 'manufacturer',
+      message: 'must not be empty string (use null if unknown)',
+    });
+    return;
+  }
+
+  if (MANUFACTURER_CATEGORY_TOKENS.has(m) || MANUFACTURER_PRODUCT_WORDS.has(m)) {
+    issues.push({
+      file,
+      field: 'manufacturer',
+      message: `looks like a category/product token ("${m}"), not a producer`,
+    });
+  }
+  if (/^\d+$/.test(m)) {
+    issues.push({
+      file,
+      field: 'manufacturer',
+      message: 'must not be digits-only',
+    });
+  }
+  if (/^[A-Za-z]{1,3}$/.test(m)) {
+    issues.push({
+      file,
+      field: 'manufacturer',
+      message: `Latin manufacturer is too short ("${m}")`,
+    });
+  }
+  if (/^[A-Z]{1,3}(?:\s+[A-Z]{1,3}){1,2}$/.test(m)) {
+    issues.push({
+      file,
+      field: 'manufacturer',
+      message: `looks like an initial-letter fragment ("${m}")`,
+    });
+  }
+}

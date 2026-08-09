@@ -1,9 +1,15 @@
 #!/usr/bin/env node
 /* global console */
 /**
- * Post-process drink JSON manufacturers that were inferred as truncated
- * product names (e.g. "Yamazaki 18", "Aberlour 12") into brand/distillery
- * names. Rewrites description when it embeds the old manufacturer.
+ * One-shot / migration helper: rewrite truncated manufacturers in
+ * `data/drinks/*.json` using a local brand map.
+ *
+ * Source of truth remains `data/drinks/*.json` (NOT data/batches).
+ * Ongoing quality enforcement is `pnpm seed:drinks:validate`
+ * (`assertManufacturerQuality` in `@sakehub/seed-utils`).
+ *
+ * Prefer fixing JSON directly for new catalog work; keep this script for
+ * bulk cleanup of legacy truncated values only.
  */
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';

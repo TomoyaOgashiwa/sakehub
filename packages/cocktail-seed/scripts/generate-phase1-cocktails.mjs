@@ -5,6 +5,8 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const COCKTAILS_DIR = path.join(ROOT, 'data', 'cocktails');
+/** Sole source of truth after scaffold: data/cocktails/*.json */
+const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 const TARGETS = {
   Gin: 30,
@@ -2267,7 +2269,14 @@ async function main() {
       continue;
     }
 
+    if (!SLUG_PATTERN.test(cocktailSeed.slug)) {
+      throw new Error(`invalid slug: ${cocktailSeed.slug}`);
+    }
     const outPath = path.join(COCKTAILS_DIR, `${cocktailSeed.slug}.json`);
+    if (path.dirname(path.resolve(outPath)) !== path.resolve(COCKTAILS_DIR)) {
+      throw new Error(`path escape for slug: ${cocktailSeed.slug}`);
+    }
+    // Scaffold only: never overwrite existing JSON (data/cocktails is canonical).
     await writeFile(outPath, `${JSON.stringify(cocktailSeed, null, 2)}\n`, 'utf8');
     existingSlugs.add(cocktailSeed.slug);
     counts.set(cocktailSeed.baseSpirit, current + 1);

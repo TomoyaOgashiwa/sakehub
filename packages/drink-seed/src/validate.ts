@@ -2,7 +2,11 @@ import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { assertAliases, type ValidationIssue } from '@sakehub/seed-utils';
+import {
+  assertAliases,
+  assertManufacturerQuality,
+  type ValidationIssue,
+} from '@sakehub/seed-utils';
 
 import { DRINK_CATEGORIES, MAX_ALIASES, SLUG_PATTERN, type DrinkSeed } from './schema.ts';
 
@@ -81,6 +85,7 @@ function validateDrink(file: string, raw: unknown, issues: ValidationIssue[]): D
     issues.push({ file, field: 'manufacturer', message: 'must be string or null' });
   }
 
+  assertManufacturerQuality(file, raw.manufacturer, issues, raw.description);
   assertAliases(file, raw.aliases, MAX_ALIASES, issues);
 
   if (issues.some((iss) => iss.file === file)) {

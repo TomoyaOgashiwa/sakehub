@@ -12,6 +12,8 @@ data/pending.txt → draft.ts（任意・LLM）→ data/drafts/*.json
 data/cocktails/*.json → validate.ts → build-seed.ts → supabase/seeds/official_cocktails.sql
 ```
 
+**正本は `data/cocktails/*.json` のみ。** `scripts/generate-phase1-cocktails.mjs` はスキャフォールド用で、既存 slug は上書きしない。配列を後から直しても再実行では反映されないので、修正は JSON を直接編集する。
+
 `build-seed.ts` は外部通信なし・決定的。同じ JSON から常に同じ SQL を出す。
 
 ## コマンド（リポジトリルート）

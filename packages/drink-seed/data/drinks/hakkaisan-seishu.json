@@ -1,0 +1,15 @@
+{
+  "slug": "hakkaisan-seishu",
+  "name": "八海山 清酒",
+  "nameEn": "Hakkaisan Seishu",
+  "category": "sake",
+  "subcategory": "Honjozo",
+  "description": "八海山の普通に親しまれる清酒。淡麗辛口の王道。",
+  "imageUrl": null,
+  "abv": 15.5,
+  "originCountry": "Japan",
+  "manufacturer": "八海醸造",
+  "aliases": [
+    "はっかいさんせいしゅ"
+  ]
+}

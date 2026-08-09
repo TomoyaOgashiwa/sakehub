@@ -1,0 +1,15 @@
+{
+  "slug": "sake-sakehitosuji",
+  "name": "酒一筋 純米吟醸",
+  "nameEn": "Sake Hitosuji Junmai Ginjo",
+  "category": "sake",
+  "subcategory": "Junmai Ginjo",
+  "description": "岡山・利守酒造の純米吟醸。フルーティーで優しい甘み。",
+  "imageUrl": null,
+  "abv": 15,
+  "originCountry": "Japan",
+  "manufacturer": "利守酒造",
+  "aliases": [
+    "さけひとすじ"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "slug": "rum-runner",
+  "id": null,
+  "name": "ラムランナー",
+  "nameEn": "Rum Runner",
+  "description": "ラムにバナナとブラックベリー、果汁を合わせるフロリダ発のトロピカルカクテル。",
+  "baseSpirit": "Rum",
+  "abv": 17,
+  "originCountry": "United States",
+  "aliases": [
+    "ラム・ランナー"
+  ],
+  "officialRecipe": {
+    "name": "ラムランナー（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ライトラム",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "ダークラム",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "バナナリキュール",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "ブラックベリーリキュール",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "パイナップルジュース",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ライムジュース",
+        "amount": 15,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "slug": "mexican-mule",
+  "id": null,
+  "name": "メキシカンミュール",
+  "nameEn": "Mexican Mule",
+  "description": "モスコミュールをテキーラで作る、ライムとジンジャーが爽快な一杯。",
+  "baseSpirit": "Tequila",
+  "abv": 11,
+  "originCountry": "Mexico",
+  "aliases": [
+    "テキーラムュール"
+  ],
+  "officialRecipe": {
+    "name": "メキシカンミュール（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "テキーラブランコ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ライムジュース",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "ジンジャービア",
+        "amount": 120,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

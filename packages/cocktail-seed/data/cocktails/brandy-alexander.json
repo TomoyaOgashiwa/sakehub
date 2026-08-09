@@ -1,0 +1,39 @@
+{
+  "slug": "brandy-alexander",
+  "id": null,
+  "name": "ブランデーアレキサンダー",
+  "nameEn": "Brandy Alexander",
+  "description": "ブランデー、カカオ、クリームで作る、なめらかなデザートカクテル。",
+  "baseSpirit": "Brandy",
+  "abv": 18,
+  "originCountry": "United States",
+  "aliases": [
+    "ブランデーアレクサンダー"
+  ],
+  "officialRecipe": {
+    "name": "ブランデーアレキサンダー（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ブランデー",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "クレーム・ド・カカオ",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "生クリーム",
+        "amount": 30,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

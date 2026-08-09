@@ -1,0 +1,39 @@
+{
+  "slug": "ranch-water",
+  "id": null,
+  "name": "ランチウォーター",
+  "nameEn": "Ranch Water",
+  "description": "テキーラ、ライム、炭酸水だけで作る、テキサス発の軽快なハイボール。",
+  "baseSpirit": "Tequila",
+  "abv": 9,
+  "originCountry": "United States",
+  "aliases": [
+    "ランチ・ウォーター"
+  ],
+  "officialRecipe": {
+    "name": "ランチウォーター（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "テキーラブランコ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ライムジュース",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "ソーダ",
+        "amount": 120,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

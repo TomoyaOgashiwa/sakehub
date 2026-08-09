@@ -1,0 +1,39 @@
+{
+  "slug": "appletini",
+  "id": null,
+  "name": "アップルティーニ",
+  "nameEn": "Appletini",
+  "description": "ウォッカにアップルリキュールを合わせる、鮮やかなリンゴ風味のモダンカクテル。",
+  "baseSpirit": "Vodka",
+  "abv": 24,
+  "originCountry": "United States",
+  "aliases": [
+    "アップルマティーニ"
+  ],
+  "officialRecipe": {
+    "name": "アップルティーニ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ウォッカ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "アップルリキュール",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "レモンジュース",
+        "amount": 10,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

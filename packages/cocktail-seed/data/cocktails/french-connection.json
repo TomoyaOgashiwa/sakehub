@@ -1,0 +1,34 @@
+{
+  "slug": "french-connection",
+  "id": null,
+  "name": "フレンチコネクション",
+  "nameEn": "French Connection",
+  "description": "コニャックとアマレットを合わせる、香ばしく甘いシンプルな食後カクテル。",
+  "baseSpirit": "Brandy",
+  "abv": 32,
+  "originCountry": "United States",
+  "aliases": [
+    "フレンチ・コネクション"
+  ],
+  "officialRecipe": {
+    "name": "フレンチコネクション（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "コニャック",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "アマレット",
+        "amount": 25,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

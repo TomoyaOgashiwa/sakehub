@@ -1,0 +1,34 @@
+{
+  "slug": "kir-royale",
+  "id": null,
+  "name": "キールロワイヤル",
+  "nameEn": "Kir Royale",
+  "description": "カシスリキュールをシャンパンで割る、華やかなキールの上級版。",
+  "baseSpirit": "Liqueur",
+  "abv": 12,
+  "originCountry": "France",
+  "aliases": [
+    "キール・ロワイヤル"
+  ],
+  "officialRecipe": {
+    "name": "キールロワイヤル（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "クレーム・ド・カシス",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "シャンパン",
+        "amount": 120,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

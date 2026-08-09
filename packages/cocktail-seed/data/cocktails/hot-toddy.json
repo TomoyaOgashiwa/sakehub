@@ -1,0 +1,44 @@
+{
+  "slug": "hot-toddy",
+  "id": null,
+  "name": "ホットトディ",
+  "nameEn": "Hot Toddy",
+  "description": "ウイスキーを湯、蜂蜜、レモンで割る、寒い季節に定番の温かいカクテル。",
+  "baseSpirit": "Whisky",
+  "abv": 10,
+  "originCountry": "United Kingdom",
+  "aliases": [
+    "ホット・トディ"
+  ],
+  "officialRecipe": {
+    "name": "ホットトディ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ウイスキー",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "熱湯",
+        "amount": 120,
+        "unit": "ml"
+      },
+      {
+        "name": "蜂蜜",
+        "amount": 2,
+        "unit": "tsp"
+      },
+      {
+        "name": "レモンジュース",
+        "amount": 10,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "耐熱グラスに甘味やスパイスを入れる。",
+      "温めた材料を注ぐ。",
+      "軽く混ぜて温かいうちに提供する。"
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "slug": "gin-fizz",
+  "id": null,
+  "name": "ジンフィズ",
+  "nameEn": "Gin Fizz",
+  "description": "ジンサワーをソーダで伸ばした、軽快で飲みやすいロングカクテル。",
+  "baseSpirit": "Gin",
+  "abv": 12,
+  "originCountry": "United States",
+  "aliases": [
+    "ジン・フィズ"
+  ],
+  "officialRecipe": {
+    "name": "ジンフィズ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ドライジン",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "レモンジュース",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "シュガーシロップ",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "ソーダ",
+        "amount": 80,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

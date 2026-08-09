@@ -1,0 +1,44 @@
+{
+  "slug": "new-york-sour",
+  "id": null,
+  "name": "ニューヨークサワー",
+  "nameEn": "New York Sour",
+  "description": "ウイスキーサワーに赤ワインを浮かべる、華やかなクラシック。",
+  "baseSpirit": "Whisky",
+  "abv": 18,
+  "originCountry": "United States",
+  "aliases": [
+    "ニューヨーク・サワー"
+  ],
+  "officialRecipe": {
+    "name": "ニューヨークサワー（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ライウイスキー",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "レモンジュース",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "シュガーシロップ",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "赤ワイン",
+        "amount": 20,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

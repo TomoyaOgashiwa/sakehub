@@ -1,0 +1,34 @@
+{
+  "slug": "pink-gin",
+  "id": null,
+  "name": "ピンクジン",
+  "nameEn": "Pink Gin",
+  "description": "ジンにアンゴスチュラビターズをまとわせる、英国海軍ゆかりのシンプルな古典。",
+  "baseSpirit": "Gin",
+  "abv": 36,
+  "originCountry": "United Kingdom",
+  "aliases": [
+    "ピンク・ジン"
+  ],
+  "officialRecipe": {
+    "name": "ピンクジン（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ドライジン",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "アンゴスチュラビターズ",
+        "amount": 3,
+        "unit": "dash"
+      }
+    ],
+    "steps": [
+      "ミキシンググラスに材料と氷を入れる。",
+      "ステアしてしっかり冷やし、香味をなじませる。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

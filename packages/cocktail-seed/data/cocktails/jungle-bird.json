@@ -1,0 +1,49 @@
+{
+  "slug": "jungle-bird",
+  "id": null,
+  "name": "ジャングルバード",
+  "nameEn": "Jungle Bird",
+  "description": "ダークラム、カンパリ、パイナップルを合わせる、ビターなトロピカルカクテル。",
+  "baseSpirit": "Rum",
+  "abv": 18,
+  "originCountry": "Malaysia",
+  "aliases": [
+    "ジャングル・バード"
+  ],
+  "officialRecipe": {
+    "name": "ジャングルバード（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ダークラム",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "カンパリ",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "パイナップルジュース",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ライムジュース",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "シュガーシロップ",
+        "amount": 10,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

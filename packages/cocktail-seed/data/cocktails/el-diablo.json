@@ -1,0 +1,44 @@
+{
+  "slug": "el-diablo",
+  "id": null,
+  "name": "エルディアブロ",
+  "nameEn": "El Diablo",
+  "description": "テキーラ、カシス、ライム、ジンジャーエールで作るスパイシーなロングカクテル。",
+  "baseSpirit": "Tequila",
+  "abv": 12,
+  "originCountry": "United States",
+  "aliases": [
+    "エル・ディアブロ"
+  ],
+  "officialRecipe": {
+    "name": "エルディアブロ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "テキーラブランコ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "クレーム・ド・カシス",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "ライムジュース",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "ジンジャーエール",
+        "amount": 90,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

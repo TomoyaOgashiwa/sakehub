@@ -1,0 +1,44 @@
+{
+  "slug": "mary-pickford",
+  "id": null,
+  "name": "メアリーピックフォード",
+  "nameEn": "Mary Pickford",
+  "description": "ライトラム、パイナップル、グレナデン、マラスキーノで作るキューバのクラシック。",
+  "baseSpirit": "Rum",
+  "abv": 19,
+  "originCountry": "Cuba",
+  "aliases": [
+    "メアリー・ピックフォード"
+  ],
+  "officialRecipe": {
+    "name": "メアリーピックフォード（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ライトラム",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "パイナップルジュース",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "グレナデンシロップ",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "マラスキーノリキュール",
+        "amount": 5,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

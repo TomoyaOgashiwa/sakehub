@@ -1,0 +1,44 @@
+{
+  "slug": "macunaima",
+  "id": null,
+  "name": "マクナイマ",
+  "nameEn": "Macunaima",
+  "description": "カシャッサ、フェルネット、ライム、シロップで作る、サンパウロ発の現代クラシック。",
+  "baseSpirit": "Cachaca",
+  "abv": 24,
+  "originCountry": "Brazil",
+  "aliases": [
+    "マクナイーマ"
+  ],
+  "officialRecipe": {
+    "name": "マクナイマ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "カシャッサ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "フェルネットブランカ",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "ライムジュース",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "シュガーシロップ",
+        "amount": 20,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

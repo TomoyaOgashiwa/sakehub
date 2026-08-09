@@ -1,0 +1,44 @@
+{
+  "slug": "bramble",
+  "id": null,
+  "name": "ブランブル",
+  "nameEn": "Bramble",
+  "description": "ジンの酸味にブラックベリーリキュールを流す、ロンドン発のモダンクラシック。",
+  "baseSpirit": "Gin",
+  "abv": 18,
+  "originCountry": "United Kingdom",
+  "aliases": [
+    "ブランブルカクテル"
+  ],
+  "officialRecipe": {
+    "name": "ブランブル（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ドライジン",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "レモンジュース",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "シュガーシロップ",
+        "amount": 10,
+        "unit": "ml"
+      },
+      {
+        "name": "クレーム・ド・ミュール",
+        "amount": 15,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

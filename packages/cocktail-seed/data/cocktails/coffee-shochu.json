@@ -1,0 +1,39 @@
+{
+  "slug": "coffee-shochu",
+  "id": null,
+  "name": "コーヒー焼酎",
+  "nameEn": "Coffee Shochu",
+  "description": "焼酎をコーヒーで割る、香ばしさと苦味が楽しめる日本のバー定番。",
+  "baseSpirit": "Shochu",
+  "abv": 8,
+  "originCountry": "Japan",
+  "aliases": [
+    "焼酎コーヒー割り"
+  ],
+  "officialRecipe": {
+    "name": "コーヒー焼酎（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "焼酎",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "アイスコーヒー",
+        "amount": 120,
+        "unit": "ml"
+      },
+      {
+        "name": "シュガーシロップ",
+        "amount": 5,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

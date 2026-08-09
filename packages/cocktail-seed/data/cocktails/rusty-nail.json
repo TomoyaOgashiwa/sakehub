@@ -1,0 +1,34 @@
+{
+  "slug": "rusty-nail",
+  "id": null,
+  "name": "ラスティネイル",
+  "nameEn": "Rusty Nail",
+  "description": "スコッチとドランブイを合わせる、甘くハーブ香のある食後向きの一杯。",
+  "baseSpirit": "Whisky",
+  "abv": 34,
+  "originCountry": "United States",
+  "aliases": [
+    "ラスティ・ネイル"
+  ],
+  "officialRecipe": {
+    "name": "ラスティネイル（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "スコッチウイスキー",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ドランブイ",
+        "amount": 25,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

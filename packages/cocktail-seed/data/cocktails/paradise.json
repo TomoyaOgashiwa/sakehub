@@ -1,0 +1,39 @@
+{
+  "slug": "paradise",
+  "id": null,
+  "name": "パラダイス",
+  "nameEn": "Paradise",
+  "description": "ジン、アプリコット、オレンジを合わせるフルーティーなIBAクラシック。",
+  "baseSpirit": "Gin",
+  "abv": 22,
+  "originCountry": "United Kingdom",
+  "aliases": [
+    "パラダイスカクテル"
+  ],
+  "officialRecipe": {
+    "name": "パラダイス（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ドライジン",
+        "amount": 35,
+        "unit": "ml"
+      },
+      {
+        "name": "アプリコットブランデー",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "オレンジジュース",
+        "amount": 35,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

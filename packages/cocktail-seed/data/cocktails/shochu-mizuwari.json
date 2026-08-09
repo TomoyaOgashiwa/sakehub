@@ -1,0 +1,34 @@
+{
+  "slug": "shochu-mizuwari",
+  "id": null,
+  "name": "焼酎水割り",
+  "nameEn": "Shochu Mizuwari",
+  "description": "焼酎を冷水で割り、香味を穏やかに楽しむ基本の飲み方。",
+  "baseSpirit": "Shochu",
+  "abv": 12,
+  "originCountry": "Japan",
+  "aliases": [
+    "水割り焼酎"
+  ],
+  "officialRecipe": {
+    "name": "焼酎水割り（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "焼酎",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "冷水",
+        "amount": 90,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

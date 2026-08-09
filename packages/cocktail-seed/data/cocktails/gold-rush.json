@@ -1,0 +1,39 @@
+{
+  "slug": "gold-rush",
+  "id": null,
+  "name": "ゴールドラッシュ",
+  "nameEn": "Gold Rush",
+  "description": "バーボン、蜂蜜、レモンで作る、シンプルで完成度の高いモダンサワー。",
+  "baseSpirit": "Whisky",
+  "abv": 23,
+  "originCountry": "United States",
+  "aliases": [
+    "ゴールド・ラッシュ"
+  ],
+  "officialRecipe": {
+    "name": "ゴールドラッシュ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "バーボンウイスキー",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "レモンジュース",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "蜂蜜シロップ",
+        "amount": 20,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

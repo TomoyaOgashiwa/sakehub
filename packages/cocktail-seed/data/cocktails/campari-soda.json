@@ -1,0 +1,34 @@
+{
+  "slug": "campari-soda",
+  "id": null,
+  "name": "カンパリソーダ",
+  "nameEn": "Campari Soda",
+  "description": "カンパリをソーダで割る、ビターで軽いイタリアの定番アペリティーボ。",
+  "baseSpirit": "Liqueur",
+  "abv": 7,
+  "originCountry": "Italy",
+  "aliases": [
+    "カンパリ・ソーダ"
+  ],
+  "officialRecipe": {
+    "name": "カンパリソーダ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "カンパリ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ソーダ",
+        "amount": 135,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

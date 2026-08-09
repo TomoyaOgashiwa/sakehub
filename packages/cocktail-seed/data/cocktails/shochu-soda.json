@@ -1,0 +1,34 @@
+{
+  "slug": "shochu-soda",
+  "id": null,
+  "name": "焼酎ソーダ割り",
+  "nameEn": "Shochu Soda",
+  "description": "焼酎を炭酸で割り、香りを軽やかに広げるすっきりしたハイボール。",
+  "baseSpirit": "Shochu",
+  "abv": 8,
+  "originCountry": "Japan",
+  "aliases": [
+    "焼酎ハイボール"
+  ],
+  "officialRecipe": {
+    "name": "焼酎ソーダ割り（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "焼酎",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ソーダ",
+        "amount": 135,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

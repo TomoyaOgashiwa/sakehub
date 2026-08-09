@@ -1,0 +1,35 @@
+{
+  "slug": "kalua-milk",
+  "id": null,
+  "name": "カルーアミルク",
+  "nameEn": "Kahlua Milk",
+  "description": "コーヒーリキュールをミルクで割る、日本でも親しまれるまろやかなロングカクテル。",
+  "baseSpirit": "Liqueur",
+  "abv": 6,
+  "originCountry": "Mexico",
+  "aliases": [
+    "カルーア・ミルク",
+    "カールーアミルク"
+  ],
+  "officialRecipe": {
+    "name": "カルーアミルク（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "コーヒーリキュール",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "牛乳",
+        "amount": 135,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

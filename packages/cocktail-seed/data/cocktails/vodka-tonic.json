@@ -1,0 +1,34 @@
+{
+  "slug": "vodka-tonic",
+  "id": null,
+  "name": "ウォッカトニック",
+  "nameEn": "Vodka Tonic",
+  "description": "ウォッカをトニックで割る、食中にも合わせやすいすっきりしたハイボール。",
+  "baseSpirit": "Vodka",
+  "abv": 9,
+  "originCountry": "United States",
+  "aliases": [
+    "ウォッカ・トニック"
+  ],
+  "officialRecipe": {
+    "name": "ウォッカトニック（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ウォッカ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "トニックウォーター",
+        "amount": 135,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

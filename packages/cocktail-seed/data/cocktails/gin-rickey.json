@@ -1,0 +1,39 @@
+{
+  "slug": "gin-rickey",
+  "id": null,
+  "name": "ジンリッキー",
+  "nameEn": "Gin Rickey",
+  "description": "ジン、ライム、ソーダだけで作る、辛口で爽快なハイボールスタイル。",
+  "baseSpirit": "Gin",
+  "abv": 10,
+  "originCountry": "United States",
+  "aliases": [
+    "ジン・リッキー"
+  ],
+  "officialRecipe": {
+    "name": "ジンリッキー（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ドライジン",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ライムジュース",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "ソーダ",
+        "amount": 120,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

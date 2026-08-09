@@ -1,0 +1,44 @@
+{
+  "slug": "ward-eight",
+  "id": null,
+  "name": "ワードエイト",
+  "nameEn": "Ward Eight",
+  "description": "ライウイスキーに柑橘とグレナデンを合わせる、ボストン生まれのサワー。",
+  "baseSpirit": "Whisky",
+  "abv": 20,
+  "originCountry": "United States",
+  "aliases": [
+    "ワード8"
+  ],
+  "officialRecipe": {
+    "name": "ワードエイト（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ライウイスキー",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "レモンジュース",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "オレンジジュース",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "グレナデンシロップ",
+        "amount": 10,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

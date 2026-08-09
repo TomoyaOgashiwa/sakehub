@@ -1,0 +1,49 @@
+{
+  "slug": "red-snapper",
+  "id": null,
+  "name": "レッドスナッパー",
+  "nameEn": "Red Snapper",
+  "description": "ブラッディメアリーをジンで作る、スパイスとトマトの食中酒向きカクテル。",
+  "baseSpirit": "Gin",
+  "abv": 10,
+  "originCountry": "France",
+  "aliases": [
+    "ジンブラッディメアリー"
+  ],
+  "officialRecipe": {
+    "name": "レッドスナッパー（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ドライジン",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "トマトジュース",
+        "amount": 120,
+        "unit": "ml"
+      },
+      {
+        "name": "レモンジュース",
+        "amount": 10,
+        "unit": "ml"
+      },
+      {
+        "name": "ウスターソース",
+        "amount": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "ホットソース",
+        "amount": 2,
+        "unit": "dash"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

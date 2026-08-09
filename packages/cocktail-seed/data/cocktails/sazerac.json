@@ -1,0 +1,44 @@
+{
+  "slug": "sazerac",
+  "id": null,
+  "name": "サゼラック",
+  "nameEn": "Sazerac",
+  "description": "ライウイスキーにペイショーズビターズとアブサンの香りをまとわせるニューオーリンズの象徴。",
+  "baseSpirit": "Whisky",
+  "abv": 36,
+  "originCountry": "United States",
+  "aliases": [
+    "サゼラックカクテル"
+  ],
+  "officialRecipe": {
+    "name": "サゼラック（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ライウイスキー",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "角砂糖",
+        "amount": 1,
+        "unit": "piece"
+      },
+      {
+        "name": "ペイショーズビターズ",
+        "amount": 3,
+        "unit": "dash"
+      },
+      {
+        "name": "アブサン",
+        "amount": 1,
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      "ミキシンググラスに材料と氷を入れる。",
+      "ステアしてしっかり冷やし、香味をなじませる。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

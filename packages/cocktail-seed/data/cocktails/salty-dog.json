@@ -1,0 +1,39 @@
+{
+  "slug": "salty-dog",
+  "id": null,
+  "name": "ソルティドッグ",
+  "nameEn": "Salty Dog",
+  "description": "グレイハウンドに塩のスノースタイルを加えた、日本でも定番のウォッカカクテル。",
+  "baseSpirit": "Vodka",
+  "abv": 10,
+  "originCountry": "United States",
+  "aliases": [
+    "ソルティ・ドッグ"
+  ],
+  "officialRecipe": {
+    "name": "ソルティドッグ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ウォッカ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "グレープフルーツジュース",
+        "amount": 135,
+        "unit": "ml"
+      },
+      {
+        "name": "塩",
+        "amount": 1,
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

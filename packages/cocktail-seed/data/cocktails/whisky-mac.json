@@ -1,0 +1,34 @@
+{
+  "slug": "whisky-mac",
+  "id": null,
+  "name": "ウイスキーマック",
+  "nameEn": "Whisky Mac",
+  "description": "スコッチとジンジャーワインを合わせる、英国で親しまれる温冷両用の一杯。",
+  "baseSpirit": "Whisky",
+  "abv": 28,
+  "originCountry": "United Kingdom",
+  "aliases": [
+    "ウイスキー・マック"
+  ],
+  "officialRecipe": {
+    "name": "ウイスキーマック（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "スコッチウイスキー",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ジンジャーワイン",
+        "amount": 30,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "slug": "queens-park-swizzle",
+  "id": null,
+  "name": "クイーンズパークスウィズル",
+  "nameEn": "Queen’s Park Swizzle",
+  "description": "ラム、ミント、ライム、ビターズをクラッシュドアイスで仕上げるトリニダードの名物。",
+  "baseSpirit": "Rum",
+  "abv": 16,
+  "originCountry": "Trinidad and Tobago",
+  "aliases": [
+    "クイーンズパーク・スウィズル"
+  ],
+  "officialRecipe": {
+    "name": "クイーンズパークスウィズル（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ダークラム",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "ライムジュース",
+        "amount": 25,
+        "unit": "ml"
+      },
+      {
+        "name": "シュガーシロップ",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "ミントの葉",
+        "amount": 10,
+        "unit": "piece"
+      },
+      {
+        "name": "アンゴスチュラビターズ",
+        "amount": 4,
+        "unit": "dash"
+      }
+    ],
+    "steps": [
+      "グラスの中でフルーツやハーブを軽くつぶす。",
+      "残りの材料と氷を加える。",
+      "よく混ぜて仕上げる。"
+    ]
+  }
+}

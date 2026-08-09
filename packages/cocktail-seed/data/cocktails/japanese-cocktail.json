@@ -1,0 +1,39 @@
+{
+  "slug": "japanese-cocktail",
+  "id": null,
+  "name": "ジャパニーズカクテル",
+  "nameEn": "Japanese Cocktail",
+  "description": "コニャック、オルジェ、ビターズで作る、19世紀アメリカ発祥の歴史的カクテル。",
+  "baseSpirit": "Brandy",
+  "abv": 31,
+  "originCountry": "United States",
+  "aliases": [
+    "ジャパニーズ"
+  ],
+  "officialRecipe": {
+    "name": "ジャパニーズカクテル（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "コニャック",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "オルジェシロップ",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "アンゴスチュラビターズ",
+        "amount": 2,
+        "unit": "dash"
+      }
+    ],
+    "steps": [
+      "ミキシンググラスに材料と氷を入れる。",
+      "ステアしてしっかり冷やし、香味をなじませる。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

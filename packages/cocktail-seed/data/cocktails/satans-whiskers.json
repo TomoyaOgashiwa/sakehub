@@ -1,0 +1,54 @@
+{
+  "slug": "satans-whiskers",
+  "id": null,
+  "name": "サタンズウィスカーズ",
+  "nameEn": "Satan's Whiskers",
+  "description": "ジン、ベルモット、オレンジを重ねる、名前に反して上品なクラシック。",
+  "baseSpirit": "Gin",
+  "abv": 21,
+  "originCountry": "United Kingdom",
+  "aliases": [
+    "サタンのひげ"
+  ],
+  "officialRecipe": {
+    "name": "サタンズウィスカーズ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ドライジン",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "ドライベルモット",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "スイートベルモット",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "オレンジジュース",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "グランマルニエ",
+        "amount": 10,
+        "unit": "ml"
+      },
+      {
+        "name": "オレンジビターズ",
+        "amount": 1,
+        "unit": "dash"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

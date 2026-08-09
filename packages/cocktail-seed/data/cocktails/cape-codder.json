@@ -1,0 +1,34 @@
+{
+  "slug": "cape-codder",
+  "id": null,
+  "name": "ケープコッダー",
+  "nameEn": "Cape Codder",
+  "description": "ウォッカとクランベリージュースで作る、シンプルなアメリカ定番ロングカクテル。",
+  "baseSpirit": "Vodka",
+  "abv": 9,
+  "originCountry": "United States",
+  "aliases": [
+    "ウォッカクランベリー"
+  ],
+  "officialRecipe": {
+    "name": "ケープコッダー（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ウォッカ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "クランベリージュース",
+        "amount": 135,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

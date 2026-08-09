@@ -1,0 +1,39 @@
+{
+  "slug": "batida-de-coco",
+  "id": null,
+  "name": "バチーダデココ",
+  "nameEn": "Batida de Coco",
+  "description": "カシャッサ、ココナッツ、コンデンスミルクを合わせる、ブラジルの濃厚な定番。",
+  "baseSpirit": "Cachaca",
+  "abv": 14,
+  "originCountry": "Brazil",
+  "aliases": [
+    "バチーダ・デ・ココ"
+  ],
+  "officialRecipe": {
+    "name": "バチーダデココ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "カシャッサ",
+        "amount": 50,
+        "unit": "ml"
+      },
+      {
+        "name": "ココナッツミルク",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "コンデンスミルク",
+        "amount": 20,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "ブレンダーに材料とクラッシュドアイスを入れる。",
+      "なめらかになるまで攪拌する。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

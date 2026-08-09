@@ -1,0 +1,44 @@
+{
+  "slug": "bijou",
+  "id": null,
+  "name": "ビジュー",
+  "nameEn": "Bijou",
+  "description": "ジン、ベルモット、シャルトリューズを宝石になぞらえた芳醇なクラシック。",
+  "baseSpirit": "Gin",
+  "abv": 31,
+  "originCountry": "United States",
+  "aliases": [
+    "ビジューカクテル"
+  ],
+  "officialRecipe": {
+    "name": "ビジュー（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ドライジン",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "スイートベルモット",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "グリーンシャルトリューズ",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "オレンジビターズ",
+        "amount": 1,
+        "unit": "dash"
+      }
+    ],
+    "steps": [
+      "ミキシンググラスに材料と氷を入れる。",
+      "ステアしてしっかり冷やし、香味をなじませる。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

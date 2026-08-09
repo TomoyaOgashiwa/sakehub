@@ -1,0 +1,39 @@
+{
+  "slug": "harvey-wallbanger",
+  "id": null,
+  "name": "ハーベイウォールバンガー",
+  "nameEn": "Harvey Wallbanger",
+  "description": "スクリュードライバーにガリアーノを浮かべる、1970年代に流行した定番。",
+  "baseSpirit": "Vodka",
+  "abv": 11,
+  "originCountry": "United States",
+  "aliases": [
+    "ハーヴェイ・ウォールバンガー"
+  ],
+  "officialRecipe": {
+    "name": "ハーベイウォールバンガー（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ウォッカ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "オレンジジュース",
+        "amount": 120,
+        "unit": "ml"
+      },
+      {
+        "name": "ガリアーノ",
+        "amount": 15,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "slug": "el-presidente",
+  "id": null,
+  "name": "エルプレジデンテ",
+  "nameEn": "El Presidente",
+  "description": "ラム、ドライベルモット、オレンジキュラソーを合わせるキューバのエレガントな古典。",
+  "baseSpirit": "Rum",
+  "abv": 25,
+  "originCountry": "Cuba",
+  "aliases": [
+    "エル・プレジデンテ"
+  ],
+  "officialRecipe": {
+    "name": "エルプレジデンテ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ライトラム",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ドライベルモット",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "オレンジキュラソー",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "グレナデンシロップ",
+        "amount": 5,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "ミキシンググラスに材料と氷を入れる。",
+      "ステアしてしっかり冷やし、香味をなじませる。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

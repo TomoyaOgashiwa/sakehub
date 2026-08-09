@@ -1,0 +1,39 @@
+{
+  "slug": "kamikaze",
+  "id": null,
+  "name": "カミカゼ",
+  "nameEn": "Kamikaze",
+  "description": "ウォッカ、ホワイトキュラソー、ライムを合わせる、切れ味のよいショートカクテル。",
+  "baseSpirit": "Vodka",
+  "abv": 27,
+  "originCountry": "United States",
+  "aliases": [
+    "神風"
+  ],
+  "officialRecipe": {
+    "name": "カミカゼ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ウォッカ",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "ホワイトキュラソー",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "ライムジュース",
+        "amount": 30,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

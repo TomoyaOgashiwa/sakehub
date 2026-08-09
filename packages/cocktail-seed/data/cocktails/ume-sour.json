@@ -1,0 +1,44 @@
+{
+  "slug": "ume-sour",
+  "id": null,
+  "name": "梅サワー",
+  "nameEn": "Ume Sour",
+  "description": "焼酎に梅の甘酸っぱさを合わせる、食中に飲みやすい和風サワー。",
+  "baseSpirit": "Shochu",
+  "abv": 7,
+  "originCountry": "Japan",
+  "aliases": [
+    "梅干しサワー"
+  ],
+  "officialRecipe": {
+    "name": "梅サワー（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "焼酎",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "梅シロップ",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "ソーダ",
+        "amount": 120,
+        "unit": "ml"
+      },
+      {
+        "name": "梅干し",
+        "amount": 1,
+        "unit": "piece"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

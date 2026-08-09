@@ -1,0 +1,49 @@
+{
+  "slug": "corpse-reviver-no-2",
+  "id": null,
+  "name": "コープスリバイバーNo.2",
+  "nameEn": "Corpse Reviver No. 2",
+  "description": "ジンとキナリキュール、オレンジ、レモンが均衡するブランチの古典。",
+  "baseSpirit": "Gin",
+  "abv": 24,
+  "originCountry": "United Kingdom",
+  "aliases": [
+    "コープス・リバイバー2"
+  ],
+  "officialRecipe": {
+    "name": "コープスリバイバーNo.2（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ドライジン",
+        "amount": 22.5,
+        "unit": "ml"
+      },
+      {
+        "name": "コアントロー",
+        "amount": 22.5,
+        "unit": "ml"
+      },
+      {
+        "name": "リレ・ブラン",
+        "amount": 22.5,
+        "unit": "ml"
+      },
+      {
+        "name": "レモンジュース",
+        "amount": 22.5,
+        "unit": "ml"
+      },
+      {
+        "name": "アブサン",
+        "amount": 1,
+        "unit": "dash"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

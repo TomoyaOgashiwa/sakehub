@@ -1,0 +1,44 @@
+{
+  "slug": "queens",
+  "id": null,
+  "name": "クイーンズ",
+  "nameEn": "Queens",
+  "description": "ジンとベルモットにパイナップルを合わせる、ブロンクスの変奏として知られる一杯。",
+  "baseSpirit": "Gin",
+  "abv": 20,
+  "originCountry": "United States",
+  "aliases": [
+    "クイーンズカクテル"
+  ],
+  "officialRecipe": {
+    "name": "クイーンズ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ドライジン",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "ドライベルモット",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "スイートベルモット",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "パイナップルジュース",
+        "amount": 30,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

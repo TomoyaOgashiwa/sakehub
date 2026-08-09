@@ -1,0 +1,39 @@
+{
+  "slug": "tequila-sunrise",
+  "id": null,
+  "name": "テキーラサンライズ",
+  "nameEn": "Tequila Sunrise",
+  "description": "テキーラとオレンジにグレナデンを沈める、朝焼けの色で知られる定番。",
+  "baseSpirit": "Tequila",
+  "abv": 11,
+  "originCountry": "United States",
+  "aliases": [
+    "テキーラ・サンライズ"
+  ],
+  "officialRecipe": {
+    "name": "テキーラサンライズ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "テキーラブランコ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "オレンジジュース",
+        "amount": 120,
+        "unit": "ml"
+      },
+      {
+        "name": "グレナデンシロップ",
+        "amount": 15,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

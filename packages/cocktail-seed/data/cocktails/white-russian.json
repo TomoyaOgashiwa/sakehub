@@ -1,0 +1,39 @@
+{
+  "slug": "white-russian",
+  "id": null,
+  "name": "ホワイトルシアン",
+  "nameEn": "White Russian",
+  "description": "ブラックルシアンにクリームを重ねた、まろやかなウォッカカクテル。",
+  "baseSpirit": "Vodka",
+  "abv": 18,
+  "originCountry": "United States",
+  "aliases": [
+    "ホワイト・ルシアン"
+  ],
+  "officialRecipe": {
+    "name": "ホワイトルシアン（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ウォッカ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "コーヒーリキュール",
+        "amount": 25,
+        "unit": "ml"
+      },
+      {
+        "name": "生クリーム",
+        "amount": 30,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

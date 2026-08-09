@@ -1,0 +1,44 @@
+{
+  "slug": "irish-coffee",
+  "id": null,
+  "name": "アイリッシュコーヒー",
+  "nameEn": "Irish Coffee",
+  "description": "アイリッシュウイスキー、ホットコーヒー、クリームで作る温かい定番。",
+  "baseSpirit": "Whisky",
+  "abv": 9,
+  "originCountry": "Ireland",
+  "aliases": [
+    "アイリッシュ・コーヒー"
+  ],
+  "officialRecipe": {
+    "name": "アイリッシュコーヒー（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "アイリッシュウイスキー",
+        "amount": 40,
+        "unit": "ml"
+      },
+      {
+        "name": "ホットコーヒー",
+        "amount": 100,
+        "unit": "ml"
+      },
+      {
+        "name": "ブラウンシュガー",
+        "amount": 2,
+        "unit": "tsp"
+      },
+      {
+        "name": "生クリーム",
+        "amount": 30,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "耐熱グラスに甘味やスパイスを入れる。",
+      "温めた材料を注ぐ。",
+      "軽く混ぜて温かいうちに提供する。"
+    ]
+  }
+}

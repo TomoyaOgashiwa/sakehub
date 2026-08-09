@@ -1,0 +1,44 @@
+{
+  "slug": "lemon-drop-martini",
+  "id": null,
+  "name": "レモンドロップマティーニ",
+  "nameEn": "Lemon Drop Martini",
+  "description": "ウォッカとレモンの甘酸っぱさをショートで楽しむ、現代的な人気カクテル。",
+  "baseSpirit": "Vodka",
+  "abv": 24,
+  "originCountry": "United States",
+  "aliases": [
+    "レモンドロップ"
+  ],
+  "officialRecipe": {
+    "name": "レモンドロップマティーニ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ウォッカ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ホワイトキュラソー",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "レモンジュース",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "シュガーシロップ",
+        "amount": 10,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

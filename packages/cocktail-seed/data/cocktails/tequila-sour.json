@@ -1,0 +1,44 @@
+{
+  "slug": "tequila-sour",
+  "id": null,
+  "name": "テキーラサワー",
+  "nameEn": "Tequila Sour",
+  "description": "テキーラにレモンと甘味、卵白を合わせる、なめらかなサワースタイル。",
+  "baseSpirit": "Tequila",
+  "abv": 20,
+  "originCountry": "Mexico",
+  "aliases": [
+    "テキーラ・サワー"
+  ],
+  "officialRecipe": {
+    "name": "テキーラサワー（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "テキーラブランコ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "レモンジュース",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "シュガーシロップ",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "卵白",
+        "amount": 1,
+        "unit": "piece"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "slug": "chi-chi",
+  "id": null,
+  "name": "チチ",
+  "nameEn": "Chi-Chi",
+  "description": "ピニャコラーダをウォッカで作る、ココナッツとパイナップルのトロピカルカクテル。",
+  "baseSpirit": "Vodka",
+  "abv": 11,
+  "originCountry": "United States",
+  "aliases": [
+    "チチカクテル"
+  ],
+  "officialRecipe": {
+    "name": "チチ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ウォッカ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "パイナップルジュース",
+        "amount": 90,
+        "unit": "ml"
+      },
+      {
+        "name": "ココナッツクリーム",
+        "amount": 30,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "ブレンダーに材料とクラッシュドアイスを入れる。",
+      "なめらかになるまで攪拌する。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

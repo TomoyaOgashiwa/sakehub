@@ -1,0 +1,39 @@
+{
+  "slug": "americano",
+  "id": null,
+  "name": "アメリカーノ",
+  "nameEn": "Americano",
+  "description": "カンパリ、スイートベルモット、ソーダで作る、ネグローニの源流となった食前酒。",
+  "baseSpirit": "Liqueur",
+  "abv": 9,
+  "originCountry": "Italy",
+  "aliases": [
+    "アメリカーノカクテル"
+  ],
+  "officialRecipe": {
+    "name": "アメリカーノ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "カンパリ",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "スイートベルモット",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "ソーダ",
+        "amount": 90,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

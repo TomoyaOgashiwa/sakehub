@@ -1,0 +1,39 @@
+{
+  "slug": "bacardi-cocktail",
+  "id": null,
+  "name": "バカルディカクテル",
+  "nameEn": "Bacardi Cocktail",
+  "description": "ライトラムにライムとグレナデンを合わせる、ブランド名で広まったクラシック。",
+  "baseSpirit": "Rum",
+  "abv": 24,
+  "originCountry": "Cuba",
+  "aliases": [
+    "バカルディ"
+  ],
+  "officialRecipe": {
+    "name": "バカルディカクテル（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ライトラム",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ライムジュース",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "グレナデンシロップ",
+        "amount": 10,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "slug": "mamie-taylor",
+  "id": null,
+  "name": "メイミーテイラー",
+  "nameEn": "Mamie Taylor",
+  "description": "スコッチ、ライム、ジンジャーエールで作る、モスコミュール以前からのハイボール。",
+  "baseSpirit": "Whisky",
+  "abv": 10,
+  "originCountry": "United States",
+  "aliases": [
+    "マミー・テイラー"
+  ],
+  "officialRecipe": {
+    "name": "メイミーテイラー（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "スコッチウイスキー",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ライムジュース",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "ジンジャーエール",
+        "amount": 120,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "slug": "cable-car",
+  "id": null,
+  "name": "ケーブルカー",
+  "nameEn": "Cable Car",
+  "description": "スパイスドラム、オレンジキュラソー、レモンを合わせるサンフランシスコ生まれのモダンカクテル。",
+  "baseSpirit": "Rum",
+  "abv": 23,
+  "originCountry": "United States",
+  "aliases": [
+    "ケーブル・カー"
+  ],
+  "officialRecipe": {
+    "name": "ケーブルカー（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "スパイスドラム",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "オレンジキュラソー",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "レモンジュース",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "シュガーシロップ",
+        "amount": 10,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

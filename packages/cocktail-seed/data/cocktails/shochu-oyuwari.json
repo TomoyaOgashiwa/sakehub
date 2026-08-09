@@ -1,0 +1,34 @@
+{
+  "slug": "shochu-oyuwari",
+  "id": null,
+  "name": "焼酎お湯割り",
+  "nameEn": "Shochu Oyuwari",
+  "description": "焼酎を湯で割り、芋や麦の香りを立たせる日本の定番スタイル。",
+  "baseSpirit": "Shochu",
+  "abv": 12,
+  "originCountry": "Japan",
+  "aliases": [
+    "お湯割り焼酎"
+  ],
+  "officialRecipe": {
+    "name": "焼酎お湯割り（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "焼酎",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "お湯",
+        "amount": 90,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "耐熱グラスに甘味やスパイスを入れる。",
+      "温めた材料を注ぐ。",
+      "軽く混ぜて温かいうちに提供する。"
+    ]
+  }
+}

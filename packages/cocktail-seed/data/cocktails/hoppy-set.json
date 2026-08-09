@@ -1,0 +1,34 @@
+{
+  "slug": "hoppy-set",
+  "id": null,
+  "name": "ホッピーセット",
+  "nameEn": "Hoppy Set",
+  "description": "焼酎をホッピーで割る、東京の大衆酒場文化を代表する一杯。",
+  "baseSpirit": "Shochu",
+  "abv": 6,
+  "originCountry": "Japan",
+  "aliases": [
+    "ホッピー"
+  ],
+  "officialRecipe": {
+    "name": "ホッピーセット（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "焼酎",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ホッピー",
+        "amount": 180,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "slug": "stinger",
+  "id": null,
+  "name": "スティンガー",
+  "nameEn": "Stinger",
+  "description": "ブランデーとホワイトミントリキュールを合わせる、清涼感のある食後酒。",
+  "baseSpirit": "Brandy",
+  "abv": 29,
+  "originCountry": "United States",
+  "aliases": [
+    "スティンガーカクテル"
+  ],
+  "officialRecipe": {
+    "name": "スティンガー（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ブランデー",
+        "amount": 50,
+        "unit": "ml"
+      },
+      {
+        "name": "ホワイトミントリキュール",
+        "amount": 20,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "ミキシンググラスに材料と氷を入れる。",
+      "ステアしてしっかり冷やし、香味をなじませる。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

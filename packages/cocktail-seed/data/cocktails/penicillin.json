@@ -1,0 +1,44 @@
+{
+  "slug": "penicillin",
+  "id": null,
+  "name": "ペニシリン",
+  "nameEn": "Penicillin",
+  "description": "スコッチ、ジンジャー、蜂蜜、レモンを合わせる現代の定番ウイスキーカクテル。",
+  "baseSpirit": "Whisky",
+  "abv": 22,
+  "originCountry": "United States",
+  "aliases": [
+    "ペニシリンカクテル"
+  ],
+  "officialRecipe": {
+    "name": "ペニシリン（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ブレンデッドスコッチ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "レモンジュース",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "蜂蜜ジンジャーシロップ",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "アイラモルト",
+        "amount": 10,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

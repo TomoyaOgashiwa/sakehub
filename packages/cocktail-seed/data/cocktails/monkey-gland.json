@@ -1,0 +1,44 @@
+{
+  "slug": "monkey-gland",
+  "id": null,
+  "name": "モンキーグランド",
+  "nameEn": "Monkey Gland",
+  "description": "ジンとオレンジにグレナデンとアブサンを効かせる、1920年代パリの一杯。",
+  "baseSpirit": "Gin",
+  "abv": 24,
+  "originCountry": "France",
+  "aliases": [
+    "モンキー・グランド"
+  ],
+  "officialRecipe": {
+    "name": "モンキーグランド（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ドライジン",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "オレンジジュース",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "グレナデンシロップ",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "アブサン",
+        "amount": 1,
+        "unit": "dash"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

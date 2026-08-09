@@ -1,0 +1,39 @@
+{
+  "slug": "nikolaschka",
+  "id": null,
+  "name": "ニコラシカ",
+  "nameEn": "Nikolaschka",
+  "description": "ブランデーに砂糖とレモンを添える、独特の飲み方で知られるクラシック。",
+  "baseSpirit": "Brandy",
+  "abv": 35,
+  "originCountry": "Germany",
+  "aliases": [
+    "ニコラシュカ"
+  ],
+  "officialRecipe": {
+    "name": "ニコラシカ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ブランデー",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "レモンスライス",
+        "amount": 1,
+        "unit": "piece"
+      },
+      {
+        "name": "砂糖",
+        "amount": 1,
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

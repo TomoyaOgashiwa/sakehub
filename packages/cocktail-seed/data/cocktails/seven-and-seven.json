@@ -1,0 +1,34 @@
+{
+  "slug": "seven-and-seven",
+  "id": null,
+  "name": "セブンアンドセブン",
+  "nameEn": "Seven and Seven",
+  "description": "アメリカンウイスキーをレモンライムソーダで割る、軽快なハイボール。",
+  "baseSpirit": "Whisky",
+  "abv": 9,
+  "originCountry": "United States",
+  "aliases": [
+    "7 and 7"
+  ],
+  "officialRecipe": {
+    "name": "セブンアンドセブン（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "アメリカンウイスキー",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "レモンライムソーダ",
+        "amount": 135,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

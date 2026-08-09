@@ -1,0 +1,49 @@
+{
+  "slug": "rosita",
+  "id": null,
+  "name": "ロジータ",
+  "nameEn": "Rosita",
+  "description": "テキーラ、ベルモット、カンパリをステアする、ビターで複雑なクラシック。",
+  "baseSpirit": "Tequila",
+  "abv": 26,
+  "originCountry": "Mexico",
+  "aliases": [
+    "ロシータ"
+  ],
+  "officialRecipe": {
+    "name": "ロジータ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "テキーラレポサド",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "カンパリ",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "ドライベルモット",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "スイートベルモット",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "アンゴスチュラビターズ",
+        "amount": 1,
+        "unit": "dash"
+      }
+    ],
+    "steps": [
+      "ミキシンググラスに材料と氷を入れる。",
+      "ステアしてしっかり冷やし、香味をなじませる。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

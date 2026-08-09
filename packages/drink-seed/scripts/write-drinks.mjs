@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* global console, process */
 /**
  * One-shot helper: write DrinkSeed JSON files from a JSON array on stdin
  * or from a file path argument. Does not overwrite existing files unless

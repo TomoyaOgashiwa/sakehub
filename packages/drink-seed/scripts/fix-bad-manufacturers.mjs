@@ -46,6 +46,19 @@ const BY_SLUG = {
   'ocho-plata': 'Tequila Ocho',
   'ocho-reposado': 'Tequila Ocho',
   'kido-sparkling': '木戸泉酒造',
+  'ej-vs-brandy': 'E&J Gallo',
+  'f-x-pichler-durnsteiner-kellerberg-riesling-2020': 'F.X. Pichler',
+  'original-sin-hard-cider': 'Original Sin',
+  'au-bon-climat-santa-barbara-chardonnay-2020': 'Au Bon Climat',
+  'don-q-cristal': 'Destilería Serrallés',
+  'don-q-gold': 'Destilería Serrallés',
+  'don-q-gran-reserva-anejo-xo': 'Destilería Serrallés',
+  'ki-no-bi-kyoto-dry-gin': 'The Kyoto Distillery',
+  'ki-no-tea-kyoto-dry-gin': 'The Kyoto Distillery',
+  'ki-no-tou-old-tom-gin': 'The Kyoto Distillery',
+  'lot-no-40-canadian-rye': 'Corby Spirit and Wine',
+  'select-aperitivo': 'Gruppo Montenegro',
+  'to-ol-gose-to-hollywood': 'To Øl',
 };
 
 function describe(d, manufacturer) {

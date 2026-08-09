@@ -1,7 +1,7 @@
 -- =============================================================================
 -- packages/drink-seed（src/build-seed.ts）が自動生成。
 -- 手編集しないこと。再生成: pnpm seed:drinks:build
--- 生成日時: 2026-08-09T21:39:52.970Z
+-- 生成日時: 2026-08-09T21:59:26.505Z
 -- 件数: 1330
 --
 -- aliases: かな読み・ローマ字表記などの別名候補。「獺祭」で登録されていても
@@ -2062,11 +2062,11 @@ VALUES (
   'Au Bon Climat Santa Barbara Chardonnay 2020',
   'wine',
   'White',
-  'Au Bon Climat Santa Barbara Chardonnay 2020 is a well-known United States White from Au Bon, selected for broad drink catalog coverage in Japan.',
+  'Au Bon Climat Santa Barbara Chardonnay 2020 is a well-known United States White from Au Bon Climat.',
   NULL,
   13.5,
   'United States',
-  'Au Bon',
+  'Au Bon Climat',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -9734,11 +9734,11 @@ VALUES (
   'Don Q Cristal',
   'rum',
   'White Rum',
-  'Don Q Cristal is a well-known Puerto Rico White Rum from Don Q, selected for broad drink catalog coverage in Japan.',
+  'Don Q Cristal is a well-known Puerto Rico White Rum from Destilería Serrallés.',
   NULL,
   40,
   'Puerto Rico',
-  'Don Q',
+  'Destilería Serrallés',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -9762,11 +9762,11 @@ VALUES (
   'Don Q Gold',
   'rum',
   'Gold Rum',
-  'Don Q Gold is a well-known Puerto Rico Gold Rum from Don Q, selected for broad drink catalog coverage in Japan.',
+  'Don Q Gold is a well-known Puerto Rico Gold Rum from Destilería Serrallés.',
   NULL,
   40,
   'Puerto Rico',
-  'Don Q',
+  'Destilería Serrallés',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -9790,11 +9790,11 @@ VALUES (
   'Don Q Gran Reserva Anejo XO',
   'rum',
   'Aged Rum',
-  'Don Q Gran Reserva Anejo XO is a well-known Puerto Rico Aged Rum from Don Q, selected for broad drink catalog coverage in Japan.',
+  'Don Q Gran Reserva Anejo XO is a well-known Puerto Rico Aged Rum from Destilería Serrallés.',
   NULL,
   40,
   'Puerto Rico',
-  'Don Q',
+  'Destilería Serrallés',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -10266,11 +10266,11 @@ VALUES (
   'EJ VS Brandy',
   'brandy',
   'Brandy',
-  'EJ VS Brandy is a well-known United States Brandy from EJ VS, selected for broad drink catalog coverage in Japan.',
+  'EJ VS Brandy is a well-known United States Brandy from E&J Gallo.',
   NULL,
   40,
   'United States',
-  'EJ VS',
+  'E&J Gallo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -10910,11 +10910,11 @@ VALUES (
   'F X Pichler Durnsteiner Kellerberg Riesling 2020',
   'wine',
   'White',
-  'F X Pichler Durnsteiner Kellerberg Riesling 2020 is a well-known Austria White from F X, selected for broad drink catalog coverage in Japan.',
+  'F X Pichler Durnsteiner Kellerberg Riesling 2020 is a well-known Austria White from F.X. Pichler.',
   NULL,
   13,
   'Austria',
-  'F X',
+  'F.X. Pichler',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -18246,11 +18246,11 @@ VALUES (
   'Ki No Bi Kyoto Dry Gin',
   'gin',
   'New Western',
-  'Ki No Bi Kyoto Dry Gin is a well-known Japan New Western from Ki No, selected for broad drink catalog coverage in Japan.',
+  'Ki No Bi Kyoto Dry Gin is a well-known Japan New Western from The Kyoto Distillery.',
   NULL,
   45.7,
   'Japan',
-  'Ki No',
+  'The Kyoto Distillery',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -18274,11 +18274,11 @@ VALUES (
   'Ki No Tea Kyoto Dry Gin',
   'gin',
   'New Western',
-  'Ki No Tea Kyoto Dry Gin is a well-known Japan New Western from Ki No, selected for broad drink catalog coverage in Japan.',
+  'Ki No Tea Kyoto Dry Gin is a well-known Japan New Western from The Kyoto Distillery.',
   NULL,
   45.1,
   'Japan',
-  'Ki No',
+  'The Kyoto Distillery',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -18302,11 +18302,11 @@ VALUES (
   'Ki No Tou Old Tom Gin',
   'gin',
   'Old Tom',
-  'Ki No Tou Old Tom Gin is a well-known Japan Old Tom from Ki No, selected for broad drink catalog coverage in Japan.',
+  'Ki No Tou Old Tom Gin is a well-known Japan Old Tom from The Kyoto Distillery.',
   NULL,
   47.4,
   'Japan',
-  'Ki No',
+  'The Kyoto Distillery',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -21438,11 +21438,11 @@ VALUES (
   'Lot No 40 Canadian Rye',
   'whisky',
   'Rye',
-  'Lot No 40 Canadian Rye is a well-known Canada Rye from Lot No, selected for broad drink catalog coverage in Japan.',
+  'Lot No 40 Canadian Rye is a well-known Canada Rye from Corby Spirit and Wine.',
   NULL,
   43,
   'Canada',
-  'Lot No',
+  'Corby Spirit and Wine',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -25946,11 +25946,11 @@ VALUES (
   'Original Sin Hard Cider',
   'other',
   'Cider',
-  'Original Sin Hard Cider is a well-known United States Cider from Original.',
+  'Original Sin Hard Cider is a well-known United States Cider from Original Sin.',
   NULL,
   6,
   'United States',
-  'Original',
+  'Original Sin',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -30650,11 +30650,11 @@ VALUES (
   'Select Aperitivo',
   'liqueur',
   'Aperitivo',
-  'Select Aperitivo is a well-known Italy Aperitivo from Select.',
+  'Select Aperitivo is a well-known Italy Aperitivo from Gruppo Montenegro.',
   NULL,
   17.5,
   'Italy',
-  'Select',
+  'Gruppo Montenegro',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -34570,11 +34570,11 @@ VALUES (
   'To Ol Gose To Hollywood',
   'beer',
   'Gose',
-  'To Ol Gose To Hollywood is a well-known Denmark Gose from To Ol, selected for broad drink catalog coverage in Japan.',
+  'To Ol Gose To Hollywood is a well-known Denmark Gose from To Øl.',
   NULL,
   3.8,
   'Denmark',
-  'To Ol',
+  'To Øl',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET

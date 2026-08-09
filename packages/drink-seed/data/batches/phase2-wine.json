@@ -343,11 +343,11 @@
     "nameEn": "Au Bon Climat Santa Barbara Chardonnay 2020",
     "category": "wine",
     "subcategory": "White",
-    "description": "Au Bon Climat Santa Barbara Chardonnay 2020 is a well-known United States White from Au Bon, selected for broad drink catalog coverage in Japan.",
+    "description": "Au Bon Climat Santa Barbara Chardonnay 2020 is a well-known United States White from Au Bon Climat.",
     "imageUrl": null,
     "abv": 13.5,
     "originCountry": "United States",
-    "manufacturer": "Au Bon",
+    "manufacturer": "Au Bon Climat",
     "aliases": []
   },
   {
@@ -577,11 +577,11 @@
     "nameEn": "F X Pichler Durnsteiner Kellerberg Riesling 2020",
     "category": "wine",
     "subcategory": "White",
-    "description": "F X Pichler Durnsteiner Kellerberg Riesling 2020 is a well-known Austria White from F X, selected for broad drink catalog coverage in Japan.",
+    "description": "F X Pichler Durnsteiner Kellerberg Riesling 2020 is a well-known Austria White from F.X. Pichler.",
     "imageUrl": null,
     "abv": 13,
     "originCountry": "Austria",
-    "manufacturer": "F X",
+    "manufacturer": "F.X. Pichler",
     "aliases": []
   },
   {

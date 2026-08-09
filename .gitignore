@@ -55,3 +55,6 @@ coverage/
 
 # drink-seed: data/drinks/*.json が正本。batches は生成途中の非正本（コミットしない）
 packages/drink-seed/data/batches/
+
+# catalog-image-seed: generated WebP staging (upload to Supabase Storage; do not commit)
+packages/catalog-image-seed/data/staging/

@@ -134,7 +134,7 @@ async function main(): Promise<void> {
 
     lines.push(`-- ${c.slug}`);
     lines.push(
-      `INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)`,
+      `INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)`,
     );
     lines.push(`VALUES (`);
     lines.push(`  ${quoteLiteral(cocktailId)},`);
@@ -145,6 +145,7 @@ async function main(): Promise<void> {
     lines.push(`  ${quoteNullableLiteral(c.baseSpirit)},`);
     lines.push(`  ${quoteNullableNumber(c.abv)},`);
     lines.push(`  ${quoteNullableLiteral(c.originCountry)},`);
+    lines.push(`  ${quoteNullableLiteral(c.imageUrl)},`);
     lines.push(`  ${quoteTextArrayLiteral(c.aliases)}`);
     lines.push(`)`);
     lines.push(`ON CONFLICT (id) DO UPDATE SET`);
@@ -155,6 +156,7 @@ async function main(): Promise<void> {
     lines.push(`  base_spirit = EXCLUDED.base_spirit,`);
     lines.push(`  abv = EXCLUDED.abv,`);
     lines.push(`  origin_country = EXCLUDED.origin_country,`);
+    lines.push(`  image_url = EXCLUDED.image_url,`);
     lines.push(`  aliases = EXCLUDED.aliases,`);
     lines.push(`  updated_at = now();`);
     lines.push('');

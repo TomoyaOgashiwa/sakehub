@@ -235,7 +235,30 @@ pnpm supabase:seed:prod     # リンク済みリモート: 共通のみ（local_
 
 ### 注意（重複 INSERT）
 
-`drinks.sql` / `local_demo.sql` は基本的に **INSERT のみ**です。既に同じ行がある状態で再実行すると UNIQUE 制約で失敗します。空の状態から入れるなら `db reset`、共通シードだけなら `pnpm supabase:seed:shared` の前に該当テーブルを整理してください。`official_cocktails.sql` は upsert 寄りで冪等です。
+`drinks.sql` / `official_cocktails.sql` は upsert（`ON CONFLICT`）です。`local_demo.sql` は基本的に **INSERT のみ**で、既に同じ行がある状態で再実行すると UNIQUE 制約で失敗します。空の状態から入れるなら `db reset` を使ってください。
+
+### カタログ画像（Storage）
+
+本番シード用の商品画像は public バケット **`catalog-images`** に WebP で置く。
+
+| Path | 用途 |
+| ---- | ---- |
+| `drinks/{slug}.webp` | drinks マスタ |
+| `cocktails/{slug}.webp` | cocktails マスタ |
+
+- `image_url` には linked（prod）の絶対公開 URL を入れる（ローカル seed でも同じ URL を参照してよい）
+- ユーザーレシピ写真は別バケット `cocktail-images`（`{user_id}/…`）
+- 生成・投入ツール: [`packages/catalog-image-seed`](../packages/catalog-image-seed/README.md)
+
+```bash
+OPENAI_API_KEY=... pnpm seed:images:generate
+SUPABASE_URL=https://xxxx.supabase.co SUPABASE_SERVICE_ROLE_KEY=... pnpm seed:images:upload
+pnpm seed:drinks:validate && pnpm seed:drinks:build
+pnpm seed:cocktails:validate && pnpm seed:cocktails:build
+pnpm supabase:seed:prod
+```
+
+費用目安（OpenAI `gpt-image-1.5` medium / 1024×1024）: 約 **$0.034 / 枚**。Phase 1（≈80 枚・再生成なし）は約 **$2.7**。Supabase Free の file storage 枠は **1 GB**（Phase 1 は数〜十数 MB）。
 
 ## Studio（管理画面）
 

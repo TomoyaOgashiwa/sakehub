@@ -1,0 +1,92 @@
+# Phase 1 priority catalog images (~80).
+# Format: kind|slug   kind = drink | cocktail
+# Lines starting with # are ignored.
+
+# --- Sake ---
+drink|dassai-23
+drink|dassai-45
+drink|dassai-39
+drink|kubota-manju
+drink|kubota-senju
+drink|hakkaisan-junmai-daiginjo
+drink|juyondai-ryugetsu
+drink|denshu-tokubetsu-junmai
+
+# --- Japanese whisky ---
+drink|yamazaki-12
+drink|yamazaki-18-year-old
+drink|hakushu-12-year-old
+drink|hakushu-distillers-reserve
+drink|hibiki-harmony
+drink|hibiki-21-year-old
+drink|nikka-from-the-barrel
+drink|nikka-coffey-malt
+
+# --- World whisky / bourbon ---
+drink|jack-daniels-old-no-7
+drink|jameson
+drink|johnnie-walker-black-label
+drink|macallan-12-sherry-oak
+drink|the-macallan-double-cask-12-year-old
+drink|glenfiddich-12-year-old
+drink|chivas-regal-12-year-old
+drink|makers-mark
+drink|woodford-reserve-distillers-select
+
+# --- Beer ---
+drink|guinness-draught
+drink|asahi-super-dry
+drink|orion-the-draft
+drink|kirin-ichiban-shibori
+drink|sapporo-black-label
+
+# --- Spirits & liqueurs ---
+drink|grey-goose
+drink|absolut-vodka
+drink|smirnoff-no-21-vodka
+drink|hendricks-gin
+drink|tanqueray-london-dry-gin
+drink|don-julio-blanco
+drink|don-julio-reposado
+drink|patron-silver
+drink|bacardi-carta-blanca
+drink|hennessy-vs
+drink|aperol
+drink|campari
+drink|cointreau
+drink|baileys-original
+drink|haku-vodka
+drink|ketel-one-vodka
+drink|bombay-sapphire
+drink|havana-club-7-year-old
+drink|remy-martin-vsop
+drink|midori-melon-liqueur
+drink|chartreuse-green
+drink|iichiko-silhouette
+
+# --- Cocktails ---
+cocktail|negroni
+cocktail|old-fashioned
+cocktail|gin-tonic
+cocktail|margarita
+cocktail|mojito
+cocktail|dry-martini
+cocktail|vodka-martini
+cocktail|manhattan
+cocktail|whiskey-sour
+cocktail|daiquiri
+cocktail|moscow-mule
+cocktail|espresso-martini
+cocktail|aperol-spritz
+cocktail|paloma
+cocktail|highball
+cocktail|lemon-sour
+cocktail|bloody-mary
+cocktail|cosmopolitan
+cocktail|sidecar
+cocktail|french-75
+cocktail|pina-colada
+cocktail|caipirinha
+cocktail|mai-tai
+cocktail|penicillin
+cocktail|boulevardier

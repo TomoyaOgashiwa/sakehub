@@ -1,7 +1,7 @@
 -- =============================================================================
 -- packages/cocktail-seed（src/build-seed.ts）が自動生成。
 -- 手編集しないこと。再生成: pnpm seed:cocktails:build
--- 生成日時: 2026-08-09T20:57:44.246Z
+-- 生成日時: 2026-08-09T22:43:19.936Z
 -- 件数: 164
 -- =============================================================================
 
@@ -86,7 +86,7 @@ WHERE email = 'official@sakehub.app';
 -- ---------------------------------------------------------------------------
 
 -- alaska
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '8b7257f6-f113-539c-bee3-b12da4635c97',
   'alaska',
@@ -96,6 +96,7 @@ VALUES (
   'Gin',
   35,
   'United States',
+  NULL,
   ARRAY['アラスカカクテル']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -106,6 +107,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -141,7 +143,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('5041cde0-a722-59e7-82e3-b9b409c7703e', '冷やしたグラスに注ぐ。', 2);
 
 -- amaretto-sour
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '109705d3-dc9f-5a92-8774-364eb02020da',
   'amaretto-sour',
@@ -151,6 +153,7 @@ VALUES (
   'Liqueur',
   14,
   'United States',
+  NULL,
   ARRAY['アマレット・サワー']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -161,6 +164,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -198,7 +202,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('1f3ea09c-4703-5a52-94ed-d28849cfb97e', '冷やしたグラスに注ぐ。', 2);
 
 -- americano
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'b9580f66-864a-530a-8ff3-56fe351eaa7b',
   'americano',
@@ -208,6 +212,7 @@ VALUES (
   'Liqueur',
   9,
   'Italy',
+  NULL,
   ARRAY['アメリカーノカクテル']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -218,6 +223,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -254,7 +260,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('02bac2f2-176e-5530-90ec-5b8a36266c7a', '軽く混ぜて仕上げる。', 2);
 
 -- aperol-spritz
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'e4662b66-6d38-5874-9541-268d547487a3',
   'aperol-spritz',
@@ -264,6 +270,7 @@ VALUES (
   'Liqueur',
   8,
   'Italy',
+  NULL,
   ARRAY['スプマンテ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -274,6 +281,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -310,7 +318,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('1a9eb1d8-f81e-5fd7-892c-4ca51e9f6d24', '軽く混ぜ、オレンジスライスを飾る。', 2);
 
 -- appletini
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'f5c59c52-226b-5c3c-9e33-2a5f400be72b',
   'appletini',
@@ -320,6 +328,7 @@ VALUES (
   'Vodka',
   24,
   'United States',
+  NULL,
   ARRAY['アップルマティーニ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -330,6 +339,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -366,7 +376,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('049eeb94-6486-5a00-af43-6adaa90eefec', '冷やしたグラスに注ぐ。', 2);
 
 -- aviation
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'e8ef61f4-4461-5b69-8cd8-9b3ae92eb8f1',
   'aviation',
@@ -376,6 +386,7 @@ VALUES (
   'Gin',
   27,
   'United States',
+  NULL,
   ARRAY['アヴィエーション']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -386,6 +397,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -423,7 +435,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('e8e8ad31-0a32-5d3a-b6f8-7e92faec5ba8', '冷やしたグラスに注ぐ。', 2);
 
 -- b-52
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '7c00a9b9-0f28-597c-b1f8-c86c4abcc8cd',
   'b-52',
@@ -433,6 +445,7 @@ VALUES (
   'Liqueur',
   24,
   'Canada',
+  NULL,
   ARRAY['ビー・フィフティツー']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -443,6 +456,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -479,7 +493,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('cf250944-abbf-5617-b3d8-96a9c33d10af', '軽く混ぜて仕上げる。', 2);
 
 -- bacardi-cocktail
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'c7812347-2052-5308-90b7-aa16f0cf2213',
   'bacardi-cocktail',
@@ -489,6 +503,7 @@ VALUES (
   'Rum',
   24,
   'Cuba',
+  NULL,
   ARRAY['バカルディ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -499,6 +514,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -535,7 +551,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('740baaaa-c340-5ab0-99e3-3b6484daf5cf', '冷やしたグラスに注ぐ。', 2);
 
 -- batanga
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'fccba1b6-40f4-5550-a154-0928ee57ee39',
   'batanga',
@@ -545,6 +561,7 @@ VALUES (
   'Tequila',
   10,
   'Mexico',
+  NULL,
   ARRAY['バタンガカクテル']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -555,6 +572,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -592,7 +610,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('452fea9a-1811-515c-b5a0-e54db96f88a7', '軽く混ぜて仕上げる。', 2);
 
 -- batida-de-coco
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '1c82a35b-601f-54c9-a038-3d64c4d30332',
   'batida-de-coco',
@@ -602,6 +620,7 @@ VALUES (
   'Cachaca',
   14,
   'Brazil',
+  NULL,
   ARRAY['バチーダ・デ・ココ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -612,6 +631,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -648,7 +668,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('d3a1c9a9-3010-506e-b0b5-9bfcf806e640', '冷やしたグラスに注ぐ。', 2);
 
 -- bay-breeze
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '8e7ba2ae-0825-5965-b895-0f3c50e6a1ca',
   'bay-breeze',
@@ -658,6 +678,7 @@ VALUES (
   'Vodka',
   9,
   'United States',
+  NULL,
   ARRAY['ハワイアンシーブリーズ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -668,6 +689,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -704,7 +726,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('a7211dc1-ee20-51e5-9a7f-727d097ed2c6', '軽く混ぜて仕上げる。', 2);
 
 -- bees-knees
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '6045b947-0e96-5b41-b44a-c95621944ae6',
   'bees-knees',
@@ -714,6 +736,7 @@ VALUES (
   'Gin',
   20,
   'United States',
+  NULL,
   '{}'::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -724,6 +747,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -760,7 +784,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('941089fe-a490-5744-af3c-082a759b5ca4', 'クーペグラスに注ぐ。', 2);
 
 -- between-the-sheets
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'a30a5619-0d64-5519-ba1b-e1658f1aad15',
   'between-the-sheets',
@@ -770,6 +794,7 @@ VALUES (
   'Rum',
   29,
   'France',
+  NULL,
   ARRAY['ビトウィーン・ザ・シーツ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -780,6 +805,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -817,7 +843,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('1ef1dfa7-e593-550f-ae8e-d8505553ebcf', '冷やしたグラスに注ぐ。', 2);
 
 -- bijou
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '0eddff1d-654a-5f82-a257-fd353347f42f',
   'bijou',
@@ -827,6 +853,7 @@ VALUES (
   'Gin',
   31,
   'United States',
+  NULL,
   ARRAY['ビジューカクテル']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -837,6 +864,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -874,7 +902,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('e539b642-95da-5830-bac8-8f6ee5b117f9', '冷やしたグラスに注ぐ。', 2);
 
 -- black-russian
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '2f70b240-173b-5799-ae0c-46e955aa7a78',
   'black-russian',
@@ -884,6 +912,7 @@ VALUES (
   'Vodka',
   27,
   'Belgium',
+  NULL,
   ARRAY['ブラック・ルシアン']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -894,6 +923,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -929,7 +959,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('97a9f74f-b878-5033-bd99-0b943502b3d2', '軽く混ぜて仕上げる。', 2);
 
 -- blood-and-sand
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '3f804884-c3ed-51e6-a022-7a77282648d1',
   'blood-and-sand',
@@ -939,6 +969,7 @@ VALUES (
   'Whisky',
   20,
   'United Kingdom',
+  NULL,
   ARRAY['ブラッド＆サンド']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -949,6 +980,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -986,7 +1018,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('883d8d28-2672-5036-a6d9-98ddc08f4406', '冷やしたグラスに注ぐ。', 2);
 
 -- bloody-mary
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'd7085ca7-9276-52bb-b9fb-fe6420b48c32',
   'bloody-mary',
@@ -996,6 +1028,7 @@ VALUES (
   'Vodka',
   12,
   'France',
+  NULL,
   '{}'::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -1006,6 +1039,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1045,7 +1079,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('8c0e59e2-d526-5b88-be45-c3f0b2326084', 'セロリやレモンスライスを飾る。', 2);
 
 -- blue-lagoon
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'd1d05336-3a48-5478-94c6-ddd9a6a44bc9',
   'blue-lagoon',
@@ -1055,6 +1089,7 @@ VALUES (
   'Vodka',
   10,
   'France',
+  NULL,
   ARRAY['ブルー・ラグーン']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -1065,6 +1100,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1101,7 +1137,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('9747afa6-db05-5ec3-8799-2a3a25efa9be', '軽く混ぜて仕上げる。', 2);
 
 -- boulevardier
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'a31f75ce-222f-53f4-a62d-c7557087640f',
   'boulevardier',
@@ -1111,6 +1147,7 @@ VALUES (
   'Whisky',
   27,
   'France',
+  NULL,
   ARRAY['ブルヴァルディエ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -1121,6 +1158,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1157,7 +1195,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('6d20de9f-54a5-59e4-9866-6e060f6f157b', '冷やしたグラスに注ぐ。', 2);
 
 -- bramble
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'f62ce1c4-e13a-5d9c-b449-3b25c9407d8c',
   'bramble',
@@ -1167,6 +1205,7 @@ VALUES (
   'Gin',
   18,
   'United Kingdom',
+  NULL,
   ARRAY['ブランブルカクテル']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -1177,6 +1216,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1214,7 +1254,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('3ff112d6-1869-594f-9a1a-29693a86c0ca', '冷やしたグラスに注ぐ。', 2);
 
 -- brandy-alexander
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '282a20e9-dc9b-59da-8240-734729d52275',
   'brandy-alexander',
@@ -1224,6 +1264,7 @@ VALUES (
   'Brandy',
   18,
   'United States',
+  NULL,
   ARRAY['ブランデーアレクサンダー']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -1234,6 +1275,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1270,7 +1312,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('4d4fa6ee-16d9-5647-a39c-d630c97acf8b', '冷やしたグラスに注ぐ。', 2);
 
 -- brandy-crusta
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '71ad5d98-739f-5c39-a223-6c634abb19a3',
   'brandy-crusta',
@@ -1280,6 +1322,7 @@ VALUES (
   'Brandy',
   26,
   'United States',
+  NULL,
   ARRAY['ブランデー・クラスタ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -1290,6 +1333,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1329,7 +1373,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('43c550a5-ba2f-5ac8-ade9-67749e1a9ffe', '冷やしたグラスに注ぐ。', 2);
 
 -- brave-bull
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '717be5f3-a922-5783-9520-73d147e877ea',
   'brave-bull',
@@ -1339,6 +1383,7 @@ VALUES (
   'Tequila',
   28,
   'Mexico',
+  NULL,
   ARRAY['ブレイブ・ブル']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -1349,6 +1394,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1384,7 +1430,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('25b55fcd-259c-521a-bada-2dc7764401db', '軽く混ぜて仕上げる。', 2);
 
 -- brown-derby
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '98f0be90-3d9f-5644-83a5-812a710caf32',
   'brown-derby',
@@ -1394,6 +1440,7 @@ VALUES (
   'Whisky',
   22,
   'United States',
+  NULL,
   ARRAY['ブラウン・ダービー']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -1404,6 +1451,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1440,7 +1488,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('968efd4a-f318-5501-99f0-262531ae6d01', '冷やしたグラスに注ぐ。', 2);
 
 -- cable-car
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'a63f5b0f-c4a6-54b3-adb2-af969ecc6688',
   'cable-car',
@@ -1450,6 +1498,7 @@ VALUES (
   'Rum',
   23,
   'United States',
+  NULL,
   ARRAY['ケーブル・カー']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -1460,6 +1509,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1497,7 +1547,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('5e480865-189d-5185-8c1c-893400affb2c', '冷やしたグラスに注ぐ。', 2);
 
 -- caipirinha
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'a94eb749-8783-537a-9949-6142cb6336de',
   'caipirinha',
@@ -1507,6 +1557,7 @@ VALUES (
   'Cachaca',
   20,
   'Brazil',
+  NULL,
   '{}'::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -1517,6 +1568,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1553,7 +1605,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('d299819a-fca3-5b51-9cf7-6989a4511d4d', 'カシャッサを注ぎ、軽く混ぜる。', 2);
 
 -- caipiroska
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'fca7f57d-a2bb-57b0-88a1-761ad4f8a234',
   'caipiroska',
@@ -1563,6 +1615,7 @@ VALUES (
   'Vodka',
   18,
   'Brazil',
+  NULL,
   ARRAY['カイピロシュカ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -1573,6 +1626,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1609,7 +1663,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('9f2b10f3-da9b-5437-ab89-5d6939ca1e2d', 'よく混ぜて仕上げる。', 2);
 
 -- calpis-sour
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'dbda4db0-8b7e-584d-aed6-d4b788204afa',
   'calpis-sour',
@@ -1619,6 +1673,7 @@ VALUES (
   'Shochu',
   6,
   'Japan',
+  NULL,
   ARRAY['カルピスチューハイ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -1629,6 +1684,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1665,7 +1721,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('362219cf-46f1-595f-b163-1521d1148327', '軽く混ぜて仕上げる。', 2);
 
 -- campari-soda
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '198e5bf1-7570-5aac-bb8a-04688ed67ffb',
   'campari-soda',
@@ -1675,6 +1731,7 @@ VALUES (
   'Liqueur',
   7,
   'Italy',
+  NULL,
   ARRAY['カンパリ・ソーダ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -1685,6 +1742,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1720,7 +1778,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('bbcdb181-0984-5a58-836c-7a3a6f5f92ce', '軽く混ぜて仕上げる。', 2);
 
 -- cantarito
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '26f32a33-6f0e-58b8-8adc-37148bf49abc',
   'cantarito',
@@ -1730,6 +1788,7 @@ VALUES (
   'Tequila',
   9,
   'Mexico',
+  NULL,
   ARRAY['カンタリートス']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -1740,6 +1799,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1778,7 +1838,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('d2595b42-15c8-53eb-8d46-22855b138fd5', '軽く混ぜて仕上げる。', 2);
 
 -- cape-codder
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'da773240-6f83-5814-b86c-50bfad260b30',
   'cape-codder',
@@ -1788,6 +1848,7 @@ VALUES (
   'Vodka',
   9,
   'United States',
+  NULL,
   ARRAY['ウォッカクランベリー']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -1798,6 +1859,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1833,7 +1895,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('bc8c7b11-620a-5231-8f54-ce27332536ba', '軽く混ぜて仕上げる。', 2);
 
 -- cassis-orange
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '34ae35a1-4222-543d-9b11-aca30ca3133f',
   'cassis-orange',
@@ -1843,6 +1905,7 @@ VALUES (
   'Liqueur',
   6,
   'Japan',
+  NULL,
   ARRAY['カシオレ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -1853,6 +1916,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1888,7 +1952,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('c6040c10-edcd-5417-bbbb-bf79e7c5e5b1', '軽く混ぜて仕上げる。', 2);
 
 -- champagne-cocktail
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '61a2c7d3-766f-5c9b-956d-2f31a87f381a',
   'champagne-cocktail',
@@ -1898,6 +1962,7 @@ VALUES (
   'Brandy',
   14,
   'United States',
+  NULL,
   ARRAY['シャンペンカクテル']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -1908,6 +1973,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1945,7 +2011,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('d754aec4-4efa-5efe-a0de-a1158103278d', '軽く混ぜて仕上げる。', 2);
 
 -- chi-chi
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '55c5cbf0-35d6-58f5-b36c-9e2ae7d98082',
   'chi-chi',
@@ -1955,6 +2021,7 @@ VALUES (
   'Vodka',
   11,
   'United States',
+  NULL,
   ARRAY['チチカクテル']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -1965,6 +2032,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2001,7 +2069,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('ffcba75f-c218-5c00-b26a-83057075c240', '冷やしたグラスに注ぐ。', 2);
 
 -- chuhai
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '76b32382-a52d-562a-9775-2a18b06b0701',
   'chuhai',
@@ -2011,6 +2079,7 @@ VALUES (
   'Shochu',
   7,
   'Japan',
+  NULL,
   ARRAY['チューハイ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -2021,6 +2090,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2057,7 +2127,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('5b288517-87b0-5805-8875-422e19d452ed', '軽く混ぜて仕上げる。', 2);
 
 -- clover-club
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'b505afa3-bdb5-5ec2-a4ba-f0888e2eddb2',
   'clover-club',
@@ -2067,6 +2137,7 @@ VALUES (
   'Gin',
   20,
   'United States',
+  NULL,
   ARRAY['クローバー・クラブ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -2077,6 +2148,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2114,7 +2186,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('78bf2141-173e-5d36-aafc-3d625903d480', '冷やしたグラスに注ぐ。', 2);
 
 -- coffee-shochu
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '483a4013-be33-5f2b-b357-b949e44f32c3',
   'coffee-shochu',
@@ -2124,6 +2196,7 @@ VALUES (
   'Shochu',
   8,
   'Japan',
+  NULL,
   ARRAY['焼酎コーヒー割り']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -2134,6 +2207,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2170,7 +2244,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('d2c99869-d9a6-54fa-8ef1-9276bb24bca2', '軽く混ぜて仕上げる。', 2);
 
 -- corpse-reviver-no-2
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '8e12b843-2f1c-537e-8365-8bd86437bea4',
   'corpse-reviver-no-2',
@@ -2180,6 +2254,7 @@ VALUES (
   'Gin',
   24,
   'United Kingdom',
+  NULL,
   ARRAY['コープス・リバイバー2']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -2190,6 +2265,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2228,7 +2304,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('32d86d80-6cda-52e0-b893-de1c0ec40b30', '冷やしたグラスに注ぐ。', 2);
 
 -- cosmopolitan
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '778eb6aa-6c16-57b6-b322-c84e61fc00f6',
   'cosmopolitan',
@@ -2238,6 +2314,7 @@ VALUES (
   'Vodka',
   20,
   'United States',
+  NULL,
   ARRAY['コスモ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -2248,6 +2325,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2285,7 +2363,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('102cd2c2-16b9-5091-8992-f106e3220db2', 'クーペグラスに注ぎ、オレンジピールを飾る。', 2);
 
 -- cuba-libre
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '1c106b40-ba86-5394-870f-8b0dd7cd0c0a',
   'cuba-libre',
@@ -2295,6 +2373,7 @@ VALUES (
   'Rum',
   10,
   'Cuba',
+  NULL,
   ARRAY['ラムコーラ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -2305,6 +2384,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2341,7 +2421,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('604f887f-374d-5685-8fe3-ee69758faa78', 'コーラを注ぎ、軽く混ぜる。', 2);
 
 -- daiquiri
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '9da36ee6-d5cc-55e2-9c17-badb0e8d24d0',
   'daiquiri',
@@ -2351,6 +2431,7 @@ VALUES (
   'Rum',
   22,
   'Cuba',
+  NULL,
   ARRAY['ダイキリ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -2361,6 +2442,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2397,7 +2479,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('d03f7b55-7490-5369-96b1-39260a3175e5', 'クーペグラスに注ぐ。', 2);
 
 -- dark-and-stormy
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '03144710-ee0a-5810-9421-060e36db0a20',
   'dark-and-stormy',
@@ -2407,6 +2489,7 @@ VALUES (
   'Rum',
   11,
   'Bermuda',
+  NULL,
   ARRAY['ダーク＆ストーミー']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -2417,6 +2500,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2453,7 +2537,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('e4451837-5183-54a0-9ee3-666d147e9044', '軽く混ぜて仕上げる。', 2);
 
 -- dry-martini
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'e23aa9eb-7fac-5b55-a09c-3983c6c8d948',
   'dry-martini',
@@ -2463,6 +2547,7 @@ VALUES (
   'Gin',
   30,
   'United States',
+  NULL,
   ARRAY['マティーニ', 'Martini']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -2473,6 +2558,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2508,7 +2594,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('38dd5c32-8f8f-52c3-aa65-2a6c39f66abf', '冷やしたカクテルグラスに注ぎ、オリーブまたはレモンピールを飾る。', 2);
 
 -- el-diablo
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'b5135fca-5784-5a6f-aaa7-06fae096d6a7',
   'el-diablo',
@@ -2518,6 +2604,7 @@ VALUES (
   'Tequila',
   12,
   'United States',
+  NULL,
   ARRAY['エル・ディアブロ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -2528,6 +2615,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2565,7 +2653,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('10acdae8-d6cd-559f-bbf1-e373dea5b480', '軽く混ぜて仕上げる。', 2);
 
 -- el-presidente
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '9a08c33e-8227-5550-aee9-9d8085147f60',
   'el-presidente',
@@ -2575,6 +2663,7 @@ VALUES (
   'Rum',
   25,
   'Cuba',
+  NULL,
   ARRAY['エル・プレジデンテ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -2585,6 +2674,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2622,7 +2712,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('df267222-be43-51cf-b907-17d8f500ace4', '冷やしたグラスに注ぐ。', 2);
 
 -- espresso-martini
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'c153ab11-335f-5956-8a51-28efcc35b7a5',
   'espresso-martini',
@@ -2632,6 +2722,7 @@ VALUES (
   'Vodka',
   18,
   'United Kingdom',
+  NULL,
   '{}'::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -2642,6 +2733,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2679,7 +2771,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('591ce14e-0187-5ea6-b949-be47d7d29ffc', 'クーペに注ぎ、コーヒー豆を飾る。', 2);
 
 -- french-75
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '9f644106-3400-5e46-92d4-09df7a190907',
   'french-75',
@@ -2689,6 +2781,7 @@ VALUES (
   'Gin',
   15,
   'France',
+  NULL,
   '{}'::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -2699,6 +2792,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2736,7 +2830,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('dce5cd96-64fd-577b-b285-9d7a867f7a83', 'シャンパンを静かに加えて飾る。', 2);
 
 -- french-connection
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '54cc4c69-dd9c-5c35-8050-404563f73a93',
   'french-connection',
@@ -2746,6 +2840,7 @@ VALUES (
   'Brandy',
   32,
   'United States',
+  NULL,
   ARRAY['フレンチ・コネクション']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -2756,6 +2851,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2791,7 +2887,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('49c451fe-b4ab-5b9f-90df-f3cf7fd136e8', '軽く混ぜて仕上げる。', 2);
 
 -- french-martini
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '8558eb33-f6f9-5295-9728-8e25bbac2a49',
   'french-martini',
@@ -2801,6 +2897,7 @@ VALUES (
   'Vodka',
   20,
   'United States',
+  NULL,
   ARRAY['フレンチ・マティーニ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -2811,6 +2908,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2847,7 +2945,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('5089a150-2b7a-52ed-9c96-75639dc0d81e', '冷やしたグラスに注ぐ。', 2);
 
 -- gimlet
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'b16a935c-14eb-5827-93a8-9ae173516b6b',
   'gimlet',
@@ -2857,6 +2955,7 @@ VALUES (
   'Gin',
   29,
   'United Kingdom',
+  NULL,
   ARRAY['ジンギムレット']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -2867,6 +2966,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2903,7 +3003,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('bbe4eb88-bd2e-514a-b4bc-e9eab9d06ce6', '冷やしたグラスに注ぐ。', 2);
 
 -- gin-fizz
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'e39d2383-33fd-567b-be97-4a2db48c7672',
   'gin-fizz',
@@ -2913,6 +3013,7 @@ VALUES (
   'Gin',
   12,
   'United States',
+  NULL,
   ARRAY['ジン・フィズ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -2923,6 +3024,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2960,7 +3062,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('2782e383-d8f3-572f-a77e-76721557fca2', '冷やしたグラスに注ぐ。', 2);
 
 -- gin-rickey
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'df713bb3-cc46-5043-9e7f-84199e19ed19',
   'gin-rickey',
@@ -2970,6 +3072,7 @@ VALUES (
   'Gin',
   10,
   'United States',
+  NULL,
   ARRAY['ジン・リッキー']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -2980,6 +3083,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3016,7 +3120,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('6ac8c9fa-5089-51cd-827f-a3b8a9506b61', '軽く混ぜて仕上げる。', 2);
 
 -- gin-tonic
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'c0c00000-0000-4000-8000-000000000004',
   'gin-tonic',
@@ -3026,6 +3130,7 @@ VALUES (
   'Gin',
   8,
   'United Kingdom',
+  NULL,
   ARRAY['ジン・トニック', 'G&T']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -3036,6 +3141,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3072,7 +3178,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('f8ce6b98-5ab5-5700-b16d-fe619c87be11', 'トニックウォーターを静かに注ぎ、ライムを絞って落とす。', 2);
 
 -- godfather
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '93504396-a187-5289-99e3-66ae1965c89d',
   'godfather',
@@ -3082,6 +3188,7 @@ VALUES (
   'Whisky',
   32,
   'United States',
+  NULL,
   ARRAY['ゴッドファーザー・カクテル']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -3092,6 +3199,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3127,7 +3235,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('8f7a582b-ec85-5e6e-bae4-ac18f4f1b9b8', '軽く混ぜて仕上げる。', 2);
 
 -- gold-rush
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'ca0372b6-e0bd-5e0c-af81-332a806b215a',
   'gold-rush',
@@ -3137,6 +3245,7 @@ VALUES (
   'Whisky',
   23,
   'United States',
+  NULL,
   ARRAY['ゴールド・ラッシュ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -3147,6 +3256,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3183,7 +3293,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('c649afcc-7604-5854-bafa-fe6d5072c897', '冷やしたグラスに注ぐ。', 2);
 
 -- golden-cadillac
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '93070ec2-fbb7-5e39-a362-fb9fa8f534a2',
   'golden-cadillac',
@@ -3193,6 +3303,7 @@ VALUES (
   'Liqueur',
   13,
   'United States',
+  NULL,
   ARRAY['ゴールデン・キャデラック']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -3203,6 +3314,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3239,7 +3351,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('e3a94bab-fdff-5810-b02d-8c6b12387f29', '冷やしたグラスに注ぐ。', 2);
 
 -- grapefruit-sour
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '0aec9877-36a5-58f9-b99e-276c440af1d0',
   'grapefruit-sour',
@@ -3249,6 +3361,7 @@ VALUES (
   'Shochu',
   7,
   'Japan',
+  NULL,
   ARRAY['グレフルサワー']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -3259,6 +3372,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3295,7 +3409,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('c0188474-7d32-5bb0-ad8c-4b52f13e49de', '軽く混ぜて仕上げる。', 2);
 
 -- grasshopper
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '601adb78-5381-5ff8-beea-eb101d1ec3dc',
   'grasshopper',
@@ -3305,6 +3419,7 @@ VALUES (
   'Liqueur',
   12,
   'United States',
+  NULL,
   ARRAY['グラスホッパーカクテル']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -3315,6 +3430,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3351,7 +3467,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('bd51c2fc-e122-5aa1-bfc6-26e348a1d394', '冷やしたグラスに注ぐ。', 2);
 
 -- greyhound
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '67cef8ca-8681-50f4-8f6e-1326d29a590a',
   'greyhound',
@@ -3361,6 +3477,7 @@ VALUES (
   'Vodka',
   10,
   'United States',
+  NULL,
   ARRAY['グレーハウンド']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -3371,6 +3488,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3406,7 +3524,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('2d79b6d4-760d-58ef-a5f3-03fe86c2e3e6', '軽く混ぜて仕上げる。', 2);
 
 -- grog
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'bca26721-8b89-592f-93da-33890a6fecd6',
   'grog',
@@ -3416,6 +3534,7 @@ VALUES (
   'Rum',
   12,
   'United Kingdom',
+  NULL,
   ARRAY['ラムグロッグ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -3426,6 +3545,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3463,7 +3583,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('b0a25cd9-02c7-53c0-bb95-1d0cc0e51fa5', '軽く混ぜて仕上げる。', 2);
 
 -- hanky-panky
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'd9869011-f36a-540f-bf3b-741b862612ab',
   'hanky-panky',
@@ -3473,6 +3593,7 @@ VALUES (
   'Gin',
   27,
   'United Kingdom',
+  NULL,
   ARRAY['ハンキー・パンキー']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -3483,6 +3604,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3519,7 +3641,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('bc65aecc-df38-5e6a-aa67-b53d6fc621a6', '冷やしたグラスに注ぐ。', 2);
 
 -- harvey-wallbanger
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'b9785370-400f-5f6f-8ddc-cb4da9b99dd7',
   'harvey-wallbanger',
@@ -3529,6 +3651,7 @@ VALUES (
   'Vodka',
   11,
   'United States',
+  NULL,
   ARRAY['ハーヴェイ・ウォールバンガー']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -3539,6 +3662,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3575,7 +3699,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('eec050bf-f397-5dc7-a751-65e0def284c6', '軽く混ぜて仕上げる。', 2);
 
 -- hemingway-daiquiri
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '103b958a-957a-5e05-9e82-707607a83d55',
   'hemingway-daiquiri',
@@ -3585,6 +3709,7 @@ VALUES (
   'Rum',
   20,
   'Cuba',
+  NULL,
   ARRAY['パパドブレ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -3595,6 +3720,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3632,7 +3758,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('2ded592b-e021-50f1-a341-501f5d1e0880', '冷やしたグラスに注ぐ。', 2);
 
 -- highball
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'c0c00000-0000-4000-8000-000000000008',
   'highball',
@@ -3642,6 +3768,7 @@ VALUES (
   'Whisky',
   7,
   'Japan',
+  NULL,
   ARRAY['ウィスキーハイボール']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -3652,6 +3779,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3687,7 +3815,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('4ec3974e-0815-5a4c-b192-38702d42d061', '炭酸水を注ぎ、マドラーで縦に一度だけステアする。', 2);
 
 -- hoppy-set
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'eaa952b4-2cce-50bb-b9ea-6a0cedaf0fd9',
   'hoppy-set',
@@ -3697,6 +3825,7 @@ VALUES (
   'Shochu',
   6,
   'Japan',
+  NULL,
   ARRAY['ホッピー']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -3707,6 +3836,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3742,7 +3872,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('69ab9617-0e37-5e2c-b646-ac60f09a88b8', '軽く混ぜて仕上げる。', 2);
 
 -- horses-neck
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'ece37a8a-8ac0-5bc4-a4ba-26b868128d40',
   'horses-neck',
@@ -3752,6 +3882,7 @@ VALUES (
   'Brandy',
   11,
   'United States',
+  NULL,
   ARRAY['ホースズネック']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -3762,6 +3893,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3799,7 +3931,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('122cbbf2-e565-5a47-9c7b-d53f313ae15e', '軽く混ぜて仕上げる。', 2);
 
 -- hot-buttered-rum
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '3269a870-f33c-52d3-a29a-670478b8b60a',
   'hot-buttered-rum',
@@ -3809,6 +3941,7 @@ VALUES (
   'Rum',
   12,
   'United States',
+  NULL,
   ARRAY['ホット・バタード・ラム']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -3819,6 +3952,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3857,7 +3991,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('ef5faa91-9b52-5ee7-bcd5-aa574ce75cdb', '軽く混ぜて温かいうちに提供する。', 2);
 
 -- hot-toddy
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '9bd1eb2a-3ffe-5a22-82b7-609ff6b3ac0c',
   'hot-toddy',
@@ -3867,6 +4001,7 @@ VALUES (
   'Whisky',
   10,
   'United Kingdom',
+  NULL,
   ARRAY['ホット・トディ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -3877,6 +4012,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3914,7 +4050,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('c4bb0796-87ac-5220-8c08-0ad137a47941', '軽く混ぜて温かいうちに提供する。', 2);
 
 -- hurricane
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'aaf143fd-7ede-551d-a721-bdec150bab62',
   'hurricane',
@@ -3924,6 +4060,7 @@ VALUES (
   'Rum',
   17,
   'United States',
+  NULL,
   ARRAY['ハリケーンカクテル']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -3934,6 +4071,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3972,7 +4110,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('f7c53cc2-9d4b-5f40-bcf1-9f2d82b0ec47', '冷やしたグラスに注ぐ。', 2);
 
 -- irish-coffee
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '6ab0c407-2842-5dc3-850b-43cb4369f22c',
   'irish-coffee',
@@ -3982,6 +4120,7 @@ VALUES (
   'Whisky',
   9,
   'Ireland',
+  NULL,
   ARRAY['アイリッシュ・コーヒー']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -3992,6 +4131,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4029,7 +4169,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('289e9362-c1ea-5e63-b180-d3f07269f00d', '軽く混ぜて温かいうちに提供する。', 2);
 
 -- jack-rose
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '8c7e3f1f-1a15-5a56-892c-10afbec3b80a',
   'jack-rose',
@@ -4039,6 +4179,7 @@ VALUES (
   'Brandy',
   23,
   'United States',
+  NULL,
   ARRAY['ジャック・ローズ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -4049,6 +4190,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4085,7 +4227,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('62429341-ad59-5735-abde-59b90943f04d', '冷やしたグラスに注ぐ。', 2);
 
 -- japanese-cocktail
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'b7c2b510-eb9a-5ca8-9df5-0e7b0cd2f627',
   'japanese-cocktail',
@@ -4095,6 +4237,7 @@ VALUES (
   'Brandy',
   31,
   'United States',
+  NULL,
   ARRAY['ジャパニーズ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -4105,6 +4248,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4141,7 +4285,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('ad8ce6df-8109-54d9-af96-bb92abf0de9a', '冷やしたグラスに注ぐ。', 2);
 
 -- juan-collins
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'd7f5141d-a234-5226-802d-d2c8962d7a5c',
   'juan-collins',
@@ -4151,6 +4295,7 @@ VALUES (
   'Tequila',
   11,
   'Mexico',
+  NULL,
   ARRAY['ホアン・コリンズ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -4161,6 +4306,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4198,7 +4344,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('9f52cac8-ac53-5cba-912f-08a3d8743837', '冷やしたグラスに注ぐ。', 2);
 
 -- jungle-bird
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '219d2a5c-9dbf-5637-ae64-dd9f43bc0966',
   'jungle-bird',
@@ -4208,6 +4354,7 @@ VALUES (
   'Rum',
   18,
   'Malaysia',
+  NULL,
   ARRAY['ジャングル・バード']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -4218,6 +4365,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4256,7 +4404,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('b4f4d5d1-7bee-519c-84d8-45e4cfadce77', '冷やしたグラスに注ぐ。', 2);
 
 -- kalua-milk
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '24aa1d10-f373-5c30-b15d-3f9cddfe7bf9',
   'kalua-milk',
@@ -4266,6 +4414,7 @@ VALUES (
   'Liqueur',
   6,
   'Mexico',
+  NULL,
   ARRAY['カルーア・ミルク', 'カールーアミルク']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -4276,6 +4425,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4311,7 +4461,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('055ac2a3-8032-54cc-b7df-2b9bc9cdd896', '軽く混ぜて仕上げる。', 2);
 
 -- kamikaze
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '8210bcd2-43a3-5952-82ab-a62557611454',
   'kamikaze',
@@ -4321,6 +4471,7 @@ VALUES (
   'Vodka',
   27,
   'United States',
+  NULL,
   ARRAY['神風']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -4331,6 +4482,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4367,7 +4519,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('375fa4e9-1439-5c8c-ad19-709fc0158bdd', '冷やしたグラスに注ぐ。', 2);
 
 -- kir-royale
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'd5a39982-215a-5a41-9f59-38a3d7c462ad',
   'kir-royale',
@@ -4377,6 +4529,7 @@ VALUES (
   'Liqueur',
   12,
   'France',
+  NULL,
   ARRAY['キール・ロワイヤル']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -4387,6 +4540,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4422,7 +4576,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('e75c3f11-450a-5ba9-b6c5-42d74594e923', '軽く混ぜて仕上げる。', 2);
 
 -- kir
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '31729125-78fb-5292-903b-303a54bce70f',
   'kir',
@@ -4432,6 +4586,7 @@ VALUES (
   'Liqueur',
   11,
   'France',
+  NULL,
   ARRAY['キールカクテル']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -4442,6 +4597,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4477,7 +4633,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('1bf854a8-594e-53f9-aac0-366d21c6bd4e', '軽く混ぜて仕上げる。', 2);
 
 -- knickerbocker
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '6d3a9414-2827-55ec-b366-b27775fce91a',
   'knickerbocker',
@@ -4487,6 +4643,7 @@ VALUES (
   'Rum',
   18,
   'United States',
+  NULL,
   ARRAY['ニッカボッカー']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -4497,6 +4654,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4534,7 +4692,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('d74618d9-790c-5ac7-9301-fed1cd079501', '冷やしたグラスに注ぐ。', 2);
 
 -- last-word
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '870c8ac6-7c07-5d65-990d-ddd6bca07db8',
   'last-word',
@@ -4544,6 +4702,7 @@ VALUES (
   'Gin',
   28,
   'United States',
+  NULL,
   ARRAY['ザ・ラスト・ワード']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -4554,6 +4713,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4591,7 +4751,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('4e218121-116e-5380-beac-c6eb584e06d4', '冷やしたグラスに注ぐ。', 2);
 
 -- lemon-drop-martini
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '2ca8c8b3-016e-5a04-b26e-f0298c61ea42',
   'lemon-drop-martini',
@@ -4601,6 +4761,7 @@ VALUES (
   'Vodka',
   24,
   'United States',
+  NULL,
   ARRAY['レモンドロップ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -4611,6 +4772,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4648,7 +4810,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('50693dfe-01c8-563a-91ef-72f08b5d704a', '冷やしたグラスに注ぐ。', 2);
 
 -- lemon-sour
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'c0c00000-0000-4000-8000-000000000001',
   'lemon-sour',
@@ -4658,6 +4820,7 @@ VALUES (
   'Shochu',
   5,
   'Japan',
+  NULL,
   ARRAY['レモンサワ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -4668,6 +4831,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4704,7 +4868,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('8c5a9c47-2a33-5d0b-acff-9c44b46185ce', '炭酸水を静かに注ぎ、縦に一度だけステアする。', 2);
 
 -- long-island-iced-tea
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'b52cc965-e893-591b-a1e6-9b1ee3fac577',
   'long-island-iced-tea',
@@ -4714,6 +4878,7 @@ VALUES (
   'Vodka',
   22,
   'United States',
+  NULL,
   ARRAY['LIIT']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -4724,6 +4889,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4765,7 +4931,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('438f1465-c2ee-5e2f-afbd-ab567c0014d1', 'コーラを静かに注いで仕上げる。', 2);
 
 -- macunaima
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '557833db-d645-5d6f-8479-e112025f0538',
   'macunaima',
@@ -4775,6 +4941,7 @@ VALUES (
   'Cachaca',
   24,
   'Brazil',
+  NULL,
   ARRAY['マクナイーマ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -4785,6 +4952,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4822,7 +4990,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('93889860-2b01-5018-8a0c-ff238ad3b89c', '冷やしたグラスに注ぐ。', 2);
 
 -- mai-tai
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '7168f33f-d07f-5edc-a0ab-4dd4b19f72f8',
   'mai-tai',
@@ -4832,6 +5000,7 @@ VALUES (
   'Rum',
   22,
   'United States',
+  NULL,
   '{}'::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -4842,6 +5011,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4880,7 +5050,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('f89db70a-d952-5400-b7b0-b5bd77a3d839', 'ミントとライムを飾る。', 2);
 
 -- mamie-taylor
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '342434fa-3fe4-5693-90ef-e16ba73c0e4b',
   'mamie-taylor',
@@ -4890,6 +5060,7 @@ VALUES (
   'Whisky',
   10,
   'United States',
+  NULL,
   ARRAY['マミー・テイラー']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -4900,6 +5071,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4936,7 +5108,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('857dd8cd-8124-5491-a706-d72a14e62f99', '軽く混ぜて仕上げる。', 2);
 
 -- manhattan
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'c0c00000-0000-4000-8000-000000000002',
   'manhattan',
@@ -4946,6 +5118,7 @@ VALUES (
   'Whisky',
   30,
   'United States',
+  NULL,
   '{}'::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -4956,6 +5129,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4993,7 +5167,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('e887cd2f-356d-5cf0-8ce3-32abdbba5a84', 'カクテルグラスに注ぎ、チェリーを飾る。', 2);
 
 -- margarita
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'c0c00000-0000-4000-8000-000000000007',
   'margarita',
@@ -5003,6 +5177,7 @@ VALUES (
   'Tequila',
   25,
   'Mexico',
+  NULL,
   '{}'::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -5013,6 +5188,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5050,7 +5226,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('ba120aaf-9e98-5fd5-a20b-6e3fd5e62948', 'グラスに注ぐ。', 2);
 
 -- martinez
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '2bfa885a-ac3e-5f49-98c0-9df17b251426',
   'martinez',
@@ -5060,6 +5236,7 @@ VALUES (
   'Gin',
   29,
   'United States',
+  NULL,
   ARRAY['マルチネス']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -5070,6 +5247,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5107,7 +5285,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('4fd3515b-e0e0-5f01-ad65-a91c6528cbd7', '冷やしたグラスに注ぐ。', 2);
 
 -- mary-pickford
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'c9a4d832-974a-579d-9a09-741a75223d03',
   'mary-pickford',
@@ -5117,6 +5295,7 @@ VALUES (
   'Rum',
   19,
   'Cuba',
+  NULL,
   ARRAY['メアリー・ピックフォード']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -5127,6 +5306,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5164,7 +5344,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('a3071cda-d7f6-5c22-aa0a-45f53b5b51b0', '冷やしたグラスに注ぐ。', 2);
 
 -- matador
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'd6e46be6-2bc8-5b7d-9489-4f2464d9229f',
   'matador',
@@ -5174,6 +5354,7 @@ VALUES (
   'Tequila',
   16,
   'Mexico',
+  NULL,
   ARRAY['マタドールカクテル']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -5184,6 +5365,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5220,7 +5402,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('2256ece3-ad2c-56de-8088-b059a5a718f9', '冷やしたグラスに注ぐ。', 2);
 
 -- metropolitan
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '4523fc4f-253a-5c4c-b209-e54872288415',
   'metropolitan',
@@ -5230,6 +5412,7 @@ VALUES (
   'Brandy',
   28,
   'United States',
+  NULL,
   ARRAY['メトロポリタンカクテル']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -5240,6 +5423,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5277,7 +5461,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('48047b8a-14e7-5815-abf3-0b7d6f48f3c4', '冷やしたグラスに注ぐ。', 2);
 
 -- mexican-mule
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '60b0eaaa-9fa6-5ac2-a843-58cf42ff470a',
   'mexican-mule',
@@ -5287,6 +5471,7 @@ VALUES (
   'Tequila',
   11,
   'Mexico',
+  NULL,
   ARRAY['テキーラムュール']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -5297,6 +5482,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5333,7 +5519,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('582a08d1-7179-520f-ad73-450e1c36d919', '軽く混ぜて仕上げる。', 2);
 
 -- mint-julep
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '42b040f0-a9aa-51f7-8ae0-26f6bfe614db',
   'mint-julep',
@@ -5343,6 +5529,7 @@ VALUES (
   'Whisky',
   25,
   'United States',
+  NULL,
   '{}'::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -5353,6 +5540,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5389,7 +5577,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('f379887f-5882-5650-8976-b4d801d9fda4', '軽く混ぜ、ミントの穂を飾る。', 2);
 
 -- mojito
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'c0c00000-0000-4000-8000-000000000003',
   'mojito',
@@ -5399,6 +5587,7 @@ VALUES (
   'Rum',
   10,
   'Cuba',
+  NULL,
   '{}'::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -5409,6 +5598,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5447,7 +5637,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('1a225b91-39fc-5c49-bb47-7b849ed3b1e2', '炭酸水を加えて軽く混ぜ、ミントを飾る。', 2);
 
 -- monkey-gland
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'de839e7a-108f-5264-8249-2d6fb402ed3b',
   'monkey-gland',
@@ -5457,6 +5647,7 @@ VALUES (
   'Gin',
   24,
   'France',
+  NULL,
   ARRAY['モンキー・グランド']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -5467,6 +5658,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5504,7 +5696,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('9da1d14c-5752-5be4-a545-ccf1bd0bf9eb', '冷やしたグラスに注ぐ。', 2);
 
 -- moscow-mule
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '98343bf2-c6eb-5fb0-b188-98c41e062ea8',
   'moscow-mule',
@@ -5514,6 +5706,7 @@ VALUES (
   'Vodka',
   12,
   'United States',
+  NULL,
   ARRAY['モスクワミュール']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -5524,6 +5717,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5560,7 +5754,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('f696662f-9e81-53e2-80de-90f6425d144e', 'ジンジャービアを注ぎ、軽く混ぜてライムを飾る。', 2);
 
 -- navy-grog
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '46999470-8b34-5fdb-bade-67e142724f21',
   'navy-grog',
@@ -5570,6 +5764,7 @@ VALUES (
   'Rum',
   21,
   'United States',
+  NULL,
   ARRAY['ネイビー・グロッグ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -5580,6 +5775,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5619,7 +5815,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('186a92e5-8aa8-51f6-8023-91efe01f2821', '冷やしたグラスに注ぐ。', 2);
 
 -- negroni
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'c0c00000-0000-4000-8000-000000000005',
   'negroni',
@@ -5629,6 +5825,7 @@ VALUES (
   'Gin',
   24,
   'Italy',
+  NULL,
   '{}'::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -5639,6 +5836,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5675,7 +5873,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('037c40e2-f683-5c3e-b431-ea02d30be946', '軽くステアし、オレンジピールを飾る。', 2);
 
 -- new-york-sour
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'e96d6c82-4297-5110-8106-aa0a1e24116d',
   'new-york-sour',
@@ -5685,6 +5883,7 @@ VALUES (
   'Whisky',
   18,
   'United States',
+  NULL,
   ARRAY['ニューヨーク・サワー']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -5695,6 +5894,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5732,7 +5932,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('25ab6922-83d8-535e-b3e2-7137b484cf95', '冷やしたグラスに注ぐ。', 2);
 
 -- nikolaschka
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '40c29e1d-03b9-56e6-9f2b-989a33fe51ab',
   'nikolaschka',
@@ -5742,6 +5942,7 @@ VALUES (
   'Brandy',
   35,
   'Germany',
+  NULL,
   ARRAY['ニコラシュカ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -5752,6 +5953,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5788,7 +5990,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('eccfb93e-f145-5abc-81c4-52e81d43e8ce', '軽く混ぜて仕上げる。', 2);
 
 -- oaxaca-old-fashioned
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '55fb3713-48f8-5b41-9e96-5aea17014784',
   'oaxaca-old-fashioned',
@@ -5798,6 +6000,7 @@ VALUES (
   'Tequila',
   32,
   'United States',
+  NULL,
   ARRAY['オアハカ・オールドファッションド']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -5808,6 +6011,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5845,7 +6049,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('d76d368f-f645-55a0-ae0c-942e8b79c0df', '冷やしたグラスに注ぐ。', 2);
 
 -- old-fashioned
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'c0c00000-0000-4000-8000-000000000006',
   'old-fashioned',
@@ -5855,6 +6059,7 @@ VALUES (
   'Whisky',
   32,
   'United States',
+  NULL,
   ARRAY['オールドファッション']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -5865,6 +6070,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5902,7 +6108,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('8004c29b-06f2-53f9-9f9c-d6f739535c9c', '軽くステアし、オレンジピールを飾る。', 2);
 
 -- oolong-hai
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'ee6dd2c6-255f-5e09-b227-469bc2db522c',
   'oolong-hai',
@@ -5912,6 +6118,7 @@ VALUES (
   'Shochu',
   7,
   'Japan',
+  NULL,
   ARRAY['烏龍ハイ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -5922,6 +6129,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5957,7 +6165,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('b488a0c6-4fa8-5a0f-89fb-a0fbf5135ad3', '軽く混ぜて仕上げる。', 2);
 
 -- painkiller
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'c737e157-0c97-569c-aa10-58054e2796ce',
   'painkiller',
@@ -5967,6 +6175,7 @@ VALUES (
   'Rum',
   14,
   'British Virgin Islands',
+  NULL,
   ARRAY['ペインキラーカクテル']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -5977,6 +6186,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6014,7 +6224,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('f41e62c4-edea-5e19-9aa0-584c116a801c', '冷やしたグラスに注ぐ。', 2);
 
 -- paloma
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '60d16e45-0525-5378-9143-96dad496fb66',
   'paloma',
@@ -6024,6 +6234,7 @@ VALUES (
   'Tequila',
   12,
   'Mexico',
+  NULL,
   '{}'::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -6034,6 +6245,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6071,7 +6283,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('385091da-42aa-5eed-a518-8825b5a91165', 'グレープフルーツソーダを注ぎ、軽く混ぜる。', 2);
 
 -- paper-plane
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '96423a48-ea29-570a-9975-2200193e56fc',
   'paper-plane',
@@ -6081,6 +6293,7 @@ VALUES (
   'Whisky',
   23,
   'United States',
+  NULL,
   ARRAY['ペーパー・プレーン']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -6091,6 +6304,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6128,7 +6342,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('72b59864-d2fa-55b7-9a34-bb423185fc69', '冷やしたグラスに注ぐ。', 2);
 
 -- paradise
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '594eae24-89b3-53b9-a316-2eeca37052cf',
   'paradise',
@@ -6138,6 +6352,7 @@ VALUES (
   'Gin',
   22,
   'United Kingdom',
+  NULL,
   ARRAY['パラダイスカクテル']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -6148,6 +6363,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6184,7 +6400,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('4928e4bd-8923-5d51-88ed-fb761100e28e', '冷やしたグラスに注ぐ。', 2);
 
 -- penicillin
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'cf43f361-7985-5a08-8caa-93e9247454c6',
   'penicillin',
@@ -6194,6 +6410,7 @@ VALUES (
   'Whisky',
   22,
   'United States',
+  NULL,
   ARRAY['ペニシリンカクテル']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -6204,6 +6421,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6241,7 +6459,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('930ac036-7067-538c-ad85-80723f1e7a91', '冷やしたグラスに注ぐ。', 2);
 
 -- pina-colada
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'e07fecbf-d666-5734-832f-000d545eb16d',
   'pina-colada',
@@ -6251,6 +6469,7 @@ VALUES (
   'Rum',
   13,
   'Puerto Rico',
+  NULL,
   ARRAY['ピナコラーダ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -6261,6 +6480,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6297,7 +6517,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('c06385cf-48b8-5087-8813-b4c7c186b3fa', 'グラスに注ぎ、パイナップルを飾る。', 2);
 
 -- pink-gin
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '6a87629c-6fe2-5f58-b7f5-cd187a22844b',
   'pink-gin',
@@ -6307,6 +6527,7 @@ VALUES (
   'Gin',
   36,
   'United Kingdom',
+  NULL,
   ARRAY['ピンク・ジン']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -6317,6 +6538,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6352,7 +6574,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('e728b70c-4cec-5df0-a7f4-5b64d9a6e755', '冷やしたグラスに注ぐ。', 2);
 
 -- pisco-sour
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '043e0588-1df9-55ea-9d50-75591eea6e86',
   'pisco-sour',
@@ -6362,6 +6584,7 @@ VALUES (
   'Brandy',
   20,
   'Peru',
+  NULL,
   ARRAY['ピスコ・サワー']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -6372,6 +6595,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6410,7 +6634,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('d0403e5c-9263-54f5-b8f2-2169d21914a1', '冷やしたグラスに注ぐ。', 2);
 
 -- planters-punch
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '8b152337-7243-5b75-a4ef-3e4fbd603995',
   'planters-punch',
@@ -6420,6 +6644,7 @@ VALUES (
   'Rum',
   15,
   'Jamaica',
+  NULL,
   ARRAY['プランターズ・パンチ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -6430,6 +6655,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6467,7 +6693,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('48fb3106-817e-5aab-b677-a5cb8fd7543e', '冷やしたグラスに注ぐ。', 2);
 
 -- queens-park-swizzle
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '1c505846-b9f3-5bf6-a7f2-fb2a0fffdd63',
   'queens-park-swizzle',
@@ -6477,6 +6703,7 @@ VALUES (
   'Rum',
   16,
   'Trinidad and Tobago',
+  NULL,
   ARRAY['クイーンズパーク・スウィズル']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -6487,6 +6714,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6525,7 +6753,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('89672ef5-203c-55dd-9cb8-3fbc926957ec', 'よく混ぜて仕上げる。', 2);
 
 -- queens
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '8f03957a-deb6-5436-9346-f0d0a7240bb8',
   'queens',
@@ -6535,6 +6763,7 @@ VALUES (
   'Gin',
   20,
   'United States',
+  NULL,
   ARRAY['クイーンズカクテル']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -6545,6 +6774,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6582,7 +6812,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('6b3cd7f4-e279-5974-afff-236835682329', '冷やしたグラスに注ぐ。', 2);
 
 -- quentao
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '45690b2f-793f-50ba-b341-cb359ac2d3f1',
   'quentao',
@@ -6592,6 +6822,7 @@ VALUES (
   'Cachaca',
   13,
   'Brazil',
+  NULL,
   ARRAY['ケンタオン']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -6602,6 +6833,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6640,7 +6872,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('73e222a8-d932-510a-8b0a-f86eaffcb8d4', '軽く混ぜて温かいうちに提供する。', 2);
 
 -- rabo-de-galo
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '8c92c369-f903-5ad6-81c0-0b9e6decddf2',
   'rabo-de-galo',
@@ -6650,6 +6882,7 @@ VALUES (
   'Cachaca',
   29,
   'Brazil',
+  NULL,
   ARRAY['ラボ・デ・ガロ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -6660,6 +6893,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6696,7 +6930,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('fa4b1050-7d01-590a-a7f1-1a0df7198144', '冷やしたグラスに注ぐ。', 2);
 
 -- ramos-gin-fizz
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'bed472f6-d321-5f82-a79f-4d77b73f6450',
   'ramos-gin-fizz',
@@ -6706,6 +6940,7 @@ VALUES (
   'Gin',
   12,
   'United States',
+  NULL,
   ARRAY['ラモス・ジン・フィズ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -6716,6 +6951,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6757,7 +6993,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('1c1ef99c-b90b-55fd-8381-ba55a8e79a68', '冷やしたグラスに注ぐ。', 2);
 
 -- ranch-water
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '2cae96f6-d2ab-5f87-a7d4-f944976581f4',
   'ranch-water',
@@ -6767,6 +7003,7 @@ VALUES (
   'Tequila',
   9,
   'United States',
+  NULL,
   ARRAY['ランチ・ウォーター']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -6777,6 +7014,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6813,7 +7051,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('60e042db-049a-561f-b495-e8dcf19374a9', '軽く混ぜて仕上げる。', 2);
 
 -- red-snapper
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '3b354bcc-e9f3-52a9-845c-fcd258da24c4',
   'red-snapper',
@@ -6823,6 +7061,7 @@ VALUES (
   'Gin',
   10,
   'France',
+  NULL,
   ARRAY['ジンブラッディメアリー']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -6833,6 +7072,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6871,7 +7111,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('fc2a9f3e-9c2f-5f7f-822c-b7b803394e46', '軽く混ぜて仕上げる。', 2);
 
 -- rob-roy
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'b0174d03-eb0c-5646-9ed1-0a3f8cf6c393',
   'rob-roy',
@@ -6881,6 +7121,7 @@ VALUES (
   'Whisky',
   30,
   'United States',
+  NULL,
   ARRAY['ロブ・ロイ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -6891,6 +7132,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6927,7 +7169,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('51f07b33-227d-503b-8c6f-b7f2e8d4eb4b', '冷やしたグラスに注ぐ。', 2);
 
 -- rosita
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '4ec924a7-3793-5260-b267-fa54c31876b6',
   'rosita',
@@ -6937,6 +7179,7 @@ VALUES (
   'Tequila',
   26,
   'Mexico',
+  NULL,
   ARRAY['ロシータ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -6947,6 +7190,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6985,7 +7229,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('05a87db4-5929-53ba-9257-f2a75ab5c4a2', '冷やしたグラスに注ぐ。', 2);
 
 -- rum-old-fashioned
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'c612ae46-c801-5a65-85f2-35b50aad08f4',
   'rum-old-fashioned',
@@ -6995,6 +7239,7 @@ VALUES (
   'Rum',
   32,
   'United States',
+  NULL,
   ARRAY['ラム・オールドファッションド']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -7005,6 +7250,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7042,7 +7288,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('fe13c2f4-3f7d-5c85-b5ea-b4ce5937d247', '冷やしたグラスに注ぐ。', 2);
 
 -- rum-runner
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '74c8c901-ca33-5632-938b-8db29853e385',
   'rum-runner',
@@ -7052,6 +7298,7 @@ VALUES (
   'Rum',
   17,
   'United States',
+  NULL,
   ARRAY['ラム・ランナー']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -7062,6 +7309,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7101,7 +7349,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('323dec78-56dd-52bd-b2e7-c68ff3272286', '冷やしたグラスに注ぐ。', 2);
 
 -- rusty-nail
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'bcd6f034-e153-5259-8e21-a4c49b3bae38',
   'rusty-nail',
@@ -7111,6 +7359,7 @@ VALUES (
   'Whisky',
   34,
   'United States',
+  NULL,
   ARRAY['ラスティ・ネイル']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -7121,6 +7370,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7156,7 +7406,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('ebf774f9-1b77-5385-b767-e2dab03ae964', '軽く混ぜて仕上げる。', 2);
 
 -- ryokucha-hai
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'a91dd871-c0cb-561a-a24d-d64988e5fd72',
   'ryokucha-hai',
@@ -7166,6 +7416,7 @@ VALUES (
   'Shochu',
   7,
   'Japan',
+  NULL,
   ARRAY['緑茶割り']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -7176,6 +7427,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7211,7 +7463,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('502e6c9b-5390-5cb3-b730-580d1055bd2c', '軽く混ぜて仕上げる。', 2);
 
 -- salty-dog
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'a1b832b5-738c-5384-8d14-90498ee82c26',
   'salty-dog',
@@ -7221,6 +7473,7 @@ VALUES (
   'Vodka',
   10,
   'United States',
+  NULL,
   ARRAY['ソルティ・ドッグ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -7231,6 +7484,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7267,7 +7521,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('5604cbb2-a782-5fd3-b8bc-1739446971b4', '軽く混ぜて仕上げる。', 2);
 
 -- satans-whiskers
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'f1b84335-ef6b-5b34-a14f-0de5aff2aea5',
   'satans-whiskers',
@@ -7277,6 +7531,7 @@ VALUES (
   'Gin',
   21,
   'United Kingdom',
+  NULL,
   ARRAY['サタンのひげ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -7287,6 +7542,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7326,7 +7582,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('6f60d898-4525-50ec-8a6b-0c3dce9f8ff5', '冷やしたグラスに注ぐ。', 2);
 
 -- sazerac
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '89a2784e-cc79-50c9-b25c-a322460340c7',
   'sazerac',
@@ -7336,6 +7592,7 @@ VALUES (
   'Whisky',
   36,
   'United States',
+  NULL,
   ARRAY['サゼラックカクテル']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -7346,6 +7603,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7383,7 +7641,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('6e2ecee0-9491-5ef6-b06c-40af62a7de3a', '冷やしたグラスに注ぐ。', 2);
 
 -- scofflaw
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '9c5247ec-f167-5873-bccc-8a783483da7f',
   'scofflaw',
@@ -7393,6 +7651,7 @@ VALUES (
   'Whisky',
   24,
   'France',
+  NULL,
   ARRAY['スコッフロウ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -7403,6 +7662,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7441,7 +7701,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('72bfde7a-148c-5367-822f-d3a829f2af5b', '冷やしたグラスに注ぐ。', 2);
 
 -- screwdriver
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '55ccfcc7-1ffe-5cce-8137-0d38a55b6d2f',
   'screwdriver',
@@ -7451,6 +7711,7 @@ VALUES (
   'Vodka',
   10,
   'United States',
+  NULL,
   ARRAY['ウォッカオレンジ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -7461,6 +7722,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7496,7 +7758,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('332cb843-9aac-54f0-8ded-a4e383ff1013', '軽く混ぜて仕上げる。', 2);
 
 -- sea-breeze
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '3ceef3e9-4647-5440-983d-d58f37cec69f',
   'sea-breeze',
@@ -7506,6 +7768,7 @@ VALUES (
   'Vodka',
   9,
   'United States',
+  NULL,
   ARRAY['シー・ブリーズ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -7516,6 +7779,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7552,7 +7816,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('b38d991d-63ae-5c54-847f-fbdaaef16eb3', '軽く混ぜて仕上げる。', 2);
 
 -- seven-and-seven
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'a628e968-dd30-5a9a-a2fa-5bbdba9e0bd9',
   'seven-and-seven',
@@ -7562,6 +7826,7 @@ VALUES (
   'Whisky',
   9,
   'United States',
+  NULL,
   ARRAY['7 and 7']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -7572,6 +7837,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7607,7 +7873,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('ff8c570d-ea6b-53be-a2f5-1f8220937b59', '軽く混ぜて仕上げる。', 2);
 
 -- sex-on-the-beach
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '1fdfa351-fe18-5f4a-a640-c99f52428d6f',
   'sex-on-the-beach',
@@ -7617,6 +7883,7 @@ VALUES (
   'Vodka',
   11,
   'United States',
+  NULL,
   ARRAY['セックス・オン・ザ・ビーチ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -7627,6 +7894,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7664,7 +7932,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('35331b3f-14a0-52bc-ba36-85adca195195', '軽く混ぜて仕上げる。', 2);
 
 -- shochu-mizuwari
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'b64cd34c-fa64-53ea-b15a-b85dedf9ec7c',
   'shochu-mizuwari',
@@ -7674,6 +7942,7 @@ VALUES (
   'Shochu',
   12,
   'Japan',
+  NULL,
   ARRAY['水割り焼酎']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -7684,6 +7953,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7719,7 +7989,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('37965552-bf96-5a06-8601-d2399822e17d', '軽く混ぜて仕上げる。', 2);
 
 -- shochu-oyuwari
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '16854665-3a81-5172-9a93-ce86ca0b5f77',
   'shochu-oyuwari',
@@ -7729,6 +7999,7 @@ VALUES (
   'Shochu',
   12,
   'Japan',
+  NULL,
   ARRAY['お湯割り焼酎']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -7739,6 +8010,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7774,7 +8046,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('cfaef2b9-ea60-5333-84cb-0d42d5639543', '軽く混ぜて温かいうちに提供する。', 2);
 
 -- shochu-rocks
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'afe06a18-28c3-5b58-8acd-9f858a37624b',
   'shochu-rocks',
@@ -7784,6 +8056,7 @@ VALUES (
   'Shochu',
   20,
   'Japan',
+  NULL,
   ARRAY['焼酎オンザロック']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -7794,6 +8067,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7829,7 +8103,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('89dc68ce-5ac5-5f9b-be9d-4c1672ee345b', '軽く混ぜて仕上げる。', 2);
 
 -- shochu-soda
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '7facbb99-1786-514f-9a99-19b94c571842',
   'shochu-soda',
@@ -7839,6 +8113,7 @@ VALUES (
   'Shochu',
   8,
   'Japan',
+  NULL,
   ARRAY['焼酎ハイボール']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -7849,6 +8124,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7884,7 +8160,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('5cb0cba7-f9bc-5e87-a927-c970ddc73e2d', '軽く混ぜて仕上げる。', 2);
 
 -- sidecar
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'b04b065e-7d24-5558-88ff-87771b4a40f3',
   'sidecar',
@@ -7894,6 +8170,7 @@ VALUES (
   'Brandy',
   25,
   'France',
+  NULL,
   '{}'::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -7904,6 +8181,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7940,7 +8218,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('87e3ef28-e7c5-573d-9143-986f99895f1e', 'クーペグラスに注ぐ。', 2);
 
 -- siesta
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'f4ae111e-5b96-50e2-b99a-06ac4142a7ae',
   'siesta',
@@ -7950,6 +8228,7 @@ VALUES (
   'Tequila',
   19,
   'United States',
+  NULL,
   ARRAY['シエスタカクテル']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -7960,6 +8239,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7998,7 +8278,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('5c8ae15e-bc2b-5f81-bf2d-73442222b51e', '冷やしたグラスに注ぐ。', 2);
 
 -- singapore-sling
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '0c8d9c8e-86cc-5853-b55e-2e8c7cfef6c0',
   'singapore-sling',
@@ -8008,6 +8288,7 @@ VALUES (
   'Gin',
   15,
   'Singapore',
+  NULL,
   '{}'::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -8018,6 +8299,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8059,7 +8341,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('0fcd8bf6-18fe-5a98-84ab-8005d18ef6ec', '氷入りのハイボールグラスに注ぎ、飾りを添える。', 2);
 
 -- southside
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'b9a8fbc1-197a-5fa1-950e-21caea539c98',
   'southside',
@@ -8069,6 +8351,7 @@ VALUES (
   'Gin',
   22,
   'United States',
+  NULL,
   ARRAY['サウス・サイド']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -8079,6 +8362,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8116,7 +8400,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('fb097054-80d5-5a6e-bea5-5631cd9a70e0', '冷やしたグラスに注ぐ。', 2);
 
 -- spumoni
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '32caf4e4-0e0f-5419-b02f-66d8ae2fbb40',
   'spumoni',
@@ -8126,6 +8410,7 @@ VALUES (
   'Liqueur',
   6,
   'Italy',
+  NULL,
   ARRAY['スプモニ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -8136,6 +8421,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8172,7 +8458,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('941b7650-c951-5012-98f6-2e2407df0c37', '軽く混ぜて仕上げる。', 2);
 
 -- stinger
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'f35fc71e-ee1c-5278-aae4-72852619bf06',
   'stinger',
@@ -8182,6 +8468,7 @@ VALUES (
   'Brandy',
   29,
   'United States',
+  NULL,
   ARRAY['スティンガーカクテル']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -8192,6 +8479,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8227,7 +8515,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('9d6fe090-c81d-53ca-93a4-5a5ebd821480', '冷やしたグラスに注ぐ。', 2);
 
 -- tequila-sour
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '9fbb5f9f-ee98-59eb-9a7e-e4333d0e8be6',
   'tequila-sour',
@@ -8237,6 +8525,7 @@ VALUES (
   'Tequila',
   20,
   'Mexico',
+  NULL,
   ARRAY['テキーラ・サワー']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -8247,6 +8536,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8284,7 +8574,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('2b6fd4e2-6470-5870-9c1f-db842b665a49', '冷やしたグラスに注ぐ。', 2);
 
 -- tequila-sunrise
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '6fe4f47d-db84-5adc-868b-51566789a124',
   'tequila-sunrise',
@@ -8294,6 +8584,7 @@ VALUES (
   'Tequila',
   11,
   'United States',
+  NULL,
   ARRAY['テキーラ・サンライズ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -8304,6 +8595,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8340,7 +8632,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('c2fe1f08-1977-5be0-a8ad-84cccc4faf86', '軽く混ぜて仕上げる。', 2);
 
 -- ti-punch
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'b901fe27-971a-5df2-8db7-b54354e5a30b',
   'ti-punch',
@@ -8350,6 +8642,7 @@ VALUES (
   'Rum',
   33,
   'Martinique',
+  NULL,
   ARRAY['ティ・パンチ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -8360,6 +8653,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8396,7 +8690,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('7446ee96-5dc9-55a9-9c6a-b1b1baf8b9a7', 'よく混ぜて仕上げる。', 2);
 
 -- tom-collins
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '9d0c5d52-08b2-582a-9433-a0daf10ab766',
   'tom-collins',
@@ -8406,6 +8700,7 @@ VALUES (
   'Gin',
   12,
   'United States',
+  NULL,
   '{}'::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -8416,6 +8711,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8453,7 +8749,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('ad122c74-1c6f-523c-982e-76a742e88f31', '炭酸水を加えて軽く混ぜる。', 2);
 
 -- tomato-hai
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '8339422b-706c-5604-8ccf-54dc9affa5a6',
   'tomato-hai',
@@ -8463,6 +8759,7 @@ VALUES (
   'Shochu',
   7,
   'Japan',
+  NULL,
   ARRAY['トマト割り']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -8473,6 +8770,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8509,7 +8807,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('6c7d7866-622d-5bb3-b74e-3bfeb8197d55', '軽く混ぜて仕上げる。', 2);
 
 -- tuxedo
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'cb0ebecf-6953-596c-88d8-110b38e01eca',
   'tuxedo',
@@ -8519,6 +8817,7 @@ VALUES (
   'Gin',
   30,
   'United States',
+  NULL,
   ARRAY['タキシードNo.2']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -8529,6 +8828,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8567,7 +8867,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('c5c03a1a-e949-508a-a6cf-94eea028cb52', '冷やしたグラスに注ぐ。', 2);
 
 -- ume-sour
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '5c09729e-8bbd-5be5-8aa7-4abd441d91f1',
   'ume-sour',
@@ -8577,6 +8877,7 @@ VALUES (
   'Shochu',
   7,
   'Japan',
+  NULL,
   ARRAY['梅干しサワー']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -8587,6 +8888,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8624,7 +8926,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('8334608b-47ae-5fc4-a95b-eac2873608a4', '軽く混ぜて仕上げる。', 2);
 
 -- vesper
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '694d6f93-8599-58d5-bde9-e92825abddb8',
   'vesper',
@@ -8634,6 +8936,7 @@ VALUES (
   'Gin',
   34,
   'United Kingdom',
+  NULL,
   ARRAY['ヴェスパーマティーニ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -8644,6 +8947,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8680,7 +8984,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('803d5f80-b24a-539f-82ec-562433334a54', '冷やしたグラスに注ぐ。', 2);
 
 -- vieux-carre
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '7cea645c-b100-542f-b576-808e96e9d36e',
   'vieux-carre',
@@ -8690,6 +8994,7 @@ VALUES (
   'Whisky',
   29,
   'United States',
+  NULL,
   ARRAY['ヴュー・カレ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -8700,6 +9005,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8739,7 +9045,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('d9e8e9a8-58f8-5a5f-84d1-d9280cb33491', '冷やしたグラスに注ぐ。', 2);
 
 -- vodka-martini
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'b33fffe1-efc3-50b3-84f6-a1efdb065efb',
   'vodka-martini',
@@ -8749,6 +9055,7 @@ VALUES (
   'Vodka',
   33,
   'United States',
+  NULL,
   ARRAY['カンガルー']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -8759,6 +9066,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8794,7 +9102,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('64994c30-a9d2-5428-b908-b4711b9cf8c9', '冷やしたグラスに注ぐ。', 2);
 
 -- vodka-tonic
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'acc6aefb-610a-5f0d-9fd8-730ad9141ead',
   'vodka-tonic',
@@ -8804,6 +9112,7 @@ VALUES (
   'Vodka',
   9,
   'United States',
+  NULL,
   ARRAY['ウォッカ・トニック']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -8814,6 +9123,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8849,7 +9159,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('a72b5f8d-d330-5726-9e35-ecdc2fca7b58', '軽く混ぜて仕上げる。', 2);
 
 -- ward-eight
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '20303559-ef9d-5d34-9e0c-549cdf3d526a',
   'ward-eight',
@@ -8859,6 +9169,7 @@ VALUES (
   'Whisky',
   20,
   'United States',
+  NULL,
   ARRAY['ワード8']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -8869,6 +9180,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8906,7 +9218,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('1993c45b-dab5-5b0b-9942-ed8137dab7f0', '冷やしたグラスに注ぐ。', 2);
 
 -- whiskey-smash
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'ba7ead34-930f-5515-9609-9acfc9169351',
   'whiskey-smash',
@@ -8916,6 +9228,7 @@ VALUES (
   'Whisky',
   20,
   'United States',
+  NULL,
   ARRAY['ウイスキー・スマッシュ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -8926,6 +9239,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8963,7 +9277,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('be98af00-7a2b-56fa-a732-991d39b8316f', 'よく混ぜて仕上げる。', 2);
 
 -- whiskey-sour
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'b1c0aba9-b2cd-5aee-95d8-d47aafd1605f',
   'whiskey-sour',
@@ -8973,6 +9287,7 @@ VALUES (
   'Whisky',
   20,
   'United States',
+  NULL,
   '{}'::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -8983,6 +9298,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -9019,7 +9335,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('c9d28594-43a7-5b6c-973f-fe24750557c0', 'ロックグラスまたはクーペに注ぐ。', 2);
 
 -- whisky-mac
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '5f12ddfe-024f-58e8-b2e5-e4cc893848c7',
   'whisky-mac',
@@ -9029,6 +9345,7 @@ VALUES (
   'Whisky',
   28,
   'United Kingdom',
+  NULL,
   ARRAY['ウイスキー・マック']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -9039,6 +9356,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -9074,7 +9392,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('1aeb6194-e6fe-5ef8-a475-6ea6450a66d0', '軽く混ぜて仕上げる。', 2);
 
 -- white-lady
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'a6074afc-802a-5a60-a81d-70d84ad99e33',
   'white-lady',
@@ -9084,6 +9402,7 @@ VALUES (
   'Gin',
   28,
   'United Kingdom',
+  NULL,
   ARRAY['ホワイト・レディ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -9094,6 +9413,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -9130,7 +9450,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('d9da54cd-e7ca-53e4-88e7-b15bd4bf9dc8', '冷やしたグラスに注ぐ。', 2);
 
 -- white-russian
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'ff36ee65-3f71-5845-b81d-3d85340eb404',
   'white-russian',
@@ -9140,6 +9460,7 @@ VALUES (
   'Vodka',
   18,
   'United States',
+  NULL,
   ARRAY['ホワイト・ルシアン']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -9150,6 +9471,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -9186,7 +9508,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('dc0d5729-a6ff-57c6-b6fa-d95479a207f7', '軽く混ぜて仕上げる。', 2);
 
 -- woo-woo
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '45c39fe2-daed-5154-b162-72dc5ac087e2',
   'woo-woo',
@@ -9196,6 +9518,7 @@ VALUES (
   'Vodka',
   12,
   'United States',
+  NULL,
   ARRAY['Woo Woo']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -9206,6 +9529,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -9242,7 +9566,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('1ed7755d-a77e-531f-ab60-c32c3d760794', '軽く混ぜて仕上げる。', 2);
 
 -- yuzu-sour
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   '12bc6b19-bf43-5578-ad94-fd8839d59c01',
   'yuzu-sour',
@@ -9252,6 +9576,7 @@ VALUES (
   'Shochu',
   7,
   'Japan',
+  NULL,
   ARRAY['ゆずサワー']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -9262,6 +9587,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -9298,7 +9624,7 @@ INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order) VALUES
   ('729ee20c-cc51-5ebe-b22a-119bc05ef166', '軽く混ぜて仕上げる。', 2);
 
 -- zombie
-INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)
+INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, aliases)
 VALUES (
   'fb3f6811-d62c-58f4-b581-93f75136bc7a',
   'zombie',
@@ -9308,6 +9634,7 @@ VALUES (
   'Rum',
   22,
   'United States',
+  NULL,
   ARRAY['ゾンビカクテル']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -9318,6 +9645,7 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
+  image_url = EXCLUDED.image_url,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 

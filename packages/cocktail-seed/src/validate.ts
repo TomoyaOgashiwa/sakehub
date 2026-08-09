@@ -82,6 +82,15 @@ function validateCocktail(file: string, raw: unknown, issues: ValidationIssue[])
     issues.push({ file, field: 'originCountry', message: 'must be string or null' });
   }
 
+  // Missing imageUrl is treated as null so existing JSON files stay valid until upload fills them.
+  if (
+    raw.imageUrl !== undefined &&
+    raw.imageUrl !== null &&
+    typeof raw.imageUrl !== 'string'
+  ) {
+    issues.push({ file, field: 'imageUrl', message: 'must be string or null' });
+  }
+
   assertAliases(file, raw.aliases, MAX_ALIASES, issues);
 
   if (!isRecord(raw.officialRecipe)) {
@@ -166,7 +175,11 @@ function validateCocktail(file: string, raw: unknown, issues: ValidationIssue[])
     return null;
   }
 
-  return raw as unknown as CocktailSeed;
+  const cocktail = raw as unknown as CocktailSeed;
+  if (cocktail.imageUrl === undefined) {
+    cocktail.imageUrl = null;
+  }
+  return cocktail;
 }
 
 export async function loadAndValidateCocktails(

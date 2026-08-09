@@ -41,6 +41,8 @@ export interface CocktailSeed {
   baseSpirit: string | null;
   abv: number | null;
   originCountry: string | null;
+  /** Supabase Storage public URL（catalog-images）。未設定時は null。 */
+  imageUrl: string | null;
   /** かな読み・ローマ字表記などの別名候補。cocktails.search_vector に合流する。 */
   aliases: string[];
   officialRecipe: OfficialRecipeSeed;

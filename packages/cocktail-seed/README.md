@@ -12,6 +12,8 @@ data/pending.txt → draft.ts（任意・LLM）→ data/drafts/*.json
 data/cocktails/*.json → validate.ts → build-seed.ts → supabase/seeds/official_cocktails.sql
 ```
 
+`imageUrl` は任意（未設定 / null 可）。カタログ画像は `@sakehub/catalog-image-seed` が Storage 公開 URL を書き戻す。
+
 **正本は `data/cocktails/*.json` のみ。** `scripts/generate-phase1-cocktails.mjs` はスキャフォールド用で、既存 slug は上書きしない。配列を後から直しても再実行では反映されないので、修正は JSON を直接編集する。
 
 `build-seed.ts` は外部通信なし・決定的。同じ JSON から常に同じ SQL を出す。

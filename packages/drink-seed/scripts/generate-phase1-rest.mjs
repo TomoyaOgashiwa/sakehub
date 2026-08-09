@@ -154,6 +154,15 @@ function inferManufacturer(nameEn) {
   return null;
 }
 
+function buildDescription(entry) {
+  const base = `${entry.nameEn} is a well-known ${entry.originCountry} ${entry.subcategory}`;
+  // Never interpolate null/undefined into description (would become "from null").
+  if (entry.manufacturer == null || entry.manufacturer === '') {
+    return `${base}.`;
+  }
+  return `${base} from ${entry.manufacturer}, selected for broad drink catalog coverage in Japan.`;
+}
+
 function toDrinkSeed(entry) {
   const slug = slugify(entry.nameEn);
   if (!SLUG_PATTERN.test(slug)) {
@@ -165,7 +174,7 @@ function toDrinkSeed(entry) {
     nameEn: entry.nameEn,
     category: entry.category,
     subcategory: entry.subcategory,
-    description: `${entry.nameEn} is a well-known ${entry.originCountry} ${entry.subcategory} from ${entry.manufacturer}, selected for broad drink catalog coverage in Japan.`,
+    description: buildDescription(entry),
     imageUrl: null,
     abv: entry.abv,
     originCountry: entry.originCountry,

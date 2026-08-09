@@ -253,27 +253,18 @@ function looksBad(manufacturer, nameEn, name) {
   return false;
 }
 
+/** Known-map only. Unknown brands return null (same policy as generate-phase1-rest). */
 function inferManufacturer(nameEn, name) {
   for (const [prefix, mfr] of KNOWN) {
     if (matchesBrandPrefix(nameEn, prefix) || matchesBrandPrefix(name, prefix)) return mfr;
   }
-  // Strip common expression suffixes, keep brand head
-  const stripped = nameEn
-    .replace(/\s+\d+(\.\d+)?(\s*(Year Old|Years?|YO|yr|年.*))?.*$/i, '')
-    .replace(
-      /\s+(Single Malt|Blended Malt|Blended|Bourbon|Rye|Tennessee|Reserve|Original|Classic|Premium|VSOP|XO|VS|Napoleon|Blanco|Reposado|Anejo|Añejo|Extra Añejo|Cristalino|London Dry|Dry Gin|Vodka|Rum|Cognac|Armagnac|IPA|Lager|Stout|Pilsner|Pale Ale|Wheat|Red|White|Sparkling|Brut|Extra Dry).*$/i,
-      '',
-    )
-    .replace(/\s+(Edition|No\.?\s*\d+|Distiller.?s).*$/i, '')
-    .trim();
-  if (stripped && stripped !== nameEn && !/\d/.test(stripped)) return stripped;
-  // Fall back to first significant token(s), skipping "The"
-  const tokens = nameEn.split(/\s+/).filter(Boolean);
-  if (tokens[0] === 'The' && tokens.length >= 2) return tokens.slice(0, 2).join(' ');
-  return tokens[0] || nameEn;
+  return null;
 }
 
 function describe(d, manufacturer) {
+  if (manufacturer == null || manufacturer === '') {
+    return `${d.nameEn} is a well-known ${d.originCountry} ${d.subcategory || d.category}.`;
+  }
   const ja = /[\u3040-\u30ff\u4e00-\u9fff]/.test(d.name);
   if (ja && d.category === 'sake') {
     return `${d.name}。${manufacturer}の${d.subcategory || '日本酒'}として知られる定番銘柄。`;
@@ -301,21 +292,34 @@ for (const file of readdirSync(DRINK_DIR).filter((f) => f.endsWith('.json')).sor
   const filePath = path.join(DRINK_DIR, file);
   const d = JSON.parse(readFileSync(filePath, 'utf8'));
   const known = knownManufacturer(d.nameEn || '', d.name || '');
-  const shouldFix =
-    (known && d.manufacturer !== known) ||
-    looksBad(d.manufacturer, d.nameEn || '', d.name || '') ||
-    looksProducty(d.manufacturer);
-  if (!shouldFix) continue;
   const next = known || inferManufacturer(d.nameEn || d.name, d.name || '');
-  if (next === d.manufacturer) continue;
+  const badCore = looksBad(d.manufacturer, d.nameEn || '', d.name || '');
+  const badProducty = looksProducty(d.manufacturer);
+
+  let target = undefined;
+  if (known && d.manufacturer !== known) {
+    target = known;
+  } else if (badCore && next != null && next !== d.manufacturer) {
+    target = next;
+  } else if (badCore && next == null && d.manufacturer != null) {
+    // Clear truncated/token manufacturers; do not invent a fallback.
+    target = null;
+  } else if (badProducty && next != null && next !== d.manufacturer) {
+    // Only rewrite "producty" strings when a known brand mapping exists.
+    target = next;
+  } else {
+    continue;
+  }
+
   const old = d.manufacturer;
-  d.manufacturer = next;
+  d.manufacturer = target;
   if (
     !d.description ||
     d.description.includes(String(old)) ||
+    /from null\b/.test(d.description) ||
     /selected for broad drink catalog|is a well-known/.test(d.description)
   ) {
-    d.description = describe(d, next);
+    d.description = describe(d, target);
   }
   writeFileSync(filePath, `${JSON.stringify(d, null, 2)}\n`, 'utf8');
   fixed++;

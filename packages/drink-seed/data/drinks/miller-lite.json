@@ -4,10 +4,10 @@
   "nameEn": "Miller Lite",
   "category": "beer",
   "subcategory": "Light Lager",
-  "description": "Miller Lite is a well-known United States Light Lager from Miller Lite, selected for broad drink catalog coverage in Japan.",
+  "description": "Miller Lite is a well-known United States Light Lager from Miller.",
   "imageUrl": null,
   "abv": 4.2,
   "originCountry": "United States",
-  "manufacturer": "Miller Lite",
+  "manufacturer": "Miller",
   "aliases": []
 }

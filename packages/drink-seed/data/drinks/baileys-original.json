@@ -6,8 +6,10 @@
   "subcategory": "Cream",
   "description": "アイリッシュウイスキーとクリームを融合させた世界で最も人気のクリームリキュール。甘くリッチな味わい。",
   "imageUrl": null,
-  "abv": 17.0,
+  "abv": 17,
   "originCountry": "Ireland",
-  "manufacturer": "Baileys",
-  "aliases": ["べいりーず"]
+  "manufacturer": "Diageo",
+  "aliases": [
+    "べいりーず"
+  ]
 }

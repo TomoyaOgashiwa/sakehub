@@ -1,7 +1,7 @@
 -- =============================================================================
 -- packages/drink-seed（src/build-seed.ts）が自動生成。
 -- 手編集しないこと。再生成: pnpm seed:drinks:build
--- 生成日時: 2026-08-09T20:50:55.453Z
+-- 生成日時: 2026-08-09T21:00:55.499Z
 -- 件数: 1330
 --
 -- aliases: かな読み・ローマ字表記などの別名候補。「獺祭」で登録されていても
@@ -18,11 +18,11 @@ VALUES (
   '1800 Anejo',
   'tequila',
   'Tequila',
-  '1800 Anejo is a well-known Mexico Tequila from 1800 Anejo, selected for broad drink catalog coverage in Japan.',
+  '1800 Anejo is a well-known Mexico Tequila from Proximo Spirits.',
   NULL,
   40,
   'Mexico',
-  '1800 Anejo',
+  'Proximo Spirits',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -46,11 +46,11 @@ VALUES (
   '1800 Cristalino',
   'tequila',
   'Tequila',
-  '1800 Cristalino is a well-known Mexico Tequila from 1800 Cristalino, selected for broad drink catalog coverage in Japan.',
+  '1800 Cristalino is a well-known Mexico Tequila from Proximo Spirits.',
   NULL,
   40,
   'Mexico',
-  '1800 Cristalino',
+  'Proximo Spirits',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -74,11 +74,11 @@ VALUES (
   '1800 Reposado',
   'tequila',
   'Tequila',
-  '1800 Reposado is a well-known Mexico Tequila from 1800 Reposado, selected for broad drink catalog coverage in Japan.',
+  '1800 Reposado is a well-known Mexico Tequila from Proximo Spirits.',
   NULL,
   40,
   'Mexico',
-  '1800 Reposado',
+  'Proximo Spirits',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -102,11 +102,11 @@ VALUES (
   '1800 Silver',
   'tequila',
   'Blanco',
-  '1800 Silver is a well-known Mexico Blanco from 1800 Silver, selected for broad drink catalog coverage in Japan.',
+  '1800 Silver is a well-known Mexico Blanco from Proximo Spirits.',
   NULL,
   40,
   'Mexico',
-  '1800 Silver',
+  'Proximo Spirits',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -130,11 +130,11 @@ VALUES (
   '2 Towns BrightCider',
   'other',
   'Cider',
-  '2 Towns BrightCider is a well-known United States Cider from 2 Towns, selected for broad drink catalog coverage in Japan.',
+  '2 Towns BrightCider is a well-known United States Cider from 2.',
   NULL,
   6,
   'United States',
-  '2 Towns',
+  '2',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -158,11 +158,11 @@ VALUES (
   '42 Below Vodka',
   'vodka',
   'Plain',
-  '42 Below Vodka is a well-known New Zealand Plain from 42 Below, selected for broad drink catalog coverage in Japan.',
+  '42 Below Vodka is a well-known New Zealand Plain from Bacardi.',
   NULL,
   40,
   'New Zealand',
-  '42 Below',
+  'Bacardi',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -186,11 +186,11 @@ VALUES (
   '9148 Gin Lavender',
   'gin',
   'New Western',
-  '9148 Gin Lavender is a well-known Japan New Western from 9148 Gin, selected for broad drink catalog coverage in Japan.',
+  '9148 Gin Lavender is a well-known Japan New Western from 9148.',
   NULL,
   45,
   'Japan',
-  '9148 Gin',
+  '9148',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -214,11 +214,11 @@ VALUES (
   '9148 Gin Original',
   'gin',
   'New Western',
-  '9148 Gin Original is a well-known Japan New Western from 9148 Gin, selected for broad drink catalog coverage in Japan.',
+  '9148 Gin Original is a well-known Japan New Western from 9148.',
   NULL,
   45,
   'Japan',
-  '9148 Gin',
+  '9148',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -242,11 +242,11 @@ VALUES (
   'Aberlour 12 Year Old',
   'whisky',
   'Single Malt',
-  'Aberlour 12 Year Old is a well-known Scotland Single Malt from Aberlour 12, selected for broad drink catalog coverage in Japan.',
+  'Aberlour 12 Year Old is a well-known Scotland Single Malt from Pernod Ricard.',
   NULL,
   40,
   'Scotland',
-  'Aberlour 12',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -270,11 +270,11 @@ VALUES (
   'Aberlour A''bunadh',
   'whisky',
   'Single Malt',
-  'Aberlour A''bunadh is a well-known Scotland Single Malt from Aberlour A''bunadh, selected for broad drink catalog coverage in Japan.',
+  'Aberlour A''bunadh is a well-known Scotland Single Malt from Pernod Ricard.',
   NULL,
   61.2,
   'Scotland',
-  'Aberlour A''bunadh',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -298,11 +298,11 @@ VALUES (
   'Absolut Citron',
   'vodka',
   'Flavoured',
-  'Absolut Citron is a well-known Sweden Flavoured from Absolut Citron, selected for broad drink catalog coverage in Japan.',
+  'Absolut Citron is a well-known Sweden Flavoured from Pernod Ricard.',
   NULL,
   40,
   'Sweden',
-  'Absolut Citron',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -326,11 +326,11 @@ VALUES (
   'Absolut Elyx',
   'vodka',
   'Plain',
-  'Absolut Elyx is a well-known Sweden Plain from Absolut Elyx, selected for broad drink catalog coverage in Japan.',
+  'Absolut Elyx is a well-known Sweden Plain from Pernod Ricard.',
   NULL,
   42.3,
   'Sweden',
-  'Absolut Elyx',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -354,11 +354,11 @@ VALUES (
   'Absolut Mandarin',
   'vodka',
   'Flavoured',
-  'Absolut Mandarin is a well-known Sweden Flavoured from Absolut Mandarin, selected for broad drink catalog coverage in Japan.',
+  'Absolut Mandarin is a well-known Sweden Flavoured from Pernod Ricard.',
   NULL,
   40,
   'Sweden',
-  'Absolut Mandarin',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -382,11 +382,11 @@ VALUES (
   'Absolut Vanilia',
   'vodka',
   'Flavoured',
-  'Absolut Vanilia is a well-known Sweden Flavoured from Absolut Vanilia, selected for broad drink catalog coverage in Japan.',
+  'Absolut Vanilia is a well-known Sweden Flavoured from Pernod Ricard.',
   NULL,
   38,
   'Sweden',
-  'Absolut Vanilia',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -410,11 +410,11 @@ VALUES (
   'Absolut Vodka',
   'vodka',
   'Plain',
-  'Absolut Vodka is a well-known Sweden Plain from Absolut Vodka, selected for broad drink catalog coverage in Japan.',
+  'Absolut Vodka is a well-known Sweden Plain from Pernod Ricard.',
   NULL,
   40,
   'Sweden',
-  'Absolut Vodka',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -522,11 +522,11 @@ VALUES (
   'Aka Kirishima',
   'shochu',
   'Imo',
-  'Aka Kirishima is a well-known Japan Imo from Aka Kirishima, selected for broad drink catalog coverage in Japan.',
+  'Aka Kirishima is a well-known Japan Imo from 霧島酒造.',
   NULL,
   25,
   'Japan',
-  'Aka Kirishima',
+  '霧島酒造',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -634,11 +634,11 @@ VALUES (
   'Akane Kirishima',
   'shochu',
   'Imo',
-  'Akane Kirishima is a well-known Japan Imo from Akane Kirishima, selected for broad drink catalog coverage in Japan.',
+  'Akane Kirishima is a well-known Japan Imo from Akane.',
   NULL,
   25,
   'Japan',
-  'Akane Kirishima',
+  'Akane',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -662,11 +662,11 @@ VALUES (
   'Akashi Single Malt',
   'whisky',
   'Single Malt',
-  'Akashi Single Malt is a well-known Japan Single Malt from Akashi Single, selected for broad drink catalog coverage in Japan.',
+  'Akashi Single Malt is a well-known Japan Single Malt from Eigashima Shuzo.',
   NULL,
   46,
   'Japan',
-  'Akashi Single',
+  'Eigashima Shuzo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -690,11 +690,11 @@ VALUES (
   'Akashi White Oak Blended',
   'whisky',
   'Blended',
-  'Akashi White Oak Blended is a well-known Japan Blended from Akashi White, selected for broad drink catalog coverage in Japan.',
+  'Akashi White Oak Blended is a well-known Japan Blended from Eigashima Shuzo.',
   NULL,
   40,
   'Japan',
-  'Akashi White',
+  'Eigashima Shuzo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -774,11 +774,11 @@ VALUES (
   'Akitabare Shunsetsu',
   'sake',
   'Junmai Ginjo',
-  'Akitabare Shunsetsu is a well-known Japan Junmai Ginjo from Akitabare Shunsetsu, selected for broad drink catalog coverage in Japan.',
+  '秋田晴 酔楽天。AkitabareのJunmai Ginjoとして知られる定番銘柄。',
   NULL,
   15,
   'Japan',
-  'Akitabare Shunsetsu',
+  'Akitabare',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -802,11 +802,11 @@ VALUES (
   'Allagash White',
   'beer',
   'Witbier',
-  'Allagash White is a well-known United States Witbier from Allagash White, selected for broad drink catalog coverage in Japan.',
+  'Allagash White is a well-known United States Witbier from Allagash.',
   NULL,
   5.2,
   'United States',
-  'Allagash White',
+  'Allagash',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -858,11 +858,11 @@ VALUES (
   'Almaviva 2020',
   'wine',
   'Red',
-  'Almaviva 2020 is a well-known Chile Red from Almaviva 2020, selected for broad drink catalog coverage in Japan.',
+  'Almaviva 2020 is a well-known Chile Red from Almaviva.',
   NULL,
   14.5,
   'Chile',
-  'Almaviva 2020',
+  'Almaviva',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -914,11 +914,11 @@ VALUES (
   'Amahagan World Malt Edition No 1',
   'whisky',
   'World Blended Malt',
-  'Amahagan World Malt Edition No 1 is a well-known Japan World Blended Malt from Amahagan World, selected for broad drink catalog coverage in Japan.',
+  'Amahagan World Malt Edition No 1 is a well-known Japan World Blended Malt from Nagahama Distillery.',
   NULL,
   47,
   'Japan',
-  'Amahagan World',
+  'Nagahama Distillery',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -998,11 +998,11 @@ VALUES (
   'Amarula Cream',
   'liqueur',
   'Cream',
-  'Amarula Cream is a well-known South Africa Cream from Amarula Cream, selected for broad drink catalog coverage in Japan.',
+  'Amarula Cream is a well-known South Africa Cream from Amarula.',
   NULL,
   17,
   'South Africa',
-  'Amarula Cream',
+  'Amarula',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -1026,11 +1026,11 @@ VALUES (
   'Amrut Fusion',
   'whisky',
   'Single Malt',
-  'Amrut Fusion is a well-known India Single Malt from Amrut Fusion, selected for broad drink catalog coverage in Japan.',
+  'Amrut Fusion is a well-known India Single Malt from Amrut Distilleries.',
   NULL,
   50,
   'India',
-  'Amrut Fusion',
+  'Amrut Distilleries',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -1054,11 +1054,11 @@ VALUES (
   'Amstel Lager',
   'beer',
   'Lager',
-  'Amstel Lager is a well-known Netherlands Lager from Amstel Lager, selected for broad drink catalog coverage in Japan.',
+  'Amstel Lager is a well-known Netherlands Lager from Amstel.',
   NULL,
   5,
   'Netherlands',
-  'Amstel Lager',
+  'Amstel',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -1166,11 +1166,11 @@ VALUES (
   'Angostura 1824',
   'rum',
   'Aged Rum',
-  'Angostura 1824 is a well-known Trinidad and Tobago Aged Rum from Angostura 1824, selected for broad drink catalog coverage in Japan.',
+  'Angostura 1824 is a well-known Trinidad and Tobago Aged Rum from Angostura.',
   NULL,
   40,
   'Trinidad and Tobago',
-  'Angostura 1824',
+  'Angostura',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -1194,11 +1194,11 @@ VALUES (
   'Angostura 1919',
   'rum',
   'Aged Rum',
-  'Angostura 1919 is a well-known Trinidad and Tobago Aged Rum from Angostura 1919, selected for broad drink catalog coverage in Japan.',
+  'Angostura 1919 is a well-known Trinidad and Tobago Aged Rum from Angostura.',
   NULL,
   40,
   'Trinidad and Tobago',
-  'Angostura 1919',
+  'Angostura',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -1222,11 +1222,11 @@ VALUES (
   'Angostura 7 Year Old',
   'rum',
   'Aged Rum',
-  'Angostura 7 Year Old is a well-known Trinidad and Tobago Aged Rum from Angostura 7, selected for broad drink catalog coverage in Japan.',
+  'Angostura 7 Year Old is a well-known Trinidad and Tobago Aged Rum from Angostura.',
   NULL,
   40,
   'Trinidad and Tobago',
-  'Angostura 7',
+  'Angostura',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -1418,11 +1418,11 @@ VALUES (
   'Aperol',
   'liqueur',
   'Aperitivo',
-  'Aperol is a well-known Italy Aperitivo from Aperol, selected for broad drink catalog coverage in Japan.',
+  'Aperol is a well-known Italy Aperitivo from Campari Group.',
   NULL,
   11,
   'Italy',
-  'Aperol',
+  'Campari Group',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -1446,11 +1446,11 @@ VALUES (
   'Appleton Estate 12 Year Old Rare Casks',
   'rum',
   'Aged Rum',
-  'Appleton Estate 12 Year Old Rare Casks is a well-known Jamaica Aged Rum from Appleton Estate, selected for broad drink catalog coverage in Japan.',
+  'Appleton Estate 12 Year Old Rare Casks is a well-known Jamaica Aged Rum from Campari Group.',
   NULL,
   43,
   'Jamaica',
-  'Appleton Estate',
+  'Campari Group',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -1474,11 +1474,11 @@ VALUES (
   'Appleton Estate 21 Year Old',
   'rum',
   'Aged Rum',
-  'Appleton Estate 21 Year Old is a well-known Jamaica Aged Rum from Appleton Estate, selected for broad drink catalog coverage in Japan.',
+  'Appleton Estate 21 Year Old is a well-known Jamaica Aged Rum from Campari Group.',
   NULL,
   43,
   'Jamaica',
-  'Appleton Estate',
+  'Campari Group',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -1502,11 +1502,11 @@ VALUES (
   'Appleton Estate 8 Year Old Reserve',
   'rum',
   'Aged Rum',
-  'Appleton Estate 8 Year Old Reserve is a well-known Jamaica Aged Rum from Appleton Estate, selected for broad drink catalog coverage in Japan.',
+  'Appleton Estate 8 Year Old Reserve is a well-known Jamaica Aged Rum from Campari Group.',
   NULL,
   43,
   'Jamaica',
-  'Appleton Estate',
+  'Campari Group',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -1530,11 +1530,11 @@ VALUES (
   'Appleton Estate Signature',
   'rum',
   'Aged Rum',
-  'Appleton Estate Signature is a well-known Jamaica Aged Rum from Appleton Estate, selected for broad drink catalog coverage in Japan.',
+  'Appleton Estate Signature is a well-known Jamaica Aged Rum from Campari Group.',
   NULL,
   40,
   'Jamaica',
-  'Appleton Estate',
+  'Campari Group',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -1614,11 +1614,11 @@ VALUES (
   'Ardbeg 10 Year Old',
   'whisky',
   'Single Malt',
-  'Ardbeg 10 Year Old is a well-known Scotland Single Malt from Ardbeg 10, selected for broad drink catalog coverage in Japan.',
+  'Ardbeg 10 Year Old is a well-known Scotland Single Malt from Ardbeg.',
   NULL,
   46,
   'Scotland',
-  'Ardbeg 10',
+  'Ardbeg',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -1642,11 +1642,11 @@ VALUES (
   'Ardbeg An Oa',
   'whisky',
   'Single Malt',
-  'Ardbeg An Oa is a well-known Scotland Single Malt from Ardbeg An, selected for broad drink catalog coverage in Japan.',
+  'Ardbeg An Oa is a well-known Scotland Single Malt from Ardbeg.',
   NULL,
   46.6,
   'Scotland',
-  'Ardbeg An',
+  'Ardbeg',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -1670,11 +1670,11 @@ VALUES (
   'Ardbeg Corryvreckan',
   'whisky',
   'Single Malt',
-  'Ardbeg Corryvreckan is a well-known Scotland Single Malt from Ardbeg Corryvreckan, selected for broad drink catalog coverage in Japan.',
+  'Ardbeg Corryvreckan is a well-known Scotland Single Malt from Ardbeg.',
   NULL,
   57.1,
   'Scotland',
-  'Ardbeg Corryvreckan',
+  'Ardbeg',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -1698,11 +1698,11 @@ VALUES (
   'Ardbeg Uigeadail',
   'whisky',
   'Single Malt',
-  'Ardbeg Uigeadail is a well-known Scotland Single Malt from Ardbeg Uigeadail, selected for broad drink catalog coverage in Japan.',
+  'Ardbeg Uigeadail is a well-known Scotland Single Malt from Ardbeg.',
   NULL,
   54.2,
   'Scotland',
-  'Ardbeg Uigeadail',
+  'Ardbeg',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -1838,11 +1838,11 @@ VALUES (
   'Arran 10 Year Old',
   'whisky',
   'Single Malt',
-  'Arran 10 Year Old is a well-known Scotland Single Malt from Arran 10, selected for broad drink catalog coverage in Japan.',
+  'Arran 10 Year Old is a well-known Scotland Single Malt from Arran.',
   NULL,
   46,
   'Scotland',
-  'Arran 10',
+  'Arran',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -1866,11 +1866,11 @@ VALUES (
   'Asahi Black',
   'beer',
   'Dark Lager',
-  'Asahi Black is a well-known Japan Dark Lager from Asahi Black, selected for broad drink catalog coverage in Japan.',
+  'Asahi Black is a well-known Japan Dark Lager from アサヒビール.',
   NULL,
   5,
   'Japan',
-  'Asahi Black',
+  'アサヒビール',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -1894,11 +1894,11 @@ VALUES (
   'Asahi Kokuto',
   'shochu',
   'Kokuto',
-  'Asahi Kokuto is a well-known Japan Kokuto from Asahi Kokuto, selected for broad drink catalog coverage in Japan.',
+  'Asahi Kokuto is a well-known Japan Kokuto from アサヒビール.',
   NULL,
   30,
   'Japan',
-  'Asahi Kokuto',
+  'アサヒビール',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -1922,11 +1922,11 @@ VALUES (
   'Asahi Mannen Imo',
   'shochu',
   'Imo',
-  'Asahi Mannen Imo is a well-known Japan Imo from Asahi Mannen, selected for broad drink catalog coverage in Japan.',
+  'Asahi Mannen Imo is a well-known Japan Imo from アサヒビール.',
   NULL,
   25,
   'Japan',
-  'Asahi Mannen',
+  'アサヒビール',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -1950,11 +1950,11 @@ VALUES (
   'Asahi Maruef',
   'beer',
   'Lager',
-  'Asahi Maruef is a well-known Japan Lager from Asahi Maruef, selected for broad drink catalog coverage in Japan.',
+  'Asahi Maruef is a well-known Japan Lager from アサヒビール.',
   NULL,
   4.5,
   'Japan',
-  'Asahi Maruef',
+  'アサヒビール',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -2006,11 +2006,11 @@ VALUES (
   'Asbach Uralt',
   'brandy',
   'Weinbrand',
-  'Asbach Uralt is a well-known Germany Weinbrand from Asbach Uralt, selected for broad drink catalog coverage in Japan.',
+  'Asbach Uralt is a well-known Germany Weinbrand from Asbach.',
   NULL,
   38,
   'Germany',
-  'Asbach Uralt',
+  'Asbach',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -2174,11 +2174,11 @@ VALUES (
   'Avion Anejo',
   'tequila',
   'Tequila',
-  'Avion Anejo is a well-known Mexico Tequila from Avion Anejo, selected for broad drink catalog coverage in Japan.',
+  'Avion Anejo is a well-known Mexico Tequila from Avion.',
   NULL,
   40,
   'Mexico',
-  'Avion Anejo',
+  'Avion',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -2202,11 +2202,11 @@ VALUES (
   'Avion Reposado',
   'tequila',
   'Tequila',
-  'Avion Reposado is a well-known Mexico Tequila from Avion Reposado, selected for broad drink catalog coverage in Japan.',
+  'Avion Reposado is a well-known Mexico Tequila from Avion.',
   NULL,
   40,
   'Mexico',
-  'Avion Reposado',
+  'Avion',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -2230,11 +2230,11 @@ VALUES (
   'Avion Silver',
   'tequila',
   'Blanco',
-  'Avion Silver is a well-known Mexico Blanco from Avion Silver, selected for broad drink catalog coverage in Japan.',
+  'Avion Silver is a well-known Mexico Blanco from Avion.',
   NULL,
   40,
   'Mexico',
-  'Avion Silver',
+  'Avion',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -2286,11 +2286,11 @@ VALUES (
   'Bacardi Carta Blanca',
   'rum',
   'White Rum',
-  'Bacardi Carta Blanca is a well-known Puerto Rico White Rum from Bacardi Carta, selected for broad drink catalog coverage in Japan.',
+  'Bacardi Carta Blanca is a well-known Puerto Rico White Rum from Bacardi.',
   NULL,
   40,
   'Puerto Rico',
-  'Bacardi Carta',
+  'Bacardi',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -2314,11 +2314,11 @@ VALUES (
   'Bacardi Carta Oro',
   'rum',
   'Gold Rum',
-  'Bacardi Carta Oro is a well-known Puerto Rico Gold Rum from Bacardi Carta, selected for broad drink catalog coverage in Japan.',
+  'Bacardi Carta Oro is a well-known Puerto Rico Gold Rum from Bacardi.',
   NULL,
   40,
   'Puerto Rico',
-  'Bacardi Carta',
+  'Bacardi',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -2342,11 +2342,11 @@ VALUES (
   'Bacardi Ocho',
   'rum',
   'Aged Rum',
-  'Bacardi Ocho is a well-known Puerto Rico Aged Rum from Bacardi Ocho, selected for broad drink catalog coverage in Japan.',
+  'Bacardi Ocho is a well-known Puerto Rico Aged Rum from Bacardi.',
   NULL,
   40,
   'Puerto Rico',
-  'Bacardi Ocho',
+  'Bacardi',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -2370,11 +2370,11 @@ VALUES (
   'Bacardi Reserva Diez',
   'rum',
   'Aged Rum',
-  'Bacardi Reserva Diez is a well-known Puerto Rico Aged Rum from Bacardi Reserva, selected for broad drink catalog coverage in Japan.',
+  'Bacardi Reserva Diez is a well-known Puerto Rico Aged Rum from Bacardi.',
   NULL,
   40,
   'Puerto Rico',
-  'Bacardi Reserva',
+  'Bacardi',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -2426,11 +2426,11 @@ VALUES (
   'Bache-Gabrielsen VSOP',
   'brandy',
   'Cognac',
-  'Bache-Gabrielsen VSOP is a well-known France Cognac from Bache-Gabrielsen VSOP, selected for broad drink catalog coverage in Japan.',
+  'Bache-Gabrielsen VSOP is a well-known France Cognac from Bache-Gabrielsen.',
   NULL,
   40,
   'France',
-  'Bache-Gabrielsen VSOP',
+  'Bache-Gabrielsen',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -2458,7 +2458,7 @@ VALUES (
   NULL,
   17,
   'Ireland',
-  'Baileys',
+  'Diageo',
   ARRAY['べいりーず']::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -2538,11 +2538,11 @@ VALUES (
   'Balblair 12 Year Old',
   'whisky',
   'Single Malt',
-  'Balblair 12 Year Old is a well-known Scotland Single Malt from Balblair 12, selected for broad drink catalog coverage in Japan.',
+  'Balblair 12 Year Old is a well-known Scotland Single Malt from Balblair.',
   NULL,
   46,
   'Scotland',
-  'Balblair 12',
+  'Balblair',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -2566,11 +2566,11 @@ VALUES (
   'Balblair 15 Year Old',
   'whisky',
   'Single Malt',
-  'Balblair 15 Year Old is a well-known Scotland Single Malt from Balblair 15, selected for broad drink catalog coverage in Japan.',
+  'Balblair 15 Year Old is a well-known Scotland Single Malt from Balblair.',
   NULL,
   46,
   'Scotland',
-  'Balblair 15',
+  'Balblair',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -2594,11 +2594,11 @@ VALUES (
   'Ballantine''s 17 Year Old',
   'whisky',
   'Blended',
-  'Ballantine''s 17 Year Old is a well-known Scotland Blended from Chivas Brothers, selected for broad drink catalog coverage in Japan.',
+  'Ballantine''s 17 Year Old is a well-known Scotland Blended from Pernod Ricard.',
   NULL,
   40,
   'Scotland',
-  'Chivas Brothers',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -2622,11 +2622,11 @@ VALUES (
   'Ballantine''s 21 Year Old',
   'whisky',
   'Blended',
-  'Ballantine''s 21 Year Old is a well-known Scotland Blended from Chivas Brothers, selected for broad drink catalog coverage in Japan.',
+  'Ballantine''s 21 Year Old is a well-known Scotland Blended from Pernod Ricard.',
   NULL,
   40,
   'Scotland',
-  'Chivas Brothers',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -2650,11 +2650,11 @@ VALUES (
   'Ballantine''s Finest',
   'whisky',
   'Blended',
-  'Ballantine''s Finest is a well-known Scotland Blended from Chivas Brothers, selected for broad drink catalog coverage in Japan.',
+  'Ballantine''s Finest is a well-known Scotland Blended from Pernod Ricard.',
   NULL,
   40,
   'Scotland',
-  'Chivas Brothers',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -2706,11 +2706,11 @@ VALUES (
   'Barcelo Imperial',
   'rum',
   'Aged Rum',
-  'Barcelo Imperial is a well-known Dominican Republic Aged Rum from Barcelo Imperial, selected for broad drink catalog coverage in Japan.',
+  'Barcelo Imperial is a well-known Dominican Republic Aged Rum from Barcelo.',
   NULL,
   38,
   'Dominican Republic',
-  'Barcelo Imperial',
+  'Barcelo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -2874,11 +2874,11 @@ VALUES (
   'Becherovka Original',
   'liqueur',
   'Herbal',
-  'Becherovka Original is a well-known Czech Republic Herbal from Becherovka Original, selected for broad drink catalog coverage in Japan.',
+  'Becherovka Original is a well-known Czech Republic Herbal from Becherovka.',
   NULL,
   38,
   'Czech Republic',
-  'Becherovka Original',
+  'Becherovka',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -2930,11 +2930,11 @@ VALUES (
   'Beefeater 24',
   'gin',
   'London Dry',
-  'Beefeater 24 is a well-known England London Dry from Beefeater 24, selected for broad drink catalog coverage in Japan.',
+  'Beefeater 24 is a well-known England London Dry from Pernod Ricard.',
   NULL,
   45,
   'England',
-  'Beefeater 24',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -2958,11 +2958,11 @@ VALUES (
   'Beefeater London Dry Gin',
   'gin',
   'London Dry',
-  'Beefeater London Dry Gin is a well-known England London Dry from Beefeater London, selected for broad drink catalog coverage in Japan.',
+  'Beefeater London Dry Gin is a well-known England London Dry from Pernod Ricard.',
   NULL,
   40,
   'England',
-  'Beefeater London',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -2986,11 +2986,11 @@ VALUES (
   'Beerlao Lager',
   'beer',
   'Lager',
-  'Beerlao Lager is a well-known Laos Lager from Beerlao Lager, selected for broad drink catalog coverage in Japan.',
+  'Beerlao Lager is a well-known Laos Lager from Beerlao.',
   NULL,
   5,
   'Laos',
-  'Beerlao Lager',
+  'Beerlao',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -3098,11 +3098,11 @@ VALUES (
   'Belvedere Lake Bartezek',
   'vodka',
   'Plain',
-  'Belvedere Lake Bartezek is a well-known Poland Plain from Belvedere Lake, selected for broad drink catalog coverage in Japan.',
+  'Belvedere Lake Bartezek is a well-known Poland Plain from LVMH.',
   NULL,
   40,
   'Poland',
-  'Belvedere Lake',
+  'LVMH',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -3126,11 +3126,11 @@ VALUES (
   'Belvedere Smogory Forest',
   'vodka',
   'Plain',
-  'Belvedere Smogory Forest is a well-known Poland Plain from Belvedere Smogory, selected for broad drink catalog coverage in Japan.',
+  'Belvedere Smogory Forest is a well-known Poland Plain from LVMH.',
   NULL,
   40,
   'Poland',
-  'Belvedere Smogory',
+  'LVMH',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -3154,11 +3154,11 @@ VALUES (
   'Belvedere Vodka',
   'vodka',
   'Plain',
-  'Belvedere Vodka is a well-known Poland Plain from Belvedere Vodka, selected for broad drink catalog coverage in Japan.',
+  'Belvedere Vodka is a well-known Poland Plain from LVMH.',
   NULL,
   40,
   'Poland',
-  'Belvedere Vodka',
+  'LVMH',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -3210,11 +3210,11 @@ VALUES (
   'Benedictine DOM',
   'liqueur',
   'Herbal',
-  'Benedictine DOM is a well-known France Herbal from Benedictine DOM, selected for broad drink catalog coverage in Japan.',
+  'Benedictine DOM is a well-known France Herbal from Benedictine.',
   NULL,
   40,
   'France',
-  'Benedictine DOM',
+  'Benedictine',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -3238,11 +3238,11 @@ VALUES (
   'BenRiach The Original Ten',
   'whisky',
   'Single Malt',
-  'BenRiach The Original Ten is a well-known Scotland Single Malt from BenRiach The, selected for broad drink catalog coverage in Japan.',
+  'BenRiach The Original Ten is a well-known Scotland Single Malt from Brown-Forman.',
   NULL,
   43,
   'Scotland',
-  'BenRiach The',
+  'Brown-Forman',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -3266,11 +3266,11 @@ VALUES (
   'Benromach 10 Year Old',
   'whisky',
   'Single Malt',
-  'Benromach 10 Year Old is a well-known Scotland Single Malt from Benromach 10, selected for broad drink catalog coverage in Japan.',
+  'Benromach 10 Year Old is a well-known Scotland Single Malt from Benromach.',
   NULL,
   43,
   'Scotland',
-  'Benromach 10',
+  'Benromach',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -3378,11 +3378,11 @@ VALUES (
   'Bintang Pilsener',
   'beer',
   'Pilsner',
-  'Bintang Pilsener is a well-known Indonesia Pilsner from Bintang Pilsener, selected for broad drink catalog coverage in Japan.',
+  'Bintang Pilsener is a well-known Indonesia Pilsner from Bintang.',
   NULL,
   4.7,
   'Indonesia',
-  'Bintang Pilsener',
+  'Bintang',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -3434,11 +3434,11 @@ VALUES (
   'Birra Moretti',
   'beer',
   'Lager',
-  'Birra Moretti is a well-known Italy Lager from Birra Moretti, selected for broad drink catalog coverage in Japan.',
+  'Birra Moretti is a well-known Italy Lager from Birra.',
   NULL,
   4.6,
   'Italy',
-  'Birra Moretti',
+  'Birra',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -3518,11 +3518,11 @@ VALUES (
   'Blanton''s Original Single Barrel',
   'whisky',
   'Bourbon',
-  'Blanton''s Original Single Barrel is a well-known United States Bourbon from Blanton''s Original, selected for broad drink catalog coverage in Japan.',
+  'Blanton''s Original Single Barrel is a well-known United States Bourbon from Buffalo Trace.',
   NULL,
   46.5,
   'United States',
-  'Blanton''s Original',
+  'Buffalo Trace',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -3770,11 +3770,11 @@ VALUES (
   'Bols Genever',
   'gin',
   'Genever',
-  'Bols Genever is a well-known Netherlands Genever from Bols Genever, selected for broad drink catalog coverage in Japan.',
+  'Bols Genever is a well-known Netherlands Genever from Bols.',
   NULL,
   42,
   'Netherlands',
-  'Bols Genever',
+  'Bols',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -3826,11 +3826,11 @@ VALUES (
   'Bols Strawberry',
   'liqueur',
   'Strawberry',
-  'Bols Strawberry is a well-known Netherlands Strawberry from Bols Strawberry, selected for broad drink catalog coverage in Japan.',
+  'Bols Strawberry is a well-known Netherlands Strawberry from Bols.',
   NULL,
   17,
   'Netherlands',
-  'Bols Strawberry',
+  'Bols',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -3854,11 +3854,11 @@ VALUES (
   'Bols Yogurt',
   'liqueur',
   'Yogurt',
-  'Bols Yogurt is a well-known Netherlands Yogurt from Bols Yogurt, selected for broad drink catalog coverage in Japan.',
+  'Bols Yogurt is a well-known Netherlands Yogurt from Bols.',
   NULL,
   15,
   'Netherlands',
-  'Bols Yogurt',
+  'Bols',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -3910,11 +3910,11 @@ VALUES (
   'Bombay Sapphire',
   'gin',
   'London Dry',
-  'Bombay Sapphire is a well-known England London Dry from Bombay Sapphire, selected for broad drink catalog coverage in Japan.',
+  'Bombay Sapphire is a well-known England London Dry from Bacardi.',
   NULL,
   47,
   'England',
-  'Bombay Sapphire',
+  'Bacardi',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -4022,11 +4022,11 @@ VALUES (
   'Bowmore 12 Year Old',
   'whisky',
   'Single Malt',
-  'Bowmore 12 Year Old is a well-known Scotland Single Malt from Bowmore 12, selected for broad drink catalog coverage in Japan.',
+  'Bowmore 12 Year Old is a well-known Scotland Single Malt from Bowmore.',
   NULL,
   40,
   'Scotland',
-  'Bowmore 12',
+  'Bowmore',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -4050,11 +4050,11 @@ VALUES (
   'Bowmore 15 Year Old',
   'whisky',
   'Single Malt',
-  'Bowmore 15 Year Old is a well-known Scotland Single Malt from Bowmore 15, selected for broad drink catalog coverage in Japan.',
+  'Bowmore 15 Year Old is a well-known Scotland Single Malt from Bowmore.',
   NULL,
   43,
   'Scotland',
-  'Bowmore 15',
+  'Bowmore',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -4106,11 +4106,11 @@ VALUES (
   'Branca Menta',
   'liqueur',
   'Amaro',
-  'Branca Menta is a well-known Italy Amaro from Branca Menta, selected for broad drink catalog coverage in Japan.',
+  'Branca Menta is a well-known Italy Amaro from Branca.',
   NULL,
   28,
   'Italy',
-  'Branca Menta',
+  'Branca',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -4134,11 +4134,11 @@ VALUES (
   'BrewDog Elvis Juice',
   'beer',
   'IPA',
-  'BrewDog Elvis Juice is a well-known Scotland IPA from BrewDog Elvis, selected for broad drink catalog coverage in Japan.',
+  'BrewDog Elvis Juice is a well-known Scotland IPA from BrewDog.',
   NULL,
   6.5,
   'Scotland',
-  'BrewDog Elvis',
+  'BrewDog',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -4162,11 +4162,11 @@ VALUES (
   'BrewDog Hazy Jane',
   'beer',
   'Hazy IPA',
-  'BrewDog Hazy Jane is a well-known Scotland Hazy IPA from BrewDog Hazy, selected for broad drink catalog coverage in Japan.',
+  'BrewDog Hazy Jane is a well-known Scotland Hazy IPA from BrewDog.',
   NULL,
   5,
   'Scotland',
-  'BrewDog Hazy',
+  'BrewDog',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -4302,11 +4302,11 @@ VALUES (
   'Brooklyn Gin',
   'gin',
   'New Western',
-  'Brooklyn Gin is a well-known United States New Western from Brooklyn Gin, selected for broad drink catalog coverage in Japan.',
+  'Brooklyn Gin is a well-known United States New Western from Brooklyn.',
   NULL,
   40,
   'United States',
-  'Brooklyn Gin',
+  'Brooklyn',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -4330,11 +4330,11 @@ VALUES (
   'Brooklyn Lager',
   'beer',
   'Lager',
-  'Brooklyn Lager is a well-known United States Lager from Brooklyn Lager, selected for broad drink catalog coverage in Japan.',
+  'Brooklyn Lager is a well-known United States Lager from Brooklyn.',
   NULL,
   5.2,
   'United States',
-  'Brooklyn Lager',
+  'Brooklyn',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -4358,11 +4358,11 @@ VALUES (
   'Brugal 1888',
   'rum',
   'Aged Rum',
-  'Brugal 1888 is a well-known Dominican Republic Aged Rum from Brugal 1888, selected for broad drink catalog coverage in Japan.',
+  'Brugal 1888 is a well-known Dominican Republic Aged Rum from Brugal.',
   NULL,
   40,
   'Dominican Republic',
-  'Brugal 1888',
+  'Brugal',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -4386,11 +4386,11 @@ VALUES (
   'Brugal Anejo',
   'rum',
   'Aged Rum',
-  'Brugal Anejo is a well-known Dominican Republic Aged Rum from Brugal Anejo, selected for broad drink catalog coverage in Japan.',
+  'Brugal Anejo is a well-known Dominican Republic Aged Rum from Brugal.',
   NULL,
   38,
   'Dominican Republic',
-  'Brugal Anejo',
+  'Brugal',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -4470,11 +4470,11 @@ VALUES (
   'Bud Light',
   'beer',
   'Light Lager',
-  'Bud Light is a well-known United States Light Lager from Bud Light, selected for broad drink catalog coverage in Japan.',
+  'Bud Light is a well-known United States Light Lager from Bud.',
   NULL,
   4.2,
   'United States',
-  'Bud Light',
+  'Bud',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -4498,11 +4498,11 @@ VALUES (
   'Budvar Original Czech Lager',
   'beer',
   'Lager',
-  'Budvar Original Czech Lager is a well-known Czech Republic Lager from Budvar Original, selected for broad drink catalog coverage in Japan.',
+  'Budvar Original Czech Lager is a well-known Czech Republic Lager from Budvar.',
   NULL,
   5,
   'Czech Republic',
-  'Budvar Original',
+  'Budvar',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -4526,11 +4526,11 @@ VALUES (
   'Budweiser',
   'beer',
   'Lager',
-  'Budweiser is a well-known United States Lager from Budweiser, selected for broad drink catalog coverage in Japan.',
+  'Budweiser is a well-known United States Lager from AB InBev.',
   NULL,
   5,
   'United States',
-  'Budweiser',
+  'AB InBev',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -4582,11 +4582,11 @@ VALUES (
   'Bulleit Bourbon',
   'whisky',
   'Bourbon',
-  'Bulleit Bourbon is a well-known United States Bourbon from Bulleit Bourbon, selected for broad drink catalog coverage in Japan.',
+  'Bulleit Bourbon is a well-known United States Bourbon from Diageo.',
   NULL,
   45,
   'United States',
-  'Bulleit Bourbon',
+  'Diageo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -4610,11 +4610,11 @@ VALUES (
   'Bulleit Rye',
   'whisky',
   'Rye',
-  'Bulleit Rye is a well-known United States Rye from Bulleit Rye, selected for broad drink catalog coverage in Japan.',
+  'Bulleit Rye is a well-known United States Rye from Diageo.',
   NULL,
   45,
   'United States',
-  'Bulleit Rye',
+  'Diageo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -4638,11 +4638,11 @@ VALUES (
   'Bulmers Original Cider',
   'other',
   'Cider',
-  'Bulmers Original Cider is a well-known Ireland Cider from Bulmers Original, selected for broad drink catalog coverage in Japan.',
+  'Bulmers Original Cider is a well-known Ireland Cider from Bulmers.',
   NULL,
   4.5,
   'Ireland',
-  'Bulmers Original',
+  'Bulmers',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -4666,11 +4666,11 @@ VALUES (
   'Bunnahabhain 12 Year Old',
   'whisky',
   'Single Malt',
-  'Bunnahabhain 12 Year Old is a well-known Scotland Single Malt from Bunnahabhain 12, selected for broad drink catalog coverage in Japan.',
+  'Bunnahabhain 12 Year Old is a well-known Scotland Single Malt from Bunnahabhain.',
   NULL,
   46.3,
   'Scotland',
-  'Bunnahabhain 12',
+  'Bunnahabhain',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -4694,11 +4694,11 @@ VALUES (
   'Bushmills 10 Year Old',
   'whisky',
   'Single Malt',
-  'Bushmills 10 Year Old is a well-known Ireland Single Malt from Bushmills 10, selected for broad drink catalog coverage in Japan.',
+  'Bushmills 10 Year Old is a well-known Ireland Single Malt from Proximo Spirits.',
   NULL,
   40,
   'Ireland',
-  'Bushmills 10',
+  'Proximo Spirits',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -4722,11 +4722,11 @@ VALUES (
   'Bushmills Black Bush',
   'whisky',
   'Blended',
-  'Bushmills Black Bush is a well-known Ireland Blended from Bushmills Black, selected for broad drink catalog coverage in Japan.',
+  'Bushmills Black Bush is a well-known Ireland Blended from Proximo Spirits.',
   NULL,
   40,
   'Ireland',
-  'Bushmills Black',
+  'Proximo Spirits',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -4862,11 +4862,11 @@ VALUES (
   'Campari',
   'liqueur',
   'Bitter',
-  'Campari is a well-known Italy Bitter from Campari, selected for broad drink catalog coverage in Japan.',
+  'Campari is a well-known Italy Bitter from Campari Group.',
   NULL,
   25,
   'Italy',
-  'Campari',
+  'Campari Group',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -4918,11 +4918,11 @@ VALUES (
   'Camus VSOP Elegance',
   'brandy',
   'Cognac',
-  'Camus VSOP Elegance is a well-known France Cognac from Camus VSOP, selected for broad drink catalog coverage in Japan.',
+  'Camus VSOP Elegance is a well-known France Cognac from Camus.',
   NULL,
   40,
   'France',
-  'Camus VSOP',
+  'Camus',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -4946,11 +4946,11 @@ VALUES (
   'Camus XO Elegance',
   'brandy',
   'Cognac',
-  'Camus XO Elegance is a well-known France Cognac from Camus XO, selected for broad drink catalog coverage in Japan.',
+  'Camus XO Elegance is a well-known France Cognac from Camus.',
   NULL,
   40,
   'France',
-  'Camus XO',
+  'Camus',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -4974,11 +4974,11 @@ VALUES (
   'Canadian Club 12 Year Old',
   'whisky',
   'Canadian',
-  'Canadian Club 12 Year Old is a well-known Canada Canadian from Canadian Club, selected for broad drink catalog coverage in Japan.',
+  'Canadian Club 12 Year Old is a well-known Canada Canadian from Beam Suntory.',
   NULL,
   40,
   'Canada',
-  'Canadian Club',
+  'Beam Suntory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -5058,11 +5058,11 @@ VALUES (
   'Captain Morgan Original Spiced Gold',
   'rum',
   'Spiced Rum',
-  'Captain Morgan Original Spiced Gold is a well-known Jamaica Spiced Rum from Captain Morgan, selected for broad drink catalog coverage in Japan.',
+  'Captain Morgan Original Spiced Gold is a well-known Jamaica Spiced Rum from Diageo.',
   NULL,
   35,
   'Jamaica',
-  'Captain Morgan',
+  'Diageo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -5198,11 +5198,11 @@ VALUES (
   'Casamigos Anejo',
   'tequila',
   'Tequila',
-  'Casamigos Anejo is a well-known Mexico Tequila from Casamigos Anejo, selected for broad drink catalog coverage in Japan.',
+  'Casamigos Anejo is a well-known Mexico Tequila from Diageo.',
   NULL,
   40,
   'Mexico',
-  'Casamigos Anejo',
+  'Diageo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -5226,11 +5226,11 @@ VALUES (
   'Casamigos Blanco',
   'tequila',
   'Tequila',
-  'Casamigos Blanco is a well-known Mexico Tequila from Casamigos Blanco, selected for broad drink catalog coverage in Japan.',
+  'Casamigos Blanco is a well-known Mexico Tequila from Diageo.',
   NULL,
   40,
   'Mexico',
-  'Casamigos Blanco',
+  'Diageo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -5254,11 +5254,11 @@ VALUES (
   'Casamigos Cristalino',
   'tequila',
   'Tequila',
-  'Casamigos Cristalino is a well-known Mexico Tequila from Casamigos Cristalino, selected for broad drink catalog coverage in Japan.',
+  'Casamigos Cristalino is a well-known Mexico Tequila from Diageo.',
   NULL,
   40,
   'Mexico',
-  'Casamigos Cristalino',
+  'Diageo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -5282,11 +5282,11 @@ VALUES (
   'Casamigos Reposado',
   'tequila',
   'Tequila',
-  'Casamigos Reposado is a well-known Mexico Tequila from Casamigos Reposado, selected for broad drink catalog coverage in Japan.',
+  'Casamigos Reposado is a well-known Mexico Tequila from Diageo.',
   NULL,
   40,
   'Mexico',
-  'Casamigos Reposado',
+  'Diageo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -5338,11 +5338,11 @@ VALUES (
   'Castarede VSOP Armagnac',
   'brandy',
   'Armagnac',
-  'Castarede VSOP Armagnac is a well-known France Armagnac from Castarede VSOP, selected for broad drink catalog coverage in Japan.',
+  'Castarede VSOP Armagnac is a well-known France Armagnac from Castarede.',
   NULL,
   40,
   'France',
-  'Castarede VSOP',
+  'Castarede',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -5366,11 +5366,11 @@ VALUES (
   'Castarede XO Armagnac',
   'brandy',
   'Armagnac',
-  'Castarede XO Armagnac is a well-known France Armagnac from Castarede XO, selected for broad drink catalog coverage in Japan.',
+  'Castarede XO Armagnac is a well-known France Armagnac from Castarede.',
   NULL,
   40,
   'France',
-  'Castarede XO',
+  'Castarede',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -5506,11 +5506,11 @@ VALUES (
   'Cazadores Anejo',
   'tequila',
   'Tequila',
-  'Cazadores Anejo is a well-known Mexico Tequila from Cazadores Anejo, selected for broad drink catalog coverage in Japan.',
+  'Cazadores Anejo is a well-known Mexico Tequila from Cazadores.',
   NULL,
   40,
   'Mexico',
-  'Cazadores Anejo',
+  'Cazadores',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -5534,11 +5534,11 @@ VALUES (
   'Cazadores Blanco',
   'tequila',
   'Tequila',
-  'Cazadores Blanco is a well-known Mexico Tequila from Cazadores Blanco, selected for broad drink catalog coverage in Japan.',
+  'Cazadores Blanco is a well-known Mexico Tequila from Cazadores.',
   NULL,
   40,
   'Mexico',
-  'Cazadores Blanco',
+  'Cazadores',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -5562,11 +5562,11 @@ VALUES (
   'Cazadores Reposado',
   'tequila',
   'Tequila',
-  'Cazadores Reposado is a well-known Mexico Tequila from Cazadores Reposado, selected for broad drink catalog coverage in Japan.',
+  'Cazadores Reposado is a well-known Mexico Tequila from Cazadores.',
   NULL,
   40,
   'Mexico',
-  'Cazadores Reposado',
+  'Cazadores',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -5618,11 +5618,11 @@ VALUES (
   'Chairman''s Reserve Original',
   'rum',
   'Aged Rum',
-  'Chairman''s Reserve Original is a well-known Saint Lucia Aged Rum from Chairman''s Reserve, selected for broad drink catalog coverage in Japan.',
+  'Chairman''s Reserve Original is a well-known Saint Lucia Aged Rum from Chairman''s.',
   NULL,
   40,
   'Saint Lucia',
-  'Chairman''s Reserve',
+  'Chairman''s',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -5646,11 +5646,11 @@ VALUES (
   'Chairman''s Reserve Spiced',
   'rum',
   'Spiced Rum',
-  'Chairman''s Reserve Spiced is a well-known Saint Lucia Spiced Rum from Chairman''s Reserve, selected for broad drink catalog coverage in Japan.',
+  'Chairman''s Reserve Spiced is a well-known Saint Lucia Spiced Rum from Chairman''s.',
   NULL,
   40,
   'Saint Lucia',
-  'Chairman''s Reserve',
+  'Chairman''s',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -5674,11 +5674,11 @@ VALUES (
   'Chambord',
   'liqueur',
   'Raspberry',
-  'Chambord is a well-known France Raspberry from Chambord, selected for broad drink catalog coverage in Japan.',
+  'Chambord is a well-known France Raspberry from Brown-Forman.',
   NULL,
   16.5,
   'France',
-  'Chambord',
+  'Brown-Forman',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -5702,11 +5702,11 @@ VALUES (
   'Chang Classic',
   'beer',
   'Lager',
-  'Chang Classic is a well-known Thailand Lager from Chang Classic, selected for broad drink catalog coverage in Japan.',
+  'Chang Classic is a well-known Thailand Lager from Chang.',
   NULL,
   5,
   'Thailand',
-  'Chang Classic',
+  'Chang',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -5758,11 +5758,11 @@ VALUES (
   'Chartreuse Green',
   'liqueur',
   'Herbal',
-  'Chartreuse Green is a well-known France Herbal from Chartreuse Green, selected for broad drink catalog coverage in Japan.',
+  'Chartreuse Green is a well-known France Herbal from Chartreuse.',
   NULL,
   55,
   'France',
-  'Chartreuse Green',
+  'Chartreuse',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -5786,11 +5786,11 @@ VALUES (
   'Chartreuse Yellow',
   'liqueur',
   'Herbal',
-  'Chartreuse Yellow is a well-known France Herbal from Chartreuse Yellow, selected for broad drink catalog coverage in Japan.',
+  'Chartreuse Yellow is a well-known France Herbal from Chartreuse.',
   NULL,
   43,
   'France',
-  'Chartreuse Yellow',
+  'Chartreuse',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -5814,11 +5814,11 @@ VALUES (
   'Chase Original Potato Vodka',
   'vodka',
   'Potato',
-  'Chase Original Potato Vodka is a well-known England Potato from Chase Original, selected for broad drink catalog coverage in Japan.',
+  'Chase Original Potato Vodka is a well-known England Potato from Chase.',
   NULL,
   40,
   'England',
-  'Chase Original',
+  'Chase',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -6458,11 +6458,11 @@ VALUES (
   'Cherry Marnier',
   'liqueur',
   'Cherry',
-  'Cherry Marnier is a well-known France Cherry from Cherry Marnier, selected for broad drink catalog coverage in Japan.',
+  'Cherry Marnier is a well-known France Cherry from Cherry.',
   NULL,
   24,
   'France',
-  'Cherry Marnier',
+  'Cherry',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -6486,11 +6486,11 @@ VALUES (
   'Chimay Blue',
   'beer',
   'Belgian Strong Ale',
-  'Chimay Blue is a well-known Belgium Belgian Strong Ale from Chimay Blue, selected for broad drink catalog coverage in Japan.',
+  'Chimay Blue is a well-known Belgium Belgian Strong Ale from Chimay.',
   NULL,
   9,
   'Belgium',
-  'Chimay Blue',
+  'Chimay',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -6514,11 +6514,11 @@ VALUES (
   'Chimay Red',
   'beer',
   'Dubbel',
-  'Chimay Red is a well-known Belgium Dubbel from Chimay Red, selected for broad drink catalog coverage in Japan.',
+  'Chimay Red is a well-known Belgium Dubbel from Chimay.',
   NULL,
   7,
   'Belgium',
-  'Chimay Red',
+  'Chimay',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -6542,11 +6542,11 @@ VALUES (
   'Chimay White',
   'beer',
   'Tripel',
-  'Chimay White is a well-known Belgium Tripel from Chimay White, selected for broad drink catalog coverage in Japan.',
+  'Chimay White is a well-known Belgium Tripel from Chimay.',
   NULL,
   8,
   'Belgium',
-  'Chimay White',
+  'Chimay',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -6570,11 +6570,11 @@ VALUES (
   'Chivas Regal 12 Year Old',
   'whisky',
   'Blended',
-  'Chivas Regal 12 Year Old is a well-known Scotland Blended from Chivas Brothers, selected for broad drink catalog coverage in Japan.',
+  'Chivas Regal 12 Year Old is a well-known Scotland Blended from Pernod Ricard.',
   NULL,
   40,
   'Scotland',
-  'Chivas Brothers',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -6598,11 +6598,11 @@ VALUES (
   'Chivas Regal 18 Year Old',
   'whisky',
   'Blended',
-  'Chivas Regal 18 Year Old is a well-known Scotland Blended from Chivas Brothers, selected for broad drink catalog coverage in Japan.',
+  'Chivas Regal 18 Year Old is a well-known Scotland Blended from Pernod Ricard.',
   NULL,
   40,
   'Scotland',
-  'Chivas Brothers',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -6626,11 +6626,11 @@ VALUES (
   'Chivas Regal Mizunara',
   'whisky',
   'Blended',
-  'Chivas Regal Mizunara is a well-known Scotland Blended from Chivas Brothers, selected for broad drink catalog coverage in Japan.',
+  'Chivas Regal Mizunara is a well-known Scotland Blended from Pernod Ricard.',
   NULL,
   40,
   'Scotland',
-  'Chivas Brothers',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -6654,11 +6654,11 @@ VALUES (
   'Chiyonosono Excel',
   'sake',
   'Junmai Ginjo',
-  'Chiyonosono Excel is a well-known Japan Junmai Ginjo from Chiyonosono Excel, selected for broad drink catalog coverage in Japan.',
+  '千代の園 エクセル。ChiyonosonoのJunmai Ginjoとして知られる定番銘柄。',
   NULL,
   15,
   'Japan',
-  'Chiyonosono Excel',
+  'Chiyonosono',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -6738,11 +6738,11 @@ VALUES (
   'Chopin Rye Vodka',
   'vodka',
   'Plain',
-  'Chopin Rye Vodka is a well-known Poland Plain from Chopin Rye, selected for broad drink catalog coverage in Japan.',
+  'Chopin Rye Vodka is a well-known Poland Plain from Chopin.',
   NULL,
   40,
   'Poland',
-  'Chopin Rye',
+  'Chopin',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -6822,11 +6822,11 @@ VALUES (
   'Choya Umeshu',
   'liqueur',
   'Umeshu',
-  'Choya Umeshu is a well-known Japan Umeshu from Choya Umeshu, selected for broad drink catalog coverage in Japan.',
+  'Choya Umeshu is a well-known Japan Umeshu from Choya.',
   NULL,
   10,
   'Japan',
-  'Choya Umeshu',
+  'Choya',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -6906,11 +6906,11 @@ VALUES (
   'Ciroc Pineapple',
   'vodka',
   'Flavoured',
-  'Ciroc Pineapple is a well-known France Flavoured from Ciroc Pineapple, selected for broad drink catalog coverage in Japan.',
+  'Ciroc Pineapple is a well-known France Flavoured from Diageo.',
   NULL,
   37.5,
   'France',
-  'Ciroc Pineapple',
+  'Diageo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -6934,11 +6934,11 @@ VALUES (
   'Ciroc Red Berry',
   'vodka',
   'Flavoured',
-  'Ciroc Red Berry is a well-known France Flavoured from Ciroc Red, selected for broad drink catalog coverage in Japan.',
+  'Ciroc Red Berry is a well-known France Flavoured from Diageo.',
   NULL,
   37.5,
   'France',
-  'Ciroc Red',
+  'Diageo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -6962,11 +6962,11 @@ VALUES (
   'Ciroc Vodka',
   'vodka',
   'Grape',
-  'Ciroc Vodka is a well-known France Grape from Ciroc Vodka, selected for broad drink catalog coverage in Japan.',
+  'Ciroc Vodka is a well-known France Grape from Diageo.',
   NULL,
   40,
   'France',
-  'Ciroc Vodka',
+  'Diageo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -6990,11 +6990,11 @@ VALUES (
   'Citadelle Original Gin',
   'gin',
   'London Dry',
-  'Citadelle Original Gin is a well-known France London Dry from Citadelle Original, selected for broad drink catalog coverage in Japan.',
+  'Citadelle Original Gin is a well-known France London Dry from Citadelle.',
   NULL,
   44,
   'France',
-  'Citadelle Original',
+  'Citadelle',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -7046,11 +7046,11 @@ VALUES (
   'Clairin Sajous',
   'rum',
   'Clairin',
-  'Clairin Sajous is a well-known Haiti Clairin from Clairin Sajous, selected for broad drink catalog coverage in Japan.',
+  'Clairin Sajous is a well-known Haiti Clairin from Clairin.',
   NULL,
   54.3,
   'Haiti',
-  'Clairin Sajous',
+  'Clairin',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -7074,11 +7074,11 @@ VALUES (
   'Clairin Vaval',
   'rum',
   'Clairin',
-  'Clairin Vaval is a well-known Haiti Clairin from Clairin Vaval, selected for broad drink catalog coverage in Japan.',
+  'Clairin Vaval is a well-known Haiti Clairin from Clairin.',
   NULL,
   50,
   'Haiti',
-  'Clairin Vaval',
+  'Clairin',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -7326,11 +7326,11 @@ VALUES (
   'Cloudwater DIPA',
   'beer',
   'Double IPA',
-  'Cloudwater DIPA is a well-known England Double IPA from Cloudwater DIPA, selected for broad drink catalog coverage in Japan.',
+  'Cloudwater DIPA is a well-known England Double IPA from Cloudwater.',
   NULL,
   8,
   'England',
-  'Cloudwater DIPA',
+  'Cloudwater',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -7410,11 +7410,11 @@ VALUES (
   'Clynelish 14 Year Old',
   'whisky',
   'Single Malt',
-  'Clynelish 14 Year Old is a well-known Scotland Single Malt from Clynelish 14, selected for broad drink catalog coverage in Japan.',
+  'Clynelish 14 Year Old is a well-known Scotland Single Malt from Clynelish.',
   NULL,
   46,
   'Scotland',
-  'Clynelish 14',
+  'Clynelish',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -7466,11 +7466,11 @@ VALUES (
   'Codigo 1530 Anejo',
   'tequila',
   'Tequila',
-  'Codigo 1530 Anejo is a well-known Mexico Tequila from Codigo 1530, selected for broad drink catalog coverage in Japan.',
+  'Codigo 1530 Anejo is a well-known Mexico Tequila from Codigo.',
   NULL,
   40,
   'Mexico',
-  'Codigo 1530',
+  'Codigo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -7494,11 +7494,11 @@ VALUES (
   'Codigo 1530 Blanco',
   'tequila',
   'Tequila',
-  'Codigo 1530 Blanco is a well-known Mexico Tequila from Codigo 1530, selected for broad drink catalog coverage in Japan.',
+  'Codigo 1530 Blanco is a well-known Mexico Tequila from Codigo.',
   NULL,
   40,
   'Mexico',
-  'Codigo 1530',
+  'Codigo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -7522,11 +7522,11 @@ VALUES (
   'Codigo 1530 Reposado',
   'tequila',
   'Tequila',
-  'Codigo 1530 Reposado is a well-known Mexico Tequila from Codigo 1530, selected for broad drink catalog coverage in Japan.',
+  'Codigo 1530 Reposado is a well-known Mexico Tequila from Codigo.',
   NULL,
   40,
   'Mexico',
-  'Codigo 1530',
+  'Codigo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -7550,11 +7550,11 @@ VALUES (
   'Codigo 1530 Rosa',
   'tequila',
   'Reposado',
-  'Codigo 1530 Rosa is a well-known Mexico Reposado from Codigo 1530, selected for broad drink catalog coverage in Japan.',
+  'Codigo 1530 Rosa is a well-known Mexico Reposado from Codigo.',
   NULL,
   40,
   'Mexico',
-  'Codigo 1530',
+  'Codigo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -7578,11 +7578,11 @@ VALUES (
   'Coedo Beniaka',
   'beer',
   'Imperial Amber',
-  'Coedo Beniaka is a well-known Japan Imperial Amber from Coedo Beniaka, selected for broad drink catalog coverage in Japan.',
+  'Coedo Beniaka is a well-known Japan Imperial Amber from Coedo.',
   NULL,
   7,
   'Japan',
-  'Coedo Beniaka',
+  'Coedo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -7606,11 +7606,11 @@ VALUES (
   'Coedo Kyara',
   'beer',
   'IPL',
-  'Coedo Kyara is a well-known Japan IPL from Coedo Kyara, selected for broad drink catalog coverage in Japan.',
+  'Coedo Kyara is a well-known Japan IPL from Coedo.',
   NULL,
   5.5,
   'Japan',
-  'Coedo Kyara',
+  'Coedo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -7634,11 +7634,11 @@ VALUES (
   'Coedo Ruri',
   'beer',
   'Pilsner',
-  'Coedo Ruri is a well-known Japan Pilsner from Coedo Ruri, selected for broad drink catalog coverage in Japan.',
+  'Coedo Ruri is a well-known Japan Pilsner from Coedo.',
   NULL,
   5,
   'Japan',
-  'Coedo Ruri',
+  'Coedo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -7662,11 +7662,11 @@ VALUES (
   'Coedo Shiro',
   'beer',
   'Hefeweizen',
-  'Coedo Shiro is a well-known Japan Hefeweizen from Coedo Shiro, selected for broad drink catalog coverage in Japan.',
+  'Coedo Shiro is a well-known Japan Hefeweizen from Coedo.',
   NULL,
   5.5,
   'Japan',
-  'Coedo Shiro',
+  'Coedo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -7690,11 +7690,11 @@ VALUES (
   'Cointreau',
   'liqueur',
   'Orange',
-  'Cointreau is a well-known France Orange from Cointreau, selected for broad drink catalog coverage in Japan.',
+  'Cointreau is a well-known France Orange from Rémy Cointreau.',
   NULL,
   40,
   'France',
-  'Cointreau',
+  'Rémy Cointreau',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -7718,11 +7718,11 @@ VALUES (
   'Combier L''Original Triple Sec',
   'liqueur',
   'Orange',
-  'Combier L''Original Triple Sec is a well-known France Orange from Combier L''Original, selected for broad drink catalog coverage in Japan.',
+  'Combier L''Original Triple Sec is a well-known France Orange from Combier.',
   NULL,
   40,
   'France',
-  'Combier L''Original',
+  'Combier',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -7858,11 +7858,11 @@ VALUES (
   'Coopers Original Pale Ale',
   'beer',
   'Pale Ale',
-  'Coopers Original Pale Ale is a well-known Australia Pale Ale from Coopers Original, selected for broad drink catalog coverage in Japan.',
+  'Coopers Original Pale Ale is a well-known Australia Pale Ale from Coopers.',
   NULL,
   4.5,
   'Australia',
-  'Coopers Original',
+  'Coopers',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -7886,11 +7886,11 @@ VALUES (
   'Coors Light',
   'beer',
   'Light Lager',
-  'Coors Light is a well-known United States Light Lager from Coors Light, selected for broad drink catalog coverage in Japan.',
+  'Coors Light is a well-known United States Light Lager from Coors.',
   NULL,
   4.2,
   'United States',
-  'Coors Light',
+  'Coors',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -7914,11 +7914,11 @@ VALUES (
   'Corona Extra',
   'beer',
   'Lager',
-  'Corona Extra is a well-known Mexico Lager from Corona Extra, selected for broad drink catalog coverage in Japan.',
+  'Corona Extra is a well-known Mexico Lager from AB InBev.',
   NULL,
   4.5,
   'Mexico',
-  'Corona Extra',
+  'AB InBev',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -7942,11 +7942,11 @@ VALUES (
   'Courvoisier VS',
   'brandy',
   'Cognac',
-  'Courvoisier VS is a well-known France Cognac from Courvoisier, selected for broad drink catalog coverage in Japan.',
+  'Courvoisier VS is a well-known France Cognac from Beam Suntory.',
   NULL,
   40,
   'France',
-  'Courvoisier',
+  'Beam Suntory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -7970,11 +7970,11 @@ VALUES (
   'Courvoisier VSOP',
   'brandy',
   'Cognac',
-  'Courvoisier VSOP is a well-known France Cognac from Courvoisier, selected for broad drink catalog coverage in Japan.',
+  'Courvoisier VSOP is a well-known France Cognac from Beam Suntory.',
   NULL,
   40,
   'France',
-  'Courvoisier',
+  'Beam Suntory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -7998,11 +7998,11 @@ VALUES (
   'Courvoisier XO',
   'brandy',
   'Cognac',
-  'Courvoisier XO is a well-known France Cognac from Courvoisier, selected for broad drink catalog coverage in Japan.',
+  'Courvoisier XO is a well-known France Cognac from Beam Suntory.',
   NULL,
   40,
   'France',
-  'Courvoisier',
+  'Beam Suntory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -8054,11 +8054,11 @@ VALUES (
   'Craigellachie 13 Year Old',
   'whisky',
   'Single Malt',
-  'Craigellachie 13 Year Old is a well-known Scotland Single Malt from Craigellachie 13, selected for broad drink catalog coverage in Japan.',
+  'Craigellachie 13 Year Old is a well-known Scotland Single Malt from Craigellachie.',
   NULL,
   46,
   'Scotland',
-  'Craigellachie 13',
+  'Craigellachie',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -8082,11 +8082,11 @@ VALUES (
   'Crown Royal Deluxe',
   'whisky',
   'Canadian',
-  'Crown Royal Deluxe is a well-known Canada Canadian from Crown Royal, selected for broad drink catalog coverage in Japan.',
+  'Crown Royal Deluxe is a well-known Canada Canadian from Diageo.',
   NULL,
   40,
   'Canada',
-  'Crown Royal',
+  'Diageo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -8222,11 +8222,11 @@ VALUES (
   'Dalwhinnie 15 Year Old',
   'whisky',
   'Single Malt',
-  'Dalwhinnie 15 Year Old is a well-known Scotland Single Malt from Dalwhinnie 15, selected for broad drink catalog coverage in Japan.',
+  'Dalwhinnie 15 Year Old is a well-known Scotland Single Malt from Dalwhinnie.',
   NULL,
   43,
   'Scotland',
-  'Dalwhinnie 15',
+  'Dalwhinnie',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -8418,11 +8418,11 @@ VALUES (
   'Dassai Shochu',
   'shochu',
   'Kasu-tori',
-  'Dassai Shochu is a well-known Japan Kasu-tori from Dassai Shochu, selected for broad drink catalog coverage in Japan.',
+  'Dassai Shochu is a well-known Japan Kasu-tori from Dassai.',
   NULL,
   39,
   'Japan',
-  'Dassai Shochu',
+  'Dassai',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -8530,11 +8530,11 @@ VALUES (
   'Deanston 12 Year Old',
   'whisky',
   'Single Malt',
-  'Deanston 12 Year Old is a well-known Scotland Single Malt from Deanston 12, selected for broad drink catalog coverage in Japan.',
+  'Deanston 12 Year Old is a well-known Scotland Single Malt from Deanston.',
   NULL,
   46.3,
   'Scotland',
-  'Deanston 12',
+  'Deanston',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -8642,11 +8642,11 @@ VALUES (
   'Delirium Tremens',
   'beer',
   'Belgian Strong Ale',
-  'Delirium Tremens is a well-known Belgium Belgian Strong Ale from Delirium Tremens, selected for broad drink catalog coverage in Japan.',
+  'Delirium Tremens is a well-known Belgium Belgian Strong Ale from Delirium.',
   NULL,
   8.5,
   'Belgium',
-  'Delirium Tremens',
+  'Delirium',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -8978,11 +8978,11 @@ VALUES (
   'Dewazakura Ichiro',
   'sake',
   'Junmai Ginjo',
-  'Dewazakura Ichiro is a well-known Japan Junmai Ginjo from Dewazakura Ichiro, selected for broad drink catalog coverage in Japan.',
+  '出羽桜 一路。DewazakuraのJunmai Ginjoとして知られる定番銘柄。',
   NULL,
   15,
   'Japan',
-  'Dewazakura Ichiro',
+  'Dewazakura',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -9090,11 +9090,11 @@ VALUES (
   'Dingle Original Gin',
   'gin',
   'London Dry',
-  'Dingle Original Gin is a well-known Ireland London Dry from Dingle Original, selected for broad drink catalog coverage in Japan.',
+  'Dingle Original Gin is a well-known Ireland London Dry from Dingle.',
   NULL,
   42.5,
   'Ireland',
-  'Dingle Original',
+  'Dingle',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -9118,11 +9118,11 @@ VALUES (
   'Diplomatico Mantuano',
   'rum',
   'Aged Rum',
-  'Diplomatico Mantuano is a well-known Venezuela Aged Rum from Diplomatico Mantuano, selected for broad drink catalog coverage in Japan.',
+  'Diplomatico Mantuano is a well-known Venezuela Aged Rum from Diplomático.',
   NULL,
   40,
   'Venezuela',
-  'Diplomatico Mantuano',
+  'Diplomático',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -9146,11 +9146,11 @@ VALUES (
   'Diplomatico Planas',
   'rum',
   'White Rum',
-  'Diplomatico Planas is a well-known Venezuela White Rum from Diplomatico Planas, selected for broad drink catalog coverage in Japan.',
+  'Diplomatico Planas is a well-known Venezuela White Rum from Diplomático.',
   NULL,
   47,
   'Venezuela',
-  'Diplomatico Planas',
+  'Diplomático',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -9174,11 +9174,11 @@ VALUES (
   'Diplomatico Reserva Exclusiva',
   'rum',
   'Aged Rum',
-  'Diplomatico Reserva Exclusiva is a well-known Venezuela Aged Rum from Diplomatico Reserva, selected for broad drink catalog coverage in Japan.',
+  'Diplomatico Reserva Exclusiva is a well-known Venezuela Aged Rum from Diplomático.',
   NULL,
   40,
   'Venezuela',
-  'Diplomatico Reserva',
+  'Diplomático',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -9202,11 +9202,11 @@ VALUES (
   'Disaronno Originale',
   'liqueur',
   'Amaretto',
-  'Disaronno Originale is a well-known Italy Amaretto from Disaronno Originale, selected for broad drink catalog coverage in Japan.',
+  'Disaronno Originale is a well-known Italy Amaretto from Illva Saronno.',
   NULL,
   28,
   'Italy',
-  'Disaronno Originale',
+  'Illva Saronno',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -9570,7 +9570,7 @@ VALUES (
   NULL,
   38,
   'Mexico',
-  'Don Julio',
+  'Diageo',
   ARRAY['どんふりお']::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -9818,11 +9818,11 @@ VALUES (
   'Doorly 12 Year Old',
   'rum',
   'Aged Rum',
-  'Doorly 12 Year Old is a well-known Barbados Aged Rum from Doorly 12, selected for broad drink catalog coverage in Japan.',
+  'Doorly 12 Year Old is a well-known Barbados Aged Rum from Doorly.',
   NULL,
   40,
   'Barbados',
-  'Doorly 12',
+  'Doorly',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -9846,11 +9846,11 @@ VALUES (
   'Doorly XO',
   'rum',
   'Aged Rum',
-  'Doorly XO is a well-known Barbados Aged Rum from Doorly XO, selected for broad drink catalog coverage in Japan.',
+  'Doorly XO is a well-known Barbados Aged Rum from Doorly.',
   NULL,
   40,
   'Barbados',
-  'Doorly XO',
+  'Doorly',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -9902,11 +9902,11 @@ VALUES (
   'Downeast Original Blend Cider',
   'other',
   'Cider',
-  'Downeast Original Blend Cider is a well-known United States Cider from Downeast Original, selected for broad drink catalog coverage in Japan.',
+  'Downeast Original Blend Cider is a well-known United States Cider from Downeast.',
   NULL,
   5.1,
   'United States',
-  'Downeast Original',
+  'Downeast',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -10042,11 +10042,11 @@ VALUES (
   'Duvel',
   'beer',
   'Belgian Strong Ale',
-  'Duvel is a well-known Belgium Belgian Strong Ale from Duvel, selected for broad drink catalog coverage in Japan.',
+  'Duvel is a well-known Belgium Belgian Strong Ale from Duvel Moortgat.',
   NULL,
   8.5,
   'Belgium',
-  'Duvel',
+  'Duvel Moortgat',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -10126,11 +10126,11 @@ VALUES (
   'Eagle Rare 10 Year Old',
   'whisky',
   'Bourbon',
-  'Eagle Rare 10 Year Old is a well-known United States Bourbon from Eagle Rare, selected for broad drink catalog coverage in Japan.',
+  'Eagle Rare 10 Year Old is a well-known United States Bourbon from Buffalo Trace.',
   NULL,
   45,
   'United States',
-  'Eagle Rare',
+  'Buffalo Trace',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -10294,11 +10294,11 @@ VALUES (
   'EJ VSOP Brandy',
   'brandy',
   'Brandy',
-  'EJ VSOP Brandy is a well-known United States Brandy from EJ VSOP, selected for broad drink catalog coverage in Japan.',
+  'EJ VSOP Brandy is a well-known United States Brandy from EJ.',
   NULL,
   40,
   'United States',
-  'EJ VSOP',
+  'EJ',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -10574,11 +10574,11 @@ VALUES (
   'Empress 1908 Indigo Gin',
   'gin',
   'New Western',
-  'Empress 1908 Indigo Gin is a well-known Canada New Western from Empress 1908, selected for broad drink catalog coverage in Japan.',
+  'Empress 1908 Indigo Gin is a well-known Canada New Western from Empress.',
   NULL,
   42.5,
   'Canada',
-  'Empress 1908',
+  'Empress',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -10658,11 +10658,11 @@ VALUES (
   'Erdinger Weissbier',
   'beer',
   'Hefeweizen',
-  'Erdinger Weissbier is a well-known Germany Hefeweizen from Erdinger Weissbier, selected for broad drink catalog coverage in Japan.',
+  'Erdinger Weissbier is a well-known Germany Hefeweizen from Erdinger.',
   NULL,
   5.3,
   'Germany',
-  'Erdinger Weissbier',
+  'Erdinger',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -10714,11 +10714,11 @@ VALUES (
   'Eristoff Vodka',
   'vodka',
   'Plain',
-  'Eristoff Vodka is a well-known France Plain from Eristoff Vodka, selected for broad drink catalog coverage in Japan.',
+  'Eristoff Vodka is a well-known France Plain from Eristoff.',
   NULL,
   37.5,
   'France',
-  'Eristoff Vodka',
+  'Eristoff',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -10742,11 +10742,11 @@ VALUES (
   'Espolon Anejo',
   'tequila',
   'Tequila',
-  'Espolon Anejo is a well-known Mexico Tequila from Espolon Anejo, selected for broad drink catalog coverage in Japan.',
+  'Espolon Anejo is a well-known Mexico Tequila from Campari Group.',
   NULL,
   40,
   'Mexico',
-  'Espolon Anejo',
+  'Campari Group',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -10770,11 +10770,11 @@ VALUES (
   'Espolon Blanco',
   'tequila',
   'Tequila',
-  'Espolon Blanco is a well-known Mexico Tequila from Espolon Blanco, selected for broad drink catalog coverage in Japan.',
+  'Espolon Blanco is a well-known Mexico Tequila from Campari Group.',
   NULL,
   40,
   'Mexico',
-  'Espolon Blanco',
+  'Campari Group',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -10798,11 +10798,11 @@ VALUES (
   'Espolon Reposado',
   'tequila',
   'Tequila',
-  'Espolon Reposado is a well-known Mexico Tequila from Espolon Reposado, selected for broad drink catalog coverage in Japan.',
+  'Espolon Reposado is a well-known Mexico Tequila from Campari Group.',
   NULL,
   40,
   'Mexico',
-  'Espolon Reposado',
+  'Campari Group',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -10826,11 +10826,11 @@ VALUES (
   'Estrella Damm',
   'beer',
   'Lager',
-  'Estrella Damm is a well-known Spain Lager from Estrella Damm, selected for broad drink catalog coverage in Japan.',
+  'Estrella Damm is a well-known Spain Lager from Estrella.',
   NULL,
   5.4,
   'Spain',
-  'Estrella Damm',
+  'Estrella',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -10854,11 +10854,11 @@ VALUES (
   'Etsu Gin',
   'gin',
   'New Western',
-  'Etsu Gin is a well-known Japan New Western from Etsu Gin, selected for broad drink catalog coverage in Japan.',
+  'Etsu Gin is a well-known Japan New Western from Etsu.',
   NULL,
   43,
   'Japan',
-  'Etsu Gin',
+  'Etsu',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -11106,11 +11106,11 @@ VALUES (
   'Finlandia Cranberry',
   'vodka',
   'Flavoured',
-  'Finlandia Cranberry is a well-known Finland Flavoured from Finlandia Cranberry, selected for broad drink catalog coverage in Japan.',
+  'Finlandia Cranberry is a well-known Finland Flavoured from Finlandia.',
   NULL,
   37.5,
   'Finland',
-  'Finlandia Cranberry',
+  'Finlandia',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -11134,11 +11134,11 @@ VALUES (
   'Finlandia Vodka',
   'vodka',
   'Plain',
-  'Finlandia Vodka is a well-known Finland Plain from Finlandia Vodka, selected for broad drink catalog coverage in Japan.',
+  'Finlandia Vodka is a well-known Finland Plain from Finlandia.',
   NULL,
   40,
   'Finland',
-  'Finlandia Vodka',
+  'Finlandia',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -11386,11 +11386,11 @@ VALUES (
   'Fortaleza Anejo',
   'tequila',
   'Tequila',
-  'Fortaleza Anejo is a well-known Mexico Tequila from Fortaleza Anejo, selected for broad drink catalog coverage in Japan.',
+  'Fortaleza Anejo is a well-known Mexico Tequila from Fortaleza.',
   NULL,
   40,
   'Mexico',
-  'Fortaleza Anejo',
+  'Fortaleza',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -11414,11 +11414,11 @@ VALUES (
   'Fortaleza Blanco',
   'tequila',
   'Tequila',
-  'Fortaleza Blanco is a well-known Mexico Tequila from Fortaleza Blanco, selected for broad drink catalog coverage in Japan.',
+  'Fortaleza Blanco is a well-known Mexico Tequila from Fortaleza.',
   NULL,
   40,
   'Mexico',
-  'Fortaleza Blanco',
+  'Fortaleza',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -11442,11 +11442,11 @@ VALUES (
   'Fortaleza Reposado',
   'tequila',
   'Tequila',
-  'Fortaleza Reposado is a well-known Mexico Tequila from Fortaleza Reposado, selected for broad drink catalog coverage in Japan.',
+  'Fortaleza Reposado is a well-known Mexico Tequila from Fortaleza.',
   NULL,
   40,
   'Mexico',
-  'Fortaleza Reposado',
+  'Fortaleza',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -11582,11 +11582,11 @@ VALUES (
   'Four Roses Single Barrel',
   'whisky',
   'Bourbon',
-  'Four Roses Single Barrel is a well-known United States Bourbon from Four Roses, selected for broad drink catalog coverage in Japan.',
+  'Four Roses Single Barrel is a well-known United States Bourbon from Kirin.',
   NULL,
   50,
   'United States',
-  'Four Roses',
+  'Kirin',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -11610,11 +11610,11 @@ VALUES (
   'Four Roses Small Batch',
   'whisky',
   'Bourbon',
-  'Four Roses Small Batch is a well-known United States Bourbon from Four Roses, selected for broad drink catalog coverage in Japan.',
+  'Four Roses Small Batch is a well-known United States Bourbon from Kirin.',
   NULL,
   45,
   'United States',
-  'Four Roses',
+  'Kirin',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -11666,11 +11666,11 @@ VALUES (
   'Franziskaner Hefe-Weissbier',
   'beer',
   'Hefeweizen',
-  'Franziskaner Hefe-Weissbier is a well-known Germany Hefeweizen from Franziskaner Hefe-Weissbier, selected for broad drink catalog coverage in Japan.',
+  'Franziskaner Hefe-Weissbier is a well-known Germany Hefeweizen from Franziskaner.',
   NULL,
   5,
   'Germany',
-  'Franziskaner Hefe-Weissbier',
+  'Franziskaner',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -11722,11 +11722,11 @@ VALUES (
   'Frapin VSOP',
   'brandy',
   'Cognac',
-  'Frapin VSOP is a well-known France Cognac from Frapin VSOP, selected for broad drink catalog coverage in Japan.',
+  'Frapin VSOP is a well-known France Cognac from Frapin.',
   NULL,
   40,
   'France',
-  'Frapin VSOP',
+  'Frapin',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -11778,11 +11778,11 @@ VALUES (
   'Fuji Gotemba Signature Blend',
   'whisky',
   'Blended',
-  'Fuji Gotemba Signature Blend is a well-known Japan Blended from Fuji Gotemba, selected for broad drink catalog coverage in Japan.',
+  'Fuji Gotemba Signature Blend is a well-known Japan Blended from Kirin Distillery.',
   NULL,
   50,
   'Japan',
-  'Fuji Gotemba',
+  'Kirin Distillery',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -11806,11 +11806,11 @@ VALUES (
   'Fuji Single Grain',
   'whisky',
   'Single Grain',
-  'Fuji Single Grain is a well-known Japan Single Grain from Fuji Single, selected for broad drink catalog coverage in Japan.',
+  'Fuji Single Grain is a well-known Japan Single Grain from Kirin Distillery.',
   NULL,
   46,
   'Japan',
-  'Fuji Single',
+  'Kirin Distillery',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -11834,11 +11834,11 @@ VALUES (
   'Fuji Single Malt',
   'whisky',
   'Single Malt',
-  'Fuji Single Malt is a well-known Japan Single Malt from Fuji Single, selected for broad drink catalog coverage in Japan.',
+  'Fuji Single Malt is a well-known Japan Single Malt from Kirin Distillery.',
   NULL,
   46,
   'Japan',
-  'Fuji Single',
+  'Kirin Distillery',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -11862,11 +11862,11 @@ VALUES (
   'Fujizakura Heights Weizen',
   'beer',
   'Weizen',
-  'Fujizakura Heights Weizen is a well-known Japan Weizen from Fujizakura Heights, selected for broad drink catalog coverage in Japan.',
+  'Fujizakura Heights Weizen is a well-known Japan Weizen from Kirin Distillery.',
   NULL,
   5.5,
   'Japan',
-  'Fujizakura Heights',
+  'Kirin Distillery',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -11974,11 +11974,11 @@ VALUES (
   'Fuller''s ESB',
   'beer',
   'Bitter',
-  'Fuller''s ESB is a well-known England Bitter from Fuller''s ESB, selected for broad drink catalog coverage in Japan.',
+  'Fuller''s ESB is a well-known England Bitter from Fuller''s.',
   NULL,
   5.9,
   'England',
-  'Fuller''s ESB',
+  'Fuller''s',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -12114,11 +12114,11 @@ VALUES (
   'Galliano L''Autentico',
   'liqueur',
   'Herbal',
-  'Galliano L''Autentico is a well-known Italy Herbal from Galliano L''Autentico, selected for broad drink catalog coverage in Japan.',
+  'Galliano L''Autentico is a well-known Italy Herbal from Galliano.',
   NULL,
   42.3,
   'Italy',
-  'Galliano L''Autentico',
+  'Galliano',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -12142,11 +12142,11 @@ VALUES (
   'Galliano Vanilla',
   'liqueur',
   'Vanilla',
-  'Galliano Vanilla is a well-known Italy Vanilla from Galliano Vanilla, selected for broad drink catalog coverage in Japan.',
+  'Galliano Vanilla is a well-known Italy Vanilla from Galliano.',
   NULL,
   30,
   'Italy',
-  'Galliano Vanilla',
+  'Galliano',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -12338,11 +12338,11 @@ VALUES (
   'Generous Gin',
   'gin',
   'New Western',
-  'Generous Gin is a well-known France New Western from Generous Gin, selected for broad drink catalog coverage in Japan.',
+  'Generous Gin is a well-known France New Western from Generous.',
   NULL,
   44,
   'France',
-  'Generous Gin',
+  'Generous',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -12506,11 +12506,11 @@ VALUES (
   'Gin Mare',
   'gin',
   'Mediterranean',
-  'Gin Mare is a well-known Spain Mediterranean from Gin Mare, selected for broad drink catalog coverage in Japan.',
+  'Gin Mare is a well-known Spain Mediterranean from Gin.',
   NULL,
   42.7,
   'Spain',
-  'Gin Mare',
+  'Gin',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -12730,11 +12730,11 @@ VALUES (
   'GlenAllachie 12 Year Old',
   'whisky',
   'Single Malt',
-  'GlenAllachie 12 Year Old is a well-known Scotland Single Malt from GlenAllachie 12, selected for broad drink catalog coverage in Japan.',
+  'GlenAllachie 12 Year Old is a well-known Scotland Single Malt from GlenAllachie.',
   NULL,
   46,
   'Scotland',
-  'GlenAllachie 12',
+  'GlenAllachie',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -12758,11 +12758,11 @@ VALUES (
   'GlenAllachie 15 Year Old',
   'whisky',
   'Single Malt',
-  'GlenAllachie 15 Year Old is a well-known Scotland Single Malt from GlenAllachie 15, selected for broad drink catalog coverage in Japan.',
+  'GlenAllachie 15 Year Old is a well-known Scotland Single Malt from GlenAllachie.',
   NULL,
   46,
   'Scotland',
-  'GlenAllachie 15',
+  'GlenAllachie',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -12898,11 +12898,11 @@ VALUES (
   'Glengoyne 10 Year Old',
   'whisky',
   'Single Malt',
-  'Glengoyne 10 Year Old is a well-known Scotland Single Malt from Glengoyne 10, selected for broad drink catalog coverage in Japan.',
+  'Glengoyne 10 Year Old is a well-known Scotland Single Malt from Glengoyne.',
   NULL,
   40,
   'Scotland',
-  'Glengoyne 10',
+  'Glengoyne',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -13122,11 +13122,11 @@ VALUES (
   'Gordon''s London Dry Gin',
   'gin',
   'London Dry',
-  'Gordon''s London Dry Gin is a well-known England London Dry from Gordon''s London, selected for broad drink catalog coverage in Japan.',
+  'Gordon''s London Dry Gin is a well-known England London Dry from Diageo.',
   NULL,
   37.5,
   'England',
-  'Gordon''s London',
+  'Diageo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -13206,11 +13206,11 @@ VALUES (
   'Gozenshu 9 Bodaimoto Junmai',
   'sake',
   'Junmai Ginjo',
-  'Gozenshu 9 Bodaimoto Junmai is a well-known Japan Junmai Ginjo from Gozenshu 9, selected for broad drink catalog coverage in Japan.',
+  '御前酒 9 NINE 菩提もと純米。GozenshuのJunmai Ginjoとして知られる定番銘柄。',
   NULL,
   15,
   'Japan',
-  'Gozenshu 9',
+  'Gozenshu',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -13486,11 +13486,11 @@ VALUES (
   'Grand Marnier Cordon Rouge',
   'liqueur',
   'Orange',
-  'Grand Marnier Cordon Rouge is a well-known France Orange from Grand Marnier, selected for broad drink catalog coverage in Japan.',
+  'Grand Marnier Cordon Rouge is a well-known France Orange from Campari Group.',
   NULL,
   40,
   'France',
-  'Grand Marnier',
+  'Campari Group',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -13514,11 +13514,11 @@ VALUES (
   'Green Spot',
   'whisky',
   'Single Pot Still',
-  'Green Spot is a well-known Ireland Single Pot Still from Green Spot, selected for broad drink catalog coverage in Japan.',
+  'Green Spot is a well-known Ireland Single Pot Still from Green.',
   NULL,
   40,
   'Ireland',
-  'Green Spot',
+  'Green',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -13542,11 +13542,11 @@ VALUES (
   'Grey Goose La Poire',
   'vodka',
   'Flavoured',
-  'Grey Goose La Poire is a well-known France Flavoured from Grey Goose, selected for broad drink catalog coverage in Japan.',
+  'Grey Goose La Poire is a well-known France Flavoured from Bacardi.',
   NULL,
   40,
   'France',
-  'Grey Goose',
+  'Bacardi',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -13570,11 +13570,11 @@ VALUES (
   'Grey Goose Le Citron',
   'vodka',
   'Flavoured',
-  'Grey Goose Le Citron is a well-known France Flavoured from Grey Goose, selected for broad drink catalog coverage in Japan.',
+  'Grey Goose Le Citron is a well-known France Flavoured from Bacardi.',
   NULL,
   40,
   'France',
-  'Grey Goose',
+  'Bacardi',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -13598,11 +13598,11 @@ VALUES (
   'Grey Goose VX',
   'vodka',
   'Vodka Spirit Drink',
-  'Grey Goose VX is a well-known France Vodka Spirit Drink from Grey Goose, selected for broad drink catalog coverage in Japan.',
+  'Grey Goose VX is a well-known France Vodka Spirit Drink from Bacardi.',
   NULL,
   40,
   'France',
-  'Grey Goose',
+  'Bacardi',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -13630,7 +13630,7 @@ VALUES (
   NULL,
   40,
   'France',
-  'Grey Goose',
+  'Bacardi',
   ARRAY['ぐれいぐーす']::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -13658,7 +13658,7 @@ VALUES (
   NULL,
   4.2,
   'Ireland',
-  'Guinness',
+  'Diageo',
   ARRAY['ぎねす', 'ぎねすどらふと']::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -13682,11 +13682,11 @@ VALUES (
   'Guinness Extra Stout',
   'beer',
   'Stout',
-  'Guinness Extra Stout is a well-known Ireland Stout from Guinness Extra, selected for broad drink catalog coverage in Japan.',
+  'Guinness Extra Stout is a well-known Ireland Stout from Diageo.',
   NULL,
   5.6,
   'Ireland',
-  'Guinness Extra',
+  'Diageo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -13710,11 +13710,11 @@ VALUES (
   'Guinness Foreign Extra Stout',
   'beer',
   'Stout',
-  'Guinness Foreign Extra Stout is a well-known Ireland Stout from Guinness Foreign, selected for broad drink catalog coverage in Japan.',
+  'Guinness Foreign Extra Stout is a well-known Ireland Stout from Diageo.',
   NULL,
   7.5,
   'Ireland',
-  'Guinness Foreign',
+  'Diageo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -13738,11 +13738,11 @@ VALUES (
   'G''Vine Floraison',
   'gin',
   'New Western',
-  'G''Vine Floraison is a well-known France New Western from G''Vine Floraison, selected for broad drink catalog coverage in Japan.',
+  'G''Vine Floraison is a well-known France New Western from G''Vine.',
   NULL,
   40,
   'France',
-  'G''Vine Floraison',
+  'G''Vine',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -13878,11 +13878,11 @@ VALUES (
   'Hakkaisan Umeshu',
   'liqueur',
   'Umeshu',
-  'Hakkaisan Umeshu is a well-known Japan Umeshu from Hakkaisan Umeshu, selected for broad drink catalog coverage in Japan.',
+  'Hakkaisan Umeshu is a well-known Japan Umeshu from Hakkaisan.',
   NULL,
   13,
   'Japan',
-  'Hakkaisan Umeshu',
+  'Hakkaisan',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -13934,11 +13934,11 @@ VALUES (
   'Haku Vodka',
   'vodka',
   'Rice',
-  'Haku Vodka is a well-known Japan Rice from Haku Vodka, selected for broad drink catalog coverage in Japan.',
+  'Haku Vodka is a well-known Japan Rice from Haku.',
   NULL,
   40,
   'Japan',
-  'Haku Vodka',
+  'Haku',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -14046,11 +14046,11 @@ VALUES (
   'Hakushu 12 Year Old',
   'whisky',
   'Single Malt',
-  'Hakushu 12 Year Old is a well-known Japan Single Malt from Hakushu 12, selected for broad drink catalog coverage in Japan.',
+  'Hakushu 12 Year Old is a well-known Japan Single Malt from Suntory.',
   NULL,
   43,
   'Japan',
-  'Hakushu 12',
+  'Suntory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -14074,11 +14074,11 @@ VALUES (
   'Hakushu 18 Year Old',
   'whisky',
   'Single Malt',
-  'Hakushu 18 Year Old is a well-known Japan Single Malt from Hakushu 18, selected for broad drink catalog coverage in Japan.',
+  'Hakushu 18 Year Old is a well-known Japan Single Malt from Suntory.',
   NULL,
   43,
   'Japan',
-  'Hakushu 18',
+  'Suntory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -14102,11 +14102,11 @@ VALUES (
   'Hakushu Distiller''s Reserve',
   'whisky',
   'Single Malt',
-  'Hakushu Distiller''s Reserve is a well-known Japan Single Malt from Hakushu Distiller''s, selected for broad drink catalog coverage in Japan.',
+  'Hakushu Distiller''s Reserve is a well-known Japan Single Malt from Suntory.',
   NULL,
   43,
   'Japan',
-  'Hakushu Distiller''s',
+  'Suntory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -14186,11 +14186,11 @@ VALUES (
   'Hakutake Shiro',
   'shochu',
   'Kome',
-  'Hakutake Shiro is a well-known Japan Kome from Hakutake Shiro, selected for broad drink catalog coverage in Japan.',
+  'Hakutake Shiro is a well-known Japan Kome from Hakutake.',
   NULL,
   25,
   'Japan',
-  'Hakutake Shiro',
+  'Hakutake',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -14214,11 +14214,11 @@ VALUES (
   'Hakutsuru Blanc',
   'sake',
   'Junmai Ginjo',
-  'Hakutsuru Blanc is a well-known Japan Junmai Ginjo from Hakutsuru Blanc, selected for broad drink catalog coverage in Japan.',
+  '白鶴 Blanc。HakutsuruのJunmai Ginjoとして知られる定番銘柄。',
   NULL,
   15,
   'Japan',
-  'Hakutsuru Blanc',
+  'Hakutsuru',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -14438,11 +14438,11 @@ VALUES (
   'Hangar 1 Buddha''s Hand Citron',
   'vodka',
   'Flavoured',
-  'Hangar 1 Buddha''s Hand Citron is a well-known United States Flavoured from Hangar 1, selected for broad drink catalog coverage in Japan.',
+  'Hangar 1 Buddha''s Hand Citron is a well-known United States Flavoured from Hangar.',
   NULL,
   40,
   'United States',
-  'Hangar 1',
+  'Hangar',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -14466,11 +14466,11 @@ VALUES (
   'Hangar 1 Vodka',
   'vodka',
   'Plain',
-  'Hangar 1 Vodka is a well-known United States Plain from Hangar 1, selected for broad drink catalog coverage in Japan.',
+  'Hangar 1 Vodka is a well-known United States Plain from Hangar.',
   NULL,
   40,
   'United States',
-  'Hangar 1',
+  'Hangar',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -14522,11 +14522,11 @@ VALUES (
   'Harris Gin',
   'gin',
   'New Western',
-  'Harris Gin is a well-known Scotland New Western from Harris Gin, selected for broad drink catalog coverage in Japan.',
+  'Harris Gin is a well-known Scotland New Western from Harris.',
   NULL,
   45,
   'Scotland',
-  'Harris Gin',
+  'Harris',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -14550,11 +14550,11 @@ VALUES (
   'Harusame Kari',
   'shochu',
   'Awamori',
-  'Harusame Kari is a well-known Japan Awamori from Harusame Kari, selected for broad drink catalog coverage in Japan.',
+  'Harusame Kari is a well-known Japan Awamori from Harusame.',
   NULL,
   30,
   'Japan',
-  'Harusame Kari',
+  'Harusame',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -14578,11 +14578,11 @@ VALUES (
   'Havana Club 3 Year Old',
   'rum',
   'White Rum',
-  'Havana Club 3 Year Old is a well-known Cuba White Rum from Havana Club, selected for broad drink catalog coverage in Japan.',
+  'Havana Club 3 Year Old is a well-known Cuba White Rum from Pernod Ricard.',
   NULL,
   40,
   'Cuba',
-  'Havana Club',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -14606,11 +14606,11 @@ VALUES (
   'Havana Club 7 Year Old',
   'rum',
   'Aged Rum',
-  'Havana Club 7 Year Old is a well-known Cuba Aged Rum from Havana Club, selected for broad drink catalog coverage in Japan.',
+  'Havana Club 7 Year Old is a well-known Cuba Aged Rum from Pernod Ricard.',
   NULL,
   40,
   'Cuba',
-  'Havana Club',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -14634,11 +14634,11 @@ VALUES (
   'Havana Club Seleccion de Maestros',
   'rum',
   'Aged Rum',
-  'Havana Club Seleccion de Maestros is a well-known Cuba Aged Rum from Havana Club, selected for broad drink catalog coverage in Japan.',
+  'Havana Club Seleccion de Maestros is a well-known Cuba Aged Rum from Pernod Ricard.',
   NULL,
   45,
   'Cuba',
-  'Havana Club',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -14806,7 +14806,7 @@ VALUES (
   NULL,
   41.4,
   'United Kingdom',
-  'Hendrick''s',
+  'William Grant & Sons',
   ARRAY['へんどりっくす']::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -14830,11 +14830,11 @@ VALUES (
   'Hendrick''s Neptunia',
   'gin',
   'New Western',
-  'Hendrick''s Neptunia is a well-known Scotland New Western from Hendrick''s Neptunia, selected for broad drink catalog coverage in Japan.',
+  'Hendrick''s Neptunia is a well-known Scotland New Western from William Grant & Sons.',
   NULL,
   43.4,
   'Scotland',
-  'Hendrick''s Neptunia',
+  'William Grant & Sons',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -14858,11 +14858,11 @@ VALUES (
   'Hendrick''s Orbium',
   'gin',
   'New Western',
-  'Hendrick''s Orbium is a well-known Scotland New Western from Hendrick''s Orbium, selected for broad drink catalog coverage in Japan.',
+  'Hendrick''s Orbium is a well-known Scotland New Western from William Grant & Sons.',
   NULL,
   43.4,
   'Scotland',
-  'Hendrick''s Orbium',
+  'William Grant & Sons',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -14886,11 +14886,11 @@ VALUES (
   'Hennessy Paradis',
   'brandy',
   'Cognac',
-  'Hennessy Paradis is a well-known France Cognac from Hennessy, selected for broad drink catalog coverage in Japan.',
+  'Hennessy Paradis is a well-known France Cognac from LVMH.',
   NULL,
   40,
   'France',
-  'Hennessy',
+  'LVMH',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -14914,11 +14914,11 @@ VALUES (
   'Hennessy VS',
   'brandy',
   'Cognac',
-  'Hennessy VS is a well-known France Cognac from Hennessy, selected for broad drink catalog coverage in Japan.',
+  'Hennessy VS is a well-known France Cognac from LVMH.',
   NULL,
   40,
   'France',
-  'Hennessy',
+  'LVMH',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -14942,11 +14942,11 @@ VALUES (
   'Hennessy VSOP',
   'brandy',
   'Cognac',
-  'Hennessy VSOP is a well-known France Cognac from Hennessy, selected for broad drink catalog coverage in Japan.',
+  'Hennessy VSOP is a well-known France Cognac from LVMH.',
   NULL,
   40,
   'France',
-  'Hennessy',
+  'LVMH',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -14974,7 +14974,7 @@ VALUES (
   NULL,
   40,
   'France',
-  'Hennessy',
+  'LVMH',
   ARRAY['へねしー']::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -15054,11 +15054,11 @@ VALUES (
   'Herno Gin',
   'gin',
   'London Dry',
-  'Herno Gin is a well-known Sweden London Dry from Herno Gin, selected for broad drink catalog coverage in Japan.',
+  'Herno Gin is a well-known Sweden London Dry from Herno.',
   NULL,
   40.5,
   'Sweden',
-  'Herno Gin',
+  'Herno',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -15110,11 +15110,11 @@ VALUES (
   'Herradura Anejo',
   'tequila',
   'Tequila',
-  'Herradura Anejo is a well-known Mexico Tequila from Herradura Anejo, selected for broad drink catalog coverage in Japan.',
+  'Herradura Anejo is a well-known Mexico Tequila from Brown-Forman.',
   NULL,
   40,
   'Mexico',
-  'Herradura Anejo',
+  'Brown-Forman',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -15138,11 +15138,11 @@ VALUES (
   'Herradura Reposado',
   'tequila',
   'Tequila',
-  'Herradura Reposado is a well-known Mexico Tequila from Herradura Reposado, selected for broad drink catalog coverage in Japan.',
+  'Herradura Reposado is a well-known Mexico Tequila from Brown-Forman.',
   NULL,
   40,
   'Mexico',
-  'Herradura Reposado',
+  'Brown-Forman',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -15166,11 +15166,11 @@ VALUES (
   'Herradura Silver',
   'tequila',
   'Blanco',
-  'Herradura Silver is a well-known Mexico Blanco from Herradura Silver, selected for broad drink catalog coverage in Japan.',
+  'Herradura Silver is a well-known Mexico Blanco from Brown-Forman.',
   NULL,
   40,
   'Mexico',
-  'Herradura Silver',
+  'Brown-Forman',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -15194,11 +15194,11 @@ VALUES (
   'Herradura Ultra',
   'tequila',
   'Cristalino',
-  'Herradura Ultra is a well-known Mexico Cristalino from Herradura Ultra, selected for broad drink catalog coverage in Japan.',
+  'Herradura Ultra is a well-known Mexico Cristalino from Brown-Forman.',
   NULL,
   40,
   'Mexico',
-  'Herradura Ultra',
+  'Brown-Forman',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -15222,11 +15222,11 @@ VALUES (
   'Hibiki 17 Year Old',
   'whisky',
   'Blended',
-  'Hibiki 17 Year Old is a well-known Japan Blended from Hibiki 17, selected for broad drink catalog coverage in Japan.',
+  'Hibiki 17 Year Old is a well-known Japan Blended from Suntory.',
   NULL,
   43,
   'Japan',
-  'Hibiki 17',
+  'Suntory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -15250,11 +15250,11 @@ VALUES (
   'Hibiki 21 Year Old',
   'whisky',
   'Blended',
-  'Hibiki 21 Year Old is a well-known Japan Blended from Hibiki 21, selected for broad drink catalog coverage in Japan.',
+  'Hibiki 21 Year Old is a well-known Japan Blended from Suntory.',
   NULL,
   43,
   'Japan',
-  'Hibiki 21',
+  'Suntory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -15278,11 +15278,11 @@ VALUES (
   'Hibiki Blender''s Choice',
   'whisky',
   'Blended',
-  'Hibiki Blender''s Choice is a well-known Japan Blended from Hibiki Blender''s, selected for broad drink catalog coverage in Japan.',
+  'Hibiki Blender''s Choice is a well-known Japan Blended from Suntory.',
   NULL,
   43,
   'Japan',
-  'Hibiki Blender''s',
+  'Suntory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -15310,7 +15310,7 @@ VALUES (
   NULL,
   43,
   'Japan',
-  'サントリー',
+  'Suntory',
   ARRAY['ひびき', 'ひびきはーもにー']::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -15334,11 +15334,11 @@ VALUES (
   'Hibiki Japanese Harmony Master''s Select',
   'whisky',
   'Blended',
-  'Hibiki Japanese Harmony Master''s Select is a well-known Japan Blended from Hibiki Japanese, selected for broad drink catalog coverage in Japan.',
+  'Hibiki Japanese Harmony Master''s Select is a well-known Japan Blended from Suntory.',
   NULL,
   43,
   'Japan',
-  'Hibiki Japanese',
+  'Suntory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -15614,11 +15614,11 @@ VALUES (
   'Hoegaarden White',
   'beer',
   'Witbier',
-  'Hoegaarden White is a well-known Belgium Witbier from Hoegaarden White, selected for broad drink catalog coverage in Japan.',
+  'Hoegaarden White is a well-known Belgium Witbier from AB InBev.',
   NULL,
   4.9,
   'Belgium',
-  'Hoegaarden White',
+  'AB InBev',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -15670,11 +15670,11 @@ VALUES (
   'Hoshiko Umeshu',
   'liqueur',
   'Umeshu',
-  'Hoshiko Umeshu is a well-known Japan Umeshu from Hoshiko Umeshu, selected for broad drink catalog coverage in Japan.',
+  'Hoshiko Umeshu is a well-known Japan Umeshu from Hoshiko.',
   NULL,
   14,
   'Japan',
-  'Hoshiko Umeshu',
+  'Hoshiko',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -15782,11 +15782,11 @@ VALUES (
   'Hpnotiq Liqueur',
   'liqueur',
   'Fruit Liqueur',
-  'Hpnotiq Liqueur is a well-known France Fruit Liqueur from Hpnotiq Liqueur, selected for broad drink catalog coverage in Japan.',
+  'Hpnotiq Liqueur is a well-known France Fruit Liqueur from Heaven Hill.',
   NULL,
   17,
   'France',
-  'Hpnotiq Liqueur',
+  'Heaven Hill',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -15922,11 +15922,11 @@ VALUES (
   'Ichiro''s Malt Double Distilleries',
   'whisky',
   'Blended Malt',
-  'Ichiro''s Malt Double Distilleries is a well-known Japan Blended Malt from Ichiro''s Malt, selected for broad drink catalog coverage in Japan.',
+  'Ichiro''s Malt Double Distilleries is a well-known Japan Blended Malt from Venture Whisky.',
   NULL,
   46,
   'Japan',
-  'Ichiro''s Malt',
+  'Venture Whisky',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -15950,11 +15950,11 @@ VALUES (
   'Ichiro''s Malt Malt and Grain',
   'whisky',
   'World Blended',
-  'Ichiro''s Malt Malt and Grain is a well-known Japan World Blended from Ichiro''s Malt, selected for broad drink catalog coverage in Japan.',
+  'Ichiro''s Malt Malt and Grain is a well-known Japan World Blended from Venture Whisky.',
   NULL,
   46.5,
   'Japan',
-  'Ichiro''s Malt',
+  'Venture Whisky',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -15978,11 +15978,11 @@ VALUES (
   'Ichiro''s Malt Mizunara Wood Reserve',
   'whisky',
   'Blended Malt',
-  'Ichiro''s Malt Mizunara Wood Reserve is a well-known Japan Blended Malt from Ichiro''s Malt, selected for broad drink catalog coverage in Japan.',
+  'Ichiro''s Malt Mizunara Wood Reserve is a well-known Japan Blended Malt from Venture Whisky.',
   NULL,
   46,
   'Japan',
-  'Ichiro''s Malt',
+  'Venture Whisky',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -16006,11 +16006,11 @@ VALUES (
   'Ichiro''s Malt Wine Wood Reserve',
   'whisky',
   'Blended Malt',
-  'Ichiro''s Malt Wine Wood Reserve is a well-known Japan Blended Malt from Ichiro''s Malt, selected for broad drink catalog coverage in Japan.',
+  'Ichiro''s Malt Wine Wood Reserve is a well-known Japan Blended Malt from Venture Whisky.',
   NULL,
   46,
   'Japan',
-  'Ichiro''s Malt',
+  'Venture Whisky',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -16034,11 +16034,11 @@ VALUES (
   'Iichiko Frasco',
   'shochu',
   'Mugi (Barley)',
-  '大分の名門・三和酒類が造る本格麦焼酎。減圧蒸留によるクリアでフルーティーな味わいが人気。',
+  'Iichiko Frasco is a well-known Japan Mugi (Barley) from Sanwa Shurui.',
   NULL,
   25,
   'Japan',
-  '三和酒類',
+  'Sanwa Shurui',
   ARRAY['いいちこ', 'ふらすこぼとる']::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -16062,11 +16062,11 @@ VALUES (
   'Iichiko Seirin',
   'shochu',
   'Mugi',
-  'Iichiko Seirin is a well-known Japan Mugi from Iichiko Seirin, selected for broad drink catalog coverage in Japan.',
+  'Iichiko Seirin is a well-known Japan Mugi from Sanwa Shurui.',
   NULL,
   25,
   'Japan',
-  'Iichiko Seirin',
+  'Sanwa Shurui',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -16090,11 +16090,11 @@ VALUES (
   'Iichiko Silhouette',
   'shochu',
   'Mugi',
-  'Iichiko Silhouette is a well-known Japan Mugi from Iichiko Silhouette, selected for broad drink catalog coverage in Japan.',
+  'Iichiko Silhouette is a well-known Japan Mugi from Sanwa Shurui.',
   NULL,
   25,
   'Japan',
-  'Iichiko Silhouette',
+  'Sanwa Shurui',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -16118,11 +16118,11 @@ VALUES (
   'Iichiko Special',
   'shochu',
   'Mugi',
-  'Iichiko Special is a well-known Japan Mugi from Iichiko Special, selected for broad drink catalog coverage in Japan.',
+  'Iichiko Special is a well-known Japan Mugi from Sanwa Shurui.',
   NULL,
   30,
   'Japan',
-  'Iichiko Special',
+  'Sanwa Shurui',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -16454,11 +16454,11 @@ VALUES (
   'Jagermeister',
   'liqueur',
   'Herbal',
-  'Jagermeister is a well-known Germany Herbal from Jagermeister, selected for broad drink catalog coverage in Japan.',
+  'Jagermeister is a well-known Germany Herbal from Mast-Jägermeister.',
   NULL,
   35,
   'Germany',
-  'Jagermeister',
+  'Mast-Jägermeister',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -16486,7 +16486,7 @@ VALUES (
   NULL,
   40,
   'Ireland',
-  'Jameson',
+  'Pernod Ricard',
   ARRAY['じぇむそん']::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -16510,11 +16510,11 @@ VALUES (
   'Janneau VSOP Armagnac',
   'brandy',
   'Armagnac',
-  'Janneau VSOP Armagnac is a well-known France Armagnac from Janneau VSOP, selected for broad drink catalog coverage in Japan.',
+  'Janneau VSOP Armagnac is a well-known France Armagnac from Janneau.',
   NULL,
   40,
   'France',
-  'Janneau VSOP',
+  'Janneau',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -16538,11 +16538,11 @@ VALUES (
   'Janneau XO Armagnac',
   'brandy',
   'Armagnac',
-  'Janneau XO Armagnac is a well-known France Armagnac from Janneau XO, selected for broad drink catalog coverage in Japan.',
+  'Janneau XO Armagnac is a well-known France Armagnac from Janneau.',
   NULL,
   40,
   'France',
-  'Janneau XO',
+  'Janneau',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -16566,11 +16566,11 @@ VALUES (
   'Japanese GIN Wabijin',
   'gin',
   'New Western',
-  'Japanese GIN Wabijin is a well-known Japan New Western from Japanese GIN, selected for broad drink catalog coverage in Japan.',
+  'Japanese GIN Wabijin is a well-known Japan New Western from Japanese.',
   NULL,
   47,
   'Japan',
-  'Japanese GIN',
+  'Japanese',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -16594,11 +16594,11 @@ VALUES (
   'Jean-Marc XO Vodka',
   'vodka',
   'Plain',
-  'Jean-Marc XO Vodka is a well-known France Plain from Jean-Marc XO, selected for broad drink catalog coverage in Japan.',
+  'Jean-Marc XO Vodka is a well-known France Plain from Jean-Marc.',
   NULL,
   40,
   'France',
-  'Jean-Marc XO',
+  'Jean-Marc',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -16650,11 +16650,11 @@ VALUES (
   'Jim Beam Black Extra Aged',
   'whisky',
   'Bourbon',
-  'Jim Beam Black Extra Aged is a well-known United States Bourbon from Jim Beam, selected for broad drink catalog coverage in Japan.',
+  'Jim Beam Black Extra Aged is a well-known United States Bourbon from Beam Suntory.',
   NULL,
   43,
   'United States',
-  'Jim Beam',
+  'Beam Suntory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -16678,11 +16678,11 @@ VALUES (
   'Jim Beam White Label',
   'whisky',
   'Bourbon',
-  'Jim Beam White Label is a well-known United States Bourbon from Jim Beam, selected for broad drink catalog coverage in Japan.',
+  'Jim Beam White Label is a well-known United States Bourbon from Beam Suntory.',
   NULL,
   40,
   'United States',
-  'Jim Beam',
+  'Beam Suntory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -17098,11 +17098,11 @@ VALUES (
   'Junipero Gin',
   'gin',
   'London Dry',
-  'Junipero Gin is a well-known United States London Dry from Junipero Gin, selected for broad drink catalog coverage in Japan.',
+  'Junipero Gin is a well-known United States London Dry from Junipero.',
   NULL,
   49.3,
   'United States',
-  'Junipero Gin',
+  'Junipero',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -17266,11 +17266,11 @@ VALUES (
   'Kah Blanco',
   'tequila',
   'Tequila',
-  'Kah Blanco is a well-known Mexico Tequila from Kah Blanco, selected for broad drink catalog coverage in Japan.',
+  'Kah Blanco is a well-known Mexico Tequila from Kah.',
   NULL,
   40,
   'Mexico',
-  'Kah Blanco',
+  'Kah',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -17298,7 +17298,7 @@ VALUES (
   NULL,
   20,
   'Mexico',
-  'Kahlua',
+  'Pernod Ricard',
   ARRAY['かるーあ']::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -17490,11 +17490,11 @@ VALUES (
   'Kanoka Mugi',
   'shochu',
   'Mugi',
-  'Kanoka Mugi is a well-known Japan Mugi from Kanoka Mugi, selected for broad drink catalog coverage in Japan.',
+  'Kanoka Mugi is a well-known Japan Mugi from Kanoka.',
   NULL,
   25,
   'Japan',
-  'Kanoka Mugi',
+  'Kanoka',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -17574,11 +17574,11 @@ VALUES (
   'Kanosuke Single Malt',
   'whisky',
   'Single Malt',
-  'Kanosuke Single Malt is a well-known Japan Single Malt from Kanosuke Single, selected for broad drink catalog coverage in Japan.',
+  'Kanosuke Single Malt is a well-known Japan Single Malt from Kanosuke.',
   NULL,
   48,
   'Japan',
-  'Kanosuke Single',
+  'Kanosuke',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -17686,11 +17686,11 @@ VALUES (
   'Kavalan Classic Single Malt',
   'whisky',
   'Single Malt',
-  'Kavalan Classic Single Malt is a well-known Taiwan Single Malt from Kavalan Classic, selected for broad drink catalog coverage in Japan.',
+  'Kavalan Classic Single Malt is a well-known Taiwan Single Malt from King Car.',
   NULL,
   40,
   'Taiwan',
-  'Kavalan Classic',
+  'King Car',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -17714,11 +17714,11 @@ VALUES (
   'Kavalan Concertmaster Port Cask Finish',
   'whisky',
   'Single Malt',
-  'Kavalan Concertmaster Port Cask Finish is a well-known Taiwan Single Malt from Kavalan Concertmaster, selected for broad drink catalog coverage in Japan.',
+  'Kavalan Concertmaster Port Cask Finish is a well-known Taiwan Single Malt from King Car.',
   NULL,
   40,
   'Taiwan',
-  'Kavalan Concertmaster',
+  'King Car',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -17742,11 +17742,11 @@ VALUES (
   'Kavalan Solist Vinho Barrique',
   'whisky',
   'Single Malt',
-  'Kavalan Solist Vinho Barrique is a well-known Taiwan Single Malt from Kavalan Solist, selected for broad drink catalog coverage in Japan.',
+  'Kavalan Solist Vinho Barrique is a well-known Taiwan Single Malt from King Car.',
   NULL,
   57.8,
   'Taiwan',
-  'Kavalan Solist',
+  'King Car',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -18078,11 +18078,11 @@ VALUES (
   'Kenbishi Zuisho',
   'sake',
   'Junmai Ginjo',
-  'Kenbishi Zuisho is a well-known Japan Junmai Ginjo from Kenbishi Zuisho, selected for broad drink catalog coverage in Japan.',
+  '剣菱 瑞祥。KenbishiのJunmai Ginjoとして知られる定番銘柄。',
   NULL,
   15,
   'Japan',
-  'Kenbishi Zuisho',
+  'Kenbishi',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -18162,11 +18162,11 @@ VALUES (
   'Ketel One Citroen',
   'vodka',
   'Flavoured',
-  'Ketel One Citroen is a well-known Netherlands Flavoured from Ketel One, selected for broad drink catalog coverage in Japan.',
+  'Ketel One Citroen is a well-known Netherlands Flavoured from Diageo.',
   NULL,
   40,
   'Netherlands',
-  'Ketel One',
+  'Diageo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -18190,11 +18190,11 @@ VALUES (
   'Ketel One Vodka',
   'vodka',
   'Plain',
-  'Ketel One Vodka is a well-known Netherlands Plain from Ketel One, selected for broad drink catalog coverage in Japan.',
+  'Ketel One Vodka is a well-known Netherlands Plain from Diageo.',
   NULL,
   40,
   'Netherlands',
-  'Ketel One',
+  'Diageo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -18218,11 +18218,11 @@ VALUES (
   'Khortytsa Platinum',
   'vodka',
   'Plain',
-  'Khortytsa Platinum is a well-known Ukraine Plain from Khortytsa Platinum, selected for broad drink catalog coverage in Japan.',
+  'Khortytsa Platinum is a well-known Ukraine Plain from Khortytsa.',
   NULL,
   40,
   'Ukraine',
-  'Khortytsa Platinum',
+  'Khortytsa',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -18330,11 +18330,11 @@ VALUES (
   'Kiccho Hozan',
   'shochu',
   'Imo',
-  'Kiccho Hozan is a well-known Japan Imo from Kiccho Hozan, selected for broad drink catalog coverage in Japan.',
+  'Kiccho Hozan is a well-known Japan Imo from Kiccho.',
   NULL,
   25,
   'Japan',
-  'Kiccho Hozan',
+  'Kiccho',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -18442,11 +18442,11 @@ VALUES (
   'Kido Sparkling',
   'sake',
   'Junmai Ginjo',
-  'Kido Sparkling is a well-known Japan Junmai Ginjo from Kido Sparkling, selected for broad drink catalog coverage in Japan.',
+  '紀土 スパークリング。KidoのJunmai Ginjoとして知られる定番銘柄。',
   NULL,
   15,
   'Japan',
-  'Kido Sparkling',
+  'Kido',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -18610,11 +18610,11 @@ VALUES (
   'Kikusui Cidre',
   'other',
   'Cider',
-  'Kikusui Cidre is a well-known Japan Cider from Kikusui Cidre, selected for broad drink catalog coverage in Japan.',
+  'Kikusui Cidre is a well-known Japan Cider from Kikusui.',
   NULL,
   5,
   'Japan',
-  'Kikusui Cidre',
+  'Kikusui',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -18638,11 +18638,11 @@ VALUES (
   'Kikusui Funaguchi',
   'sake',
   'Junmai Ginjo',
-  'Kikusui Funaguchi is a well-known Japan Junmai Ginjo from Kikusui Funaguchi, selected for broad drink catalog coverage in Japan.',
+  '菊水 ふなぐち一番しぼり。KikusuiのJunmai Ginjoとして知られる定番銘柄。',
   NULL,
   15,
   'Japan',
-  'Kikusui Funaguchi',
+  'Kikusui',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -18694,11 +18694,11 @@ VALUES (
   'Kikusui Karakuchi',
   'sake',
   'Junmai Ginjo',
-  'Kikusui Karakuchi is a well-known Japan Junmai Ginjo from Kikusui Karakuchi, selected for broad drink catalog coverage in Japan.',
+  '菊水 辛口。KikusuiのJunmai Ginjoとして知られる定番銘柄。',
   NULL,
   15,
   'Japan',
-  'Kikusui Karakuchi',
+  'Kikusui',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -18750,11 +18750,11 @@ VALUES (
   'Kilchoman Sanaig',
   'whisky',
   'Single Malt',
-  'Kilchoman Sanaig is a well-known Scotland Single Malt from Kilchoman Sanaig, selected for broad drink catalog coverage in Japan.',
+  'Kilchoman Sanaig is a well-known Scotland Single Malt from Kilchoman.',
   NULL,
   46,
   'Scotland',
-  'Kilchoman Sanaig',
+  'Kilchoman',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -18806,11 +18806,11 @@ VALUES (
   'Kilkerran 12 Year Old',
   'whisky',
   'Single Malt',
-  'Kilkerran 12 Year Old is a well-known Scotland Single Malt from Kilkerran 12, selected for broad drink catalog coverage in Japan.',
+  'Kilkerran 12 Year Old is a well-known Scotland Single Malt from Kilkerran.',
   NULL,
   46,
   'Scotland',
-  'Kilkerran 12',
+  'Kilkerran',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -18890,11 +18890,11 @@ VALUES (
   'Kinmiya Shochu',
   'shochu',
   'Koruiju',
-  'Kinmiya Shochu is a well-known Japan Koruiju from Kinmiya Shochu, selected for broad drink catalog coverage in Japan.',
+  'Kinmiya Shochu is a well-known Japan Koruiju from Kinmiya.',
   NULL,
   25,
   'Japan',
-  'Kinmiya Shochu',
+  'Kinmiya',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -18918,11 +18918,11 @@ VALUES (
   'Kirin Classic Lager',
   'beer',
   'Lager',
-  'Kirin Classic Lager is a well-known Japan Lager from Kirin Classic, selected for broad drink catalog coverage in Japan.',
+  'Kirin Classic Lager is a well-known Japan Lager from キリンビール.',
   NULL,
   4.5,
   'Japan',
-  'Kirin Classic',
+  'キリンビール',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -18946,11 +18946,11 @@ VALUES (
   'Kirin Hard Cidre',
   'other',
   'Cider',
-  'Kirin Hard Cidre is a well-known Japan Cider from Kirin Hard, selected for broad drink catalog coverage in Japan.',
+  'Kirin Hard Cidre is a well-known Japan Cider from キリンビール.',
   NULL,
   4.5,
   'Japan',
-  'Kirin Hard',
+  'キリンビール',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -18974,11 +18974,11 @@ VALUES (
   'Kirin Heartland',
   'beer',
   'Lager',
-  'Kirin Heartland is a well-known Japan Lager from Kirin Heartland, selected for broad drink catalog coverage in Japan.',
+  'Kirin Heartland is a well-known Japan Lager from キリンビール.',
   NULL,
   5,
   'Japan',
-  'Kirin Heartland',
+  'キリンビール',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -19002,11 +19002,11 @@ VALUES (
   'Kirin Hyoketsu Mottainai Hamaguri no Umeshu',
   'liqueur',
   'Umeshu',
-  'Kirin Hyoketsu Mottainai Hamaguri no Umeshu is a well-known Japan Umeshu from Kirin Hyoketsu, selected for broad drink catalog coverage in Japan.',
+  'Kirin Hyoketsu Mottainai Hamaguri no Umeshu is a well-known Japan Umeshu from キリンビール.',
   NULL,
   10,
   'Japan',
-  'Kirin Hyoketsu',
+  'キリンビール',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -19030,11 +19030,11 @@ VALUES (
   'Kirin Ichiban Shibori',
   'beer',
   'Lager',
-  'Kirin Ichiban Shibori is a well-known Japan Lager from Kirin Ichiban, selected for broad drink catalog coverage in Japan.',
+  'Kirin Ichiban Shibori is a well-known Japan Lager from キリンビール.',
   NULL,
   5,
   'Japan',
-  'Kirin Ichiban',
+  'キリンビール',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -19058,11 +19058,11 @@ VALUES (
   'Kirin Lager Beer',
   'beer',
   'Lager',
-  'Kirin Lager Beer is a well-known Japan Lager from Kirin Lager, selected for broad drink catalog coverage in Japan.',
+  'Kirin Lager Beer is a well-known Japan Lager from キリンビール.',
   NULL,
   5,
   'Japan',
-  'Kirin Lager',
+  'キリンビール',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -19086,11 +19086,11 @@ VALUES (
   'Kirin Spring Valley Hojun 496',
   'beer',
   'IPL',
-  'Kirin Spring Valley Hojun 496 is a well-known Japan IPL from Kirin Spring, selected for broad drink catalog coverage in Japan.',
+  'Kirin Spring Valley Hojun 496 is a well-known Japan IPL from キリンビール.',
   NULL,
   6,
   'Japan',
-  'Kirin Spring',
+  'キリンビール',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -19114,11 +19114,11 @@ VALUES (
   'Kirin Spring Valley Silk Ale',
   'beer',
   'White Ale',
-  'Kirin Spring Valley Silk Ale is a well-known Japan White Ale from Kirin Spring, selected for broad drink catalog coverage in Japan.',
+  'Kirin Spring Valley Silk Ale is a well-known Japan White Ale from キリンビール.',
   NULL,
   5.5,
   'Japan',
-  'Kirin Spring',
+  'キリンビール',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -19226,11 +19226,11 @@ VALUES (
   'Knob Creek 9 Year Old Bourbon',
   'whisky',
   'Bourbon',
-  'Knob Creek 9 Year Old Bourbon is a well-known United States Bourbon from Knob Creek, selected for broad drink catalog coverage in Japan.',
+  'Knob Creek 9 Year Old Bourbon is a well-known United States Bourbon from Beam Suntory.',
   NULL,
   50,
   'United States',
-  'Knob Creek',
+  'Beam Suntory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -19254,11 +19254,11 @@ VALUES (
   'Kokoro Gin',
   'gin',
   'New Western',
-  'Kokoro Gin is a well-known England New Western from Kokoro Gin, selected for broad drink catalog coverage in Japan.',
+  'Kokoro Gin is a well-known England New Western from Kokoro.',
   NULL,
   42,
   'England',
-  'Kokoro Gin',
+  'Kokoro',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -19366,11 +19366,11 @@ VALUES (
   'Kokuto Umeshu',
   'liqueur',
   'Umeshu',
-  'Kokuto Umeshu is a well-known Japan Umeshu from Kokuto Umeshu, selected for broad drink catalog coverage in Japan.',
+  'Kokuto Umeshu is a well-known Japan Umeshu from Kokuto.',
   NULL,
   14,
   'Japan',
-  'Kokuto Umeshu',
+  'Kokuto',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -19394,11 +19394,11 @@ VALUES (
   'Komasa Gin Hojicha',
   'gin',
   'New Western',
-  'Komasa Gin Hojicha is a well-known Japan New Western from Komasa Gin, selected for broad drink catalog coverage in Japan.',
+  'Komasa Gin Hojicha is a well-known Japan New Western from Komasa.',
   NULL,
   45,
   'Japan',
-  'Komasa Gin',
+  'Komasa',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -19422,11 +19422,11 @@ VALUES (
   'Komasa Gin Sakurajima Komikan',
   'gin',
   'New Western',
-  'Komasa Gin Sakurajima Komikan is a well-known Japan New Western from Komasa Gin, selected for broad drink catalog coverage in Japan.',
+  'Komasa Gin Sakurajima Komikan is a well-known Japan New Western from Komasa.',
   NULL,
   45,
   'Japan',
-  'Komasa Gin',
+  'Komasa',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -19506,11 +19506,11 @@ VALUES (
   'Korbel Brandy',
   'brandy',
   'Brandy',
-  'Korbel Brandy is a well-known United States Brandy from Korbel Brandy, selected for broad drink catalog coverage in Japan.',
+  'Korbel Brandy is a well-known United States Brandy from Korbel.',
   NULL,
   40,
   'United States',
-  'Korbel Brandy',
+  'Korbel',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -19618,11 +19618,11 @@ VALUES (
   'Koskenkorva Vodka',
   'vodka',
   'Plain',
-  'Koskenkorva Vodka is a well-known Finland Plain from Koskenkorva Vodka, selected for broad drink catalog coverage in Japan.',
+  'Koskenkorva Vodka is a well-known Finland Plain from Koskenkorva.',
   NULL,
   40,
   'Finland',
-  'Koskenkorva Vodka',
+  'Koskenkorva',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -19646,11 +19646,11 @@ VALUES (
   'Kozuru Kuro',
   'shochu',
   'Imo',
-  'Kozuru Kuro is a well-known Japan Imo from Kozuru Kuro, selected for broad drink catalog coverage in Japan.',
+  'Kozuru Kuro is a well-known Japan Imo from Kozuru.',
   NULL,
   25,
   'Japan',
-  'Kozuru Kuro',
+  'Kozuru',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -19674,11 +19674,11 @@ VALUES (
   'Kozuru Yellow',
   'shochu',
   'Imo',
-  'Kozuru Yellow is a well-known Japan Imo from Kozuru Yellow, selected for broad drink catalog coverage in Japan.',
+  'Kozuru Yellow is a well-known Japan Imo from Kozuru.',
   NULL,
   25,
   'Japan',
-  'Kozuru Yellow',
+  'Kozuru',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -19702,11 +19702,11 @@ VALUES (
   'Kraken Black Spiced Rum',
   'rum',
   'Spiced Rum',
-  'Kraken Black Spiced Rum is a well-known Trinidad and Tobago Spiced Rum from Kraken Black, selected for broad drink catalog coverage in Japan.',
+  'Kraken Black Spiced Rum is a well-known Trinidad and Tobago Spiced Rum from Proximo Spirits.',
   NULL,
   40,
   'Trinidad and Tobago',
-  'Kraken Black',
+  'Proximo Spirits',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -20038,11 +20038,11 @@ VALUES (
   'Kumesen Brown',
   'shochu',
   'Awamori',
-  'Kumesen Brown is a well-known Japan Awamori from Kumesen Brown, selected for broad drink catalog coverage in Japan.',
+  'Kumesen Brown is a well-known Japan Awamori from Kumesen.',
   NULL,
   30,
   'Japan',
-  'Kumesen Brown',
+  'Kumesen',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -20066,11 +20066,11 @@ VALUES (
   'Kumesen Green',
   'shochu',
   'Awamori',
-  'Kumesen Green is a well-known Japan Awamori from Kumesen Green, selected for broad drink catalog coverage in Japan.',
+  'Kumesen Green is a well-known Japan Awamori from Kumesen.',
   NULL,
   25,
   'Japan',
-  'Kumesen Green',
+  'Kumesen',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -20122,11 +20122,11 @@ VALUES (
   'Kura Awamori',
   'shochu',
   'Awamori',
-  'Kura Awamori is a well-known Japan Awamori from Kura Awamori, selected for broad drink catalog coverage in Japan.',
+  'Kura Awamori is a well-known Japan Awamori from Kura.',
   NULL,
   25,
   'Japan',
-  'Kura Awamori',
+  'Kura',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -20206,11 +20206,11 @@ VALUES (
   'Kuro Isanishiki',
   'shochu',
   'Imo',
-  'Kuro Isanishiki is a well-known Japan Imo from Kuro Isanishiki, selected for broad drink catalog coverage in Japan.',
+  'Kuro Isanishiki is a well-known Japan Imo from Kuro.',
   NULL,
   25,
   'Japan',
-  'Kuro Isanishiki',
+  'Kuro',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -20234,11 +20234,11 @@ VALUES (
   'Kuro Kirishima EX',
   'shochu',
   'Imo',
-  'Kuro Kirishima EX is a well-known Japan Imo from Kuro Kirishima, selected for broad drink catalog coverage in Japan.',
+  'Kuro Kirishima EX is a well-known Japan Imo from 霧島酒造.',
   NULL,
   25,
   'Japan',
-  'Kuro Kirishima',
+  '霧島酒造',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -20262,11 +20262,11 @@ VALUES (
   'Kuro Kirishima',
   'shochu',
   'Imo',
-  'Kuro Kirishima is a well-known Japan Imo from Kuro Kirishima, selected for broad drink catalog coverage in Japan.',
+  'Kuro Kirishima is a well-known Japan Imo from 霧島酒造.',
   NULL,
   25,
   'Japan',
-  'Kuro Kirishima',
+  '霧島酒造',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -20318,11 +20318,11 @@ VALUES (
   'Kuro Satsuma',
   'shochu',
   'Imo',
-  'Kuro Satsuma is a well-known Japan Imo from Kuro Satsuma, selected for broad drink catalog coverage in Japan.',
+  'Kuro Satsuma is a well-known Japan Imo from Kuro.',
   NULL,
   25,
   'Japan',
-  'Kuro Satsuma',
+  'Kuro',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -20346,11 +20346,11 @@ VALUES (
   'Kuro Sesen',
   'shochu',
   'Mugi',
-  'Kuro Sesen is a well-known Japan Mugi from Kuro Sesen, selected for broad drink catalog coverage in Japan.',
+  'Kuro Sesen is a well-known Japan Mugi from Kuro.',
   NULL,
   25,
   'Japan',
-  'Kuro Sesen',
+  'Kuro',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -20374,11 +20374,11 @@ VALUES (
   'Kuro Shiranami',
   'shochu',
   'Imo',
-  'Kuro Shiranami is a well-known Japan Imo from Kuro Shiranami, selected for broad drink catalog coverage in Japan.',
+  'Kuro Shiranami is a well-known Japan Imo from Kuro.',
   NULL,
   25,
   'Japan',
-  'Kuro Shiranami',
+  'Kuro',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -20486,11 +20486,11 @@ VALUES (
   'Kuzuryu Ippin',
   'sake',
   'Junmai Ginjo',
-  'Kuzuryu Ippin is a well-known Japan Junmai Ginjo from Kuzuryu Ippin, selected for broad drink catalog coverage in Japan.',
+  '九頭龍 逸品。KuzuryuのJunmai Ginjoとして知られる定番銘柄。',
   NULL,
   15,
   'Japan',
-  'Kuzuryu Ippin',
+  'Kuzuryu',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -20514,11 +20514,11 @@ VALUES (
   'Kuzuryu Junmai',
   'sake',
   'Junmai Ginjo',
-  'Kuzuryu Junmai is a well-known Japan Junmai Ginjo from Kuzuryu Junmai, selected for broad drink catalog coverage in Japan.',
+  '九頭龍 純米。KuzuryuのJunmai Ginjoとして知られる定番銘柄。',
   NULL,
   15,
   'Japan',
-  'Kuzuryu Junmai',
+  'Kuzuryu',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -20626,11 +20626,11 @@ VALUES (
   'Lagavulin 16 Year Old',
   'whisky',
   'Single Malt',
-  'Lagavulin 16 Year Old is a well-known Scotland Single Malt from Lagavulin 16, selected for broad drink catalog coverage in Japan.',
+  'Lagavulin 16 Year Old is a well-known Scotland Single Malt from Diageo.',
   NULL,
   43,
   'Scotland',
-  'Lagavulin 16',
+  'Diageo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -20654,11 +20654,11 @@ VALUES (
   'Lagunitas IPA',
   'beer',
   'IPA',
-  'Lagunitas IPA is a well-known United States IPA from Lagunitas IPA, selected for broad drink catalog coverage in Japan.',
+  'Lagunitas IPA is a well-known United States IPA from Lagunitas.',
   NULL,
   6.2,
   'United States',
-  'Lagunitas IPA',
+  'Lagunitas',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -20682,11 +20682,11 @@ VALUES (
   'Laird''s Applejack',
   'brandy',
   'Apple Brandy',
-  'Laird''s Applejack is a well-known United States Apple Brandy from Laird''s Applejack, selected for broad drink catalog coverage in Japan.',
+  'Laird''s Applejack is a well-known United States Apple Brandy from Laird & Company.',
   NULL,
   40,
   'United States',
-  'Laird''s Applejack',
+  'Laird & Company',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -20710,11 +20710,11 @@ VALUES (
   'Laird''s Straight Apple Brandy',
   'brandy',
   'Apple Brandy',
-  'Laird''s Straight Apple Brandy is a well-known United States Apple Brandy from Laird''s Straight, selected for broad drink catalog coverage in Japan.',
+  'Laird''s Straight Apple Brandy is a well-known United States Apple Brandy from Laird & Company.',
   NULL,
   50,
   'United States',
-  'Laird''s Straight',
+  'Laird & Company',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -20766,11 +20766,11 @@ VALUES (
   'Laphroaig 10 Year Old',
   'whisky',
   'Single Malt',
-  'Laphroaig 10 Year Old is a well-known Scotland Single Malt from Laphroaig 10, selected for broad drink catalog coverage in Japan.',
+  'Laphroaig 10 Year Old is a well-known Scotland Single Malt from Beam Suntory.',
   NULL,
   40,
   'Scotland',
-  'Laphroaig 10',
+  'Beam Suntory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -20794,11 +20794,11 @@ VALUES (
   'Laphroaig Lore',
   'whisky',
   'Single Malt',
-  'Laphroaig Lore is a well-known Scotland Single Malt from Laphroaig Lore, selected for broad drink catalog coverage in Japan.',
+  'Laphroaig Lore is a well-known Scotland Single Malt from Beam Suntory.',
   NULL,
   48,
   'Scotland',
-  'Laphroaig Lore',
+  'Beam Suntory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -20822,11 +20822,11 @@ VALUES (
   'Laphroaig Quarter Cask',
   'whisky',
   'Single Malt',
-  'Laphroaig Quarter Cask is a well-known Scotland Single Malt from Laphroaig Quarter, selected for broad drink catalog coverage in Japan.',
+  'Laphroaig Quarter Cask is a well-known Scotland Single Malt from Beam Suntory.',
   NULL,
   48,
   'Scotland',
-  'Laphroaig Quarter',
+  'Beam Suntory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -20850,11 +20850,11 @@ VALUES (
   'Larios 12',
   'gin',
   'London Dry',
-  'Larios 12 is a well-known Spain London Dry from Larios 12, selected for broad drink catalog coverage in Japan.',
+  'Larios 12 is a well-known Spain London Dry from Larios.',
   NULL,
   40,
   'Spain',
-  'Larios 12',
+  'Larios',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -20878,11 +20878,11 @@ VALUES (
   'Larsen VSOP',
   'brandy',
   'Cognac',
-  'Larsen VSOP is a well-known France Cognac from Larsen VSOP, selected for broad drink catalog coverage in Japan.',
+  'Larsen VSOP is a well-known France Cognac from Larsen.',
   NULL,
   40,
   'France',
-  'Larsen VSOP',
+  'Larsen',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -20906,11 +20906,11 @@ VALUES (
   'Larsen XO',
   'brandy',
   'Cognac',
-  'Larsen XO is a well-known France Cognac from Larsen XO, selected for broad drink catalog coverage in Japan.',
+  'Larsen XO is a well-known France Cognac from Larsen.',
   NULL,
   40,
   'France',
-  'Larsen XO',
+  'Larsen',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -20990,11 +20990,11 @@ VALUES (
   'Lazzaroni Amaretto',
   'liqueur',
   'Amaretto',
-  'Lazzaroni Amaretto is a well-known Italy Amaretto from Lazzaroni Amaretto, selected for broad drink catalog coverage in Japan.',
+  'Lazzaroni Amaretto is a well-known Italy Amaretto from Lazzaroni.',
   NULL,
   24,
   'Italy',
-  'Lazzaroni Amaretto',
+  'Lazzaroni',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -21018,11 +21018,11 @@ VALUES (
   'Ledaig 10 Year Old',
   'whisky',
   'Single Malt',
-  'Ledaig 10 Year Old is a well-known Scotland Single Malt from Ledaig 10, selected for broad drink catalog coverage in Japan.',
+  'Ledaig 10 Year Old is a well-known Scotland Single Malt from Ledaig.',
   NULL,
   46,
   'Scotland',
-  'Ledaig 10',
+  'Ledaig',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -21074,11 +21074,11 @@ VALUES (
   'Leffe Blonde',
   'beer',
   'Belgian Blonde',
-  'Leffe Blonde is a well-known Belgium Belgian Blonde from Leffe Blonde, selected for broad drink catalog coverage in Japan.',
+  'Leffe Blonde is a well-known Belgium Belgian Blonde from AB InBev.',
   NULL,
   6.6,
   'Belgium',
-  'Leffe Blonde',
+  'AB InBev',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -21102,11 +21102,11 @@ VALUES (
   'Leffe Brune',
   'beer',
   'Dubbel',
-  'Leffe Brune is a well-known Belgium Dubbel from Leffe Brune, selected for broad drink catalog coverage in Japan.',
+  'Leffe Brune is a well-known Belgium Dubbel from AB InBev.',
   NULL,
   6.5,
   'Belgium',
-  'Leffe Brune',
+  'AB InBev',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -21270,11 +21270,11 @@ VALUES (
   'Level Vodka',
   'vodka',
   'Plain',
-  'Level Vodka is a well-known Sweden Plain from Level Vodka, selected for broad drink catalog coverage in Japan.',
+  'Level Vodka is a well-known Sweden Plain from Level.',
   NULL,
   40,
   'Sweden',
-  'Level Vodka',
+  'Level',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -21298,11 +21298,11 @@ VALUES (
   'Licor 43',
   'liqueur',
   'Vanilla',
-  'Licor 43 is a well-known Spain Vanilla from Licor 43, selected for broad drink catalog coverage in Japan.',
+  'Licor 43 is a well-known Spain Vanilla from Licor.',
   NULL,
   31,
   'Spain',
-  'Licor 43',
+  'Licor',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -21326,11 +21326,11 @@ VALUES (
   'Lindisfarne Mead',
   'other',
   'Mead',
-  'Lindisfarne Mead is a well-known United Kingdom Mead from Lindisfarne Mead, selected for broad drink catalog coverage in Japan.',
+  'Lindisfarne Mead is a well-known United Kingdom Mead from Lindisfarne.',
   NULL,
   14.5,
   'United Kingdom',
-  'Lindisfarne Mead',
+  'Lindisfarne',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -21578,11 +21578,11 @@ VALUES (
   'Lucano Amaro',
   'liqueur',
   'Amaro',
-  'Lucano Amaro is a well-known Italy Amaro from Lucano Amaro, selected for broad drink catalog coverage in Japan.',
+  'Lucano Amaro is a well-known Italy Amaro from Lucano.',
   NULL,
   28,
   'Italy',
-  'Lucano Amaro',
+  'Lucano',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -21606,11 +21606,11 @@ VALUES (
   'Luksusowa Vodka',
   'vodka',
   'Plain',
-  'Luksusowa Vodka is a well-known Poland Plain from Luksusowa Vodka, selected for broad drink catalog coverage in Japan.',
+  'Luksusowa Vodka is a well-known Poland Plain from Luksusowa.',
   NULL,
   40,
   'Poland',
-  'Luksusowa Vodka',
+  'Luksusowa',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -21662,11 +21662,11 @@ VALUES (
   'Luxardo Limoncello',
   'liqueur',
   'Limoncello',
-  'Luxardo Limoncello is a well-known Italy Limoncello from Luxardo Limoncello, selected for broad drink catalog coverage in Japan.',
+  'Luxardo Limoncello is a well-known Italy Limoncello from Luxardo.',
   NULL,
   27,
   'Italy',
-  'Luxardo Limoncello',
+  'Luxardo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -21690,11 +21690,11 @@ VALUES (
   'Luxardo Maraschino',
   'liqueur',
   'Maraschino',
-  'Luxardo Maraschino is a well-known Italy Maraschino from Luxardo Maraschino, selected for broad drink catalog coverage in Japan.',
+  'Luxardo Maraschino is a well-known Italy Maraschino from Luxardo.',
   NULL,
   32,
   'Italy',
-  'Luxardo Maraschino',
+  'Luxardo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -21746,11 +21746,11 @@ VALUES (
   'Macchu Pisco',
   'brandy',
   'Pisco',
-  'Macchu Pisco is a well-known Peru Pisco from Macchu Pisco, selected for broad drink catalog coverage in Japan.',
+  'Macchu Pisco is a well-known Peru Pisco from Macchu.',
   NULL,
   40,
   'Peru',
-  'Macchu Pisco',
+  'Macchu',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -21830,11 +21830,11 @@ VALUES (
   'Magners Original Irish Cider',
   'other',
   'Cider',
-  'Magners Original Irish Cider is a well-known Ireland Cider from Magners Original, selected for broad drink catalog coverage in Japan.',
+  'Magners Original Irish Cider is a well-known Ireland Cider from Magners.',
   NULL,
   4.5,
   'Ireland',
-  'Magners Original',
+  'Magners',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -21886,11 +21886,11 @@ VALUES (
   'Maker''s Mark 46',
   'whisky',
   'Bourbon',
-  'Maker''s Mark 46 is a well-known United States Bourbon from Maker''s Mark, selected for broad drink catalog coverage in Japan.',
+  'Maker''s Mark 46 is a well-known United States Bourbon from Beam Suntory.',
   NULL,
   47,
   'United States',
-  'Maker''s Mark',
+  'Beam Suntory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -21918,7 +21918,7 @@ VALUES (
   NULL,
   45,
   'United States',
-  'Maker''s Mark Distillery',
+  'Beam Suntory',
   ARRAY['めーかーずまーく']::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -21970,11 +21970,11 @@ VALUES (
   'Malfy Gin Rosa',
   'gin',
   'Flavoured Gin',
-  'Malfy Gin Rosa is a well-known Italy Flavoured Gin from Malfy Gin, selected for broad drink catalog coverage in Japan.',
+  'Malfy Gin Rosa is a well-known Italy Flavoured Gin from Malfy.',
   NULL,
   41,
   'Italy',
-  'Malfy Gin',
+  'Malfy',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -21998,11 +21998,11 @@ VALUES (
   'Malibu Original',
   'liqueur',
   'Coconut Rum Liqueur',
-  'Malibu Original is a well-known Barbados Coconut Rum Liqueur from Malibu Original, selected for broad drink catalog coverage in Japan.',
+  'Malibu Original is a well-known Barbados Coconut Rum Liqueur from Pernod Ricard.',
   NULL,
   21,
   'Barbados',
-  'Malibu Original',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -22026,11 +22026,11 @@ VALUES (
   'Malibu Pineapple',
   'liqueur',
   'Rum Liqueur',
-  'Malibu Pineapple is a well-known Barbados Rum Liqueur from Malibu Pineapple, selected for broad drink catalog coverage in Japan.',
+  'Malibu Pineapple is a well-known Barbados Rum Liqueur from Pernod Ricard.',
   NULL,
   21,
   'Barbados',
-  'Malibu Pineapple',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -22110,11 +22110,11 @@ VALUES (
   'Manotsuru Maho',
   'sake',
   'Junmai Ginjo',
-  'Manotsuru Maho is a well-known Japan Junmai Ginjo from Manotsuru Maho, selected for broad drink catalog coverage in Japan.',
+  '真野鶴 魔法。ManotsuruのJunmai Ginjoとして知られる定番銘柄。',
   NULL,
   15,
   'Japan',
-  'Manotsuru Maho',
+  'Manotsuru',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -22138,11 +22138,11 @@ VALUES (
   'Manotsuru Miku',
   'sake',
   'Junmai Ginjo',
-  'Manotsuru Miku is a well-known Japan Junmai Ginjo from Manotsuru Miku, selected for broad drink catalog coverage in Japan.',
+  '真野鶴 実来。ManotsuruのJunmai Ginjoとして知られる定番銘柄。',
   NULL,
   15,
   'Japan',
-  'Manotsuru Miku',
+  'Manotsuru',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -22194,11 +22194,11 @@ VALUES (
   'Maraska Maraschino',
   'liqueur',
   'Maraschino',
-  'Maraska Maraschino is a well-known Croatia Maraschino from Maraska Maraschino, selected for broad drink catalog coverage in Japan.',
+  'Maraska Maraschino is a well-known Croatia Maraschino from Maraska.',
   NULL,
   32,
   'Croatia',
-  'Maraska Maraschino',
+  'Maraska',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -22334,11 +22334,11 @@ VALUES (
   'Mars Iwai Tradition',
   'whisky',
   'Blended',
-  'Mars Iwai Tradition is a well-known Japan Blended from Mars Iwai, selected for broad drink catalog coverage in Japan.',
+  'Mars Iwai Tradition is a well-known Japan Blended from Hombo Shuzo.',
   NULL,
   40,
   'Japan',
-  'Mars Iwai',
+  'Hombo Shuzo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -22362,11 +22362,11 @@ VALUES (
   'Mars Komagatake Single Malt',
   'whisky',
   'Single Malt',
-  'Mars Komagatake Single Malt is a well-known Japan Single Malt from Mars Komagatake, selected for broad drink catalog coverage in Japan.',
+  'Mars Komagatake Single Malt is a well-known Japan Single Malt from Hombo Shuzo.',
   NULL,
   48,
   'Japan',
-  'Mars Komagatake',
+  'Hombo Shuzo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -22390,11 +22390,11 @@ VALUES (
   'Mars Tsunuki Single Malt',
   'whisky',
   'Single Malt',
-  'Mars Tsunuki Single Malt is a well-known Japan Single Malt from Mars Tsunuki, selected for broad drink catalog coverage in Japan.',
+  'Mars Tsunuki Single Malt is a well-known Japan Single Malt from Hombo Shuzo.',
   NULL,
   50,
   'Japan',
-  'Mars Tsunuki',
+  'Hombo Shuzo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -22418,11 +22418,11 @@ VALUES (
   'Martell Blue Swift',
   'brandy',
   'Cognac',
-  'Martell Blue Swift is a well-known France Cognac from Martell, selected for broad drink catalog coverage in Japan.',
+  'Martell Blue Swift is a well-known France Cognac from Pernod Ricard.',
   NULL,
   40,
   'France',
-  'Martell',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -22446,11 +22446,11 @@ VALUES (
   'Martell Cordon Bleu',
   'brandy',
   'Cognac',
-  'Martell Cordon Bleu is a well-known France Cognac from Martell, selected for broad drink catalog coverage in Japan.',
+  'Martell Cordon Bleu is a well-known France Cognac from Pernod Ricard.',
   NULL,
   40,
   'France',
-  'Martell',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -22474,11 +22474,11 @@ VALUES (
   'Martell VS',
   'brandy',
   'Cognac',
-  'Martell VS is a well-known France Cognac from Martell, selected for broad drink catalog coverage in Japan.',
+  'Martell VS is a well-known France Cognac from Pernod Ricard.',
   NULL,
   40,
   'France',
-  'Martell',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -22502,11 +22502,11 @@ VALUES (
   'Martell XO',
   'brandy',
   'Cognac',
-  'Martell XO is a well-known France Cognac from Martell, selected for broad drink catalog coverage in Japan.',
+  'Martell XO is a well-known France Cognac from Pernod Ricard.',
   NULL,
   40,
   'France',
-  'Martell',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -22586,11 +22586,11 @@ VALUES (
   'Masseto 2019',
   'wine',
   'Red',
-  'Masseto 2019 is a well-known Italy Red from Masseto 2019, selected for broad drink catalog coverage in Japan.',
+  'Masseto 2019 is a well-known Italy Red from Masseto.',
   NULL,
   15,
   'Italy',
-  'Masseto 2019',
+  'Masseto',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -22642,11 +22642,11 @@ VALUES (
   'Masumi Kaya',
   'sake',
   'Junmai Ginjo',
-  'Masumi Kaya is a well-known Japan Junmai Ginjo from Masumi Kaya, selected for broad drink catalog coverage in Japan.',
+  '真澄 茅色 KAYA。MasumiのJunmai Ginjoとして知られる定番銘柄。',
   NULL,
   15,
   'Japan',
-  'Masumi Kaya',
+  'Masumi',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -22670,11 +22670,11 @@ VALUES (
   'Masumi Origarami',
   'sake',
   'Junmai Ginjo',
-  'Masumi Origarami is a well-known Japan Junmai Ginjo from Masumi Origarami, selected for broad drink catalog coverage in Japan.',
+  '真澄 うすにごり。MasumiのJunmai Ginjoとして知られる定番銘柄。',
   NULL,
   15,
   'Japan',
-  'Masumi Origarami',
+  'Masumi',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -22726,11 +22726,11 @@ VALUES (
   'Masumi Shiro',
   'sake',
   'Junmai Ginjo',
-  'Masumi Shiro is a well-known Japan Junmai Ginjo from Masumi Shiro, selected for broad drink catalog coverage in Japan.',
+  '真澄 白妙 SHIRO。MasumiのJunmai Ginjoとして知られる定番銘柄。',
   NULL,
   15,
   'Japan',
-  'Masumi Shiro',
+  'Masumi',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -22754,11 +22754,11 @@ VALUES (
   'Mathilde Poire',
   'liqueur',
   'Pear',
-  'Mathilde Poire is a well-known France Pear from Mathilde Poire, selected for broad drink catalog coverage in Japan.',
+  'Mathilde Poire is a well-known France Pear from Mathilde.',
   NULL,
   18,
   'France',
-  'Mathilde Poire',
+  'Mathilde',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -22894,11 +22894,11 @@ VALUES (
   'Metaxa 12 Stars',
   'brandy',
   'Greek Brandy',
-  'Metaxa 12 Stars is a well-known Greece Greek Brandy from Metaxa 12, selected for broad drink catalog coverage in Japan.',
+  'Metaxa 12 Stars is a well-known Greece Greek Brandy from Metaxa.',
   NULL,
   40,
   'Greece',
-  'Metaxa 12',
+  'Metaxa',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -22922,11 +22922,11 @@ VALUES (
   'Metaxa 5 Stars',
   'brandy',
   'Greek Brandy',
-  'Metaxa 5 Stars is a well-known Greece Greek Brandy from Metaxa 5, selected for broad drink catalog coverage in Japan.',
+  'Metaxa 5 Stars is a well-known Greece Greek Brandy from Metaxa.',
   NULL,
   38,
   'Greece',
-  'Metaxa 5',
+  'Metaxa',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -22950,11 +22950,11 @@ VALUES (
   'Metaxa 7 Stars',
   'brandy',
   'Greek Brandy',
-  'Metaxa 7 Stars is a well-known Greece Greek Brandy from Metaxa 7, selected for broad drink catalog coverage in Japan.',
+  'Metaxa 7 Stars is a well-known Greece Greek Brandy from Metaxa.',
   NULL,
   40,
   'Greece',
-  'Metaxa 7',
+  'Metaxa',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -22978,11 +22978,11 @@ VALUES (
   'Meukow VS',
   'brandy',
   'Cognac',
-  'Meukow VS is a well-known France Cognac from Meukow VS, selected for broad drink catalog coverage in Japan.',
+  'Meukow VS is a well-known France Cognac from Meukow.',
   NULL,
   40,
   'France',
-  'Meukow VS',
+  'Meukow',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -23006,11 +23006,11 @@ VALUES (
   'Meukow VSOP',
   'brandy',
   'Cognac',
-  'Meukow VSOP is a well-known France Cognac from Meukow VSOP, selected for broad drink catalog coverage in Japan.',
+  'Meukow VSOP is a well-known France Cognac from Meukow.',
   NULL,
   40,
   'France',
-  'Meukow VSOP',
+  'Meukow',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -23034,11 +23034,11 @@ VALUES (
   'Meukow XO',
   'brandy',
   'Cognac',
-  'Meukow XO is a well-known France Cognac from Meukow XO, selected for broad drink catalog coverage in Japan.',
+  'Meukow XO is a well-known France Cognac from Meukow.',
   NULL,
   40,
   'France',
-  'Meukow XO',
+  'Meukow',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -23062,11 +23062,11 @@ VALUES (
   'Michter''s US1 Bourbon',
   'whisky',
   'Bourbon',
-  'Michter''s US1 Bourbon is a well-known United States Bourbon from Michter''s US1, selected for broad drink catalog coverage in Japan.',
+  'Michter''s US1 Bourbon is a well-known United States Bourbon from Michter''s.',
   NULL,
   45.7,
   'United States',
-  'Michter''s US1',
+  'Michter''s',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -23090,11 +23090,11 @@ VALUES (
   'Michter''s US1 Rye',
   'whisky',
   'Rye',
-  'Michter''s US1 Rye is a well-known United States Rye from Michter''s US1, selected for broad drink catalog coverage in Japan.',
+  'Michter''s US1 Rye is a well-known United States Rye from Michter''s.',
   NULL,
   42.4,
   'United States',
-  'Michter''s US1',
+  'Michter''s',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -23174,11 +23174,11 @@ VALUES (
   'Milagro Anejo',
   'tequila',
   'Tequila',
-  'Milagro Anejo is a well-known Mexico Tequila from Milagro Anejo, selected for broad drink catalog coverage in Japan.',
+  'Milagro Anejo is a well-known Mexico Tequila from Milagro.',
   NULL,
   40,
   'Mexico',
-  'Milagro Anejo',
+  'Milagro',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -23202,11 +23202,11 @@ VALUES (
   'Milagro Reposado',
   'tequila',
   'Tequila',
-  'Milagro Reposado is a well-known Mexico Tequila from Milagro Reposado, selected for broad drink catalog coverage in Japan.',
+  'Milagro Reposado is a well-known Mexico Tequila from Milagro.',
   NULL,
   40,
   'Mexico',
-  'Milagro Reposado',
+  'Milagro',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -23230,11 +23230,11 @@ VALUES (
   'Milagro Silver',
   'tequila',
   'Blanco',
-  'Milagro Silver is a well-known Mexico Blanco from Milagro Silver, selected for broad drink catalog coverage in Japan.',
+  'Milagro Silver is a well-known Mexico Blanco from Milagro.',
   NULL,
   40,
   'Mexico',
-  'Milagro Silver',
+  'Milagro',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -23258,11 +23258,11 @@ VALUES (
   'Miller Lite',
   'beer',
   'Light Lager',
-  'Miller Lite is a well-known United States Light Lager from Miller Lite, selected for broad drink catalog coverage in Japan.',
+  'Miller Lite is a well-known United States Light Lager from Miller.',
   NULL,
   4.2,
   'United States',
-  'Miller Lite',
+  'Miller',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -23286,11 +23286,11 @@ VALUES (
   'Mimurosugi Bodaimoto',
   'sake',
   'Junmai Ginjo',
-  'Mimurosugi Bodaimoto is a well-known Japan Junmai Ginjo from Mimurosugi Bodaimoto, selected for broad drink catalog coverage in Japan.',
+  'みむろ杉 菩提もと。MimurosugiのJunmai Ginjoとして知られる定番銘柄。',
   NULL,
   15,
   'Japan',
-  'Mimurosugi Bodaimoto',
+  'Mimurosugi',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -23398,11 +23398,11 @@ VALUES (
   'Minoh Stout',
   'beer',
   'Stout',
-  'Minoh Stout is a well-known Japan Stout from Minoh Stout, selected for broad drink catalog coverage in Japan.',
+  'Minoh Stout is a well-known Japan Stout from Minoh.',
   NULL,
   5.5,
   'Japan',
-  'Minoh Stout',
+  'Minoh',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -23426,11 +23426,11 @@ VALUES (
   'Minoh W-IPA',
   'beer',
   'Double IPA',
-  'Minoh W-IPA is a well-known Japan Double IPA from Minoh W-IPA, selected for broad drink catalog coverage in Japan.',
+  'Minoh W-IPA is a well-known Japan Double IPA from Minoh.',
   NULL,
   9,
   'Japan',
-  'Minoh W-IPA',
+  'Minoh',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -23538,11 +23538,11 @@ VALUES (
   'Miyagikyo Single Malt',
   'whisky',
   'Single Malt',
-  'Miyagikyo Single Malt is a well-known Japan Single Malt from Miyagikyo Single, selected for broad drink catalog coverage in Japan.',
+  'Miyagikyo Single Malt is a well-known Japan Single Malt from Nikka.',
   NULL,
   45,
   'Japan',
-  'Miyagikyo Single',
+  'Nikka',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -23706,11 +23706,11 @@ VALUES (
   'Modelo Especial',
   'beer',
   'Lager',
-  'Modelo Especial is a well-known Mexico Lager from Modelo Especial, selected for broad drink catalog coverage in Japan.',
+  'Modelo Especial is a well-known Mexico Lager from Modelo.',
   NULL,
   4.4,
   'Mexico',
-  'Modelo Especial',
+  'Modelo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -23874,11 +23874,11 @@ VALUES (
   'Monkey 47 Schwarzwald Dry Gin',
   'gin',
   'New Western',
-  'Monkey 47 Schwarzwald Dry Gin is a well-known Germany New Western from Monkey 47, selected for broad drink catalog coverage in Japan.',
+  'Monkey 47 Schwarzwald Dry Gin is a well-known Germany New Western from Monkey.',
   NULL,
   47,
   'Germany',
-  'Monkey 47',
+  'Monkey',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -23902,11 +23902,11 @@ VALUES (
   'Monkey Shoulder',
   'whisky',
   'Blended Malt',
-  'Monkey Shoulder is a well-known Scotland Blended Malt from Monkey Shoulder, selected for broad drink catalog coverage in Japan.',
+  'Monkey Shoulder is a well-known Scotland Blended Malt from William Grant & Sons.',
   NULL,
   40,
   'Scotland',
-  'Monkey Shoulder',
+  'William Grant & Sons',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -24042,11 +24042,11 @@ VALUES (
   'Moskovskaya Vodka',
   'vodka',
   'Plain',
-  'Moskovskaya Vodka is a well-known Latvia Plain from Moskovskaya Vodka, selected for broad drink catalog coverage in Japan.',
+  'Moskovskaya Vodka is a well-known Latvia Plain from Moskovskaya.',
   NULL,
   38,
   'Latvia',
-  'Moskovskaya Vodka',
+  'Moskovskaya',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -24070,11 +24070,11 @@ VALUES (
   'Mount Gay Black Barrel',
   'rum',
   'Aged Rum',
-  'Mount Gay Black Barrel is a well-known Barbados Aged Rum from Mount Gay, selected for broad drink catalog coverage in Japan.',
+  'Mount Gay Black Barrel is a well-known Barbados Aged Rum from Rémy Cointreau.',
   NULL,
   43,
   'Barbados',
-  'Mount Gay',
+  'Rémy Cointreau',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -24098,11 +24098,11 @@ VALUES (
   'Mount Gay Eclipse',
   'rum',
   'Gold Rum',
-  'Mount Gay Eclipse is a well-known Barbados Gold Rum from Mount Gay, selected for broad drink catalog coverage in Japan.',
+  'Mount Gay Eclipse is a well-known Barbados Gold Rum from Rémy Cointreau.',
   NULL,
   40,
   'Barbados',
-  'Mount Gay',
+  'Rémy Cointreau',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -24126,11 +24126,11 @@ VALUES (
   'Mount Gay XO',
   'rum',
   'Aged Rum',
-  'Mount Gay XO is a well-known Barbados Aged Rum from Mount Gay, selected for broad drink catalog coverage in Japan.',
+  'Mount Gay XO is a well-known Barbados Aged Rum from Rémy Cointreau.',
   NULL,
   43,
   'Barbados',
-  'Mount Gay',
+  'Rémy Cointreau',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -24294,11 +24294,11 @@ VALUES (
   'Musou Sengetsu',
   'shochu',
   'Mugi',
-  'Musou Sengetsu is a well-known Japan Mugi from Musou Sengetsu, selected for broad drink catalog coverage in Japan.',
+  'Musou Sengetsu is a well-known Japan Mugi from Musou.',
   NULL,
   25,
   'Japan',
-  'Musou Sengetsu',
+  'Musou',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -24434,11 +24434,11 @@ VALUES (
   'Myers''s Original Dark',
   'rum',
   'Dark Rum',
-  'Myers''s Original Dark is a well-known Jamaica Dark Rum from Myers''s Original, selected for broad drink catalog coverage in Japan.',
+  'Myers''s Original Dark is a well-known Jamaica Dark Rum from Myers''s.',
   NULL,
   40,
   'Jamaica',
-  'Myers''s Original',
+  'Myers''s',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -24574,11 +24574,11 @@ VALUES (
   'Negra Modelo',
   'beer',
   'Dark Lager',
-  'Negra Modelo is a well-known Mexico Dark Lager from Negra Modelo, selected for broad drink catalog coverage in Japan.',
+  'Negra Modelo is a well-known Mexico Dark Lager from Negra.',
   NULL,
   5.4,
   'Mexico',
-  'Negra Modelo',
+  'Negra',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -24602,11 +24602,11 @@ VALUES (
   'Neisson Blanc',
   'rum',
   'Rhum Agricole',
-  'Neisson Blanc is a well-known Martinique Rhum Agricole from Neisson Blanc, selected for broad drink catalog coverage in Japan.',
+  'Neisson Blanc is a well-known Martinique Rhum Agricole from Neisson.',
   NULL,
   50,
   'Martinique',
-  'Neisson Blanc',
+  'Neisson',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -24826,11 +24826,11 @@ VALUES (
   'Nikaido Kitchomu',
   'shochu',
   'Mugi',
-  'Nikaido Kitchomu is a well-known Japan Mugi from Nikaido Kitchomu, selected for broad drink catalog coverage in Japan.',
+  'Nikaido Kitchomu is a well-known Japan Mugi from Nikaido.',
   NULL,
   25,
   'Japan',
-  'Nikaido Kitchomu',
+  'Nikaido',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -24854,11 +24854,11 @@ VALUES (
   'Nikaido Mugi',
   'shochu',
   'Mugi',
-  'Nikaido Mugi is a well-known Japan Mugi from Nikaido Mugi, selected for broad drink catalog coverage in Japan.',
+  'Nikaido Mugi is a well-known Japan Mugi from Nikaido.',
   NULL,
   25,
   'Japan',
-  'Nikaido Mugi',
+  'Nikaido',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -24882,11 +24882,11 @@ VALUES (
   'Nikka Cidre Dry',
   'other',
   'Cider',
-  'Nikka Cidre Dry is a well-known Japan Cider from Nikka Cidre, selected for broad drink catalog coverage in Japan.',
+  'Nikka Cidre Dry is a well-known Japan Cider from Nikka.',
   NULL,
   5,
   'Japan',
-  'Nikka Cidre',
+  'Nikka',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -24910,11 +24910,11 @@ VALUES (
   'Nikka Cidre Sweet',
   'other',
   'Cider',
-  'Nikka Cidre Sweet is a well-known Japan Cider from Nikka Cidre, selected for broad drink catalog coverage in Japan.',
+  'Nikka Cidre Sweet is a well-known Japan Cider from Nikka.',
   NULL,
   3,
   'Japan',
-  'Nikka Cidre',
+  'Nikka',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -24938,11 +24938,11 @@ VALUES (
   'Nikka Coffey Gin',
   'gin',
   'New Western',
-  'Nikka Coffey Gin is a well-known Japan New Western from Nikka Coffey, selected for broad drink catalog coverage in Japan.',
+  'Nikka Coffey Gin is a well-known Japan New Western from Nikka.',
   NULL,
   47,
   'Japan',
-  'Nikka Coffey',
+  'Nikka',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -24966,11 +24966,11 @@ VALUES (
   'Nikka Coffey Grain',
   'whisky',
   'Single Grain',
-  'Nikka Coffey Grain is a well-known Japan Single Grain from Nikka Coffey, selected for broad drink catalog coverage in Japan.',
+  'Nikka Coffey Grain is a well-known Japan Single Grain from Nikka.',
   NULL,
   45,
   'Japan',
-  'Nikka Coffey',
+  'Nikka',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -24994,11 +24994,11 @@ VALUES (
   'Nikka Coffey Malt',
   'whisky',
   'Malt Whisky',
-  'Nikka Coffey Malt is a well-known Japan Malt Whisky from Nikka Coffey, selected for broad drink catalog coverage in Japan.',
+  'Nikka Coffey Malt is a well-known Japan Malt Whisky from Nikka.',
   NULL,
   45,
   'Japan',
-  'Nikka Coffey',
+  'Nikka',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -25022,11 +25022,11 @@ VALUES (
   'Nikka Coffey Vodka',
   'vodka',
   'Grain',
-  'Nikka Coffey Vodka is a well-known Japan Grain from Nikka Coffey, selected for broad drink catalog coverage in Japan.',
+  'Nikka Coffey Vodka is a well-known Japan Grain from Nikka.',
   NULL,
   40,
   'Japan',
-  'Nikka Coffey',
+  'Nikka',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -25050,11 +25050,11 @@ VALUES (
   'Nikka From The Barrel',
   'whisky',
   'Blended',
-  'Nikka From The Barrel is a well-known Japan Blended from Nikka From, selected for broad drink catalog coverage in Japan.',
+  'Nikka From The Barrel is a well-known Japan Blended from Nikka.',
   NULL,
   51.4,
   'Japan',
-  'Nikka From',
+  'Nikka',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -25078,11 +25078,11 @@ VALUES (
   'Nikka Session',
   'whisky',
   'Blended Malt',
-  'Nikka Session is a well-known Japan Blended Malt from Nikka Session, selected for broad drink catalog coverage in Japan.',
+  'Nikka Session is a well-known Japan Blended Malt from Nikka.',
   NULL,
   43,
   'Japan',
-  'Nikka Session',
+  'Nikka',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -25106,11 +25106,11 @@ VALUES (
   'Nikka Wilkinson Vodka',
   'vodka',
   'Plain',
-  'Nikka Wilkinson Vodka is a well-known Japan Plain from Nikka Wilkinson, selected for broad drink catalog coverage in Japan.',
+  'Nikka Wilkinson Vodka is a well-known Japan Plain from Nikka.',
   NULL,
   40,
   'Japan',
-  'Nikka Wilkinson',
+  'Nikka',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -25246,11 +25246,11 @@ VALUES (
   'No 209 Gin',
   'gin',
   'New Western',
-  'No 209 Gin is a well-known United States New Western from No 209, selected for broad drink catalog coverage in Japan.',
+  'No 209 Gin is a well-known United States New Western from No.',
   NULL,
   46,
   'United States',
-  'No 209',
+  'No',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -25358,11 +25358,11 @@ VALUES (
   'Oban 14 Year Old',
   'whisky',
   'Single Malt',
-  'Oban 14 Year Old is a well-known Scotland Single Malt from Oban 14, selected for broad drink catalog coverage in Japan.',
+  'Oban 14 Year Old is a well-known Scotland Single Malt from Diageo.',
   NULL,
   43,
   'Scotland',
-  'Oban 14',
+  'Diageo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -25414,11 +25414,11 @@ VALUES (
   'Ocho Anejo',
   'tequila',
   'Tequila',
-  'Ocho Anejo is a well-known Mexico Tequila from Ocho Anejo, selected for broad drink catalog coverage in Japan.',
+  'Ocho Anejo is a well-known Mexico Tequila from Ocho.',
   NULL,
   40,
   'Mexico',
-  'Ocho Anejo',
+  'Ocho',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -25442,11 +25442,11 @@ VALUES (
   'Ocho Plata',
   'tequila',
   'Blanco',
-  'Ocho Plata is a well-known Mexico Blanco from Ocho Plata, selected for broad drink catalog coverage in Japan.',
+  'Ocho Plata is a well-known Mexico Blanco from Ocho.',
   NULL,
   40,
   'Mexico',
-  'Ocho Plata',
+  'Ocho',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -25470,11 +25470,11 @@ VALUES (
   'Ocho Reposado',
   'tequila',
   'Tequila',
-  'Ocho Reposado is a well-known Mexico Tequila from Ocho Reposado, selected for broad drink catalog coverage in Japan.',
+  'Ocho Reposado is a well-known Mexico Tequila from Ocho.',
   NULL,
   40,
   'Mexico',
-  'Ocho Reposado',
+  'Ocho',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -25498,11 +25498,11 @@ VALUES (
   'Ohmine 2 Grain Yamadanishiki',
   'sake',
   'Junmai Ginjo',
-  'Ohmine 2 Grain Yamadanishiki is a well-known Japan Junmai Ginjo from Ohmine 2, selected for broad drink catalog coverage in Japan.',
+  '大嶺 2粒 山田錦。OhmineのJunmai Ginjoとして知られる定番銘柄。',
   NULL,
   15,
   'Japan',
-  'Ohmine 2',
+  'Ohmine',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -25526,11 +25526,11 @@ VALUES (
   'Ohmine 3 Grain Omachi',
   'sake',
   'Junmai Ginjo',
-  'Ohmine 3 Grain Omachi is a well-known Japan Junmai Ginjo from Ohmine 3, selected for broad drink catalog coverage in Japan.',
+  '大嶺 3粒 雄町。OhmineのJunmai Ginjoとして知られる定番銘柄。',
   NULL,
   15,
   'Japan',
-  'Ohmine 3',
+  'Ohmine',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -25554,11 +25554,11 @@ VALUES (
   'Ohmine 3 Grain Yamadanishiki',
   'sake',
   'Junmai Ginjo',
-  'Ohmine 3 Grain Yamadanishiki is a well-known Japan Junmai Ginjo from Ohmine 3, selected for broad drink catalog coverage in Japan.',
+  '大嶺 3粒 山田錦。OhmineのJunmai Ginjoとして知られる定番銘柄。',
   NULL,
   15,
   'Japan',
-  'Ohmine 3',
+  'Ohmine',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -25610,11 +25610,11 @@ VALUES (
   'Okuhida Vodka',
   'vodka',
   'Rice',
-  'Okuhida Vodka is a well-known Japan Rice from Okuhida Vodka, selected for broad drink catalog coverage in Japan.',
+  'Okuhida Vodka is a well-known Japan Rice from Okuhida.',
   NULL,
   40,
   'Japan',
-  'Okuhida Vodka',
+  'Okuhida',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -25638,11 +25638,11 @@ VALUES (
   'Old Forester 1920 Prohibition Style',
   'whisky',
   'Bourbon',
-  'Old Forester 1920 Prohibition Style is a well-known United States Bourbon from Old Forester, selected for broad drink catalog coverage in Japan.',
+  'Old Forester 1920 Prohibition Style is a well-known United States Bourbon from Brown-Forman.',
   NULL,
   57.5,
   'United States',
-  'Old Forester',
+  'Brown-Forman',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -25666,11 +25666,11 @@ VALUES (
   'Old Forester 86 Proof',
   'whisky',
   'Bourbon',
-  'Old Forester 86 Proof is a well-known United States Bourbon from Old Forester, selected for broad drink catalog coverage in Japan.',
+  'Old Forester 86 Proof is a well-known United States Bourbon from Brown-Forman.',
   NULL,
   43,
   'United States',
-  'Old Forester',
+  'Brown-Forman',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -25750,11 +25750,11 @@ VALUES (
   'Olmeca Altos Anejo',
   'tequila',
   'Anejo',
-  'Olmeca Altos Anejo is a well-known Mexico Anejo from Olmeca Altos, selected for broad drink catalog coverage in Japan.',
+  'Olmeca Altos Anejo is a well-known Mexico Anejo from Pernod Ricard.',
   NULL,
   38,
   'Mexico',
-  'Olmeca Altos',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -25778,11 +25778,11 @@ VALUES (
   'Olmeca Altos Plata',
   'tequila',
   'Blanco',
-  'Olmeca Altos Plata is a well-known Mexico Blanco from Olmeca Altos, selected for broad drink catalog coverage in Japan.',
+  'Olmeca Altos Plata is a well-known Mexico Blanco from Pernod Ricard.',
   NULL,
   38,
   'Mexico',
-  'Olmeca Altos',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -25806,11 +25806,11 @@ VALUES (
   'Olmeca Altos Reposado',
   'tequila',
   'Reposado',
-  'Olmeca Altos Reposado is a well-known Mexico Reposado from Olmeca Altos, selected for broad drink catalog coverage in Japan.',
+  'Olmeca Altos Reposado is a well-known Mexico Reposado from Pernod Ricard.',
   NULL,
   38,
   'Mexico',
-  'Olmeca Altos',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -25834,11 +25834,11 @@ VALUES (
   'Omnipollo Nebuchadnezzar',
   'beer',
   'Double IPA',
-  'Omnipollo Nebuchadnezzar is a well-known Sweden Double IPA from Omnipollo Nebuchadnezzar, selected for broad drink catalog coverage in Japan.',
+  'Omnipollo Nebuchadnezzar is a well-known Sweden Double IPA from Omnipollo.',
   NULL,
   8.5,
   'Sweden',
-  'Omnipollo Nebuchadnezzar',
+  'Omnipollo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -25946,11 +25946,11 @@ VALUES (
   'Original Sin Hard Cider',
   'other',
   'Cider',
-  'Original Sin Hard Cider is a well-known United States Cider from Original Sin, selected for broad drink catalog coverage in Japan.',
+  'Original Sin Hard Cider is a well-known United States Cider from Original.',
   NULL,
   6,
   'United States',
-  'Original Sin',
+  'Original',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -25974,11 +25974,11 @@ VALUES (
   'Orion 75 Beer IPA',
   'beer',
   'IPA',
-  'Orion 75 Beer IPA is a well-known Japan IPA from Orion 75, selected for broad drink catalog coverage in Japan.',
+  'Orion 75 Beer IPA is a well-known Japan IPA from Orion.',
   NULL,
   6,
   'Japan',
-  'Orion 75',
+  'Orion',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -26086,11 +26086,11 @@ VALUES (
   'Osborne Veterano',
   'brandy',
   'Brandy de Jerez',
-  'Osborne Veterano is a well-known Spain Brandy de Jerez from Osborne Veterano, selected for broad drink catalog coverage in Japan.',
+  'Osborne Veterano is a well-known Spain Brandy de Jerez from Osborne.',
   NULL,
   30,
   'Spain',
-  'Osborne Veterano',
+  'Osborne',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -26142,11 +26142,11 @@ VALUES (
   'Otard VSOP',
   'brandy',
   'Cognac',
-  'Otard VSOP is a well-known France Cognac from Otard VSOP, selected for broad drink catalog coverage in Japan.',
+  'Otard VSOP is a well-known France Cognac from Otard.',
   NULL,
   40,
   'France',
-  'Otard VSOP',
+  'Otard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -26170,11 +26170,11 @@ VALUES (
   'Otard XO Gold',
   'brandy',
   'Cognac',
-  'Otard XO Gold is a well-known France Cognac from Otard XO, selected for broad drink catalog coverage in Japan.',
+  'Otard XO Gold is a well-known France Cognac from Otard.',
   NULL,
   40,
   'France',
-  'Otard XO',
+  'Otard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -26366,11 +26366,11 @@ VALUES (
   'Pacifico Clara',
   'beer',
   'Lager',
-  'Pacifico Clara is a well-known Mexico Lager from Pacifico Clara, selected for broad drink catalog coverage in Japan.',
+  'Pacifico Clara is a well-known Mexico Lager from Pacifico.',
   NULL,
   4.5,
   'Mexico',
-  'Pacifico Clara',
+  'Pacifico',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -26394,11 +26394,11 @@ VALUES (
   'Pampero Aniversario',
   'rum',
   'Aged Rum',
-  'Pampero Aniversario is a well-known Venezuela Aged Rum from Pampero Aniversario, selected for broad drink catalog coverage in Japan.',
+  'Pampero Aniversario is a well-known Venezuela Aged Rum from Pampero.',
   NULL,
   40,
   'Venezuela',
-  'Pampero Aniversario',
+  'Pampero',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -26814,11 +26814,11 @@ VALUES (
   'Pernod Anise',
   'liqueur',
   'Anise',
-  'Pernod Anise is a well-known France Anise from Pernod Anise, selected for broad drink catalog coverage in Japan.',
+  'Pernod Anise is a well-known France Anise from Pernod.',
   NULL,
   40,
   'France',
-  'Pernod Anise',
+  'Pernod',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -26898,11 +26898,11 @@ VALUES (
   'Petrus 2018',
   'wine',
   'Red',
-  'Petrus 2018 is a well-known France Red from Petrus 2018, selected for broad drink catalog coverage in Japan.',
+  'Petrus 2018 is a well-known France Red from Petrus.',
   NULL,
   14.5,
   'France',
-  'Petrus 2018',
+  'Petrus',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -27038,11 +27038,11 @@ VALUES (
   'Pilsner Urquell',
   'beer',
   'Pilsner',
-  'Pilsner Urquell is a well-known Czech Republic Pilsner from Pilsner Urquell, selected for broad drink catalog coverage in Japan.',
+  'Pilsner Urquell is a well-known Czech Republic Pilsner from Pilsner.',
   NULL,
   4.4,
   'Czech Republic',
-  'Pilsner Urquell',
+  'Pilsner',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -27094,11 +27094,11 @@ VALUES (
   'Pingus 2019',
   'wine',
   'Red',
-  'Pingus 2019 is a well-known Spain Red from Pingus 2019, selected for broad drink catalog coverage in Japan.',
+  'Pingus 2019 is a well-known Spain Red from Pingus.',
   NULL,
   14.5,
   'Spain',
-  'Pingus 2019',
+  'Pingus',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -27150,11 +27150,11 @@ VALUES (
   'Plantation 3 Stars',
   'rum',
   'White Rum',
-  'Plantation 3 Stars is a well-known Barbados White Rum from Plantation 3, selected for broad drink catalog coverage in Japan.',
+  'Plantation 3 Stars is a well-known Barbados White Rum from Plantation.',
   NULL,
   41.2,
   'Barbados',
-  'Plantation 3',
+  'Plantation',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -27178,11 +27178,11 @@ VALUES (
   'Plantation Original Dark',
   'rum',
   'Dark Rum',
-  'Plantation Original Dark is a well-known Barbados Dark Rum from Plantation Original, selected for broad drink catalog coverage in Japan.',
+  'Plantation Original Dark is a well-known Barbados Dark Rum from Plantation.',
   NULL,
   40,
   'Barbados',
-  'Plantation Original',
+  'Plantation',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -27206,11 +27206,11 @@ VALUES (
   'Plantation XO 20th Anniversary',
   'rum',
   'Aged Rum',
-  'Plantation XO 20th Anniversary is a well-known Barbados Aged Rum from Plantation XO, selected for broad drink catalog coverage in Japan.',
+  'Plantation XO 20th Anniversary is a well-known Barbados Aged Rum from Plantation.',
   NULL,
   40,
   'Barbados',
-  'Plantation XO',
+  'Plantation',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -27234,11 +27234,11 @@ VALUES (
   'Plymouth Gin',
   'gin',
   'Plymouth',
-  'Plymouth Gin is a well-known England Plymouth from Plymouth Gin, selected for broad drink catalog coverage in Japan.',
+  'Plymouth Gin is a well-known England Plymouth from Plymouth.',
   NULL,
   41.2,
   'England',
-  'Plymouth Gin',
+  'Plymouth',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -27430,11 +27430,11 @@ VALUES (
   'Presidente Pilsener',
   'beer',
   'Pilsner',
-  'Presidente Pilsener is a well-known Dominican Republic Pilsner from Presidente Pilsener, selected for broad drink catalog coverage in Japan.',
+  'Presidente Pilsener is a well-known Dominican Republic Pilsner from Presidente.',
   NULL,
   5,
   'Dominican Republic',
-  'Presidente Pilsener',
+  'Presidente',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -27458,11 +27458,11 @@ VALUES (
   'Purity Vodka 34',
   'vodka',
   'Plain',
-  'Purity Vodka 34 is a well-known Sweden Plain from Purity Vodka, selected for broad drink catalog coverage in Japan.',
+  'Purity Vodka 34 is a well-known Sweden Plain from Purity.',
   NULL,
   40,
   'Sweden',
-  'Purity Vodka',
+  'Purity',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -27514,11 +27514,11 @@ VALUES (
   'Quilmes Cristal',
   'beer',
   'Lager',
-  'Quilmes Cristal is a well-known Argentina Lager from Quilmes Cristal, selected for broad drink catalog coverage in Japan.',
+  'Quilmes Cristal is a well-known Argentina Lager from Quilmes.',
   NULL,
   4.9,
   'Argentina',
-  'Quilmes Cristal',
+  'Quilmes',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -27570,11 +27570,11 @@ VALUES (
   'Ramazzotti Amaro',
   'liqueur',
   'Amaro',
-  'Ramazzotti Amaro is a well-known Italy Amaro from Ramazzotti Amaro, selected for broad drink catalog coverage in Japan.',
+  'Ramazzotti Amaro is a well-known Italy Amaro from Ramazzotti.',
   NULL,
   30,
   'Italy',
-  'Ramazzotti Amaro',
+  'Ramazzotti',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -27598,11 +27598,11 @@ VALUES (
   'Rampur Select',
   'whisky',
   'Single Malt',
-  'Rampur Select is a well-known India Single Malt from Rampur Select, selected for broad drink catalog coverage in Japan.',
+  'Rampur Select is a well-known India Single Malt from Rampur.',
   NULL,
   43,
   'India',
-  'Rampur Select',
+  'Rampur',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -27626,11 +27626,11 @@ VALUES (
   'Redbreast 12 Year Old',
   'whisky',
   'Single Pot Still',
-  'Redbreast 12 Year Old is a well-known Ireland Single Pot Still from Redbreast 12, selected for broad drink catalog coverage in Japan.',
+  'Redbreast 12 Year Old is a well-known Ireland Single Pot Still from Pernod Ricard.',
   NULL,
   40,
   'Ireland',
-  'Redbreast 12',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -27654,11 +27654,11 @@ VALUES (
   'Redbreast 15 Year Old',
   'whisky',
   'Single Pot Still',
-  'Redbreast 15 Year Old is a well-known Ireland Single Pot Still from Redbreast 15, selected for broad drink catalog coverage in Japan.',
+  'Redbreast 15 Year Old is a well-known Ireland Single Pot Still from Pernod Ricard.',
   NULL,
   46,
   'Ireland',
-  'Redbreast 15',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -27738,11 +27738,11 @@ VALUES (
   'Remy Martin 1738 Accord Royal',
   'brandy',
   'Cognac',
-  'Remy Martin 1738 Accord Royal is a well-known France Cognac from Remy Cointreau, selected for broad drink catalog coverage in Japan.',
+  'Remy Martin 1738 Accord Royal is a well-known France Cognac from Rémy Cointreau.',
   NULL,
   40,
   'France',
-  'Remy Cointreau',
+  'Rémy Cointreau',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -27766,11 +27766,11 @@ VALUES (
   'Remy Martin Louis XIII',
   'brandy',
   'Cognac',
-  'Remy Martin Louis XIII is a well-known France Cognac from Remy Cointreau, selected for broad drink catalog coverage in Japan.',
+  'Remy Martin Louis XIII is a well-known France Cognac from Rémy Cointreau.',
   NULL,
   40,
   'France',
-  'Remy Cointreau',
+  'Rémy Cointreau',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -27794,11 +27794,11 @@ VALUES (
   'Remy Martin VSOP',
   'brandy',
   'Cognac',
-  'Remy Martin VSOP is a well-known France Cognac from Remy Cointreau, selected for broad drink catalog coverage in Japan.',
+  'Remy Martin VSOP is a well-known France Cognac from Rémy Cointreau.',
   NULL,
   40,
   'France',
-  'Remy Cointreau',
+  'Rémy Cointreau',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -27822,11 +27822,11 @@ VALUES (
   'Remy Martin XO',
   'brandy',
   'Cognac',
-  'Remy Martin XO is a well-known France Cognac from Remy Cointreau, selected for broad drink catalog coverage in Japan.',
+  'Remy Martin XO is a well-known France Cognac from Rémy Cointreau.',
   NULL,
   40,
   'France',
-  'Remy Cointreau',
+  'Rémy Cointreau',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -27878,11 +27878,11 @@ VALUES (
   'Reyka Vodka',
   'vodka',
   'Plain',
-  'Reyka Vodka is a well-known Iceland Plain from Reyka Vodka, selected for broad drink catalog coverage in Japan.',
+  'Reyka Vodka is a well-known Iceland Plain from Reyka.',
   NULL,
   40,
   'Iceland',
-  'Reyka Vodka',
+  'Reyka',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -28018,11 +28018,11 @@ VALUES (
   'Ricard Pastis',
   'liqueur',
   'Anise',
-  'Ricard Pastis is a well-known France Anise from Ricard Pastis, selected for broad drink catalog coverage in Japan.',
+  'Ricard Pastis is a well-known France Anise from Ricard.',
   NULL,
   45,
   'France',
-  'Ricard Pastis',
+  'Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -28130,11 +28130,11 @@ VALUES (
   'Rittenhouse Rye',
   'whisky',
   'Rye',
-  'Rittenhouse Rye is a well-known United States Rye from Rittenhouse Rye, selected for broad drink catalog coverage in Japan.',
+  'Rittenhouse Rye is a well-known United States Rye from Rittenhouse.',
   NULL,
   50,
   'United States',
-  'Rittenhouse Rye',
+  'Rittenhouse',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -28186,11 +28186,11 @@ VALUES (
   'Rochefort 10',
   'beer',
   'Quadrupel',
-  'Rochefort 10 is a well-known Belgium Quadrupel from Rochefort 10, selected for broad drink catalog coverage in Japan.',
+  'Rochefort 10 is a well-known Belgium Quadrupel from Rochefort.',
   NULL,
   11.3,
   'Belgium',
-  'Rochefort 10',
+  'Rochefort',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -28246,7 +28246,7 @@ VALUES (
   NULL,
   47,
   'Japan',
-  'サントリー',
+  'Suntory',
   ARRAY['ろくじん', '六']::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -28498,7 +28498,7 @@ VALUES (
   NULL,
   40,
   'Guatemala',
-  'Ron Zacapa',
+  'Diageo',
   ARRAY['ろんさかぱ']::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -28718,11 +28718,11 @@ VALUES (
   'Ryukyu Ohcho',
   'shochu',
   'Awamori',
-  'Ryukyu Ohcho is a well-known Japan Awamori from Ryukyu Ohcho, selected for broad drink catalog coverage in Japan.',
+  'Ryukyu Ohcho is a well-known Japan Awamori from Ryukyu.',
   NULL,
   30,
   'Japan',
-  'Ryukyu Ohcho',
+  'Ryukyu',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -28858,11 +28858,11 @@ VALUES (
   'Saigon Special',
   'beer',
   'Lager',
-  'Saigon Special is a well-known Vietnam Lager from Saigon Special, selected for broad drink catalog coverage in Japan.',
+  'Saigon Special is a well-known Vietnam Lager from Saigon.',
   NULL,
   4.9,
   'Vietnam',
-  'Saigon Special',
+  'Saigon',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -29558,11 +29558,11 @@ VALUES (
   'Sakurao Gin Hamagou',
   'gin',
   'New Western',
-  'Sakurao Gin Hamagou is a well-known Japan New Western from Sakurao Gin, selected for broad drink catalog coverage in Japan.',
+  'Sakurao Gin Hamagou is a well-known Japan New Western from Sakurao.',
   NULL,
   47,
   'Japan',
-  'Sakurao Gin',
+  'Sakurao',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -29614,11 +29614,11 @@ VALUES (
   'Sakurao Single Malt',
   'whisky',
   'Single Malt',
-  'Sakurao Single Malt is a well-known Japan Single Malt from Sakurao Single, selected for broad drink catalog coverage in Japan.',
+  'Sakurao Single Malt is a well-known Japan Single Malt from Sakurao.',
   NULL,
   43,
   'Japan',
-  'Sakurao Single',
+  'Sakurao',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -29838,11 +29838,11 @@ VALUES (
   'Sapling Vodka',
   'vodka',
   'Plain',
-  'Sapling Vodka is a well-known England Plain from Sapling Vodka, selected for broad drink catalog coverage in Japan.',
+  'Sapling Vodka is a well-known England Plain from Sapling.',
   NULL,
   40,
   'England',
-  'Sapling Vodka',
+  'Sapling',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -29866,11 +29866,11 @@ VALUES (
   'Sapporo Black Label',
   'beer',
   'Lager',
-  'Sapporo Black Label is a well-known Japan Lager from Sapporo Black, selected for broad drink catalog coverage in Japan.',
+  'Sapporo Black Label is a well-known Japan Lager from サッポロビール.',
   NULL,
   5,
   'Japan',
-  'Sapporo Black',
+  'サッポロビール',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -29894,11 +29894,11 @@ VALUES (
   'Sapporo Classic',
   'beer',
   'Lager',
-  'Sapporo Classic is a well-known Japan Lager from Sapporo Classic, selected for broad drink catalog coverage in Japan.',
+  'Sapporo Classic is a well-known Japan Lager from サッポロビール.',
   NULL,
   5,
   'Japan',
-  'Sapporo Classic',
+  'サッポロビール',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -29922,11 +29922,11 @@ VALUES (
   'Sapporo Lager Beer Akaboshi',
   'beer',
   'Lager',
-  'Sapporo Lager Beer Akaboshi is a well-known Japan Lager from Sapporo Lager, selected for broad drink catalog coverage in Japan.',
+  'Sapporo Lager Beer Akaboshi is a well-known Japan Lager from サッポロビール.',
   NULL,
   5,
   'Japan',
-  'Sapporo Lager',
+  'サッポロビール',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -30006,11 +30006,11 @@ VALUES (
   'Sato Kuro',
   'shochu',
   'Imo',
-  'Sato Kuro is a well-known Japan Imo from Sato Kuro, selected for broad drink catalog coverage in Japan.',
+  'Sato Kuro is a well-known Japan Imo from Sato.',
   NULL,
   25,
   'Japan',
-  'Sato Kuro',
+  'Sato',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -30034,11 +30034,11 @@ VALUES (
   'Sato Mugi',
   'shochu',
   'Mugi',
-  'Sato Mugi is a well-known Japan Mugi from Sato Mugi, selected for broad drink catalog coverage in Japan.',
+  'Sato Mugi is a well-known Japan Mugi from Sato.',
   NULL,
   25,
   'Japan',
-  'Sato Mugi',
+  'Sato',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -30062,11 +30062,11 @@ VALUES (
   'Sato Shiro',
   'shochu',
   'Imo',
-  'Sato Shiro is a well-known Japan Imo from Sato Shiro, selected for broad drink catalog coverage in Japan.',
+  'Sato Shiro is a well-known Japan Imo from Sato.',
   NULL,
   25,
   'Japan',
-  'Sato Shiro',
+  'Sato',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -30090,11 +30090,11 @@ VALUES (
   'Satsuma Chaya',
   'shochu',
   'Imo',
-  'Satsuma Chaya is a well-known Japan Imo from Satsuma Chaya, selected for broad drink catalog coverage in Japan.',
+  'Satsuma Chaya is a well-known Japan Imo from Satsuma.',
   NULL,
   25,
   'Japan',
-  'Satsuma Chaya',
+  'Satsuma',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -30146,11 +30146,11 @@ VALUES (
   'Satsuma Shiranami',
   'shochu',
   'Imo',
-  'Satsuma Shiranami is a well-known Japan Imo from Satsuma Shiranami, selected for broad drink catalog coverage in Japan.',
+  'Satsuma Shiranami is a well-known Japan Imo from Satsuma.',
   NULL,
   25,
   'Japan',
-  'Satsuma Shiranami',
+  'Satsuma',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -30174,11 +30174,11 @@ VALUES (
   'Sauvelle Vodka',
   'vodka',
   'Plain',
-  'Sauvelle Vodka is a well-known France Plain from Sauvelle Vodka, selected for broad drink catalog coverage in Japan.',
+  'Sauvelle Vodka is a well-known France Plain from Sauvelle.',
   NULL,
   40,
   'France',
-  'Sauvelle Vodka',
+  'Sauvelle',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -30342,11 +30342,11 @@ VALUES (
   'Sazerac Rye',
   'whisky',
   'Rye',
-  'Sazerac Rye is a well-known United States Rye from Sazerac Rye, selected for broad drink catalog coverage in Japan.',
+  'Sazerac Rye is a well-known United States Rye from Sazerac.',
   NULL,
   45,
   'United States',
-  'Sazerac Rye',
+  'Sazerac',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -30650,11 +30650,11 @@ VALUES (
   'Select Aperitivo',
   'liqueur',
   'Aperitivo',
-  'Select Aperitivo is a well-known Italy Aperitivo from Select Aperitivo, selected for broad drink catalog coverage in Japan.',
+  'Select Aperitivo is a well-known Italy Aperitivo from Select.',
   NULL,
   17.5,
   'Italy',
-  'Select Aperitivo',
+  'Select',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -30734,11 +30734,11 @@ VALUES (
   'Senkin Kabutomushi',
   'sake',
   'Junmai Ginjo',
-  'Senkin Kabutomushi is a well-known Japan Junmai Ginjo from Senkin Kabutomushi, selected for broad drink catalog coverage in Japan.',
+  '仙禽 かぶとむし。SenkinのJunmai Ginjoとして知られる定番銘柄。',
   NULL,
   15,
   'Japan',
-  'Senkin Kabutomushi',
+  'Senkin',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -30790,11 +30790,11 @@ VALUES (
   'Senkin Yukidaruma',
   'sake',
   'Junmai Ginjo',
-  'Senkin Yukidaruma is a well-known Japan Junmai Ginjo from Senkin Yukidaruma, selected for broad drink catalog coverage in Japan.',
+  '仙禽 雪だるま。SenkinのJunmai Ginjoとして知られる定番銘柄。',
   NULL,
   15,
   'Japan',
-  'Senkin Yukidaruma',
+  'Senkin',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -30874,11 +30874,11 @@ VALUES (
   'Sharaku Junmai',
   'sake',
   'Junmai Ginjo',
-  'Sharaku Junmai is a well-known Japan Junmai Ginjo from Sharaku Junmai, selected for broad drink catalog coverage in Japan.',
+  '冩樂 純米酒。SharakuのJunmai Ginjoとして知られる定番銘柄。',
   NULL,
   15,
   'Japan',
-  'Sharaku Junmai',
+  'Sharaku',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -30902,11 +30902,11 @@ VALUES (
   'Sheppy''s 200 Special Edition Cider',
   'other',
   'Cider',
-  'Sheppy''s 200 Special Edition Cider is a well-known United Kingdom Cider from Sheppy''s 200, selected for broad drink catalog coverage in Japan.',
+  'Sheppy''s 200 Special Edition Cider is a well-known United Kingdom Cider from Sheppy''s.',
   NULL,
   5,
   'United Kingdom',
-  'Sheppy''s 200',
+  'Sheppy''s',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -31098,11 +31098,11 @@ VALUES (
   'Shiro Kirishima',
   'shochu',
   'Imo',
-  'Shiro Kirishima is a well-known Japan Imo from Shiro Kirishima, selected for broad drink catalog coverage in Japan.',
+  'Shiro Kirishima is a well-known Japan Imo from 霧島酒造.',
   NULL,
   25,
   'Japan',
-  'Shiro Kirishima',
+  '霧島酒造',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -31126,11 +31126,11 @@ VALUES (
   'Shiroten Hozan',
   'shochu',
   'Imo',
-  'Shiroten Hozan is a well-known Japan Imo from Shiroten Hozan, selected for broad drink catalog coverage in Japan.',
+  'Shiroten Hozan is a well-known Japan Imo from Shiroten.',
   NULL,
   25,
   'Japan',
-  'Shiroten Hozan',
+  'Shiroten',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -31518,11 +31518,11 @@ VALUES (
   'Sipsmith VJOP',
   'gin',
   'Navy Strength',
-  'Sipsmith VJOP is a well-known England Navy Strength from Sipsmith VJOP, selected for broad drink catalog coverage in Japan.',
+  'Sipsmith VJOP is a well-known England Navy Strength from Sipsmith.',
   NULL,
   57.7,
   'England',
-  'Sipsmith VJOP',
+  'Sipsmith',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -31546,11 +31546,11 @@ VALUES (
   'Skyy Vodka',
   'vodka',
   'Plain',
-  'Skyy Vodka is a well-known United States Plain from Skyy Vodka, selected for broad drink catalog coverage in Japan.',
+  'Skyy Vodka is a well-known United States Plain from Skyy.',
   NULL,
   40,
   'United States',
-  'Skyy Vodka',
+  'Skyy',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -31574,11 +31574,11 @@ VALUES (
   'Smirnoff Black No 55',
   'vodka',
   'Plain',
-  'Smirnoff Black No 55 is a well-known United Kingdom Plain from Smirnoff Black, selected for broad drink catalog coverage in Japan.',
+  'Smirnoff Black No 55 is a well-known United Kingdom Plain from Diageo.',
   NULL,
   40,
   'United Kingdom',
-  'Smirnoff Black',
+  'Diageo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -31602,11 +31602,11 @@ VALUES (
   'Smirnoff No 21 Vodka',
   'vodka',
   'Plain',
-  'Smirnoff No 21 Vodka is a well-known United Kingdom Plain from Smirnoff No, selected for broad drink catalog coverage in Japan.',
+  'Smirnoff No 21 Vodka is a well-known United Kingdom Plain from Diageo.',
   NULL,
   40,
   'United Kingdom',
-  'Smirnoff No',
+  'Diageo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -31630,11 +31630,11 @@ VALUES (
   'Smirnoff Raspberry',
   'vodka',
   'Flavoured',
-  'Smirnoff Raspberry is a well-known United Kingdom Flavoured from Smirnoff Raspberry, selected for broad drink catalog coverage in Japan.',
+  'Smirnoff Raspberry is a well-known United Kingdom Flavoured from Diageo.',
   NULL,
   37.5,
   'United Kingdom',
-  'Smirnoff Raspberry',
+  'Diageo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -31798,11 +31798,11 @@ VALUES (
   'Sol Cerveza',
   'beer',
   'Lager',
-  'Sol Cerveza is a well-known Mexico Lager from Sol Cerveza, selected for broad drink catalog coverage in Japan.',
+  'Sol Cerveza is a well-known Mexico Lager from Sol.',
   NULL,
   4.5,
   'Mexico',
-  'Sol Cerveza',
+  'Sol',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -31854,11 +31854,11 @@ VALUES (
   'Southern Comfort',
   'liqueur',
   'Whiskey Liqueur',
-  'Southern Comfort is a well-known United States Whiskey Liqueur from Southern Comfort, selected for broad drink catalog coverage in Japan.',
+  'Southern Comfort is a well-known United States Whiskey Liqueur from Southern.',
   NULL,
   35,
   'United States',
-  'Southern Comfort',
+  'Southern',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -31882,11 +31882,11 @@ VALUES (
   'Springbank 10 Year Old',
   'whisky',
   'Single Malt',
-  'Springbank 10 Year Old is a well-known Scotland Single Malt from Springbank 10, selected for broad drink catalog coverage in Japan.',
+  'Springbank 10 Year Old is a well-known Scotland Single Malt from Springbank.',
   NULL,
   46,
   'Scotland',
-  'Springbank 10',
+  'Springbank',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -31910,11 +31910,11 @@ VALUES (
   'Springbank 15 Year Old',
   'whisky',
   'Single Malt',
-  'Springbank 15 Year Old is a well-known Scotland Single Malt from Springbank 15, selected for broad drink catalog coverage in Japan.',
+  'Springbank 15 Year Old is a well-known Scotland Single Malt from Springbank.',
   NULL,
   46,
   'Scotland',
-  'Springbank 15',
+  'Springbank',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -32050,11 +32050,11 @@ VALUES (
   'St-Remy VSOP',
   'brandy',
   'Brandy',
-  'St-Remy VSOP is a well-known France Brandy from St-Remy VSOP, selected for broad drink catalog coverage in Japan.',
+  'St-Remy VSOP is a well-known France Brandy from Rémy Cointreau.',
   NULL,
   40,
   'France',
-  'St-Remy VSOP',
+  'Rémy Cointreau',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -32078,11 +32078,11 @@ VALUES (
   'St-Remy XO',
   'brandy',
   'Brandy',
-  'St-Remy XO is a well-known France Brandy from St-Remy XO, selected for broad drink catalog coverage in Japan.',
+  'St-Remy XO is a well-known France Brandy from Rémy Cointreau.',
   NULL,
   40,
   'France',
-  'St-Remy XO',
+  'Rémy Cointreau',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -32134,11 +32134,11 @@ VALUES (
   'Starward Nova',
   'whisky',
   'Single Malt',
-  'Starward Nova is a well-known Australia Single Malt from Starward Nova, selected for broad drink catalog coverage in Japan.',
+  'Starward Nova is a well-known Australia Single Malt from Starward.',
   NULL,
   41,
   'Australia',
-  'Starward Nova',
+  'Starward',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -32162,11 +32162,11 @@ VALUES (
   'Starward Two-Fold',
   'whisky',
   'Double Grain',
-  'Starward Two-Fold is a well-known Australia Double Grain from Starward Two-Fold, selected for broad drink catalog coverage in Japan.',
+  'Starward Two-Fold is a well-known Australia Double Grain from Starward.',
   NULL,
   40,
   'Australia',
-  'Starward Two-Fold',
+  'Starward',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -32190,11 +32190,11 @@ VALUES (
   'Steinlager Classic',
   'beer',
   'Lager',
-  'Steinlager Classic is a well-known New Zealand Lager from Steinlager Classic, selected for broad drink catalog coverage in Japan.',
+  'Steinlager Classic is a well-known New Zealand Lager from Steinlager.',
   NULL,
   5,
   'New Zealand',
-  'Steinlager Classic',
+  'Steinlager',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -32218,11 +32218,11 @@ VALUES (
   'Stella Artois',
   'beer',
   'Pilsner',
-  'Stella Artois is a well-known Belgium Pilsner from Stella Artois, selected for broad drink catalog coverage in Japan.',
+  'Stella Artois is a well-known Belgium Pilsner from AB InBev.',
   NULL,
   5,
   'Belgium',
-  'Stella Artois',
+  'AB InBev',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -32246,11 +32246,11 @@ VALUES (
   'Stock 84',
   'brandy',
   'Brandy',
-  'Stock 84 is a well-known Italy Brandy from Stock 84, selected for broad drink catalog coverage in Japan.',
+  'Stock 84 is a well-known Italy Brandy from Stock.',
   NULL,
   38,
   'Italy',
-  'Stock 84',
+  'Stock',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -32274,11 +32274,11 @@ VALUES (
   'Stolichnaya Elit',
   'vodka',
   'Plain',
-  'Stolichnaya Elit is a well-known Latvia Plain from Stolichnaya Elit, selected for broad drink catalog coverage in Japan.',
+  'Stolichnaya Elit is a well-known Latvia Plain from Stolichnaya.',
   NULL,
   40,
   'Latvia',
-  'Stolichnaya Elit',
+  'Stolichnaya',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -32330,11 +32330,11 @@ VALUES (
   'Stone Delicious IPA',
   'beer',
   'IPA',
-  'Stone Delicious IPA is a well-known United States IPA from Stone Delicious, selected for broad drink catalog coverage in Japan.',
+  'Stone Delicious IPA is a well-known United States IPA from Stone Brewing.',
   NULL,
   7.7,
   'United States',
-  'Stone Delicious',
+  'Stone Brewing',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -32358,11 +32358,11 @@ VALUES (
   'Stone IPA',
   'beer',
   'IPA',
-  'Stone IPA is a well-known United States IPA from Stone IPA, selected for broad drink catalog coverage in Japan.',
+  'Stone IPA is a well-known United States IPA from Stone Brewing.',
   NULL,
   6.9,
   'United States',
-  'Stone IPA',
+  'Stone Brewing',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -32414,11 +32414,11 @@ VALUES (
   'Strongbow Dark Fruit Cider',
   'other',
   'Cider',
-  'Strongbow Dark Fruit Cider is a well-known United Kingdom Cider from Strongbow Dark, selected for broad drink catalog coverage in Japan.',
+  'Strongbow Dark Fruit Cider is a well-known United Kingdom Cider from Heineken.',
   NULL,
   4,
   'United Kingdom',
-  'Strongbow Dark',
+  'Heineken',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -32442,11 +32442,11 @@ VALUES (
   'Strongbow Original Dry Cider',
   'other',
   'Cider',
-  'Strongbow Original Dry Cider is a well-known United Kingdom Cider from Strongbow Original, selected for broad drink catalog coverage in Japan.',
+  'Strongbow Original Dry Cider is a well-known United Kingdom Cider from Heineken.',
   NULL,
   5,
   'United Kingdom',
-  'Strongbow Original',
+  'Heineken',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -32554,11 +32554,11 @@ VALUES (
   'Suntory Plum Liqueur Yamazaki Cask Blend',
   'liqueur',
   'Umeshu',
-  'Suntory Plum Liqueur Yamazaki Cask Blend is a well-known Japan Umeshu from Suntory Plum, selected for broad drink catalog coverage in Japan.',
+  'Suntory Plum Liqueur Yamazaki Cask Blend is a well-known Japan Umeshu from Suntory.',
   NULL,
   20,
   'Japan',
-  'Suntory Plum',
+  'Suntory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -32582,11 +32582,11 @@ VALUES (
   'Suntory Sui Gin',
   'gin',
   'New Western',
-  'Suntory Sui Gin is a well-known Japan New Western from Suntory Sui, selected for broad drink catalog coverage in Japan.',
+  'Suntory Sui Gin is a well-known Japan New Western from Suntory.',
   NULL,
   40,
   'Japan',
-  'Suntory Sui',
+  'Suntory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -32610,11 +32610,11 @@ VALUES (
   'Suntory Tomi No Oka Koshu',
   'wine',
   'White',
-  'Suntory Tomi No Oka Koshu is a well-known Japan White from Suntory Tomi, selected for broad drink catalog coverage in Japan.',
+  'Suntory Tomi No Oka Koshu is a well-known Japan White from Suntory.',
   NULL,
   12.5,
   'Japan',
-  'Suntory Tomi',
+  'Suntory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -32638,11 +32638,11 @@ VALUES (
   'Suntory Vodka 80 Proof',
   'vodka',
   'Plain',
-  'Suntory Vodka 80 Proof is a well-known Japan Plain from Suntory Vodka, selected for broad drink catalog coverage in Japan.',
+  'Suntory Vodka 80 Proof is a well-known Japan Plain from Suntory.',
   NULL,
   40,
   'Japan',
-  'Suntory Vodka',
+  'Suntory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -32666,11 +32666,11 @@ VALUES (
   'Suntory Whisky Toki',
   'whisky',
   'Blended',
-  'Suntory Whisky Toki is a well-known Japan Blended from Suntory Whisky, selected for broad drink catalog coverage in Japan.',
+  'Suntory Whisky Toki is a well-known Japan Blended from Suntory.',
   NULL,
   43,
   'Japan',
-  'Suntory Whisky',
+  'Suntory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -32694,11 +32694,11 @@ VALUES (
   'Suntory World Whisky Ao',
   'whisky',
   'Blended',
-  'Suntory World Whisky Ao is a well-known Japan Blended from Suntory World, selected for broad drink catalog coverage in Japan.',
+  'Suntory World Whisky Ao is a well-known Japan Blended from Suntory.',
   NULL,
   43,
   'Japan',
-  'Suntory World',
+  'Suntory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -32750,11 +32750,11 @@ VALUES (
   'Svedka Vodka',
   'vodka',
   'Plain',
-  'Svedka Vodka is a well-known Sweden Plain from Svedka Vodka, selected for broad drink catalog coverage in Japan.',
+  'Svedka Vodka is a well-known Sweden Plain from Svedka.',
   NULL,
   40,
   'Sweden',
-  'Svedka Vodka',
+  'Svedka',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -32834,11 +32834,11 @@ VALUES (
   'Takachiyo 59 Aiyama',
   'sake',
   'Junmai Ginjo',
-  'Takachiyo 59 Aiyama is a well-known Japan Junmai Ginjo from Takachiyo 59, selected for broad drink catalog coverage in Japan.',
+  'たかちよ59 愛山。TakachiyoのJunmai Ginjoとして知られる定番銘柄。',
   NULL,
   15,
   'Japan',
-  'Takachiyo 59',
+  'Takachiyo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -32862,11 +32862,11 @@ VALUES (
   'Takachiyo 59 Omachi',
   'sake',
   'Junmai Ginjo',
-  'Takachiyo 59 Omachi is a well-known Japan Junmai Ginjo from Takachiyo 59, selected for broad drink catalog coverage in Japan.',
+  'たかちよ59 雄町。TakachiyoのJunmai Ginjoとして知られる定番銘柄。',
   NULL,
   15,
   'Japan',
-  'Takachiyo 59',
+  'Takachiyo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -32946,11 +32946,11 @@ VALUES (
   'Takara Gokujo',
   'shochu',
   'Koruiju',
-  'Takara Gokujo is a well-known Japan Koruiju from Takara Gokujo, selected for broad drink catalog coverage in Japan.',
+  'Takara Gokujo is a well-known Japan Koruiju from Takara.',
   NULL,
   25,
   'Japan',
-  'Takara Gokujo',
+  'Takara',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -32974,11 +32974,11 @@ VALUES (
   'Takara Jun',
   'shochu',
   'Koruiju',
-  'Takara Jun is a well-known Japan Koruiju from Takara Jun, selected for broad drink catalog coverage in Japan.',
+  'Takara Jun is a well-known Japan Koruiju from Takara.',
   NULL,
   25,
   'Japan',
-  'Takara Jun',
+  'Takara',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -33002,11 +33002,11 @@ VALUES (
   'Taketsuru 17 Year Old',
   'whisky',
   'Blended Malt',
-  'Taketsuru 17 Year Old is a well-known Japan Blended Malt from Taketsuru 17, selected for broad drink catalog coverage in Japan.',
+  'Taketsuru 17 Year Old is a well-known Japan Blended Malt from Nikka.',
   NULL,
   43,
   'Japan',
-  'Taketsuru 17',
+  'Nikka',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -33030,11 +33030,11 @@ VALUES (
   'Taketsuru Pure Malt',
   'whisky',
   'Blended Malt',
-  'Taketsuru Pure Malt is a well-known Japan Blended Malt from Taketsuru Pure, selected for broad drink catalog coverage in Japan.',
+  'Taketsuru Pure Malt is a well-known Japan Blended Malt from Nikka.',
   NULL,
   43,
   'Japan',
-  'Taketsuru Pure',
+  'Nikka',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -33058,11 +33058,11 @@ VALUES (
   'Talisker 10 Year Old',
   'whisky',
   'Single Malt',
-  'Talisker 10 Year Old is a well-known Scotland Single Malt from Talisker 10, selected for broad drink catalog coverage in Japan.',
+  'Talisker 10 Year Old is a well-known Scotland Single Malt from Diageo.',
   NULL,
   45.8,
   'Scotland',
-  'Talisker 10',
+  'Diageo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -33086,11 +33086,11 @@ VALUES (
   'Talisker 18 Year Old',
   'whisky',
   'Single Malt',
-  'Talisker 18 Year Old is a well-known Scotland Single Malt from Talisker 18, selected for broad drink catalog coverage in Japan.',
+  'Talisker 18 Year Old is a well-known Scotland Single Malt from Diageo.',
   NULL,
   45.8,
   'Scotland',
-  'Talisker 18',
+  'Diageo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -33114,11 +33114,11 @@ VALUES (
   'Talisker Storm',
   'whisky',
   'Single Malt',
-  'Talisker Storm is a well-known Scotland Single Malt from Talisker Storm, selected for broad drink catalog coverage in Japan.',
+  'Talisker Storm is a well-known Scotland Single Malt from Diageo.',
   NULL,
   45.8,
   'Scotland',
-  'Talisker Storm',
+  'Diageo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -33198,11 +33198,11 @@ VALUES (
   'Tanqueray London Dry Gin',
   'gin',
   'London Dry',
-  'Tanqueray London Dry Gin is a well-known England London Dry from Tanqueray London, selected for broad drink catalog coverage in Japan.',
+  'Tanqueray London Dry Gin is a well-known England London Dry from Diageo.',
   NULL,
   47.3,
   'England',
-  'Tanqueray London',
+  'Diageo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -33226,11 +33226,11 @@ VALUES (
   'Tanqueray No Ten',
   'gin',
   'New Western',
-  'Tanqueray No Ten is a well-known England New Western from Tanqueray No, selected for broad drink catalog coverage in Japan.',
+  'Tanqueray No Ten is a well-known England New Western from Diageo.',
   NULL,
   47.3,
   'England',
-  'Tanqueray No',
+  'Diageo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -33254,11 +33254,11 @@ VALUES (
   'Tanqueray Rangpur',
   'gin',
   'Flavoured Gin',
-  'Tanqueray Rangpur is a well-known England Flavoured Gin from Tanqueray Rangpur, selected for broad drink catalog coverage in Japan.',
+  'Tanqueray Rangpur is a well-known England Flavoured Gin from Diageo.',
   NULL,
   41.3,
   'England',
-  'Tanqueray Rangpur',
+  'Diageo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -33310,11 +33310,11 @@ VALUES (
   'Tapatio Anejo',
   'tequila',
   'Tequila',
-  'Tapatio Anejo is a well-known Mexico Tequila from Tapatio Anejo, selected for broad drink catalog coverage in Japan.',
+  'Tapatio Anejo is a well-known Mexico Tequila from Tapatio.',
   NULL,
   40,
   'Mexico',
-  'Tapatio Anejo',
+  'Tapatio',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -33338,11 +33338,11 @@ VALUES (
   'Tapatio Blanco',
   'tequila',
   'Tequila',
-  'Tapatio Blanco is a well-known Mexico Tequila from Tapatio Blanco, selected for broad drink catalog coverage in Japan.',
+  'Tapatio Blanco is a well-known Mexico Tequila from Tapatio.',
   NULL,
   40,
   'Mexico',
-  'Tapatio Blanco',
+  'Tapatio',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -33366,11 +33366,11 @@ VALUES (
   'Tapatio Reposado',
   'tequila',
   'Tequila',
-  'Tapatio Reposado is a well-known Mexico Tequila from Tapatio Reposado, selected for broad drink catalog coverage in Japan.',
+  'Tapatio Reposado is a well-known Mexico Tequila from Tapatio.',
   NULL,
   40,
   'Mexico',
-  'Tapatio Reposado',
+  'Tapatio',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -33394,11 +33394,11 @@ VALUES (
   'Taragawa Brown',
   'shochu',
   'Awamori',
-  'Taragawa Brown is a well-known Japan Awamori from Taragawa Brown, selected for broad drink catalog coverage in Japan.',
+  'Taragawa Brown is a well-known Japan Awamori from Taragawa.',
   NULL,
   30,
   'Japan',
-  'Taragawa Brown',
+  'Taragawa',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -33534,11 +33534,11 @@ VALUES (
   'Tedorigawa Kinka',
   'sake',
   'Junmai Ginjo',
-  'Tedorigawa Kinka is a well-known Japan Junmai Ginjo from Tedorigawa Kinka, selected for broad drink catalog coverage in Japan.',
+  '手取川 吉田蔵u Kinka。TedorigawaのJunmai Ginjoとして知られる定番銘柄。',
   NULL,
   15,
   'Japan',
-  'Tedorigawa Kinka',
+  'Tedorigawa',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -33758,11 +33758,11 @@ VALUES (
   'Teremana Anejo',
   'tequila',
   'Tequila',
-  'Teremana Anejo is a well-known Mexico Tequila from Teremana Anejo, selected for broad drink catalog coverage in Japan.',
+  'Teremana Anejo is a well-known Mexico Tequila from Teremana.',
   NULL,
   40,
   'Mexico',
-  'Teremana Anejo',
+  'Teremana',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -33786,11 +33786,11 @@ VALUES (
   'Teremana Blanco',
   'tequila',
   'Tequila',
-  'Teremana Blanco is a well-known Mexico Tequila from Teremana Blanco, selected for broad drink catalog coverage in Japan.',
+  'Teremana Blanco is a well-known Mexico Tequila from Teremana.',
   NULL,
   40,
   'Mexico',
-  'Teremana Blanco',
+  'Teremana',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -33814,11 +33814,11 @@ VALUES (
   'Teremana Reposado',
   'tequila',
   'Tequila',
-  'Teremana Reposado is a well-known Mexico Tequila from Teremana Reposado, selected for broad drink catalog coverage in Japan.',
+  'Teremana Reposado is a well-known Mexico Tequila from Teremana.',
   NULL,
   40,
   'Mexico',
-  'Teremana Reposado',
+  'Teremana',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -33926,11 +33926,11 @@ VALUES (
   'The Balvenie Caribbean Cask 14 Year Old',
   'whisky',
   'Single Malt',
-  'The Balvenie Caribbean Cask 14 Year Old is a well-known Scotland Single Malt from The Balvenie, selected for broad drink catalog coverage in Japan.',
+  'The Balvenie Caribbean Cask 14 Year Old is a well-known Scotland Single Malt from William Grant & Sons.',
   NULL,
   43,
   'Scotland',
-  'The Balvenie',
+  'William Grant & Sons',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -33954,11 +33954,11 @@ VALUES (
   'The Balvenie DoubleWood 12 Year Old',
   'whisky',
   'Single Malt',
-  'The Balvenie DoubleWood 12 Year Old is a well-known Scotland Single Malt from The Balvenie, selected for broad drink catalog coverage in Japan.',
+  'The Balvenie DoubleWood 12 Year Old is a well-known Scotland Single Malt from William Grant & Sons.',
   NULL,
   40,
   'Scotland',
-  'The Balvenie',
+  'William Grant & Sons',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -33982,11 +33982,11 @@ VALUES (
   'The Balvenie PortWood 21 Year Old',
   'whisky',
   'Single Malt',
-  'The Balvenie PortWood 21 Year Old is a well-known Scotland Single Malt from The Balvenie, selected for broad drink catalog coverage in Japan.',
+  'The Balvenie PortWood 21 Year Old is a well-known Scotland Single Malt from William Grant & Sons.',
   NULL,
   40,
   'Scotland',
-  'The Balvenie',
+  'William Grant & Sons',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -34038,11 +34038,11 @@ VALUES (
   'The Chita Single Grain',
   'whisky',
   'Single Grain',
-  'The Chita Single Grain is a well-known Japan Single Grain from The Chita, selected for broad drink catalog coverage in Japan.',
+  'The Chita Single Grain is a well-known Japan Single Grain from サントリー.',
   NULL,
   43,
   'Japan',
-  'The Chita',
+  'サントリー',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -34094,11 +34094,11 @@ VALUES (
   'The GlenDronach Allardice 18 Year Old',
   'whisky',
   'Single Malt',
-  'The GlenDronach Allardice 18 Year Old is a well-known Scotland Single Malt from The GlenDronach, selected for broad drink catalog coverage in Japan.',
+  'The GlenDronach Allardice 18 Year Old is a well-known Scotland Single Malt from Brown-Forman.',
   NULL,
   46,
   'Scotland',
-  'The GlenDronach',
+  'Brown-Forman',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -34122,11 +34122,11 @@ VALUES (
   'The GlenDronach Original 12 Year Old',
   'whisky',
   'Single Malt',
-  'The GlenDronach Original 12 Year Old is a well-known Scotland Single Malt from The GlenDronach, selected for broad drink catalog coverage in Japan.',
+  'The GlenDronach Original 12 Year Old is a well-known Scotland Single Malt from Brown-Forman.',
   NULL,
   43,
   'Scotland',
-  'The GlenDronach',
+  'Brown-Forman',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -34150,11 +34150,11 @@ VALUES (
   'The GlenDronach Revival 15 Year Old',
   'whisky',
   'Single Malt',
-  'The GlenDronach Revival 15 Year Old is a well-known Scotland Single Malt from The GlenDronach, selected for broad drink catalog coverage in Japan.',
+  'The GlenDronach Revival 15 Year Old is a well-known Scotland Single Malt from Brown-Forman.',
   NULL,
   46,
   'Scotland',
-  'The GlenDronach',
+  'Brown-Forman',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -34178,11 +34178,11 @@ VALUES (
   'The Glenlivet 12 Year Old',
   'whisky',
   'Single Malt',
-  'The Glenlivet 12 Year Old is a well-known Scotland Single Malt from The Glenlivet Distillery, selected for broad drink catalog coverage in Japan.',
+  'The Glenlivet 12 Year Old is a well-known Scotland Single Malt from Pernod Ricard.',
   NULL,
   40,
   'Scotland',
-  'The Glenlivet Distillery',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -34206,11 +34206,11 @@ VALUES (
   'The Glenlivet 15 Year Old French Oak',
   'whisky',
   'Single Malt',
-  'The Glenlivet 15 Year Old French Oak is a well-known Scotland Single Malt from The Glenlivet Distillery, selected for broad drink catalog coverage in Japan.',
+  'The Glenlivet 15 Year Old French Oak is a well-known Scotland Single Malt from Pernod Ricard.',
   NULL,
   40,
   'Scotland',
-  'The Glenlivet Distillery',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -34234,11 +34234,11 @@ VALUES (
   'The Glenlivet 18 Year Old',
   'whisky',
   'Single Malt',
-  'The Glenlivet 18 Year Old is a well-known Scotland Single Malt from The Glenlivet Distillery, selected for broad drink catalog coverage in Japan.',
+  'The Glenlivet 18 Year Old is a well-known Scotland Single Malt from Pernod Ricard.',
   NULL,
   40,
   'Scotland',
-  'The Glenlivet Distillery',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -34458,11 +34458,11 @@ VALUES (
   'Tia Maria',
   'liqueur',
   'Coffee',
-  'Tia Maria is a well-known Italy Coffee from Tia Maria, selected for broad drink catalog coverage in Japan.',
+  'Tia Maria is a well-known Italy Coffee from Tia.',
   NULL,
   20,
   'Italy',
-  'Tia Maria',
+  'Tia',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -34514,11 +34514,11 @@ VALUES (
   'Tiger Beer',
   'beer',
   'Lager',
-  'Tiger Beer is a well-known Singapore Lager from Tiger Beer, selected for broad drink catalog coverage in Japan.',
+  'Tiger Beer is a well-known Singapore Lager from Tiger.',
   NULL,
   5,
   'Singapore',
-  'Tiger Beer',
+  'Tiger',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -34598,11 +34598,11 @@ VALUES (
   'Tobermory 12 Year Old',
   'whisky',
   'Single Malt',
-  'Tobermory 12 Year Old is a well-known Scotland Single Malt from Tobermory 12, selected for broad drink catalog coverage in Japan.',
+  'Tobermory 12 Year Old is a well-known Scotland Single Malt from Tobermory.',
   NULL,
   46,
   'Scotland',
-  'Tobermory 12',
+  'Tobermory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -34738,11 +34738,11 @@ VALUES (
   'Tomatin 12 Year Old',
   'whisky',
   'Single Malt',
-  'Tomatin 12 Year Old is a well-known Scotland Single Malt from Tomatin 12, selected for broad drink catalog coverage in Japan.',
+  'Tomatin 12 Year Old is a well-known Scotland Single Malt from Tomatin.',
   NULL,
   43,
   'Scotland',
-  'Tomatin 12',
+  'Tomatin',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -34766,11 +34766,11 @@ VALUES (
   'Tomatin 18 Year Old',
   'whisky',
   'Single Malt',
-  'Tomatin 18 Year Old is a well-known Scotland Single Malt from Tomatin 18, selected for broad drink catalog coverage in Japan.',
+  'Tomatin 18 Year Old is a well-known Scotland Single Malt from Tomatin.',
   NULL,
   46,
   'Scotland',
-  'Tomatin 18',
+  'Tomatin',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -34794,11 +34794,11 @@ VALUES (
   'Tomino Hozan',
   'shochu',
   'Imo',
-  'Tomino Hozan is a well-known Japan Imo from Tomino Hozan, selected for broad drink catalog coverage in Japan.',
+  'Tomino Hozan is a well-known Japan Imo from Tomino.',
   NULL,
   25,
   'Japan',
-  'Tomino Hozan',
+  'Tomino',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -34906,11 +34906,11 @@ VALUES (
   'Torres 10 Gran Reserva',
   'brandy',
   'Brandy de Jerez',
-  'Torres 10 Gran Reserva is a well-known Spain Brandy de Jerez from Torres 10, selected for broad drink catalog coverage in Japan.',
+  'Torres 10 Gran Reserva is a well-known Spain Brandy de Jerez from Torres.',
   NULL,
   38,
   'Spain',
-  'Torres 10',
+  'Torres',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -34934,11 +34934,11 @@ VALUES (
   'Torres 15 Reserva Privada',
   'brandy',
   'Brandy de Jerez',
-  'Torres 15 Reserva Privada is a well-known Spain Brandy de Jerez from Torres 15, selected for broad drink catalog coverage in Japan.',
+  'Torres 15 Reserva Privada is a well-known Spain Brandy de Jerez from Torres.',
   NULL,
   40,
   'Spain',
-  'Torres 15',
+  'Torres',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -35242,11 +35242,11 @@ VALUES (
   'Tsingtao Beer',
   'beer',
   'Lager',
-  'Tsingtao Beer is a well-known China Lager from Tsingtao Beer, selected for broad drink catalog coverage in Japan.',
+  'Tsingtao Beer is a well-known China Lager from Tsingtao.',
   NULL,
   4.7,
   'China',
-  'Tsingtao Beer',
+  'Tsingtao',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -35270,11 +35270,11 @@ VALUES (
   'Tsukushi Kuro',
   'shochu',
   'Mugi',
-  'Tsukushi Kuro is a well-known Japan Mugi from Tsukushi Kuro, selected for broad drink catalog coverage in Japan.',
+  'Tsukushi Kuro is a well-known Japan Mugi from Tsukushi.',
   NULL,
   25,
   'Japan',
-  'Tsukushi Kuro',
+  'Tsukushi',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -35298,11 +35298,11 @@ VALUES (
   'Tsukushi Shiro',
   'shochu',
   'Mugi',
-  'Tsukushi Shiro is a well-known Japan Mugi from Tsukushi Shiro, selected for broad drink catalog coverage in Japan.',
+  'Tsukushi Shiro is a well-known Japan Mugi from Tsukushi.',
   NULL,
   25,
   'Japan',
-  'Tsukushi Shiro',
+  'Tsukushi',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -35382,11 +35382,11 @@ VALUES (
   'Tuborg Green',
   'beer',
   'Pilsner',
-  'Tuborg Green is a well-known Denmark Pilsner from Tuborg Green, selected for broad drink catalog coverage in Japan.',
+  'Tuborg Green is a well-known Denmark Pilsner from Tuborg.',
   NULL,
   4.6,
   'Denmark',
-  'Tuborg Green',
+  'Tuborg',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -35410,11 +35410,11 @@ VALUES (
   'Tullamore D.E.W. Original',
   'whisky',
   'Blended',
-  'Tullamore D.E.W. Original is a well-known Ireland Blended from Tullamore D.E.W., selected for broad drink catalog coverage in Japan.',
+  'Tullamore D.E.W. Original is a well-known Ireland Blended from William Grant & Sons.',
   NULL,
   40,
   'Ireland',
-  'Tullamore D.E.W.',
+  'William Grant & Sons',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -35550,11 +35550,11 @@ VALUES (
   'Unkai Soba',
   'shochu',
   'Soba',
-  'Unkai Soba is a well-known Japan Soba from Unkai Soba, selected for broad drink catalog coverage in Japan.',
+  'Unkai Soba is a well-known Japan Soba from Unkai.',
   NULL,
   25,
   'Japan',
-  'Unkai Soba',
+  'Unkai',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -35634,11 +35634,11 @@ VALUES (
   'Vdka 6100',
   'vodka',
   'Plain',
-  'Vdka 6100 is a well-known New Zealand Plain from Vdka 6100, selected for broad drink catalog coverage in Japan.',
+  'Vdka 6100 is a well-known New Zealand Plain from Vdka.',
   NULL,
   40,
   'New Zealand',
-  'Vdka 6100',
+  'Vdka',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -35774,11 +35774,11 @@ VALUES (
   'Victoria Bitter',
   'beer',
   'Lager',
-  'Victoria Bitter is a well-known Australia Lager from Victoria Bitter, selected for broad drink catalog coverage in Japan.',
+  'Victoria Bitter is a well-known Australia Lager from Victoria.',
   NULL,
   4.9,
   'Australia',
-  'Victoria Bitter',
+  'Victoria',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -35914,11 +35914,11 @@ VALUES (
   'Weihenstephaner Hefeweissbier',
   'beer',
   'Hefeweizen',
-  'Weihenstephaner Hefeweissbier is a well-known Germany Hefeweizen from Weihenstephaner Hefeweissbier, selected for broad drink catalog coverage in Japan.',
+  'Weihenstephaner Hefeweissbier is a well-known Germany Hefeweizen from Weihenstephaner.',
   NULL,
   5.4,
   'Germany',
-  'Weihenstephaner Hefeweissbier',
+  'Weihenstephaner',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -35942,11 +35942,11 @@ VALUES (
   'Westmalle Dubbel',
   'beer',
   'Dubbel',
-  'Westmalle Dubbel is a well-known Belgium Dubbel from Westmalle Dubbel, selected for broad drink catalog coverage in Japan.',
+  'Westmalle Dubbel is a well-known Belgium Dubbel from Westmalle.',
   NULL,
   7,
   'Belgium',
-  'Westmalle Dubbel',
+  'Westmalle',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -35970,11 +35970,11 @@ VALUES (
   'Westmalle Tripel',
   'beer',
   'Tripel',
-  'Westmalle Tripel is a well-known Belgium Tripel from Westmalle Tripel, selected for broad drink catalog coverage in Japan.',
+  'Westmalle Tripel is a well-known Belgium Tripel from Westmalle.',
   NULL,
   9.5,
   'Belgium',
-  'Westmalle Tripel',
+  'Westmalle',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -36026,11 +36026,11 @@ VALUES (
   'Wheatley Vodka',
   'vodka',
   'Plain',
-  'Wheatley Vodka is a well-known United States Plain from Wheatley Vodka, selected for broad drink catalog coverage in Japan.',
+  'Wheatley Vodka is a well-known United States Plain from Wheatley.',
   NULL,
   41,
   'United States',
-  'Wheatley Vodka',
+  'Wheatley',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -36054,11 +36054,11 @@ VALUES (
   'WhistlePig 10 Year Old Rye',
   'whisky',
   'Rye',
-  'WhistlePig 10 Year Old Rye is a well-known United States Rye from WhistlePig 10, selected for broad drink catalog coverage in Japan.',
+  'WhistlePig 10 Year Old Rye is a well-known United States Rye from WhistlePig.',
   NULL,
   50,
   'United States',
-  'WhistlePig 10',
+  'WhistlePig',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -36138,11 +36138,11 @@ VALUES (
   'Wild Turkey 101 Bourbon',
   'whisky',
   'Bourbon',
-  'Wild Turkey 101 Bourbon is a well-known United States Bourbon from Wild Turkey, selected for broad drink catalog coverage in Japan.',
+  'Wild Turkey 101 Bourbon is a well-known United States Bourbon from Campari Group.',
   NULL,
   50.5,
   'United States',
-  'Wild Turkey',
+  'Campari Group',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -36166,11 +36166,11 @@ VALUES (
   'Wild Turkey American Honey',
   'liqueur',
   'Whiskey Liqueur',
-  'Wild Turkey American Honey is a well-known United States Whiskey Liqueur from Wild Turkey, selected for broad drink catalog coverage in Japan.',
+  'Wild Turkey American Honey is a well-known United States Whiskey Liqueur from Campari Group.',
   NULL,
   35.5,
   'United States',
-  'Wild Turkey',
+  'Campari Group',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -36194,11 +36194,11 @@ VALUES (
   'Wild Turkey Rare Breed',
   'whisky',
   'Bourbon',
-  'Wild Turkey Rare Breed is a well-known United States Bourbon from Wild Turkey, selected for broad drink catalog coverage in Japan.',
+  'Wild Turkey Rare Breed is a well-known United States Bourbon from Campari Group.',
   NULL,
   58.4,
   'United States',
-  'Wild Turkey',
+  'Campari Group',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -36306,11 +36306,11 @@ VALUES (
   'Woodford Reserve Distiller''s Select',
   'whisky',
   'Bourbon',
-  'Woodford Reserve Distiller''s Select is a well-known United States Bourbon from Woodford Reserve, selected for broad drink catalog coverage in Japan.',
+  'Woodford Reserve Distiller''s Select is a well-known United States Bourbon from Brown-Forman.',
   NULL,
   43.2,
   'United States',
-  'Woodford Reserve',
+  'Brown-Forman',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -36362,11 +36362,11 @@ VALUES (
   'Wyborowa Vodka',
   'vodka',
   'Plain',
-  'Wyborowa Vodka is a well-known Poland Plain from Wyborowa Vodka, selected for broad drink catalog coverage in Japan.',
+  'Wyborowa Vodka is a well-known Poland Plain from Pernod Ricard.',
   NULL,
   40,
   'Poland',
-  'Wyborowa Vodka',
+  'Pernod Ricard',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -36478,7 +36478,7 @@ VALUES (
   NULL,
   43,
   'Japan',
-  'サントリー',
+  'Suntory',
   ARRAY['やまざき', 'やまざき12ねん']::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -36502,11 +36502,11 @@ VALUES (
   'Yamazaki 18 Year Old',
   'whisky',
   'Single Malt',
-  'Yamazaki 18 Year Old is a well-known Japan Single Malt from Yamazaki 18, selected for broad drink catalog coverage in Japan.',
+  'Yamazaki 18 Year Old is a well-known Japan Single Malt from Suntory.',
   NULL,
   43,
   'Japan',
-  'Yamazaki 18',
+  'Suntory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -36530,11 +36530,11 @@ VALUES (
   'Yamazaki 25 Year Old',
   'whisky',
   'Single Malt',
-  'Yamazaki 25 Year Old is a well-known Japan Single Malt from Yamazaki 25, selected for broad drink catalog coverage in Japan.',
+  'Yamazaki 25 Year Old is a well-known Japan Single Malt from Suntory.',
   NULL,
   43,
   'Japan',
-  'Yamazaki 25',
+  'Suntory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -36558,11 +36558,11 @@ VALUES (
   'Yamazaki Distiller''s Reserve',
   'whisky',
   'Single Malt',
-  'Yamazaki Distiller''s Reserve is a well-known Japan Single Malt from Yamazaki Distiller''s, selected for broad drink catalog coverage in Japan.',
+  'Yamazaki Distiller''s Reserve is a well-known Japan Single Malt from Suntory.',
   NULL,
   43,
   'Japan',
-  'Yamazaki Distiller''s',
+  'Suntory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -36614,11 +36614,11 @@ VALUES (
   'Yebisu Meister',
   'beer',
   'Lager',
-  'Yebisu Meister is a well-known Japan Lager from Yebisu Meister, selected for broad drink catalog coverage in Japan.',
+  'Yebisu Meister is a well-known Japan Lager from サッポロビール.',
   NULL,
   5.5,
   'Japan',
-  'Yebisu Meister',
+  'サッポロビール',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -36642,11 +36642,11 @@ VALUES (
   'Yebisu Premium Black',
   'beer',
   'Dark Lager',
-  'Yebisu Premium Black is a well-known Japan Dark Lager from Yebisu Premium, selected for broad drink catalog coverage in Japan.',
+  'Yebisu Premium Black is a well-known Japan Dark Lager from サッポロビール.',
   NULL,
   5,
   'Japan',
-  'Yebisu Premium',
+  'サッポロビール',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -36754,11 +36754,11 @@ VALUES (
   'Yoichi Single Malt',
   'whisky',
   'Single Malt',
-  'Yoichi Single Malt is a well-known Japan Single Malt from Yoichi Single, selected for broad drink catalog coverage in Japan.',
+  'Yoichi Single Malt is a well-known Japan Single Malt from Nikka.',
   NULL,
   45,
   'Japan',
-  'Yoichi Single',
+  'Nikka',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -36782,11 +36782,11 @@ VALUES (
   'Yokaichi Kome',
   'shochu',
   'Kome',
-  'Yokaichi Kome is a well-known Japan Kome from Yokaichi Kome, selected for broad drink catalog coverage in Japan.',
+  'Yokaichi Kome is a well-known Japan Kome from Yokaichi.',
   NULL,
   25,
   'Japan',
-  'Yokaichi Kome',
+  'Yokaichi',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -36810,11 +36810,11 @@ VALUES (
   'Yokaichi Mugi',
   'shochu',
   'Mugi',
-  'Yokaichi Mugi is a well-known Japan Mugi from Yokaichi Mugi, selected for broad drink catalog coverage in Japan.',
+  'Yokaichi Mugi is a well-known Japan Mugi from Yokaichi.',
   NULL,
   25,
   'Japan',
-  'Yokaichi Mugi',
+  'Yokaichi',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -36950,11 +36950,11 @@ VALUES (
   'Yukko Mugi',
   'shochu',
   'Mugi',
-  'Yukko Mugi is a well-known Japan Mugi from Yukko Mugi, selected for broad drink catalog coverage in Japan.',
+  'Yukko Mugi is a well-known Japan Mugi from Yukko.',
   NULL,
   25,
   'Japan',
-  'Yukko Mugi',
+  'Yukko',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -36978,11 +36978,11 @@ VALUES (
   'Yukon Jack',
   'liqueur',
   'Honey Liqueur',
-  'Yukon Jack is a well-known Canada Honey Liqueur from Yukon Jack, selected for broad drink catalog coverage in Japan.',
+  'Yukon Jack is a well-known Canada Honey Liqueur from Yukon.',
   NULL,
   50,
   'Canada',
-  'Yukon Jack',
+  'Yukon',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -37090,11 +37090,11 @@ VALUES (
   'Zanpa Black',
   'shochu',
   'Awamori',
-  'Zanpa Black is a well-known Japan Awamori from Zanpa Black, selected for broad drink catalog coverage in Japan.',
+  'Zanpa Black is a well-known Japan Awamori from Zanpa.',
   NULL,
   30,
   'Japan',
-  'Zanpa Black',
+  'Zanpa',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -37118,11 +37118,11 @@ VALUES (
   'Zanpa White',
   'shochu',
   'Awamori',
-  'Zanpa White is a well-known Japan Awamori from Zanpa White, selected for broad drink catalog coverage in Japan.',
+  'Zanpa White is a well-known Japan Awamori from Zanpa.',
   NULL,
   25,
   'Japan',
-  'Zanpa White',
+  'Zanpa',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -37230,11 +37230,11 @@ VALUES (
   'Zwack Unicum',
   'liqueur',
   'Herbal',
-  'Zwack Unicum is a well-known Hungary Herbal from Zwack Unicum, selected for broad drink catalog coverage in Japan.',
+  'Zwack Unicum is a well-known Hungary Herbal from Zwack.',
   NULL,
   40,
   'Hungary',
-  'Zwack Unicum',
+  'Zwack',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET

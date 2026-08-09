@@ -4,10 +4,10 @@
   "nameEn": "Victoria Bitter",
   "category": "beer",
   "subcategory": "Lager",
-  "description": "Victoria Bitter is a well-known Australia Lager from Victoria Bitter, selected for broad drink catalog coverage in Japan.",
+  "description": "Victoria Bitter is a well-known Australia Lager from Victoria.",
   "imageUrl": null,
   "abv": 4.9,
   "originCountry": "Australia",
-  "manufacturer": "Victoria Bitter",
+  "manufacturer": "Victoria",
   "aliases": []
 }

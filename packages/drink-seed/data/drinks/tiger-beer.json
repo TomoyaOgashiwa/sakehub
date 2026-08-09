@@ -4,10 +4,10 @@
   "nameEn": "Tiger Beer",
   "category": "beer",
   "subcategory": "Lager",
-  "description": "Tiger Beer is a well-known Singapore Lager from Tiger Beer, selected for broad drink catalog coverage in Japan.",
+  "description": "Tiger Beer is a well-known Singapore Lager from Tiger.",
   "imageUrl": null,
   "abv": 5,
   "originCountry": "Singapore",
-  "manufacturer": "Tiger Beer",
+  "manufacturer": "Tiger",
   "aliases": []
 }

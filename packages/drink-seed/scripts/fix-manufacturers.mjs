@@ -49,7 +49,17 @@ const KNOWN = [
   ['Gin Mare', 'Gin Mare'],
   ['2 Towns', '2 Towns Ciderhouse'],
   ['9148', 'Niigata Kameda Distillery'],
+  ['EJ VS', 'E&J Gallo'],
   ['EJ ', 'E&J Gallo'],
+  ['F X Pichler', 'F.X. Pichler'],
+  ['F X', 'F.X. Pichler'],
+  ['Original Sin', 'Original Sin'],
+  ['Au Bon Climat', 'Au Bon Climat'],
+  ['Don Q', 'Destilería Serrallés'],
+  ['Ki No', 'The Kyoto Distillery'],
+  ['Lot No 40', 'Corby Spirit and Wine'],
+  ['Select Aperitivo', 'Gruppo Montenegro'],
+  ['To Ol', 'To Øl'],
   ['Kah ', 'Kah Tequila'],
   ['Sol Cerveza', 'Heineken'],
   ['Tia Maria', 'Illva Saronno'],
@@ -235,14 +245,29 @@ const CATEGORY_TOKENS = new Set([
   'Sake',
 ]);
 
-function looksBad(manufacturer, nameEn, name) {
+const PRODUCT_WORDS = new Set([
+  'Original',
+  'Reserve',
+  'Classic',
+  'Premium',
+  'Single',
+  'Blended',
+  'Select',
+  'Special',
+  'Limited',
+]);
+
+function looksBad(manufacturer, nameEn) {
   if (!manufacturer) return true;
-  if (manufacturer === nameEn || manufacturer === name) return true;
+  // Note: manufacturer === nameEn is often valid (Heineken, Orval, Cynar).
   if (CATEGORY_TOKENS.has(manufacturer)) return true;
+  if (PRODUCT_WORDS.has(manufacturer)) return true;
   // digit-only or leading numeric fragment used as mfr ("2", "9148")
   if (/^\d+$/.test(manufacturer)) return true;
   // extremely short Latin token ("No", "Bud", "Gin") — CJK brewery names are OK
   if (/^[A-Za-z]{1,3}$/.test(manufacturer)) return true;
+  // initial-letter fragments ("EJ VS", "F X")
+  if (/^[A-Z]{1,3}(?:\s+[A-Z]{1,3}){1,2}$/.test(manufacturer)) return true;
   // truncated product: "Yamazaki 18", "Aberlour 12", "Wild Turkey 101"
   if (/\b\d+(\.\d+)?\b/.test(manufacturer) && !/&|Brothers|Sons|Group|Distill|Company|Company|Co\.|Ltd|酒造|醸造|Brew/i.test(manufacturer)) {
     return true;
@@ -293,7 +318,7 @@ for (const file of readdirSync(DRINK_DIR).filter((f) => f.endsWith('.json')).sor
   const d = JSON.parse(readFileSync(filePath, 'utf8'));
   const known = knownManufacturer(d.nameEn || '', d.name || '');
   const next = known || inferManufacturer(d.nameEn || d.name, d.name || '');
-  const badCore = looksBad(d.manufacturer, d.nameEn || '', d.name || '');
+  const badCore = looksBad(d.manufacturer, d.nameEn || '');
   const badProducty = looksProducty(d.manufacturer);
 
   let target = undefined;
@@ -304,9 +329,12 @@ for (const file of readdirSync(DRINK_DIR).filter((f) => f.endsWith('.json')).sor
   } else if (badCore && next == null && d.manufacturer != null) {
     // Clear truncated/token manufacturers; do not invent a fallback.
     target = null;
-  } else if (badProducty && next != null && next !== d.manufacturer) {
-    // Only rewrite "producty" strings when a known brand mapping exists.
+  } else if ((badProducty || PRODUCT_WORDS.has(d.manufacturer || '')) && next != null && next !== d.manufacturer) {
+    // Rewrite product-word / producty strings when a known mapping exists.
     target = next;
+  } else if (PRODUCT_WORDS.has(d.manufacturer || '') && next == null) {
+    // Product-only token with no mapping → clear rather than keep "Original".
+    target = null;
   } else {
     continue;
   }

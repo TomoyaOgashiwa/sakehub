@@ -239,11 +239,11 @@
     "nameEn": "Kuro Shiranami",
     "category": "shochu",
     "subcategory": "Imo",
-    "description": "Kuro Shiranami is a well-known Japan Imo from Kuro Shiranami, selected for broad drink catalog coverage in Japan.",
+    "description": "黒白波。薩摩酒造のImoとして知られる定番銘柄。",
     "imageUrl": null,
     "abv": 25,
     "originCountry": "Japan",
-    "manufacturer": "Kuro Shiranami",
+    "manufacturer": "薩摩酒造",
     "aliases": []
   },
   {
@@ -265,11 +265,11 @@
     "nameEn": "Maou",
     "category": "shochu",
     "subcategory": "Imo",
-    "description": "Maou is a well-known Japan Imo from Maou, selected for broad drink catalog coverage in Japan.",
+    "description": "魔王。白玉醸造のImoとして知られる定番銘柄。",
     "imageUrl": null,
     "abv": 25,
     "originCountry": "Japan",
-    "manufacturer": "Maou",
+    "manufacturer": "白玉醸造",
     "aliases": []
   },
   {
@@ -330,11 +330,11 @@
     "nameEn": "Sato Kuro",
     "category": "shochu",
     "subcategory": "Imo",
-    "description": "Sato Kuro is a well-known Japan Imo from Sato Kuro, selected for broad drink catalog coverage in Japan.",
+    "description": "佐藤 黒。鹿児島酒造のImoとして知られる定番銘柄。",
     "imageUrl": null,
     "abv": 25,
     "originCountry": "Japan",
-    "manufacturer": "Sato Kuro",
+    "manufacturer": "鹿児島酒造",
     "aliases": []
   },
   {
@@ -343,11 +343,11 @@
     "nameEn": "Sato Shiro",
     "category": "shochu",
     "subcategory": "Imo",
-    "description": "Sato Shiro is a well-known Japan Imo from Sato Shiro, selected for broad drink catalog coverage in Japan.",
+    "description": "佐藤 白。鹿児島酒造のImoとして知られる定番銘柄。",
     "imageUrl": null,
     "abv": 25,
     "originCountry": "Japan",
-    "manufacturer": "Sato Shiro",
+    "manufacturer": "鹿児島酒造",
     "aliases": []
   },
   {
@@ -356,11 +356,11 @@
     "nameEn": "Sato Mugi",
     "category": "shochu",
     "subcategory": "Mugi",
-    "description": "Sato Mugi is a well-known Japan Mugi from Sato Mugi, selected for broad drink catalog coverage in Japan.",
+    "description": "佐藤 麦。鹿児島酒造のMugiとして知られる定番銘柄。",
     "imageUrl": null,
     "abv": 25,
     "originCountry": "Japan",
-    "manufacturer": "Sato Mugi",
+    "manufacturer": "鹿児島酒造",
     "aliases": []
   },
   {
@@ -382,11 +382,11 @@
     "nameEn": "Umi",
     "category": "shochu",
     "subcategory": "Imo",
-    "description": "Umi is a well-known Japan Imo from Umi, selected for broad drink catalog coverage in Japan.",
+    "description": "海。大海酒造のImoとして知られる定番銘柄。",
     "imageUrl": null,
     "abv": 25,
     "originCountry": "Japan",
-    "manufacturer": "Umi",
+    "manufacturer": "大海酒造",
     "aliases": []
   },
   {
@@ -486,11 +486,11 @@
     "nameEn": "Kuro Isanishiki",
     "category": "shochu",
     "subcategory": "Imo",
-    "description": "Kuro Isanishiki is a well-known Japan Imo from Kuro Isanishiki, selected for broad drink catalog coverage in Japan.",
+    "description": "黒伊佐錦。大口酒造のImoとして知られる定番銘柄。",
     "imageUrl": null,
     "abv": 25,
     "originCountry": "Japan",
-    "manufacturer": "Kuro Isanishiki",
+    "manufacturer": "大口酒造",
     "aliases": []
   },
   {

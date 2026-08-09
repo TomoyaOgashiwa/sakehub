@@ -1,7 +1,7 @@
 -- =============================================================================
 -- packages/drink-seed（src/build-seed.ts）が自動生成。
 -- 手編集しないこと。再生成: pnpm seed:drinks:build
--- 生成日時: 2026-08-09T21:25:23.964Z
+-- 生成日時: 2026-08-09T21:39:52.970Z
 -- 件数: 1330
 --
 -- aliases: かな読み・ローマ字表記などの別名候補。「獺祭」で登録されていても
@@ -130,11 +130,11 @@ VALUES (
   '2 Towns BrightCider',
   'other',
   'Cider',
-  '2 Towns BrightCider is a well-known United States Cider from 2.',
+  '2 Towns BrightCider is a well-known United States Cider from 2 Towns Ciderhouse.',
   NULL,
   6,
   'United States',
-  '2',
+  '2 Towns Ciderhouse',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -186,11 +186,11 @@ VALUES (
   '9148 Gin Lavender',
   'gin',
   'New Western',
-  '9148 Gin Lavender is a well-known Japan New Western from 9148.',
+  '9148 Gin Lavender is a well-known Japan New Western from Niigata Kameda Distillery.',
   NULL,
   45,
   'Japan',
-  '9148',
+  'Niigata Kameda Distillery',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -214,11 +214,11 @@ VALUES (
   '9148 Gin Original',
   'gin',
   'New Western',
-  '9148 Gin Original is a well-known Japan New Western from 9148.',
+  '9148 Gin Original is a well-known Japan New Western from Niigata Kameda Distillery.',
   NULL,
   45,
   'Japan',
-  '9148',
+  'Niigata Kameda Distillery',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -3770,11 +3770,11 @@ VALUES (
   'Bols Genever',
   'gin',
   'Genever',
-  'Bols Genever is a well-known Netherlands Genever from Bols.',
+  'Bols Genever is a well-known Netherlands Genever from Lucas Bols.',
   NULL,
   42,
   'Netherlands',
-  'Bols',
+  'Lucas Bols',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -3826,11 +3826,11 @@ VALUES (
   'Bols Strawberry',
   'liqueur',
   'Strawberry',
-  'Bols Strawberry is a well-known Netherlands Strawberry from Bols.',
+  'Bols Strawberry is a well-known Netherlands Strawberry from Lucas Bols.',
   NULL,
   17,
   'Netherlands',
-  'Bols',
+  'Lucas Bols',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -3854,11 +3854,11 @@ VALUES (
   'Bols Yogurt',
   'liqueur',
   'Yogurt',
-  'Bols Yogurt is a well-known Netherlands Yogurt from Bols.',
+  'Bols Yogurt is a well-known Netherlands Yogurt from Lucas Bols.',
   NULL,
   15,
   'Netherlands',
-  'Bols',
+  'Lucas Bols',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -4470,11 +4470,11 @@ VALUES (
   'Bud Light',
   'beer',
   'Light Lager',
-  'Bud Light is a well-known United States Light Lager from Bud.',
+  'Bud Light is a well-known United States Light Lager from AB InBev.',
   NULL,
   4.2,
   'United States',
-  'Bud',
+  'AB InBev',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -10294,11 +10294,11 @@ VALUES (
   'EJ VSOP Brandy',
   'brandy',
   'Brandy',
-  'EJ VSOP Brandy is a well-known United States Brandy from EJ.',
+  'EJ VSOP Brandy is a well-known United States Brandy from E&J Gallo.',
   NULL,
   40,
   'United States',
-  'EJ',
+  'E&J Gallo',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -10854,11 +10854,11 @@ VALUES (
   'Etsu Gin',
   'gin',
   'New Western',
-  'Etsu Gin is a well-known Japan New Western from Etsu.',
+  'Etsu Gin is a well-known Japan New Western from 新潟亀田蒸留所.',
   NULL,
   43,
   'Japan',
-  'Etsu',
+  '新潟亀田蒸留所',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -12506,11 +12506,11 @@ VALUES (
   'Gin Mare',
   'gin',
   'Mediterranean',
-  'Gin Mare is a well-known Spain Mediterranean from Gin.',
+  'Gin Mare is a well-known Spain Mediterranean from Gin Mare.',
   NULL,
   42.7,
   'Spain',
-  'Gin',
+  'Gin Mare',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -13934,11 +13934,11 @@ VALUES (
   'Haku Vodka',
   'vodka',
   'Rice',
-  'Haku Vodka is a well-known Japan Rice from Haku.',
+  'Haku Vodka is a well-known Japan Rice from Suntory.',
   NULL,
   40,
   'Japan',
-  'Haku',
+  'Suntory',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -17266,11 +17266,11 @@ VALUES (
   'Kah Blanco',
   'tequila',
   'Tequila',
-  'Kah Blanco is a well-known Mexico Tequila from Kah.',
+  'Kah Blanco is a well-known Mexico Tequila from Kah Tequila.',
   NULL,
   40,
   'Mexico',
-  'Kah',
+  'Kah Tequila',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -18442,11 +18442,11 @@ VALUES (
   'Kido Sparkling',
   'sake',
   'Junmai Ginjo',
-  '紀土 スパークリング。KidoのJunmai Ginjoとして知られる定番銘柄。',
+  '紀土 スパークリング。木戸泉酒造のJunmai Ginjoとして知られる定番銘柄。',
   NULL,
   15,
   'Japan',
-  'Kido',
+  '木戸泉酒造',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -20122,11 +20122,11 @@ VALUES (
   'Kura Awamori',
   'shochu',
   'Awamori',
-  'Kura Awamori is a well-known Japan Awamori from Kura.',
+  'くら。瑞穂酒造のAwamoriとして知られる定番銘柄。',
   NULL,
   25,
   'Japan',
-  'Kura',
+  '瑞穂酒造',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -20206,11 +20206,11 @@ VALUES (
   'Kuro Isanishiki',
   'shochu',
   'Imo',
-  'Kuro Isanishiki is a well-known Japan Imo from Kuro.',
+  '黒伊佐錦。大口酒造のImoとして知られる定番銘柄。',
   NULL,
   25,
   'Japan',
-  'Kuro',
+  '大口酒造',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -20318,11 +20318,11 @@ VALUES (
   'Kuro Satsuma',
   'shochu',
   'Imo',
-  'Kuro Satsuma is a well-known Japan Imo from Kuro.',
+  '黒さつま。若潮酒造のImoとして知られる定番銘柄。',
   NULL,
   25,
   'Japan',
-  'Kuro',
+  '若潮酒造',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -20346,11 +20346,11 @@ VALUES (
   'Kuro Sesen',
   'shochu',
   'Mugi',
-  'Kuro Sesen is a well-known Japan Mugi from Kuro.',
+  '黒さそり。西酒造のMugiとして知られる定番銘柄。',
   NULL,
   25,
   'Japan',
-  'Kuro',
+  '西酒造',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -20374,11 +20374,11 @@ VALUES (
   'Kuro Shiranami',
   'shochu',
   'Imo',
-  'Kuro Shiranami is a well-known Japan Imo from Kuro.',
+  '黒白波。薩摩酒造のImoとして知られる定番銘柄。',
   NULL,
   25,
   'Japan',
-  'Kuro',
+  '薩摩酒造',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -22166,11 +22166,11 @@ VALUES (
   'Maou',
   'shochu',
   'Imo',
-  'Maou is a well-known Japan Imo from Maou, selected for broad drink catalog coverage in Japan.',
+  '魔王。白玉醸造のImoとして知られる定番銘柄。',
   NULL,
   25,
   'Japan',
-  'Maou',
+  '白玉醸造',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -25246,11 +25246,11 @@ VALUES (
   'No 209 Gin',
   'gin',
   'New Western',
-  'No 209 Gin is a well-known United States New Western from No.',
+  'No 209 Gin is a well-known United States New Western from Distillery No. 209.',
   NULL,
   46,
   'United States',
-  'No',
+  'Distillery No. 209',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -25414,11 +25414,11 @@ VALUES (
   'Ocho Anejo',
   'tequila',
   'Tequila',
-  'Ocho Anejo is a well-known Mexico Tequila from Ocho.',
+  'Ocho Anejo is a well-known Mexico Tequila from Tequila Ocho.',
   NULL,
   40,
   'Mexico',
-  'Ocho',
+  'Tequila Ocho',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -25442,11 +25442,11 @@ VALUES (
   'Ocho Plata',
   'tequila',
   'Blanco',
-  'Ocho Plata is a well-known Mexico Blanco from Ocho.',
+  'Ocho Plata is a well-known Mexico Blanco from Tequila Ocho.',
   NULL,
   40,
   'Mexico',
-  'Ocho',
+  'Tequila Ocho',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -25470,11 +25470,11 @@ VALUES (
   'Ocho Reposado',
   'tequila',
   'Tequila',
-  'Ocho Reposado is a well-known Mexico Tequila from Ocho.',
+  'Ocho Reposado is a well-known Mexico Tequila from Tequila Ocho.',
   NULL,
   40,
   'Mexico',
-  'Ocho',
+  'Tequila Ocho',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -30006,11 +30006,11 @@ VALUES (
   'Sato Kuro',
   'shochu',
   'Imo',
-  'Sato Kuro is a well-known Japan Imo from Sato.',
+  '佐藤 黒。鹿児島酒造のImoとして知られる定番銘柄。',
   NULL,
   25,
   'Japan',
-  'Sato',
+  '鹿児島酒造',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -30034,11 +30034,11 @@ VALUES (
   'Sato Mugi',
   'shochu',
   'Mugi',
-  'Sato Mugi is a well-known Japan Mugi from Sato.',
+  '佐藤 麦。鹿児島酒造のMugiとして知られる定番銘柄。',
   NULL,
   25,
   'Japan',
-  'Sato',
+  '鹿児島酒造',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -30062,11 +30062,11 @@ VALUES (
   'Sato Shiro',
   'shochu',
   'Imo',
-  'Sato Shiro is a well-known Japan Imo from Sato.',
+  '佐藤 白。鹿児島酒造のImoとして知られる定番銘柄。',
   NULL,
   25,
   'Japan',
-  'Sato',
+  '鹿児島酒造',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -31546,11 +31546,11 @@ VALUES (
   'Skyy Vodka',
   'vodka',
   'Plain',
-  'Skyy Vodka is a well-known United States Plain from Skyy.',
+  'Skyy Vodka is a well-known United States Plain from Campari Group.',
   NULL,
   40,
   'United States',
-  'Skyy',
+  'Campari Group',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -31798,11 +31798,11 @@ VALUES (
   'Sol Cerveza',
   'beer',
   'Lager',
-  'Sol Cerveza is a well-known Mexico Lager from Sol.',
+  'Sol Cerveza is a well-known Mexico Lager from Heineken.',
   NULL,
   4.5,
   'Mexico',
-  'Sol',
+  'Heineken',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -34458,11 +34458,11 @@ VALUES (
   'Tia Maria',
   'liqueur',
   'Coffee',
-  'Tia Maria is a well-known Italy Coffee from Tia.',
+  'Tia Maria is a well-known Italy Coffee from Illva Saronno.',
   NULL,
   20,
   'Italy',
-  'Tia',
+  'Illva Saronno',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -35494,11 +35494,11 @@ VALUES (
   'Umi',
   'shochu',
   'Imo',
-  'Umi is a well-known Japan Imo from Umi, selected for broad drink catalog coverage in Japan.',
+  '海。大海酒造のImoとして知られる定番銘柄。',
   NULL,
   25,
   'Japan',
-  'Umi',
+  '大海酒造',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET
@@ -35634,11 +35634,11 @@ VALUES (
   'Vdka 6100',
   'vodka',
   'Plain',
-  'Vdka 6100 is a well-known New Zealand Plain from Vdka.',
+  'Vdka 6100 is a well-known New Zealand Plain from Yamanashi Wine.',
   NULL,
   40,
   'New Zealand',
-  'Vdka',
+  'Yamanashi Wine',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET

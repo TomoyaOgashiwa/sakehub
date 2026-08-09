@@ -564,11 +564,11 @@
     "nameEn": "Ocho Plata",
     "category": "tequila",
     "subcategory": "Blanco",
-    "description": "Ocho Plata is a well-known Mexico Blanco from Ocho Plata, selected for broad drink catalog coverage in Japan.",
+    "description": "Ocho Plata is a well-known Mexico Blanco from Tequila Ocho.",
     "imageUrl": null,
     "abv": 40,
     "originCountry": "Mexico",
-    "manufacturer": "Ocho Plata",
+    "manufacturer": "Tequila Ocho",
     "aliases": []
   },
   {
@@ -577,11 +577,11 @@
     "nameEn": "Ocho Reposado",
     "category": "tequila",
     "subcategory": "Tequila",
-    "description": "Ocho Reposado is a well-known Mexico Tequila from Ocho Reposado, selected for broad drink catalog coverage in Japan.",
+    "description": "Ocho Reposado is a well-known Mexico Tequila from Tequila Ocho.",
     "imageUrl": null,
     "abv": 40,
     "originCountry": "Mexico",
-    "manufacturer": "Ocho Reposado",
+    "manufacturer": "Tequila Ocho",
     "aliases": []
   },
   {
@@ -590,11 +590,11 @@
     "nameEn": "Ocho Anejo",
     "category": "tequila",
     "subcategory": "Tequila",
-    "description": "Ocho Anejo is a well-known Mexico Tequila from Ocho Anejo, selected for broad drink catalog coverage in Japan.",
+    "description": "Ocho Anejo is a well-known Mexico Tequila from Tequila Ocho.",
     "imageUrl": null,
     "abv": 40,
     "originCountry": "Mexico",
-    "manufacturer": "Ocho Anejo",
+    "manufacturer": "Tequila Ocho",
     "aliases": []
   },
   {

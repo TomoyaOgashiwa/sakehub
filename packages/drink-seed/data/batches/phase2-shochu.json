@@ -174,11 +174,11 @@
     "nameEn": "Kura Awamori",
     "category": "shochu",
     "subcategory": "Awamori",
-    "description": "Kura Awamori is a well-known Japan Awamori from Kura Awamori, selected for broad drink catalog coverage in Japan.",
+    "description": "くら。瑞穂酒造のAwamoriとして知られる定番銘柄。",
     "imageUrl": null,
     "abv": 25,
     "originCountry": "Japan",
-    "manufacturer": "Kura Awamori",
+    "manufacturer": "瑞穂酒造",
     "aliases": []
   },
   {
@@ -239,11 +239,11 @@
     "nameEn": "Kuro Satsuma",
     "category": "shochu",
     "subcategory": "Imo",
-    "description": "Kuro Satsuma is a well-known Japan Imo from Kuro Satsuma, selected for broad drink catalog coverage in Japan.",
+    "description": "黒さつま。若潮酒造のImoとして知られる定番銘柄。",
     "imageUrl": null,
     "abv": 25,
     "originCountry": "Japan",
-    "manufacturer": "Kuro Satsuma",
+    "manufacturer": "若潮酒造",
     "aliases": []
   },
   {
@@ -434,11 +434,11 @@
     "nameEn": "Kuro Sesen",
     "category": "shochu",
     "subcategory": "Mugi",
-    "description": "Kuro Sesen is a well-known Japan Mugi from Kuro Sesen, selected for broad drink catalog coverage in Japan.",
+    "description": "黒さそり。西酒造のMugiとして知られる定番銘柄。",
     "imageUrl": null,
     "abv": 25,
     "originCountry": "Japan",
-    "manufacturer": "Kuro Sesen",
+    "manufacturer": "西酒造",
     "aliases": []
   },
   {

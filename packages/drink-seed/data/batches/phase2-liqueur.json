@@ -18,11 +18,11 @@
     "nameEn": "Tia Maria",
     "category": "liqueur",
     "subcategory": "Coffee",
-    "description": "Tia Maria is a well-known Italy Coffee from Tia Maria, selected for broad drink catalog coverage in Japan.",
+    "description": "Tia Maria is a well-known Italy Coffee from Illva Saronno.",
     "imageUrl": null,
     "abv": 20,
     "originCountry": "Italy",
-    "manufacturer": "Tia Maria",
+    "manufacturer": "Illva Saronno",
     "aliases": []
   },
   {
@@ -408,11 +408,11 @@
     "nameEn": "Bols Strawberry",
     "category": "liqueur",
     "subcategory": "Strawberry",
-    "description": "Bols Strawberry is a well-known Netherlands Strawberry from Bols Strawberry, selected for broad drink catalog coverage in Japan.",
+    "description": "Bols Strawberry is a well-known Netherlands Strawberry from Lucas Bols.",
     "imageUrl": null,
     "abv": 17,
     "originCountry": "Netherlands",
-    "manufacturer": "Bols Strawberry",
+    "manufacturer": "Lucas Bols",
     "aliases": []
   },
   {
@@ -421,11 +421,11 @@
     "nameEn": "Bols Yogurt",
     "category": "liqueur",
     "subcategory": "Yogurt",
-    "description": "Bols Yogurt is a well-known Netherlands Yogurt from Bols Yogurt, selected for broad drink catalog coverage in Japan.",
+    "description": "Bols Yogurt is a well-known Netherlands Yogurt from Lucas Bols.",
     "imageUrl": null,
     "abv": 15,
     "originCountry": "Netherlands",
-    "manufacturer": "Bols Yogurt",
+    "manufacturer": "Lucas Bols",
     "aliases": []
   },
   {

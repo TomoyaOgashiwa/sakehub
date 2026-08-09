@@ -36,6 +36,13 @@ const KNOWN = [
   ['Akashi', 'Eigashima Shuzo'],
   ['Amahagan', 'Nagahama Distillery'],
   ["Ichiro's Malt", 'Venture Whisky'],
+  // Fuji* は単語境界必須（Fujizakura Heights を Kirin に誤マッチさせない）
+  ['Fujizakura', '富士桜高原麦酒'],
+  ['富士桜', '富士桜高原麦酒'],
+  ['Fuji Gotemba', 'Kirin Distillery'],
+  ['Fuji Single', 'Kirin Distillery'],
+  ['富士山麓', 'Kirin Distillery'],
+  ['富士', 'Kirin Distillery'],
   ['Fuji', 'Kirin Distillery'],
   ['Johnnie Walker', 'Diageo'],
   ['Jack Daniel', 'Brown-Forman'],
@@ -176,6 +183,29 @@ const KNOWN = [
   ['赤霧島', '霧島酒造'],
 ].sort((a, b) => b[0].length - a[0].length);
 
+/**
+ * Brand prefix match with a boundary after the prefix.
+ * Prevents `Fuji` matching `Fujizakura`, `Mars` matching `Marshall`, etc.
+ * CJK prefixes may be followed by space / middle-dot / end, but not another
+ * CJK syllable that continues a longer proper noun unless the prefix itself
+ * is the longer entry (longest-first sort handles 富士桜 before 富士).
+ */
+function matchesBrandPrefix(text, prefix) {
+  if (!text || !text.startsWith(prefix)) return false;
+  if (text.length === prefix.length) return true;
+  const next = text[prefix.length];
+  const prefixEndsLatin = /[A-Za-z0-9]$/.test(prefix);
+  if (prefixEndsLatin) {
+    // Latin brand must end the token: space, hyphen, apostrophe, or EOS.
+    return /[\s'’\-]/.test(next);
+  }
+  // CJK / mixed: allow whitespace or middle-dot; block if next continues
+  // the same CJK run without separator (富士 + 桜 → need longer prefix entry).
+  if (/[\s'’\-・]/.test(next)) return true;
+  if (/[\u3040-\u30ff\u4e00-\u9fff]/.test(next)) return false;
+  return true;
+}
+
 function looksBad(manufacturer, nameEn, name) {
   if (!manufacturer) return true;
   if (manufacturer === nameEn || manufacturer === name) return true;
@@ -191,7 +221,7 @@ function looksBad(manufacturer, nameEn, name) {
 
 function inferManufacturer(nameEn, name) {
   for (const [prefix, mfr] of KNOWN) {
-    if (nameEn.startsWith(prefix) || name.startsWith(prefix)) return mfr;
+    if (matchesBrandPrefix(nameEn, prefix) || matchesBrandPrefix(name, prefix)) return mfr;
   }
   // Strip common expression suffixes, keep brand head
   const stripped = nameEn
@@ -219,7 +249,9 @@ function describe(d, manufacturer) {
 
 function knownManufacturer(nameEn, name) {
   for (const [prefix, mfr] of KNOWN) {
-    if ((nameEn || '').startsWith(prefix) || (name || '').startsWith(prefix)) return mfr;
+    if (matchesBrandPrefix(nameEn || '', prefix) || matchesBrandPrefix(name || '', prefix)) {
+      return mfr;
+    }
   }
   return null;
 }

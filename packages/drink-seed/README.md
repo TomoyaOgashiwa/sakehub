@@ -13,7 +13,11 @@ draft.ts（任意・LLM。identity フィールドのみ生成）→ data/drafts
 data/drinks/*.json → validate.ts → build-seed.ts → supabase/seeds/drinks.sql
 ```
 
+**正本は `data/drinks/*.json` のみ。** `data/batches/` は生成途中の非正本で gitignore 対象（コミットしない）。
+`scripts/generate-phase1-*.mjs` / `fix-*.mjs` はワンショット／移行用。日常の追加・修正は JSON を直接編集し、`validate` → `build` する。
+
 `build-seed.ts` は外部通信なし・決定的。同じ JSON から常に同じ SQL を出す。
+`validate` は truncated manufacturer（`No` / `EJ VS` / `Original` 等）や description の `from null` も拒否する。
 
 ## なぜ管理画面ではなくこの形なのか
 

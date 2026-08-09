@@ -5,7 +5,6 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const BATCH_DIR = path.join(ROOT, 'data', 'batches');
 const DRINK_DIR = path.join(ROOT, 'data', 'drinks');
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
@@ -38,37 +37,17 @@ const phase2Counts = {
   other: 20,
 };
 
-const protectedExistingSlugs = new Set([
-  'yamazaki-12',
-  'hibiki-harmony',
-  'macallan-12-sherry-oak',
-  'makers-mark',
-  'jameson',
-  'asahi-super-dry',
-  'yebisu-premium',
-  'sapporo-premium',
-  'guinness-draught',
-  'brewdog-punk-ipa',
-  'grace-koshu',
-  'cloudy-bay-sauvignon-blanc',
-  'chateau-margaux-2015',
-  'opus-one-2020',
-  'iichiko-frasco',
-  'mori-izo',
-  'roku-gin',
-  'hendricks-gin',
-  'grey-goose',
-  'ron-zacapa-23',
-  'don-julio-1942',
-  'hennessy-xo',
-  'baileys-original',
-  'kahlua',
-  'somersby-apple-cider',
-]);
-
-for (const slug of readBatchSlugs('phase1-sake.json')) {
-  protectedExistingSlugs.add(slug);
+/** Existing `data/drinks` JSON is the sole source of truth / protect list. */
+function loadExistingDrinkSlugs() {
+  if (!existsSync(DRINK_DIR)) return new Set();
+  return new Set(
+    readdirSync(DRINK_DIR)
+      .filter((f) => f.endsWith('.json'))
+      .map((f) => f.replace(/\.json$/, '')),
+  );
 }
+
+const protectedExistingSlugs = loadExistingDrinkSlugs();
 
 const rows = [];
 
@@ -183,13 +162,6 @@ function toDrinkSeed(entry) {
   };
 }
 
-function readBatchSlugs(fileName) {
-  const filePath = path.join(BATCH_DIR, fileName);
-  if (!existsSync(filePath)) return [];
-  const batch = JSON.parse(readFileSync(filePath, 'utf8'));
-  return Array.isArray(batch) ? batch.map((drink) => drink.slug).filter(Boolean) : [];
-}
-
 function buildCatalog() {
   const catalog = new Map();
   const seen = new Set();
@@ -197,8 +169,9 @@ function buildCatalog() {
     if (seen.has(entry.slug)) {
       throw new Error(`Duplicate generated slug: ${entry.slug}`);
     }
+    // data/drinks is the sole source of truth — never regenerate an existing slug.
     if (protectedExistingSlugs.has(entry.slug)) {
-      throw new Error(`Generated slug duplicates protected existing seed: ${entry.slug}`);
+      continue;
     }
     seen.add(entry.slug);
     const categoryRows = catalog.get(entry.category) || [];
@@ -228,8 +201,8 @@ function countDrinksByCategory() {
   return Object.fromEntries(Object.entries(counts).sort(([a], [b]) => a.localeCompare(b)));
 }
 
-// Curated data blocks are appended below. The generator slices them into Phase1/Phase2
-// batches so reruns stay deterministic while individual drink files are not overwritten.
+// Curated data blocks are appended below. The generator writes only to data/drinks
+// (sole source of truth). Existing JSON files are never overwritten.
 
 add(
   'sake',
@@ -1528,32 +1501,34 @@ Ross on Wye Raison d'Etre Cider|Cider|7|United Kingdom
 
 const catalog = buildCatalog();
 
-mkdirSync(BATCH_DIR, { recursive: true });
 mkdirSync(DRINK_DIR, { recursive: true });
 
-const writtenBatches = [];
 let individualWritten = 0;
 let individualSkipped = 0;
+const onDiskByCategory = countDrinksByCategory();
+const categories = new Set([...Object.keys(phase1Counts), ...Object.keys(phase2Counts)]);
 
-for (const [category, count] of Object.entries(phase1Counts)) {
-  assertEnough(catalog, category, count + (phase2Counts[category] || 0));
-  const batch = catalog.get(category).slice(0, count);
-  writeJson(path.join(BATCH_DIR, `phase1-${category}.json`), batch);
-  writtenBatches.push([`phase1-${category}.json`, batch.length]);
-}
-
-for (const [category, count] of Object.entries(phase2Counts)) {
-  assertEnough(catalog, category, (phase1Counts[category] || 0) + count);
-  const offset = phase1Counts[category] || 0;
-  const batch = catalog.get(category).slice(offset, offset + count);
-  writeJson(path.join(BATCH_DIR, `phase2-${category}.json`), batch);
-  writtenBatches.push([`phase2-${category}.json`, batch.length]);
-}
-
-for (const [fileName] of writtenBatches) {
-  const batch = JSON.parse(readFileSync(path.join(BATCH_DIR, fileName), 'utf8'));
-  for (const drink of batch) {
+for (const category of [...categories].sort()) {
+  const phase1 = phase1Counts[category] || 0;
+  const phase2 = phase2Counts[category] || 0;
+  const target = phase1 + phase2;
+  if (target === 0) continue;
+  const have = onDiskByCategory[category] || 0;
+  const missing = Math.max(0, target - have);
+  if (missing === 0) {
+    individualSkipped += target;
+    continue;
+  }
+  assertEnough(catalog, category, missing);
+  const drinks = catalog.get(category).slice(0, missing);
+  for (const drink of drinks) {
+    if (!SLUG_PATTERN.test(drink.slug)) {
+      throw new Error(`invalid slug: ${drink.slug}`);
+    }
     const filePath = path.join(DRINK_DIR, `${drink.slug}.json`);
+    if (path.dirname(path.resolve(filePath)) !== path.resolve(DRINK_DIR)) {
+      throw new Error(`path escape for slug: ${drink.slug}`);
+    }
     if (existsSync(filePath)) {
       individualSkipped++;
       continue;
@@ -1563,11 +1538,7 @@ for (const [fileName] of writtenBatches) {
   }
 }
 
-console.log('Batch counts:');
-for (const [fileName, count] of writtenBatches) {
-  console.log(`  ${fileName}: ${count}`);
-}
-console.log(`Individual drink files: wrote ${individualWritten}, skipped ${individualSkipped}`);
+console.log(`Individual drink files: wrote ${individualWritten}, skipped existing/target-met ${individualSkipped}`);
 console.log('Final category counts from data/drinks:');
 for (const [category, count] of Object.entries(countDrinksByCategory())) {
   console.log(`  ${category}: ${count}`);

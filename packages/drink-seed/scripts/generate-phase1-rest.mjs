@@ -114,8 +114,8 @@ function matchesBrandPrefix(text, prefix) {
   if (!text || !text.startsWith(prefix)) return false;
   if (text.length === prefix.length) return true;
   const next = text[prefix.length];
-  if (/[A-Za-z0-9]$/.test(prefix)) return /[\s'’\-]/.test(next);
-  if (/[\s'’\-・]/.test(next)) return true;
+  if (/[A-Za-z0-9]$/.test(prefix)) return /[\s'’-]/.test(next);
+  if (/[\s'’・-]/.test(next)) return true;
   if (/[\u3040-\u30ff\u4e00-\u9fff]/.test(next)) return false;
   return true;
 }

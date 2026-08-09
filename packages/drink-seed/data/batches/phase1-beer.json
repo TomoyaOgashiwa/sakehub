@@ -525,11 +525,11 @@
     "nameEn": "Bud Light",
     "category": "beer",
     "subcategory": "Light Lager",
-    "description": "Bud Light is a well-known United States Light Lager from Bud Light, selected for broad drink catalog coverage in Japan.",
+    "description": "Bud Light is a well-known United States Light Lager from AB InBev.",
     "imageUrl": null,
     "abv": 4.2,
     "originCountry": "United States",
-    "manufacturer": "Bud Light",
+    "manufacturer": "AB InBev",
     "aliases": []
   },
   {

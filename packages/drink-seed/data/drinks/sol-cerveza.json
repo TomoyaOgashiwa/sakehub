@@ -4,10 +4,10 @@
   "nameEn": "Sol Cerveza",
   "category": "beer",
   "subcategory": "Lager",
-  "description": "Sol Cerveza is a well-known Mexico Lager from Sol.",
+  "description": "Sol Cerveza is a well-known Mexico Lager from Heineken.",
   "imageUrl": null,
   "abv": 4.5,
   "originCountry": "Mexico",
-  "manufacturer": "Sol",
+  "manufacturer": "Heineken",
   "aliases": []
 }

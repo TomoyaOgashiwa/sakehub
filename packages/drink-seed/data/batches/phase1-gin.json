@@ -473,11 +473,11 @@
     "nameEn": "Bols Genever",
     "category": "gin",
     "subcategory": "Genever",
-    "description": "Bols Genever is a well-known Netherlands Genever from Bols Genever, selected for broad drink catalog coverage in Japan.",
+    "description": "Bols Genever is a well-known Netherlands Genever from Lucas Bols.",
     "imageUrl": null,
     "abv": 42,
     "originCountry": "Netherlands",
-    "manufacturer": "Bols Genever",
+    "manufacturer": "Lucas Bols",
     "aliases": []
   },
   {
@@ -668,11 +668,11 @@
     "nameEn": "No 209 Gin",
     "category": "gin",
     "subcategory": "New Western",
-    "description": "No 209 Gin is a well-known United States New Western from No 209, selected for broad drink catalog coverage in Japan.",
+    "description": "No 209 Gin is a well-known United States New Western from Distillery No. 209.",
     "imageUrl": null,
     "abv": 46,
     "originCountry": "United States",
-    "manufacturer": "No 209",
+    "manufacturer": "Distillery No. 209",
     "aliases": []
   },
   {

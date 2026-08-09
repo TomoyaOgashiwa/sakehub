@@ -278,11 +278,11 @@
     "nameEn": "Skyy Vodka",
     "category": "vodka",
     "subcategory": "Plain",
-    "description": "Skyy Vodka is a well-known United States Plain from Skyy Vodka, selected for broad drink catalog coverage in Japan.",
+    "description": "Skyy Vodka is a well-known United States Plain from Campari Group.",
     "imageUrl": null,
     "abv": 40,
     "originCountry": "United States",
-    "manufacturer": "Skyy Vodka",
+    "manufacturer": "Campari Group",
     "aliases": []
   },
   {
@@ -629,11 +629,11 @@
     "nameEn": "Haku Vodka",
     "category": "vodka",
     "subcategory": "Rice",
-    "description": "Haku Vodka is a well-known Japan Rice from Haku Vodka, selected for broad drink catalog coverage in Japan.",
+    "description": "Haku Vodka is a well-known Japan Rice from Suntory.",
     "imageUrl": null,
     "abv": 40,
     "originCountry": "Japan",
-    "manufacturer": "Haku Vodka",
+    "manufacturer": "Suntory",
     "aliases": []
   }
 ]

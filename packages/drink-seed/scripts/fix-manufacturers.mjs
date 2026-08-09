@@ -44,6 +44,19 @@ const KNOWN = [
   ['富士山麓', 'Kirin Distillery'],
   ['富士', 'Kirin Distillery'],
   ['Fuji', 'Kirin Distillery'],
+  ['No 209', 'Distillery No. 209'],
+  ['Bud Light', 'AB InBev'],
+  ['Gin Mare', 'Gin Mare'],
+  ['2 Towns', '2 Towns Ciderhouse'],
+  ['9148', 'Niigata Kameda Distillery'],
+  ['EJ ', 'E&J Gallo'],
+  ['Kah ', 'Kah Tequila'],
+  ['Sol Cerveza', 'Heineken'],
+  ['Tia Maria', 'Illva Saronno'],
+  ['魔王', '白玉醸造'],
+  ['Maou', '白玉醸造'],
+  ['海', '大海酒造'],
+  ['Umi', '大海酒造'],
   ['Johnnie Walker', 'Diageo'],
   ['Jack Daniel', 'Brown-Forman'],
   ['Gentleman Jack', 'Brown-Forman'],
@@ -206,9 +219,30 @@ function matchesBrandPrefix(text, prefix) {
   return true;
 }
 
+const CATEGORY_TOKENS = new Set([
+  'Gin',
+  'Vodka',
+  'Rum',
+  'Beer',
+  'Wine',
+  'Whisky',
+  'Whiskey',
+  'Tequila',
+  'Brandy',
+  'Liqueur',
+  'Cider',
+  'Shochu',
+  'Sake',
+]);
+
 function looksBad(manufacturer, nameEn, name) {
   if (!manufacturer) return true;
   if (manufacturer === nameEn || manufacturer === name) return true;
+  if (CATEGORY_TOKENS.has(manufacturer)) return true;
+  // digit-only or leading numeric fragment used as mfr ("2", "9148")
+  if (/^\d+$/.test(manufacturer)) return true;
+  // extremely short Latin token ("No", "Bud", "Gin") — CJK brewery names are OK
+  if (/^[A-Za-z]{1,3}$/.test(manufacturer)) return true;
   // truncated product: "Yamazaki 18", "Aberlour 12", "Wild Turkey 101"
   if (/\b\d+(\.\d+)?\b/.test(manufacturer) && !/&|Brothers|Sons|Group|Distill|Company|Company|Co\.|Ltd|酒造|醸造|Brew/i.test(manufacturer)) {
     return true;

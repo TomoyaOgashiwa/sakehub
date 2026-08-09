@@ -78,6 +78,10 @@ function add(category, defaults, block) {
     if (!line || line.startsWith('#')) continue;
     const [namePart, subcategory, abv, originCountry, manufacturer, aliases] = line.split('|');
     const [nameEn, name = nameEn] = namePart.split('::');
+    const inferred =
+      (manufacturer && manufacturer.trim()) ||
+      (defaults.manufacturer && String(defaults.manufacturer).trim()) ||
+      inferManufacturer(nameEn.trim());
     rows.push({
       nameEn: nameEn.trim(),
       name: name.trim(),
@@ -85,7 +89,8 @@ function add(category, defaults, block) {
       subcategory: (subcategory || defaults.subcategory).trim(),
       abv: Number(abv || defaults.abv),
       originCountry: (originCountry || defaults.originCountry).trim(),
-      manufacturer: (manufacturer || defaults.manufacturer || inferManufacturer(nameEn)).trim(),
+      // Unknown brands stay null (schema allows it) rather than inventing truncated names.
+      manufacturer: inferred ? String(inferred).trim() : null,
       aliases: aliases ? aliases.split(';').map((alias) => alias.trim()).filter(Boolean) : [],
     });
   }

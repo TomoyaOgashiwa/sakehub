@@ -6,8 +6,10 @@
   "subcategory": "Anejo",
   "description": "最低2年半熟成のプレミアムアネホテキーラ。キャラメル、バニラ、トフィーの芳醇な風味とシルキーな舌触り。",
   "imageUrl": null,
-  "abv": 38.0,
+  "abv": 38,
   "originCountry": "Mexico",
-  "manufacturer": "Don Julio",
-  "aliases": ["どんふりお"]
+  "manufacturer": "Diageo",
+  "aliases": [
+    "どんふりお"
+  ]
 }

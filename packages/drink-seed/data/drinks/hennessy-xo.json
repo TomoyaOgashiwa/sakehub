@@ -6,8 +6,10 @@
   "subcategory": "Cognac",
   "description": "最低10年熟成の約100種のオー・ド・ヴィーをブレンド。スパイス、ドライフルーツ、チョコレートが重層的に広がる。",
   "imageUrl": null,
-  "abv": 40.0,
+  "abv": 40,
   "originCountry": "France",
-  "manufacturer": "Hennessy",
-  "aliases": ["へねしー"]
+  "manufacturer": "LVMH",
+  "aliases": [
+    "へねしー"
+  ]
 }

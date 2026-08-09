@@ -4,10 +4,10 @@
   "nameEn": "Budweiser",
   "category": "beer",
   "subcategory": "Lager",
-  "description": "Budweiser is a well-known United States Lager from Budweiser, selected for broad drink catalog coverage in Japan.",
+  "description": "Budweiser is a well-known United States Lager from AB InBev.",
   "imageUrl": null,
   "abv": 5,
   "originCountry": "United States",
-  "manufacturer": "Budweiser",
+  "manufacturer": "AB InBev",
   "aliases": []
 }

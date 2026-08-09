@@ -4,10 +4,13 @@
   "nameEn": "Iichiko Frasco",
   "category": "shochu",
   "subcategory": "Mugi (Barley)",
-  "description": "大分の名門・三和酒類が造る本格麦焼酎。減圧蒸留によるクリアでフルーティーな味わいが人気。",
+  "description": "Iichiko Frasco is a well-known Japan Mugi (Barley) from Sanwa Shurui.",
   "imageUrl": null,
-  "abv": 25.0,
+  "abv": 25,
   "originCountry": "Japan",
-  "manufacturer": "三和酒類",
-  "aliases": ["いいちこ", "ふらすこぼとる"]
+  "manufacturer": "Sanwa Shurui",
+  "aliases": [
+    "いいちこ",
+    "ふらすこぼとる"
+  ]
 }

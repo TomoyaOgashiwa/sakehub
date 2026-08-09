@@ -4,10 +4,10 @@
   "nameEn": "Sapporo Classic",
   "category": "beer",
   "subcategory": "Lager",
-  "description": "Sapporo Classic is a well-known Japan Lager from Sapporo Classic, selected for broad drink catalog coverage in Japan.",
+  "description": "Sapporo Classic is a well-known Japan Lager from サッポロビール.",
   "imageUrl": null,
   "abv": 5,
   "originCountry": "Japan",
-  "manufacturer": "Sapporo Classic",
+  "manufacturer": "サッポロビール",
   "aliases": []
 }

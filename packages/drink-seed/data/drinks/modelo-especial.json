@@ -4,10 +4,10 @@
   "nameEn": "Modelo Especial",
   "category": "beer",
   "subcategory": "Lager",
-  "description": "Modelo Especial is a well-known Mexico Lager from Modelo Especial, selected for broad drink catalog coverage in Japan.",
+  "description": "Modelo Especial is a well-known Mexico Lager from Modelo.",
   "imageUrl": null,
   "abv": 4.4,
   "originCountry": "Mexico",
-  "manufacturer": "Modelo Especial",
+  "manufacturer": "Modelo",
   "aliases": []
 }

@@ -109,6 +109,17 @@ function slugify(value) {
     .toLowerCase();
 }
 
+/** Latin brand prefixes must end at a token boundary (avoid Fuji→Fujizakura). */
+function matchesBrandPrefix(text, prefix) {
+  if (!text || !text.startsWith(prefix)) return false;
+  if (text.length === prefix.length) return true;
+  const next = text[prefix.length];
+  if (/[A-Za-z0-9]$/.test(prefix)) return /[\s'’\-]/.test(next);
+  if (/[\s'’\-・]/.test(next)) return true;
+  if (/[\u3040-\u30ff\u4e00-\u9fff]/.test(next)) return false;
+  return true;
+}
+
 function inferManufacturer(nameEn) {
   const known = [
     ['Johnnie Walker', 'Diageo'],
@@ -127,10 +138,15 @@ function inferManufacturer(nameEn) {
     ['Remy Martin', 'Remy Cointreau'],
     ['Martell', 'Martell'],
     ['Courvoisier', 'Courvoisier'],
-  ];
-  const match = known.find(([prefix]) => nameEn.startsWith(prefix));
+    ['Fujizakura', '富士桜高原麦酒'],
+    ['Fuji Gotemba', 'Kirin Distillery'],
+    ['Fuji Single', 'Kirin Distillery'],
+    ['Fuji', 'Kirin Distillery'],
+  ].sort((a, b) => b[0].length - a[0].length);
+  const match = known.find(([prefix]) => matchesBrandPrefix(nameEn, prefix));
   if (match) return match[1];
-  return nameEn.split(/\s+/).slice(0, 2).join(' ');
+  // Prefer null over inventing a truncated product name as manufacturer.
+  return null;
 }
 
 function toDrinkSeed(entry) {

@@ -13,6 +13,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'data', 'drinks');
+const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 mkdirSync(OUT, { recursive: true });
 
 const args = process.argv.slice(2);
@@ -26,7 +27,13 @@ if (!Array.isArray(drinks)) throw new Error('expected JSON array');
 let written = 0;
 let skipped = 0;
 for (const d of drinks) {
+  if (typeof d.slug !== 'string' || !SLUG_PATTERN.test(d.slug)) {
+    throw new Error(`invalid slug: ${JSON.stringify(d?.slug)}`);
+  }
   const out = path.join(OUT, `${d.slug}.json`);
+  if (path.dirname(path.resolve(out)) !== path.resolve(OUT)) {
+    throw new Error(`path escape for slug: ${d.slug}`);
+  }
   if (existsSync(out) && !force) {
     skipped++;
     continue;

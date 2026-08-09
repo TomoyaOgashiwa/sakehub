@@ -1,7 +1,7 @@
 -- =============================================================================
 -- packages/drink-seed（src/build-seed.ts）が自動生成。
 -- 手編集しないこと。再生成: pnpm seed:drinks:build
--- 生成日時: 2026-08-09T21:00:55.499Z
+-- 生成日時: 2026-08-09T21:25:23.964Z
 -- 件数: 1330
 --
 -- aliases: かな読み・ローマ字表記などの別名候補。「獺祭」で登録されていても
@@ -11862,11 +11862,11 @@ VALUES (
   'Fujizakura Heights Weizen',
   'beer',
   'Weizen',
-  'Fujizakura Heights Weizen is a well-known Japan Weizen from Kirin Distillery.',
+  'Fujizakura Heights Weizen is a well-known Japan Weizen from 富士桜高原麦酒.',
   NULL,
   5.5,
   'Japan',
-  'Kirin Distillery',
+  '富士桜高原麦酒',
   '{}'::TEXT[]
 )
 ON CONFLICT (slug) DO UPDATE SET

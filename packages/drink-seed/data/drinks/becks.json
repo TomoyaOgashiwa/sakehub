@@ -1,0 +1,13 @@
+{
+  "slug": "becks",
+  "name": "Beck's",
+  "nameEn": "Beck's",
+  "category": "beer",
+  "subcategory": "Pilsner",
+  "description": "Beck's is a well-known Germany Pilsner from Beck's, selected for broad drink catalog coverage in Japan.",
+  "imageUrl": null,
+  "abv": 4.9,
+  "originCountry": "Germany",
+  "manufacturer": "Beck's",
+  "aliases": []
+}

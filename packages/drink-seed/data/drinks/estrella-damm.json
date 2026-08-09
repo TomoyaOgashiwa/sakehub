@@ -1,0 +1,13 @@
+{
+  "slug": "estrella-damm",
+  "name": "Estrella Damm",
+  "nameEn": "Estrella Damm",
+  "category": "beer",
+  "subcategory": "Lager",
+  "description": "Estrella Damm is a well-known Spain Lager from Estrella Damm, selected for broad drink catalog coverage in Japan.",
+  "imageUrl": null,
+  "abv": 5.4,
+  "originCountry": "Spain",
+  "manufacturer": "Estrella Damm",
+  "aliases": []
+}

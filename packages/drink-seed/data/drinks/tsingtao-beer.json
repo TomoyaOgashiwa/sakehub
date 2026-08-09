@@ -1,0 +1,13 @@
+{
+  "slug": "tsingtao-beer",
+  "name": "Tsingtao Beer",
+  "nameEn": "Tsingtao Beer",
+  "category": "beer",
+  "subcategory": "Lager",
+  "description": "Tsingtao Beer is a well-known China Lager from Tsingtao Beer, selected for broad drink catalog coverage in Japan.",
+  "imageUrl": null,
+  "abv": 4.7,
+  "originCountry": "China",
+  "manufacturer": "Tsingtao Beer",
+  "aliases": []
+}

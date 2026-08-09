@@ -1,0 +1,13 @@
+{
+  "slug": "kirin-lager-beer",
+  "name": "キリン ラガービール",
+  "nameEn": "Kirin Lager Beer",
+  "category": "beer",
+  "subcategory": "Lager",
+  "description": "Kirin Lager Beer is a well-known Japan Lager from Kirin Lager, selected for broad drink catalog coverage in Japan.",
+  "imageUrl": null,
+  "abv": 5,
+  "originCountry": "Japan",
+  "manufacturer": "Kirin Lager",
+  "aliases": []
+}

@@ -1,0 +1,13 @@
+{
+  "slug": "sol-cerveza",
+  "name": "Sol Cerveza",
+  "nameEn": "Sol Cerveza",
+  "category": "beer",
+  "subcategory": "Lager",
+  "description": "Sol Cerveza is a well-known Mexico Lager from Sol Cerveza, selected for broad drink catalog coverage in Japan.",
+  "imageUrl": null,
+  "abv": 4.5,
+  "originCountry": "Mexico",
+  "manufacturer": "Sol Cerveza",
+  "aliases": []
+}

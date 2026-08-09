@@ -1,0 +1,13 @@
+{
+  "slug": "pabst-blue-ribbon",
+  "name": "Pabst Blue Ribbon",
+  "nameEn": "Pabst Blue Ribbon",
+  "category": "beer",
+  "subcategory": "Lager",
+  "description": "Pabst Blue Ribbon is a well-known United States Lager from Pabst Blue, selected for broad drink catalog coverage in Japan.",
+  "imageUrl": null,
+  "abv": 4.8,
+  "originCountry": "United States",
+  "manufacturer": "Pabst Blue",
+  "aliases": []
+}

@@ -1,0 +1,13 @@
+{
+  "slug": "guinness-extra-stout",
+  "name": "Guinness Extra Stout",
+  "nameEn": "Guinness Extra Stout",
+  "category": "beer",
+  "subcategory": "Stout",
+  "description": "Guinness Extra Stout is a well-known Ireland Stout from Guinness Extra, selected for broad drink catalog coverage in Japan.",
+  "imageUrl": null,
+  "abv": 5.6,
+  "originCountry": "Ireland",
+  "manufacturer": "Guinness Extra",
+  "aliases": []
+}

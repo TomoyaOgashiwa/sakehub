@@ -1,0 +1,13 @@
+{
+  "slug": "negra-modelo",
+  "name": "Negra Modelo",
+  "nameEn": "Negra Modelo",
+  "category": "beer",
+  "subcategory": "Dark Lager",
+  "description": "Negra Modelo is a well-known Mexico Dark Lager from Negra.",
+  "imageUrl": null,
+  "abv": 5.4,
+  "originCountry": "Mexico",
+  "manufacturer": "Negra",
+  "aliases": []
+}

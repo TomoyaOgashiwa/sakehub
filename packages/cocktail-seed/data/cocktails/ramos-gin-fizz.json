@@ -1,0 +1,64 @@
+{
+  "slug": "ramos-gin-fizz",
+  "id": null,
+  "name": "ラモスジンフィズ",
+  "nameEn": "Ramos Gin Fizz",
+  "description": "クリームと卵白の泡が特徴的な、ニューオーリンズ生まれの華やかなジンフィズ。",
+  "baseSpirit": "Gin",
+  "abv": 12,
+  "originCountry": "United States",
+  "aliases": [
+    "ラモス・ジン・フィズ"
+  ],
+  "officialRecipe": {
+    "name": "ラモスジンフィズ（基本レシピ）",
+    "memo": "卵白とクリームを乳化させるため、最初に氷なしで振ってから氷を入れて振る。",
+    "ingredients": [
+      {
+        "name": "ドライジン",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "レモンジュース",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "ライムジュース",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "シュガーシロップ",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "生クリーム",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "卵白",
+        "amount": 1,
+        "unit": "piece"
+      },
+      {
+        "name": "オレンジフラワーウォーター",
+        "amount": 3,
+        "unit": "drop"
+      },
+      {
+        "name": "ソーダ",
+        "amount": 60,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

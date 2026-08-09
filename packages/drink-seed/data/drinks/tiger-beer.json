@@ -1,0 +1,13 @@
+{
+  "slug": "tiger-beer",
+  "name": "Tiger Beer",
+  "nameEn": "Tiger Beer",
+  "category": "beer",
+  "subcategory": "Lager",
+  "description": "Tiger Beer is a well-known Singapore Lager from Tiger.",
+  "imageUrl": null,
+  "abv": 5,
+  "originCountry": "Singapore",
+  "manufacturer": "Tiger",
+  "aliases": []
+}

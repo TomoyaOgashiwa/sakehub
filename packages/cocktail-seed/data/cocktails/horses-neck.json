@@ -1,0 +1,44 @@
+{
+  "slug": "horses-neck",
+  "id": null,
+  "name": "ホーセズネック",
+  "nameEn": "Horse's Neck",
+  "description": "ブランデーとジンジャーエールに長いレモンピールを添える、見た目も特徴的な一杯。",
+  "baseSpirit": "Brandy",
+  "abv": 11,
+  "originCountry": "United States",
+  "aliases": [
+    "ホースズネック"
+  ],
+  "officialRecipe": {
+    "name": "ホーセズネック（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ブランデー",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ジンジャーエール",
+        "amount": 120,
+        "unit": "ml"
+      },
+      {
+        "name": "アンゴスチュラビターズ",
+        "amount": 1,
+        "unit": "dash"
+      },
+      {
+        "name": "レモンピール",
+        "amount": 1,
+        "unit": "piece"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

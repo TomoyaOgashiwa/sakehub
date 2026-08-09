@@ -1,0 +1,44 @@
+{
+  "slug": "paper-plane",
+  "id": null,
+  "name": "ペーパープレーン",
+  "nameEn": "Paper Plane",
+  "description": "バーボン、アマーロ、アペロール、レモンを等量で合わせる現代クラシック。",
+  "baseSpirit": "Whisky",
+  "abv": 23,
+  "originCountry": "United States",
+  "aliases": [
+    "ペーパー・プレーン"
+  ],
+  "officialRecipe": {
+    "name": "ペーパープレーン（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "バーボンウイスキー",
+        "amount": 22.5,
+        "unit": "ml"
+      },
+      {
+        "name": "アマーロ",
+        "amount": 22.5,
+        "unit": "ml"
+      },
+      {
+        "name": "アペロール",
+        "amount": 22.5,
+        "unit": "ml"
+      },
+      {
+        "name": "レモンジュース",
+        "amount": 22.5,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "slug": "tomato-hai",
+  "id": null,
+  "name": "トマトハイ",
+  "nameEn": "Tomato Hai",
+  "description": "焼酎をトマトジュースで割る、食事に合わせやすい日本のロングドリンク。",
+  "baseSpirit": "Shochu",
+  "abv": 7,
+  "originCountry": "Japan",
+  "aliases": [
+    "トマト割り"
+  ],
+  "officialRecipe": {
+    "name": "トマトハイ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "焼酎",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "トマトジュース",
+        "amount": 135,
+        "unit": "ml"
+      },
+      {
+        "name": "塩",
+        "amount": 1,
+        "unit": "dash"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

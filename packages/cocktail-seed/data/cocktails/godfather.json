@@ -1,0 +1,34 @@
+{
+  "slug": "godfather",
+  "id": null,
+  "name": "ゴッドファーザー",
+  "nameEn": "Godfather",
+  "description": "ウイスキーにアマレットを合わせる、映画名で知られるシンプルなクラシック。",
+  "baseSpirit": "Whisky",
+  "abv": 32,
+  "originCountry": "United States",
+  "aliases": [
+    "ゴッドファーザー・カクテル"
+  ],
+  "officialRecipe": {
+    "name": "ゴッドファーザー（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "スコッチウイスキー",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "アマレット",
+        "amount": 25,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

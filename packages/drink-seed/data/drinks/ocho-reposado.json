@@ -1,0 +1,13 @@
+{
+  "slug": "ocho-reposado",
+  "name": "Ocho Reposado",
+  "nameEn": "Ocho Reposado",
+  "category": "tequila",
+  "subcategory": "Tequila",
+  "description": "Ocho Reposado is a well-known Mexico Tequila from Tequila Ocho.",
+  "imageUrl": null,
+  "abv": 40,
+  "originCountry": "Mexico",
+  "manufacturer": "Tequila Ocho",
+  "aliases": []
+}

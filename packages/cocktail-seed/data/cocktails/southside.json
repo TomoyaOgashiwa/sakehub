@@ -1,0 +1,44 @@
+{
+  "slug": "southside",
+  "id": null,
+  "name": "サウスサイド",
+  "nameEn": "Southside",
+  "description": "ジンにミントとライムを合わせた、爽快な禁酒法時代の名作。",
+  "baseSpirit": "Gin",
+  "abv": 22,
+  "originCountry": "United States",
+  "aliases": [
+    "サウス・サイド"
+  ],
+  "officialRecipe": {
+    "name": "サウスサイド（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ドライジン",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ライムジュース",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "シュガーシロップ",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "ミントの葉",
+        "amount": 8,
+        "unit": "piece"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

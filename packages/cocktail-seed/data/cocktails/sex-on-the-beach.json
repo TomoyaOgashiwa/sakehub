@@ -1,0 +1,44 @@
+{
+  "slug": "sex-on-the-beach",
+  "id": null,
+  "name": "セックスオンザビーチ",
+  "nameEn": "Sex on the Beach",
+  "description": "ウォッカ、ピーチ、クランベリー、オレンジを合わせる華やかなフルーツカクテル。",
+  "baseSpirit": "Vodka",
+  "abv": 11,
+  "originCountry": "United States",
+  "aliases": [
+    "セックス・オン・ザ・ビーチ"
+  ],
+  "officialRecipe": {
+    "name": "セックスオンザビーチ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ウォッカ",
+        "amount": 40,
+        "unit": "ml"
+      },
+      {
+        "name": "ピーチリキュール",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "クランベリージュース",
+        "amount": 40,
+        "unit": "ml"
+      },
+      {
+        "name": "オレンジジュース",
+        "amount": 40,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "slug": "vieux-carre",
+  "id": null,
+  "name": "ヴューカレ",
+  "nameEn": "Vieux Carre",
+  "description": "ライ、コニャック、ベルモットをビターズでまとめるニューオーリンズの名作。",
+  "baseSpirit": "Whisky",
+  "abv": 29,
+  "originCountry": "United States",
+  "aliases": [
+    "ヴュー・カレ"
+  ],
+  "officialRecipe": {
+    "name": "ヴューカレ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ライウイスキー",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "コニャック",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "スイートベルモット",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "ベネディクティン",
+        "amount": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "ペイショーズビターズ",
+        "amount": 2,
+        "unit": "dash"
+      },
+      {
+        "name": "アンゴスチュラビターズ",
+        "amount": 2,
+        "unit": "dash"
+      }
+    ],
+    "steps": [
+      "ミキシンググラスに材料と氷を入れる。",
+      "ステアしてしっかり冷やし、香味をなじませる。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

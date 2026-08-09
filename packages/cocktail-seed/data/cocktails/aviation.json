@@ -1,0 +1,44 @@
+{
+  "slug": "aviation",
+  "id": null,
+  "name": "アビエーション",
+  "nameEn": "Aviation",
+  "description": "ジンにマラスキーノとバイオレットの香りを重ねる、淡い紫色のクラシック。",
+  "baseSpirit": "Gin",
+  "abv": 27,
+  "originCountry": "United States",
+  "aliases": [
+    "アヴィエーション"
+  ],
+  "officialRecipe": {
+    "name": "アビエーション（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ドライジン",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "マラスキーノリキュール",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "レモンジュース",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "クレーム・ド・バイオレット",
+        "amount": 5,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

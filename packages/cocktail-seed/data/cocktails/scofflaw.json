@@ -1,0 +1,49 @@
+{
+  "slug": "scofflaw",
+  "id": null,
+  "name": "スコッフロー",
+  "nameEn": "Scofflaw",
+  "description": "ライウイスキー、ベルモット、レモン、グレナデンを合わせる禁酒法時代の一杯。",
+  "baseSpirit": "Whisky",
+  "abv": 24,
+  "originCountry": "France",
+  "aliases": [
+    "スコッフロウ"
+  ],
+  "officialRecipe": {
+    "name": "スコッフロー（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ライウイスキー",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ドライベルモット",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "レモンジュース",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "グレナデンシロップ",
+        "amount": 10,
+        "unit": "ml"
+      },
+      {
+        "name": "オレンジビターズ",
+        "amount": 1,
+        "unit": "dash"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

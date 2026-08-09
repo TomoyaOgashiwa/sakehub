@@ -1,0 +1,13 @@
+{
+  "slug": "casamigos-blanco",
+  "name": "Casamigos Blanco",
+  "nameEn": "Casamigos Blanco",
+  "category": "tequila",
+  "subcategory": "Tequila",
+  "description": "Casamigos Blanco is a well-known Mexico Tequila from Diageo.",
+  "imageUrl": null,
+  "abv": 40,
+  "originCountry": "Mexico",
+  "manufacturer": "Diageo",
+  "aliases": []
+}

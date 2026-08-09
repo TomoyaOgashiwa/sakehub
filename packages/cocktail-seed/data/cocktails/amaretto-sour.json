@@ -1,0 +1,44 @@
+{
+  "slug": "amaretto-sour",
+  "id": null,
+  "name": "アマレットサワー",
+  "nameEn": "Amaretto Sour",
+  "description": "アマレットの杏仁香をレモンと卵白でやわらげる、人気のリキュールサワー。",
+  "baseSpirit": "Liqueur",
+  "abv": 14,
+  "originCountry": "United States",
+  "aliases": [
+    "アマレット・サワー"
+  ],
+  "officialRecipe": {
+    "name": "アマレットサワー（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "アマレット",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "レモンジュース",
+        "amount": 25,
+        "unit": "ml"
+      },
+      {
+        "name": "シュガーシロップ",
+        "amount": 10,
+        "unit": "ml"
+      },
+      {
+        "name": "卵白",
+        "amount": 1,
+        "unit": "piece"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

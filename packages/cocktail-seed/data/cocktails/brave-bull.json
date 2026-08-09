@@ -1,0 +1,34 @@
+{
+  "slug": "brave-bull",
+  "id": null,
+  "name": "ブレイブブル",
+  "nameEn": "Brave Bull",
+  "description": "テキーラとコーヒーリキュールを合わせる、ブラックルシアンのテキーラ版。",
+  "baseSpirit": "Tequila",
+  "abv": 28,
+  "originCountry": "Mexico",
+  "aliases": [
+    "ブレイブ・ブル"
+  ],
+  "officialRecipe": {
+    "name": "ブレイブブル（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "テキーラレポサド",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "コーヒーリキュール",
+        "amount": 25,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

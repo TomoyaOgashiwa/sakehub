@@ -1,0 +1,39 @@
+{
+  "slug": "caipiroska",
+  "id": null,
+  "name": "カイピロスカ",
+  "nameEn": "Caipiroska",
+  "description": "カイピリーニャをウォッカで作る、ライムの香りが主役のクラッシュドアイスカクテル。",
+  "baseSpirit": "Vodka",
+  "abv": 18,
+  "originCountry": "Brazil",
+  "aliases": [
+    "カイピロシュカ"
+  ],
+  "officialRecipe": {
+    "name": "カイピロスカ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ウォッカ",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "ライム",
+        "amount": 0.5,
+        "unit": "piece"
+      },
+      {
+        "name": "砂糖",
+        "amount": 2,
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      "グラスの中でフルーツやハーブを軽くつぶす。",
+      "残りの材料と氷を加える。",
+      "よく混ぜて仕上げる。"
+    ]
+  }
+}

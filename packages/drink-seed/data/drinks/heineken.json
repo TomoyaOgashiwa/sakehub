@@ -1,0 +1,13 @@
+{
+  "slug": "heineken",
+  "name": "Heineken",
+  "nameEn": "Heineken",
+  "category": "beer",
+  "subcategory": "Lager",
+  "description": "Heineken is a well-known Netherlands Lager from Heineken, selected for broad drink catalog coverage in Japan.",
+  "imageUrl": null,
+  "abv": 5,
+  "originCountry": "Netherlands",
+  "manufacturer": "Heineken",
+  "aliases": []
+}

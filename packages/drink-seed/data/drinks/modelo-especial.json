@@ -1,0 +1,13 @@
+{
+  "slug": "modelo-especial",
+  "name": "Modelo Especial",
+  "nameEn": "Modelo Especial",
+  "category": "beer",
+  "subcategory": "Lager",
+  "description": "Modelo Especial is a well-known Mexico Lager from Modelo.",
+  "imageUrl": null,
+  "abv": 4.4,
+  "originCountry": "Mexico",
+  "manufacturer": "Modelo",
+  "aliases": []
+}

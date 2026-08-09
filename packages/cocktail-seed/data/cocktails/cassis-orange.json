@@ -1,0 +1,34 @@
+{
+  "slug": "cassis-orange",
+  "id": null,
+  "name": "カシスオレンジ",
+  "nameEn": "Cassis Orange",
+  "description": "カシスリキュールをオレンジジュースで割る、日本のバーでも定番の甘酸っぱい一杯。",
+  "baseSpirit": "Liqueur",
+  "abv": 6,
+  "originCountry": "Japan",
+  "aliases": [
+    "カシオレ"
+  ],
+  "officialRecipe": {
+    "name": "カシスオレンジ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "クレーム・ド・カシス",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "オレンジジュース",
+        "amount": 135,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "slug": "birra-moretti",
+  "name": "Birra Moretti",
+  "nameEn": "Birra Moretti",
+  "category": "beer",
+  "subcategory": "Lager",
+  "description": "Birra Moretti is a well-known Italy Lager from Birra.",
+  "imageUrl": null,
+  "abv": 4.6,
+  "originCountry": "Italy",
+  "manufacturer": "Birra",
+  "aliases": []
+}

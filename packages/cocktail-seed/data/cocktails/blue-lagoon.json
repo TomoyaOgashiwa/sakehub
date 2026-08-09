@@ -1,0 +1,39 @@
+{
+  "slug": "blue-lagoon",
+  "id": null,
+  "name": "ブルーラグーン",
+  "nameEn": "Blue Lagoon",
+  "description": "ウォッカ、ブルーキュラソー、レモネードで作る鮮やかな青のロングカクテル。",
+  "baseSpirit": "Vodka",
+  "abv": 10,
+  "originCountry": "France",
+  "aliases": [
+    "ブルー・ラグーン"
+  ],
+  "officialRecipe": {
+    "name": "ブルーラグーン（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ウォッカ",
+        "amount": 40,
+        "unit": "ml"
+      },
+      {
+        "name": "ブルーキュラソー",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "レモネード",
+        "amount": 120,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

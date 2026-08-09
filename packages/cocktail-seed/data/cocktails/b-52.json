@@ -1,0 +1,39 @@
+{
+  "slug": "b-52",
+  "id": null,
+  "name": "B-52",
+  "nameEn": "B-52",
+  "description": "コーヒー、アイリッシュクリーム、オレンジのリキュールを層にするショットカクテル。",
+  "baseSpirit": "Liqueur",
+  "abv": 24,
+  "originCountry": "Canada",
+  "aliases": [
+    "ビー・フィフティツー"
+  ],
+  "officialRecipe": {
+    "name": "B-52（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "コーヒーリキュール",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "アイリッシュクリーム",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "グランマルニエ",
+        "amount": 20,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "slug": "oolong-hai",
+  "id": null,
+  "name": "ウーロンハイ",
+  "nameEn": "Oolong Hai",
+  "description": "焼酎を烏龍茶で割る、居酒屋と日本のバーで定番の軽い一杯。",
+  "baseSpirit": "Shochu",
+  "abv": 7,
+  "originCountry": "Japan",
+  "aliases": [
+    "烏龍ハイ"
+  ],
+  "officialRecipe": {
+    "name": "ウーロンハイ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "焼酎",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "烏龍茶",
+        "amount": 135,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

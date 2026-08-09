@@ -1,0 +1,39 @@
+{
+  "slug": "spumoni",
+  "id": null,
+  "name": "スプモーニ",
+  "nameEn": "Spumoni",
+  "description": "カンパリ、グレープフルーツ、トニックを合わせる、日本でも人気のビターなロングカクテル。",
+  "baseSpirit": "Liqueur",
+  "abv": 6,
+  "originCountry": "Italy",
+  "aliases": [
+    "スプモニ"
+  ],
+  "officialRecipe": {
+    "name": "スプモーニ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "カンパリ",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "グレープフルーツジュース",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "トニックウォーター",
+        "amount": 90,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

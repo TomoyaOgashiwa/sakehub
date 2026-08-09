@@ -1,0 +1,39 @@
+{
+  "slug": "jack-rose",
+  "id": null,
+  "name": "ジャックローズ",
+  "nameEn": "Jack Rose",
+  "description": "アップルブランデー、ライム、グレナデンで作る、鮮やかな色合いのクラシック。",
+  "baseSpirit": "Brandy",
+  "abv": 23,
+  "originCountry": "United States",
+  "aliases": [
+    "ジャック・ローズ"
+  ],
+  "officialRecipe": {
+    "name": "ジャックローズ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "アップルブランデー",
+        "amount": 50,
+        "unit": "ml"
+      },
+      {
+        "name": "ライムジュース",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "グレナデンシロップ",
+        "amount": 15,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

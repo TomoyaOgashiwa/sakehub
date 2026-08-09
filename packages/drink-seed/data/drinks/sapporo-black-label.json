@@ -1,0 +1,13 @@
+{
+  "slug": "sapporo-black-label",
+  "name": "サッポロ生ビール黒ラベル",
+  "nameEn": "Sapporo Black Label",
+  "category": "beer",
+  "subcategory": "Lager",
+  "description": "Sapporo Black Label is a well-known Japan Lager from サッポロビール.",
+  "imageUrl": null,
+  "abv": 5,
+  "originCountry": "Japan",
+  "manufacturer": "サッポロビール",
+  "aliases": []
+}

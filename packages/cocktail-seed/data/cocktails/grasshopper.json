@@ -1,0 +1,39 @@
+{
+  "slug": "grasshopper",
+  "id": null,
+  "name": "グラスホッパー",
+  "nameEn": "Grasshopper",
+  "description": "ミントとカカオ、クリームで作る、緑色が印象的なデザートカクテル。",
+  "baseSpirit": "Liqueur",
+  "abv": 12,
+  "originCountry": "United States",
+  "aliases": [
+    "グラスホッパーカクテル"
+  ],
+  "officialRecipe": {
+    "name": "グラスホッパー（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "グリーンミントリキュール",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "ホワイトカカオリキュール",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "生クリーム",
+        "amount": 30,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

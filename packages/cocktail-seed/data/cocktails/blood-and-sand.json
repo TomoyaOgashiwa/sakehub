@@ -1,0 +1,44 @@
+{
+  "slug": "blood-and-sand",
+  "id": null,
+  "name": "ブラッドアンドサンド",
+  "nameEn": "Blood and Sand",
+  "description": "スコッチ、チェリーブランデー、ベルモット、オレンジが均衡する映画由来の古典。",
+  "baseSpirit": "Whisky",
+  "abv": 20,
+  "originCountry": "United Kingdom",
+  "aliases": [
+    "ブラッド＆サンド"
+  ],
+  "officialRecipe": {
+    "name": "ブラッドアンドサンド（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "スコッチウイスキー",
+        "amount": 25,
+        "unit": "ml"
+      },
+      {
+        "name": "チェリーブランデー",
+        "amount": 25,
+        "unit": "ml"
+      },
+      {
+        "name": "スイートベルモット",
+        "amount": 25,
+        "unit": "ml"
+      },
+      {
+        "name": "オレンジジュース",
+        "amount": 25,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

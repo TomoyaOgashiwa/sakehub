@@ -1,0 +1,13 @@
+{
+  "slug": "brewdog-elvis-juice",
+  "name": "BrewDog Elvis Juice",
+  "nameEn": "BrewDog Elvis Juice",
+  "category": "beer",
+  "subcategory": "IPA",
+  "description": "BrewDog Elvis Juice is a well-known Scotland IPA from BrewDog.",
+  "imageUrl": null,
+  "abv": 6.5,
+  "originCountry": "Scotland",
+  "manufacturer": "BrewDog",
+  "aliases": []
+}

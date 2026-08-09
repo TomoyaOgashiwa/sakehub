@@ -1,0 +1,44 @@
+{
+  "slug": "champagne-cocktail",
+  "id": null,
+  "name": "シャンパンカクテル",
+  "nameEn": "Champagne Cocktail",
+  "description": "角砂糖、ビターズ、ブランデー、シャンパンで作る祝祭感のあるクラシック。",
+  "baseSpirit": "Brandy",
+  "abv": 14,
+  "originCountry": "United States",
+  "aliases": [
+    "シャンペンカクテル"
+  ],
+  "officialRecipe": {
+    "name": "シャンパンカクテル（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "角砂糖",
+        "amount": 1,
+        "unit": "piece"
+      },
+      {
+        "name": "アンゴスチュラビターズ",
+        "amount": 2,
+        "unit": "dash"
+      },
+      {
+        "name": "ブランデー",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "シャンパン",
+        "amount": 120,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

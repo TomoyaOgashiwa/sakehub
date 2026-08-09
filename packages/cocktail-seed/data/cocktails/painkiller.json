@@ -1,0 +1,44 @@
+{
+  "slug": "painkiller",
+  "id": null,
+  "name": "ペインキラー",
+  "nameEn": "Painkiller",
+  "description": "ダークラム、パイナップル、オレンジ、ココナッツで作る英領バージン諸島の定番。",
+  "baseSpirit": "Rum",
+  "abv": 14,
+  "originCountry": "British Virgin Islands",
+  "aliases": [
+    "ペインキラーカクテル"
+  ],
+  "officialRecipe": {
+    "name": "ペインキラー（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ダークラム",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "パイナップルジュース",
+        "amount": 120,
+        "unit": "ml"
+      },
+      {
+        "name": "オレンジジュース",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "ココナッツクリーム",
+        "amount": 30,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

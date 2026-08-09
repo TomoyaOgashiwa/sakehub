@@ -1,0 +1,34 @@
+{
+  "slug": "greyhound",
+  "id": null,
+  "name": "グレイハウンド",
+  "nameEn": "Greyhound",
+  "description": "ウォッカとグレープフルーツだけで作る、軽やかな酸味のロングカクテル。",
+  "baseSpirit": "Vodka",
+  "abv": 10,
+  "originCountry": "United States",
+  "aliases": [
+    "グレーハウンド"
+  ],
+  "officialRecipe": {
+    "name": "グレイハウンド（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ウォッカ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "グレープフルーツジュース",
+        "amount": 135,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

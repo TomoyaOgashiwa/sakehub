@@ -1,0 +1,13 @@
+{
+  "slug": "saigon-special",
+  "name": "Saigon Special",
+  "nameEn": "Saigon Special",
+  "category": "beer",
+  "subcategory": "Lager",
+  "description": "Saigon Special is a well-known Vietnam Lager from Saigon.",
+  "imageUrl": null,
+  "abv": 4.9,
+  "originCountry": "Vietnam",
+  "manufacturer": "Saigon",
+  "aliases": []
+}

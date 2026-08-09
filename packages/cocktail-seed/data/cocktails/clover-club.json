@@ -1,0 +1,44 @@
+{
+  "slug": "clover-club",
+  "id": null,
+  "name": "クローバークラブ",
+  "nameEn": "Clover Club",
+  "description": "ラズベリーと卵白のなめらかな泡で仕上げる、フィラデルフィア発祥の名作。",
+  "baseSpirit": "Gin",
+  "abv": 20,
+  "originCountry": "United States",
+  "aliases": [
+    "クローバー・クラブ"
+  ],
+  "officialRecipe": {
+    "name": "クローバークラブ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ドライジン",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "レモンジュース",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "ラズベリーシロップ",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "卵白",
+        "amount": 1,
+        "unit": "piece"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

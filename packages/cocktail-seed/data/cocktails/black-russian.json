@@ -1,0 +1,34 @@
+{
+  "slug": "black-russian",
+  "id": null,
+  "name": "ブラックルシアン",
+  "nameEn": "Black Russian",
+  "description": "ウォッカとコーヒーリキュールだけで作る、濃厚で甘い食後の一杯。",
+  "baseSpirit": "Vodka",
+  "abv": 27,
+  "originCountry": "Belgium",
+  "aliases": [
+    "ブラック・ルシアン"
+  ],
+  "officialRecipe": {
+    "name": "ブラックルシアン（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ウォッカ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "コーヒーリキュール",
+        "amount": 25,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

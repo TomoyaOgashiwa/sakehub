@@ -1,0 +1,44 @@
+{
+  "slug": "martinez",
+  "id": null,
+  "name": "マルティネス",
+  "nameEn": "Martinez",
+  "description": "マティーニの原型ともされる、ジンとスイートベルモットの芳醇な一杯。",
+  "baseSpirit": "Gin",
+  "abv": 29,
+  "originCountry": "United States",
+  "aliases": [
+    "マルチネス"
+  ],
+  "officialRecipe": {
+    "name": "マルティネス（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "オールドトムジン",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "スイートベルモット",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "マラスキーノリキュール",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "オレンジビターズ",
+        "amount": 1,
+        "unit": "dash"
+      }
+    ],
+    "steps": [
+      "ミキシンググラスに材料と氷を入れる。",
+      "ステアしてしっかり冷やし、香味をなじませる。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

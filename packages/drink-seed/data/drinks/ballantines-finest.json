@@ -1,0 +1,13 @@
+{
+  "slug": "ballantines-finest",
+  "name": "Ballantine's Finest",
+  "nameEn": "Ballantine's Finest",
+  "category": "whisky",
+  "subcategory": "Blended",
+  "description": "Ballantine's Finest is a well-known Scotland Blended from Pernod Ricard.",
+  "imageUrl": null,
+  "abv": 40,
+  "originCountry": "Scotland",
+  "manufacturer": "Pernod Ricard",
+  "aliases": []
+}

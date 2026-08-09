@@ -1,0 +1,44 @@
+{
+  "slug": "oaxaca-old-fashioned",
+  "id": null,
+  "name": "オアハカオールドファッションド",
+  "nameEn": "Oaxaca Old Fashioned",
+  "description": "テキーラとメスカルをアガベでまとめる、現代テキーラカクテルの代表作。",
+  "baseSpirit": "Tequila",
+  "abv": 32,
+  "originCountry": "United States",
+  "aliases": [
+    "オアハカ・オールドファッションド"
+  ],
+  "officialRecipe": {
+    "name": "オアハカオールドファッションド（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "テキーラレポサド",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "メスカル",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "アガベシロップ",
+        "amount": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "アンゴスチュラビターズ",
+        "amount": 2,
+        "unit": "dash"
+      }
+    ],
+    "steps": [
+      "ミキシンググラスに材料と氷を入れる。",
+      "ステアしてしっかり冷やし、香味をなじませる。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

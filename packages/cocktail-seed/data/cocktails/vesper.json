@@ -1,0 +1,39 @@
+{
+  "slug": "vesper",
+  "id": null,
+  "name": "ヴェスパー",
+  "nameEn": "Vesper",
+  "description": "ジンとウォッカをリレでまとめる、ジェームズ・ボンドで知られる強いマティーニ。",
+  "baseSpirit": "Gin",
+  "abv": 34,
+  "originCountry": "United Kingdom",
+  "aliases": [
+    "ヴェスパーマティーニ"
+  ],
+  "officialRecipe": {
+    "name": "ヴェスパー（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ドライジン",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "ウォッカ",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "リレ・ブラン",
+        "amount": 10,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "ミキシンググラスに材料と氷を入れる。",
+      "ステアしてしっかり冷やし、香味をなじませる。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

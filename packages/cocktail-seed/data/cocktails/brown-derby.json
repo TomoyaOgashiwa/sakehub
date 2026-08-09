@@ -1,0 +1,39 @@
+{
+  "slug": "brown-derby",
+  "id": null,
+  "name": "ブラウンダービー",
+  "nameEn": "Brown Derby",
+  "description": "バーボンにグレープフルーツと蜂蜜を合わせる、ハリウッド黄金期のカクテル。",
+  "baseSpirit": "Whisky",
+  "abv": 22,
+  "originCountry": "United States",
+  "aliases": [
+    "ブラウン・ダービー"
+  ],
+  "officialRecipe": {
+    "name": "ブラウンダービー（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "バーボンウイスキー",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "グレープフルーツジュース",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "蜂蜜シロップ",
+        "amount": 15,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

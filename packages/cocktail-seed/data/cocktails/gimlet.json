@@ -1,0 +1,39 @@
+{
+  "slug": "gimlet",
+  "id": null,
+  "name": "ギムレット",
+  "nameEn": "Gimlet",
+  "description": "ジンとライムの鋭い酸味が冴える、英国海軍由来とされるショートカクテル。",
+  "baseSpirit": "Gin",
+  "abv": 29,
+  "originCountry": "United Kingdom",
+  "aliases": [
+    "ジンギムレット"
+  ],
+  "officialRecipe": {
+    "name": "ギムレット（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ドライジン",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ライムジュース",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "シュガーシロップ",
+        "amount": 5,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

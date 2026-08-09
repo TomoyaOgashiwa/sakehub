@@ -1,0 +1,13 @@
+{
+  "slug": "level-vodka",
+  "name": "Level Vodka",
+  "nameEn": "Level Vodka",
+  "category": "vodka",
+  "subcategory": "Plain",
+  "description": "Level Vodka is a well-known Sweden Plain from Level.",
+  "imageUrl": null,
+  "abv": 40,
+  "originCountry": "Sweden",
+  "manufacturer": "Level",
+  "aliases": []
+}

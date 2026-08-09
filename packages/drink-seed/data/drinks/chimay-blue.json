@@ -1,0 +1,13 @@
+{
+  "slug": "chimay-blue",
+  "name": "Chimay Blue",
+  "nameEn": "Chimay Blue",
+  "category": "beer",
+  "subcategory": "Belgian Strong Ale",
+  "description": "Chimay Blue is a well-known Belgium Belgian Strong Ale from Chimay.",
+  "imageUrl": null,
+  "abv": 9,
+  "originCountry": "Belgium",
+  "manufacturer": "Chimay",
+  "aliases": []
+}

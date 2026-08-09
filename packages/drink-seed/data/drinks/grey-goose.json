@@ -6,8 +6,10 @@
   "subcategory": null,
   "description": "フランス・コニャック地方の冬小麦と天然湧水で造られたプレミアムウォッカ。シルクのようになめらかな口当たり。",
   "imageUrl": null,
-  "abv": 40.0,
+  "abv": 40,
   "originCountry": "France",
-  "manufacturer": "Grey Goose",
-  "aliases": ["ぐれいぐーす"]
+  "manufacturer": "Bacardi",
+  "aliases": [
+    "ぐれいぐーす"
+  ]
 }

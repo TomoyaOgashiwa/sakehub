@@ -1,0 +1,49 @@
+{
+  "slug": "tuxedo",
+  "id": null,
+  "name": "タキシード",
+  "nameEn": "Tuxedo",
+  "description": "ジンとドライベルモットにマラスキーノとアブサンを添える、端正なクラシック。",
+  "baseSpirit": "Gin",
+  "abv": 30,
+  "originCountry": "United States",
+  "aliases": [
+    "タキシードNo.2"
+  ],
+  "officialRecipe": {
+    "name": "タキシード（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ドライジン",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ドライベルモット",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "マラスキーノリキュール",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "アブサン",
+        "amount": 1,
+        "unit": "dash"
+      },
+      {
+        "name": "オレンジビターズ",
+        "amount": 1,
+        "unit": "dash"
+      }
+    ],
+    "steps": [
+      "ミキシンググラスに材料と氷を入れる。",
+      "ステアしてしっかり冷やし、香味をなじませる。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

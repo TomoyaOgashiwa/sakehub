@@ -1,0 +1,54 @@
+{
+  "slug": "brandy-crusta",
+  "id": null,
+  "name": "ブランデークラスタ",
+  "nameEn": "Brandy Crusta",
+  "description": "ブランデー、キュラソー、レモン、ビターズを砂糖の縁で飾る19世紀の古典。",
+  "baseSpirit": "Brandy",
+  "abv": 26,
+  "originCountry": "United States",
+  "aliases": [
+    "ブランデー・クラスタ"
+  ],
+  "officialRecipe": {
+    "name": "ブランデークラスタ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ブランデー",
+        "amount": 50,
+        "unit": "ml"
+      },
+      {
+        "name": "オレンジキュラソー",
+        "amount": 10,
+        "unit": "ml"
+      },
+      {
+        "name": "マラスキーノリキュール",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "レモンジュース",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "アンゴスチュラビターズ",
+        "amount": 2,
+        "unit": "dash"
+      },
+      {
+        "name": "砂糖",
+        "amount": 1,
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

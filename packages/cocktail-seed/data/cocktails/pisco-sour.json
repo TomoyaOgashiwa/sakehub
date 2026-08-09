@@ -1,0 +1,49 @@
+{
+  "slug": "pisco-sour",
+  "id": null,
+  "name": "ピスコサワー",
+  "nameEn": "Pisco Sour",
+  "description": "ピスコにライム、甘味、卵白を合わせる、ペルーとチリで愛される代表的カクテル。",
+  "baseSpirit": "Brandy",
+  "abv": 20,
+  "originCountry": "Peru",
+  "aliases": [
+    "ピスコ・サワー"
+  ],
+  "officialRecipe": {
+    "name": "ピスコサワー（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ピスコ",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "ライムジュース",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "シュガーシロップ",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "卵白",
+        "amount": 1,
+        "unit": "piece"
+      },
+      {
+        "name": "アンゴスチュラビターズ",
+        "amount": 2,
+        "unit": "dash"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

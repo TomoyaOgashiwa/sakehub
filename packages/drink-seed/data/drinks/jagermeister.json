@@ -1,0 +1,13 @@
+{
+  "slug": "jagermeister",
+  "name": "Jagermeister",
+  "nameEn": "Jagermeister",
+  "category": "liqueur",
+  "subcategory": "Herbal",
+  "description": "Jagermeister is a well-known Germany Herbal from Mast-Jägermeister.",
+  "imageUrl": null,
+  "abv": 35,
+  "originCountry": "Germany",
+  "manufacturer": "Mast-Jägermeister",
+  "aliases": []
+}

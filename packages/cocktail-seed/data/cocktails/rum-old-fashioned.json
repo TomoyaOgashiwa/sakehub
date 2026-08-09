@@ -1,0 +1,44 @@
+{
+  "slug": "rum-old-fashioned",
+  "id": null,
+  "name": "ラムオールドファッションド",
+  "nameEn": "Rum Old Fashioned",
+  "description": "熟成ラムを砂糖とビターズで引き立てる、オールドファッションドのラム版。",
+  "baseSpirit": "Rum",
+  "abv": 32,
+  "originCountry": "United States",
+  "aliases": [
+    "ラム・オールドファッションド"
+  ],
+  "officialRecipe": {
+    "name": "ラムオールドファッションド（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ダークラム",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "デメララシロップ",
+        "amount": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "アンゴスチュラビターズ",
+        "amount": 2,
+        "unit": "dash"
+      },
+      {
+        "name": "オレンジビターズ",
+        "amount": 1,
+        "unit": "dash"
+      }
+    ],
+    "steps": [
+      "ミキシンググラスに材料と氷を入れる。",
+      "ステアしてしっかり冷やし、香味をなじませる。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

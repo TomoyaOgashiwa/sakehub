@@ -1,0 +1,13 @@
+{
+  "slug": "umi",
+  "name": "海",
+  "nameEn": "Umi",
+  "category": "shochu",
+  "subcategory": "Imo",
+  "description": "海。大海酒造のImoとして知られる定番銘柄。",
+  "imageUrl": null,
+  "abv": 25,
+  "originCountry": "Japan",
+  "manufacturer": "大海酒造",
+  "aliases": []
+}

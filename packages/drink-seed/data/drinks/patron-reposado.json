@@ -1,0 +1,13 @@
+{
+  "slug": "patron-reposado",
+  "name": "Patron Reposado",
+  "nameEn": "Patron Reposado",
+  "category": "tequila",
+  "subcategory": "Tequila",
+  "description": "Patron Reposado is a well-known Mexico Tequila from Bacardi, selected for broad drink catalog coverage in Japan.",
+  "imageUrl": null,
+  "abv": 40,
+  "originCountry": "Mexico",
+  "manufacturer": "Bacardi",
+  "aliases": []
+}

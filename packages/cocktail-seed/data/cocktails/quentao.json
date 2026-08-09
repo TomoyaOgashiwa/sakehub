@@ -1,0 +1,49 @@
+{
+  "slug": "quentao",
+  "id": null,
+  "name": "クエンタォン",
+  "nameEn": "Quentao",
+  "description": "カシャッサを生姜、砂糖、スパイスと温める、ブラジルの祝祭で飲まれるホットカクテル。",
+  "baseSpirit": "Cachaca",
+  "abv": 13,
+  "originCountry": "Brazil",
+  "aliases": [
+    "ケンタオン"
+  ],
+  "officialRecipe": {
+    "name": "クエンタォン（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "カシャッサ",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "水",
+        "amount": 90,
+        "unit": "ml"
+      },
+      {
+        "name": "砂糖",
+        "amount": 1,
+        "unit": "tbsp"
+      },
+      {
+        "name": "生姜",
+        "amount": 5,
+        "unit": "g"
+      },
+      {
+        "name": "シナモン",
+        "amount": 1,
+        "unit": "piece"
+      }
+    ],
+    "steps": [
+      "耐熱グラスに甘味やスパイスを入れる。",
+      "温めた材料を注ぐ。",
+      "軽く混ぜて温かいうちに提供する。"
+    ]
+  }
+}

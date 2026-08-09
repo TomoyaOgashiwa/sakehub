@@ -1,0 +1,13 @@
+{
+  "slug": "bols-genever",
+  "name": "Bols Genever",
+  "nameEn": "Bols Genever",
+  "category": "gin",
+  "subcategory": "Genever",
+  "description": "Bols Genever is a well-known Netherlands Genever from Lucas Bols.",
+  "imageUrl": null,
+  "abv": 42,
+  "originCountry": "Netherlands",
+  "manufacturer": "Lucas Bols",
+  "aliases": []
+}

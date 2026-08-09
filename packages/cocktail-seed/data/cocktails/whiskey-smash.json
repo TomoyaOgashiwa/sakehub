@@ -1,0 +1,44 @@
+{
+  "slug": "whiskey-smash",
+  "id": null,
+  "name": "ウイスキースマッシュ",
+  "nameEn": "Whiskey Smash",
+  "description": "ウイスキーにミントとレモンを合わせる、ジュレップとサワーの中間的な一杯。",
+  "baseSpirit": "Whisky",
+  "abv": 20,
+  "originCountry": "United States",
+  "aliases": [
+    "ウイスキー・スマッシュ"
+  ],
+  "officialRecipe": {
+    "name": "ウイスキースマッシュ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "バーボンウイスキー",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "レモン",
+        "amount": 0.5,
+        "unit": "piece"
+      },
+      {
+        "name": "シュガーシロップ",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "ミントの葉",
+        "amount": 8,
+        "unit": "piece"
+      }
+    ],
+    "steps": [
+      "グラスの中でフルーツやハーブを軽くつぶす。",
+      "残りの材料と氷を加える。",
+      "よく混ぜて仕上げる。"
+    ]
+  }
+}

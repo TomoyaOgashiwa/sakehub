@@ -1,0 +1,34 @@
+{
+  "slug": "vodka-martini",
+  "id": null,
+  "name": "ウォッカマティーニ",
+  "nameEn": "Vodka Martini",
+  "description": "ジンの代わりにウォッカを使う、シャープでクリーンなマティーニ。",
+  "baseSpirit": "Vodka",
+  "abv": 33,
+  "originCountry": "United States",
+  "aliases": [
+    "カンガルー"
+  ],
+  "officialRecipe": {
+    "name": "ウォッカマティーニ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ウォッカ",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "ドライベルモット",
+        "amount": 10,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "ミキシンググラスに材料と氷を入れる。",
+      "ステアしてしっかり冷やし、香味をなじませる。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

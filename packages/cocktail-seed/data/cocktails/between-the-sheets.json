@@ -1,0 +1,44 @@
+{
+  "slug": "between-the-sheets",
+  "id": null,
+  "name": "ビトウィーンザシーツ",
+  "nameEn": "Between the Sheets",
+  "description": "ラム、コニャック、ホワイトキュラソー、レモンを合わせるサイドカー系の古典。",
+  "baseSpirit": "Rum",
+  "abv": 29,
+  "originCountry": "France",
+  "aliases": [
+    "ビトウィーン・ザ・シーツ"
+  ],
+  "officialRecipe": {
+    "name": "ビトウィーンザシーツ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ライトラム",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "コニャック",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "ホワイトキュラソー",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "レモンジュース",
+        "amount": 20,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

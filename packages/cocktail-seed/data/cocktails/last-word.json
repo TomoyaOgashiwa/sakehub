@@ -1,0 +1,44 @@
+{
+  "slug": "last-word",
+  "id": null,
+  "name": "ラストワード",
+  "nameEn": "Last Word",
+  "description": "ジン、シャルトリューズ、マラスキーノ、ライムを等量で合わせる強い個性のクラシック。",
+  "baseSpirit": "Gin",
+  "abv": 28,
+  "originCountry": "United States",
+  "aliases": [
+    "ザ・ラスト・ワード"
+  ],
+  "officialRecipe": {
+    "name": "ラストワード（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ドライジン",
+        "amount": 22.5,
+        "unit": "ml"
+      },
+      {
+        "name": "グリーンシャルトリューズ",
+        "amount": 22.5,
+        "unit": "ml"
+      },
+      {
+        "name": "マラスキーノリキュール",
+        "amount": 22.5,
+        "unit": "ml"
+      },
+      {
+        "name": "ライムジュース",
+        "amount": 22.5,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

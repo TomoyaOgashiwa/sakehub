@@ -1,0 +1,49 @@
+{
+  "slug": "siesta",
+  "id": null,
+  "name": "シエスタ",
+  "nameEn": "Siesta",
+  "description": "テキーラ、カンパリ、グレープフルーツ、ライムを合わせるモダンクラシック。",
+  "baseSpirit": "Tequila",
+  "abv": 19,
+  "originCountry": "United States",
+  "aliases": [
+    "シエスタカクテル"
+  ],
+  "officialRecipe": {
+    "name": "シエスタ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "テキーラブランコ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "カンパリ",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "グレープフルーツジュース",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "ライムジュース",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "シュガーシロップ",
+        "amount": 10,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

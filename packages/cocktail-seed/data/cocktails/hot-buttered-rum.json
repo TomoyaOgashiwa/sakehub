@@ -1,0 +1,49 @@
+{
+  "slug": "hot-buttered-rum",
+  "id": null,
+  "name": "ホットバタードラム",
+  "nameEn": "Hot Buttered Rum",
+  "description": "ラム、バター、砂糖、スパイスを湯で溶く、冬の温かいクラシック。",
+  "baseSpirit": "Rum",
+  "abv": 12,
+  "originCountry": "United States",
+  "aliases": [
+    "ホット・バタード・ラム"
+  ],
+  "officialRecipe": {
+    "name": "ホットバタードラム（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ダークラム",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "熱湯",
+        "amount": 120,
+        "unit": "ml"
+      },
+      {
+        "name": "無塩バター",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "ブラウンシュガー",
+        "amount": 2,
+        "unit": "tsp"
+      },
+      {
+        "name": "シナモン",
+        "amount": 1,
+        "unit": "dash"
+      }
+    ],
+    "steps": [
+      "耐熱グラスに甘味やスパイスを入れる。",
+      "温めた材料を注ぐ。",
+      "軽く混ぜて温かいうちに提供する。"
+    ]
+  }
+}

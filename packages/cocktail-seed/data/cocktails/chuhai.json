@@ -1,0 +1,39 @@
+{
+  "slug": "chuhai",
+  "id": null,
+  "name": "酎ハイ",
+  "nameEn": "Chuhai",
+  "description": "焼酎を炭酸で割る、各種サワーのベースにもなる日本のロングドリンク。",
+  "baseSpirit": "Shochu",
+  "abv": 7,
+  "originCountry": "Japan",
+  "aliases": [
+    "チューハイ"
+  ],
+  "officialRecipe": {
+    "name": "酎ハイ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "焼酎",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ソーダ",
+        "amount": 135,
+        "unit": "ml"
+      },
+      {
+        "name": "レモン",
+        "amount": 0.125,
+        "unit": "piece"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

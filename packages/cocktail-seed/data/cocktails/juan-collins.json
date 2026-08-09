@@ -1,0 +1,44 @@
+{
+  "slug": "juan-collins",
+  "id": null,
+  "name": "ファンコリンズ",
+  "nameEn": "Juan Collins",
+  "description": "トムコリンズをテキーラで作る、爽快なロングサワー。",
+  "baseSpirit": "Tequila",
+  "abv": 11,
+  "originCountry": "Mexico",
+  "aliases": [
+    "ホアン・コリンズ"
+  ],
+  "officialRecipe": {
+    "name": "ファンコリンズ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "テキーラブランコ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "レモンジュース",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "シュガーシロップ",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "ソーダ",
+        "amount": 90,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

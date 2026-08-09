@@ -1,0 +1,13 @@
+{
+  "slug": "lagunitas-ipa",
+  "name": "Lagunitas IPA",
+  "nameEn": "Lagunitas IPA",
+  "category": "beer",
+  "subcategory": "IPA",
+  "description": "Lagunitas IPA is a well-known United States IPA from Lagunitas.",
+  "imageUrl": null,
+  "abv": 6.2,
+  "originCountry": "United States",
+  "manufacturer": "Lagunitas",
+  "aliases": []
+}

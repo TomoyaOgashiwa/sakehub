@@ -1,0 +1,34 @@
+{
+  "slug": "shochu-rocks",
+  "id": null,
+  "name": "焼酎ロック",
+  "nameEn": "Shochu on the Rocks",
+  "description": "氷で冷やしながら焼酎の香味変化を楽しむ、最もシンプルな提供スタイル。",
+  "baseSpirit": "Shochu",
+  "abv": 20,
+  "originCountry": "Japan",
+  "aliases": [
+    "焼酎オンザロック"
+  ],
+  "officialRecipe": {
+    "name": "焼酎ロック（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "焼酎",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "氷",
+        "amount": 1,
+        "unit": "piece"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

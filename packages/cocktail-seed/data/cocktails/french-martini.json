@@ -1,0 +1,39 @@
+{
+  "slug": "french-martini",
+  "id": null,
+  "name": "フレンチマティーニ",
+  "nameEn": "French Martini",
+  "description": "ウォッカ、ラズベリーリキュール、パイナップルを合わせるフルーティーなモダンクラシック。",
+  "baseSpirit": "Vodka",
+  "abv": 20,
+  "originCountry": "United States",
+  "aliases": [
+    "フレンチ・マティーニ"
+  ],
+  "officialRecipe": {
+    "name": "フレンチマティーニ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ウォッカ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ラズベリーリキュール",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "パイナップルジュース",
+        "amount": 45,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

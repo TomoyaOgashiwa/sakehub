@@ -1,0 +1,34 @@
+{
+  "slug": "kir",
+  "id": null,
+  "name": "キール",
+  "nameEn": "Kir",
+  "description": "カシスリキュールを白ワインで割る、フランスの代表的なアペリティフ。",
+  "baseSpirit": "Liqueur",
+  "abv": 11,
+  "originCountry": "France",
+  "aliases": [
+    "キールカクテル"
+  ],
+  "officialRecipe": {
+    "name": "キール（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "クレーム・ド・カシス",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "白ワイン",
+        "amount": 120,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

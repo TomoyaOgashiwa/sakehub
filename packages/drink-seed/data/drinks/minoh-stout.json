@@ -1,0 +1,13 @@
+{
+  "slug": "minoh-stout",
+  "name": "箕面ビール スタウト",
+  "nameEn": "Minoh Stout",
+  "category": "beer",
+  "subcategory": "Stout",
+  "description": "Minoh Stout is a well-known Japan Stout from Minoh.",
+  "imageUrl": null,
+  "abv": 5.5,
+  "originCountry": "Japan",
+  "manufacturer": "Minoh",
+  "aliases": []
+}

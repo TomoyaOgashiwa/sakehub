@@ -1,0 +1,39 @@
+{
+  "slug": "woo-woo",
+  "id": null,
+  "name": "ウーウー",
+  "nameEn": "Woo Woo",
+  "description": "ウォッカ、ピーチ、クランベリーで作る、甘酸っぱく軽いパーティーカクテル。",
+  "baseSpirit": "Vodka",
+  "abv": 12,
+  "originCountry": "United States",
+  "aliases": [
+    "Woo Woo"
+  ],
+  "officialRecipe": {
+    "name": "ウーウー（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ウォッカ",
+        "amount": 40,
+        "unit": "ml"
+      },
+      {
+        "name": "ピーチリキュール",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "クランベリージュース",
+        "amount": 100,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

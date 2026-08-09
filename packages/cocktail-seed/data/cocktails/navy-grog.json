@@ -1,0 +1,54 @@
+{
+  "slug": "navy-grog",
+  "id": null,
+  "name": "ネイビーグロッグ",
+  "nameEn": "Navy Grog",
+  "description": "複数のラムとグレープフルーツ、蜂蜜を合わせるティキの代表作。",
+  "baseSpirit": "Rum",
+  "abv": 21,
+  "originCountry": "United States",
+  "aliases": [
+    "ネイビー・グロッグ"
+  ],
+  "officialRecipe": {
+    "name": "ネイビーグロッグ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ライトラム",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "ダークラム",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "デメラララム",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "グレープフルーツジュース",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "ライムジュース",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "蜂蜜シロップ",
+        "amount": 15,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

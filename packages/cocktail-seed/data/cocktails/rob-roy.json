@@ -1,0 +1,39 @@
+{
+  "slug": "rob-roy",
+  "id": null,
+  "name": "ロブロイ",
+  "nameEn": "Rob Roy",
+  "description": "マンハッタンをスコッチで作る、香ばしくなめらかなクラシック。",
+  "baseSpirit": "Whisky",
+  "abv": 30,
+  "originCountry": "United States",
+  "aliases": [
+    "ロブ・ロイ"
+  ],
+  "officialRecipe": {
+    "name": "ロブロイ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "スコッチウイスキー",
+        "amount": 50,
+        "unit": "ml"
+      },
+      {
+        "name": "スイートベルモット",
+        "amount": 25,
+        "unit": "ml"
+      },
+      {
+        "name": "アンゴスチュラビターズ",
+        "amount": 2,
+        "unit": "dash"
+      }
+    ],
+    "steps": [
+      "ミキシンググラスに材料と氷を入れる。",
+      "ステアしてしっかり冷やし、香味をなじませる。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

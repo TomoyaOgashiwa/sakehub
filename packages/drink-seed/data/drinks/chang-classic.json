@@ -1,0 +1,13 @@
+{
+  "slug": "chang-classic",
+  "name": "Chang Classic",
+  "nameEn": "Chang Classic",
+  "category": "beer",
+  "subcategory": "Lager",
+  "description": "Chang Classic is a well-known Thailand Lager from Chang.",
+  "imageUrl": null,
+  "abv": 5,
+  "originCountry": "Thailand",
+  "manufacturer": "Chang",
+  "aliases": []
+}

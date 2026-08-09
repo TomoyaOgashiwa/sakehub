@@ -1,0 +1,39 @@
+{
+  "slug": "sea-breeze",
+  "id": null,
+  "name": "シーブリーズ",
+  "nameEn": "Sea Breeze",
+  "description": "ウォッカ、クランベリー、グレープフルーツで作る爽やかなフルーツカクテル。",
+  "baseSpirit": "Vodka",
+  "abv": 9,
+  "originCountry": "United States",
+  "aliases": [
+    "シー・ブリーズ"
+  ],
+  "officialRecipe": {
+    "name": "シーブリーズ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ウォッカ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "クランベリージュース",
+        "amount": 90,
+        "unit": "ml"
+      },
+      {
+        "name": "グレープフルーツジュース",
+        "amount": 45,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

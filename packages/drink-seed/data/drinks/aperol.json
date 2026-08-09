@@ -1,0 +1,13 @@
+{
+  "slug": "aperol",
+  "name": "Aperol",
+  "nameEn": "Aperol",
+  "category": "liqueur",
+  "subcategory": "Aperitivo",
+  "description": "Aperol is a well-known Italy Aperitivo from Campari Group.",
+  "imageUrl": null,
+  "abv": 11,
+  "originCountry": "Italy",
+  "manufacturer": "Campari Group",
+  "aliases": []
+}

@@ -1,0 +1,49 @@
+{
+  "slug": "hurricane",
+  "id": null,
+  "name": "ハリケーン",
+  "nameEn": "Hurricane",
+  "description": "ラムとパッションフルーツをたっぷり使う、ニューオーリンズ名物のトロピカルカクテル。",
+  "baseSpirit": "Rum",
+  "abv": 17,
+  "originCountry": "United States",
+  "aliases": [
+    "ハリケーンカクテル"
+  ],
+  "officialRecipe": {
+    "name": "ハリケーン（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ライトラム",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ダークラム",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "パッションフルーツシロップ",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "レモンジュース",
+        "amount": 25,
+        "unit": "ml"
+      },
+      {
+        "name": "グレナデンシロップ",
+        "amount": 10,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "シェーカーに材料と氷を入れる。",
+      "しっかりシェイクして冷やす。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

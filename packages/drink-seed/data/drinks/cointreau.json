@@ -1,0 +1,13 @@
+{
+  "slug": "cointreau",
+  "name": "Cointreau",
+  "nameEn": "Cointreau",
+  "category": "liqueur",
+  "subcategory": "Orange",
+  "description": "Cointreau is a well-known France Orange from Rémy Cointreau.",
+  "imageUrl": null,
+  "abv": 40,
+  "originCountry": "France",
+  "manufacturer": "Rémy Cointreau",
+  "aliases": []
+}

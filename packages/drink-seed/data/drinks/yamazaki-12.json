@@ -6,8 +6,11 @@
   "subcategory": "Single Malt",
   "description": "日本初のモルトウイスキー蒸留所が生んだ至宝。繊細で複雑な味わいに、ほのかなミズナラの香りが漂う。",
   "imageUrl": null,
-  "abv": 43.0,
+  "abv": 43,
   "originCountry": "Japan",
-  "manufacturer": "サントリー",
-  "aliases": ["やまざき", "やまざき12ねん"]
+  "manufacturer": "Suntory",
+  "aliases": [
+    "やまざき",
+    "やまざき12ねん"
+  ]
 }

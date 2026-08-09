@@ -1,0 +1,44 @@
+{
+  "slug": "batanga",
+  "id": null,
+  "name": "バタンガ",
+  "nameEn": "Batanga",
+  "description": "テキーラ、ライム、コーラを塩で引き締める、メキシコのバー定番。",
+  "baseSpirit": "Tequila",
+  "abv": 10,
+  "originCountry": "Mexico",
+  "aliases": [
+    "バタンガカクテル"
+  ],
+  "officialRecipe": {
+    "name": "バタンガ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "テキーラブランコ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ライムジュース",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "コーラ",
+        "amount": 120,
+        "unit": "ml"
+      },
+      {
+        "name": "塩",
+        "amount": 1,
+        "unit": "dash"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "slug": "dark-and-stormy",
+  "id": null,
+  "name": "ダークアンドストーミー",
+  "nameEn": "Dark and Stormy",
+  "description": "ダークラムとジンジャービアで作る、バミューダを代表するスパイシーなハイボール。",
+  "baseSpirit": "Rum",
+  "abv": 11,
+  "originCountry": "Bermuda",
+  "aliases": [
+    "ダーク＆ストーミー"
+  ],
+  "officialRecipe": {
+    "name": "ダークアンドストーミー（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ダークラム",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "ジンジャービア",
+        "amount": 120,
+        "unit": "ml"
+      },
+      {
+        "name": "ライムジュース",
+        "amount": 10,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

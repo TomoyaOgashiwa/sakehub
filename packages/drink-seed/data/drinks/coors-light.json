@@ -1,0 +1,13 @@
+{
+  "slug": "coors-light",
+  "name": "Coors Light",
+  "nameEn": "Coors Light",
+  "category": "beer",
+  "subcategory": "Light Lager",
+  "description": "Coors Light is a well-known United States Light Lager from Coors.",
+  "imageUrl": null,
+  "abv": 4.2,
+  "originCountry": "United States",
+  "manufacturer": "Coors",
+  "aliases": []
+}

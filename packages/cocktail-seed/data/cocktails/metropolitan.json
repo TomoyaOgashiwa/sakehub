@@ -1,0 +1,44 @@
+{
+  "slug": "metropolitan",
+  "id": null,
+  "name": "メトロポリタン",
+  "nameEn": "Metropolitan",
+  "description": "ブランデー、スイートベルモット、シロップ、ビターズで作るマンハッタン系の古典。",
+  "baseSpirit": "Brandy",
+  "abv": 28,
+  "originCountry": "United States",
+  "aliases": [
+    "メトロポリタンカクテル"
+  ],
+  "officialRecipe": {
+    "name": "メトロポリタン（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ブランデー",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "スイートベルモット",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "シュガーシロップ",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "アンゴスチュラビターズ",
+        "amount": 2,
+        "unit": "dash"
+      }
+    ],
+    "steps": [
+      "ミキシンググラスに材料と氷を入れる。",
+      "ステアしてしっかり冷やし、香味をなじませる。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

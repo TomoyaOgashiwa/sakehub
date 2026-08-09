@@ -1,0 +1,39 @@
+{
+  "slug": "hanky-panky",
+  "id": null,
+  "name": "ハンキーパンキー",
+  "nameEn": "Hanky Panky",
+  "description": "ジンとスイートベルモットにフェルネットを効かせた、サヴォイ由来のビターな一杯。",
+  "baseSpirit": "Gin",
+  "abv": 27,
+  "originCountry": "United Kingdom",
+  "aliases": [
+    "ハンキー・パンキー"
+  ],
+  "officialRecipe": {
+    "name": "ハンキーパンキー（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ドライジン",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "スイートベルモット",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "フェルネットブランカ",
+        "amount": 5,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "ミキシンググラスに材料と氷を入れる。",
+      "ステアしてしっかり冷やし、香味をなじませる。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

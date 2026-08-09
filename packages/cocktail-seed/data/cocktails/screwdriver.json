@@ -1,0 +1,34 @@
+{
+  "slug": "screwdriver",
+  "id": null,
+  "name": "スクリュードライバー",
+  "nameEn": "Screwdriver",
+  "description": "ウォッカをオレンジジュースで割る、世界的に親しまれるシンプルなロングカクテル。",
+  "baseSpirit": "Vodka",
+  "abv": 10,
+  "originCountry": "United States",
+  "aliases": [
+    "ウォッカオレンジ"
+  ],
+  "officialRecipe": {
+    "name": "スクリュードライバー（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "ウォッカ",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "オレンジジュース",
+        "amount": 135,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

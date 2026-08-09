@@ -6,8 +6,11 @@
   "subcategory": "Blended",
   "description": "山崎・白州・知多のモルトとグレーンを匠の技でブレンド。華やかな香りと繊細な甘みが調和した日本の美意識。",
   "imageUrl": null,
-  "abv": 43.0,
+  "abv": 43,
   "originCountry": "Japan",
-  "manufacturer": "サントリー",
-  "aliases": ["ひびき", "ひびきはーもにー"]
+  "manufacturer": "Suntory",
+  "aliases": [
+    "ひびき",
+    "ひびきはーもにー"
+  ]
 }

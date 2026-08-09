@@ -1,0 +1,13 @@
+{
+  "slug": "bud-light",
+  "name": "Bud Light",
+  "nameEn": "Bud Light",
+  "category": "beer",
+  "subcategory": "Light Lager",
+  "description": "Bud Light is a well-known United States Light Lager from AB InBev.",
+  "imageUrl": null,
+  "abv": 4.2,
+  "originCountry": "United States",
+  "manufacturer": "AB InBev",
+  "aliases": []
+}

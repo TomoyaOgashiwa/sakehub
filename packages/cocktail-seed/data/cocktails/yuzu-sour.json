@@ -1,0 +1,39 @@
+{
+  "slug": "yuzu-sour",
+  "id": null,
+  "name": "柚子サワー",
+  "nameEn": "Yuzu Sour",
+  "description": "焼酎に柚子の酸味と香りを合わせる、日本らしい爽やかなサワー。",
+  "baseSpirit": "Shochu",
+  "abv": 7,
+  "originCountry": "Japan",
+  "aliases": [
+    "ゆずサワー"
+  ],
+  "officialRecipe": {
+    "name": "柚子サワー（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "焼酎",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "柚子果汁",
+        "amount": 20,
+        "unit": "ml"
+      },
+      {
+        "name": "ソーダ",
+        "amount": 120,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "グラスに氷を入れる。",
+      "材料を順に注ぐ。",
+      "軽く混ぜて仕上げる。"
+    ]
+  }
+}

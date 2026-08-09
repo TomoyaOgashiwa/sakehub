@@ -1,0 +1,39 @@
+{
+  "slug": "boulevardier",
+  "id": null,
+  "name": "ブールヴァルディエ",
+  "nameEn": "Boulevardier",
+  "description": "バーボン、カンパリ、ベルモットで作る、ネグローニのウイスキー版。",
+  "baseSpirit": "Whisky",
+  "abv": 27,
+  "originCountry": "France",
+  "aliases": [
+    "ブルヴァルディエ"
+  ],
+  "officialRecipe": {
+    "name": "ブールヴァルディエ（基本レシピ）",
+    "memo": "クラシックな配合を家庭でも作りやすい一杯分に整えた基本レシピ。",
+    "ingredients": [
+      {
+        "name": "バーボンウイスキー",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "カンパリ",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "スイートベルモット",
+        "amount": 30,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      "ミキシンググラスに材料と氷を入れる。",
+      "ステアしてしっかり冷やし、香味をなじませる。",
+      "冷やしたグラスに注ぐ。"
+    ]
+  }
+}

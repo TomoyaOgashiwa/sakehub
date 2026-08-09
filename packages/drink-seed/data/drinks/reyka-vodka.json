@@ -1,0 +1,13 @@
+{
+  "slug": "reyka-vodka",
+  "name": "Reyka Vodka",
+  "nameEn": "Reyka Vodka",
+  "category": "vodka",
+  "subcategory": "Plain",
+  "description": "Reyka Vodka is a well-known Iceland Plain from Reyka.",
+  "imageUrl": null,
+  "abv": 40,
+  "originCountry": "Iceland",
+  "manufacturer": "Reyka",
+  "aliases": []
+}

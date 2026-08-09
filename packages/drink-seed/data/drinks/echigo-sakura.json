@@ -1,0 +1,15 @@
+{
+  "slug": "echigo-sakura",
+  "name": "越後桜 普通酒",
+  "nameEn": "Echigo Sakura",
+  "category": "sake",
+  "subcategory": "Futsushu",
+  "description": "新潟の日常酒。すっきり辛口で食卓に寄り添う。",
+  "imageUrl": null,
+  "abv": 15,
+  "originCountry": "Japan",
+  "manufacturer": "越後桜酒造",
+  "aliases": [
+    "えちござくら"
+  ]
+}

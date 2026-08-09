@@ -1,0 +1,13 @@
+{
+  "slug": "hoegaarden-white",
+  "name": "Hoegaarden White",
+  "nameEn": "Hoegaarden White",
+  "category": "beer",
+  "subcategory": "Witbier",
+  "description": "Hoegaarden White is a well-known Belgium Witbier from AB InBev.",
+  "imageUrl": null,
+  "abv": 4.9,
+  "originCountry": "Belgium",
+  "manufacturer": "AB InBev",
+  "aliases": []
+}

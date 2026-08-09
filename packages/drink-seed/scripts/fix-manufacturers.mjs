@@ -197,11 +197,11 @@ function matchesBrandPrefix(text, prefix) {
   const prefixEndsLatin = /[A-Za-z0-9]$/.test(prefix);
   if (prefixEndsLatin) {
     // Latin brand must end the token: space, hyphen, apostrophe, or EOS.
-    return /[\s'’\-]/.test(next);
+    return /[\s'’-]/.test(next);
   }
   // CJK / mixed: allow whitespace or middle-dot; block if next continues
   // the same CJK run without separator (富士 + 桜 → need longer prefix entry).
-  if (/[\s'’\-・]/.test(next)) return true;
+  if (/[\s'’・-]/.test(next)) return true;
   if (/[\u3040-\u30ff\u4e00-\u9fff]/.test(next)) return false;
   return true;
 }

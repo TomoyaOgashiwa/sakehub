@@ -9,5 +9,6 @@
   "abv": 40,
   "originCountry": "France",
   "manufacturer": "LVMH",
-  "aliases": []
+  "aliases": [],
+  "imageSource": "none"
 }

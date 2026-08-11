@@ -140,6 +140,8 @@ ${items.map((it, i) => `${i + 1}. ${it.name}${it.slugHint ? ` (slug hint: ${it.s
     return list.map((c) => ({
       ...c,
       id: null,
+      imageUrl: c.imageUrl ?? null,
+      imageSource: c.imageSource ?? 'none',
       slug: c.slug && SLUG_PATTERN.test(c.slug) ? c.slug : slugifyAsciiOrFallback(c.name, 'cocktail'),
     }));
   }

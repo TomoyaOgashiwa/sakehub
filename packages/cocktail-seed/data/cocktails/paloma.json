@@ -7,6 +7,8 @@
   "baseSpirit": "Tequila",
   "abv": 12,
   "originCountry": "Mexico",
+  "imageUrl": null,
+  "imageSource": "none",
   "aliases": [],
   "officialRecipe": {
     "name": "パロマ（基本レシピ）",

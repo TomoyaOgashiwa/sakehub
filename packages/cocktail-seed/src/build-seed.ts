@@ -134,7 +134,7 @@ async function main(): Promise<void> {
 
     lines.push(`-- ${c.slug}`);
     lines.push(
-      `INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, aliases)`,
+      `INSERT INTO cocktails (id, slug, name, name_en, description, base_spirit, abv, origin_country, image_url, image_source, aliases)`,
     );
     lines.push(`VALUES (`);
     lines.push(`  ${quoteLiteral(cocktailId)},`);
@@ -145,6 +145,8 @@ async function main(): Promise<void> {
     lines.push(`  ${quoteNullableLiteral(c.baseSpirit)},`);
     lines.push(`  ${quoteNullableNumber(c.abv)},`);
     lines.push(`  ${quoteNullableLiteral(c.originCountry)},`);
+    lines.push(`  ${quoteNullableLiteral(c.imageUrl)},`);
+    lines.push(`  ${quoteLiteral(c.imageSource)},`);
     lines.push(`  ${quoteTextArrayLiteral(c.aliases)}`);
     lines.push(`)`);
     lines.push(`ON CONFLICT (id) DO UPDATE SET`);
@@ -155,6 +157,12 @@ async function main(): Promise<void> {
     lines.push(`  base_spirit = EXCLUDED.base_spirit,`);
     lines.push(`  abv = EXCLUDED.abv,`);
     lines.push(`  origin_country = EXCLUDED.origin_country,`);
+    // Preserve existing Storage URL / attribution when seed has not uploaded an image yet.
+    lines.push(`  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),`);
+    lines.push(`  image_source = CASE`);
+    lines.push(`    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source`);
+    lines.push(`    ELSE cocktails.image_source`);
+    lines.push(`  END,`);
     lines.push(`  aliases = EXCLUDED.aliases,`);
     lines.push(`  updated_at = now();`);
     lines.push('');

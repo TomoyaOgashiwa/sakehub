@@ -27,6 +27,10 @@ export interface OfficialRecipeSeed {
   steps: string[];
 }
 
+/** Catalog master image attribution (UI label + regulatory disclosure). */
+export const IMAGE_SOURCES = ['none', 'generated', 'brand'] as const;
+export type ImageSource = (typeof IMAGE_SOURCES)[number];
+
 /**
  * One cocktail master + its official basic recipe.
  * `id` is null for new cocktails (derived from slug via UUIDv5).
@@ -41,6 +45,10 @@ export interface CocktailSeed {
   baseSpirit: string | null;
   abv: number | null;
   originCountry: string | null;
+  /** Supabase Storage public URL（catalog-images）。未設定時は null。 */
+  imageUrl: string | null;
+  /** none = no image; generated = AI; brand = company-provided. */
+  imageSource: ImageSource;
   /** かな読み・ローマ字表記などの別名候補。cocktails.search_vector に合流する。 */
   aliases: string[];
   officialRecipe: OfficialRecipeSeed;

@@ -9,5 +9,8 @@
   "abv": 15.5,
   "originCountry": "Japan",
   "manufacturer": "八海醸造",
-  "aliases": ["はっかいさん"]
+  "aliases": [
+    "はっかいさん"
+  ],
+  "imageSource": "none"
 }

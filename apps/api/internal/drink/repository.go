@@ -14,7 +14,7 @@ var ErrNotFound = errors.New("drink not found")
 // average_rating and total_reviews are computed dynamically from the ratings table.
 // search_vector is excluded because it is a generated column used only for queries.
 const allColumns = `id, slug, name, name_en, category, subcategory, description,
-	image_url, abv, origin_country, manufacturer,
+	image_url, image_source, abv, origin_country, manufacturer,
 	COALESCE((SELECT AVG(r.rating)::NUMERIC(3,2) FROM ratings r WHERE r.drink_id = id), 0) AS average_rating,
 	COALESCE((SELECT COUNT(*) FROM ratings r WHERE r.drink_id = id), 0)::INTEGER AS total_reviews,
 	created_at, updated_at`
@@ -38,7 +38,7 @@ func (r *repository) scanDrink(row interface{ Scan(dest ...any) error }) (*Drink
 	var d Drink
 	err := row.Scan(
 		&d.ID, &d.Slug, &d.Name, &d.NameEn, &d.Category, &d.Subcategory,
-		&d.Description, &d.ImageURL, &d.ABV, &d.OriginCountry, &d.Manufacturer,
+		&d.Description, &d.ImageURL, &d.ImageSource, &d.ABV, &d.OriginCountry, &d.Manufacturer,
 		&d.AverageRating, &d.TotalReviews, &d.CreatedAt, &d.UpdatedAt,
 	)
 	if err != nil {
@@ -149,7 +149,7 @@ OR EXISTS (SELECT 1 FROM unnest(aliases) AS alias WHERE strpos(lower(alias), low
 		var d Drink
 		if err := rows.Scan(
 			&d.ID, &d.Slug, &d.Name, &d.NameEn, &d.Category, &d.Subcategory,
-			&d.Description, &d.ImageURL, &d.ABV, &d.OriginCountry, &d.Manufacturer,
+			&d.Description, &d.ImageURL, &d.ImageSource, &d.ABV, &d.OriginCountry, &d.Manufacturer,
 			&d.AverageRating, &d.TotalReviews, &d.CreatedAt, &d.UpdatedAt,
 			&total,
 		); err != nil {
@@ -168,13 +168,17 @@ OR EXISTS (SELECT 1 FROM unnest(aliases) AS alias WHERE strpos(lower(alias), low
 }
 
 func (r *repository) Insert(ctx context.Context, d *Drink) error {
-	const q = `INSERT INTO drinks (slug, name, name_en, category, subcategory, description, image_url, abv, origin_country, manufacturer)
-		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+	const q = `INSERT INTO drinks (slug, name, name_en, category, subcategory, description, image_url, image_source, abv, origin_country, manufacturer)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
 		RETURNING id, created_at, updated_at`
+
+	if d.ImageSource == "" {
+		d.ImageSource = "none"
+	}
 
 	if err := r.db.QueryRowContext(ctx, q,
 		d.Slug, d.Name, d.NameEn, d.Category, d.Subcategory,
-		d.Description, d.ImageURL, d.ABV, d.OriginCountry, d.Manufacturer,
+		d.Description, d.ImageURL, d.ImageSource, d.ABV, d.OriginCountry, d.Manufacturer,
 	).Scan(&d.ID, &d.CreatedAt, &d.UpdatedAt); err != nil {
 		return err
 	}

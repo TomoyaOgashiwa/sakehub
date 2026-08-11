@@ -2,13 +2,19 @@ import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { assertAliases, type ValidationIssue } from '@sakehub/seed-utils';
+import {
+  assertAliases,
+  assertCatalogImageUrl,
+  type ValidationIssue,
+} from '@sakehub/seed-utils';
 
 import {
+  IMAGE_SOURCES,
   INGREDIENT_UNITS,
   MAX_ALIASES,
   SLUG_PATTERN,
   type CocktailSeed,
+  type ImageSource,
   type IngredientUnit,
 } from './schema.ts';
 
@@ -19,6 +25,23 @@ const UUID_PATTERN =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 const UNIT_SET = new Set<string>(INGREDIENT_UNITS);
+const IMAGE_SOURCE_SET = new Set<string>(IMAGE_SOURCES);
+
+function resolveImageSource(
+  imageUrl: string | null | undefined,
+  imageSource: unknown,
+): ImageSource {
+  if (typeof imageSource === 'string' && IMAGE_SOURCE_SET.has(imageSource)) {
+    return imageSource as ImageSource;
+  }
+  if (
+    typeof imageUrl === 'string' &&
+    imageUrl.includes('/storage/v1/object/public/catalog-images/cocktails/')
+  ) {
+    return 'generated';
+  }
+  return 'none';
+}
 
 function isRecord(v: unknown): v is Record<string, unknown> {
   return typeof v === 'object' && v !== null && !Array.isArray(v);
@@ -80,6 +103,41 @@ function validateCocktail(file: string, raw: unknown, issues: ValidationIssue[])
 
   if (raw.originCountry !== null && typeof raw.originCountry !== 'string') {
     issues.push({ file, field: 'originCountry', message: 'must be string or null' });
+  }
+
+  // Missing / null imageUrl stays valid until upload fills a prod catalog-images URL.
+  if (typeof slug === 'string') {
+    assertCatalogImageUrl(file, 'cocktail', slug, raw.imageUrl ?? null, issues);
+  } else if (
+    raw.imageUrl !== undefined &&
+    raw.imageUrl !== null &&
+    typeof raw.imageUrl !== 'string'
+  ) {
+    issues.push({ file, field: 'imageUrl', message: 'must be string or null' });
+  }
+
+  if (
+    raw.imageSource !== undefined &&
+    (typeof raw.imageSource !== 'string' || !IMAGE_SOURCE_SET.has(raw.imageSource))
+  ) {
+    issues.push({
+      file,
+      field: 'imageSource',
+      message: `must be one of ${IMAGE_SOURCES.join(', ')}`,
+    });
+  }
+
+  if (
+    typeof raw.imageUrl === 'string' &&
+    typeof raw.imageSource === 'string' &&
+    IMAGE_SOURCE_SET.has(raw.imageSource) &&
+    raw.imageSource === 'none'
+  ) {
+    issues.push({
+      file,
+      field: 'imageSource',
+      message: 'must not be "none" when imageUrl is set',
+    });
   }
 
   assertAliases(file, raw.aliases, MAX_ALIASES, issues);
@@ -166,7 +224,15 @@ function validateCocktail(file: string, raw: unknown, issues: ValidationIssue[])
     return null;
   }
 
-  return raw as unknown as CocktailSeed;
+  const cocktail = raw as unknown as CocktailSeed;
+  const imageUrl =
+    cocktail.imageUrl === undefined || cocktail.imageUrl === null ? null : cocktail.imageUrl;
+  cocktail.imageUrl = imageUrl;
+  cocktail.imageSource = resolveImageSource(imageUrl, raw.imageSource);
+  if (cocktail.imageUrl === null && cocktail.imageSource !== 'none') {
+    cocktail.imageSource = 'none';
+  }
+  return cocktail;
 }
 
 export async function loadAndValidateCocktails(

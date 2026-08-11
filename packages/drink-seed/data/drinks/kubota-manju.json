@@ -9,5 +9,9 @@
   "abv": 15.5,
   "originCountry": "Japan",
   "manufacturer": "朝日酒造",
-  "aliases": ["くぼた", "くぼたまんじゅ"]
+  "aliases": [
+    "くぼた",
+    "くぼたまんじゅ"
+  ],
+  "imageSource": "none"
 }

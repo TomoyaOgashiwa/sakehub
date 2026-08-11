@@ -13,7 +13,7 @@ import (
 // cocktailColumns is the shared SELECT column list for the cocktails master.
 // recipe_count only counts published non-official recipes so the listing
 // matches ListPublishedRecipes.
-const cocktailColumns = `c.id, c.slug, c.name, c.name_en, c.description, c.image_url,
+const cocktailColumns = `c.id, c.slug, c.name, c.name_en, c.description, c.image_url, c.image_source,
 	c.base_spirit, c.abv, c.origin_country,
 	COALESCE(rc.cnt, 0)::INTEGER AS recipe_count,
 	c.created_at, c.updated_at`
@@ -55,7 +55,7 @@ func NewRepository(db *sql.DB) Repository {
 func (r *repository) scanCocktail(row interface{ Scan(dest ...any) error }) (*Cocktail, error) {
 	var c Cocktail
 	err := row.Scan(
-		&c.ID, &c.Slug, &c.Name, &c.NameEn, &c.Description, &c.ImageURL,
+		&c.ID, &c.Slug, &c.Name, &c.NameEn, &c.Description, &c.ImageURL, &c.ImageSource,
 		&c.BaseSpirit, &c.ABV, &c.OriginCountry, &c.RecipeCount,
 		&c.CreatedAt, &c.UpdatedAt,
 	)
@@ -141,7 +141,7 @@ OR EXISTS (SELECT 1 FROM unnest(c.aliases) AS alias WHERE strpos(lower(alias), l
 	for rows.Next() {
 		var c Cocktail
 		if err := rows.Scan(
-			&c.ID, &c.Slug, &c.Name, &c.NameEn, &c.Description, &c.ImageURL,
+			&c.ID, &c.Slug, &c.Name, &c.NameEn, &c.Description, &c.ImageURL, &c.ImageSource,
 			&c.BaseSpirit, &c.ABV, &c.OriginCountry, &c.RecipeCount,
 			&c.CreatedAt, &c.UpdatedAt, &total,
 		); err != nil {

@@ -4,16 +4,41 @@ import { fileURLToPath } from 'node:url';
 
 import {
   assertAliases,
+  assertCatalogImageUrl,
   assertManufacturerQuality,
   type ValidationIssue,
 } from '@sakehub/seed-utils';
 
-import { DRINK_CATEGORIES, MAX_ALIASES, SLUG_PATTERN, type DrinkSeed } from './schema.ts';
+import {
+  DRINK_CATEGORIES,
+  IMAGE_SOURCES,
+  MAX_ALIASES,
+  SLUG_PATTERN,
+  type DrinkSeed,
+  type ImageSource,
+} from './schema.ts';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DATA_DIR = path.join(ROOT, 'data', 'drinks');
 
 const CATEGORY_SET = new Set<string>(DRINK_CATEGORIES);
+const IMAGE_SOURCE_SET = new Set<string>(IMAGE_SOURCES);
+
+function resolveImageSource(
+  imageUrl: string | null | undefined,
+  imageSource: unknown,
+): ImageSource {
+  if (typeof imageSource === 'string' && IMAGE_SOURCE_SET.has(imageSource)) {
+    return imageSource as ImageSource;
+  }
+  if (
+    typeof imageUrl === 'string' &&
+    imageUrl.includes('/storage/v1/object/public/catalog-images/drinks/')
+  ) {
+    return 'generated';
+  }
+  return 'none';
+}
 
 function isRecord(v: unknown): v is Record<string, unknown> {
   return typeof v === 'object' && v !== null && !Array.isArray(v);
@@ -67,8 +92,34 @@ function validateDrink(file: string, raw: unknown, issues: ValidationIssue[]): D
     issues.push({ file, field: 'description', message: 'must be a string (may be empty)' });
   }
 
-  if (raw.imageUrl !== null && typeof raw.imageUrl !== 'string') {
+  if (typeof slug === 'string') {
+    assertCatalogImageUrl(file, 'drink', slug, raw.imageUrl ?? null, issues);
+  } else if (raw.imageUrl !== null && raw.imageUrl !== undefined && typeof raw.imageUrl !== 'string') {
     issues.push({ file, field: 'imageUrl', message: 'must be string or null' });
+  }
+
+  if (
+    raw.imageSource !== undefined &&
+    (typeof raw.imageSource !== 'string' || !IMAGE_SOURCE_SET.has(raw.imageSource))
+  ) {
+    issues.push({
+      file,
+      field: 'imageSource',
+      message: `must be one of ${IMAGE_SOURCES.join(', ')}`,
+    });
+  }
+
+  if (
+    typeof raw.imageUrl === 'string' &&
+    typeof raw.imageSource === 'string' &&
+    IMAGE_SOURCE_SET.has(raw.imageSource) &&
+    raw.imageSource === 'none'
+  ) {
+    issues.push({
+      file,
+      field: 'imageSource',
+      message: 'must not be "none" when imageUrl is set',
+    });
   }
 
   if (raw.abv !== null) {
@@ -92,7 +143,14 @@ function validateDrink(file: string, raw: unknown, issues: ValidationIssue[]): D
     return null;
   }
 
-  return raw as unknown as DrinkSeed;
+  const drink = raw as unknown as DrinkSeed;
+  const imageUrl = typeof drink.imageUrl === 'string' ? drink.imageUrl : null;
+  drink.imageUrl = imageUrl;
+  drink.imageSource = resolveImageSource(imageUrl, raw.imageSource);
+  if (drink.imageUrl === null && drink.imageSource !== 'none') {
+    drink.imageSource = 'none';
+  }
+  return drink;
 }
 
 export async function loadAndValidateDrinks(

@@ -7,6 +7,8 @@
   "baseSpirit": "Gin",
   "abv": 8,
   "originCountry": "United Kingdom",
+  "imageUrl": null,
+  "imageSource": "none",
   "aliases": [
     "ジン・トニック",
     "G&T"

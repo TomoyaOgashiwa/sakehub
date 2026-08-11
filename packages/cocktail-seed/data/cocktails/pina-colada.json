@@ -7,6 +7,8 @@
   "baseSpirit": "Rum",
   "abv": 13,
   "originCountry": "Puerto Rico",
+  "imageUrl": null,
+  "imageSource": "none",
   "aliases": [
     "ピナコラーダ"
   ],

@@ -9,5 +9,6 @@
   "abv": 40,
   "originCountry": "Scotland",
   "manufacturer": "The Macallan",
-  "aliases": []
+  "aliases": [],
+  "imageSource": "none"
 }

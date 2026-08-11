@@ -7,6 +7,8 @@
   "baseSpirit": "Gin",
   "abv": 15,
   "originCountry": "France",
+  "imageUrl": null,
+  "imageSource": "none",
   "aliases": [],
   "officialRecipe": {
     "name": "フレンチ75（基本レシピ）",

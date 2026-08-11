@@ -7,6 +7,8 @@
   "baseSpirit": "Rum",
   "abv": 10,
   "originCountry": "Cuba",
+  "imageUrl": null,
+  "imageSource": "none",
   "aliases": [],
   "officialRecipe": {
     "name": "モヒート（基本レシピ）",

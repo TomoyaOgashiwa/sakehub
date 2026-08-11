@@ -7,6 +7,8 @@
   "baseSpirit": "Brandy",
   "abv": 25,
   "originCountry": "France",
+  "imageUrl": null,
+  "imageSource": "none",
   "aliases": [],
   "officialRecipe": {
     "name": "サイドカー（基本レシピ）",

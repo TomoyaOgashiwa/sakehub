@@ -218,6 +218,91 @@ const MANUFACTURER_PRODUCT_WORDS = new Set([
  * Truncated / token manufacturers that must not land in production seed.
  * `null` is allowed (unknown). Brand-as-name (e.g. Heineken) is allowed.
  */
+// ---------------------------------------------------------------------------
+// catalog image URL validation / seed JSON patch
+// ---------------------------------------------------------------------------
+
+export type CatalogImageKind = 'drink' | 'cocktail';
+
+const PROD_SUPABASE_URL_RE = /^https:\/\/[a-z0-9-]+\.supabase\.co\/?$/i;
+
+/** Hosted Supabase project URL (not localhost / custom domains). */
+export function isProdSupabaseUrl(url: string): boolean {
+  return PROD_SUPABASE_URL_RE.test(url.trim());
+}
+
+/**
+ * Non-null catalog imageUrl must be a public Storage URL for this slug.
+ * Optional `?v=<hex>` cache-bust query is allowed.
+ */
+export function assertCatalogImageUrl(
+  file: string,
+  kind: CatalogImageKind,
+  slug: string,
+  imageUrl: unknown,
+  issues: ValidationIssue[],
+): void {
+  if (imageUrl === undefined || imageUrl === null) return;
+  if (typeof imageUrl !== 'string') {
+    issues.push({ file, field: 'imageUrl', message: 'must be string or null' });
+    return;
+  }
+
+  const folder = kind === 'drink' ? 'drinks' : 'cocktails';
+  let parsed: URL;
+  try {
+    parsed = new URL(imageUrl);
+  } catch {
+    issues.push({ file, field: 'imageUrl', message: 'must be an absolute URL' });
+    return;
+  }
+
+  if (parsed.protocol !== 'https:') {
+    issues.push({
+      file,
+      field: 'imageUrl',
+      message: 'must use https: (localhost / http URLs are not allowed in seed)',
+    });
+    return;
+  }
+
+  if (!parsed.hostname.endsWith('.supabase.co')) {
+    issues.push({
+      file,
+      field: 'imageUrl',
+      message: 'must point at a *.supabase.co host',
+    });
+    return;
+  }
+
+  const expectedPath = `/storage/v1/object/public/catalog-images/${folder}/${slug}.webp`;
+  if (parsed.pathname !== expectedPath) {
+    issues.push({
+      file,
+      field: 'imageUrl',
+      message: `path must be ${expectedPath}`,
+    });
+  }
+
+  const keys = [...parsed.searchParams.keys()];
+  if (keys.length > 1 || (keys.length === 1 && keys[0] !== 'v')) {
+    issues.push({
+      file,
+      field: 'imageUrl',
+      message: 'only optional ?v=<hex> query is allowed',
+    });
+    return;
+  }
+  const v = parsed.searchParams.get('v');
+  if (v != null && !/^[a-f0-9]{6,64}$/i.test(v)) {
+    issues.push({
+      file,
+      field: 'imageUrl',
+      message: 'v query must be a hex content hash',
+    });
+  }
+}
+
 export function assertManufacturerQuality(
   file: string,
   manufacturer: unknown,

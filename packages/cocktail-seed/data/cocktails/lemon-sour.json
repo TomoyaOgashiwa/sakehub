@@ -7,6 +7,8 @@
   "baseSpirit": "Shochu",
   "abv": 5,
   "originCountry": "Japan",
+  "imageUrl": null,
+  "imageSource": "none",
   "aliases": [
     "レモンサワ"
   ],

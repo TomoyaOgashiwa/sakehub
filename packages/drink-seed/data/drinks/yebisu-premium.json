@@ -6,8 +6,11 @@
   "subcategory": "Pilsner",
   "description": "ドイツ「ビール純粋令」に則った麦芽100%の本格プレミアムビール。深いコクと豊かな香りが楽しめる。",
   "imageUrl": null,
-  "abv": 5.0,
+  "abv": 5,
   "originCountry": "Japan",
   "manufacturer": "サッポロビール",
-  "aliases": ["えびすびーる", "えびす"]
+  "aliases": [
+    "えびすびーる",
+    "えびす"
+  ]
 }

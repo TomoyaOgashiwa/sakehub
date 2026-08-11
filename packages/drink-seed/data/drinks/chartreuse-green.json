@@ -9,5 +9,6 @@
   "abv": 55,
   "originCountry": "France",
   "manufacturer": "Chartreuse",
-  "aliases": []
+  "aliases": [],
+  "imageSource": "none"
 }

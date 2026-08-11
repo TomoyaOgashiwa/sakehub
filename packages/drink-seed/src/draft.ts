@@ -167,6 +167,7 @@ function toDraftSeed(identity: DraftIdentity): DrinkSeed {
     // 意図的に空文字のまま。事実系フィールドは人が一次ソースを確認して埋める。
     description: '',
     imageUrl: null,
+    imageSource: 'none',
     abv: null,
     originCountry: null,
     manufacturer: null,

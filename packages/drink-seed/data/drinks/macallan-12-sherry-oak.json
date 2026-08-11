@@ -6,8 +6,11 @@
   "subcategory": "Single Malt",
   "description": "シェリー樽由来のリッチなドライフルーツとスパイスの風味。スコッチウイスキーの王道とも言える深い琥珀色の一杯。",
   "imageUrl": null,
-  "abv": 40.0,
+  "abv": 40,
   "originCountry": "United Kingdom",
   "manufacturer": "The Macallan",
-  "aliases": ["まっからん"]
+  "aliases": [
+    "まっからん"
+  ],
+  "imageSource": "none"
 }

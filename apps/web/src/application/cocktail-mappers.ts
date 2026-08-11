@@ -1,4 +1,5 @@
 import type {
+  CatalogImageSource,
   Cocktail,
   CocktailRecipe,
   CocktailRecipeRating,
@@ -12,6 +13,7 @@ export interface ApiCocktail {
   name_en?: string;
   description: string;
   image_url?: string;
+  image_source?: CatalogImageSource;
   base_spirit?: string;
   abv?: number;
   origin_country?: string;
@@ -84,6 +86,7 @@ export function toCocktail(api: ApiCocktail): Cocktail {
     nameEn: api.name_en,
     description: api.description,
     imageUrl: api.image_url,
+    imageSource: api.image_source ?? 'none',
     baseSpirit: api.base_spirit,
     abv: api.abv,
     originCountry: api.origin_country,

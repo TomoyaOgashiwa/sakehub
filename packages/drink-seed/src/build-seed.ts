@@ -42,7 +42,7 @@ async function main(): Promise<void> {
   for (const d of drinks) {
     lines.push(`-- ${d.slug}`);
     lines.push(
-      `INSERT INTO drinks (slug, name, name_en, category, subcategory, description, image_url, abv, origin_country, manufacturer, aliases)`,
+      `INSERT INTO drinks (slug, name, name_en, category, subcategory, description, image_url, image_source, abv, origin_country, manufacturer, aliases)`,
     );
     lines.push(`VALUES (`);
     lines.push(`  ${quoteLiteral(d.slug)},`);
@@ -52,6 +52,7 @@ async function main(): Promise<void> {
     lines.push(`  ${quoteNullableLiteral(d.subcategory)},`);
     lines.push(`  ${quoteLiteral(d.description)},`);
     lines.push(`  ${quoteNullableLiteral(d.imageUrl)},`);
+    lines.push(`  ${quoteLiteral(d.imageSource)},`);
     lines.push(`  ${quoteNullableNumber(d.abv)},`);
     lines.push(`  ${quoteNullableLiteral(d.originCountry)},`);
     lines.push(`  ${quoteNullableLiteral(d.manufacturer)},`);
@@ -66,7 +67,12 @@ async function main(): Promise<void> {
     lines.push(`  category = EXCLUDED.category,`);
     lines.push(`  subcategory = EXCLUDED.subcategory,`);
     lines.push(`  description = EXCLUDED.description,`);
-    lines.push(`  image_url = EXCLUDED.image_url,`);
+    // Preserve existing Storage URL / attribution when seed has not uploaded an image yet.
+    lines.push(`  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),`);
+    lines.push(`  image_source = CASE`);
+    lines.push(`    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source`);
+    lines.push(`    ELSE drinks.image_source`);
+    lines.push(`  END,`);
     lines.push(`  abv = EXCLUDED.abv,`);
     lines.push(`  origin_country = EXCLUDED.origin_country,`);
     lines.push(`  manufacturer = EXCLUDED.manufacturer,`);

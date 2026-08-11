@@ -6,8 +6,11 @@
   "subcategory": "Lager",
   "description": "完璧なバランスを追求した「大人の生ビール」。麦のうまみと爽やかな後味が調和した一杯。",
   "imageUrl": null,
-  "abv": 5.0,
+  "abv": 5,
   "originCountry": "Japan",
   "manufacturer": "サッポロビール",
-  "aliases": ["さっぽろくろらべる", "くろらべる"]
+  "aliases": [
+    "さっぽろくろらべる",
+    "くろらべる"
+  ]
 }

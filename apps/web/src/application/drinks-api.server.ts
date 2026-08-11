@@ -1,6 +1,6 @@
 import 'server-only';
 
-import type { Drink } from '@sakehub/types';
+import type { CatalogImageSource, Drink } from '@sakehub/types';
 
 import { serverFetch } from './server-api';
 
@@ -13,6 +13,7 @@ interface ApiDrink {
   subcategory?: string;
   description: string;
   image_url?: string;
+  image_source?: CatalogImageSource;
   abv?: number;
   origin_country?: string;
   manufacturer?: string;
@@ -39,6 +40,7 @@ function toDrink(api: ApiDrink): Drink {
     subcategory: api.subcategory,
     description: api.description,
     imageUrl: api.image_url,
+    imageSource: api.image_source ?? 'none',
     abv: api.abv,
     originCountry: api.origin_country,
     manufacturer: api.manufacturer,

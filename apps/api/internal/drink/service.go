@@ -38,6 +38,8 @@ func (s *Service) List(ctx context.Context, params ListParams) ([]Drink, int, er
 }
 
 func (s *Service) Create(ctx context.Context, input CreateInput) (*Drink, error) {
+	// Attribution labels (generated / brand) are seed/admin-only. Public Create
+	// must not accept client-supplied image_source.
 	d := &Drink{
 		Slug:          input.Slug,
 		Name:          input.Name,
@@ -46,6 +48,7 @@ func (s *Service) Create(ctx context.Context, input CreateInput) (*Drink, error)
 		Subcategory:   input.Subcategory,
 		Description:   input.Description,
 		ImageURL:      input.ImageURL,
+		ImageSource:   "none",
 		ABV:           input.ABV,
 		OriginCountry: input.OriginCountry,
 		Manufacturer:  input.Manufacturer,

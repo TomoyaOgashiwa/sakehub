@@ -11,6 +11,9 @@ export const DRINK_CATEGORIES = ['all', ...PRODUCT_DRINK_CATEGORIES] as const;
 
 export type DrinkCategory = (typeof DRINK_CATEGORIES)[number];
 
+/** Catalog master image attribution for UI disclosure labels. */
+export type CatalogImageSource = 'none' | 'generated' | 'brand';
+
 export type Drink = {
   id: string;
   slug: string;
@@ -20,6 +23,7 @@ export type Drink = {
   subcategory?: string;
   description: string;
   imageUrl?: string;
+  imageSource: CatalogImageSource;
   abv?: number;
   originCountry?: string;
   manufacturer?: string;

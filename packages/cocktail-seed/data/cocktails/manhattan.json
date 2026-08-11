@@ -7,6 +7,8 @@
   "baseSpirit": "Whisky",
   "abv": 30,
   "originCountry": "United States",
+  "imageUrl": null,
+  "imageSource": "none",
   "aliases": [],
   "officialRecipe": {
     "name": "マンハッタン（基本レシピ）",

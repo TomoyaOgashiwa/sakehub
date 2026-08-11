@@ -12,6 +12,7 @@ import { JsonLd } from '@/components/json-ld';
 import { fetchDrinkBySlugServer } from '@/application/drinks-api.server';
 import { getOptionalAccessToken } from '@/application/require-access-token';
 import { fetchMyReview, fetchReviewsByDrinkId } from '@/application/reviews-api.server';
+import { getCatalogImageSourceLabel } from '@/utils/catalog-image-source-label';
 import { DrinkReviewWidget } from './drink-review-widget';
 
 type PageProps = {
@@ -58,6 +59,7 @@ export default async function DrinkDetailPage({ params }: PageProps) {
   ]);
 
   const displayName = drink.nameEn ? `${drink.name} (${drink.nameEn})` : drink.name;
+  const imageSourceLabel = getCatalogImageSourceLabel(drink.imageSource);
 
   return (
     <>
@@ -197,7 +199,7 @@ export default async function DrinkDetailPage({ params }: PageProps) {
 
             <aside>
               <div className="sticky top-8 space-y-6">
-                <figure className="bg-muted flex items-center justify-center overflow-hidden rounded-xl">
+                <figure className="bg-muted overflow-hidden rounded-xl">
                   {drink.imageUrl ? (
                     <div className="relative aspect-square w-full">
                       <Image
@@ -213,6 +215,11 @@ export default async function DrinkDetailPage({ params }: PageProps) {
                     <div className="from-muted to-muted-foreground/10 flex aspect-square w-full items-center justify-center bg-gradient-to-br">
                       <Wine className="text-muted-foreground/40 size-16" aria-hidden="true" />
                     </div>
+                  )}
+                  {imageSourceLabel && (
+                    <figcaption className="flex justify-end px-3 py-2">
+                      <Badge variant={imageSourceLabel.variant}>{imageSourceLabel.text}</Badge>
+                    </figcaption>
                   )}
                 </figure>
 

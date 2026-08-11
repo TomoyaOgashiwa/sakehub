@@ -6,8 +6,12 @@
   "subcategory": "Lager",
   "description": "辛口でキレのある味わいが特徴の日本を代表するドライビール。すっきりとした後味で、どんな料理にも合わせやすい。",
   "imageUrl": null,
-  "abv": 5.0,
+  "abv": 5,
   "originCountry": "Japan",
   "manufacturer": "アサヒビール",
-  "aliases": ["あさひすーぱーどらい", "あさひびーる"]
+  "aliases": [
+    "あさひすーぱーどらい",
+    "あさひびーる"
+  ],
+  "imageSource": "none"
 }

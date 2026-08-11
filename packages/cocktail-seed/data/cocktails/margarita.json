@@ -7,6 +7,8 @@
   "baseSpirit": "Tequila",
   "abv": 25,
   "originCountry": "Mexico",
+  "imageUrl": null,
+  "imageSource": "none",
   "aliases": [],
   "officialRecipe": {
     "name": "マルガリータ（基本レシピ）",

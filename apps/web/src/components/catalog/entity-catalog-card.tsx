@@ -12,6 +12,8 @@ interface EntityCatalogCardProps {
   description: string;
   imageUrl?: string;
   imageAlt: string;
+  /** Small overlay on the image (e.g. AI-generated disclosure). */
+  imageBadge?: ReactNode;
   badge?: string;
   fallbackIcon: ReactNode;
   footer?: ReactNode;
@@ -25,6 +27,7 @@ export function EntityCatalogCard({
   description,
   imageUrl,
   imageAlt,
+  imageBadge,
   badge,
   fallbackIcon,
   footer,
@@ -42,6 +45,9 @@ export function EntityCatalogCard({
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 className="object-cover"
               />
+              {imageBadge != null && (
+                <div className="pointer-events-none absolute right-2 bottom-2">{imageBadge}</div>
+              )}
             </div>
           ) : (
             <div className="from-muted to-muted-foreground/10 flex aspect-4/3 w-full items-center justify-center rounded-lg bg-gradient-to-br">

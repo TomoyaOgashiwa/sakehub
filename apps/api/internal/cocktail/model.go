@@ -64,6 +64,7 @@ type Cocktail struct {
 	NameEn        *string   `json:"name_en,omitempty"`
 	Description   string    `json:"description"`
 	ImageURL      *string   `json:"image_url,omitempty"`
+	ImageSource   string    `json:"image_source"`
 	BaseSpirit    *string   `json:"base_spirit,omitempty"`
 	ABV           *float64  `json:"abv,omitempty"`
 	OriginCountry *string   `json:"origin_country,omitempty"`

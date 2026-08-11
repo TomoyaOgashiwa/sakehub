@@ -7,8 +7,8 @@
   "baseSpirit": "Rum",
   "abv": 13,
   "originCountry": "Puerto Rico",
-  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/pina-colada.webp",
-  "imageSource": "generated",
+  "imageUrl": null,
+  "imageSource": "none",
   "aliases": [
     "ピナコラーダ"
   ],

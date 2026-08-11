@@ -5,12 +5,12 @@
   "category": "whisky",
   "subcategory": "Bourbon",
   "description": "冬小麦を使用したまろやかなバーボン。キャラメルとバニラの甘い香りに、口当たりの柔らかさが際立つ。",
-  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/makers-mark.webp",
+  "imageUrl": null,
   "abv": 45,
   "originCountry": "United States",
   "manufacturer": "Beam Suntory",
   "aliases": [
     "めーかーずまーく"
   ],
-  "imageSource": "generated"
+  "imageSource": "none"
 }

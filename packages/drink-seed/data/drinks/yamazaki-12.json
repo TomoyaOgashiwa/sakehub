@@ -5,7 +5,7 @@
   "category": "whisky",
   "subcategory": "Single Malt",
   "description": "日本初のモルトウイスキー蒸留所が生んだ至宝。繊細で複雑な味わいに、ほのかなミズナラの香りが漂う。",
-  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/yamazaki-12.webp",
+  "imageUrl": null,
   "abv": 43,
   "originCountry": "Japan",
   "manufacturer": "Suntory",
@@ -13,5 +13,5 @@
     "やまざき",
     "やまざき12ねん"
   ],
-  "imageSource": "generated"
+  "imageSource": "none"
 }

@@ -5,10 +5,10 @@
   "category": "tequila",
   "subcategory": "Blanco",
   "description": "Patron Silver is a well-known Mexico Blanco from Bacardi, selected for broad drink catalog coverage in Japan.",
-  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/patron-silver.webp",
+  "imageUrl": null,
   "abv": 40,
   "originCountry": "Mexico",
   "manufacturer": "Bacardi",
   "aliases": [],
-  "imageSource": "generated"
+  "imageSource": "none"
 }

@@ -5,10 +5,10 @@
   "category": "whisky",
   "subcategory": "Malt Whisky",
   "description": "Nikka Coffey Malt is a well-known Japan Malt Whisky from Nikka.",
-  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/nikka-coffey-malt.webp",
+  "imageUrl": null,
   "abv": 45,
   "originCountry": "Japan",
   "manufacturer": "Nikka",
   "aliases": [],
-  "imageSource": "generated"
+  "imageSource": "none"
 }

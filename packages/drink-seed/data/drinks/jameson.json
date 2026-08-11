@@ -5,12 +5,12 @@
   "category": "whisky",
   "subcategory": "Blended",
   "description": "3回蒸留のスムースなアイリッシュウイスキー。バニラ、ナッツ、かすかなスパイスが織りなす軽やかな味わい。",
-  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/jameson.webp",
+  "imageUrl": null,
   "abv": 40,
   "originCountry": "Ireland",
   "manufacturer": "Pernod Ricard",
   "aliases": [
     "じぇむそん"
   ],
-  "imageSource": "generated"
+  "imageSource": "none"
 }

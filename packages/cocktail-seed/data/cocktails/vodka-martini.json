@@ -7,8 +7,8 @@
   "baseSpirit": "Vodka",
   "abv": 33,
   "originCountry": "United States",
-  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/vodka-martini.webp",
-  "imageSource": "generated",
+  "imageUrl": null,
+  "imageSource": "none",
   "aliases": [
     "カンガルー"
   ],

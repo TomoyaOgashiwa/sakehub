@@ -5,7 +5,7 @@
   "category": "sake",
   "subcategory": "Junmai Daiginjo",
   "description": "山田錦を39%まで磨いた中核商品。華やかな香りとまろやかな旨みのバランスが良い。",
-  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/dassai-39.webp",
+  "imageUrl": null,
   "abv": 16,
   "originCountry": "Japan",
   "manufacturer": "旭酒造",
@@ -13,5 +13,5 @@
     "だっさい39",
     "だっさいさんわりきゅうぶ"
   ],
-  "imageSource": "generated"
+  "imageSource": "none"
 }

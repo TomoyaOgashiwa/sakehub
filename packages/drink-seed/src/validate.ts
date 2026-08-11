@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 import {
   assertAliases,
+  assertCatalogImageUrl,
   assertManufacturerQuality,
   type ValidationIssue,
 } from '@sakehub/seed-utils';
@@ -91,7 +92,9 @@ function validateDrink(file: string, raw: unknown, issues: ValidationIssue[]): D
     issues.push({ file, field: 'description', message: 'must be a string (may be empty)' });
   }
 
-  if (raw.imageUrl !== null && typeof raw.imageUrl !== 'string') {
+  if (typeof slug === 'string') {
+    assertCatalogImageUrl(file, 'drink', slug, raw.imageUrl ?? null, issues);
+  } else if (raw.imageUrl !== null && raw.imageUrl !== undefined && typeof raw.imageUrl !== 'string') {
     issues.push({ file, field: 'imageUrl', message: 'must be string or null' });
   }
 
@@ -103,6 +106,19 @@ function validateDrink(file: string, raw: unknown, issues: ValidationIssue[]): D
       file,
       field: 'imageSource',
       message: `must be one of ${IMAGE_SOURCES.join(', ')}`,
+    });
+  }
+
+  if (
+    typeof raw.imageUrl === 'string' &&
+    typeof raw.imageSource === 'string' &&
+    IMAGE_SOURCE_SET.has(raw.imageSource) &&
+    raw.imageSource === 'none'
+  ) {
+    issues.push({
+      file,
+      field: 'imageSource',
+      message: 'must not be "none" when imageUrl is set',
     });
   }
 

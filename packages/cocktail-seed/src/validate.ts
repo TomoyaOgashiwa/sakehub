@@ -2,7 +2,11 @@ import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { assertAliases, type ValidationIssue } from '@sakehub/seed-utils';
+import {
+  assertAliases,
+  assertCatalogImageUrl,
+  type ValidationIssue,
+} from '@sakehub/seed-utils';
 
 import {
   IMAGE_SOURCES,
@@ -101,8 +105,10 @@ function validateCocktail(file: string, raw: unknown, issues: ValidationIssue[])
     issues.push({ file, field: 'originCountry', message: 'must be string or null' });
   }
 
-  // Missing imageUrl is treated as null so existing JSON files stay valid until upload fills them.
-  if (
+  // Missing / null imageUrl stays valid until upload fills a prod catalog-images URL.
+  if (typeof slug === 'string') {
+    assertCatalogImageUrl(file, 'cocktail', slug, raw.imageUrl ?? null, issues);
+  } else if (
     raw.imageUrl !== undefined &&
     raw.imageUrl !== null &&
     typeof raw.imageUrl !== 'string'
@@ -118,6 +124,19 @@ function validateCocktail(file: string, raw: unknown, issues: ValidationIssue[])
       file,
       field: 'imageSource',
       message: `must be one of ${IMAGE_SOURCES.join(', ')}`,
+    });
+  }
+
+  if (
+    typeof raw.imageUrl === 'string' &&
+    typeof raw.imageSource === 'string' &&
+    IMAGE_SOURCE_SET.has(raw.imageSource) &&
+    raw.imageSource === 'none'
+  ) {
+    issues.push({
+      file,
+      field: 'imageSource',
+      message: 'must not be "none" when imageUrl is set',
     });
   }
 

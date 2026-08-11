@@ -5,10 +5,10 @@
   "category": "rum",
   "subcategory": "White Rum",
   "description": "Bacardi Carta Blanca is a well-known Puerto Rico White Rum from Bacardi.",
-  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/bacardi-carta-blanca.webp",
+  "imageUrl": null,
   "abv": 40,
   "originCountry": "Puerto Rico",
   "manufacturer": "Bacardi",
   "aliases": [],
-  "imageSource": "generated"
+  "imageSource": "none"
 }

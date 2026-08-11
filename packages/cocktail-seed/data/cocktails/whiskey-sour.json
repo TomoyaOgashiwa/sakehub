@@ -7,8 +7,8 @@
   "baseSpirit": "Whisky",
   "abv": 20,
   "originCountry": "United States",
-  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/whiskey-sour.webp",
-  "imageSource": "generated",
+  "imageUrl": null,
+  "imageSource": "none",
   "aliases": [],
   "officialRecipe": {
     "name": "ウイスキーサワー（基本レシピ）",

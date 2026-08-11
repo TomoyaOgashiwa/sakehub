@@ -3,15 +3,19 @@
  * back into drink/cocktail seed JSON files.
  *
  * Usage:
- *   SUPABASE_URL=... SUPABASE_SERVICE_ROLE_KEY=... pnpm seed:images:upload
+ *   SUPABASE_URL=https://xxxx.supabase.co SUPABASE_SERVICE_ROLE_KEY=... \
+ *     pnpm seed:images:upload
  *
- * Prefer the linked (prod) project URL. Local Storage sync is out of scope.
+ * Local Storage (127.0.0.1) is refused by default. Pass `--allow-local` only for
+ * local experiments — do not commit those imageUrl values into seed.
  */
 
+import { createHash } from 'node:crypto';
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import { createClient } from '@supabase/supabase-js';
+import { isProdSupabaseUrl } from '@sakehub/seed-utils';
 
 import { loadRootEnv } from './load-env.ts';
 import {
@@ -21,6 +25,7 @@ import {
   REPO_ROOT,
   seedJsonPath,
   stagingFile,
+  type CatalogKind,
 } from './paths.ts';
 import { loadPriority } from './priority.ts';
 
@@ -35,39 +40,35 @@ function requireEnv(name: string, aliases: string[] = []): string {
   process.exit(1);
 }
 
-async function setImageUrl(kind: 'drink' | 'cocktail', slug: string, imageUrl: string): Promise<void> {
+/** Merge patch into seed JSON without field whitelists (preserves unknown keys). */
+async function patchSeedJson(
+  kind: CatalogKind,
+  slug: string,
+  patch: Record<string, unknown>,
+): Promise<void> {
   const file = seedJsonPath(kind, slug);
   const raw = JSON.parse(await readFile(file, 'utf8')) as Record<string, unknown>;
-  raw.imageUrl = imageUrl;
-  raw.imageSource = 'generated';
-
-  // Keep a stable-ish key order for drinks (existing shape) and cocktails.
-  if (kind === 'cocktail') {
-    const ordered: Record<string, unknown> = {
-      slug: raw.slug,
-      id: raw.id ?? null,
-      name: raw.name,
-      nameEn: raw.nameEn ?? null,
-      description: raw.description,
-      baseSpirit: raw.baseSpirit ?? null,
-      abv: raw.abv ?? null,
-      originCountry: raw.originCountry ?? null,
-      imageUrl,
-      imageSource: 'generated',
-      aliases: raw.aliases ?? [],
-      officialRecipe: raw.officialRecipe,
-    };
-    await writeFile(file, `${JSON.stringify(ordered, null, 2)}\n`, 'utf8');
-    return;
-  }
-
+  Object.assign(raw, patch);
   await writeFile(file, `${JSON.stringify(raw, null, 2)}\n`, 'utf8');
 }
 
+function contentVersion(bytes: Buffer): string {
+  return createHash('sha256').update(bytes).digest('hex').slice(0, 8);
+}
+
 async function main(): Promise<void> {
+  const allowLocal = process.argv.includes('--allow-local');
   // Public URL base should be the hosted project URL (not localhost) for prod seed imageUrl.
   const supabaseUrl = requireEnv('SUPABASE_URL', ['NEXT_PUBLIC_SUPABASE_URL']);
   const serviceRoleKey = requireEnv('SUPABASE_SERVICE_ROLE_KEY');
+
+  if (!allowLocal && !isProdSupabaseUrl(supabaseUrl)) {
+    throw new Error(
+      `Refusing non-prod SUPABASE_URL (${supabaseUrl}). ` +
+        `Pass a https://*.supabase.co URL, or --allow-local for local-only experiments ` +
+        `(do not commit localhost imageUrl into seed).`,
+    );
+  }
 
   const supabase = createClient(supabaseUrl, serviceRoleKey, {
     auth: { persistSession: false, autoRefreshToken: false },
@@ -101,8 +102,12 @@ async function main(): Promise<void> {
       throw new Error(`upload failed for ${remotePath}: ${error.message}`);
     }
 
-    const imageUrl = publicObjectUrl(supabaseUrl, item.kind, item.slug);
-    await setImageUrl(item.kind, item.slug, imageUrl);
+    const version = contentVersion(bytes);
+    const imageUrl = publicObjectUrl(supabaseUrl, item.kind, item.slug, version);
+    await patchSeedJson(item.kind, item.slug, {
+      imageUrl,
+      imageSource: 'generated',
+    });
     uploaded += 1;
     console.log(`ok ${remotePath} → ${imageUrl}`);
   }

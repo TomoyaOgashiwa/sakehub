@@ -7,8 +7,8 @@
   "baseSpirit": "Cachaca",
   "abv": 20,
   "originCountry": "Brazil",
-  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/caipirinha.webp",
-  "imageSource": "generated",
+  "imageUrl": null,
+  "imageSource": "none",
   "aliases": [],
   "officialRecipe": {
     "name": "カイピリーニャ（基本レシピ）",

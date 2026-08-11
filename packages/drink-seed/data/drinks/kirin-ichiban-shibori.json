@@ -5,10 +5,10 @@
   "category": "beer",
   "subcategory": "Lager",
   "description": "Kirin Ichiban Shibori is a well-known Japan Lager from キリンビール.",
-  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/kirin-ichiban-shibori.webp",
+  "imageUrl": null,
   "abv": 5,
   "originCountry": "Japan",
   "manufacturer": "キリンビール",
   "aliases": [],
-  "imageSource": "generated"
+  "imageSource": "none"
 }

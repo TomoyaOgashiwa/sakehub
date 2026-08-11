@@ -7,8 +7,8 @@
   "baseSpirit": "Brandy",
   "abv": 25,
   "originCountry": "France",
-  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/sidecar.webp",
-  "imageSource": "generated",
+  "imageUrl": null,
+  "imageSource": "none",
   "aliases": [],
   "officialRecipe": {
     "name": "サイドカー（基本レシピ）",

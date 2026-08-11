@@ -5,10 +5,10 @@
   "category": "tequila",
   "subcategory": "Reposado",
   "description": "Don Julio Reposado is a well-known Mexico Reposado from Diageo, selected for broad drink catalog coverage in Japan.",
-  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/don-julio-reposado.webp",
+  "imageUrl": null,
   "abv": 38,
   "originCountry": "Mexico",
   "manufacturer": "Diageo",
   "aliases": [],
-  "imageSource": "generated"
+  "imageSource": "none"
 }

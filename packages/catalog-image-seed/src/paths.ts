@@ -25,7 +25,14 @@ export function seedJsonPath(kind: CatalogKind, slug: string): string {
   return path.join(REPO_ROOT, 'packages', 'cocktail-seed', 'data', 'cocktails', `${slug}.json`);
 }
 
-export function publicObjectUrl(supabaseUrl: string, kind: CatalogKind, slug: string): string {
+/** Public Storage URL. Pass `version` (content hash) so regenerations bust CDN / next/image caches. */
+export function publicObjectUrl(
+  supabaseUrl: string,
+  kind: CatalogKind,
+  slug: string,
+  version?: string,
+): string {
   const base = supabaseUrl.replace(/\/$/, '');
-  return `${base}/storage/v1/object/public/${BUCKET}/${objectPath(kind, slug)}`;
+  const url = `${base}/storage/v1/object/public/${BUCKET}/${objectPath(kind, slug)}`;
+  return version ? `${url}?v=${version}` : url;
 }

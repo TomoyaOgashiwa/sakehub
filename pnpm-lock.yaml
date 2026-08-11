@@ -212,6 +212,9 @@ importers:
 
   packages/catalog-image-seed:
     dependencies:
+      '@sakehub/seed-utils':
+        specifier: workspace:*
+        version: link:../seed-utils
       '@supabase/supabase-js':
         specifier: ^2.111.0
         version: 2.111.0

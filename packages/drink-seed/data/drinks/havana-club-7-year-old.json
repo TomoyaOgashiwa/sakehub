@@ -5,10 +5,10 @@
   "category": "rum",
   "subcategory": "Aged Rum",
   "description": "Havana Club 7 Year Old is a well-known Cuba Aged Rum from Pernod Ricard.",
-  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/havana-club-7-year-old.webp",
+  "imageUrl": null,
   "abv": 40,
   "originCountry": "Cuba",
   "manufacturer": "Pernod Ricard",
   "aliases": [],
-  "imageSource": "generated"
+  "imageSource": "none"
 }

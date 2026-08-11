@@ -5,7 +5,7 @@
   "category": "sake",
   "subcategory": "Junmai Daiginjo",
   "description": "山田錦を45%まで磨いた獺祭のエントリークラス。穏やかな吟醸香と飲みやすさが特徴。",
-  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/dassai-45.webp",
+  "imageUrl": null,
   "abv": 16,
   "originCountry": "Japan",
   "manufacturer": "旭酒造",
@@ -13,5 +13,5 @@
     "だっさい45",
     "だっさいよんわりごぶ"
   ],
-  "imageSource": "generated"
+  "imageSource": "none"
 }

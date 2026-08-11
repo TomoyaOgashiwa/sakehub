@@ -5,10 +5,10 @@
   "category": "sake",
   "subcategory": "Junmai Ginjo",
   "description": "Denshu Tokubetsu Junmai is a well-known Japan Junmai Ginjo from Denshu Tokubetsu, selected for broad drink catalog coverage in Japan.",
-  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/denshu-tokubetsu-junmai.webp",
+  "imageUrl": null,
   "abv": 15,
   "originCountry": "Japan",
   "manufacturer": "Denshu Tokubetsu",
   "aliases": [],
-  "imageSource": "generated"
+  "imageSource": "none"
 }

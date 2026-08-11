@@ -7,8 +7,8 @@
   "baseSpirit": "Gin",
   "abv": 15,
   "originCountry": "France",
-  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/french-75.webp",
-  "imageSource": "generated",
+  "imageUrl": null,
+  "imageSource": "none",
   "aliases": [],
   "officialRecipe": {
     "name": "フレンチ75（基本レシピ）",

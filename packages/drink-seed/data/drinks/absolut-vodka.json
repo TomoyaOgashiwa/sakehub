@@ -5,10 +5,10 @@
   "category": "vodka",
   "subcategory": "Plain",
   "description": "Absolut Vodka is a well-known Sweden Plain from Pernod Ricard.",
-  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/absolut-vodka.webp",
+  "imageUrl": null,
   "abv": 40,
   "originCountry": "Sweden",
   "manufacturer": "Pernod Ricard",
   "aliases": [],
-  "imageSource": "generated"
+  "imageSource": "none"
 }

@@ -5,10 +5,10 @@
   "category": "brandy",
   "subcategory": "Cognac",
   "description": "Remy Martin VSOP is a well-known France Cognac from Rémy Cointreau.",
-  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/remy-martin-vsop.webp",
+  "imageUrl": null,
   "abv": 40,
   "originCountry": "France",
   "manufacturer": "Rémy Cointreau",
   "aliases": [],
-  "imageSource": "generated"
+  "imageSource": "none"
 }

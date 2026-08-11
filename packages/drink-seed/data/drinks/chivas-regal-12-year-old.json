@@ -5,10 +5,10 @@
   "category": "whisky",
   "subcategory": "Blended",
   "description": "Chivas Regal 12 Year Old is a well-known Scotland Blended from Pernod Ricard.",
-  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/chivas-regal-12-year-old.webp",
+  "imageUrl": null,
   "abv": 40,
   "originCountry": "Scotland",
   "manufacturer": "Pernod Ricard",
   "aliases": [],
-  "imageSource": "generated"
+  "imageSource": "none"
 }

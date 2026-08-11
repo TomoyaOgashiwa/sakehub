@@ -7,8 +7,8 @@
   "baseSpirit": "Shochu",
   "abv": 5,
   "originCountry": "Japan",
-  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/lemon-sour.webp",
-  "imageSource": "generated",
+  "imageUrl": null,
+  "imageSource": "none",
   "aliases": [
     "レモンサワ"
   ],

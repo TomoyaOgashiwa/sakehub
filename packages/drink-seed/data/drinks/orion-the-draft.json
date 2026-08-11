@@ -5,10 +5,10 @@
   "category": "beer",
   "subcategory": "Lager",
   "description": "Orion The Draft is a well-known Japan Lager from Orion The, selected for broad drink catalog coverage in Japan.",
-  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/orion-the-draft.webp",
+  "imageUrl": null,
   "abv": 5,
   "originCountry": "Japan",
   "manufacturer": "Orion The",
   "aliases": [],
-  "imageSource": "generated"
+  "imageSource": "none"
 }

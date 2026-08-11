@@ -1,7 +1,7 @@
 -- =============================================================================
 -- packages/drink-seed（src/build-seed.ts）が自動生成。
 -- 手編集しないこと。再生成: pnpm seed:drinks:build
--- 生成日時: 2026-08-11T20:49:48.775Z
+-- 生成日時: 2026-08-11T21:08:08.569Z
 -- 件数: 1330
 --
 -- aliases: かな読み・ローマ字表記などの別名候補。「獺祭」で登録されていても
@@ -32,8 +32,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -62,8 +65,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -92,8 +98,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -122,8 +131,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -152,8 +164,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -182,8 +197,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -212,8 +230,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -242,8 +263,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -272,8 +296,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -302,8 +329,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -332,8 +362,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -362,8 +395,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -392,8 +428,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -422,8 +461,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -439,8 +481,8 @@ VALUES (
   'vodka',
   'Plain',
   'Absolut Vodka is a well-known Sweden Plain from Pernod Ricard.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/absolut-vodka.webp',
-  'generated',
+  NULL,
+  'none',
   40,
   'Sweden',
   'Pernod Ricard',
@@ -452,8 +494,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -482,8 +527,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -512,8 +560,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -542,8 +593,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -572,8 +626,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -602,8 +659,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -632,8 +692,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -662,8 +725,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -692,8 +758,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -722,8 +791,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -752,8 +824,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -782,8 +857,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -812,8 +890,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -842,8 +923,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -872,8 +956,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -902,8 +989,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -932,8 +1022,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -962,8 +1055,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -992,8 +1088,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1022,8 +1121,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1052,8 +1154,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1082,8 +1187,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1112,8 +1220,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1142,8 +1253,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1172,8 +1286,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1202,8 +1319,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1232,8 +1352,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1262,8 +1385,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1292,8 +1418,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1322,8 +1451,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1352,8 +1484,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1382,8 +1517,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1412,8 +1550,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1442,8 +1583,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1472,8 +1616,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1502,8 +1649,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1519,8 +1669,8 @@ VALUES (
   'liqueur',
   'Aperitivo',
   'Aperol is a well-known Italy Aperitivo from Campari Group.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/aperol.webp',
-  'generated',
+  NULL,
+  'none',
   11,
   'Italy',
   'Campari Group',
@@ -1532,8 +1682,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1562,8 +1715,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1592,8 +1748,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1622,8 +1781,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1652,8 +1814,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1682,8 +1847,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1712,8 +1880,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1742,8 +1913,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1772,8 +1946,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1802,8 +1979,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1832,8 +2012,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1862,8 +2045,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1892,8 +2078,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1922,8 +2111,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1952,8 +2144,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -1982,8 +2177,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2012,8 +2210,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2042,8 +2243,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2072,8 +2276,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2102,8 +2309,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2119,8 +2329,8 @@ VALUES (
   'beer',
   'Lager',
   '辛口でキレのある味わいが特徴の日本を代表するドライビール。すっきりとした後味で、どんな料理にも合わせやすい。',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/asahi-super-dry.webp',
-  'generated',
+  NULL,
+  'none',
   5,
   'Japan',
   'アサヒビール',
@@ -2132,8 +2342,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2162,8 +2375,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2192,8 +2408,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2222,8 +2441,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2252,8 +2474,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2282,8 +2507,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2312,8 +2540,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2342,8 +2573,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2372,8 +2606,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2402,8 +2639,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2432,8 +2672,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2449,8 +2692,8 @@ VALUES (
   'rum',
   'White Rum',
   'Bacardi Carta Blanca is a well-known Puerto Rico White Rum from Bacardi.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/bacardi-carta-blanca.webp',
-  'generated',
+  NULL,
+  'none',
   40,
   'Puerto Rico',
   'Bacardi',
@@ -2462,8 +2705,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2492,8 +2738,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2522,8 +2771,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2552,8 +2804,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2582,8 +2837,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2612,8 +2870,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2629,8 +2890,8 @@ VALUES (
   'liqueur',
   'Cream',
   'アイリッシュウイスキーとクリームを融合させた世界で最も人気のクリームリキュール。甘くリッチな味わい。',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/baileys-original.webp',
-  'generated',
+  NULL,
+  'none',
   17,
   'Ireland',
   'Diageo',
@@ -2642,8 +2903,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2672,8 +2936,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2702,8 +2969,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2732,8 +3002,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2762,8 +3035,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2792,8 +3068,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2822,8 +3101,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2852,8 +3134,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2882,8 +3167,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2912,8 +3200,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2942,8 +3233,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -2972,8 +3266,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3002,8 +3299,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3032,8 +3332,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3062,8 +3365,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3092,8 +3398,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3122,8 +3431,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3152,8 +3464,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3182,8 +3497,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3212,8 +3530,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3242,8 +3563,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3272,8 +3596,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3302,8 +3629,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3332,8 +3662,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3362,8 +3695,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3392,8 +3728,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3422,8 +3761,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3452,8 +3794,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3482,8 +3827,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3512,8 +3860,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3542,8 +3893,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3572,8 +3926,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3602,8 +3959,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3632,8 +3992,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3662,8 +4025,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3692,8 +4058,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3722,8 +4091,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3752,8 +4124,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3782,8 +4157,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3812,8 +4190,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3842,8 +4223,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3872,8 +4256,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3902,8 +4289,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3932,8 +4322,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3962,8 +4355,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -3992,8 +4388,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4022,8 +4421,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4052,8 +4454,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4082,8 +4487,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4112,8 +4520,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4142,8 +4553,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4172,8 +4586,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4189,8 +4606,8 @@ VALUES (
   'gin',
   'London Dry',
   'Bombay Sapphire is a well-known England London Dry from Bacardi.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/bombay-sapphire.webp',
-  'generated',
+  NULL,
+  'none',
   47,
   'England',
   'Bacardi',
@@ -4202,8 +4619,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4232,8 +4652,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4262,8 +4685,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4292,8 +4718,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4322,8 +4751,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4352,8 +4784,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4382,8 +4817,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4412,8 +4850,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4442,8 +4883,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4472,8 +4916,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4502,8 +4949,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4532,8 +4982,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4562,8 +5015,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4592,8 +5048,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4622,8 +5081,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4652,8 +5114,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4682,8 +5147,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4712,8 +5180,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4742,8 +5213,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4772,8 +5246,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4802,8 +5279,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4832,8 +5312,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4862,8 +5345,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4892,8 +5378,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4922,8 +5411,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4952,8 +5444,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -4982,8 +5477,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5012,8 +5510,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5042,8 +5543,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5072,8 +5576,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5102,8 +5609,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5132,8 +5642,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5162,8 +5675,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5192,8 +5708,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5209,8 +5728,8 @@ VALUES (
   'liqueur',
   'Bitter',
   'Campari is a well-known Italy Bitter from Campari Group.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/campari.webp',
-  'generated',
+  NULL,
+  'none',
   25,
   'Italy',
   'Campari Group',
@@ -5222,8 +5741,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5252,8 +5774,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5282,8 +5807,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5312,8 +5840,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5342,8 +5873,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5372,8 +5906,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5402,8 +5939,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5432,8 +5972,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5462,8 +6005,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5492,8 +6038,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5522,8 +6071,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5552,8 +6104,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5582,8 +6137,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5612,8 +6170,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5642,8 +6203,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5672,8 +6236,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5702,8 +6269,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5732,8 +6302,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5762,8 +6335,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5792,8 +6368,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5822,8 +6401,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5852,8 +6434,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5882,8 +6467,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5912,8 +6500,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5942,8 +6533,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -5972,8 +6566,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6002,8 +6599,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6032,8 +6632,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6062,8 +6665,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6092,8 +6698,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6122,8 +6731,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6152,8 +6764,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6169,8 +6784,8 @@ VALUES (
   'liqueur',
   'Herbal',
   'Chartreuse Green is a well-known France Herbal from Chartreuse.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/chartreuse-green.webp',
-  'generated',
+  NULL,
+  'none',
   55,
   'France',
   'Chartreuse',
@@ -6182,8 +6797,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6212,8 +6830,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6242,8 +6863,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6272,8 +6896,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6302,8 +6929,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6332,8 +6962,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6362,8 +6995,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6392,8 +7028,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6422,8 +7061,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6452,8 +7094,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6482,8 +7127,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6512,8 +7160,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6542,8 +7193,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6572,8 +7226,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6602,8 +7259,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6632,8 +7292,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6662,8 +7325,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6692,8 +7358,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6722,8 +7391,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6752,8 +7424,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6782,8 +7457,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6812,8 +7490,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6842,8 +7523,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6872,8 +7556,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6902,8 +7589,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6932,8 +7622,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6962,8 +7655,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -6992,8 +7688,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7022,8 +7721,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7039,8 +7741,8 @@ VALUES (
   'whisky',
   'Blended',
   'Chivas Regal 12 Year Old is a well-known Scotland Blended from Pernod Ricard.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/chivas-regal-12-year-old.webp',
-  'generated',
+  NULL,
+  'none',
   40,
   'Scotland',
   'Pernod Ricard',
@@ -7052,8 +7754,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7082,8 +7787,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7112,8 +7820,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7142,8 +7853,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7172,8 +7886,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7202,8 +7919,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7232,8 +7952,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7262,8 +7985,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7292,8 +8018,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7322,8 +8051,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7352,8 +8084,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7382,8 +8117,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7412,8 +8150,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7442,8 +8183,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7472,8 +8216,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7502,8 +8249,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7532,8 +8282,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7562,8 +8315,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7592,8 +8348,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7622,8 +8381,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7652,8 +8414,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7682,8 +8447,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7712,8 +8480,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7742,8 +8513,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7772,8 +8546,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7802,8 +8579,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7832,8 +8612,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7862,8 +8645,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7892,8 +8678,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7922,8 +8711,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7952,8 +8744,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -7982,8 +8777,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8012,8 +8810,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8042,8 +8843,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8072,8 +8876,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8102,8 +8909,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8132,8 +8942,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8162,8 +8975,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8192,8 +9008,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8222,8 +9041,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8239,8 +9061,8 @@ VALUES (
   'liqueur',
   'Orange',
   'Cointreau is a well-known France Orange from Rémy Cointreau.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/cointreau.webp',
-  'generated',
+  NULL,
+  'none',
   40,
   'France',
   'Rémy Cointreau',
@@ -8252,8 +9074,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8282,8 +9107,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8312,8 +9140,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8342,8 +9173,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8372,8 +9206,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8402,8 +9239,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8432,8 +9272,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8462,8 +9305,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8492,8 +9338,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8522,8 +9371,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8552,8 +9404,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8582,8 +9437,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8612,8 +9470,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8642,8 +9503,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8672,8 +9536,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8702,8 +9569,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8732,8 +9602,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8762,8 +9635,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8792,8 +9668,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8822,8 +9701,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8852,8 +9734,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8882,8 +9767,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8912,8 +9800,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8929,8 +9820,8 @@ VALUES (
   'sake',
   'Junmai Daiginjo',
   '山田錦を23%まで磨き上げた究極の純米大吟醸。華やかな吟醸香と透明感のある甘みが広がる。',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/dassai-23.webp',
-  'generated',
+  NULL,
+  'none',
   16,
   'Japan',
   '旭酒造',
@@ -8942,8 +9833,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8959,8 +9853,8 @@ VALUES (
   'sake',
   'Junmai Daiginjo',
   '山田錦を39%まで磨いた中核商品。華やかな香りとまろやかな旨みのバランスが良い。',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/dassai-39.webp',
-  'generated',
+  NULL,
+  'none',
   16,
   'Japan',
   '旭酒造',
@@ -8972,8 +9866,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -8989,8 +9886,8 @@ VALUES (
   'sake',
   'Junmai Daiginjo',
   '山田錦を45%まで磨いた獺祭のエントリークラス。穏やかな吟醸香と飲みやすさが特徴。',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/dassai-45.webp',
-  'generated',
+  NULL,
+  'none',
   16,
   'Japan',
   '旭酒造',
@@ -9002,8 +9899,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9032,8 +9932,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9062,8 +9965,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9092,8 +9998,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9122,8 +10031,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9152,8 +10064,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9182,8 +10097,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9212,8 +10130,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9242,8 +10163,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9272,8 +10196,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9302,8 +10229,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9332,8 +10262,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9362,8 +10295,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9379,8 +10315,8 @@ VALUES (
   'sake',
   'Junmai Ginjo',
   'Denshu Tokubetsu Junmai is a well-known Japan Junmai Ginjo from Denshu Tokubetsu, selected for broad drink catalog coverage in Japan.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/denshu-tokubetsu-junmai.webp',
-  'generated',
+  NULL,
+  'none',
   15,
   'Japan',
   'Denshu Tokubetsu',
@@ -9392,8 +10328,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9422,8 +10361,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9452,8 +10394,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9482,8 +10427,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9512,8 +10460,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9542,8 +10493,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9572,8 +10526,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9602,8 +10559,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9632,8 +10592,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9662,8 +10625,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9692,8 +10658,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9722,8 +10691,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9752,8 +10724,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9782,8 +10757,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9812,8 +10790,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9842,8 +10823,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9872,8 +10856,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9902,8 +10889,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9932,8 +10922,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9962,8 +10955,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -9992,8 +10988,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10022,8 +11021,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10052,8 +11054,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10082,8 +11087,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10112,8 +11120,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10142,8 +11153,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10172,8 +11186,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10202,8 +11219,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10232,8 +11252,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10262,8 +11285,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10292,8 +11318,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10322,8 +11351,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10339,8 +11371,8 @@ VALUES (
   'tequila',
   'Blanco',
   'Don Julio Blanco is a well-known Mexico Blanco from Diageo, selected for broad drink catalog coverage in Japan.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/don-julio-blanco.webp',
-  'generated',
+  NULL,
+  'none',
   38,
   'Mexico',
   'Diageo',
@@ -10352,8 +11384,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10382,8 +11417,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10399,8 +11437,8 @@ VALUES (
   'tequila',
   'Reposado',
   'Don Julio Reposado is a well-known Mexico Reposado from Diageo, selected for broad drink catalog coverage in Japan.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/don-julio-reposado.webp',
-  'generated',
+  NULL,
+  'none',
   38,
   'Mexico',
   'Diageo',
@@ -10412,8 +11450,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10442,8 +11483,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10472,8 +11516,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10502,8 +11549,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10532,8 +11582,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10562,8 +11615,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10592,8 +11648,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10622,8 +11681,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10652,8 +11714,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10682,8 +11747,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10712,8 +11780,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10742,8 +11813,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10772,8 +11846,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10802,8 +11879,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10832,8 +11912,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10862,8 +11945,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10892,8 +11978,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10922,8 +12011,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10952,8 +12044,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -10982,8 +12077,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11012,8 +12110,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11042,8 +12143,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11072,8 +12176,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11102,8 +12209,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11132,8 +12242,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11162,8 +12275,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11192,8 +12308,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11222,8 +12341,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11252,8 +12374,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11282,8 +12407,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11312,8 +12440,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11342,8 +12473,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11372,8 +12506,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11402,8 +12539,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11432,8 +12572,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11462,8 +12605,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11492,8 +12638,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11522,8 +12671,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11552,8 +12704,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11582,8 +12737,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11612,8 +12770,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11642,8 +12803,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11672,8 +12836,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11702,8 +12869,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11732,8 +12902,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11762,8 +12935,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11792,8 +12968,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11822,8 +13001,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11852,8 +13034,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11882,8 +13067,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11912,8 +13100,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11942,8 +13133,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -11972,8 +13166,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12002,8 +13199,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12032,8 +13232,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12062,8 +13265,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12092,8 +13298,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12122,8 +13331,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12152,8 +13364,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12182,8 +13397,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12212,8 +13430,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12242,8 +13463,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12272,8 +13496,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12302,8 +13529,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12332,8 +13562,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12362,8 +13595,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12392,8 +13628,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12422,8 +13661,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12452,8 +13694,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12482,8 +13727,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12512,8 +13760,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12542,8 +13793,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12572,8 +13826,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12602,8 +13859,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12632,8 +13892,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12662,8 +13925,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12692,8 +13958,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12722,8 +13991,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12752,8 +14024,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12782,8 +14057,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12812,8 +14090,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12842,8 +14123,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12872,8 +14156,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12902,8 +14189,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12932,8 +14222,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12962,8 +14255,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -12992,8 +14288,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13022,8 +14321,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13052,8 +14354,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13082,8 +14387,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13112,8 +14420,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13142,8 +14453,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13172,8 +14486,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13202,8 +14519,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13232,8 +14552,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13262,8 +14585,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13292,8 +14618,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13322,8 +14651,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13352,8 +14684,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13382,8 +14717,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13412,8 +14750,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13442,8 +14783,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13472,8 +14816,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13502,8 +14849,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13532,8 +14882,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13562,8 +14915,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13592,8 +14948,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13622,8 +14981,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13652,8 +15014,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13682,8 +15047,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13712,8 +15080,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13729,8 +15100,8 @@ VALUES (
   'whisky',
   'Single Malt',
   'Glenfiddich 12 Year Old is a well-known Scotland Single Malt from William Grant & Sons, selected for broad drink catalog coverage in Japan.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/glenfiddich-12-year-old.webp',
-  'generated',
+  NULL,
+  'none',
   40,
   'Scotland',
   'William Grant & Sons',
@@ -13742,8 +15113,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13772,8 +15146,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13802,8 +15179,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13832,8 +15212,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13862,8 +15245,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13892,8 +15278,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13922,8 +15311,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13952,8 +15344,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -13982,8 +15377,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14012,8 +15410,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14042,8 +15443,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14072,8 +15476,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14102,8 +15509,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14132,8 +15542,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14162,8 +15575,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14192,8 +15608,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14222,8 +15641,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14252,8 +15674,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14282,8 +15707,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14312,8 +15740,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14342,8 +15773,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14372,8 +15806,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14402,8 +15839,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14432,8 +15872,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14462,8 +15905,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14492,8 +15938,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14522,8 +15971,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14552,8 +16004,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14582,8 +16037,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14599,8 +16057,8 @@ VALUES (
   'vodka',
   NULL,
   'フランス・コニャック地方の冬小麦と天然湧水で造られたプレミアムウォッカ。シルクのようになめらかな口当たり。',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/grey-goose.webp',
-  'generated',
+  NULL,
+  'none',
   40,
   'France',
   'Bacardi',
@@ -14612,8 +16070,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14629,8 +16090,8 @@ VALUES (
   'beer',
   'Stout',
   'アイルランド生まれの世界的スタウトビール。クリーミーな泡立ちとローストモルトのほのかな苦味が特徴。',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/guinness-draught.webp',
-  'generated',
+  NULL,
+  'none',
   4.2,
   'Ireland',
   'Diageo',
@@ -14642,8 +16103,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14672,8 +16136,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14702,8 +16169,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14732,8 +16202,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14762,8 +16235,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14779,8 +16255,8 @@ VALUES (
   'sake',
   'Junmai Daiginjo',
   '新潟の名水と厳選された酒米で醸した淡麗辛口の代表格。すっきりとした飲み口でどんな料理にも寄り添う。',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/hakkaisan-junmai-daiginjo.webp',
-  'generated',
+  NULL,
+  'none',
   15.5,
   'Japan',
   '八海醸造',
@@ -14792,8 +16268,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14822,8 +16301,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14852,8 +16334,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14882,8 +16367,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14912,8 +16400,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14929,8 +16420,8 @@ VALUES (
   'vodka',
   'Rice',
   'Haku Vodka is a well-known Japan Rice from Suntory.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/haku-vodka.webp',
-  'generated',
+  NULL,
+  'none',
   40,
   'Japan',
   'Suntory',
@@ -14942,8 +16433,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -14972,8 +16466,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15002,8 +16499,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15032,8 +16532,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15049,8 +16552,8 @@ VALUES (
   'whisky',
   'Single Malt',
   'Hakushu 12 Year Old is a well-known Japan Single Malt from Suntory.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/hakushu-12-year-old.webp',
-  'generated',
+  NULL,
+  'none',
   43,
   'Japan',
   'Suntory',
@@ -15062,8 +16565,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15092,8 +16598,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15109,8 +16618,8 @@ VALUES (
   'whisky',
   'Single Malt',
   'Hakushu Distiller''s Reserve is a well-known Japan Single Malt from Suntory.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/hakushu-distillers-reserve.webp',
-  'generated',
+  NULL,
+  'none',
   43,
   'Japan',
   'Suntory',
@@ -15122,8 +16631,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15152,8 +16664,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15182,8 +16697,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15212,8 +16730,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15242,8 +16763,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15272,8 +16796,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15302,8 +16829,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15332,8 +16862,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15362,8 +16895,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15392,8 +16928,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15422,8 +16961,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15452,8 +16994,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15482,8 +17027,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15512,8 +17060,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15542,8 +17093,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15572,8 +17126,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15602,8 +17159,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15632,8 +17192,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15649,8 +17212,8 @@ VALUES (
   'rum',
   'Aged Rum',
   'Havana Club 7 Year Old is a well-known Cuba Aged Rum from Pernod Ricard.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/havana-club-7-year-old.webp',
-  'generated',
+  NULL,
+  'none',
   40,
   'Cuba',
   'Pernod Ricard',
@@ -15662,8 +17225,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15692,8 +17258,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15722,8 +17291,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15752,8 +17324,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15782,8 +17357,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15812,8 +17390,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15842,8 +17423,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15859,8 +17443,8 @@ VALUES (
   'gin',
   NULL,
   'バラときゅうりのエッセンスが特徴的なスコットランド産プレミアムジン。個性的だが万人に愛されるフローラルな香り。',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/hendricks-gin.webp',
-  'generated',
+  NULL,
+  'none',
   41.4,
   'United Kingdom',
   'William Grant & Sons',
@@ -15872,8 +17456,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15902,8 +17489,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15932,8 +17522,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15962,8 +17555,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -15979,8 +17575,8 @@ VALUES (
   'brandy',
   'Cognac',
   'Hennessy VS is a well-known France Cognac from LVMH.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/hennessy-vs.webp',
-  'generated',
+  NULL,
+  'none',
   40,
   'France',
   'LVMH',
@@ -15992,8 +17588,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16022,8 +17621,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16052,8 +17654,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16082,8 +17687,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16112,8 +17720,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16142,8 +17753,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16172,8 +17786,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16202,8 +17819,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16232,8 +17852,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16262,8 +17885,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16292,8 +17918,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16322,8 +17951,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16339,8 +17971,8 @@ VALUES (
   'whisky',
   'Blended',
   'Hibiki 21 Year Old is a well-known Japan Blended from Suntory.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/hibiki-21-year-old.webp',
-  'generated',
+  NULL,
+  'none',
   43,
   'Japan',
   'Suntory',
@@ -16352,8 +17984,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16382,8 +18017,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16399,8 +18037,8 @@ VALUES (
   'whisky',
   'Blended',
   '山崎・白州・知多のモルトとグレーンを匠の技でブレンド。華やかな香りと繊細な甘みが調和した日本の美意識。',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/hibiki-harmony.webp',
-  'generated',
+  NULL,
+  'none',
   43,
   'Japan',
   'Suntory',
@@ -16412,8 +18050,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16442,8 +18083,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16472,8 +18116,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16502,8 +18149,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16532,8 +18182,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16562,8 +18215,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16592,8 +18248,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16622,8 +18281,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16652,8 +18314,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16682,8 +18347,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16712,8 +18380,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16742,8 +18413,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16772,8 +18446,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16802,8 +18479,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16832,8 +18512,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16862,8 +18545,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16892,8 +18578,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16922,8 +18611,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16952,8 +18644,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -16982,8 +18677,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17012,8 +18710,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17042,8 +18743,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17072,8 +18776,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17102,8 +18809,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17132,8 +18842,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17162,8 +18875,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17192,8 +18908,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17222,8 +18941,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17239,8 +18961,8 @@ VALUES (
   'shochu',
   'Mugi',
   'Iichiko Silhouette is a well-known Japan Mugi from Sanwa Shurui.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/iichiko-silhouette.webp',
-  'generated',
+  NULL,
+  'none',
   25,
   'Japan',
   'Sanwa Shurui',
@@ -17252,8 +18974,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17282,8 +19007,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17312,8 +19040,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17342,8 +19073,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17372,8 +19106,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17402,8 +19139,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17432,8 +19172,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17462,8 +19205,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17479,8 +19225,8 @@ VALUES (
   'whisky',
   'Tennessee',
   'Jack Daniel''s Old No 7 is a well-known United States Tennessee from Brown-Forman, selected for broad drink catalog coverage in Japan.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/jack-daniels-old-no-7.webp',
-  'generated',
+  NULL,
+  'none',
   40,
   'United States',
   'Brown-Forman',
@@ -17492,8 +19238,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17522,8 +19271,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17552,8 +19304,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17582,8 +19337,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17612,8 +19370,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17642,8 +19403,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17659,8 +19423,8 @@ VALUES (
   'whisky',
   'Blended',
   '3回蒸留のスムースなアイリッシュウイスキー。バニラ、ナッツ、かすかなスパイスが織りなす軽やかな味わい。',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/jameson.webp',
-  'generated',
+  NULL,
+  'none',
   40,
   'Ireland',
   'Pernod Ricard',
@@ -17672,8 +19436,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17702,8 +19469,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17732,8 +19502,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17762,8 +19535,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17792,8 +19568,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17822,8 +19601,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17852,8 +19634,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17882,8 +19667,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17912,8 +19700,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17942,8 +19733,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -17959,8 +19753,8 @@ VALUES (
   'whisky',
   'Blended',
   'Johnnie Walker Black Label is a well-known Scotland Blended from Diageo, selected for broad drink catalog coverage in Japan.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/johnnie-walker-black-label.webp',
-  'generated',
+  NULL,
+  'none',
   40,
   'Scotland',
   'Diageo',
@@ -17972,8 +19766,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18002,8 +19799,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18032,8 +19832,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18062,8 +19865,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18092,8 +19898,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18122,8 +19931,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18152,8 +19964,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18182,8 +19997,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18212,8 +20030,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18242,8 +20063,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18272,8 +20096,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18302,8 +20129,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18332,8 +20162,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18362,8 +20195,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18392,8 +20228,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18422,8 +20261,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18439,8 +20281,8 @@ VALUES (
   'sake',
   'Junmai Daiginjo',
   '十四代の上位純米大吟醸。豊かな香りと甘旨の余韻が長く続く。',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/juyondai-ryugetsu.webp',
-  'generated',
+  NULL,
+  'none',
   16,
   'Japan',
   '高木酒造',
@@ -18452,8 +20294,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18482,8 +20327,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18512,8 +20360,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18542,8 +20393,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18572,8 +20426,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18602,8 +20459,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18632,8 +20492,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18662,8 +20525,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18692,8 +20558,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18722,8 +20591,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18752,8 +20624,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18782,8 +20657,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18812,8 +20690,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18842,8 +20723,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18872,8 +20756,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18902,8 +20789,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18932,8 +20822,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18962,8 +20855,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -18992,8 +20888,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19022,8 +20921,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19052,8 +20954,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19082,8 +20987,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19112,8 +21020,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19142,8 +21053,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19172,8 +21086,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19202,8 +21119,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19232,8 +21152,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19262,8 +21185,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19292,8 +21218,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19322,8 +21251,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19352,8 +21284,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19382,8 +21317,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19412,8 +21350,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19442,8 +21383,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19472,8 +21416,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19489,8 +21436,8 @@ VALUES (
   'vodka',
   'Plain',
   'Ketel One Vodka is a well-known Netherlands Plain from Diageo.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/ketel-one-vodka.webp',
-  'generated',
+  NULL,
+  'none',
   40,
   'Netherlands',
   'Diageo',
@@ -19502,8 +21449,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19532,8 +21482,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19562,8 +21515,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19592,8 +21548,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19622,8 +21581,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19652,8 +21614,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19682,8 +21647,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19712,8 +21680,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19742,8 +21713,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19772,8 +21746,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19802,8 +21779,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19832,8 +21812,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19862,8 +21845,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19892,8 +21878,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19922,8 +21911,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19952,8 +21944,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -19982,8 +21977,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20012,8 +22010,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20042,8 +22043,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20072,8 +22076,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20102,8 +22109,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20132,8 +22142,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20162,8 +22175,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20192,8 +22208,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20222,8 +22241,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20252,8 +22274,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20282,8 +22307,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20312,8 +22340,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20342,8 +22373,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20372,8 +22406,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20389,8 +22426,8 @@ VALUES (
   'beer',
   'Lager',
   'Kirin Ichiban Shibori is a well-known Japan Lager from キリンビール.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/kirin-ichiban-shibori.webp',
-  'generated',
+  NULL,
+  'none',
   5,
   'Japan',
   'キリンビール',
@@ -20402,8 +22439,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20432,8 +22472,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20462,8 +22505,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20492,8 +22538,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20522,8 +22571,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20552,8 +22604,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20582,8 +22637,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20612,8 +22670,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20642,8 +22703,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20672,8 +22736,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20702,8 +22769,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20732,8 +22802,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20762,8 +22835,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20792,8 +22868,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20822,8 +22901,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20852,8 +22934,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20882,8 +22967,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20912,8 +23000,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20942,8 +23033,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -20972,8 +23066,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21002,8 +23099,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21032,8 +23132,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21062,8 +23165,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21092,8 +23198,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21122,8 +23231,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21152,8 +23264,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21182,8 +23297,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21199,8 +23317,8 @@ VALUES (
   'sake',
   'Junmai Daiginjo',
   '久保田シリーズの最高峰。柔らかな口当たりと上品で深い味わい。余韻が長く続く贅沢な一杯。',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/kubota-manju.webp',
-  'generated',
+  NULL,
+  'none',
   15.5,
   'Japan',
   '朝日酒造',
@@ -21212,8 +23330,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21229,8 +23350,8 @@ VALUES (
   'sake',
   'Ginjo',
   '吟醸香を控えめに抑え、淡麗辛口に仕上げた久保田シリーズの日常酒。',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/kubota-senju.webp',
-  'generated',
+  NULL,
+  'none',
   15,
   'Japan',
   '朝日酒造',
@@ -21242,8 +23363,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21272,8 +23396,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21302,8 +23429,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21332,8 +23462,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21362,8 +23495,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21392,8 +23528,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21422,8 +23561,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21452,8 +23594,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21482,8 +23627,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21512,8 +23660,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21542,8 +23693,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21572,8 +23726,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21602,8 +23759,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21632,8 +23792,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21662,8 +23825,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21692,8 +23858,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21722,8 +23891,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21752,8 +23924,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21782,8 +23957,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21812,8 +23990,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21842,8 +24023,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21872,8 +24056,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21902,8 +24089,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21932,8 +24122,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21962,8 +24155,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -21992,8 +24188,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22022,8 +24221,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22052,8 +24254,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22082,8 +24287,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22112,8 +24320,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22142,8 +24353,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22172,8 +24386,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22202,8 +24419,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22232,8 +24452,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22262,8 +24485,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22292,8 +24518,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22322,8 +24551,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22352,8 +24584,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22382,8 +24617,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22412,8 +24650,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22442,8 +24683,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22472,8 +24716,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22502,8 +24749,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22532,8 +24782,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22562,8 +24815,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22592,8 +24848,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22622,8 +24881,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22652,8 +24914,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22682,8 +24947,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22712,8 +24980,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22742,8 +25013,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22772,8 +25046,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22802,8 +25079,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22832,8 +25112,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22862,8 +25145,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22892,8 +25178,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22922,8 +25211,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22952,8 +25244,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -22982,8 +25277,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23012,8 +25310,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23042,8 +25343,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23072,8 +25376,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23102,8 +25409,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23132,8 +25442,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23162,8 +25475,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23192,8 +25508,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23222,8 +25541,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23252,8 +25574,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23269,8 +25594,8 @@ VALUES (
   'whisky',
   'Single Malt',
   'シェリー樽由来のリッチなドライフルーツとスパイスの風味。スコッチウイスキーの王道とも言える深い琥珀色の一杯。',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/macallan-12-sherry-oak.webp',
-  'generated',
+  NULL,
+  'none',
   40,
   'United Kingdom',
   'The Macallan',
@@ -23282,8 +25607,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23312,8 +25640,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23342,8 +25673,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23372,8 +25706,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23402,8 +25739,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23432,8 +25772,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23462,8 +25805,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23479,8 +25825,8 @@ VALUES (
   'whisky',
   'Bourbon',
   '冬小麦を使用したまろやかなバーボン。キャラメルとバニラの甘い香りに、口当たりの柔らかさが際立つ。',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/makers-mark.webp',
-  'generated',
+  NULL,
+  'none',
   45,
   'United States',
   'Beam Suntory',
@@ -23492,8 +25838,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23522,8 +25871,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23552,8 +25904,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23582,8 +25937,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23612,8 +25970,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23642,8 +26003,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23672,8 +26036,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23702,8 +26069,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23732,8 +26102,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23762,8 +26135,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23792,8 +26168,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23822,8 +26201,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23852,8 +26234,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23882,8 +26267,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23912,8 +26300,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23942,8 +26333,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -23972,8 +26366,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24002,8 +26399,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24032,8 +26432,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24062,8 +26465,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24092,8 +26498,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24122,8 +26531,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24152,8 +26564,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24182,8 +26597,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24212,8 +26630,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24242,8 +26663,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24272,8 +26696,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24302,8 +26729,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24332,8 +26762,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24362,8 +26795,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24392,8 +26828,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24422,8 +26861,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24452,8 +26894,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24482,8 +26927,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24512,8 +26960,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24542,8 +26993,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24572,8 +27026,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24602,8 +27059,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24632,8 +27092,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24662,8 +27125,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24692,8 +27158,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24722,8 +27191,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24752,8 +27224,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24769,8 +27244,8 @@ VALUES (
   'liqueur',
   'Melon',
   'Midori Melon Liqueur is a well-known Japan Melon from Midori Melon, selected for broad drink catalog coverage in Japan.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/midori-melon-liqueur.webp',
-  'generated',
+  NULL,
+  'none',
   20,
   'Japan',
   'Midori Melon',
@@ -24782,8 +27257,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24812,8 +27290,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24842,8 +27323,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24872,8 +27356,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24902,8 +27389,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24932,8 +27422,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24962,8 +27455,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -24992,8 +27488,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25022,8 +27521,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25052,8 +27554,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25082,8 +27587,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25112,8 +27620,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25142,8 +27653,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25172,8 +27686,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25202,8 +27719,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25232,8 +27752,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25262,8 +27785,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25292,8 +27818,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25322,8 +27851,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25352,8 +27884,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25382,8 +27917,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25412,8 +27950,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25442,8 +27983,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25472,8 +28016,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25502,8 +28049,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25532,8 +28082,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25562,8 +28115,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25592,8 +28148,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25622,8 +28181,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25652,8 +28214,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25682,8 +28247,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25712,8 +28280,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25742,8 +28313,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25772,8 +28346,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25802,8 +28379,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25832,8 +28412,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25862,8 +28445,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25892,8 +28478,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25922,8 +28511,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25952,8 +28544,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -25982,8 +28577,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26012,8 +28610,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26042,8 +28643,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26072,8 +28676,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26102,8 +28709,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26132,8 +28742,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26162,8 +28775,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26192,8 +28808,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26222,8 +28841,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26252,8 +28874,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26282,8 +28907,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26312,8 +28940,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26342,8 +28973,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26372,8 +29006,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26402,8 +29039,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26432,8 +29072,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26462,8 +29105,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26492,8 +29138,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26522,8 +29171,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26552,8 +29204,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26582,8 +29237,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26612,8 +29270,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26642,8 +29303,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26672,8 +29336,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26702,8 +29369,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26732,8 +29402,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26762,8 +29435,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26779,8 +29455,8 @@ VALUES (
   'whisky',
   'Malt Whisky',
   'Nikka Coffey Malt is a well-known Japan Malt Whisky from Nikka.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/nikka-coffey-malt.webp',
-  'generated',
+  NULL,
+  'none',
   45,
   'Japan',
   'Nikka',
@@ -26792,8 +29468,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26822,8 +29501,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26839,8 +29521,8 @@ VALUES (
   'whisky',
   'Blended',
   'Nikka From The Barrel is a well-known Japan Blended from Nikka.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/nikka-from-the-barrel.webp',
-  'generated',
+  NULL,
+  'none',
   51.4,
   'Japan',
   'Nikka',
@@ -26852,8 +29534,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26882,8 +29567,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26912,8 +29600,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26942,8 +29633,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -26972,8 +29666,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27002,8 +29699,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27032,8 +29732,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27062,8 +29765,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27092,8 +29798,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27122,8 +29831,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27152,8 +29864,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27182,8 +29897,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27212,8 +29930,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27242,8 +29963,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27272,8 +29996,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27302,8 +30029,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27332,8 +30062,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27362,8 +30095,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27392,8 +30128,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27422,8 +30161,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27452,8 +30194,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27482,8 +30227,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27512,8 +30260,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27542,8 +30293,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27572,8 +30326,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27602,8 +30359,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27632,8 +30392,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27662,8 +30425,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27692,8 +30458,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27722,8 +30491,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27752,8 +30524,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27782,8 +30557,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27812,8 +30590,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27842,8 +30623,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27859,8 +30643,8 @@ VALUES (
   'beer',
   'Lager',
   'Orion The Draft is a well-known Japan Lager from Orion The, selected for broad drink catalog coverage in Japan.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/orion-the-draft.webp',
-  'generated',
+  NULL,
+  'none',
   5,
   'Japan',
   'Orion The',
@@ -27872,8 +30656,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27902,8 +30689,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27932,8 +30722,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27962,8 +30755,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -27992,8 +30788,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28022,8 +30821,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28052,8 +30854,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28082,8 +30887,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28112,8 +30920,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28142,8 +30953,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28172,8 +30986,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28202,8 +31019,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28232,8 +31052,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28262,8 +31085,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28292,8 +31118,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28322,8 +31151,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28352,8 +31184,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28382,8 +31217,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28412,8 +31250,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28442,8 +31283,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28459,8 +31303,8 @@ VALUES (
   'tequila',
   'Blanco',
   'Patron Silver is a well-known Mexico Blanco from Bacardi, selected for broad drink catalog coverage in Japan.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/patron-silver.webp',
-  'generated',
+  NULL,
+  'none',
   40,
   'Mexico',
   'Bacardi',
@@ -28472,8 +31316,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28502,8 +31349,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28532,8 +31382,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28562,8 +31415,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28592,8 +31448,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28622,8 +31481,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28652,8 +31514,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28682,8 +31547,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28712,8 +31580,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28742,8 +31613,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28772,8 +31646,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28802,8 +31679,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28832,8 +31712,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28862,8 +31745,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28892,8 +31778,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28922,8 +31811,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28952,8 +31844,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -28982,8 +31877,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29012,8 +31910,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29042,8 +31943,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29072,8 +31976,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29102,8 +32009,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29132,8 +32042,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29162,8 +32075,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29192,8 +32108,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29222,8 +32141,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29252,8 +32174,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29282,8 +32207,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29312,8 +32240,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29342,8 +32273,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29372,8 +32306,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29402,8 +32339,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29432,8 +32372,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29462,8 +32405,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29492,8 +32438,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29522,8 +32471,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29552,8 +32504,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29582,8 +32537,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29612,8 +32570,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29642,8 +32603,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29672,8 +32636,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29702,8 +32669,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29732,8 +32702,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29762,8 +32735,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29779,8 +32755,8 @@ VALUES (
   'brandy',
   'Cognac',
   'Remy Martin VSOP is a well-known France Cognac from Rémy Cointreau.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/remy-martin-vsop.webp',
-  'generated',
+  NULL,
+  'none',
   40,
   'France',
   'Rémy Cointreau',
@@ -29792,8 +32768,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29822,8 +32801,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29852,8 +32834,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29882,8 +32867,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29912,8 +32900,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29942,8 +32933,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -29972,8 +32966,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30002,8 +32999,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30032,8 +33032,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30062,8 +33065,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30092,8 +33098,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30122,8 +33131,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30152,8 +33164,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30182,8 +33197,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30212,8 +33230,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30242,8 +33263,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30272,8 +33296,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30302,8 +33329,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30332,8 +33362,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30362,8 +33395,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30392,8 +33428,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30422,8 +33461,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30452,8 +33494,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30482,8 +33527,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30512,8 +33560,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30542,8 +33593,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30572,8 +33626,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30602,8 +33659,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30632,8 +33692,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30662,8 +33725,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30692,8 +33758,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30722,8 +33791,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30752,8 +33824,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30782,8 +33857,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30812,8 +33890,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30842,8 +33923,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30872,8 +33956,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30902,8 +33989,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30932,8 +34022,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30962,8 +34055,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -30992,8 +34088,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31022,8 +34121,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31052,8 +34154,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31082,8 +34187,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31112,8 +34220,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31142,8 +34253,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31172,8 +34286,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31202,8 +34319,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31232,8 +34352,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31262,8 +34385,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31292,8 +34418,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31322,8 +34451,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31352,8 +34484,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31382,8 +34517,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31412,8 +34550,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31442,8 +34583,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31472,8 +34616,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31502,8 +34649,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31532,8 +34682,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31562,8 +34715,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31592,8 +34748,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31622,8 +34781,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31652,8 +34814,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31682,8 +34847,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31712,8 +34880,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31742,8 +34913,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31772,8 +34946,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31802,8 +34979,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31832,8 +35012,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31862,8 +35045,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31892,8 +35078,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31922,8 +35111,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31952,8 +35144,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31982,8 +35177,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -31999,8 +35197,8 @@ VALUES (
   'beer',
   'Lager',
   'Sapporo Black Label is a well-known Japan Lager from サッポロビール.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/sapporo-black-label.webp',
-  'generated',
+  NULL,
+  'none',
   5,
   'Japan',
   'サッポロビール',
@@ -32012,8 +35210,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32042,8 +35243,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32072,8 +35276,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32102,8 +35309,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32132,8 +35342,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32162,8 +35375,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32192,8 +35408,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32222,8 +35441,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32252,8 +35474,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32282,8 +35507,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32312,8 +35540,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32342,8 +35573,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32372,8 +35606,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32402,8 +35639,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32432,8 +35672,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32462,8 +35705,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32492,8 +35738,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32522,8 +35771,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32552,8 +35804,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32582,8 +35837,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32612,8 +35870,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32642,8 +35903,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32672,8 +35936,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32702,8 +35969,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32732,8 +36002,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32762,8 +36035,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32792,8 +36068,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32822,8 +36101,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32852,8 +36134,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32882,8 +36167,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32912,8 +36200,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32942,8 +36233,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -32972,8 +36266,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33002,8 +36299,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33032,8 +36332,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33062,8 +36365,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33092,8 +36398,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33122,8 +36431,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33152,8 +36464,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33182,8 +36497,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33212,8 +36530,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33242,8 +36563,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33272,8 +36596,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33302,8 +36629,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33332,8 +36662,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33362,8 +36695,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33392,8 +36728,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33422,8 +36761,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33452,8 +36794,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33482,8 +36827,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33512,8 +36860,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33542,8 +36893,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33572,8 +36926,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33602,8 +36959,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33632,8 +36992,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33662,8 +37025,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33692,8 +37058,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33722,8 +37091,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33752,8 +37124,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33782,8 +37157,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33812,8 +37190,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33842,8 +37223,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33859,8 +37243,8 @@ VALUES (
   'vodka',
   'Plain',
   'Smirnoff No 21 Vodka is a well-known United Kingdom Plain from Diageo.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/smirnoff-no-21-vodka.webp',
-  'generated',
+  NULL,
+  'none',
   40,
   'United Kingdom',
   'Diageo',
@@ -33872,8 +37256,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33902,8 +37289,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33932,8 +37322,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33962,8 +37355,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -33992,8 +37388,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34022,8 +37421,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34052,8 +37454,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34082,8 +37487,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34112,8 +37520,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34142,8 +37553,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34172,8 +37586,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34202,8 +37619,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34232,8 +37652,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34262,8 +37685,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34292,8 +37718,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34322,8 +37751,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34352,8 +37784,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34382,8 +37817,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34412,8 +37850,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34442,8 +37883,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34472,8 +37916,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34502,8 +37949,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34532,8 +37982,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34562,8 +38015,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34592,8 +38048,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34622,8 +38081,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34652,8 +38114,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34682,8 +38147,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34712,8 +38180,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34742,8 +38213,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34772,8 +38246,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34802,8 +38279,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34832,8 +38312,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34862,8 +38345,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34892,8 +38378,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34922,8 +38411,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34952,8 +38444,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -34982,8 +38477,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35012,8 +38510,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35042,8 +38543,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35072,8 +38576,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35102,8 +38609,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35132,8 +38642,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35162,8 +38675,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35192,8 +38708,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35222,8 +38741,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35252,8 +38774,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35282,8 +38807,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35312,8 +38840,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35342,8 +38873,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35372,8 +38906,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35402,8 +38939,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35432,8 +38972,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35462,8 +39005,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35492,8 +39038,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35522,8 +39071,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35552,8 +39104,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35569,8 +39124,8 @@ VALUES (
   'gin',
   'London Dry',
   'Tanqueray London Dry Gin is a well-known England London Dry from Diageo.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/tanqueray-london-dry-gin.webp',
-  'generated',
+  NULL,
+  'none',
   47.3,
   'England',
   'Diageo',
@@ -35582,8 +39137,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35612,8 +39170,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35642,8 +39203,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35672,8 +39236,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35702,8 +39269,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35732,8 +39302,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35762,8 +39335,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35792,8 +39368,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35822,8 +39401,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35852,8 +39434,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35882,8 +39467,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35912,8 +39500,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35942,8 +39533,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -35972,8 +39566,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36002,8 +39599,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36032,8 +39632,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36062,8 +39665,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36092,8 +39698,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36122,8 +39731,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36152,8 +39764,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36182,8 +39797,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36212,8 +39830,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36242,8 +39863,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36272,8 +39896,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36302,8 +39929,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36332,8 +39962,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36362,8 +39995,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36392,8 +40028,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36422,8 +40061,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36452,8 +40094,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36482,8 +40127,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36512,8 +40160,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36542,8 +40193,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36572,8 +40226,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36602,8 +40259,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36632,8 +40292,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36662,8 +40325,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36692,8 +40358,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36722,8 +40391,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36739,8 +40411,8 @@ VALUES (
   'whisky',
   'Single Malt',
   'The Macallan Double Cask 12 Year Old is a well-known Scotland Single Malt from The Macallan, selected for broad drink catalog coverage in Japan.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/the-macallan-double-cask-12-year-old.webp',
-  'generated',
+  NULL,
+  'none',
   40,
   'Scotland',
   'The Macallan',
@@ -36752,8 +40424,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36782,8 +40457,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36812,8 +40490,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36842,8 +40523,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36872,8 +40556,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36902,8 +40589,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36932,8 +40622,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36962,8 +40655,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -36992,8 +40688,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37022,8 +40721,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37052,8 +40754,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37082,8 +40787,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37112,8 +40820,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37142,8 +40853,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37172,8 +40886,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37202,8 +40919,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37232,8 +40952,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37262,8 +40985,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37292,8 +41018,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37322,8 +41051,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37352,8 +41084,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37382,8 +41117,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37412,8 +41150,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37442,8 +41183,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37472,8 +41216,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37502,8 +41249,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37532,8 +41282,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37562,8 +41315,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37592,8 +41348,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37622,8 +41381,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37652,8 +41414,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37682,8 +41447,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37712,8 +41480,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37742,8 +41513,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37772,8 +41546,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37802,8 +41579,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37832,8 +41612,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37862,8 +41645,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37892,8 +41678,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37922,8 +41711,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37952,8 +41744,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -37982,8 +41777,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38012,8 +41810,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38042,8 +41843,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38072,8 +41876,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38102,8 +41909,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38132,8 +41942,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38162,8 +41975,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38192,8 +42008,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38222,8 +42041,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38252,8 +42074,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38282,8 +42107,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38312,8 +42140,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38342,8 +42173,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38372,8 +42206,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38402,8 +42239,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38432,8 +42272,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38462,8 +42305,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38492,8 +42338,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38522,8 +42371,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38552,8 +42404,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38582,8 +42437,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38612,8 +42470,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38642,8 +42503,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38672,8 +42536,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38702,8 +42569,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38732,8 +42602,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38762,8 +42635,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38792,8 +42668,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38822,8 +42701,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38852,8 +42734,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38882,8 +42767,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38899,8 +42787,8 @@ VALUES (
   'whisky',
   'Bourbon',
   'Woodford Reserve Distiller''s Select is a well-known United States Bourbon from Brown-Forman.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/woodford-reserve-distillers-select.webp',
-  'generated',
+  NULL,
+  'none',
   43.2,
   'United States',
   'Brown-Forman',
@@ -38912,8 +42800,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38942,8 +42833,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -38972,8 +42866,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39002,8 +42899,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39032,8 +42932,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39062,8 +42965,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39079,8 +42985,8 @@ VALUES (
   'whisky',
   'Single Malt',
   '日本初のモルトウイスキー蒸留所が生んだ至宝。繊細で複雑な味わいに、ほのかなミズナラの香りが漂う。',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/yamazaki-12.webp',
-  'generated',
+  NULL,
+  'none',
   43,
   'Japan',
   'Suntory',
@@ -39092,8 +42998,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39109,8 +43018,8 @@ VALUES (
   'whisky',
   'Single Malt',
   'Yamazaki 18 Year Old is a well-known Japan Single Malt from Suntory.',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/yamazaki-18-year-old.webp',
-  'generated',
+  NULL,
+  'none',
   43,
   'Japan',
   'Suntory',
@@ -39122,8 +43031,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39152,8 +43064,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39182,8 +43097,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39212,8 +43130,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39242,8 +43163,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39272,8 +43196,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39302,8 +43229,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39332,8 +43262,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39362,8 +43295,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39392,8 +43328,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39422,8 +43361,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39452,8 +43394,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39482,8 +43427,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39512,8 +43460,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39542,8 +43493,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39572,8 +43526,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39602,8 +43559,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39632,8 +43592,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39662,8 +43625,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39692,8 +43658,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39722,8 +43691,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39752,8 +43724,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39782,8 +43757,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39812,8 +43790,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39842,8 +43823,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39872,8 +43856,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,
@@ -39902,8 +43889,11 @@ ON CONFLICT (slug) DO UPDATE SET
   category = EXCLUDED.category,
   subcategory = EXCLUDED.subcategory,
   description = EXCLUDED.description,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, drinks.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE drinks.image_source
+  END,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
   manufacturer = EXCLUDED.manufacturer,

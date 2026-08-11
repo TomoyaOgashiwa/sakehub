@@ -10,6 +10,7 @@
     "upload": "node --experimental-strip-types --disable-warning=ExperimentalWarning ./src/upload.ts"
   },
   "dependencies": {
+    "@sakehub/seed-utils": "workspace:*",
     "@supabase/supabase-js": "^2.111.0"
   },
   "devDependencies": {

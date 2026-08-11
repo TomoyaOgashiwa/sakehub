@@ -29,7 +29,6 @@ type CreateInput struct {
 	Subcategory   *string  `json:"subcategory,omitempty"`
 	Description   string   `json:"description"`
 	ImageURL      *string  `json:"image_url,omitempty"`
-	ImageSource   string   `json:"image_source,omitempty"`
 	ABV           *float64 `json:"abv,omitempty"`
 	OriginCountry *string  `json:"origin_country,omitempty"`
 	Manufacturer  *string  `json:"manufacturer,omitempty"`

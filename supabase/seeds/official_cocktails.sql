@@ -1,7 +1,7 @@
 -- =============================================================================
 -- packages/cocktail-seed（src/build-seed.ts）が自動生成。
 -- 手編集しないこと。再生成: pnpm seed:cocktails:build
--- 生成日時: 2026-08-11T20:49:53.518Z
+-- 生成日時: 2026-08-11T21:08:13.638Z
 -- 件数: 164
 -- =============================================================================
 
@@ -108,8 +108,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -167,8 +170,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -228,8 +234,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -276,8 +285,8 @@ VALUES (
   'Liqueur',
   8,
   'Italy',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/aperol-spritz.webp',
-  'generated',
+  NULL,
+  'none',
   ARRAY['スプマンテ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -288,8 +297,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -348,8 +360,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -408,8 +423,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -469,8 +487,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -529,8 +550,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -589,8 +613,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -650,8 +677,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -710,8 +740,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -770,8 +803,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -830,8 +866,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -891,8 +930,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -952,8 +994,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1011,8 +1056,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1060,8 +1108,8 @@ VALUES (
   'Vodka',
   12,
   'France',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/bloody-mary.webp',
-  'generated',
+  NULL,
+  'none',
   '{}'::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -1072,8 +1120,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1135,8 +1186,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1183,8 +1237,8 @@ VALUES (
   'Whisky',
   27,
   'France',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/boulevardier.webp',
-  'generated',
+  NULL,
+  'none',
   ARRAY['ブルヴァルディエ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -1195,8 +1249,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1255,8 +1312,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1316,8 +1376,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1376,8 +1439,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1439,8 +1505,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1498,8 +1567,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1558,8 +1630,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1607,8 +1682,8 @@ VALUES (
   'Cachaca',
   20,
   'Brazil',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/caipirinha.webp',
-  'generated',
+  NULL,
+  'none',
   '{}'::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -1619,8 +1694,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1679,8 +1757,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1739,8 +1820,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1799,8 +1883,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1858,8 +1945,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1920,8 +2010,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -1979,8 +2072,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2038,8 +2134,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2099,8 +2198,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2159,8 +2261,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2219,8 +2324,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2280,8 +2388,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2340,8 +2451,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2390,8 +2504,8 @@ VALUES (
   'Vodka',
   20,
   'United States',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/cosmopolitan.webp',
-  'generated',
+  NULL,
+  'none',
   ARRAY['コスモ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -2402,8 +2516,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2463,8 +2580,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2511,8 +2631,8 @@ VALUES (
   'Rum',
   22,
   'Cuba',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/daiquiri.webp',
-  'generated',
+  NULL,
+  'none',
   ARRAY['ダイキリ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -2523,8 +2643,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2583,8 +2706,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2631,8 +2757,8 @@ VALUES (
   'Gin',
   30,
   'United States',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/dry-martini.webp',
-  'generated',
+  NULL,
+  'none',
   ARRAY['マティーニ', 'Martini']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -2643,8 +2769,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2702,8 +2831,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2763,8 +2895,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2812,8 +2947,8 @@ VALUES (
   'Vodka',
   18,
   'United Kingdom',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/espresso-martini.webp',
-  'generated',
+  NULL,
+  'none',
   '{}'::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -2824,8 +2959,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2873,8 +3011,8 @@ VALUES (
   'Gin',
   15,
   'France',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/french-75.webp',
-  'generated',
+  NULL,
+  'none',
   '{}'::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -2885,8 +3023,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -2946,8 +3087,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3005,8 +3149,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3065,8 +3212,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3125,8 +3275,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3186,8 +3339,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3234,8 +3390,8 @@ VALUES (
   'Gin',
   8,
   'United Kingdom',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/gin-tonic.webp',
-  'generated',
+  NULL,
+  'none',
   ARRAY['ジン・トニック', 'G&T']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -3246,8 +3402,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3306,8 +3465,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3365,8 +3527,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3425,8 +3590,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3485,8 +3653,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3545,8 +3716,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3605,8 +3779,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3664,8 +3841,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3725,8 +3905,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3785,8 +3968,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3845,8 +4031,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3894,8 +4083,8 @@ VALUES (
   'Whisky',
   7,
   'Japan',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/highball.webp',
-  'generated',
+  NULL,
+  'none',
   ARRAY['ウィスキーハイボール']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -3906,8 +4095,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -3965,8 +4157,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4024,8 +4219,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4085,8 +4283,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4147,8 +4348,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4208,8 +4412,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4270,8 +4477,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4331,8 +4541,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4391,8 +4604,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4451,8 +4667,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4512,8 +4731,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4574,8 +4796,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4633,8 +4858,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4693,8 +4921,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4752,8 +4983,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4811,8 +5045,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4872,8 +5109,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4933,8 +5173,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -4982,8 +5225,8 @@ VALUES (
   'Shochu',
   5,
   'Japan',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/lemon-sour.webp',
-  'generated',
+  NULL,
+  'none',
   ARRAY['レモンサワ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -4994,8 +5237,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5054,8 +5300,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5119,8 +5368,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5168,8 +5420,8 @@ VALUES (
   'Rum',
   22,
   'United States',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/mai-tai.webp',
-  'generated',
+  NULL,
+  'none',
   '{}'::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -5180,8 +5432,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5242,8 +5497,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5290,8 +5548,8 @@ VALUES (
   'Whisky',
   30,
   'United States',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/manhattan.webp',
-  'generated',
+  NULL,
+  'none',
   '{}'::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -5302,8 +5560,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5351,8 +5612,8 @@ VALUES (
   'Tequila',
   25,
   'Mexico',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/margarita.webp',
-  'generated',
+  NULL,
+  'none',
   '{}'::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -5363,8 +5624,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5424,8 +5688,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5485,8 +5752,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5546,8 +5816,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5606,8 +5879,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5667,8 +5943,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5727,8 +6006,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5775,8 +6057,8 @@ VALUES (
   'Rum',
   10,
   'Cuba',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/mojito.webp',
-  'generated',
+  NULL,
+  'none',
   '{}'::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -5787,8 +6069,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5849,8 +6134,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5898,8 +6186,8 @@ VALUES (
   'Vodka',
   12,
   'United States',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/moscow-mule.webp',
-  'generated',
+  NULL,
+  'none',
   ARRAY['モスクワミュール']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -5910,8 +6198,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -5970,8 +6261,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6021,8 +6315,8 @@ VALUES (
   'Gin',
   24,
   'Italy',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/negroni.webp',
-  'generated',
+  NULL,
+  'none',
   '{}'::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -6033,8 +6327,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6093,8 +6390,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6154,8 +6454,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6214,8 +6517,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6263,8 +6569,8 @@ VALUES (
   'Whisky',
   32,
   'United States',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/old-fashioned.webp',
-  'generated',
+  NULL,
+  'none',
   ARRAY['オールドファッション']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -6275,8 +6581,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6336,8 +6645,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6395,8 +6707,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6444,8 +6759,8 @@ VALUES (
   'Tequila',
   12,
   'Mexico',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/paloma.webp',
-  'generated',
+  NULL,
+  'none',
   '{}'::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -6456,8 +6771,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6517,8 +6835,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6578,8 +6899,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6626,8 +6950,8 @@ VALUES (
   'Whisky',
   22,
   'United States',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/penicillin.webp',
-  'generated',
+  NULL,
+  'none',
   ARRAY['ペニシリンカクテル']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -6638,8 +6962,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6687,8 +7014,8 @@ VALUES (
   'Rum',
   13,
   'Puerto Rico',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/pina-colada.webp',
-  'generated',
+  NULL,
+  'none',
   ARRAY['ピナコラーダ']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -6699,8 +7026,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6759,8 +7089,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6818,8 +7151,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6880,8 +7216,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -6941,8 +7280,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7003,8 +7345,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7064,8 +7409,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7126,8 +7474,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7186,8 +7537,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7251,8 +7605,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7311,8 +7668,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7373,8 +7733,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7433,8 +7796,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7495,8 +7861,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7556,8 +7925,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7619,8 +7991,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7678,8 +8053,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7737,8 +8115,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7797,8 +8178,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7860,8 +8244,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7921,8 +8308,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -7983,8 +8373,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8042,8 +8435,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8102,8 +8498,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8161,8 +8560,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8222,8 +8624,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8281,8 +8686,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8340,8 +8748,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8399,8 +8810,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8446,8 +8860,8 @@ VALUES (
   'Brandy',
   25,
   'France',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/sidecar.webp',
-  'generated',
+  NULL,
+  'none',
   '{}'::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -8458,8 +8872,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8518,8 +8935,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8580,8 +9000,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8645,8 +9068,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8706,8 +9132,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8766,8 +9195,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8825,8 +9257,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8886,8 +9321,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -8946,8 +9384,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -9006,8 +9447,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -9067,8 +9511,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -9127,8 +9574,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -9189,8 +9639,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -9250,8 +9703,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -9310,8 +9766,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -9361,8 +9820,8 @@ VALUES (
   'Vodka',
   33,
   'United States',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/vodka-martini.webp',
-  'generated',
+  NULL,
+  'none',
   ARRAY['カンガルー']::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -9373,8 +9832,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -9432,8 +9894,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -9491,8 +9956,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -9552,8 +10020,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -9601,8 +10072,8 @@ VALUES (
   'Whisky',
   20,
   'United States',
-  'http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/whiskey-sour.webp',
-  'generated',
+  NULL,
+  'none',
   '{}'::TEXT[]
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -9613,8 +10084,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -9673,8 +10147,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -9732,8 +10209,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -9792,8 +10272,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -9852,8 +10335,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -9912,8 +10398,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 
@@ -9972,8 +10461,11 @@ ON CONFLICT (id) DO UPDATE SET
   base_spirit = EXCLUDED.base_spirit,
   abv = EXCLUDED.abv,
   origin_country = EXCLUDED.origin_country,
-  image_url = EXCLUDED.image_url,
-  image_source = EXCLUDED.image_source,
+  image_url = COALESCE(EXCLUDED.image_url, cocktails.image_url),
+  image_source = CASE
+    WHEN EXCLUDED.image_url IS NOT NULL THEN EXCLUDED.image_source
+    ELSE cocktails.image_source
+  END,
   aliases = EXCLUDED.aliases,
   updated_at = now();
 

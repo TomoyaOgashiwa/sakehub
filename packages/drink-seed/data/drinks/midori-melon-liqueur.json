@@ -5,10 +5,10 @@
   "category": "liqueur",
   "subcategory": "Melon",
   "description": "Midori Melon Liqueur is a well-known Japan Melon from Midori Melon, selected for broad drink catalog coverage in Japan.",
-  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/midori-melon-liqueur.webp",
+  "imageUrl": null,
   "abv": 20,
   "originCountry": "Japan",
   "manufacturer": "Midori Melon",
   "aliases": [],
-  "imageSource": "generated"
+  "imageSource": "none"
 }

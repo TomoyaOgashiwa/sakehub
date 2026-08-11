@@ -5,12 +5,12 @@
   "category": "sake",
   "subcategory": "Junmai Daiginjo",
   "description": "新潟の名水と厳選された酒米で醸した淡麗辛口の代表格。すっきりとした飲み口でどんな料理にも寄り添う。",
-  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/hakkaisan-junmai-daiginjo.webp",
+  "imageUrl": null,
   "abv": 15.5,
   "originCountry": "Japan",
   "manufacturer": "八海醸造",
   "aliases": [
     "はっかいさん"
   ],
-  "imageSource": "generated"
+  "imageSource": "none"
 }

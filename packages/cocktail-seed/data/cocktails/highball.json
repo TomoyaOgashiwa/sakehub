@@ -7,8 +7,8 @@
   "baseSpirit": "Whisky",
   "abv": 7,
   "originCountry": "Japan",
-  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/highball.webp",
-  "imageSource": "generated",
+  "imageUrl": null,
+  "imageSource": "none",
   "aliases": [
     "ウィスキーハイボール"
   ],

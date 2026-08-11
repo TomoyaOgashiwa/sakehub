@@ -5,10 +5,10 @@
   "category": "liqueur",
   "subcategory": "Orange",
   "description": "Cointreau is a well-known France Orange from Rémy Cointreau.",
-  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/cointreau.webp",
+  "imageUrl": null,
   "abv": 40,
   "originCountry": "France",
   "manufacturer": "Rémy Cointreau",
   "aliases": [],
-  "imageSource": "generated"
+  "imageSource": "none"
 }

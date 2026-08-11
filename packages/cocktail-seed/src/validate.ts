@@ -27,22 +27,6 @@ const UUID_PATTERN =
 const UNIT_SET = new Set<string>(INGREDIENT_UNITS);
 const IMAGE_SOURCE_SET = new Set<string>(IMAGE_SOURCES);
 
-function resolveImageSource(
-  imageUrl: string | null | undefined,
-  imageSource: unknown,
-): ImageSource {
-  if (typeof imageSource === 'string' && IMAGE_SOURCE_SET.has(imageSource)) {
-    return imageSource as ImageSource;
-  }
-  if (
-    typeof imageUrl === 'string' &&
-    imageUrl.includes('/storage/v1/object/public/catalog-images/cocktails/')
-  ) {
-    return 'generated';
-  }
-  return 'none';
-}
-
 function isRecord(v: unknown): v is Record<string, unknown> {
   return typeof v === 'object' && v !== null && !Array.isArray(v);
 }
@@ -116,14 +100,11 @@ function validateCocktail(file: string, raw: unknown, issues: ValidationIssue[])
     issues.push({ file, field: 'imageUrl', message: 'must be string or null' });
   }
 
-  if (
-    raw.imageSource !== undefined &&
-    (typeof raw.imageSource !== 'string' || !IMAGE_SOURCE_SET.has(raw.imageSource))
-  ) {
+  if (typeof raw.imageSource !== 'string' || !IMAGE_SOURCE_SET.has(raw.imageSource)) {
     issues.push({
       file,
       field: 'imageSource',
-      message: `must be one of ${IMAGE_SOURCES.join(', ')}`,
+      message: `must be one of ${IMAGE_SOURCES.join(', ')} (do not infer from imageUrl)`,
     });
   }
 
@@ -137,6 +118,19 @@ function validateCocktail(file: string, raw: unknown, issues: ValidationIssue[])
       file,
       field: 'imageSource',
       message: 'must not be "none" when imageUrl is set',
+    });
+  }
+
+  if (
+    (raw.imageUrl === null || raw.imageUrl === undefined) &&
+    typeof raw.imageSource === 'string' &&
+    IMAGE_SOURCE_SET.has(raw.imageSource) &&
+    raw.imageSource !== 'none'
+  ) {
+    issues.push({
+      file,
+      field: 'imageSource',
+      message: 'must be "none" when imageUrl is null',
     });
   }
 
@@ -225,13 +219,9 @@ function validateCocktail(file: string, raw: unknown, issues: ValidationIssue[])
   }
 
   const cocktail = raw as unknown as CocktailSeed;
-  const imageUrl =
+  cocktail.imageUrl =
     cocktail.imageUrl === undefined || cocktail.imageUrl === null ? null : cocktail.imageUrl;
-  cocktail.imageUrl = imageUrl;
-  cocktail.imageSource = resolveImageSource(imageUrl, raw.imageSource);
-  if (cocktail.imageUrl === null && cocktail.imageSource !== 'none') {
-    cocktail.imageSource = 'none';
-  }
+  cocktail.imageSource = raw.imageSource as ImageSource;
   return cocktail;
 }
 

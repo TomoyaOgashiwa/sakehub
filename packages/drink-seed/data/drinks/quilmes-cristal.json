@@ -6,6 +6,7 @@
   "subcategory": "Lager",
   "description": "Quilmes Cristal is a well-known Argentina Lager from Quilmes.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 4.9,
   "originCountry": "Argentina",
   "manufacturer": "Quilmes",

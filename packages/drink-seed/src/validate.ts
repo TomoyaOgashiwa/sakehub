@@ -24,22 +24,6 @@ const DATA_DIR = path.join(ROOT, 'data', 'drinks');
 const CATEGORY_SET = new Set<string>(DRINK_CATEGORIES);
 const IMAGE_SOURCE_SET = new Set<string>(IMAGE_SOURCES);
 
-function resolveImageSource(
-  imageUrl: string | null | undefined,
-  imageSource: unknown,
-): ImageSource {
-  if (typeof imageSource === 'string' && IMAGE_SOURCE_SET.has(imageSource)) {
-    return imageSource as ImageSource;
-  }
-  if (
-    typeof imageUrl === 'string' &&
-    imageUrl.includes('/storage/v1/object/public/catalog-images/drinks/')
-  ) {
-    return 'generated';
-  }
-  return 'none';
-}
-
 function isRecord(v: unknown): v is Record<string, unknown> {
   return typeof v === 'object' && v !== null && !Array.isArray(v);
 }
@@ -98,14 +82,11 @@ function validateDrink(file: string, raw: unknown, issues: ValidationIssue[]): D
     issues.push({ file, field: 'imageUrl', message: 'must be string or null' });
   }
 
-  if (
-    raw.imageSource !== undefined &&
-    (typeof raw.imageSource !== 'string' || !IMAGE_SOURCE_SET.has(raw.imageSource))
-  ) {
+  if (typeof raw.imageSource !== 'string' || !IMAGE_SOURCE_SET.has(raw.imageSource)) {
     issues.push({
       file,
       field: 'imageSource',
-      message: `must be one of ${IMAGE_SOURCES.join(', ')}`,
+      message: `must be one of ${IMAGE_SOURCES.join(', ')} (do not infer from imageUrl)`,
     });
   }
 
@@ -119,6 +100,19 @@ function validateDrink(file: string, raw: unknown, issues: ValidationIssue[]): D
       file,
       field: 'imageSource',
       message: 'must not be "none" when imageUrl is set',
+    });
+  }
+
+  if (
+    (raw.imageUrl === null || raw.imageUrl === undefined) &&
+    typeof raw.imageSource === 'string' &&
+    IMAGE_SOURCE_SET.has(raw.imageSource) &&
+    raw.imageSource !== 'none'
+  ) {
+    issues.push({
+      file,
+      field: 'imageSource',
+      message: 'must be "none" when imageUrl is null',
     });
   }
 
@@ -144,12 +138,8 @@ function validateDrink(file: string, raw: unknown, issues: ValidationIssue[]): D
   }
 
   const drink = raw as unknown as DrinkSeed;
-  const imageUrl = typeof drink.imageUrl === 'string' ? drink.imageUrl : null;
-  drink.imageUrl = imageUrl;
-  drink.imageSource = resolveImageSource(imageUrl, raw.imageSource);
-  if (drink.imageUrl === null && drink.imageSource !== 'none') {
-    drink.imageSource = 'none';
-  }
+  drink.imageUrl = typeof drink.imageUrl === 'string' ? drink.imageUrl : null;
+  drink.imageSource = raw.imageSource as ImageSource;
   return drink;
 }
 

@@ -6,6 +6,7 @@
   "subcategory": "Pale Ale",
   "description": "Sierra Nevada Pale Ale is a well-known United States Pale Ale from Sierra Nevada, selected for broad drink catalog coverage in Japan.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 5.6,
   "originCountry": "United States",
   "manufacturer": "Sierra Nevada",

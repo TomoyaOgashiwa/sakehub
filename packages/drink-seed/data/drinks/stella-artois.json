@@ -6,6 +6,7 @@
   "subcategory": "Pilsner",
   "description": "Stella Artois is a well-known Belgium Pilsner from AB InBev.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 5,
   "originCountry": "Belgium",
   "manufacturer": "AB InBev",

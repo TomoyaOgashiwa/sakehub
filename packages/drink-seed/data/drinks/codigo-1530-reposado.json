@@ -6,6 +6,7 @@
   "subcategory": "Tequila",
   "description": "Codigo 1530 Reposado is a well-known Mexico Tequila from Codigo.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 40,
   "originCountry": "Mexico",
   "manufacturer": "Codigo",

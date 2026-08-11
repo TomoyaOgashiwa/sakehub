@@ -6,6 +6,7 @@
   "subcategory": "Lager",
   "description": "Estrella Damm is a well-known Spain Lager from Estrella.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 5.4,
   "originCountry": "Spain",
   "manufacturer": "Estrella",

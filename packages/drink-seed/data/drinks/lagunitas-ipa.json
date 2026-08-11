@@ -6,6 +6,7 @@
   "subcategory": "IPA",
   "description": "Lagunitas IPA is a well-known United States IPA from Lagunitas.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 6.2,
   "originCountry": "United States",
   "manufacturer": "Lagunitas",

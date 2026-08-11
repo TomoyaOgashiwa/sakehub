@@ -6,6 +6,7 @@
   "subcategory": "Lager",
   "description": "Victoria Bitter is a well-known Australia Lager from Victoria.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 4.9,
   "originCountry": "Australia",
   "manufacturer": "Victoria",

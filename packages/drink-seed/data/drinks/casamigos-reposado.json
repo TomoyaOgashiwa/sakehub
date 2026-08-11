@@ -6,6 +6,7 @@
   "subcategory": "Tequila",
   "description": "Casamigos Reposado is a well-known Mexico Tequila from Diageo.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 40,
   "originCountry": "Mexico",
   "manufacturer": "Diageo",

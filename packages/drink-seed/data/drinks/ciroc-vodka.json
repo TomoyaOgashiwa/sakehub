@@ -6,6 +6,7 @@
   "subcategory": "Grape",
   "description": "Ciroc Vodka is a well-known France Grape from Diageo.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 40,
   "originCountry": "France",
   "manufacturer": "Diageo",

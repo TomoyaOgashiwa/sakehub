@@ -6,6 +6,7 @@
   "subcategory": "Tequila",
   "description": "Cazadores Reposado is a well-known Mexico Tequila from Cazadores.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 40,
   "originCountry": "Mexico",
   "manufacturer": "Cazadores",

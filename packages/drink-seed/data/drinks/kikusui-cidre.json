@@ -6,6 +6,7 @@
   "subcategory": "Cider",
   "description": "Kikusui Cidre is a well-known Japan Cider from Kikusui.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 5,
   "originCountry": "Japan",
   "manufacturer": "Kikusui",

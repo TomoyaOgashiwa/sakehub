@@ -6,6 +6,7 @@
   "subcategory": "Tripel",
   "description": "Chimay White is a well-known Belgium Tripel from Chimay.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 8,
   "originCountry": "Belgium",
   "manufacturer": "Chimay",

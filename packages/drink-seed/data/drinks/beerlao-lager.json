@@ -6,6 +6,7 @@
   "subcategory": "Lager",
   "description": "Beerlao Lager is a well-known Laos Lager from Beerlao.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 5,
   "originCountry": "Laos",
   "manufacturer": "Beerlao",

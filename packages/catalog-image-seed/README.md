@@ -7,12 +7,14 @@
 ```
 data/priority.txt
   → generate（gpt-image-1.5 / medium / webp）→ data/staging/**（gitignore）
-    → upload（service_role + prod SUPABASE_URL）→ Storage + seed JSON の imageUrl 更新
+    → upload（service_role + prod SUPABASE_URL）→ Storage + seed JSON の imageUrl / imageSource 更新
     → pnpm seed:drinks|cocktails:validate/build
     → pnpm supabase:seed:prod
 ```
 
 ローカルでの目視 Quality Check / 再生成ループは当面スコープ外。API 失敗時の機械リトライのみ行う。
+
+画像出典は URL ではなく seed / DB の `imageSource`（`none` | `generated` | `brand`）で明示する。`upload` は `imageSource: "generated"` を書き込む。
 
 ## コマンド（リポジトリルート）
 
@@ -25,7 +27,7 @@ SUPABASE_URL=https://xxxx.supabase.co SUPABASE_SERVICE_ROLE_KEY=... \
 ```
 
 - `generate` は既存 staging をスキップする。上書きは `--force`
-- `upload` は linked（prod）の `https://*.supabase.co` を想定。絶対公開 URL（`?v=<sha8>` 付き）を `imageUrl` に書き戻す
+- `upload` は linked（prod）の `https://*.supabase.co` を想定。絶対公開 URL（`?v=<sha8>` 付き）を `imageUrl` に書き戻し、同時に `imageSource: "generated"` をセットする
 - ローカル Storage への試験投入だけは `pnpm seed:images:upload -- --allow-local`。**localhost の imageUrl を seed にコミットしないこと**
 - `pnpm supabase:seed:prod` の前に validate/build を通すこと。upsert は seed の `image_url` が NULL のとき既存 URL を消さないが、prod 向け正本は常に `https://*.supabase.co/...` であること
 

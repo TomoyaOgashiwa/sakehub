@@ -6,6 +6,7 @@
   "subcategory": "Brandy",
   "description": "St-Remy XO is a well-known France Brandy from Rémy Cointreau.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 40,
   "originCountry": "France",
   "manufacturer": "Rémy Cointreau",

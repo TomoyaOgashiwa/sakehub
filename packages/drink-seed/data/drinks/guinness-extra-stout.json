@@ -6,6 +6,7 @@
   "subcategory": "Stout",
   "description": "Guinness Extra Stout is a well-known Ireland Stout from Diageo.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 5.6,
   "originCountry": "Ireland",
   "manufacturer": "Diageo",

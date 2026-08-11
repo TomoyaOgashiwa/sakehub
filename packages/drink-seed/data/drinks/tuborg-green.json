@@ -6,6 +6,7 @@
   "subcategory": "Pilsner",
   "description": "Tuborg Green is a well-known Denmark Pilsner from Tuborg.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 4.6,
   "originCountry": "Denmark",
   "manufacturer": "Tuborg",

@@ -5,12 +5,13 @@
   "category": "sake",
   "subcategory": "Junmai Daiginjo",
   "description": "十四代の上位純米大吟醸。豊かな香りと甘旨の余韻が長く続く。",
-  "imageUrl": null,
+  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/juyondai-ryugetsu.webp",
   "abv": 16,
   "originCountry": "Japan",
   "manufacturer": "高木酒造",
   "aliases": [
     "じゅうよんだいりゅうげつ",
     "龍月"
-  ]
+  ],
+  "imageSource": "generated"
 }

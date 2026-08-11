@@ -5,9 +5,13 @@
   "category": "beer",
   "subcategory": "Lager",
   "description": "辛口でキレのある味わいが特徴の日本を代表するドライビール。すっきりとした後味で、どんな料理にも合わせやすい。",
-  "imageUrl": null,
-  "abv": 5.0,
+  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/asahi-super-dry.webp",
+  "abv": 5,
   "originCountry": "Japan",
   "manufacturer": "アサヒビール",
-  "aliases": ["あさひすーぱーどらい", "あさひびーる"]
+  "aliases": [
+    "あさひすーぱーどらい",
+    "あさひびーる"
+  ],
+  "imageSource": "generated"
 }

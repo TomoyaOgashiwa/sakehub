@@ -3,6 +3,7 @@ import { Martini } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
 import { EntityCatalogCard } from '@/components/catalog/entity-catalog-card';
+import { getCatalogImageSourceLabel } from '@/utils/catalog-image-source-label';
 
 interface CocktailCardProps {
   cocktail: Cocktail;
@@ -10,6 +11,7 @@ interface CocktailCardProps {
 
 export function CocktailCard({ cocktail }: CocktailCardProps) {
   const recruiting = cocktail.recipeCount === 0;
+  const imageSourceLabel = getCatalogImageSourceLabel(cocktail.imageSource);
 
   return (
     <EntityCatalogCard
@@ -19,6 +21,13 @@ export function CocktailCard({ cocktail }: CocktailCardProps) {
       description={cocktail.description}
       imageUrl={cocktail.imageUrl}
       imageAlt={cocktail.name}
+      imageBadge={
+        imageSourceLabel ? (
+          <Badge variant={imageSourceLabel.variant} className="bg-background/90 shadow-sm">
+            {imageSourceLabel.text}
+          </Badge>
+        ) : undefined
+      }
       badge={cocktail.baseSpirit}
       fallbackIcon={<Martini className="text-muted-foreground/40 size-12" aria-hidden="true" />}
       footer={

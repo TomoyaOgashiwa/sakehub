@@ -5,12 +5,13 @@
   "category": "beer",
   "subcategory": "Stout",
   "description": "アイルランド生まれの世界的スタウトビール。クリーミーな泡立ちとローストモルトのほのかな苦味が特徴。",
-  "imageUrl": null,
+  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/guinness-draught.webp",
   "abv": 4.2,
   "originCountry": "Ireland",
   "manufacturer": "Diageo",
   "aliases": [
     "ぎねす",
     "ぎねすどらふと"
-  ]
+  ],
+  "imageSource": "generated"
 }

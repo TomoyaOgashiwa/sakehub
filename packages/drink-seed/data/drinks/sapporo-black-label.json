@@ -5,9 +5,10 @@
   "category": "beer",
   "subcategory": "Lager",
   "description": "Sapporo Black Label is a well-known Japan Lager from サッポロビール.",
-  "imageUrl": null,
+  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/sapporo-black-label.webp",
   "abv": 5,
   "originCountry": "Japan",
   "manufacturer": "サッポロビール",
-  "aliases": []
+  "aliases": [],
+  "imageSource": "generated"
 }

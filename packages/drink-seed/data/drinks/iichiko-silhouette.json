@@ -5,9 +5,10 @@
   "category": "shochu",
   "subcategory": "Mugi",
   "description": "Iichiko Silhouette is a well-known Japan Mugi from Sanwa Shurui.",
-  "imageUrl": null,
+  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/iichiko-silhouette.webp",
   "abv": 25,
   "originCountry": "Japan",
   "manufacturer": "Sanwa Shurui",
-  "aliases": []
+  "aliases": [],
+  "imageSource": "generated"
 }

@@ -39,6 +39,7 @@ async function setImageUrl(kind: 'drink' | 'cocktail', slug: string, imageUrl: s
   const file = seedJsonPath(kind, slug);
   const raw = JSON.parse(await readFile(file, 'utf8')) as Record<string, unknown>;
   raw.imageUrl = imageUrl;
+  raw.imageSource = 'generated';
 
   // Keep a stable-ish key order for drinks (existing shape) and cocktails.
   if (kind === 'cocktail') {
@@ -52,6 +53,7 @@ async function setImageUrl(kind: 'drink' | 'cocktail', slug: string, imageUrl: s
       abv: raw.abv ?? null,
       originCountry: raw.originCountry ?? null,
       imageUrl,
+      imageSource: 'generated',
       aliases: raw.aliases ?? [],
       officialRecipe: raw.officialRecipe,
     };

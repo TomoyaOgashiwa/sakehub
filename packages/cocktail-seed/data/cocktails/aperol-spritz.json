@@ -7,6 +7,8 @@
   "baseSpirit": "Liqueur",
   "abv": 8,
   "originCountry": "Italy",
+  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/aperol-spritz.webp",
+  "imageSource": "generated",
   "aliases": [
     "スプマンテ"
   ],

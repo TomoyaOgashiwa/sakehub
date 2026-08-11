@@ -1,3 +1,4 @@
+import type { CatalogImageSource } from './drink';
 import type { CocktailRecipe, CocktailRecipeStatus } from './cocktail-recipe';
 
 /**
@@ -11,6 +12,7 @@ export interface Cocktail {
   nameEn?: string;
   description: string;
   imageUrl?: string;
+  imageSource: CatalogImageSource;
   baseSpirit?: string;
   abv?: number;
   originCountry?: string;

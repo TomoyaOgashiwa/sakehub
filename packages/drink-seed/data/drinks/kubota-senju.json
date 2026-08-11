@@ -5,12 +5,13 @@
   "category": "sake",
   "subcategory": "Ginjo",
   "description": "吟醸香を控えめに抑え、淡麗辛口に仕上げた久保田シリーズの日常酒。",
-  "imageUrl": null,
+  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/kubota-senju.webp",
   "abv": 15,
   "originCountry": "Japan",
   "manufacturer": "朝日酒造",
   "aliases": [
     "くぼたせんじゅ",
     "千寿"
-  ]
+  ],
+  "imageSource": "generated"
 }

@@ -7,6 +7,8 @@
   "baseSpirit": "Whisky",
   "abv": 32,
   "originCountry": "United States",
+  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/old-fashioned.webp",
+  "imageSource": "generated",
   "aliases": [
     "オールドファッション"
   ],

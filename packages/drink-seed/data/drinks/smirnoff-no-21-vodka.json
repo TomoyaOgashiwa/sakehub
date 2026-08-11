@@ -5,9 +5,10 @@
   "category": "vodka",
   "subcategory": "Plain",
   "description": "Smirnoff No 21 Vodka is a well-known United Kingdom Plain from Diageo.",
-  "imageUrl": null,
+  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/smirnoff-no-21-vodka.webp",
   "abv": 40,
   "originCountry": "United Kingdom",
   "manufacturer": "Diageo",
-  "aliases": []
+  "aliases": [],
+  "imageSource": "generated"
 }

@@ -5,9 +5,10 @@
   "category": "whisky",
   "subcategory": "Single Malt",
   "description": "The Macallan Double Cask 12 Year Old is a well-known Scotland Single Malt from The Macallan, selected for broad drink catalog coverage in Japan.",
-  "imageUrl": null,
+  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/the-macallan-double-cask-12-year-old.webp",
   "abv": 40,
   "originCountry": "Scotland",
   "manufacturer": "The Macallan",
-  "aliases": []
+  "aliases": [],
+  "imageSource": "generated"
 }

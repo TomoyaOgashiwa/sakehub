@@ -5,11 +5,12 @@
   "category": "gin",
   "subcategory": null,
   "description": "バラときゅうりのエッセンスが特徴的なスコットランド産プレミアムジン。個性的だが万人に愛されるフローラルな香り。",
-  "imageUrl": null,
+  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/hendricks-gin.webp",
   "abv": 41.4,
   "originCountry": "United Kingdom",
   "manufacturer": "William Grant & Sons",
   "aliases": [
     "へんどりっくす"
-  ]
+  ],
+  "imageSource": "generated"
 }

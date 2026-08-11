@@ -7,6 +7,8 @@
   "baseSpirit": "Tequila",
   "abv": 12,
   "originCountry": "Mexico",
+  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/paloma.webp",
+  "imageSource": "generated",
   "aliases": [],
   "officialRecipe": {
     "name": "パロマ（基本レシピ）",

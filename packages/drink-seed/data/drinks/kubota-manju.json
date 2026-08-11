@@ -5,9 +5,13 @@
   "category": "sake",
   "subcategory": "Junmai Daiginjo",
   "description": "久保田シリーズの最高峰。柔らかな口当たりと上品で深い味わい。余韻が長く続く贅沢な一杯。",
-  "imageUrl": null,
+  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/kubota-manju.webp",
   "abv": 15.5,
   "originCountry": "Japan",
   "manufacturer": "朝日酒造",
-  "aliases": ["くぼた", "くぼたまんじゅ"]
+  "aliases": [
+    "くぼた",
+    "くぼたまんじゅ"
+  ],
+  "imageSource": "generated"
 }

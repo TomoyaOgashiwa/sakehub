@@ -7,6 +7,7 @@
   "baseSpirit": "Whisky",
   "abv": 25,
   "originCountry": "United States",
+  "imageUrl": null,
   "aliases": [],
   "officialRecipe": {
     "name": "ミントジュレップ（基本レシピ）",

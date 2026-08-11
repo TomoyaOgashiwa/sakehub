@@ -10,6 +10,7 @@ import { Separator } from '@/components/ui/separator';
 import { StarRatingDisplay } from '@/components/ui/star-rating';
 import { JsonLd } from '@/components/json-ld';
 import { fetchCocktailBySlugServer } from '@/application/cocktails-api.server';
+import { getCatalogImageSourceLabel } from '@/utils/catalog-image-source-label';
 import { buildRecipeJsonLd } from '@/utils/recipe-json-ld';
 
 const RECIPE_PAGE_SIZE = 50;
@@ -66,6 +67,7 @@ export default async function CocktailDetailPage({ params, searchParams }: PageP
   const nextRecipesOffset = recipesOffset + cocktail.recipes.length;
   const prevRecipesOffset = Math.max(0, recipesOffset - RECIPE_PAGE_SIZE);
   const official = cocktail.officialRecipe;
+  const imageSourceLabel = getCatalogImageSourceLabel(cocktail.imageSource);
 
   return (
     <>
@@ -98,7 +100,7 @@ export default async function CocktailDetailPage({ params, searchParams }: PageP
           </header>
 
           <div className="mb-8 flex flex-col gap-6 sm:flex-row">
-            <figure className="bg-muted flex w-full shrink-0 items-center justify-center overflow-hidden rounded-xl sm:w-56">
+            <figure className="bg-muted w-full shrink-0 overflow-hidden rounded-xl sm:w-56">
               {cocktail.imageUrl ? (
                 <div className="relative aspect-square w-full">
                   <Image
@@ -114,6 +116,11 @@ export default async function CocktailDetailPage({ params, searchParams }: PageP
                 <div className="from-muted to-muted-foreground/10 flex aspect-square w-full items-center justify-center bg-gradient-to-br">
                   <Martini className="text-muted-foreground/40 size-16" aria-hidden="true" />
                 </div>
+              )}
+              {imageSourceLabel && (
+                <figcaption className="flex justify-end px-3 py-2">
+                  <Badge variant={imageSourceLabel.variant}>{imageSourceLabel.text}</Badge>
+                </figcaption>
               )}
             </figure>
 

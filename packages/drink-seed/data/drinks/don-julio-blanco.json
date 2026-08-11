@@ -5,9 +5,10 @@
   "category": "tequila",
   "subcategory": "Blanco",
   "description": "Don Julio Blanco is a well-known Mexico Blanco from Diageo, selected for broad drink catalog coverage in Japan.",
-  "imageUrl": null,
+  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/don-julio-blanco.webp",
   "abv": 38,
   "originCountry": "Mexico",
   "manufacturer": "Diageo",
-  "aliases": []
+  "aliases": [],
+  "imageSource": "generated"
 }

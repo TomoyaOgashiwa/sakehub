@@ -5,9 +5,10 @@
   "category": "whisky",
   "subcategory": "Bourbon",
   "description": "Woodford Reserve Distiller's Select is a well-known United States Bourbon from Brown-Forman.",
-  "imageUrl": null,
+  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/woodford-reserve-distillers-select.webp",
   "abv": 43.2,
   "originCountry": "United States",
   "manufacturer": "Brown-Forman",
-  "aliases": []
+  "aliases": [],
+  "imageSource": "generated"
 }

@@ -5,9 +5,14 @@
   "category": "sake",
   "subcategory": "Junmai Daiginjo",
   "description": "山田錦を23%まで磨き上げた究極の純米大吟醸。華やかな吟醸香と透明感のある甘みが広がる。",
-  "imageUrl": null,
-  "abv": 16.0,
+  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/dassai-23.webp",
+  "abv": 16,
   "originCountry": "Japan",
   "manufacturer": "旭酒造",
-  "aliases": ["だっさい", "だっさい23", "だっさいにわりさんぶ"]
+  "aliases": [
+    "だっさい",
+    "だっさい23",
+    "だっさいにわりさんぶ"
+  ],
+  "imageSource": "generated"
 }

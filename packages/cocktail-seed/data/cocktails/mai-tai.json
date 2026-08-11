@@ -7,6 +7,8 @@
   "baseSpirit": "Rum",
   "abv": 22,
   "originCountry": "United States",
+  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/mai-tai.webp",
+  "imageSource": "generated",
   "aliases": [],
   "officialRecipe": {
     "name": "マイタイ（基本レシピ）",

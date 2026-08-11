@@ -5,9 +5,10 @@
   "category": "liqueur",
   "subcategory": "Bitter",
   "description": "Campari is a well-known Italy Bitter from Campari Group.",
-  "imageUrl": null,
+  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/campari.webp",
   "abv": 25,
   "originCountry": "Italy",
   "manufacturer": "Campari Group",
-  "aliases": []
+  "aliases": [],
+  "imageSource": "generated"
 }

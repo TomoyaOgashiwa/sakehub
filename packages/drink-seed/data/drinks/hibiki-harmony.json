@@ -5,12 +5,13 @@
   "category": "whisky",
   "subcategory": "Blended",
   "description": "山崎・白州・知多のモルトとグレーンを匠の技でブレンド。華やかな香りと繊細な甘みが調和した日本の美意識。",
-  "imageUrl": null,
+  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/hibiki-harmony.webp",
   "abv": 43,
   "originCountry": "Japan",
   "manufacturer": "Suntory",
   "aliases": [
     "ひびき",
     "ひびきはーもにー"
-  ]
+  ],
+  "imageSource": "generated"
 }

@@ -19,6 +19,10 @@ export { DRINK_CATEGORIES, type DrinkCategory };
  * LLM が誤った値を自信満々に生成しやすい領域。draft.ts はこれらを埋めず
  * null のままにする（人が一次ソースを確認して補完する）。
  */
+/** Catalog master image attribution (UI label + regulatory disclosure). */
+export const IMAGE_SOURCES = ['none', 'generated', 'brand'] as const;
+export type ImageSource = (typeof IMAGE_SOURCES)[number];
+
 export interface DrinkSeed {
   slug: string;
   name: string;
@@ -27,6 +31,8 @@ export interface DrinkSeed {
   subcategory: string | null;
   description: string;
   imageUrl: string | null;
+  /** none = no image; generated = AI; brand = company-provided. */
+  imageSource: ImageSource;
   abv: number | null;
   originCountry: string | null;
   manufacturer: string | null;

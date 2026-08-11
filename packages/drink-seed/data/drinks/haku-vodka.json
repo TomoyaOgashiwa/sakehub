@@ -5,9 +5,10 @@
   "category": "vodka",
   "subcategory": "Rice",
   "description": "Haku Vodka is a well-known Japan Rice from Suntory.",
-  "imageUrl": null,
+  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/haku-vodka.webp",
   "abv": 40,
   "originCountry": "Japan",
   "manufacturer": "Suntory",
-  "aliases": []
+  "aliases": [],
+  "imageSource": "generated"
 }

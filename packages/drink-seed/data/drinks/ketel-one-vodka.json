@@ -5,9 +5,10 @@
   "category": "vodka",
   "subcategory": "Plain",
   "description": "Ketel One Vodka is a well-known Netherlands Plain from Diageo.",
-  "imageUrl": null,
+  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/ketel-one-vodka.webp",
   "abv": 40,
   "originCountry": "Netherlands",
   "manufacturer": "Diageo",
-  "aliases": []
+  "aliases": [],
+  "imageSource": "generated"
 }

@@ -7,6 +7,8 @@
   "baseSpirit": "Rum",
   "abv": 22,
   "originCountry": "Cuba",
+  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/daiquiri.webp",
+  "imageSource": "generated",
   "aliases": [
     "ダイキリ"
   ],

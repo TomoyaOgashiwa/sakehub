@@ -46,9 +46,13 @@ func (s *Service) Create(ctx context.Context, input CreateInput) (*Drink, error)
 		Subcategory:   input.Subcategory,
 		Description:   input.Description,
 		ImageURL:      input.ImageURL,
+		ImageSource:   input.ImageSource,
 		ABV:           input.ABV,
 		OriginCountry: input.OriginCountry,
 		Manufacturer:  input.Manufacturer,
+	}
+	if d.ImageSource == "" {
+		d.ImageSource = "none"
 	}
 	if err := s.repo.Insert(ctx, d); err != nil {
 		return nil, fmt.Errorf("drink.Create: %w", err)

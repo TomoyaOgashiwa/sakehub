@@ -5,9 +5,10 @@
   "category": "brandy",
   "subcategory": "Cognac",
   "description": "Hennessy VS is a well-known France Cognac from LVMH.",
-  "imageUrl": null,
+  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/hennessy-vs.webp",
   "abv": 40,
   "originCountry": "France",
   "manufacturer": "LVMH",
-  "aliases": []
+  "aliases": [],
+  "imageSource": "generated"
 }

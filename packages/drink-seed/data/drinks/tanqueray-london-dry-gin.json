@@ -5,9 +5,10 @@
   "category": "gin",
   "subcategory": "London Dry",
   "description": "Tanqueray London Dry Gin is a well-known England London Dry from Diageo.",
-  "imageUrl": null,
+  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/tanqueray-london-dry-gin.webp",
   "abv": 47.3,
   "originCountry": "England",
   "manufacturer": "Diageo",
-  "aliases": []
+  "aliases": [],
+  "imageSource": "generated"
 }

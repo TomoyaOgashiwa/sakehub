@@ -5,9 +5,10 @@
   "category": "liqueur",
   "subcategory": "Aperitivo",
   "description": "Aperol is a well-known Italy Aperitivo from Campari Group.",
-  "imageUrl": null,
+  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/aperol.webp",
   "abv": 11,
   "originCountry": "Italy",
   "manufacturer": "Campari Group",
-  "aliases": []
+  "aliases": [],
+  "imageSource": "generated"
 }

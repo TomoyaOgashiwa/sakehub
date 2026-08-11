@@ -5,11 +5,12 @@
   "category": "vodka",
   "subcategory": null,
   "description": "フランス・コニャック地方の冬小麦と天然湧水で造られたプレミアムウォッカ。シルクのようになめらかな口当たり。",
-  "imageUrl": null,
+  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/drinks/grey-goose.webp",
   "abv": 40,
   "originCountry": "France",
   "manufacturer": "Bacardi",
   "aliases": [
     "ぐれいぐーす"
-  ]
+  ],
+  "imageSource": "generated"
 }

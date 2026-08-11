@@ -7,6 +7,8 @@
   "baseSpirit": "Vodka",
   "abv": 12,
   "originCountry": "France",
+  "imageUrl": "http://127.0.0.1:54321/storage/v1/object/public/catalog-images/cocktails/bloody-mary.webp",
+  "imageSource": "generated",
   "aliases": [],
   "officialRecipe": {
     "name": "ブラッディメアリー（基本レシピ）",

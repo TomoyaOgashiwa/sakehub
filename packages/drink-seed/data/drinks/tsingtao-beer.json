@@ -6,6 +6,7 @@
   "subcategory": "Lager",
   "description": "Tsingtao Beer is a well-known China Lager from Tsingtao.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 4.7,
   "originCountry": "China",
   "manufacturer": "Tsingtao",

@@ -6,6 +6,7 @@
   "subcategory": "Tequila",
   "description": "Teremana Reposado is a well-known Mexico Tequila from Teremana.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 40,
   "originCountry": "Mexico",
   "manufacturer": "Teremana",

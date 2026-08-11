@@ -6,6 +6,7 @@
   "subcategory": "Lager",
   "description": "Corona Extra is a well-known Mexico Lager from AB InBev.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 4.5,
   "originCountry": "Mexico",
   "manufacturer": "AB InBev",

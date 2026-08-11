@@ -6,6 +6,7 @@
   "subcategory": "Cider",
   "description": "Bulmers Original Cider is a well-known Ireland Cider from Bulmers.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 4.5,
   "originCountry": "Ireland",
   "manufacturer": "Bulmers",

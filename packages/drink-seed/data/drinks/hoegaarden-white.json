@@ -6,6 +6,7 @@
   "subcategory": "Witbier",
   "description": "Hoegaarden White is a well-known Belgium Witbier from AB InBev.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 4.9,
   "originCountry": "Belgium",
   "manufacturer": "AB InBev",

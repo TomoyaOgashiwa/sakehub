@@ -6,6 +6,7 @@
   "subcategory": "Pilsner",
   "description": "Pilsner Urquell is a well-known Czech Republic Pilsner from Pilsner.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 4.4,
   "originCountry": "Czech Republic",
   "manufacturer": "Pilsner",

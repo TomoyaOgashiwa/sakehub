@@ -6,6 +6,7 @@
   "subcategory": "Cider",
   "description": "Magners Original Irish Cider is a well-known Ireland Cider from Magners.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 4.5,
   "originCountry": "Ireland",
   "manufacturer": "Magners",

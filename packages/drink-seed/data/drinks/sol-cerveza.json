@@ -6,6 +6,7 @@
   "subcategory": "Lager",
   "description": "Sol Cerveza is a well-known Mexico Lager from Heineken.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 4.5,
   "originCountry": "Mexico",
   "manufacturer": "Heineken",

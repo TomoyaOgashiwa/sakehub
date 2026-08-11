@@ -6,6 +6,7 @@
   "subcategory": "Bourbon",
   "description": "Jim Beam White Label is a well-known United States Bourbon from Beam Suntory.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 40,
   "originCountry": "United States",
   "manufacturer": "Beam Suntory",

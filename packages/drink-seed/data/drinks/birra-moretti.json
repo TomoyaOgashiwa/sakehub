@@ -6,6 +6,7 @@
   "subcategory": "Lager",
   "description": "Birra Moretti is a well-known Italy Lager from Birra.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 4.6,
   "originCountry": "Italy",
   "manufacturer": "Birra",

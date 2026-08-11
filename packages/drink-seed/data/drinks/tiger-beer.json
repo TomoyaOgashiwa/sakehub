@@ -6,6 +6,7 @@
   "subcategory": "Lager",
   "description": "Tiger Beer is a well-known Singapore Lager from Tiger.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 5,
   "originCountry": "Singapore",
   "manufacturer": "Tiger",

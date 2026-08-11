@@ -6,6 +6,7 @@
   "subcategory": "Light Lager",
   "description": "Miller Lite is a well-known United States Light Lager from Miller.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 4.2,
   "originCountry": "United States",
   "manufacturer": "Miller",

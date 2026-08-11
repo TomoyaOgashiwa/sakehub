@@ -6,6 +6,7 @@
   "subcategory": "Tequila",
   "description": "Fortaleza Reposado is a well-known Mexico Tequila from Fortaleza.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 40,
   "originCountry": "Mexico",
   "manufacturer": "Fortaleza",

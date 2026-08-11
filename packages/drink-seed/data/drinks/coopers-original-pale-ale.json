@@ -6,6 +6,7 @@
   "subcategory": "Pale Ale",
   "description": "Coopers Original Pale Ale is a well-known Australia Pale Ale from Coopers.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 4.5,
   "originCountry": "Australia",
   "manufacturer": "Coopers",

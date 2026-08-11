@@ -6,6 +6,7 @@
   "subcategory": "Lager",
   "description": "Brooklyn Lager is a well-known United States Lager from Brooklyn.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 5.2,
   "originCountry": "United States",
   "manufacturer": "Brooklyn",

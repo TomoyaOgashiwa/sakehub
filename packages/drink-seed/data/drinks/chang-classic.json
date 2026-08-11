@@ -6,6 +6,7 @@
   "subcategory": "Lager",
   "description": "Chang Classic is a well-known Thailand Lager from Chang.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 5,
   "originCountry": "Thailand",
   "manufacturer": "Chang",

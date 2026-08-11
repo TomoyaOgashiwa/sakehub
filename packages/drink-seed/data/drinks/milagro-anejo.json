@@ -6,6 +6,7 @@
   "subcategory": "Tequila",
   "description": "Milagro Anejo is a well-known Mexico Tequila from Milagro.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 40,
   "originCountry": "Mexico",
   "manufacturer": "Milagro",

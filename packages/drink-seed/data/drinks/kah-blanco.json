@@ -6,6 +6,7 @@
   "subcategory": "Tequila",
   "description": "Kah Blanco is a well-known Mexico Tequila from Kah Tequila.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 40,
   "originCountry": "Mexico",
   "manufacturer": "Kah Tequila",

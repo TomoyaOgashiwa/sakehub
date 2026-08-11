@@ -6,6 +6,7 @@
   "subcategory": "Cognac",
   "description": "Martell XO is a well-known France Cognac from Pernod Ricard.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 40,
   "originCountry": "France",
   "manufacturer": "Pernod Ricard",

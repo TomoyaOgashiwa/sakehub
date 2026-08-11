@@ -6,6 +6,7 @@
   "subcategory": "Cognac",
   "description": "Remy Martin Louis XIII is a well-known France Cognac from Rémy Cointreau.",
   "imageUrl": null,
+  "imageSource": "none",
   "abv": 40,
   "originCountry": "France",
   "manufacturer": "Rémy Cointreau",

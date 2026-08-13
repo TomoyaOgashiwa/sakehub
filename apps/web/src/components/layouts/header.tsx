@@ -29,6 +29,14 @@ export async function Header() {
             >
               カクテル
             </Link>
+            {user && (
+              <Link
+                href="/my-logs"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                記録
+              </Link>
+            )}
           </nav>
         </div>
         <nav className="flex items-center gap-6">

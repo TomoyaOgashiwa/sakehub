@@ -14,11 +14,3 @@ export type UserProfile = User & {
   totalDrinks: number;
   totalReviews: number;
 };
-
-export type DrinkLog = {
-  id: string;
-  userId: string;
-  drinkId: string;
-  drankAt: string;
-  createdAt: string;
-};

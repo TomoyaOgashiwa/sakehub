@@ -85,7 +85,7 @@ export default async function MyLogsPage() {
         className="bg-muted/40 mb-10 rounded-xl border p-5"
       >
         <Heading level="h2" id="week-summary-heading" className="mb-1 text-base">
-          今週の目安摂取量
+          今週の摂取量
         </Heading>
         <p className="text-muted-foreground mb-4 text-xs">{weekLabel}</p>
         {summary ? (
@@ -131,11 +131,7 @@ export default async function MyLogsPage() {
               const presetLabel = log.servingKey
                 ? findServingPreset(log.servingKey)?.label
                 : undefined;
-              const volumeLabel = formatVolumeDisplay(
-                log.inputUnit,
-                log.inputValue,
-                log.volumeMl,
-              );
+              const volumeLabel = formatVolumeDisplay(log.inputUnit, log.inputValue, log.volumeMl);
               const title = log.drink?.name ?? log.customDrinkName ?? '不明な銘柄';
 
               return (
@@ -192,9 +188,7 @@ export default async function MyLogsPage() {
                           ))}
                       </p>
                     )}
-                    <p className="text-muted-foreground text-xs">
-                      {formatJaDate(log.drankAt)}
-                    </p>
+                    <p className="text-muted-foreground text-xs">{formatJaDate(log.drankAt)}</p>
                   </div>
                   <DeleteLogButton logId={log.id} />
                 </li>

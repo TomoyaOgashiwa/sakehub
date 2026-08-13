@@ -40,3 +40,15 @@ export async function fetchDrinkLogSummary(
   if (!result.ok) return null;
   return toDrinkLogSummary(result.data);
 }
+
+export async function fetchDrinkLogById(
+  accessToken: string,
+  id: string,
+): Promise<DrinkLog | null> {
+  const result = await authServerFetch<ApiDrinkLog>(
+    `/api/auth/drink-logs/${encodeURIComponent(id)}`,
+    { accessToken },
+  );
+  if (!result.ok) return null;
+  return toDrinkLog(result.data);
+}

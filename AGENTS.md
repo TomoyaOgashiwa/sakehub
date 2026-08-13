@@ -160,6 +160,13 @@ sakehub/
 - コミットは Conventional Commits 準拠（例: `feat(web): add login form server action`）。
 - 1 PR = 1 関心事。複数アプリにまたがる変更でも論点を絞り、無関係な整形を含めない。
 
+### プランの保存
+
+- Plan mode / Cloud Agent / Request ID 起点で作成した実装プランは、**必ず** [`.cursor/plans/`](.cursor/plans/) に markdown として残す。
+- Cursor UI 上のドラフトだけにしない。実装完了後も削除しない。
+- リポジトリに該当プランが無い場合は、会話（agent transcript）の CreatePlan 内容から再作成する。
+- 実装がプランから逸脱した場合は、プラン末尾に「実際の実装との差分」を追記する（本文の歴史は書き換えない）。
+
 ---
 
 ## 6. 共通アーキテクチャ原則

@@ -182,6 +182,13 @@ export interface DrinkLogBatchCreateInput {
   items: DrinkLogItemInput[];
 }
 
+/** Single-log update payload (edit form). */
+export interface DrinkLogUpdateInput extends DrinkLogItemInput {
+  drankAt?: string;
+  placeName?: string;
+  placeUrl?: string;
+}
+
 /** @deprecated Prefer DrinkLogBatchCreateInput */
 export interface DrinkLogCreateInput extends DrinkLogItemInput {
   drankAt?: string;

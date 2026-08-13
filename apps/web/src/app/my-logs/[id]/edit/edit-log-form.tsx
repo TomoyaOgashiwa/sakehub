@@ -2,8 +2,9 @@
 
 import { useActionState, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import type { DrinkLog } from '@sakehub/types';
 
-import { createDrinkLogBatch, type DrinkLogActionState } from '@/application/drink-log-actions';
+import { updateDrinkLog, type DrinkLogActionState } from '@/application/drink-log-actions';
 import {
   DrinkAutocomplete,
   type SelectedDrinkOption,
@@ -17,20 +18,53 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { drinkLogBatchSchema, isoToTokyoDateInput } from '@/utils/drink-log-schema';
+import { drinkLogUpdateSchema, isoToTokyoDateInput } from '@/utils/drink-log-schema';
 
 const initialState: DrinkLogActionState = { ok: false, error: '' };
 
-export function NewLogForm() {
+function logToLine(log: DrinkLog): DrinkLogLine {
+  if (log.drink) {
+    return {
+      localId: log.id,
+      kind: 'catalog',
+      drinkId: log.drink.id,
+      name: log.drink.name,
+      category: log.drink.category,
+      unit: log.inputUnit,
+      value: String(log.inputValue),
+      servingKey: log.servingKey ?? null,
+      precision: log.volumePrecision,
+      quantity: log.quantity,
+    };
+  }
+  return {
+    localId: log.id,
+    kind: 'custom',
+    name: log.customDrinkName ?? '不明な銘柄',
+    unit: log.inputUnit,
+    value: String(log.inputValue),
+    servingKey: null,
+    precision: log.volumePrecision,
+    quantity: log.quantity,
+  };
+}
+
+interface EditLogFormProps {
+  log: DrinkLog;
+}
+
+export function EditLogForm({ log }: EditLogFormProps) {
   const router = useRouter();
-  const [drankAt, setDrankAt] = useState(() => isoToTokyoDateInput(new Date().toISOString()));
-  const [placeName, setPlaceName] = useState('');
-  const [placeUrl, setPlaceUrl] = useState('');
-  const [lines, setLines] = useState<DrinkLogLine[]>([]);
+  const [drankAt, setDrankAt] = useState(() => isoToTokyoDateInput(log.drankAt));
+  const [placeName, setPlaceName] = useState(log.placeName ?? '');
+  const [placeUrl, setPlaceUrl] = useState(log.placeUrl ?? '');
+  const [line, setLine] = useState<DrinkLogLine>(() => logToLine(log));
+
+  const boundUpdate = updateDrinkLog.bind(null, log.id);
 
   const [state, formAction, isPending] = useActionState(
     async (prev: DrinkLogActionState, formData: FormData) => {
-      const result = await createDrinkLogBatch(prev, formData);
+      const result = await boundUpdate(prev, formData);
       if (result.ok) {
         router.push('/my-logs');
         router.refresh();
@@ -40,35 +74,25 @@ export function NewLogForm() {
     initialState,
   );
 
-  const itemsJSON = useMemo(() => JSON.stringify(lines.map(lineToApiItem)), [lines]);
+  const itemJSON = useMemo(() => JSON.stringify(lineToApiItem(line)), [line]);
 
   const canSubmit = useMemo(() => {
-    const parsed = drinkLogBatchSchema.safeParse({
+    const parsed = drinkLogUpdateSchema.safeParse({
       drank_at: drankAt,
       place_name: placeName,
       place_url: placeUrl,
-      items: lines.map(lineToApiItem),
+      ...lineToApiItem(line),
     });
     return parsed.success;
-  }, [drankAt, placeName, placeUrl, lines]);
+  }, [drankAt, placeName, placeUrl, line]);
 
-  function addDrink(option: SelectedDrinkOption) {
-    setLines((prev) => [...prev, createLineFromSelection(option)]);
-  }
-
-  function updateLine(localId: string, patch: Partial<DrinkLogLine>) {
-    setLines((prev) =>
-      prev.map((line) => (line.localId === localId ? { ...line, ...patch } : line)),
-    );
-  }
-
-  function removeLine(localId: string) {
-    setLines((prev) => prev.filter((line) => line.localId !== localId));
+  function replaceDrink(option: SelectedDrinkOption) {
+    setLine(createLineFromSelection(option));
   }
 
   return (
     <form action={formAction} className="space-y-8">
-      <input type="hidden" name="items_json" value={itemsJSON} />
+      <input type="hidden" name="item_json" value={itemJSON} />
 
       <div className="space-y-2">
         <Label htmlFor="drank_at">いつ飲んだか</Label>
@@ -84,23 +108,15 @@ export function NewLogForm() {
       </div>
 
       <div className="space-y-4">
-        <DrinkAutocomplete onSelect={addDrink} />
-
-        {lines.length === 0 ? (
-          <p className="text-muted-foreground text-sm">まだお酒が追加されていません。</p>
-        ) : (
-          <ul className="space-y-4">
-            {lines.map((line) => (
-              <li key={line.localId}>
-                <DrinkLogLineEditor
-                  line={line}
-                  onChange={(patch) => updateLine(line.localId, patch)}
-                  onRemove={() => removeLine(line.localId)}
-                />
-              </li>
-            ))}
-          </ul>
-        )}
+        <div className="space-y-2">
+          <Label>銘柄を変更</Label>
+          <DrinkAutocomplete onSelect={replaceDrink} />
+        </div>
+        <DrinkLogLineEditor
+          line={line}
+          onChange={(patch) => setLine((prev) => ({ ...prev, ...patch }))}
+          showRemove={false}
+        />
       </div>
 
       <div className="space-y-4">
@@ -125,9 +141,6 @@ export function NewLogForm() {
             onChange={(e) => setPlaceUrl(e.target.value)}
             maxLength={2000}
           />
-          <p className="text-muted-foreground text-xs">
-            お店の場合など、分かるときだけ入力してください。
-          </p>
         </div>
       </div>
 
@@ -137,9 +150,19 @@ export function NewLogForm() {
         </p>
       )}
 
-      <Button type="submit" disabled={isPending || !canSubmit}>
-        {isPending ? '記録中…' : '記録する'}
-      </Button>
+      <div className="flex flex-wrap gap-3">
+        <Button type="submit" disabled={isPending || !canSubmit}>
+          {isPending ? '保存中…' : '変更を保存'}
+        </Button>
+        <Button
+          type="button"
+          variant="outline"
+          onClick={() => router.push('/my-logs')}
+          disabled={isPending}
+        >
+          キャンセル
+        </Button>
+      </div>
     </form>
   );
 }

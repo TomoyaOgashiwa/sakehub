@@ -11,6 +11,8 @@ type stubRepo struct {
 	meta         *drinkMeta
 	metaErr      error
 	inserted     []*Log
+	updated      []*Log
+	byID         map[string]*Log
 	searchMisses []string
 }
 
@@ -26,6 +28,29 @@ func (s *stubRepo) Insert(ctx context.Context, log *Log) error {
 	log.CreatedAt = time.Now().UTC()
 	log.UpdatedAt = log.CreatedAt
 	s.inserted = append(s.inserted, log)
+	return nil
+}
+
+func (s *stubRepo) FindByID(ctx context.Context, id, userID string) (*Log, error) {
+	if s.byID == nil {
+		return nil, ErrNotFound
+	}
+	log, ok := s.byID[id]
+	if !ok || log.UserID != userID {
+		return nil, ErrNotFound
+	}
+	cp := *log
+	return &cp, nil
+}
+
+func (s *stubRepo) Update(ctx context.Context, log *Log) error {
+	log.UpdatedAt = time.Now().UTC()
+	s.updated = append(s.updated, log)
+	if s.byID == nil {
+		s.byID = map[string]*Log{}
+	}
+	cp := *log
+	s.byID[log.ID] = &cp
 	return nil
 }
 
@@ -207,6 +232,96 @@ func TestCreateBatchRejectsInvalidQuantity(t *testing.T) {
 	}, "user-1")
 	if err == nil {
 		t.Fatal("expected validation error")
+	}
+}
+
+func TestUpdateKeepsEstimatedPreset(t *testing.T) {
+	drinkID := "drink-1"
+	existing := &Log{
+		ID:         "log-1",
+		UserID:     "user-1",
+		DrinkID:    &drinkID,
+		DrankAt:    time.Date(2026, 8, 1, 12, 0, 0, 0, time.UTC),
+		VolumeML:   300,
+		Quantity:   1,
+		InputUnit:  UnitML,
+		InputValue: 300,
+	}
+	repo := &stubRepo{
+		meta: &drinkMeta{Category: "beer", ABV: sql.NullFloat64{Float64: 5, Valid: true}},
+		byID: map[string]*Log{"log-1": existing},
+	}
+	svc := NewService(repo)
+
+	key := "beer_mug_m"
+	updated, err := svc.Update(context.Background(), "log-1", "user-1", UpdateInput{
+		DrinkID:         &drinkID,
+		InputUnit:       UnitML,
+		InputValue:      300,
+		ServingKey:      &key,
+		VolumePrecision: PrecisionEstimated,
+		Quantity:        2,
+	})
+	if err != nil {
+		t.Fatalf("Update: %v", err)
+	}
+	if updated.Quantity != 2 {
+		t.Fatalf("quantity = %d, want 2", updated.Quantity)
+	}
+	if updated.VolumePrecision != PrecisionEstimated {
+		t.Fatalf("precision = %s, want estimated", updated.VolumePrecision)
+	}
+}
+
+func TestUpdateRejectsBothDrinkIDAndCustom(t *testing.T) {
+	drinkID := "drink-1"
+	existing := &Log{ID: "log-1", UserID: "user-1", DrinkID: &drinkID, DrankAt: time.Now().UTC()}
+	repo := &stubRepo{
+		meta: &drinkMeta{Category: "beer"},
+		byID: map[string]*Log{"log-1": existing},
+	}
+	svc := NewService(repo)
+
+	name := "both"
+	_, err := svc.Update(context.Background(), "log-1", "user-1", UpdateInput{
+		DrinkID:         &drinkID,
+		CustomDrinkName: &name,
+		InputUnit:       UnitML,
+		InputValue:      100,
+		VolumePrecision: PrecisionExact,
+	})
+	if err == nil {
+		t.Fatal("expected validation error")
+	}
+}
+
+func TestUpdateCustomDrinkClearsPreset(t *testing.T) {
+	existing := &Log{ID: "log-1", UserID: "user-1", DrankAt: time.Now().UTC()}
+	repo := &stubRepo{byID: map[string]*Log{"log-1": existing}}
+	svc := NewService(repo)
+
+	name := "自由入力銘柄"
+	key := "sake_go"
+	updated, err := svc.Update(context.Background(), "log-1", "user-1", UpdateInput{
+		CustomDrinkName: &name,
+		InputUnit:       UnitML,
+		InputValue:      180,
+		ServingKey:      &key,
+		VolumePrecision: PrecisionEstimated,
+		Quantity:        1,
+		PlaceName:       strPtr("居酒屋"),
+	})
+	if err != nil {
+		t.Fatalf("Update: %v", err)
+	}
+	if updated.ServingKey != nil {
+		t.Fatalf("serving_key should be cleared, got %v", *updated.ServingKey)
+	}
+	if updated.VolumePrecision != PrecisionExact {
+		t.Fatalf("precision = %s, want exact", updated.VolumePrecision)
+	}
+	if updated.PlaceName == nil || *updated.PlaceName != "居酒屋" {
+		t.Fatalf("place = %v", updated.PlaceName)
 	}
 }
 

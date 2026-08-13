@@ -240,6 +240,97 @@ func (s *Service) List(ctx context.Context, userID string, params ListParams) ([
 	return logs, nil
 }
 
+func (s *Service) GetByID(ctx context.Context, id, userID string) (*Log, error) {
+	if strings.TrimSpace(id) == "" {
+		return nil, fmt.Errorf("%w: id is required", ErrValidation)
+	}
+	log, err := s.repo.FindByID(ctx, id, userID)
+	if err != nil {
+		return nil, fmt.Errorf("drinklog.GetByID: %w", err)
+	}
+	return log, nil
+}
+
+func (s *Service) Update(ctx context.Context, id, userID string, input UpdateInput) (*Log, error) {
+	if strings.TrimSpace(id) == "" {
+		return nil, fmt.Errorf("%w: id is required", ErrValidation)
+	}
+
+	existing, err := s.repo.FindByID(ctx, id, userID)
+	if err != nil {
+		return nil, fmt.Errorf("drinklog.Update: %w", err)
+	}
+
+	normalized, err := normalizeItem(CreateItemInput{
+		DrinkID:         input.DrinkID,
+		CustomDrinkName: input.CustomDrinkName,
+		InputUnit:       input.InputUnit,
+		InputValue:      input.InputValue,
+		ServingKey:      input.ServingKey,
+		VolumePrecision: input.VolumePrecision,
+		Quantity:        input.Quantity,
+	})
+	if err != nil {
+		return nil, fmt.Errorf("%w: %v", ErrValidation, err)
+	}
+
+	if normalized.DrinkID != nil {
+		meta, err := s.repo.FindDrinkMeta(ctx, *normalized.DrinkID)
+		if err != nil {
+			return nil, fmt.Errorf("drinklog.Update: %w", err)
+		}
+		applyServingRules(normalized, meta.Category)
+	} else {
+		normalized.ServingKey = nil
+		normalized.VolumePrecision = PrecisionExact
+	}
+
+	placeName, err := optionalTrimmed(input.PlaceName, maxPlaceNameLen, "place_name")
+	if err != nil {
+		return nil, err
+	}
+	placeURL, err := optionalTrimmed(input.PlaceURL, maxPlaceURLLen, "place_url")
+	if err != nil {
+		return nil, err
+	}
+
+	drankAt := existing.DrankAt
+	if input.DrankAt != nil {
+		drankAt = input.DrankAt.UTC()
+	}
+
+	log := Log{
+		ID:              existing.ID,
+		UserID:          userID,
+		DrinkID:         normalized.DrinkID,
+		CustomDrinkName: normalized.CustomDrinkName,
+		DrankAt:         drankAt,
+		VolumeML:        normalized.VolumeML,
+		Quantity:        normalized.Quantity,
+		InputUnit:       normalized.InputUnit,
+		InputValue:      normalized.InputValue,
+		ServingKey:      normalized.ServingKey,
+		VolumePrecision: normalized.VolumePrecision,
+		PlaceName:       placeName,
+		PlaceURL:        placeURL,
+	}
+
+	if err := s.repo.Update(ctx, &log); err != nil {
+		return nil, fmt.Errorf("drinklog.Update: %w", err)
+	}
+
+	if normalized.CustomDrinkName != nil {
+		_ = s.repo.InsertSearchMiss(ctx, userID, *normalized.CustomDrinkName)
+	}
+
+	// Re-fetch so response includes joined drink summary.
+	updated, err := s.repo.FindByID(ctx, id, userID)
+	if err != nil {
+		return nil, fmt.Errorf("drinklog.Update: %w", err)
+	}
+	return updated, nil
+}
+
 func (s *Service) Delete(ctx context.Context, id, userID string) error {
 	if strings.TrimSpace(id) == "" {
 		return fmt.Errorf("%w: id is required", ErrValidation)

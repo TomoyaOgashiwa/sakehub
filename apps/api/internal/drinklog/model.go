@@ -64,6 +64,20 @@ type CreateBatchInput struct {
 	Items     []CreateItemInput `json:"items"`
 }
 
+// UpdateInput replaces one existing log (item fields + optional drank_at / place).
+type UpdateInput struct {
+	DrinkID         *string         `json:"drink_id,omitempty"`
+	CustomDrinkName *string         `json:"custom_drink_name,omitempty"`
+	InputUnit       VolumeUnit      `json:"input_unit"`
+	InputValue      float64         `json:"input_value"`
+	ServingKey      *string         `json:"serving_key,omitempty"`
+	VolumePrecision VolumePrecision `json:"volume_precision"`
+	Quantity        int             `json:"quantity,omitempty"`
+	DrankAt         *time.Time      `json:"drank_at,omitempty"`
+	PlaceName       *string         `json:"place_name,omitempty"`
+	PlaceURL        *string         `json:"place_url,omitempty"`
+}
+
 // Summary is a period aggregate for pure alcohol intake.
 type Summary struct {
 	From              time.Time `json:"from"`

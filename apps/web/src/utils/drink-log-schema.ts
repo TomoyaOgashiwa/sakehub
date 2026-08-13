@@ -19,7 +19,8 @@ const dateYmdSchema = z
       probe.getUTCMonth() === month - 1 &&
       probe.getUTCDate() === day
     );
-  }, '日付が不正です。');
+  }, '日付が不正です。')
+  .refine((raw) => raw <= tokyoTodayYmd(), '未来の日付は選べません。');
 
 const optionalTrimmed = (max: number) =>
   z
@@ -163,6 +164,11 @@ export function isoToTokyoDateInput(iso: string): string {
   const month = parts.find((p) => p.type === 'month')?.value;
   const day = parts.find((p) => p.type === 'day')?.value;
   return `${year}-${month}-${day}`;
+}
+
+/** Today's calendar date in Asia/Tokyo as YYYY-MM-DD (for date inputs / Zod). */
+export function tokyoTodayYmd(reference = new Date()): string {
+  return isoToTokyoDateInput(reference.toISOString());
 }
 
 export function firstZodErrorMessage(error: z.ZodError): string {

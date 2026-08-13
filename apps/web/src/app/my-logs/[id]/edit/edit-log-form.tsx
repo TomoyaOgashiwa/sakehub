@@ -18,7 +18,11 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { drinkLogUpdateSchema, isoToTokyoDateInput } from '@/utils/drink-log-schema';
+import {
+  drinkLogUpdateSchema,
+  isoToTokyoDateInput,
+  tokyoTodayYmd,
+} from '@/utils/drink-log-schema';
 
 const initialState: DrinkLogActionState = { ok: false, error: '' };
 
@@ -59,6 +63,7 @@ export function EditLogForm({ log }: EditLogFormProps) {
   const [placeName, setPlaceName] = useState(log.placeName ?? '');
   const [placeUrl, setPlaceUrl] = useState(log.placeUrl ?? '');
   const [line, setLine] = useState<DrinkLogLine>(() => logToLine(log));
+  const maxDate = tokyoTodayYmd();
 
   const boundUpdate = updateDrinkLog.bind(null, log.id);
 
@@ -101,6 +106,7 @@ export function EditLogForm({ log }: EditLogFormProps) {
           name="drank_at"
           type="date"
           required
+          max={maxDate}
           value={drankAt}
           onChange={(e) => setDrankAt(e.target.value)}
           className="max-w-xs"

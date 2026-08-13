@@ -3,12 +3,17 @@ package saveddrink
 import "time"
 
 const (
-	StatusDrank           = "drank"
-	StatusWant            = "want"
-	MaxNoteLen            = 280
-	MaxProvisionalRaw     = 200
-	MinNormalizedLen      = 2
-	MaxNormalizedLen      = 40
+	StatusDrank = "drank"
+	StatusWant  = "want"
+	MaxNoteLen  = 280
+	// MaxProvisionalRaw is the max rune length of the trimmed display name.
+	// Keep in sync with apps/web MAX_PROVISIONAL_NAME_LEN in saved-drink-actions.ts.
+	MaxProvisionalRaw = 200
+	MinNormalizedLen  = 2
+	MaxNormalizedLen  = 40
+	// MaxProvisionalPerUser caps distinct provisional drinks per owner.
+	// Re-saving the same normalized name upserts and does not count as new.
+	MaxProvisionalPerUser = 100
 	VisibilityPublished   = "published"
 	VisibilityProvisional = "provisional"
 )

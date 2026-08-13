@@ -38,7 +38,7 @@ func TestListSkipsSuggestionsWhenHitsExist(t *testing.T) {
 		listDrinks: []Drink{{ID: "1", Name: "Dassai"}},
 		listTotal:  1,
 	}
-	svc := NewService(repo)
+	svc := NewService(repo, nil)
 
 	drinks, total, suggestions, err := svc.List(context.Background(), ListParams{Query: "獺祭"})
 	if err != nil {
@@ -58,7 +58,7 @@ func TestListSkipsSuggestionsWhenHitsExist(t *testing.T) {
 func TestListSkipsSuggestionsWhenCategorySet(t *testing.T) {
 	t.Parallel()
 	repo := &stubRepo{listDrinks: []Drink{}, listTotal: 0}
-	svc := NewService(repo)
+	svc := NewService(repo, nil)
 
 	_, _, suggestions, err := svc.List(context.Background(), ListParams{Query: "foo", Category: "sake"})
 	if err != nil {
@@ -80,7 +80,7 @@ func TestListReturnsSuggestionsOnBareQueryZeroHit(t *testing.T) {
 		listTotal:     0,
 		suggestDrinks: want,
 	}
-	svc := NewService(repo)
+	svc := NewService(repo, nil)
 
 	drinks, total, suggestions, err := svc.List(context.Background(), ListParams{Query: "Zenhito Cedr Malt"})
 	if err != nil {
@@ -97,17 +97,42 @@ func TestListReturnsSuggestionsOnBareQueryZeroHit(t *testing.T) {
 	}
 }
 
-func TestListPropagatesSuggestError(t *testing.T) {
+func TestListReturnsEmptySuggestionsOnSuggestError(t *testing.T) {
 	t.Parallel()
 	repo := &stubRepo{
 		listDrinks: []Drink{},
 		listTotal:  0,
 		suggestErr: errors.New("trgm failed"),
 	}
-	svc := NewService(repo)
+	svc := NewService(repo, nil)
 
-	_, _, _, err := svc.List(context.Background(), ListParams{Query: "missing"})
-	if err == nil {
-		t.Fatal("expected error")
+	drinks, total, suggestions, err := svc.List(context.Background(), ListParams{Query: "missing"})
+	if err != nil {
+		t.Fatalf("List should succeed when suggestions fail: %v", err)
+	}
+	if total != 0 || len(drinks) != 0 {
+		t.Fatalf("expected empty list, got %d total=%d", len(drinks), total)
+	}
+	if suggestions == nil || len(suggestions) != 0 {
+		t.Fatalf("suggestions = %+v, want empty slice", suggestions)
+	}
+}
+
+func TestListSkipsSuggestionsWhenQueryTooShort(t *testing.T) {
+	t.Parallel()
+	repo := &stubRepo{listDrinks: []Drink{}, listTotal: 0}
+	svc := NewService(repo, nil)
+
+	for _, q := range []string{"あ", "酒", "a", " "} {
+		_, _, suggestions, err := svc.List(context.Background(), ListParams{Query: q})
+		if err != nil {
+			t.Fatalf("List(%q): %v", q, err)
+		}
+		if repo.suggestCalled {
+			t.Fatalf("SuggestSimilar should not run for %q", q)
+		}
+		if len(suggestions) != 0 {
+			t.Fatalf("suggestions for %q = %d, want 0", q, len(suggestions))
+		}
 	}
 }

@@ -3,14 +3,22 @@ package drink
 import (
 	"context"
 	"fmt"
+	"strings"
+	"unicode/utf8"
+
+	"go.uber.org/zap"
 )
 
 type Service struct {
-	repo Repository
+	repo   Repository
+	logger *zap.Logger
 }
 
-func NewService(repo Repository) *Service {
-	return &Service{repo: repo}
+func NewService(repo Repository, logger *zap.Logger) *Service {
+	if logger == nil {
+		logger = zap.NewNop()
+	}
+	return &Service{repo: repo, logger: logger}
 }
 
 func (s *Service) GetByID(ctx context.Context, id string) (*Drink, error) {
@@ -36,10 +44,15 @@ func (s *Service) List(ctx context.Context, params ListParams) ([]Drink, int, []
 	}
 
 	suggestions := []Drink{}
-	if params.Query != "" && params.Category == "" && total == 0 {
-		suggestions, err = s.repo.SuggestSimilar(ctx, params.Query, MaxSuggestions)
+	q := strings.TrimSpace(params.Query)
+	if q != "" &&
+		params.Category == "" &&
+		total == 0 &&
+		utf8.RuneCountInString(q) >= MinSuggestQueryLen {
+		suggestions, err = s.repo.SuggestSimilar(ctx, q, MaxSuggestions)
 		if err != nil {
-			return nil, 0, nil, fmt.Errorf("drink.List suggestions: %w", err)
+			s.logger.Warn("drink suggestions failed", zap.String("q", q), zap.Error(err))
+			suggestions = []Drink{}
 		}
 	}
 

@@ -170,15 +170,46 @@ OR EXISTS (SELECT 1 FROM unnest(aliases) AS alias WHERE strpos(lower(alias), low
 	return drinks, total, nil
 }
 
+// suggestionColumns is a thin projection for zero-hit similar drinks.
+// Ratings aggregates stay off this path so trgm candidates are not scanned with
+// correlated AVG/COUNT before LIMIT.
+const suggestionColumns = `id, slug, name, name_en, category, subcategory, description,
+	image_url, image_source, abv, origin_country, manufacturer,
+	created_at, updated_at`
+
+func (r *repository) scanSuggestion(row interface{ Scan(dest ...any) error }) (*Drink, error) {
+	var d Drink
+	err := row.Scan(
+		&d.ID, &d.Slug, &d.Name, &d.NameEn, &d.Category, &d.Subcategory,
+		&d.Description, &d.ImageURL, &d.ImageSource, &d.ABV, &d.OriginCountry, &d.Manufacturer,
+		&d.CreatedAt, &d.UpdatedAt,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &d, nil
+}
+
 func (r *repository) SuggestSimilar(ctx context.Context, query string, limit int) ([]Drink, error) {
 	if limit <= 0 {
 		limit = MaxSuggestions
 	}
 
+	tx, err := r.db.BeginTx(ctx, nil)
+	if err != nil {
+		return nil, err
+	}
+	defer tx.Rollback()
+
+	// % uses gin_trgm_ops (idx_drinks_name_trgm). similarity() > n does not.
+	// Threshold is a package constant, not request input.
+	setLocal := fmt.Sprintf("SET LOCAL pg_trgm.similarity_threshold = %g", SimilarityThreshold)
+	if _, err := tx.ExecContext(ctx, setLocal); err != nil {
+		return nil, err
+	}
+
 	q := fmt.Sprintf(`
-		SELECT id, slug, name, name_en, category, subcategory, description,
-			image_url, image_source, abv, origin_country, manufacturer,
-			average_rating, total_reviews, created_at, updated_at
+		SELECT %s
 		FROM (
 			SELECT %s,
 				GREATEST(
@@ -188,32 +219,39 @@ func (r *repository) SuggestSimilar(ctx context.Context, query string, limit int
 			FROM drinks
 			WHERE visibility = 'published'
 			  AND (
-				similarity(name, $1) > $2
-				OR EXISTS (SELECT 1 FROM unnest(aliases) a WHERE similarity(a, $1) > $2)
+				name %% $1
+				OR EXISTS (SELECT 1 FROM unnest(aliases) a WHERE a %% $1)
 			  )
 		) ranked
 		ORDER BY sim DESC
-		LIMIT $3`, allColumns)
+		LIMIT $2`, suggestionColumns, suggestionColumns)
 
-	rows, err := r.db.QueryContext(ctx, q, query, SimilarityThreshold, limit)
+	rows, err := tx.QueryContext(ctx, q, query, limit)
 	if err != nil {
 		return nil, err
 	}
-	defer rows.Close()
 
 	var drinks []Drink
 	for rows.Next() {
-		d, err := r.scanDrink(rows)
+		d, err := r.scanSuggestion(rows)
 		if err != nil {
+			rows.Close()
 			return nil, err
 		}
 		drinks = append(drinks, *d)
 	}
-	if err := rows.Err(); err != nil {
+	scanErr := rows.Err()
+	if err := rows.Close(); err != nil {
 		return nil, err
+	}
+	if scanErr != nil {
+		return nil, scanErr
 	}
 	if drinks == nil {
 		drinks = []Drink{}
+	}
+	if err := tx.Commit(); err != nil {
+		return nil, err
 	}
 	return drinks, nil
 }

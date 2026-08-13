@@ -42,7 +42,7 @@ func New(logger *zap.Logger, db *sql.DB, cfg *config.Config, kf keyfunc.Keyfunc)
 	}))
 
 	userH := user.NewHandler(user.NewService(user.NewRepository(db)))
-	drinkH := drink.NewHandler(drink.NewService(drink.NewRepository(db)))
+	drinkH := drink.NewHandler(drink.NewService(drink.NewRepository(db), logger))
 	cocktailH := cocktail.NewHandler(cocktail.NewService(cocktail.NewRepository(db)))
 	reviewH := review.NewHandler(review.NewService(review.NewRepository(db)))
 	drinkLogH := drinklog.NewHandler(drinklog.NewService(drinklog.NewRepository(db)))

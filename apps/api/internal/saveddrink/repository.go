@@ -8,6 +8,8 @@ import (
 
 type Repository interface {
 	DrinkExists(ctx context.Context, drinkID string) (bool, error)
+	CountProvisionalByUser(ctx context.Context, userID string) (int, error)
+	ProvisionalNameExists(ctx context.Context, userID, nameNormalized string) (bool, error)
 	Upsert(ctx context.Context, userID, drinkID, status string) (*SavedDrink, error)
 	UpsertProvisional(ctx context.Context, userID, name, nameNormalized, status string) (*SavedDrink, error)
 	Update(ctx context.Context, drinkID, userID string, status, note *string) (*SavedDrink, error)
@@ -28,6 +30,28 @@ func (r *repository) DrinkExists(ctx context.Context, drinkID string) (bool, err
 	const q = `SELECT EXISTS(SELECT 1 FROM drinks WHERE id = $1 AND visibility = 'published')`
 	var exists bool
 	if err := r.db.QueryRowContext(ctx, q, drinkID).Scan(&exists); err != nil {
+		return false, err
+	}
+	return exists, nil
+}
+
+func (r *repository) CountProvisionalByUser(ctx context.Context, userID string) (int, error) {
+	const q = `SELECT COUNT(*) FROM drinks WHERE visibility = 'provisional' AND submitted_by = $1`
+	var n int
+	if err := r.db.QueryRowContext(ctx, q, userID).Scan(&n); err != nil {
+		return 0, err
+	}
+	return n, nil
+}
+
+func (r *repository) ProvisionalNameExists(ctx context.Context, userID, nameNormalized string) (bool, error) {
+	const q = `
+		SELECT EXISTS(
+			SELECT 1 FROM drinks
+			WHERE visibility = 'provisional' AND submitted_by = $1 AND name_normalized = $2
+		)`
+	var exists bool
+	if err := r.db.QueryRowContext(ctx, q, userID, nameNormalized).Scan(&exists); err != nil {
 		return false, err
 	}
 	return exists, nil
@@ -186,7 +210,8 @@ func (r *repository) DeleteByDrinkAndUser(ctx context.Context, drinkID, userID s
 		WHERE id = $1
 		  AND visibility = 'provisional'
 		  AND submitted_by = $2
-		  AND NOT EXISTS (SELECT 1 FROM saved_drinks s WHERE s.drink_id = drinks.id)`
+		  AND NOT EXISTS (SELECT 1 FROM saved_drinks s WHERE s.drink_id = drinks.id)
+		  AND NOT EXISTS (SELECT 1 FROM drink_logs l WHERE l.drink_id = drinks.id)`
 	if _, err := tx.ExecContext(ctx, delOrphan, drinkID, userID); err != nil {
 		return err
 	}

@@ -12,6 +12,7 @@ import { authServerFetch } from '@/application/server-api';
 export type SavedDrinkActionState = { ok: true; data?: SavedDrink } | { ok: false; error: string };
 
 const MAX_NOTE_LEN = 280;
+// Keep in sync with apps/api saveddrink.MaxProvisionalRaw.
 const MAX_PROVISIONAL_NAME_LEN = 200;
 
 function revalidateSavedDrinkPaths(slug: string) {

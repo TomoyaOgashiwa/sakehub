@@ -44,4 +44,7 @@ type ListParams struct {
 const (
 	SimilarityThreshold = 0.3
 	MaxSuggestions      = 5
+	// MinSuggestQueryLen skips trgm suggestions for 1-rune queries (e.g. 「酒」「あ」).
+	// Aligned with saveddrink.MinNormalizedLen.
+	MinSuggestQueryLen = 2
 )

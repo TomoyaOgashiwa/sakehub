@@ -37,7 +37,7 @@ func NewRepository(db *sql.DB) Repository {
 }
 
 func (r *repository) FindDrinkMeta(ctx context.Context, drinkID string) (*drinkMeta, error) {
-	const q = `SELECT category, abv FROM drinks WHERE id = $1`
+	const q = `SELECT category, abv FROM drinks WHERE id = $1 AND visibility = 'published'`
 
 	var meta drinkMeta
 	err := r.db.QueryRowContext(ctx, q, drinkID).Scan(&meta.Category, &meta.ABV)

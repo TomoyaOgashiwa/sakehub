@@ -142,3 +142,5 @@ chi では `/{id}` より前に登録。ボディ例:
 - `PUT /day` はクライアントの `range_from` / `range_to` を信じず、`time_zone` + 元の `date`（YYYY-MM-DD）からサーバーが半開区間を計算する。
 - 同一暦日の記録が 21 件以上あるときは一括編集 UI を出さず、API は 409 で拒否する（未ロード行の DELETE を防ぐ）。
 - `place_url` は Zod / Go とも http(s) のみ。`logToLine` は join 欠落時も `drinkId` を保持する。
+- `ReplaceInRange` は `FOR UPDATE` 後に件数を再チェックする。外側の `CountInRange` は fast-fail 用に残し、並行 `CreateBatch` による TOCTOU はロック後の 409 で止める。
+- 日次編集で上限超過のときは当日ログを全件ページング取得し、総件数と各行の 1件編集・削除を出す。

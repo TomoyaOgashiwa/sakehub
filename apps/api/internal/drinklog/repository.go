@@ -259,6 +259,10 @@ func (r *repository) ReplaceInRange(ctx context.Context, userID string, from, to
 	}
 	rows.Close()
 
+	if len(existingTimes) > maxItemsPerBatch {
+		return nil, fmt.Errorf("%w: too many logs in day to replace (max %d)", ErrConflict, maxItemsPerBatch)
+	}
+
 	incomingIDs := make(map[string]struct{}, len(incoming))
 	for i := range incoming {
 		id := strings.TrimSpace(incoming[i].ID)

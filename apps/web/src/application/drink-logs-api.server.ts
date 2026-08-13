@@ -20,12 +20,39 @@ export async function fetchMyDrinkLogs(
   if (options?.from) params.from = options.from;
   if (options?.to) params.to = options.to;
 
-  const result = await authServerFetch<{ data: ApiDrinkLog[] | null }>(
-    '/api/auth/drink-logs',
-    { accessToken, params },
-  );
+  const result = await authServerFetch<{ data: ApiDrinkLog[] | null }>('/api/auth/drink-logs', {
+    accessToken,
+    params,
+  });
   if (!result.ok) return [];
   return (result.data.data ?? []).map(toDrinkLog);
+}
+
+const LIST_PAGE_SIZE = 100;
+const LIST_RANGE_CAP = 1000;
+
+/** Pages through GET /drink-logs until the range is exhausted (or LIST_RANGE_CAP). */
+export async function fetchAllMyDrinkLogsInRange(
+  accessToken: string,
+  from: string,
+  to: string,
+): Promise<DrinkLog[]> {
+  const all: DrinkLog[] = [];
+  let offset = 0;
+  while (offset < LIST_RANGE_CAP) {
+    const page = await fetchMyDrinkLogs(accessToken, {
+      limit: LIST_PAGE_SIZE,
+      offset,
+      from,
+      to,
+    });
+    all.push(...page);
+    if (page.length < LIST_PAGE_SIZE) {
+      break;
+    }
+    offset += LIST_PAGE_SIZE;
+  }
+  return all;
 }
 
 export async function fetchDrinkLogSummary(
@@ -41,10 +68,7 @@ export async function fetchDrinkLogSummary(
   return toDrinkLogSummary(result.data);
 }
 
-export async function fetchDrinkLogById(
-  accessToken: string,
-  id: string,
-): Promise<DrinkLog | null> {
+export async function fetchDrinkLogById(accessToken: string, id: string): Promise<DrinkLog | null> {
   const result = await authServerFetch<ApiDrinkLog>(
     `/api/auth/drink-logs/${encodeURIComponent(id)}`,
     { accessToken },

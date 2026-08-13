@@ -10,12 +10,13 @@ import (
 )
 
 type stubRepo struct {
-	meta         *drinkMeta
-	metaErr      error
-	inserted     []*Log
-	updated      []*Log
-	byID         map[string]*Log
-	searchMisses []string
+	meta          *drinkMeta
+	metaErr       error
+	inserted      []*Log
+	updated       []*Log
+	byID          map[string]*Log
+	searchMisses  []string
+	countOverride *int
 }
 
 func (s *stubRepo) FindDrinkMeta(ctx context.Context, drinkID string) (*drinkMeta, error) {
@@ -68,6 +69,9 @@ func (s *stubRepo) Delete(ctx context.Context, id, userID string) error {
 }
 
 func (s *stubRepo) CountInRange(ctx context.Context, userID string, from, to time.Time) (int, error) {
+	if s.countOverride != nil {
+		return *s.countOverride, nil
+	}
 	n := 0
 	for _, log := range s.byID {
 		if log.UserID != userID {
@@ -93,6 +97,10 @@ func (s *stubRepo) ReplaceInRange(ctx context.Context, userID string, from, to t
 		if (log.DrankAt.Equal(from) || log.DrankAt.After(from)) && log.DrankAt.Before(to) {
 			existingInRange[id] = struct{}{}
 		}
+	}
+
+	if len(existingInRange) > maxItemsPerBatch {
+		return nil, fmt.Errorf("%w: too many logs in day to replace (max %d)", ErrConflict, maxItemsPerBatch)
 	}
 
 	incomingIDs := map[string]struct{}{}
@@ -644,6 +652,50 @@ func TestReplaceDayRejectsTooManyInRange(t *testing.T) {
 	})
 	if !errors.Is(err, ErrConflict) {
 		t.Fatalf("err = %v, want conflict", err)
+	}
+}
+
+func TestReplaceDayRejectsTooManyAfterLock(t *testing.T) {
+	drinkID := "drink-1"
+	ymd, from, _ := utcCalendarDay(t, -1)
+	byID := map[string]*Log{}
+	for i := 0; i < maxItemsPerBatch+1; i++ {
+		id := fmt.Sprintf("log-%d", i)
+		byID[id] = &Log{
+			ID:         id,
+			UserID:     "user-1",
+			DrinkID:    &drinkID,
+			DrankAt:    from.Add(time.Duration(i) * time.Minute),
+			VolumeML:   180,
+			Quantity:   1,
+			InputUnit:  UnitML,
+			InputValue: 180,
+		}
+	}
+	staleCount := maxItemsPerBatch
+	repo := &stubRepo{
+		meta:          &drinkMeta{Category: "sake"},
+		byID:          byID,
+		countOverride: &staleCount,
+	}
+	svc := NewService(repo)
+
+	drankAt := from
+	_, err := svc.ReplaceDay(context.Background(), "user-1", ReplaceDayInput{
+		TimeZone: "UTC",
+		Date:     ymd,
+		DrankAt:  &drankAt,
+		Items: []ReplaceDayItem{{
+			CreateItemInput: CreateItemInput{
+				DrinkID:         &drinkID,
+				InputUnit:       UnitML,
+				InputValue:      180,
+				VolumePrecision: PrecisionExact,
+			},
+		}},
+	})
+	if !errors.Is(err, ErrConflict) {
+		t.Fatalf("err = %v, want conflict from locked range", err)
 	}
 }
 

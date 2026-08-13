@@ -24,7 +24,7 @@ export default function LoginPage() {
     <div className="space-y-6">
       <div className="space-y-2 text-center">
         <Heading level="h1">Sign In</Heading>
-        <p className="text-muted-foreground text-sm">特定した銘柄をリストに残すためにログイン</p>
+        <p className="text-muted-foreground text-sm">飲んだ／飲みたいを残すためにログイン</p>
       </div>
 
       <form action={formAction} className="space-y-4">

@@ -1,4 +1,4 @@
-import type { SavedDrink, SavedDrinkCatalog } from '@sakehub/types';
+import type { SavedDrink, SavedDrinkCatalog, SavedDrinkStatus } from '@sakehub/types';
 
 export interface ApiSavedDrinkCatalog {
   id: string;
@@ -13,6 +13,8 @@ export interface ApiSavedDrink {
   id: string;
   user_id: string;
   drink_id: string;
+  status: SavedDrinkStatus;
+  note: string;
   created_at: string;
   drink?: ApiSavedDrinkCatalog;
   rating?: number;
@@ -35,6 +37,8 @@ export function toSavedDrink(api: ApiSavedDrink): SavedDrink {
     id: api.id,
     userId: api.user_id,
     drinkId: api.drink_id,
+    status: api.status,
+    note: api.note ?? '',
     createdAt: api.created_at,
     drink: api.drink ? toCatalog(api.drink) : undefined,
     rating: api.rating,

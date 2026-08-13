@@ -3,10 +3,13 @@
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 
+import type { SavedDrinkStatus } from '@sakehub/types';
+
 import type { DrinkListResult } from '@/application/drinks-api';
 import { useDrinks } from '@/application/use-drinks';
 import { SearchMissLogger } from '@/components/catalog/search-miss-logger';
 import { DRINK_LIST_PAGE_SIZE } from '@/config/drinks';
+import { savedDrinkStatusLabel } from '@/utils/saved-drink-status';
 
 import { CategoryFilter } from './category-filter';
 import { DrinkGrid } from './drink-grid';
@@ -15,7 +18,7 @@ import { DrinkSearch } from './drink-search';
 
 interface DrinkListClientProps {
   fallbackData: DrinkListResult;
-  recentSaves?: { slug: string; name: string }[];
+  recentSaves?: { slug: string; name: string; status: SavedDrinkStatus }[];
 }
 
 function parseOffset(raw: string | null): number {
@@ -72,7 +75,7 @@ export function DrinkListClient({ fallbackData, recentSaves }: DrinkListClientPr
             {recentSaves.map((item) => (
               <li key={item.slug}>
                 <Link href={`/drinks/${item.slug}`} className="hover:underline">
-                  {item.name}
+                  {item.name}（{savedDrinkStatusLabel(item.status)}）
                 </Link>
               </li>
             ))}

@@ -25,6 +25,7 @@ func (h *Handler) AuthRoutes(r chi.Router) {
 	r.Get("/", h.List)
 	r.Get("/mine", h.GetMine)
 	r.Post("/", h.Save)
+	r.Patch("/{drink_id}", h.Patch)
 	r.Delete("/{drink_id}", h.Unsave)
 }
 
@@ -43,6 +44,30 @@ func (h *Handler) Save(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 
 	row, err := h.svc.Save(r.Context(), userID, input)
+	if err != nil {
+		writeServiceError(w, err)
+		return
+	}
+
+	response.JSON(w, http.StatusOK, row)
+}
+
+func (h *Handler) Patch(w http.ResponseWriter, r *http.Request) {
+	userID := middleware.UserID(r.Context())
+	if userID == "" {
+		response.Error(w, http.StatusUnauthorized, "unauthorized")
+		return
+	}
+
+	var input PatchInput
+	if err := json.NewDecoder(r.Body).Decode(&input); err != nil {
+		response.Error(w, http.StatusBadRequest, "invalid json")
+		return
+	}
+	defer r.Body.Close()
+
+	drinkID := chi.URLParam(r, "drink_id")
+	row, err := h.svc.Patch(r.Context(), drinkID, userID, input)
 	if err != nil {
 		writeServiceError(w, err)
 		return

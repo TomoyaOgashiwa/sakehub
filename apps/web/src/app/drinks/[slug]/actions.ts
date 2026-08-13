@@ -37,9 +37,14 @@ export async function submitReview(
 }
 
 export async function deleteReview(reviewId: string, drinkSlug: string): Promise<ReviewState> {
-  return deleteEntityRating<DrinkReview>({
+  const result = await deleteEntityRating<DrinkReview>({
     ratingId: reviewId,
     deletePath: `/api/auth/reviews/${encodeURIComponent(reviewId)}`,
     pathToRevalidate: drinkRevalidatePath(drinkSlug),
   });
+  if (result.ok) {
+    revalidatePath('/list');
+    revalidatePath('/');
+  }
+  return result;
 }

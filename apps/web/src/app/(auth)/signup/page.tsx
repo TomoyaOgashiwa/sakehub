@@ -24,7 +24,7 @@ export default function SignupPage() {
     <div className="space-y-6">
       <div className="space-y-2 text-center">
         <Heading level="h1">Create Account</Heading>
-        <p className="text-muted-foreground text-sm">特定した銘柄をリストに残すために登録</p>
+        <p className="text-muted-foreground text-sm">飲んだ／飲みたいを残すために登録</p>
       </div>
 
       <form action={formAction} className="space-y-4">

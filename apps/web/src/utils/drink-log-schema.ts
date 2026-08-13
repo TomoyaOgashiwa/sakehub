@@ -166,7 +166,12 @@ export type DrinkLogDayReplaceParsed = z.infer<typeof drinkLogDayReplaceSchema>;
 export type DrinkLogUpdateParsed = z.infer<typeof drinkLogUpdateSchema>;
 export type DrinkLogItemParsed = z.infer<typeof drinkLogItemSchema>;
 
-export { zonedDateToIso, isoToZonedDateInput, todayYmdInTimeZone } from '@/utils/time-zone';
+export {
+  isoToZonedDateInput,
+  todayYmdInTimeZone,
+  ymdToDrankAtIso,
+  zonedDateToIso,
+} from '@/utils/time-zone';
 
 export function zodIssuesToFieldErrors(error: z.ZodError): Record<string, string> {
   const fieldErrors: Record<string, string> = {};

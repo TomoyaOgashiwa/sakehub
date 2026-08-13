@@ -11,7 +11,8 @@ import {
   drinkLogDayReplaceSchema,
   drinkLogUpdateSchema,
   firstZodErrorMessage,
-  zonedDateToIso,
+  isoToZonedDateInput,
+  ymdToDrankAtIso,
   zodIssuesToFieldErrors,
 } from '@/utils/drink-log-schema';
 
@@ -70,7 +71,7 @@ export async function createDrinkLogBatch(
     accessToken: token.accessToken,
     method: 'POST',
     body: {
-      ...(drank_at ? { drank_at: zonedDateToIso(drank_at, time_zone) } : {}),
+      ...(drank_at ? { drank_at: ymdToDrankAtIso(drank_at, time_zone) } : {}),
       ...(place_name ? { place_name } : {}),
       ...(place_url ? { place_url } : {}),
       items,
@@ -135,7 +136,7 @@ export async function replaceDrinkLogsForDay(
     body: {
       range_from,
       range_to,
-      drank_at: zonedDateToIso(drank_at, time_zone),
+      drank_at: ymdToDrankAtIso(drank_at, time_zone),
       place_name: place_name ?? null,
       place_url: place_url ?? null,
       items,
@@ -166,6 +167,7 @@ export async function updateDrinkLog(
 
   const timeZone = ((formData.get('time_zone') as string | null) ?? '').trim();
   const drankAtRaw = ((formData.get('drank_at') as string | null) ?? '').trim();
+  const originalDrankAt = ((formData.get('original_drank_at') as string | null) ?? '').trim();
   const placeName = ((formData.get('place_name') as string | null) ?? '').trim();
   const placeUrl = ((formData.get('place_url') as string | null) ?? '').trim();
   const itemJSON = ((formData.get('item_json') as string | null) ?? '').trim();
@@ -197,13 +199,17 @@ export async function updateDrinkLog(
   }
 
   const data = parsed.data;
+  const originalYmd = originalDrankAt ? isoToZonedDateInput(originalDrankAt, data.time_zone) : '';
+  const dateChanged = Boolean(data.drank_at && data.drank_at !== originalYmd);
   const result = await authServerFetch<ApiDrinkLog>(
     `/api/auth/drink-logs/${encodeURIComponent(logId)}`,
     {
       accessToken: token.accessToken,
       method: 'PATCH',
       body: {
-        ...(data.drank_at ? { drank_at: zonedDateToIso(data.drank_at, data.time_zone) } : {}),
+        ...(dateChanged && data.drank_at
+          ? { drank_at: ymdToDrankAtIso(data.drank_at, data.time_zone) }
+          : {}),
         place_name: data.place_name ?? null,
         place_url: data.place_url ?? null,
         ...(data.drink_id ? { drink_id: data.drink_id } : {}),

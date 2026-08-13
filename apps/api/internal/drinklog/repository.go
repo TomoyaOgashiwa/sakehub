@@ -227,20 +227,21 @@ func (r *repository) ReplaceInRange(ctx context.Context, userID string, from, to
 	defer func() { _ = tx.Rollback() }()
 
 	rows, err := tx.QueryContext(ctx, `
-		SELECT id FROM drink_logs
+		SELECT id, drank_at FROM drink_logs
 		WHERE user_id = $1 AND drank_at >= $2 AND drank_at < $3
 		FOR UPDATE`, userID, from, to)
 	if err != nil {
 		return nil, err
 	}
-	existing := make(map[string]struct{})
+	existingTimes := make(map[string]time.Time)
 	for rows.Next() {
 		var id string
-		if err := rows.Scan(&id); err != nil {
+		var drankAt time.Time
+		if err := rows.Scan(&id, &drankAt); err != nil {
 			rows.Close()
 			return nil, err
 		}
-		existing[id] = struct{}{}
+		existingTimes[id] = drankAt
 	}
 	if err := rows.Err(); err != nil {
 		rows.Close()
@@ -254,14 +255,14 @@ func (r *repository) ReplaceInRange(ctx context.Context, userID string, from, to
 		if id == "" {
 			continue
 		}
-		if _, ok := existing[id]; !ok {
+		if _, ok := existingTimes[id]; !ok {
 			return nil, fmt.Errorf("%w: item id not in range", ErrValidation)
 		}
 		incomingIDs[id] = struct{}{}
 		incoming[i].ID = id
 	}
 
-	for id := range existing {
+	for id := range existingTimes {
 		if _, keep := incomingIDs[id]; keep {
 			continue
 		}
@@ -299,6 +300,12 @@ func (r *repository) ReplaceInRange(ctx context.Context, userID string, from, to
 		log := &incoming[i]
 		log.UserID = userID
 		if log.ID != "" {
+			if orig, ok := existingTimes[log.ID]; ok {
+				inOriginalDay := !log.DrankAt.Before(from) && log.DrankAt.Before(to)
+				if inOriginalDay {
+					log.DrankAt = orig
+				}
+			}
 			err := tx.QueryRowContext(ctx, updateQ,
 				log.DrinkID, log.CustomDrinkName, log.DrankAt, log.VolumeML, log.Quantity, log.InputUnit, log.InputValue,
 				log.ServingKey, log.VolumePrecision, log.PlaceName, log.PlaceURL,

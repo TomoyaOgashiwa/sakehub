@@ -92,6 +92,9 @@ func (s *stubRepo) ReplaceInRange(ctx context.Context, userID string, from, to t
 			return nil, fmt.Errorf("%w: item id not in range", ErrValidation)
 		}
 		incomingIDs[id] = struct{}{}
+		if !incoming[i].DrankAt.Before(from) && incoming[i].DrankAt.Before(to) {
+			incoming[i].DrankAt = s.byID[id].DrankAt
+		}
 	}
 
 	for id := range existingInRange {
@@ -511,6 +514,9 @@ func TestReplaceDayInsertUpdateDelete(t *testing.T) {
 	}
 	if repo.byID["keep-1"].Quantity != 2 {
 		t.Fatalf("keep quantity = %d, want 2", repo.byID["keep-1"].Quantity)
+	}
+	if !repo.byID["keep-1"].DrankAt.Equal(keep.DrankAt) {
+		t.Fatalf("same-day replace should keep original drank_at, got %v", repo.byID["keep-1"].DrankAt)
 	}
 	if repo.byID["keep-1"].PlaceName == nil || *repo.byID["keep-1"].PlaceName != "自宅" {
 		t.Fatalf("place = %v", repo.byID["keep-1"].PlaceName)

@@ -17,9 +17,10 @@ import {
   type DrinkLogLine,
 } from '@/components/drink-logs/drink-log-line-editor';
 import { Button } from '@/components/ui/button';
-import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
+import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { isoToZonedDateInput, todayYmdInTimeZone } from '@/utils/time-zone';
+import { useBrowserTimeZone, useBrowserTodayYmd } from '@/hooks/use-browser-calendar';
+import { isoToZonedDateInput } from '@/utils/time-zone';
 
 const initialState: DrinkLogActionState = { ok: false, error: '' };
 
@@ -30,11 +31,13 @@ interface EditLogFormProps {
 
 export function EditLogForm({ log, timeZone }: EditLogFormProps) {
   const router = useRouter();
-  const [drankAt, setDrankAt] = useState(() => isoToZonedDateInput(log.drankAt, timeZone));
+  const tz = useBrowserTimeZone(timeZone);
+  const maxDate = useBrowserTodayYmd();
+  const [drankAt, setDrankAt] = useState<string | null>(null);
   const [placeName, setPlaceName] = useState(log.placeName ?? '');
   const [placeUrl, setPlaceUrl] = useState(log.placeUrl ?? '');
   const [line, setLine] = useState<DrinkLogLine>(() => logToLine(log));
-  const maxDate = todayYmdInTimeZone(timeZone);
+  const drankAtValue = drankAt ?? isoToZonedDateInput(log.drankAt, tz);
 
   const boundUpdate = updateDrinkLog.bind(null, log.id);
 
@@ -62,7 +65,8 @@ export function EditLogForm({ log, timeZone }: EditLogFormProps) {
 
   return (
     <form action={formAction} className="flex flex-col gap-8">
-      <input type="hidden" name="time_zone" value={timeZone} />
+      <input type="hidden" name="time_zone" value={tz} />
+      <input type="hidden" name="original_drank_at" value={log.drankAt} />
       <input type="hidden" name="item_json" value={itemJSON} />
 
       <FieldGroup>
@@ -73,12 +77,15 @@ export function EditLogForm({ log, timeZone }: EditLogFormProps) {
             name="drank_at"
             type="date"
             required
-            max={maxDate}
-            value={drankAt}
+            max={maxDate || undefined}
+            value={drankAtValue}
             aria-invalid={drankInvalid}
             onChange={(e) => setDrankAt(e.target.value)}
             className="max-w-xs"
           />
+          <FieldDescription>
+            日付を変えない場合は元の時刻のままです。今日にすると記録した時刻（UTC）になります。
+          </FieldDescription>
           {drankInvalid && <FieldError>{fieldErrors?.drank_at}</FieldError>}
         </Field>
 

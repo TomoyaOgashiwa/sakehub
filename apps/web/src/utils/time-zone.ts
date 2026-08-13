@@ -75,6 +75,29 @@ export function todayYmdInTimeZone(timeZone: string, reference = new Date()): st
 }
 
 /**
+ * Calendar today in the JS runtime's local timezone.
+ * Use from the browser (not Server Components — Node is usually UTC).
+ */
+export function localTodayYmd(reference = new Date()): string {
+  const year = reference.getFullYear();
+  const month = String(reference.getMonth() + 1).padStart(2, '0');
+  const day = String(reference.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+/**
+ * Create/update payload for `drank_at`:
+ * today's calendar date → the current UTC instant;
+ * any past date → local midnight in `timeZone`.
+ */
+export function ymdToDrankAtIso(ymd: string, timeZone: string, now = new Date()): string {
+  if (ymd === todayYmdInTimeZone(timeZone, now)) {
+    return now.toISOString();
+  }
+  return zonedDateToIso(ymd, timeZone);
+}
+
+/**
  * Interpret YYYY-MM-DD as local midnight in `timeZone`, return ISO UTC.
  * Two-pass offset correction handles DST.
  */

@@ -22,7 +22,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { todayYmdInTimeZone } from '@/utils/time-zone';
+import { useBrowserTimeZone, useBrowserTodayYmd } from '@/hooks/use-browser-calendar';
 
 const initialState: DrinkLogActionState = { ok: false, error: '' };
 
@@ -41,8 +41,8 @@ function lineErrorsAt(
 
 export interface DrinkLogBatchFormProps {
   mode: 'create' | 'day-edit';
-  timeZone: string;
-  initialDrankAt: string;
+  timeZone?: string;
+  initialDrankAt?: string;
   initialPlaceName?: string;
   initialPlaceUrl?: string;
   initialLines?: DrinkLogLine[];
@@ -53,8 +53,8 @@ export interface DrinkLogBatchFormProps {
 
 export function DrinkLogBatchForm({
   mode,
-  timeZone,
-  initialDrankAt,
+  timeZone: timeZoneProp,
+  initialDrankAt = '',
   initialPlaceName = '',
   initialPlaceUrl = '',
   initialLines = [],
@@ -63,11 +63,15 @@ export function DrinkLogBatchForm({
   placeMixed = false,
 }: DrinkLogBatchFormProps) {
   const router = useRouter();
-  const [drankAt, setDrankAt] = useState(initialDrankAt);
+  const browserToday = useBrowserTodayYmd();
+  const browserTz = useBrowserTimeZone(timeZoneProp ?? 'UTC');
+  const timeZone = mode === 'create' ? browserTz : (timeZoneProp ?? browserTz);
+  const maxDate = browserToday;
+  const [drankAt, setDrankAt] = useState<string | null>(mode === 'create' ? null : initialDrankAt);
   const [placeName, setPlaceName] = useState(initialPlaceName);
   const [placeUrl, setPlaceUrl] = useState(initialPlaceUrl);
   const [lines, setLines] = useState<DrinkLogLine[]>(initialLines);
-  const maxDate = todayYmdInTimeZone(timeZone);
+  const drankAtValue = drankAt ?? (mode === 'create' ? browserToday : initialDrankAt);
 
   const action = mode === 'create' ? createDrinkLogBatch : replaceDrinkLogsForDay;
 
@@ -123,12 +127,17 @@ export function DrinkLogBatchForm({
             name="drank_at"
             type="date"
             required
-            max={maxDate}
-            value={drankAt}
+            max={maxDate || undefined}
+            value={drankAtValue}
             aria-invalid={drankInvalid}
             onChange={(e) => setDrankAt(e.target.value)}
             className="max-w-xs"
           />
+          {mode === 'create' && (
+            <FieldDescription>
+              今日のままなら、記録した時刻（UTC）で保存されます。昨日以前にするときだけ日付を変えてください。
+            </FieldDescription>
+          )}
           {drankInvalid && <FieldError>{fieldErrors?.drank_at}</FieldError>}
         </Field>
 

@@ -19,7 +19,7 @@ interface SearchZeroExitProps {
 export function SearchZeroExit({ query, suggestions, isAuthenticated }: SearchZeroExitProps) {
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
-  const loginHref = `/login?next=${encodeURIComponent(`/?q=${query}`)}`;
+  const loginHref = `/login?next=${encodeURIComponent(`/?q=${encodeURIComponent(query)}`)}`;
 
   const handleSave = (status: SavedDrinkStatus) => {
     setError(null);

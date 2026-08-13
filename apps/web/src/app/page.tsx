@@ -75,13 +75,15 @@ async function DrinkListLoader({ searchParams }: PageProps) {
 
   const recentSaves = saved.flatMap((item) => {
     if (!item.drink) return [];
-    return [{ slug: item.drink.slug, name: item.drink.name, status: item.status }];
+    const href = item.drink.visibility === 'provisional' ? '/list' : `/drinks/${item.drink.slug}`;
+    return [{ drinkId: item.drink.id, name: item.drink.name, status: item.status, href }];
   });
 
   return (
     <DrinkListClient
       fallbackData={result}
       recentSaves={recentSaves.length > 0 ? recentSaves : undefined}
+      isAuthenticated={Boolean(user)}
     />
   );
 }

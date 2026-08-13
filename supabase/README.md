@@ -208,25 +208,26 @@ supabase db push
 
 シードは用途別に `supabase/seeds/` へ分割しています。
 
-| ファイル | 内容 | ローカル | 本番 |
-| -------- | ---- | -------- | ---- |
-| `seeds/official_cocktails.sql` | 公式カクテルマスタ・公式レシピ（生成物） | ✅ | ✅ |
-| `seeds/drinks.sql` | drinks マスタ | ✅ | ✅ |
-| `seeds/local_demo.sql` | デモユーザー・ドリンク評価・個別レシピ・レシピ評価 | ✅ | ❌ |
+| ファイル                       | 内容                                               | ローカル | 本番 |
+| ------------------------------ | -------------------------------------------------- | -------- | ---- |
+| `seeds/official_cocktails.sql` | 公式カクテルマスタ・公式レシピ（生成物）           | ✅       | ✅   |
+| `seeds/drinks.sql`             | drinks マスタ                                      | ✅       | ✅   |
+| `seeds/local_demo.sql`         | デモユーザー・ドリンク評価・個別レシピ・レシピ評価 | ✅       | ❌   |
+| `seeds/local_zero_hit.sql`     | お酒検索ゼロ件の再現（類似フィクスチャ・仮の印）   | ✅       | ❌   |
 
-`config.toml` の `[db.seed].sql_paths` はローカル用に上記 3 ファイルを順に指定しています。
+`config.toml` の `[db.seed].sql_paths` はローカル用に上記 4 ファイルを順に指定しています。
 
 ### いつ実行されるか
 
-| 方法 | 内容 |
-| ---- | ---- |
-| `supabase db reset` | ローカル DB を作り直したあと、migrations の直後に `[db.seed]` の SQL が自動実行される（`--no-seed` を付けない限り） |
-| 下記の「シード単体」 | **いまの DB に対して** seed だけを流す（テーブルはすでに存在している前提） |
+| 方法                 | 内容                                                                                                                |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `supabase db reset`  | ローカル DB を作り直したあと、migrations の直後に `[db.seed]` の SQL が自動実行される（`--no-seed` を付けない限り） |
+| 下記の「シード単体」 | **いまの DB に対して** seed だけを流す（テーブルはすでに存在している前提）                                          |
 
 ### シードだけ再実行したい（リポジトリルートで）
 
 ```bash
-pnpm supabase:seed          # ローカル: 共通 + local_demo
+pnpm supabase:seed          # ローカル: 共通 + local_demo + local_zero_hit
 pnpm supabase:seed:shared   # ローカル: 共通のみ（評価・個別レシピなし）
 pnpm supabase:seed:prod     # リンク済みリモート: 共通のみ（local_demo なし）
 ```
@@ -235,15 +236,17 @@ pnpm supabase:seed:prod     # リンク済みリモート: 共通のみ（local_
 
 ### 注意（重複 INSERT）
 
-`drinks.sql` / `official_cocktails.sql` は upsert（`ON CONFLICT`）です。`local_demo.sql` は基本的に **INSERT のみ**で、既に同じ行がある状態で再実行すると UNIQUE 制約で失敗します。空の状態から入れるなら `db reset` を使ってください。
+`drinks.sql` / `official_cocktails.sql` / `local_zero_hit.sql` は upsert（`ON CONFLICT`）です。`local_demo.sql` は基本的に **INSERT のみ**で、既に同じ行がある状態で再実行すると UNIQUE 制約で失敗します。空の状態から入れるなら `db reset` を使ってください。
+
+ゼロ件画面の再現クエリは `seeds/local_zero_hit.sql` 先頭コメントを参照（類似あり: `Zenhito Cedr Malt`、類似なし: `xqzt9zeroHitNoCatalog`）。仮の印は `rater01@example.com` / `password123`。
 
 ### カタログ画像（Storage）
 
 本番シード用の商品画像は public バケット **`catalog-images`** に WebP で置く。
 
-| Path | 用途 |
-| ---- | ---- |
-| `drinks/{slug}.webp` | drinks マスタ |
+| Path                    | 用途             |
+| ----------------------- | ---------------- |
+| `drinks/{slug}.webp`    | drinks マスタ    |
 | `cocktails/{slug}.webp` | cocktails マスタ |
 
 - `image_url` には linked（prod）の絶対公開 URL を入れる（ローカル seed でも同じ URL を参照してよい）

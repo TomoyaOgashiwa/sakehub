@@ -7,6 +7,7 @@ export interface ApiSavedDrinkCatalog {
   name_en?: string;
   category: string;
   image_url?: string;
+  visibility?: 'published' | 'provisional';
 }
 
 export interface ApiSavedDrink {
@@ -29,6 +30,7 @@ function toCatalog(api: ApiSavedDrinkCatalog): SavedDrinkCatalog {
     nameEn: api.name_en,
     category: api.category as SavedDrinkCatalog['category'],
     imageUrl: api.image_url,
+    visibility: api.visibility === 'provisional' ? 'provisional' : 'published',
   };
 }
 

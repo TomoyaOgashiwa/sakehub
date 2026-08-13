@@ -8,20 +8,24 @@ import (
 )
 
 type stubRepo struct {
-	exists     bool
-	existsErr  error
-	upsertRow  *SavedDrink
-	upsertErr  error
-	updateRow  *SavedDrink
-	updateErr  error
-	findRow    *SavedDrink
-	findErr    error
-	listRows   []SavedDrink
-	listErr    error
-	deleteErr  error
-	deletedFor string
-	lastStatus string
-	lastNote   *string
+	exists         bool
+	existsErr      error
+	upsertRow      *SavedDrink
+	upsertErr      error
+	provisionalRow *SavedDrink
+	provisionalErr error
+	updateRow      *SavedDrink
+	updateErr      error
+	findRow        *SavedDrink
+	findErr        error
+	listRows       []SavedDrink
+	listErr        error
+	deleteErr      error
+	deletedFor     string
+	lastStatus     string
+	lastNote       *string
+	lastProvName   string
+	lastProvNorm   string
 }
 
 func (s *stubRepo) DrinkExists(context.Context, string) (bool, error) {
@@ -31,6 +35,13 @@ func (s *stubRepo) DrinkExists(context.Context, string) (bool, error) {
 func (s *stubRepo) Upsert(_ context.Context, _, _, status string) (*SavedDrink, error) {
 	s.lastStatus = status
 	return s.upsertRow, s.upsertErr
+}
+
+func (s *stubRepo) UpsertProvisional(_ context.Context, _, name, nameNormalized, status string) (*SavedDrink, error) {
+	s.lastStatus = status
+	s.lastProvName = name
+	s.lastProvNorm = nameNormalized
+	return s.provisionalRow, s.provisionalErr
 }
 
 func (s *stubRepo) Update(_ context.Context, _, _ string, status, note *string) (*SavedDrink, error) {
@@ -143,6 +154,50 @@ func TestPatchUpdatesStatus(t *testing.T) {
 	}
 	if repo.lastStatus != StatusWant {
 		t.Fatalf("patched status %q, want %q", repo.lastStatus, StatusWant)
+	}
+}
+
+func TestSaveProvisionalRequiresNameAndStatus(t *testing.T) {
+	t.Parallel()
+	svc := NewService(&stubRepo{})
+	_, err := svc.SaveProvisional(context.Background(), "user", SaveProvisionalInput{Status: StatusDrank})
+	if !errors.Is(err, ErrValidation) {
+		t.Fatalf("expected ErrValidation, got %v", err)
+	}
+}
+
+func TestSaveProvisionalRejectsInvalidStatus(t *testing.T) {
+	t.Parallel()
+	svc := NewService(&stubRepo{})
+	_, err := svc.SaveProvisional(context.Background(), "user", SaveProvisionalInput{Name: "禅人未登録ラベル", Status: "have"})
+	if !errors.Is(err, ErrValidation) {
+		t.Fatalf("expected ErrValidation, got %v", err)
+	}
+}
+
+func TestSaveProvisionalUpsertsNormalizedName(t *testing.T) {
+	t.Parallel()
+	want := &SavedDrink{ID: "s1", Status: StatusWant}
+	repo := &stubRepo{provisionalRow: want}
+	svc := NewService(repo)
+	got, err := svc.SaveProvisional(context.Background(), "user", SaveProvisionalInput{
+		Name:   "  禅人未登録ラベル  ",
+		Status: StatusWant,
+	})
+	if err != nil {
+		t.Fatalf("SaveProvisional: %v", err)
+	}
+	if got != want {
+		t.Fatalf("got %+v, want %+v", got, want)
+	}
+	if repo.lastProvName != "禅人未登録ラベル" {
+		t.Fatalf("name %q", repo.lastProvName)
+	}
+	if repo.lastProvNorm != "禅人未登録らべる" {
+		t.Fatalf("normalized %q, want 禅人未登録らべる", repo.lastProvNorm)
+	}
+	if repo.lastStatus != StatusWant {
+		t.Fatalf("status %q", repo.lastStatus)
 	}
 }
 

@@ -2,6 +2,8 @@ import type { DrinkCategory } from './drink';
 
 export type SavedDrinkStatus = 'drank' | 'want';
 
+export type DrinkVisibility = 'published' | 'provisional';
+
 export interface SavedDrinkCatalog {
   id: string;
   slug: string;
@@ -9,6 +11,7 @@ export interface SavedDrinkCatalog {
   nameEn?: string;
   category: Exclude<DrinkCategory, 'all'>;
   imageUrl?: string;
+  visibility: DrinkVisibility;
 }
 
 /** One personal mark per user per catalog drink. Rating is an optional annotation. */

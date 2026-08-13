@@ -23,6 +23,7 @@ type Repository interface {
 	FindByID(ctx context.Context, id string) (*Drink, error)
 	FindBySlug(ctx context.Context, slug string) (*Drink, error)
 	List(ctx context.Context, params ListParams) ([]Drink, int, error)
+	SuggestSimilar(ctx context.Context, query string, limit int) ([]Drink, error)
 	Insert(ctx context.Context, d *Drink) error
 }
 
@@ -48,7 +49,7 @@ func (r *repository) scanDrink(row interface{ Scan(dest ...any) error }) (*Drink
 }
 
 func (r *repository) FindByID(ctx context.Context, id string) (*Drink, error) {
-	q := fmt.Sprintf(`SELECT %s FROM drinks WHERE id = $1`, allColumns)
+	q := fmt.Sprintf(`SELECT %s FROM drinks WHERE id = $1 AND visibility = 'published'`, allColumns)
 
 	d, err := r.scanDrink(r.db.QueryRowContext(ctx, q, id))
 	if errors.Is(err, sql.ErrNoRows) {
@@ -61,7 +62,7 @@ func (r *repository) FindByID(ctx context.Context, id string) (*Drink, error) {
 }
 
 func (r *repository) FindBySlug(ctx context.Context, slug string) (*Drink, error) {
-	q := fmt.Sprintf(`SELECT %s FROM drinks WHERE slug = $1`, allColumns)
+	q := fmt.Sprintf(`SELECT %s FROM drinks WHERE slug = $1 AND visibility = 'published'`, allColumns)
 
 	d, err := r.scanDrink(r.db.QueryRowContext(ctx, q, slug))
 	if errors.Is(err, sql.ErrNoRows) {
@@ -83,6 +84,8 @@ func (r *repository) List(ctx context.Context, params ListParams) ([]Drink, int,
 		args       []any
 		argIdx     int
 	)
+
+	conditions = append(conditions, "visibility = 'published'")
 
 	if params.Category != "" {
 		argIdx++
@@ -165,6 +168,54 @@ OR EXISTS (SELECT 1 FROM unnest(aliases) AS alias WHERE strpos(lower(alias), low
 	}
 
 	return drinks, total, nil
+}
+
+func (r *repository) SuggestSimilar(ctx context.Context, query string, limit int) ([]Drink, error) {
+	if limit <= 0 {
+		limit = MaxSuggestions
+	}
+
+	q := fmt.Sprintf(`
+		SELECT id, slug, name, name_en, category, subcategory, description,
+			image_url, image_source, abv, origin_country, manufacturer,
+			average_rating, total_reviews, created_at, updated_at
+		FROM (
+			SELECT %s,
+				GREATEST(
+					similarity(name, $1),
+					COALESCE((SELECT max(similarity(a, $1)) FROM unnest(aliases) a), 0)
+				) AS sim
+			FROM drinks
+			WHERE visibility = 'published'
+			  AND (
+				similarity(name, $1) > $2
+				OR EXISTS (SELECT 1 FROM unnest(aliases) a WHERE similarity(a, $1) > $2)
+			  )
+		) ranked
+		ORDER BY sim DESC
+		LIMIT $3`, allColumns)
+
+	rows, err := r.db.QueryContext(ctx, q, query, SimilarityThreshold, limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var drinks []Drink
+	for rows.Next() {
+		d, err := r.scanDrink(rows)
+		if err != nil {
+			return nil, err
+		}
+		drinks = append(drinks, *d)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	if drinks == nil {
+		drinks = []Drink{}
+	}
+	return drinks, nil
 }
 
 func (r *repository) Insert(ctx context.Context, d *Drink) error {

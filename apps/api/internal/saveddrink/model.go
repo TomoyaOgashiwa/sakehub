@@ -3,19 +3,25 @@ package saveddrink
 import "time"
 
 const (
-	StatusDrank = "drank"
-	StatusWant  = "want"
-	MaxNoteLen  = 280
+	StatusDrank           = "drank"
+	StatusWant            = "want"
+	MaxNoteLen            = 280
+	MaxProvisionalRaw     = 200
+	MinNormalizedLen      = 2
+	MaxNormalizedLen      = 40
+	VisibilityPublished   = "published"
+	VisibilityProvisional = "provisional"
 )
 
 // DrinkSummary is the catalog slice embedded on list responses.
 type DrinkSummary struct {
-	ID       string  `json:"id"`
-	Slug     string  `json:"slug"`
-	Name     string  `json:"name"`
-	NameEn   *string `json:"name_en,omitempty"`
-	Category string  `json:"category"`
-	ImageURL *string `json:"image_url,omitempty"`
+	ID         string  `json:"id"`
+	Slug       string  `json:"slug"`
+	Name       string  `json:"name"`
+	NameEn     *string `json:"name_en,omitempty"`
+	Category   string  `json:"category"`
+	ImageURL   *string `json:"image_url,omitempty"`
+	Visibility string  `json:"visibility"`
 }
 
 // SavedDrink is a personal 1-per-user catalog mark. Rating is optional.
@@ -34,6 +40,11 @@ type SavedDrink struct {
 type SaveInput struct {
 	DrinkID string `json:"drink_id"`
 	Status  string `json:"status"`
+}
+
+type SaveProvisionalInput struct {
+	Name   string `json:"name"`
+	Status string `json:"status"`
 }
 
 type PatchInput struct {

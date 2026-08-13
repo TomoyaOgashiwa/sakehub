@@ -4,6 +4,7 @@
 --   seeds/official_cocktails.sql  … 公式カクテル（ローカル / 本番 共通）
 --   seeds/drinks.sql              … drinks マスタ（ローカル / 本番 共通）
 --   seeds/local_demo.sql          … デモユーザー・評価・個別レシピ（ローカル専用）
+--   seeds/local_zero_hit.sql      … お酒検索ゼロ件の再現（ローカル専用）
 --
 -- ローカル: config.toml [db.seed] / pnpm supabase:seed
 -- 本番:     pnpm supabase:seed:prod（--linked、local_demo は含まない）

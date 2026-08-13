@@ -40,3 +40,8 @@ type ListParams struct {
 	Limit    int
 	Offset   int
 }
+
+const (
+	SimilarityThreshold = 0.3
+	MaxSuggestions      = 5
+)

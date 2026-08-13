@@ -35,24 +35,30 @@ func (h *Handler) List(w http.ResponseWriter, r *http.Request) {
 	}
 	offset, _ := strconv.Atoi(q.Get("offset"))
 
+	category := q.Get("category")
+	if category == "all" {
+		category = ""
+	}
+
 	params := ListParams{
-		Category: q.Get("category"),
+		Category: category,
 		Query:    strings.TrimSpace(q.Get("q")),
 		Limit:    limit,
 		Offset:   offset,
 	}
 
-	drinks, total, err := h.svc.List(r.Context(), params)
+	drinks, total, suggestions, err := h.svc.List(r.Context(), params)
 	if err != nil {
 		response.Error(w, http.StatusInternalServerError, "internal server error")
 		return
 	}
 
 	response.JSON(w, http.StatusOK, map[string]any{
-		"data":   drinks,
-		"total":  total,
-		"limit":  limit,
-		"offset": offset,
+		"data":        drinks,
+		"total":       total,
+		"limit":       limit,
+		"offset":      offset,
+		"suggestions": suggestions,
 	})
 }
 

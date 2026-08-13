@@ -15,10 +15,19 @@ import { CategoryFilter } from './category-filter';
 import { DrinkGrid } from './drink-grid';
 import { DrinkGridSkeleton } from './drink-card-skeleton';
 import { DrinkSearch } from './drink-search';
+import { SearchZeroExit } from './search-zero-exit';
+
+interface RecentSave {
+  drinkId: string;
+  name: string;
+  status: SavedDrinkStatus;
+  href: string;
+}
 
 interface DrinkListClientProps {
   fallbackData: DrinkListResult;
-  recentSaves?: { slug: string; name: string; status: SavedDrinkStatus }[];
+  recentSaves?: RecentSave[];
+  isAuthenticated?: boolean;
 }
 
 function parseOffset(raw: string | null): number {
@@ -27,12 +36,17 @@ function parseOffset(raw: string | null): number {
   return Math.floor(n);
 }
 
-export function DrinkListClient({ fallbackData, recentSaves }: DrinkListClientProps) {
+export function DrinkListClient({
+  fallbackData,
+  recentSaves,
+  isAuthenticated = false,
+}: DrinkListClientProps) {
   const searchParams = useSearchParams();
 
   const category = searchParams.get('category') ?? '';
   const q = searchParams.get('q') ?? '';
-  const filtered = Boolean(q || (category && category !== 'all'));
+  const categoryFilterActive = category !== '' && category !== 'all';
+  const filtered = Boolean(q || categoryFilterActive);
   const offset = filtered ? parseOffset(searchParams.get('offset')) : 0;
 
   const { data, isLoading, isValidating } = useDrinks(
@@ -73,8 +87,8 @@ export function DrinkListClient({ fallbackData, recentSaves }: DrinkListClientPr
           </h2>
           <ul className="flex flex-wrap gap-x-4 gap-y-1 text-sm">
             {recentSaves.map((item) => (
-              <li key={item.slug}>
-                <Link href={`/drinks/${item.slug}`} className="hover:underline">
+              <li key={item.drinkId}>
+                <Link href={item.href} className="hover:underline">
                   {item.name}（{savedDrinkStatusLabel(item.status)}）
                 </Link>
               </li>
@@ -88,12 +102,22 @@ export function DrinkListClient({ fallbackData, recentSaves }: DrinkListClientPr
           scope="drink"
           query={q}
           total={result.total}
-          filtersActive={category !== ''}
+          filtersActive={categoryFilterActive}
           ready={missLogReady}
         />
       )}
 
-      {isLoading ? <DrinkGridSkeleton /> : <DrinkGrid drinks={result.drinks} />}
+      {isLoading ? (
+        <DrinkGridSkeleton />
+      ) : result.drinks.length === 0 && q && !categoryFilterActive ? (
+        <SearchZeroExit
+          query={q}
+          suggestions={result.suggestions ?? []}
+          isAuthenticated={isAuthenticated}
+        />
+      ) : (
+        <DrinkGrid drinks={result.drinks} />
+      )}
 
       {result.total > 0 && (
         <p className="text-muted-foreground text-center text-sm">

@@ -29,12 +29,21 @@ func (s *Service) GetBySlug(ctx context.Context, slug string) (*Drink, error) {
 	return d, nil
 }
 
-func (s *Service) List(ctx context.Context, params ListParams) ([]Drink, int, error) {
+func (s *Service) List(ctx context.Context, params ListParams) ([]Drink, int, []Drink, error) {
 	drinks, total, err := s.repo.List(ctx, params)
 	if err != nil {
-		return nil, 0, fmt.Errorf("drink.List: %w", err)
+		return nil, 0, nil, fmt.Errorf("drink.List: %w", err)
 	}
-	return drinks, total, nil
+
+	suggestions := []Drink{}
+	if params.Query != "" && params.Category == "" && total == 0 {
+		suggestions, err = s.repo.SuggestSimilar(ctx, params.Query, MaxSuggestions)
+		if err != nil {
+			return nil, 0, nil, fmt.Errorf("drink.List suggestions: %w", err)
+		}
+	}
+
+	return drinks, total, suggestions, nil
 }
 
 func (s *Service) Create(ctx context.Context, input CreateInput) (*Drink, error) {

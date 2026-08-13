@@ -26,6 +26,8 @@ export function SavedDrinkRow({ item }: SavedDrinkRowProps) {
 
   if (!drink) return null;
 
+  const isProvisional = drink.visibility === 'provisional';
+
   const handleToggle = () => {
     const next: SavedDrinkStatus = oppositeSavedDrinkStatus(item.status);
     setError(null);
@@ -41,29 +43,50 @@ export function SavedDrinkRow({ item }: SavedDrinkRowProps) {
 
   return (
     <li className="flex items-start gap-3 rounded-lg border p-3">
-      <Link
-        href={`/drinks/${drink.slug}`}
-        className="bg-muted relative size-16 shrink-0 overflow-hidden rounded-md"
-      >
-        {drink.imageUrl ? (
-          <Image src={drink.imageUrl} alt={drink.name} fill sizes="64px" className="object-cover" />
-        ) : (
+      {isProvisional ? (
+        <div className="bg-muted relative size-16 shrink-0 overflow-hidden rounded-md">
           <span className="flex size-full items-center justify-center">
             <Wine className="text-muted-foreground/40 size-7" aria-hidden="true" />
           </span>
-        )}
-      </Link>
+        </div>
+      ) : (
+        <Link
+          href={`/drinks/${drink.slug}`}
+          className="bg-muted relative size-16 shrink-0 overflow-hidden rounded-md"
+        >
+          {drink.imageUrl ? (
+            <Image
+              src={drink.imageUrl}
+              alt={drink.name}
+              fill
+              sizes="64px"
+              className="object-cover"
+            />
+          ) : (
+            <span className="flex size-full items-center justify-center">
+              <Wine className="text-muted-foreground/40 size-7" aria-hidden="true" />
+            </span>
+          )}
+        </Link>
+      )}
 
       <div className="min-w-0 flex-1 space-y-1">
         <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
-          <Link href={`/drinks/${drink.slug}`} className="font-medium hover:underline">
-            {drink.name}
-          </Link>
+          {isProvisional ? (
+            <span className="font-medium">{drink.name}</span>
+          ) : (
+            <Link href={`/drinks/${drink.slug}`} className="font-medium hover:underline">
+              {drink.name}
+            </Link>
+          )}
           <span className="text-muted-foreground text-xs">
             {savedDrinkStatusLabel(item.status)}
           </span>
+          {isProvisional && (
+            <span className="rounded-full border px-2 py-0.5 text-xs">カタログ未登録</span>
+          )}
         </div>
-        {item.rating != null && (
+        {!isProvisional && item.rating != null && (
           <StarRatingDisplay value={item.rating} size="sm" showValue={false} />
         )}
         {item.note ? (

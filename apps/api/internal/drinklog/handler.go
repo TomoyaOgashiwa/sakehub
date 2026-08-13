@@ -26,6 +26,8 @@ func (h *Handler) AuthRoutes(r chi.Router) {
 	r.Get("/", h.List)
 	r.Get("/summary", h.Summary)
 	r.Post("/", h.CreateBatch)
+	r.Get("/{id}", h.Get)
+	r.Patch("/{id}", h.Update)
 	r.Delete("/{id}", h.Delete)
 }
 
@@ -133,6 +135,47 @@ func (h *Handler) Summary(w http.ResponseWriter, r *http.Request) {
 	}
 
 	response.JSON(w, http.StatusOK, summary)
+}
+
+func (h *Handler) Get(w http.ResponseWriter, r *http.Request) {
+	userID := middleware.UserID(r.Context())
+	if userID == "" {
+		response.Error(w, http.StatusUnauthorized, "unauthorized")
+		return
+	}
+
+	id := chi.URLParam(r, "id")
+	log, err := h.svc.GetByID(r.Context(), id, userID)
+	if err != nil {
+		writeServiceError(w, err)
+		return
+	}
+
+	response.JSON(w, http.StatusOK, log)
+}
+
+func (h *Handler) Update(w http.ResponseWriter, r *http.Request) {
+	userID := middleware.UserID(r.Context())
+	if userID == "" {
+		response.Error(w, http.StatusUnauthorized, "unauthorized")
+		return
+	}
+
+	var input UpdateInput
+	if err := json.NewDecoder(r.Body).Decode(&input); err != nil {
+		response.Error(w, http.StatusBadRequest, "invalid json")
+		return
+	}
+	defer r.Body.Close()
+
+	id := chi.URLParam(r, "id")
+	log, err := h.svc.Update(r.Context(), id, userID, input)
+	if err != nil {
+		writeServiceError(w, err)
+		return
+	}
+
+	response.JSON(w, http.StatusOK, log)
 }
 
 func (h *Handler) Delete(w http.ResponseWriter, r *http.Request) {

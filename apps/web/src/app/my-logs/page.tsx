@@ -8,6 +8,11 @@ import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
 import { Heading } from '@/components/ui/heading';
 import { findServingPreset } from '@/config/serving-presets';
+import {
+  addUtcDays,
+  groupLogsByTokyoDay,
+  startOfTokyoDayUtc,
+} from '@/utils/drink-log-day';
 import { cn } from '@/utils/utils';
 import { formatVolumeDisplay, round2 } from '@/utils/volume';
 
@@ -17,27 +22,24 @@ export const metadata: Metadata = {
   title: '飲んだ記録',
 };
 
-function startOfWeek(date: Date): Date {
-  const d = new Date(date);
-  const day = d.getDay(); // 0=Sun
-  const diff = day === 0 ? -6 : 1 - day; // Monday start
-  d.setHours(0, 0, 0, 0);
-  d.setDate(d.getDate() + diff);
-  return d;
-}
-
-function addDays(date: Date, days: number): Date {
-  const d = new Date(date);
-  d.setDate(d.getDate() + days);
-  return d;
-}
-
-function formatJaDate(iso: string): string {
-  return new Date(iso).toLocaleDateString('ja-JP', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
+function startOfWeekTokyo(date: Date): Date {
+  const tokyoToday = startOfTokyoDayUtc(date);
+  // Get weekday in Tokyo for "today"
+  const weekday = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Asia/Tokyo',
+    weekday: 'short',
+  }).format(date);
+  const map: Record<string, number> = {
+    Mon: 0,
+    Tue: 1,
+    Wed: 2,
+    Thu: 3,
+    Fri: 4,
+    Sat: 5,
+    Sun: 6,
+  };
+  const offset = map[weekday] ?? 0;
+  return addUtcDays(tokyoToday, -offset);
 }
 
 export default async function MyLogsPage() {
@@ -46,20 +48,27 @@ export default async function MyLogsPage() {
     redirect('/login');
   }
 
-  const weekStart = startOfWeek(new Date());
-  const weekEnd = addDays(weekStart, 7);
+  const weekStart = startOfWeekTokyo(new Date());
+  const weekEnd = addUtcDays(weekStart, 7);
   const from = weekStart.toISOString();
   const to = weekEnd.toISOString();
 
+  const listFrom = addUtcDays(startOfTokyoDayUtc(new Date()), -29).toISOString();
+  const listTo = addUtcDays(startOfTokyoDayUtc(new Date()), 1).toISOString();
+
   const [summary, logs] = await Promise.all([
     fetchDrinkLogSummary(accessToken, from, to),
-    fetchMyDrinkLogs(accessToken, { limit: 50 }),
+    fetchMyDrinkLogs(accessToken, { limit: 100, from: listFrom, to: listTo }),
   ]);
 
+  const daySections = groupLogsByTokyoDay(logs);
+
   const weekLabel = `${weekStart.toLocaleDateString('ja-JP', {
+    timeZone: 'Asia/Tokyo',
     month: 'short',
     day: 'numeric',
-  })} – ${addDays(weekEnd, -1).toLocaleDateString('ja-JP', {
+  })} – ${addUtcDays(weekEnd, -1).toLocaleDateString('ja-JP', {
+    timeZone: 'Asia/Tokyo',
     month: 'short',
     day: 'numeric',
   })}`;
@@ -72,7 +81,7 @@ export default async function MyLogsPage() {
             飲んだ記録
           </Heading>
           <p className="text-muted-foreground text-sm">
-            飲んだ量を残して、週ごとの目安摂取量を確認できます。
+            飲んだ量を残して、日ごと・週ごとの目安摂取量を確認できます。
           </p>
         </div>
         <Link href="/my-logs/new" className={cn(buttonVariants())}>
@@ -113,12 +122,12 @@ export default async function MyLogsPage() {
         )}
       </section>
 
-      <section aria-labelledby="recent-logs-heading" className="space-y-4">
+      <section aria-labelledby="recent-logs-heading" className="space-y-6">
         <Heading level="h2" id="recent-logs-heading">
-          直近の記録
+          直近30日の記録
         </Heading>
 
-        {logs.length === 0 ? (
+        {daySections.length === 0 ? (
           <div className="rounded-lg border border-dashed p-8 text-center">
             <p className="text-muted-foreground mb-3 text-sm">まだ記録がありません。</p>
             <Link href="/my-logs/new" className="text-foreground text-sm font-medium underline">
@@ -126,75 +135,110 @@ export default async function MyLogsPage() {
             </Link>
           </div>
         ) : (
-          <ul className="space-y-3">
-            {logs.map((log) => {
-              const presetLabel = log.servingKey
-                ? findServingPreset(log.servingKey)?.label
-                : undefined;
-              const volumeLabel = formatVolumeDisplay(log.inputUnit, log.inputValue, log.volumeMl);
-              const title = log.drink?.name ?? log.customDrinkName ?? '不明な銘柄';
+          daySections.map((section) => (
+            <section
+              key={section.dayKey}
+              aria-labelledby={`day-${section.dayKey}`}
+              className="space-y-3"
+            >
+              <div className="flex flex-wrap items-baseline justify-between gap-2 border-b pb-2">
+                <Heading level="h3" id={`day-${section.dayKey}`} className="text-base">
+                  {section.label}
+                </Heading>
+                <p className="text-muted-foreground text-sm tabular-nums">
+                  {section.drinkCount}杯
+                  <span className="mx-1.5">·</span>
+                  {section.pureAlcoholGrams}g
+                  {section.skippedMissingAbv > 0 && (
+                    <span className="ml-2 text-xs">
+                      （度数不明 {section.skippedMissingAbv}杯を未算入）
+                    </span>
+                  )}
+                </p>
+              </div>
 
-              return (
-                <li
-                  key={log.id}
-                  className="flex items-start justify-between gap-3 rounded-lg border p-3"
-                >
-                  <div className="min-w-0 space-y-1">
-                    {log.drink ? (
-                      <Link
-                        href={`/drinks/${log.drink.slug}`}
-                        className="font-medium hover:underline"
-                      >
-                        {title}
-                      </Link>
-                    ) : (
-                      <p className="font-medium">
-                        {title}
-                        {log.customDrinkName && (
-                          <span className="ml-2">
-                            <Badge variant="secondary">未登録</Badge>
-                          </span>
+              <ul className="space-y-3">
+                {section.logs.map((log) => {
+                  const presetLabel = log.servingKey
+                    ? findServingPreset(log.servingKey)?.label
+                    : undefined;
+                  const volumeLabel = formatVolumeDisplay(
+                    log.inputUnit,
+                    log.inputValue,
+                    log.volumeMl,
+                  );
+                  const title = log.drink?.name ?? log.customDrinkName ?? '不明な銘柄';
+
+                  return (
+                    <li
+                      key={log.id}
+                      className="flex items-start justify-between gap-3 rounded-lg border p-3"
+                    >
+                      <div className="min-w-0 space-y-1">
+                        {log.drink ? (
+                          <Link
+                            href={`/drinks/${log.drink.slug}`}
+                            className="font-medium hover:underline"
+                          >
+                            {title}
+                          </Link>
+                        ) : (
+                          <p className="font-medium">
+                            {title}
+                            {log.customDrinkName && (
+                              <span className="ml-2">
+                                <Badge variant="secondary">未登録</Badge>
+                              </span>
+                            )}
+                          </p>
                         )}
-                      </p>
-                    )}
-                    <p className="text-muted-foreground text-sm">
-                      {presetLabel ? `${presetLabel} · ${volumeLabel}` : volumeLabel}
-                      {log.quantity > 1 && (
-                        <span className="tabular-nums"> × {log.quantity}杯</span>
-                      )}
-                      {log.volumePrecision === 'estimated' && (
-                        <span className="ml-2">
-                          <Badge variant="secondary">目安</Badge>
-                        </span>
-                      )}
-                    </p>
-                    {(log.placeName || log.placeUrl) && (
-                      <p className="text-muted-foreground text-xs break-all">
-                        {log.placeName && <span>{log.placeName}</span>}
-                        {log.placeName && log.placeUrl && <span> · </span>}
-                        {log.placeUrl &&
-                          (log.placeUrl.startsWith('http://') ||
-                          log.placeUrl.startsWith('https://') ? (
-                            <a
-                              href={log.placeUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="underline underline-offset-2"
-                            >
-                              リンク
-                            </a>
-                          ) : (
-                            <span>{log.placeUrl}</span>
-                          ))}
-                      </p>
-                    )}
-                    <p className="text-muted-foreground text-xs">{formatJaDate(log.drankAt)}</p>
-                  </div>
-                  <DeleteLogButton logId={log.id} />
-                </li>
-              );
-            })}
-          </ul>
+                        <p className="text-muted-foreground text-sm">
+                          {presetLabel ? `${presetLabel} · ${volumeLabel}` : volumeLabel}
+                          {log.quantity > 1 && (
+                            <span className="tabular-nums"> × {log.quantity}杯</span>
+                          )}
+                          {log.volumePrecision === 'estimated' && (
+                            <span className="ml-2">
+                              <Badge variant="secondary">目安</Badge>
+                            </span>
+                          )}
+                        </p>
+                        {(log.placeName || log.placeUrl) && (
+                          <p className="text-muted-foreground text-xs break-all">
+                            {log.placeName && <span>{log.placeName}</span>}
+                            {log.placeName && log.placeUrl && <span> · </span>}
+                            {log.placeUrl &&
+                              (log.placeUrl.startsWith('http://') ||
+                              log.placeUrl.startsWith('https://') ? (
+                                <a
+                                  href={log.placeUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="underline underline-offset-2"
+                                >
+                                  リンク
+                                </a>
+                              ) : (
+                                <span>{log.placeUrl}</span>
+                              ))}
+                          </p>
+                        )}
+                        <p className="text-muted-foreground text-xs">
+                          <Link
+                            href={`/my-logs/${log.id}/edit`}
+                            className="underline underline-offset-2"
+                          >
+                            編集
+                          </Link>
+                        </p>
+                      </div>
+                      <DeleteLogButton logId={log.id} />
+                    </li>
+                  );
+                })}
+              </ul>
+            </section>
+          ))
         )}
       </section>
     </div>

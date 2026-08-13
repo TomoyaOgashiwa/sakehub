@@ -7,6 +7,7 @@ interface ApiDrinkListResponse {
   total: number;
   limit: number;
   offset: number;
+  suggestions?: unknown[];
 }
 
 export async function GET(request: NextRequest) {

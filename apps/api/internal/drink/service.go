@@ -3,14 +3,22 @@ package drink
 import (
 	"context"
 	"fmt"
+	"strings"
+	"unicode/utf8"
+
+	"go.uber.org/zap"
 )
 
 type Service struct {
-	repo Repository
+	repo   Repository
+	logger *zap.Logger
 }
 
-func NewService(repo Repository) *Service {
-	return &Service{repo: repo}
+func NewService(repo Repository, logger *zap.Logger) *Service {
+	if logger == nil {
+		logger = zap.NewNop()
+	}
+	return &Service{repo: repo, logger: logger}
 }
 
 func (s *Service) GetByID(ctx context.Context, id string) (*Drink, error) {
@@ -29,12 +37,26 @@ func (s *Service) GetBySlug(ctx context.Context, slug string) (*Drink, error) {
 	return d, nil
 }
 
-func (s *Service) List(ctx context.Context, params ListParams) ([]Drink, int, error) {
+func (s *Service) List(ctx context.Context, params ListParams) ([]Drink, int, []Drink, error) {
 	drinks, total, err := s.repo.List(ctx, params)
 	if err != nil {
-		return nil, 0, fmt.Errorf("drink.List: %w", err)
+		return nil, 0, nil, fmt.Errorf("drink.List: %w", err)
 	}
-	return drinks, total, nil
+
+	suggestions := []Drink{}
+	q := strings.TrimSpace(params.Query)
+	if q != "" &&
+		params.Category == "" &&
+		total == 0 &&
+		utf8.RuneCountInString(q) >= MinSuggestQueryLen {
+		suggestions, err = s.repo.SuggestSimilar(ctx, q, MaxSuggestions)
+		if err != nil {
+			s.logger.Warn("drink suggestions failed", zap.String("q", q), zap.Error(err))
+			suggestions = []Drink{}
+		}
+	}
+
+	return drinks, total, suggestions, nil
 }
 
 func (s *Service) Create(ctx context.Context, input CreateInput) (*Drink, error) {

@@ -97,7 +97,8 @@ SELECT
   END AS comment
 FROM auth.users u
 CROSS JOIN drinks d
-WHERE u.email LIKE 'rater%@example.com';
+WHERE u.email LIKE 'rater%@example.com'
+  AND d.visibility = 'published';
 
 -- =============================================================================
 -- Seed: ユーザー作成カクテルレシピ + レシピ評価

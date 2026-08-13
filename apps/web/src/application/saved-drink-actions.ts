@@ -1,6 +1,7 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 import type { SavedDrink, SavedDrinkStatus } from '@sakehub/types';
 
 import { isSafeSlug, isSafeUUID } from '@/application/rating-action-helpers';
@@ -11,6 +12,8 @@ import { authServerFetch } from '@/application/server-api';
 export type SavedDrinkActionState = { ok: true; data?: SavedDrink } | { ok: false; error: string };
 
 const MAX_NOTE_LEN = 280;
+// Keep in sync with apps/api saveddrink.MaxProvisionalRaw.
+const MAX_PROVISIONAL_NAME_LEN = 200;
 
 function revalidateSavedDrinkPaths(slug: string) {
   if (isSafeSlug(slug)) {
@@ -52,6 +55,40 @@ export async function saveDrink(
 
   revalidateSavedDrinkPaths(drinkSlug);
   return { ok: true, data: toSavedDrink(result.data) };
+}
+
+export async function saveProvisionalDrink(
+  name: string,
+  status: SavedDrinkStatus,
+): Promise<SavedDrinkActionState> {
+  const trimmed = name.trim();
+  if (!trimmed) {
+    return { ok: false, error: '名前を入力してください。' };
+  }
+  if ([...trimmed].length > MAX_PROVISIONAL_NAME_LEN) {
+    return { ok: false, error: `名前は${MAX_PROVISIONAL_NAME_LEN}文字以内で入力してください。` };
+  }
+  if (!isSavedDrinkStatus(status)) {
+    return { ok: false, error: '意図を選んでください。' };
+  }
+
+  const auth = await requireAccessToken();
+  if (!auth.ok) {
+    return { ok: false, error: 'リストに残すにはログインが必要です。' };
+  }
+
+  const result = await authServerFetch<ApiSavedDrink>('/api/auth/saved-drinks/provisional', {
+    method: 'POST',
+    accessToken: auth.accessToken,
+    body: { name: trimmed, status },
+  });
+  if (!result.ok) {
+    return { ok: false, error: result.error || 'リストへの追加に失敗しました。' };
+  }
+
+  revalidatePath('/');
+  revalidatePath('/list');
+  redirect('/list');
 }
 
 export async function updateSavedDrink(

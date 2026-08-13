@@ -16,6 +16,7 @@ sql_paths = [
   "./seeds/official_cocktails.sql",
   "./seeds/drinks.sql",
   "./seeds/local_demo.sql",
+  "./seeds/local_zero_hit.sql",
 ]
 
 [studio]

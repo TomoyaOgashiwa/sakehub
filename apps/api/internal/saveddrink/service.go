@@ -4,7 +4,10 @@ import (
 	"context"
 	"fmt"
 	"regexp"
+	"strings"
 	"unicode/utf8"
+
+	"github.com/sakehub/api/pkg/normalize"
 )
 
 var uuidRe = regexp.MustCompile(`(?i)^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$`)
@@ -45,6 +48,31 @@ func (s *Service) Save(ctx context.Context, userID string, input SaveInput) (*Sa
 	row, err := s.repo.Upsert(ctx, userID, input.DrinkID, input.Status)
 	if err != nil {
 		return nil, fmt.Errorf("saveddrink.Save: %w", err)
+	}
+	return row, nil
+}
+
+func (s *Service) SaveProvisional(ctx context.Context, userID string, input SaveProvisionalInput) (*SavedDrink, error) {
+	name := strings.TrimSpace(input.Name)
+	if name == "" {
+		return nil, fmt.Errorf("%w: name is required", ErrValidation)
+	}
+	if utf8.RuneCountInString(name) > MaxProvisionalRaw {
+		return nil, fmt.Errorf("%w: name is too long", ErrValidation)
+	}
+	if !validStatus(input.Status) {
+		return nil, fmt.Errorf("%w: status must be drank or want", ErrValidation)
+	}
+
+	normalized := normalize.Query(name)
+	n := utf8.RuneCountInString(normalized)
+	if n < MinNormalizedLen || n > MaxNormalizedLen {
+		return nil, fmt.Errorf("%w: name is invalid", ErrValidation)
+	}
+
+	row, err := s.repo.UpsertProvisional(ctx, userID, name, normalized, input.Status)
+	if err != nil {
+		return nil, fmt.Errorf("saveddrink.SaveProvisional: %w", err)
 	}
 	return row, nil
 }

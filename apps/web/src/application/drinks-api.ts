@@ -26,6 +26,7 @@ interface ApiDrinkListResponse {
   total: number;
   limit: number;
   offset: number;
+  suggestions?: ApiDrink[];
 }
 
 function toDrink(api: ApiDrink): Drink {
@@ -54,6 +55,7 @@ export interface DrinkListResult {
   total: number;
   limit: number;
   offset: number;
+  suggestions: Drink[];
 }
 
 export interface FetchDrinksParams {
@@ -85,6 +87,7 @@ export async function fetchDrinks(params: FetchDrinksParams = {}): Promise<Drink
     total: res.total,
     limit: res.limit,
     offset: res.offset,
+    suggestions: (res.suggestions ?? []).map(toDrink),
   };
 }
 

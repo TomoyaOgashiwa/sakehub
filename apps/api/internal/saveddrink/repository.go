@@ -4,11 +4,13 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+	"fmt"
 )
 
 type Repository interface {
 	DrinkExists(ctx context.Context, drinkID string) (bool, error)
 	Upsert(ctx context.Context, userID, drinkID, status string) (*SavedDrink, error)
+	UpsertProvisional(ctx context.Context, userID, name, nameNormalized, status string) (*SavedDrink, error)
 	Update(ctx context.Context, drinkID, userID string, status, note *string) (*SavedDrink, error)
 	FindByDrinkAndUser(ctx context.Context, drinkID, userID string) (*SavedDrink, error)
 	ListByUser(ctx context.Context, userID string, params ListParams) ([]SavedDrink, error)
@@ -24,7 +26,7 @@ func NewRepository(db *sql.DB) Repository {
 }
 
 func (r *repository) DrinkExists(ctx context.Context, drinkID string) (bool, error) {
-	const q = `SELECT EXISTS(SELECT 1 FROM drinks WHERE id = $1)`
+	const q = `SELECT EXISTS(SELECT 1 FROM drinks WHERE id = $1 AND visibility = 'published')`
 	var exists bool
 	if err := r.db.QueryRowContext(ctx, q, drinkID).Scan(&exists); err != nil {
 		return false, err
@@ -44,6 +46,76 @@ func (r *repository) Upsert(ctx context.Context, userID, drinkID, status string)
 	if err := r.db.QueryRowContext(ctx, q, userID, drinkID, status).Scan(
 		&row.ID, &row.UserID, &row.DrinkID, &row.Status, &row.Note, &row.CreatedAt,
 	); err != nil {
+		return nil, err
+	}
+	return &row, nil
+}
+
+func (r *repository) UpsertProvisional(ctx context.Context, userID, name, nameNormalized, status string) (*SavedDrink, error) {
+	tx, err := r.db.BeginTx(ctx, nil)
+	if err != nil {
+		return nil, err
+	}
+	defer tx.Rollback()
+
+	// Owner-scoped lock so COUNT + INSERT cannot race past MaxProvisionalPerUser.
+	if _, err := tx.ExecContext(ctx, `SELECT pg_advisory_xact_lock(hashtext($1))`, userID); err != nil {
+		return nil, err
+	}
+
+	var exists bool
+	if err := tx.QueryRowContext(ctx, `
+		SELECT EXISTS(
+			SELECT 1 FROM drinks
+			WHERE visibility = 'provisional' AND submitted_by = $1 AND name_normalized = $2
+		)`, userID, nameNormalized).Scan(&exists); err != nil {
+		return nil, err
+	}
+	if !exists {
+		var n int
+		if err := tx.QueryRowContext(ctx, `
+			SELECT COUNT(*) FROM drinks
+			WHERE visibility = 'provisional' AND submitted_by = $1`, userID).Scan(&n); err != nil {
+			return nil, err
+		}
+		if n >= MaxProvisionalPerUser {
+			return nil, fmt.Errorf("%w: provisional limit reached", ErrValidation)
+		}
+	}
+
+	const insertDrink = `
+		INSERT INTO drinks (
+			slug, name, name_normalized, category, description,
+			visibility, submitted_by, image_source
+		)
+		VALUES (
+			'p-' || replace(gen_random_uuid()::text, '-', ''),
+			$1, $2, 'other', '', 'provisional', $3, 'none'
+		)
+		ON CONFLICT (submitted_by, name_normalized) WHERE visibility = 'provisional'
+		DO UPDATE SET name = EXCLUDED.name
+		RETURNING id`
+
+	var drinkID string
+	if err := tx.QueryRowContext(ctx, insertDrink, name, nameNormalized, userID).Scan(&drinkID); err != nil {
+		return nil, err
+	}
+
+	const upsertSaved = `
+		INSERT INTO saved_drinks (user_id, drink_id, status)
+		VALUES ($1, $2, $3)
+		ON CONFLICT (user_id, drink_id)
+		DO UPDATE SET status = EXCLUDED.status
+		RETURNING id, user_id, drink_id, status, note, created_at`
+
+	var row SavedDrink
+	if err := tx.QueryRowContext(ctx, upsertSaved, userID, drinkID, status).Scan(
+		&row.ID, &row.UserID, &row.DrinkID, &row.Status, &row.Note, &row.CreatedAt,
+	); err != nil {
+		return nil, err
+	}
+
+	if err := tx.Commit(); err != nil {
 		return nil, err
 	}
 	return &row, nil
@@ -94,7 +166,7 @@ func (r *repository) ListByUser(ctx context.Context, userID string, params ListP
 	const q = `
 		SELECT
 			s.id, s.user_id, s.drink_id, s.status, s.note, s.created_at,
-			d.id, d.slug, d.name, d.name_en, d.category, d.image_url,
+			d.id, d.slug, d.name, d.name_en, d.category, d.image_url, d.visibility,
 			r.rating, r.comment
 		FROM saved_drinks s
 		INNER JOIN drinks d ON d.id = s.drink_id
@@ -124,9 +196,29 @@ func (r *repository) ListByUser(ctx context.Context, userID string, params ListP
 }
 
 func (r *repository) DeleteByDrinkAndUser(ctx context.Context, drinkID, userID string) error {
-	const q = `DELETE FROM saved_drinks WHERE drink_id = $1 AND user_id = $2`
-	_, err := r.db.ExecContext(ctx, q, drinkID, userID)
-	return err
+	tx, err := r.db.BeginTx(ctx, nil)
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback()
+
+	const delSaved = `DELETE FROM saved_drinks WHERE drink_id = $1 AND user_id = $2`
+	if _, err := tx.ExecContext(ctx, delSaved, drinkID, userID); err != nil {
+		return err
+	}
+
+	const delOrphan = `
+		DELETE FROM drinks
+		WHERE id = $1
+		  AND visibility = 'provisional'
+		  AND submitted_by = $2
+		  AND NOT EXISTS (SELECT 1 FROM saved_drinks s WHERE s.drink_id = drinks.id)
+		  AND NOT EXISTS (SELECT 1 FROM drink_logs l WHERE l.drink_id = drinks.id)`
+	if _, err := tx.ExecContext(ctx, delOrphan, drinkID, userID); err != nil {
+		return err
+	}
+
+	return tx.Commit()
 }
 
 func scanListed(rows *sql.Rows) (SavedDrink, error) {
@@ -140,7 +232,7 @@ func scanListed(rows *sql.Rows) (SavedDrink, error) {
 	)
 	err := rows.Scan(
 		&item.ID, &item.UserID, &item.DrinkID, &item.Status, &item.Note, &item.CreatedAt,
-		&drink.ID, &drink.Slug, &drink.Name, &nameEn, &drink.Category, &imageURL,
+		&drink.ID, &drink.Slug, &drink.Name, &nameEn, &drink.Category, &imageURL, &drink.Visibility,
 		&rating, &comment,
 	)
 	if err != nil {

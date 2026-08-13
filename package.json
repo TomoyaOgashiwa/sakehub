@@ -9,7 +9,7 @@
     "type-check": "turbo type-check",
     "format": "prettier --write .",
     "check:normalize-sync": "pnpm --filter @sakehub/drink-seed test",
-    "supabase:seed": "supabase db query --local --file supabase/seeds/official_cocktails.sql && supabase db query --local --file supabase/seeds/drinks.sql && supabase db query --local --file supabase/seeds/local_demo.sql",
+    "supabase:seed": "supabase db query --local --file supabase/seeds/official_cocktails.sql && supabase db query --local --file supabase/seeds/drinks.sql && supabase db query --local --file supabase/seeds/local_demo.sql && supabase db query --local --file supabase/seeds/local_zero_hit.sql",
     "supabase:seed:shared": "supabase db query --local --file supabase/seeds/official_cocktails.sql && supabase db query --local --file supabase/seeds/drinks.sql",
     "supabase:seed:prod": "supabase db query --linked --file supabase/seeds/official_cocktails.sql && supabase db query --linked --file supabase/seeds/drinks.sql",
     "seed:cocktails:validate": "pnpm --filter @sakehub/cocktail-seed validate",

@@ -23,6 +23,7 @@ type Repository interface {
 	FindByID(ctx context.Context, id string) (*Drink, error)
 	FindBySlug(ctx context.Context, slug string) (*Drink, error)
 	List(ctx context.Context, params ListParams) ([]Drink, int, error)
+	SuggestSimilar(ctx context.Context, query string, limit int) ([]Drink, error)
 	Insert(ctx context.Context, d *Drink) error
 }
 
@@ -48,7 +49,7 @@ func (r *repository) scanDrink(row interface{ Scan(dest ...any) error }) (*Drink
 }
 
 func (r *repository) FindByID(ctx context.Context, id string) (*Drink, error) {
-	q := fmt.Sprintf(`SELECT %s FROM drinks WHERE id = $1`, allColumns)
+	q := fmt.Sprintf(`SELECT %s FROM drinks WHERE id = $1 AND visibility = 'published'`, allColumns)
 
 	d, err := r.scanDrink(r.db.QueryRowContext(ctx, q, id))
 	if errors.Is(err, sql.ErrNoRows) {
@@ -61,7 +62,7 @@ func (r *repository) FindByID(ctx context.Context, id string) (*Drink, error) {
 }
 
 func (r *repository) FindBySlug(ctx context.Context, slug string) (*Drink, error) {
-	q := fmt.Sprintf(`SELECT %s FROM drinks WHERE slug = $1`, allColumns)
+	q := fmt.Sprintf(`SELECT %s FROM drinks WHERE slug = $1 AND visibility = 'published'`, allColumns)
 
 	d, err := r.scanDrink(r.db.QueryRowContext(ctx, q, slug))
 	if errors.Is(err, sql.ErrNoRows) {
@@ -83,6 +84,8 @@ func (r *repository) List(ctx context.Context, params ListParams) ([]Drink, int,
 		args       []any
 		argIdx     int
 	)
+
+	conditions = append(conditions, "visibility = 'published'")
 
 	if params.Category != "" {
 		argIdx++
@@ -165,6 +168,93 @@ OR EXISTS (SELECT 1 FROM unnest(aliases) AS alias WHERE strpos(lower(alias), low
 	}
 
 	return drinks, total, nil
+}
+
+// suggestionColumns is a thin projection for zero-hit similar drinks.
+// Ratings aggregates stay off this path so trgm candidates are not scanned with
+// correlated AVG/COUNT before LIMIT.
+const suggestionColumns = `id, slug, name, name_en, category, subcategory, description,
+	image_url, image_source, abv, origin_country, manufacturer,
+	created_at, updated_at`
+
+func (r *repository) scanSuggestion(row interface{ Scan(dest ...any) error }) (*Drink, error) {
+	var d Drink
+	err := row.Scan(
+		&d.ID, &d.Slug, &d.Name, &d.NameEn, &d.Category, &d.Subcategory,
+		&d.Description, &d.ImageURL, &d.ImageSource, &d.ABV, &d.OriginCountry, &d.Manufacturer,
+		&d.CreatedAt, &d.UpdatedAt,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &d, nil
+}
+
+func (r *repository) SuggestSimilar(ctx context.Context, query string, limit int) ([]Drink, error) {
+	if limit <= 0 {
+		limit = MaxSuggestions
+	}
+
+	tx, err := r.db.BeginTx(ctx, nil)
+	if err != nil {
+		return nil, err
+	}
+	defer tx.Rollback()
+
+	// % uses gin_trgm_ops: idx_drinks_name_trgm and idx_drinks_aliases_trgm
+	// (array_to_string_immutable(aliases, ' ')). similarity() > n does not.
+	// Threshold is a package constant, not request input.
+	setLocal := fmt.Sprintf("SET LOCAL pg_trgm.similarity_threshold = %g", SimilarityThreshold)
+	if _, err := tx.ExecContext(ctx, setLocal); err != nil {
+		return nil, err
+	}
+
+	q := fmt.Sprintf(`
+		SELECT %s
+		FROM (
+			SELECT %s,
+				GREATEST(
+					similarity(name, $1),
+					similarity(array_to_string_immutable(aliases, ' '), $1)
+				) AS sim
+			FROM drinks
+			WHERE visibility = 'published'
+			  AND (
+				name %% $1
+				OR array_to_string_immutable(aliases, ' ') %% $1
+			  )
+		) ranked
+		ORDER BY sim DESC
+		LIMIT $2`, suggestionColumns, suggestionColumns)
+
+	rows, err := tx.QueryContext(ctx, q, query, limit)
+	if err != nil {
+		return nil, err
+	}
+
+	var drinks []Drink
+	for rows.Next() {
+		d, err := r.scanSuggestion(rows)
+		if err != nil {
+			rows.Close()
+			return nil, err
+		}
+		drinks = append(drinks, *d)
+	}
+	scanErr := rows.Err()
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if scanErr != nil {
+		return nil, scanErr
+	}
+	if drinks == nil {
+		drinks = []Drink{}
+	}
+	if err := tx.Commit(); err != nil {
+		return nil, err
+	}
+	return drinks, nil
 }
 
 func (r *repository) Insert(ctx context.Context, d *Drink) error {

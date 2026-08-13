@@ -19,12 +19,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'SakeHub - Discover & Share Your Favorite Spirits',
+    default: 'SakeHub - 銘柄を特定する',
     template: '%s | SakeHub',
   },
-  description:
-    'Explore, review, and share your favorite spirits. From whisky to sake, beer to cocktails — find your next drink on SakeHub.',
-  keywords: ['sake', 'whisky', 'beer', 'wine', 'cocktail', 'spirits', 'review', 'rating'],
+  description: 'ラベルや名前の手がかりから、商品単位で銘柄を探す。',
+  keywords: ['sake', 'whisky', 'beer', 'wine', 'cocktail', 'spirits', 'identify', 'catalog'],
   openGraph: {
     type: 'website',
     locale: 'ja_JP',

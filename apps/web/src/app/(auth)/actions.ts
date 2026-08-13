@@ -3,6 +3,7 @@
 import { redirect } from 'next/navigation';
 
 import { createClient } from '@/lib/supabase/server';
+import { safeNextPath } from '@/utils/safe-next-path';
 
 export interface AuthState {
   ok: boolean;
@@ -24,7 +25,7 @@ export async function signIn(_prevState: AuthState, formData: FormData): Promise
     return { ok: false, error: error.message };
   }
 
-  redirect('/');
+  redirect(safeNextPath(formData.get('next') as string | null));
 }
 
 export async function signUp(_prevState: AuthState, formData: FormData): Promise<AuthState> {
@@ -51,7 +52,7 @@ export async function signUp(_prevState: AuthState, formData: FormData): Promise
     return { ok: false, error: error.message };
   }
 
-  redirect('/');
+  redirect(safeNextPath(formData.get('next') as string | null));
 }
 
 export async function signOut(): Promise<void> {

@@ -11,6 +11,7 @@ import { StarRatingDisplay } from '@/components/ui/star-rating';
 import { JsonLd } from '@/components/json-ld';
 import { fetchDrinkBySlugServer } from '@/application/drinks-api.server';
 import { getOptionalAccessToken } from '@/application/require-access-token';
+import { fetchMySavedDrink } from '@/application/saved-drinks-api.server';
 import { fetchMyReview, fetchReviewsByDrinkId } from '@/application/reviews-api.server';
 import { getCatalogImageSourceLabel } from '@/utils/catalog-image-source-label';
 import { DrinkReviewWidget } from './drink-review-widget';
@@ -53,9 +54,10 @@ export default async function DrinkDetailPage({ params }: PageProps) {
 
   const { user, accessToken } = await getOptionalAccessToken();
 
-  const [reviews, myReview] = await Promise.all([
+  const [reviews, myReview, mySaved] = await Promise.all([
     fetchReviewsByDrinkId(drink.id),
     user && accessToken ? fetchMyReview(drink.id, accessToken) : Promise.resolve(null),
+    user && accessToken ? fetchMySavedDrink(drink.id, accessToken) : Promise.resolve(null),
   ]);
 
   const displayName = drink.nameEn ? `${drink.name} (${drink.nameEn})` : drink.name;
@@ -126,7 +128,34 @@ export default async function DrinkDetailPage({ params }: PageProps) {
 
               <Separator />
 
-              {/* Reviews section */}
+              <section aria-labelledby="personal-list-heading" className="space-y-4">
+                <Heading level="h2" id="personal-list-heading" className="sr-only">
+                  リスト
+                </Heading>
+                {user ? (
+                  <div className="bg-muted/40 rounded-xl border p-4">
+                    <DrinkReviewWidget
+                      key={`${mySaved?.id ?? 'unsaved'}-${myReview?.updatedAt ?? 'none'}`}
+                      drinkId={drink.id}
+                      drinkSlug={slug}
+                      initialSaved={mySaved != null}
+                      initialReview={myReview}
+                    />
+                  </div>
+                ) : (
+                  <div className="bg-muted/40 rounded-xl border p-4">
+                    <Link
+                      href={`/login?next=${encodeURIComponent(`/drinks/${slug}`)}`}
+                      className="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-9 items-center rounded-md px-4 text-sm font-medium"
+                    >
+                      ログインしてリストに残す
+                    </Link>
+                  </div>
+                )}
+              </section>
+
+              <Separator />
+
               <section aria-labelledby="reviews-heading" className="space-y-6">
                 <div className="flex flex-wrap items-center gap-4">
                   <Heading level="h2" id="reviews-heading">
@@ -138,26 +167,6 @@ export default async function DrinkDetailPage({ params }: PageProps) {
                     size="md"
                   />
                 </div>
-
-                {user ? (
-                  <div className="bg-muted/40 rounded-xl border p-4">
-                    <DrinkReviewWidget
-                      key={myReview?.updatedAt ?? 'none'}
-                      drinkId={drink.id}
-                      drinkSlug={slug}
-                      initialReview={myReview}
-                    />
-                  </div>
-                ) : (
-                  <div className="bg-muted/40 rounded-xl border p-4">
-                    <p className="text-muted-foreground text-sm">
-                      <Link href="/login" className="text-foreground font-medium underline">
-                        ログイン
-                      </Link>
-                      すると星評価を付けられます
-                    </p>
-                  </div>
-                )}
 
                 {reviews.length > 0 && (
                   <div className="space-y-3">
@@ -180,20 +189,6 @@ export default async function DrinkDetailPage({ params }: PageProps) {
                     </div>
                   </div>
                 )}
-              </section>
-
-              <Separator />
-
-              {/* Flavor profile placeholder */}
-              <section aria-labelledby="flavor-heading" className="space-y-4">
-                <Heading level="h2" id="flavor-heading">
-                  フレーバープロファイル
-                </Heading>
-                <div className="rounded-lg border border-dashed p-8 text-center">
-                  <p className="text-muted-foreground text-sm">
-                    フレーバー評価機能は近日公開予定です
-                  </p>
-                </div>
               </section>
             </div>
 

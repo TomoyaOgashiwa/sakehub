@@ -35,3 +35,6 @@ export const MAIN_FILTER_CATEGORIES: FilterCategory[] = DRINK_CATEGORIES.map((va
   value,
   label: CATEGORY_LABELS[value],
 }));
+
+/** Home shelf and filtered-result page size. */
+export const DRINK_LIST_PAGE_SIZE = 20;

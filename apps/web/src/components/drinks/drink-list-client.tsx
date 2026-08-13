@@ -1,50 +1,84 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
 import type { DrinkListResult } from '@/application/drinks-api';
 import { useDrinks } from '@/application/use-drinks';
 import { SearchMissLogger } from '@/components/catalog/search-miss-logger';
+import { DRINK_LIST_PAGE_SIZE } from '@/config/drinks';
 
 import { CategoryFilter } from './category-filter';
-import { DrinkSearch } from './drink-search';
 import { DrinkGrid } from './drink-grid';
 import { DrinkGridSkeleton } from './drink-card-skeleton';
+import { DrinkSearch } from './drink-search';
 
 interface DrinkListClientProps {
   fallbackData: DrinkListResult;
+  recentSaves?: { slug: string; name: string }[];
 }
 
-export function DrinkListClient({ fallbackData }: DrinkListClientProps) {
+function parseOffset(raw: string | null): number {
+  const n = Number(raw);
+  if (!Number.isFinite(n) || n < 0) return 0;
+  return Math.floor(n);
+}
+
+export function DrinkListClient({ fallbackData, recentSaves }: DrinkListClientProps) {
   const searchParams = useSearchParams();
 
   const category = searchParams.get('category') ?? '';
   const q = searchParams.get('q') ?? '';
+  const filtered = Boolean(q || (category && category !== 'all'));
+  const offset = filtered ? parseOffset(searchParams.get('offset')) : 0;
 
-  const { data, isLoading, isValidating } = useDrinks({ category, q, limit: 20 }, fallbackData);
+  const { data, isLoading, isValidating } = useDrinks(
+    { category, q, limit: DRINK_LIST_PAGE_SIZE, offset },
+    fallbackData,
+  );
   const result = data ?? fallbackData;
-  // keepPreviousData 中は旧クエリの total=0 が残り得るので、現キーの取得が
-  // 終わるまでミスログしない。
   const missLogReady = !isLoading && !isValidating;
+
+  const nextOffset = offset + result.drinks.length;
+  const prevOffset = Math.max(0, offset - DRINK_LIST_PAGE_SIZE);
+  const hasPrev = filtered && offset > 0;
+  const hasNext = filtered && nextOffset < result.total;
+
+  function hrefFor(next: number): string {
+    const params = new URLSearchParams(searchParams.toString());
+    if (next > 0) {
+      params.set('offset', String(next));
+    } else {
+      params.delete('offset');
+    }
+    const qs = params.toString();
+    return qs ? `/?${qs}` : '/';
+  }
 
   return (
     <div className="space-y-6">
-      <div className="bg-muted/50 flex flex-col gap-2 rounded-lg px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm">
-          カクテルのレシピを探すなら{' '}
-          <Link href="/cocktails" className="font-medium underline-offset-4 hover:underline">
-            カクテル一覧
-          </Link>
-        </p>
+      <div className="w-full sm:max-w-md">
+        <DrinkSearch />
       </div>
 
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <CategoryFilter />
-        <div className="w-full sm:max-w-md">
-          <DrinkSearch />
-        </div>
-      </div>
+      <CategoryFilter />
+
+      {recentSaves && recentSaves.length > 0 && (
+        <section aria-labelledby="recent-saves-heading" className="space-y-2">
+          <h2 id="recent-saves-heading" className="text-muted-foreground text-sm font-medium">
+            最近残した
+          </h2>
+          <ul className="flex flex-wrap gap-x-4 gap-y-1 text-sm">
+            {recentSaves.map((item) => (
+              <li key={item.slug}>
+                <Link href={`/drinks/${item.slug}`} className="hover:underline">
+                  {item.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {q && (
         <SearchMissLogger
@@ -60,8 +94,35 @@ export function DrinkListClient({ fallbackData }: DrinkListClientProps) {
 
       {result.total > 0 && (
         <p className="text-muted-foreground text-center text-sm">
-          {result.total}件中 {result.drinks.length}件を表示
+          {filtered
+            ? `${result.total}件中 ${offset + 1}–${offset + result.drinks.length}件を表示`
+            : `${result.total}件中 ${result.drinks.length}件を表示`}
         </p>
+      )}
+
+      {(hasPrev || hasNext) && (
+        <nav aria-label="ページネーション" className="flex justify-center gap-4">
+          {hasPrev ? (
+            <Link
+              href={hrefFor(prevOffset)}
+              className="text-sm font-medium underline-offset-4 hover:underline"
+            >
+              前へ
+            </Link>
+          ) : (
+            <span className="text-muted-foreground text-sm">前へ</span>
+          )}
+          {hasNext ? (
+            <Link
+              href={hrefFor(nextOffset)}
+              className="text-sm font-medium underline-offset-4 hover:underline"
+            >
+              次へ
+            </Link>
+          ) : (
+            <span className="text-muted-foreground text-sm">次へ</span>
+          )}
+        </nav>
       )}
     </div>
   );

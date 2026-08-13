@@ -4,6 +4,10 @@ import { ConfirmedSearchInput } from '@/components/catalog/confirmed-search-inpu
 
 export function DrinkSearch() {
   return (
-    <ConfirmedSearchInput pathname="/" placeholder="お酒を検索..." ariaLabel="お酒をキーワードで検索" />
+    <ConfirmedSearchInput
+      pathname="/"
+      placeholder="銘柄名・別名で検索"
+      ariaLabel="銘柄名・別名で検索"
+    />
   );
 }

@@ -1,7 +1,9 @@
 import { type NextRequest, NextResponse } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
 
-const protectedRoutes = ['/profile', '/my-cocktails', '/my-logs'];
+import { safeNextPath } from '@/utils/safe-next-path';
+
+const protectedRoutes = ['/profile', '/my-cocktails', '/my-logs', '/list'];
 
 export async function proxy(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
@@ -34,6 +36,12 @@ export async function proxy(request: NextRequest) {
   if (isProtected && !user) {
     const url = request.nextUrl.clone();
     url.pathname = '/login';
+    url.search = '';
+    const next = `${request.nextUrl.pathname}${request.nextUrl.search}`;
+    const safeNext = safeNextPath(next);
+    if (safeNext !== '/') {
+      url.searchParams.set('next', safeNext);
+    }
     return NextResponse.redirect(url);
   }
 

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
 import { Heading } from '@/components/ui/heading';
@@ -71,6 +72,15 @@ export default async function ProfilePage() {
               </dd>
             </div>
           </dl>
+        </div>
+
+        <div className="border-t pt-6">
+          <Link
+            href="/my-logs"
+            className="text-foreground text-sm font-medium underline-offset-4 hover:underline"
+          >
+            飲んだ記録を見る
+          </Link>
         </div>
 
         <div className="border-t pt-6">

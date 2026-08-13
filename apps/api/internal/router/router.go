@@ -13,6 +13,7 @@ import (
 
 	"github.com/sakehub/api/internal/cocktail"
 	"github.com/sakehub/api/internal/drink"
+	"github.com/sakehub/api/internal/drinklog"
 	"github.com/sakehub/api/internal/handler"
 	"github.com/sakehub/api/internal/middleware"
 	"github.com/sakehub/api/internal/review"
@@ -43,6 +44,7 @@ func New(logger *zap.Logger, db *sql.DB, cfg *config.Config, kf keyfunc.Keyfunc)
 	drinkH := drink.NewHandler(drink.NewService(drink.NewRepository(db)))
 	cocktailH := cocktail.NewHandler(cocktail.NewService(cocktail.NewRepository(db)))
 	reviewH := review.NewHandler(review.NewService(review.NewRepository(db)))
+	drinkLogH := drinklog.NewHandler(drinklog.NewService(drinklog.NewRepository(db)))
 	searchMissH := searchmiss.NewHandler(searchmiss.NewService(searchmiss.NewRepository(db)))
 
 	// client_hash 回転による unique_searchers 水増しを緩和する目的の
@@ -78,6 +80,7 @@ func New(logger *zap.Logger, db *sql.DB, cfg *config.Config, kf keyfunc.Keyfunc)
 			r.Use(middleware.RequireAuth(kf))
 			r.Route("/reviews", reviewH.AuthRoutes)
 			r.Route("/cocktail-recipe-ratings", cocktailH.RatingAuthRoutes)
+			r.Route("/drink-logs", drinkLogH.AuthRoutes)
 		})
 
 		r.Group(func(r chi.Router) {

@@ -4,8 +4,10 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"net/url"
 	"strings"
 	"time"
+	_ "time/tzdata"
 	"unicode/utf8"
 
 	"github.com/sakehub/api/internal/searchmiss"
@@ -41,7 +43,7 @@ func (s *Service) CreateBatch(ctx context.Context, input CreateBatchInput, userI
 	if err != nil {
 		return nil, err
 	}
-	placeURL, err := optionalTrimmed(input.PlaceURL, maxPlaceURLLen, "place_url")
+	placeURL, err := optionalPlaceURL(input.PlaceURL)
 	if err != nil {
 		return nil, err
 	}
@@ -256,6 +258,35 @@ func optionalTrimmed(raw *string, maxLen int, field string) (*string, error) {
 	return &v, nil
 }
 
+func optionalPlaceURL(raw *string) (*string, error) {
+	v, err := optionalTrimmed(raw, maxPlaceURLLen, "place_url")
+	if err != nil || v == nil {
+		return v, err
+	}
+	u, err := url.ParseRequestURI(*v)
+	if err != nil || (u.Scheme != "http" && u.Scheme != "https") || u.Host == "" {
+		return nil, fmt.Errorf("%w: place_url must be http(s)", ErrValidation)
+	}
+	return v, nil
+}
+
+func zonedDayRange(timeZone, ymd string) (time.Time, time.Time, error) {
+	tz := strings.TrimSpace(timeZone)
+	if tz == "" {
+		return time.Time{}, time.Time{}, fmt.Errorf("%w: time_zone is required", ErrValidation)
+	}
+	loc, err := time.LoadLocation(tz)
+	if err != nil {
+		return time.Time{}, time.Time{}, fmt.Errorf("%w: invalid time_zone", ErrValidation)
+	}
+	trimmed := strings.TrimSpace(ymd)
+	start, err := time.ParseInLocation("2006-01-02", trimmed, loc)
+	if err != nil || start.Format("2006-01-02") != trimmed {
+		return time.Time{}, time.Time{}, fmt.Errorf("%w: invalid date", ErrValidation)
+	}
+	return start, start.AddDate(0, 0, 1), nil
+}
+
 func (s *Service) List(ctx context.Context, userID string, params ListParams) ([]Log, error) {
 	if params.Limit <= 0 || params.Limit > 100 {
 		params.Limit = 50
@@ -312,7 +343,7 @@ func (s *Service) Update(ctx context.Context, id, userID string, input UpdateInp
 	if err != nil {
 		return nil, err
 	}
-	placeURL, err := optionalTrimmed(input.PlaceURL, maxPlaceURLLen, "place_url")
+	placeURL, err := optionalPlaceURL(input.PlaceURL)
 	if err != nil {
 		return nil, err
 	}
@@ -358,19 +389,24 @@ func (s *Service) Update(ctx context.Context, id, userID string, input UpdateInp
 }
 
 func (s *Service) ReplaceDay(ctx context.Context, userID string, input ReplaceDayInput) ([]Log, error) {
-	if input.RangeFrom == nil || input.RangeTo == nil {
-		return nil, fmt.Errorf("%w: range_from and range_to are required", ErrValidation)
-	}
 	if input.DrankAt == nil {
 		return nil, fmt.Errorf("%w: drank_at is required", ErrValidation)
 	}
-	from := input.RangeFrom.UTC()
-	to := input.RangeTo.UTC()
-	if !to.After(from) {
-		return nil, fmt.Errorf("%w: range_to must be after range_from", ErrValidation)
+
+	from, to, err := zonedDayRange(input.TimeZone, input.Date)
+	if err != nil {
+		return nil, err
 	}
 	if to.Sub(from) > maxDayRange {
 		return nil, fmt.Errorf("%w: day range is too long", ErrValidation)
+	}
+
+	count, err := s.repo.CountInRange(ctx, userID, from, to)
+	if err != nil {
+		return nil, fmt.Errorf("drinklog.ReplaceDay: %w", err)
+	}
+	if count > maxItemsPerBatch {
+		return nil, fmt.Errorf("%w: too many logs in day to replace (max %d)", ErrConflict, maxItemsPerBatch)
 	}
 
 	drankAt := input.DrankAt.UTC()
@@ -389,7 +425,7 @@ func (s *Service) ReplaceDay(ctx context.Context, userID string, input ReplaceDa
 	if err != nil {
 		return nil, err
 	}
-	placeURL, err := optionalTrimmed(input.PlaceURL, maxPlaceURLLen, "place_url")
+	placeURL, err := optionalPlaceURL(input.PlaceURL)
 	if err != nil {
 		return nil, err
 	}

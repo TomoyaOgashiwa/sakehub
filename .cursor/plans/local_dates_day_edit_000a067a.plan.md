@@ -135,3 +135,10 @@ chi では `/{id}` より前に登録。ボディ例:
 - `cd apps/api && gofmt && go vet ./... && go test ./internal/drinklog`
 - `pnpm lint` と `pnpm type-check`（ルート）
 - 手動: TZ を Tokyo 以外に見立てて「今日」・日セクション・未来日 Zod エラーが日付欄に出ること、日付一括で行の追加/削除/日付変更が原子的に保存されること
+
+## 実際の実装との差分
+
+- 新規で日付が今日のときは現地 0:00 ではなく送信時刻の UTC instant を保存する。過去日だけ日付ピッカー経由で現地 0:00 にする。
+- `PUT /day` はクライアントの `range_from` / `range_to` を信じず、`time_zone` + 元の `date`（YYYY-MM-DD）からサーバーが半開区間を計算する。
+- 同一暦日の記録が 21 件以上あるときは一括編集 UI を出さず、API は 409 で拒否する（未ロード行の DELETE を防ぐ）。
+- `place_url` は Zod / Go とも http(s) のみ。`logToLine` は join 欠落時も `drinkId` を保持する。

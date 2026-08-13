@@ -96,8 +96,7 @@ export async function replaceDrinkLogsForDay(
   }
 
   const timeZone = ((formData.get('time_zone') as string | null) ?? '').trim();
-  const rangeFrom = ((formData.get('range_from') as string | null) ?? '').trim();
-  const rangeTo = ((formData.get('range_to') as string | null) ?? '').trim();
+  const originalDate = ((formData.get('original_date') as string | null) ?? '').trim();
   const drankAtRaw = ((formData.get('drank_at') as string | null) ?? '').trim();
   const placeName = ((formData.get('place_name') as string | null) ?? '').trim();
   const placeUrl = ((formData.get('place_url') as string | null) ?? '').trim();
@@ -112,8 +111,7 @@ export async function replaceDrinkLogsForDay(
 
   const parsed = drinkLogDayReplaceSchema.safeParse({
     time_zone: timeZone,
-    range_from: rangeFrom,
-    range_to: rangeTo,
+    date: originalDate,
     drank_at: drankAtRaw,
     place_name: placeName,
     place_url: placeUrl,
@@ -128,14 +126,14 @@ export async function replaceDrinkLogsForDay(
     };
   }
 
-  const { drank_at, place_name, place_url, items, time_zone, range_from, range_to } = parsed.data;
+  const { drank_at, place_name, place_url, items, time_zone, date } = parsed.data;
 
   const result = await authServerFetch<{ data: ApiDrinkLog[] }>('/api/auth/drink-logs/day', {
     accessToken: token.accessToken,
     method: 'PUT',
     body: {
-      range_from,
-      range_to,
+      time_zone,
+      date,
       drank_at: ymdToDrankAtIso(drank_at, time_zone),
       place_name: place_name ?? null,
       place_url: place_url ?? null,

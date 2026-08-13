@@ -67,6 +67,19 @@ func (s *stubRepo) Delete(ctx context.Context, id, userID string) error {
 	return nil
 }
 
+func (s *stubRepo) CountInRange(ctx context.Context, userID string, from, to time.Time) (int, error) {
+	n := 0
+	for _, log := range s.byID {
+		if log.UserID != userID {
+			continue
+		}
+		if (log.DrankAt.Equal(from) || log.DrankAt.After(from)) && log.DrankAt.Before(to) {
+			n++
+		}
+	}
+	return n, nil
+}
+
 func (s *stubRepo) ReplaceInRange(ctx context.Context, userID string, from, to time.Time, incoming []Log) ([]Log, error) {
 	if s.byID == nil {
 		s.byID = map[string]*Log{}
@@ -446,8 +459,7 @@ func TestUpdateRejectsFutureDrankAt(t *testing.T) {
 
 func TestReplaceDayInsertUpdateDelete(t *testing.T) {
 	drinkID := "drink-1"
-	from := time.Now().UTC().Truncate(time.Hour).Add(-24 * time.Hour)
-	to := from.Add(24 * time.Hour)
+	ymd, from, _ := utcCalendarDay(t, -1)
 	keep := &Log{
 		ID:         "keep-1",
 		UserID:     "user-1",
@@ -478,8 +490,8 @@ func TestReplaceDayInsertUpdateDelete(t *testing.T) {
 	drankAt := from
 	keepID := "keep-1"
 	logs, err := svc.ReplaceDay(context.Background(), "user-1", ReplaceDayInput{
-		RangeFrom: &from,
-		RangeTo:   &to,
+		TimeZone:  "UTC",
+		Date:      ymd,
 		DrankAt:   &drankAt,
 		PlaceName: strPtr("自宅"),
 		Items: []ReplaceDayItem{
@@ -534,8 +546,7 @@ func TestReplaceDayInsertUpdateDelete(t *testing.T) {
 
 func TestReplaceDayRejectsIDOutsideRange(t *testing.T) {
 	drinkID := "drink-1"
-	from := time.Now().UTC().Truncate(time.Hour).Add(-24 * time.Hour)
-	to := from.Add(24 * time.Hour)
+	ymd, from, _ := utcCalendarDay(t, -1)
 	outside := &Log{
 		ID:         "outside-1",
 		UserID:     "user-1",
@@ -555,9 +566,9 @@ func TestReplaceDayRejectsIDOutsideRange(t *testing.T) {
 	outsideID := "outside-1"
 	drankAt := from
 	_, err := svc.ReplaceDay(context.Background(), "user-1", ReplaceDayInput{
-		RangeFrom: &from,
-		RangeTo:   &to,
-		DrankAt:   &drankAt,
+		TimeZone: "UTC",
+		Date:     ymd,
+		DrankAt:  &drankAt,
 		Items: []ReplaceDayItem{{
 			ID: &outsideID,
 			CreateItemInput: CreateItemInput{
@@ -573,18 +584,16 @@ func TestReplaceDayRejectsIDOutsideRange(t *testing.T) {
 	}
 }
 
-func TestReplaceDayRejectsLongRange(t *testing.T) {
+func TestReplaceDayRejectsInvalidTimeZone(t *testing.T) {
 	repo := &stubRepo{meta: &drinkMeta{Category: "beer"}}
 	svc := NewService(repo)
 
-	from := time.Now().UTC().Add(-72 * time.Hour)
-	to := time.Now().UTC()
-	drankAt := from
+	drankAt := time.Now().UTC().Add(-time.Hour)
 	id := "drink-1"
 	_, err := svc.ReplaceDay(context.Background(), "user-1", ReplaceDayInput{
-		RangeFrom: &from,
-		RangeTo:   &to,
-		DrankAt:   &drankAt,
+		TimeZone: "Not/AZone",
+		Date:     "2026-08-01",
+		DrankAt:  &drankAt,
 		Items: []ReplaceDayItem{{
 			CreateItemInput: CreateItemInput{
 				DrinkID:         &id,
@@ -597,6 +606,89 @@ func TestReplaceDayRejectsLongRange(t *testing.T) {
 	if !errors.Is(err, ErrValidation) {
 		t.Fatalf("err = %v, want validation", err)
 	}
+}
+
+func TestReplaceDayRejectsTooManyInRange(t *testing.T) {
+	drinkID := "drink-1"
+	ymd, from, _ := utcCalendarDay(t, -1)
+	byID := map[string]*Log{}
+	for i := 0; i < maxItemsPerBatch+1; i++ {
+		id := fmt.Sprintf("log-%d", i)
+		byID[id] = &Log{
+			ID:         id,
+			UserID:     "user-1",
+			DrinkID:    &drinkID,
+			DrankAt:    from.Add(time.Duration(i) * time.Minute),
+			VolumeML:   180,
+			Quantity:   1,
+			InputUnit:  UnitML,
+			InputValue: 180,
+		}
+	}
+	repo := &stubRepo{meta: &drinkMeta{Category: "sake"}, byID: byID}
+	svc := NewService(repo)
+
+	drankAt := from
+	_, err := svc.ReplaceDay(context.Background(), "user-1", ReplaceDayInput{
+		TimeZone: "UTC",
+		Date:     ymd,
+		DrankAt:  &drankAt,
+		Items: []ReplaceDayItem{{
+			CreateItemInput: CreateItemInput{
+				DrinkID:         &drinkID,
+				InputUnit:       UnitML,
+				InputValue:      180,
+				VolumePrecision: PrecisionExact,
+			},
+		}},
+	})
+	if !errors.Is(err, ErrConflict) {
+		t.Fatalf("err = %v, want conflict", err)
+	}
+}
+
+func TestZonedDayRangeTokyo(t *testing.T) {
+	from, to, err := zonedDayRange("Asia/Tokyo", "2026-08-13")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got := from.UTC().Format(time.RFC3339); got != "2026-08-12T15:00:00Z" {
+		t.Fatalf("from = %s", got)
+	}
+	if to.Sub(from) != 24*time.Hour {
+		t.Fatalf("duration = %s", to.Sub(from))
+	}
+}
+
+func TestCreateBatchRejectsJavascriptPlaceURL(t *testing.T) {
+	repo := &stubRepo{meta: &drinkMeta{Category: "beer"}}
+	svc := NewService(repo)
+
+	id := "drink-1"
+	_, err := svc.CreateBatch(context.Background(), CreateBatchInput{
+		PlaceURL: strPtr("javascript:alert(1)"),
+		Items: []CreateItemInput{{
+			DrinkID:         &id,
+			InputUnit:       UnitML,
+			InputValue:      300,
+			VolumePrecision: PrecisionExact,
+		}},
+	}, "user-1")
+	if !errors.Is(err, ErrValidation) {
+		t.Fatalf("err = %v, want validation", err)
+	}
+}
+
+func utcCalendarDay(t *testing.T, offsetDays int) (ymd string, from, to time.Time) {
+	t.Helper()
+	day := time.Now().UTC().AddDate(0, 0, offsetDays)
+	ymd = day.Format("2006-01-02")
+	var err error
+	from, to, err = zonedDayRange("UTC", ymd)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return ymd, from, to
 }
 
 func strPtr(s string) *string { return &s }

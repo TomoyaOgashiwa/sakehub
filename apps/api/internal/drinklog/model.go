@@ -84,10 +84,11 @@ type ReplaceDayItem struct {
 	CreateItemInput
 }
 
-// ReplaceDayInput replaces all logs in [range_from, range_to) with items.
+// ReplaceDayInput replaces all logs in one local calendar day.
+// The delete window is computed on the server from time_zone + date (not client instants).
 type ReplaceDayInput struct {
-	RangeFrom *time.Time       `json:"range_from"`
-	RangeTo   *time.Time       `json:"range_to"`
+	TimeZone  string           `json:"time_zone"`
+	Date      string           `json:"date"`
 	DrankAt   *time.Time       `json:"drank_at"`
 	PlaceName *string          `json:"place_name"`
 	PlaceURL  *string          `json:"place_url"`

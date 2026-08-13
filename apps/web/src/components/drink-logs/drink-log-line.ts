@@ -64,6 +64,20 @@ export function logToLine(log: DrinkLog): DrinkLogLine {
       quantity: log.quantity,
     };
   }
+  if (log.drinkId) {
+    return {
+      localId: log.id,
+      logId: log.id,
+      kind: 'catalog',
+      drinkId: log.drinkId,
+      name: log.customDrinkName ?? '不明な銘柄',
+      unit: log.inputUnit,
+      value: String(log.inputValue),
+      servingKey: log.servingKey ?? null,
+      precision: log.volumePrecision,
+      quantity: log.quantity,
+    };
+  }
   return {
     localId: log.id,
     logId: log.id,

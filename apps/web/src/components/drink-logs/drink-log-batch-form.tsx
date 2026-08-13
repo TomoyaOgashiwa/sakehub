@@ -46,8 +46,7 @@ export interface DrinkLogBatchFormProps {
   initialPlaceName?: string;
   initialPlaceUrl?: string;
   initialLines?: DrinkLogLine[];
-  rangeFrom?: string;
-  rangeTo?: string;
+  originalDate?: string;
   placeMixed?: boolean;
 }
 
@@ -58,8 +57,7 @@ export function DrinkLogBatchForm({
   initialPlaceName = '',
   initialPlaceUrl = '',
   initialLines = [],
-  rangeFrom,
-  rangeTo,
+  originalDate,
   placeMixed = false,
 }: DrinkLogBatchFormProps) {
   const router = useRouter();
@@ -112,11 +110,8 @@ export function DrinkLogBatchForm({
     <form action={formAction} className="flex flex-col gap-8">
       <input type="hidden" name="time_zone" value={timeZone} />
       <input type="hidden" name="items_json" value={itemsJSON} />
-      {mode === 'day-edit' && rangeFrom && rangeTo && (
-        <>
-          <input type="hidden" name="range_from" value={rangeFrom} />
-          <input type="hidden" name="range_to" value={rangeTo} />
-        </>
+      {mode === 'day-edit' && originalDate && (
+        <input type="hidden" name="original_date" value={originalDate} />
       )}
 
       <FieldGroup>

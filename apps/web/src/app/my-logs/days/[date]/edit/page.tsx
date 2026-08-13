@@ -10,6 +10,7 @@ import { getOptionalAccessToken } from '@/application/require-access-token';
 import { DrinkLogBatchForm } from '@/components/drink-logs/drink-log-batch-form';
 import { logToLine } from '@/components/drink-logs/drink-log-line';
 import { Heading } from '@/components/ui/heading';
+import { DRINK_LOG_MAX_ITEMS_PER_BATCH } from '@/utils/drink-log-schema';
 import { addCalendarYmd, zonedDateToIso } from '@/utils/time-zone';
 
 export const metadata: Metadata = {
@@ -49,7 +50,7 @@ export default async function EditDrinkLogsForDayPage({ params }: PageProps) {
   const rangeTo = zonedDateToIso(addCalendarYmd(date, 1), timeZone);
 
   const logs = await fetchMyDrinkLogs(accessToken, {
-    limit: 20,
+    limit: DRINK_LOG_MAX_ITEMS_PER_BATCH + 1,
     from: rangeFrom,
     to: rangeTo,
   });
@@ -57,7 +58,9 @@ export default async function EditDrinkLogsForDayPage({ params }: PageProps) {
     notFound();
   }
 
-  const place = sharedPlace(logs);
+  const overLimit = logs.length > DRINK_LOG_MAX_ITEMS_PER_BATCH;
+  const visibleLogs = overLimit ? logs.slice(0, DRINK_LOG_MAX_ITEMS_PER_BATCH) : logs;
+  const place = sharedPlace(visibleLogs);
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-12">
@@ -74,21 +77,46 @@ export default async function EditDrinkLogsForDayPage({ params }: PageProps) {
       <Heading level="h1" className="mb-2">
         この日の記録を編集
       </Heading>
-      <p className="text-muted-foreground mb-8 text-sm">
-        同じ日に飲んだお酒をまとめて修正できます。行の追加・削除もできます。
-      </p>
 
-      <DrinkLogBatchForm
-        mode="day-edit"
-        timeZone={timeZone}
-        initialDrankAt={date}
-        initialPlaceName={place.name}
-        initialPlaceUrl={place.url}
-        initialLines={logs.map(logToLine)}
-        rangeFrom={rangeFrom}
-        rangeTo={rangeTo}
-        placeMixed={place.mixed}
-      />
+      {overLimit ? (
+        <div className="flex flex-col gap-4">
+          <p className="text-muted-foreground text-sm">
+            この日の記録が {DRINK_LOG_MAX_ITEMS_PER_BATCH}{' '}
+            件を超えているため、まとめて編集できません。1件ずつ編集するか、不要な記録を削除してください。
+          </p>
+          <ul className="flex flex-col gap-2">
+            {visibleLogs.map((log) => {
+              const title = log.drink?.name ?? log.customDrinkName ?? '不明な銘柄';
+              return (
+                <li key={log.id}>
+                  <Link
+                    href={`/my-logs/${log.id}/edit`}
+                    className="text-sm underline underline-offset-2"
+                  >
+                    {title}を編集
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ) : (
+        <>
+          <p className="text-muted-foreground mb-8 text-sm">
+            同じ日に飲んだお酒をまとめて修正できます。行の追加・削除もできます。
+          </p>
+          <DrinkLogBatchForm
+            mode="day-edit"
+            timeZone={timeZone}
+            initialDrankAt={date}
+            initialPlaceName={place.name}
+            initialPlaceUrl={place.url}
+            initialLines={visibleLogs.map(logToLine)}
+            originalDate={date}
+            placeMixed={place.mixed}
+          />
+        </>
+      )}
     </div>
   );
 }

@@ -1,9 +1,11 @@
 import { z } from 'zod';
 
+import { isSafeHttpUrl } from '@/utils/http-url';
 import { isValidTimeZone, todayYmdInTimeZone } from '@/utils/time-zone';
 
 export const volumeUnitSchema = z.enum(['ml', 'oz']);
 export const volumePrecisionSchema = z.enum(['exact', 'estimated']);
+export const DRINK_LOG_MAX_ITEMS_PER_BATCH = 20;
 
 export const ianaTimeZoneSchema = z
   .string()
@@ -28,12 +30,6 @@ const dateYmdSchema = z
     );
   }, '日付が不正です。');
 
-const isoDateTimeSchema = z
-  .string()
-  .trim()
-  .min(1, '日時が不正です。')
-  .refine((raw) => !Number.isNaN(Date.parse(raw)), '日時が不正です。');
-
 const optionalTrimmed = (max: number) =>
   z
     .string()
@@ -48,19 +44,7 @@ const placeUrlSchema = z
   .max(2000)
   .optional()
   .transform((v) => (v && v.length > 0 ? v : undefined))
-  .refine(
-    (v) => v === undefined || /^https?:\/\//i.test(v) || !v.includes('://'),
-    'URL は http(s) で始めてください。',
-  )
-  .refine((v) => {
-    if (v === undefined || !/^https?:\/\//i.test(v)) return true;
-    try {
-      const parsed = new URL(v);
-      return parsed.protocol === 'http:' || parsed.protocol === 'https:';
-    } catch {
-      return false;
-    }
-  }, '場所の URL が不正です。');
+  .refine((v) => v === undefined || isSafeHttpUrl(v), 'URL は http(s) で始めてください。');
 
 const drinkLogItemFields = z.object({
   id: z.string().uuid().optional(),
@@ -122,7 +106,10 @@ export const drinkLogBatchSchema = z
     drank_at: dateYmdSchema.optional(),
     place_name: optionalTrimmed(200),
     place_url: placeUrlSchema,
-    items: z.array(drinkLogItemSchema).min(1, '飲んだお酒を1つ以上追加してください。').max(20),
+    items: z
+      .array(drinkLogItemSchema)
+      .min(1, '飲んだお酒を1つ以上追加してください。')
+      .max(DRINK_LOG_MAX_ITEMS_PER_BATCH),
   })
   .superRefine((data, ctx) => {
     refineNotFutureDate(data.drank_at, data.time_zone, ctx);
@@ -131,12 +118,14 @@ export const drinkLogBatchSchema = z
 export const drinkLogDayReplaceSchema = z
   .object({
     time_zone: ianaTimeZoneSchema,
-    range_from: isoDateTimeSchema,
-    range_to: isoDateTimeSchema,
+    date: dateYmdSchema,
     drank_at: dateYmdSchema,
     place_name: optionalTrimmed(200),
     place_url: placeUrlSchema,
-    items: z.array(drinkLogDayItemSchema).min(1, '飲んだお酒を1つ以上追加してください。').max(20),
+    items: z
+      .array(drinkLogDayItemSchema)
+      .min(1, '飲んだお酒を1つ以上追加してください。')
+      .max(DRINK_LOG_MAX_ITEMS_PER_BATCH),
   })
   .superRefine((data, ctx) => {
     refineNotFutureDate(data.drank_at, data.time_zone, ctx);

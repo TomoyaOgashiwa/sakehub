@@ -193,10 +193,10 @@ export interface DrinkLogDayItemInput extends DrinkLogItemInput {
   id?: string;
 }
 
-/** Replace all logs in a local calendar day (UTC range from the client). */
+/** Replace all logs in a local calendar day. Server computes the UTC range from timeZone + date. */
 export interface DrinkLogDayReplaceInput {
-  rangeFrom: string;
-  rangeTo: string;
+  timeZone: string;
+  date: string;
   drankAt: string;
   placeName?: string;
   placeUrl?: string;

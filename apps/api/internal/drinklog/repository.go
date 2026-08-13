@@ -22,6 +22,7 @@ type Repository interface {
 	Update(ctx context.Context, log *Log) error
 	ListByUser(ctx context.Context, userID string, params ListParams) ([]Log, error)
 	Delete(ctx context.Context, id, userID string) error
+	CountInRange(ctx context.Context, userID string, from, to time.Time) (int, error)
 	ReplaceInRange(ctx context.Context, userID string, from, to time.Time, incoming []Log) ([]Log, error)
 	Summary(ctx context.Context, userID string, from, to time.Time) (logCount, skipped int, pureGrams float64, err error)
 	InsertSearchMiss(ctx context.Context, userID, queryRaw string) error
@@ -217,6 +218,15 @@ func (r *repository) Delete(ctx context.Context, id, userID string) error {
 		return ErrForbidden
 	}
 	return nil
+}
+
+func (r *repository) CountInRange(ctx context.Context, userID string, from, to time.Time) (int, error) {
+	const q = `SELECT COUNT(*) FROM drink_logs WHERE user_id = $1 AND drank_at >= $2 AND drank_at < $3`
+	var n int
+	if err := r.db.QueryRowContext(ctx, q, userID, from, to).Scan(&n); err != nil {
+		return 0, err
+	}
+	return n, nil
 }
 
 func (r *repository) ReplaceInRange(ctx context.Context, userID string, from, to time.Time, incoming []Log) ([]Log, error) {

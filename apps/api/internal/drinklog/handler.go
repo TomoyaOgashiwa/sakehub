@@ -233,6 +233,8 @@ func writeServiceError(w http.ResponseWriter, err error) {
 	switch {
 	case errors.Is(err, ErrValidation):
 		response.Error(w, http.StatusBadRequest, err.Error())
+	case errors.Is(err, ErrConflict):
+		response.Error(w, http.StatusConflict, err.Error())
 	case errors.Is(err, ErrDrinkNotFound):
 		response.Error(w, http.StatusNotFound, "drink not found")
 	case errors.Is(err, ErrNotFound):

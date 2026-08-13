@@ -3,16 +3,14 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
 import { fetchDrinkLogSummary, fetchMyDrinkLogs } from '@/application/drink-logs-api.server';
+import { getRequestTimeZone } from '@/application/request-time-zone';
 import { getOptionalAccessToken } from '@/application/require-access-token';
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
 import { Heading } from '@/components/ui/heading';
 import { findServingPreset } from '@/config/serving-presets';
-import {
-  addUtcDays,
-  groupLogsByTokyoDay,
-  startOfTokyoDayUtc,
-} from '@/utils/drink-log-day';
+import { groupLogsByZonedDay, startOfWeekZoned } from '@/utils/drink-log-day';
+import { addCalendarYmd, todayYmdInTimeZone, zonedDateToIso, zonedDayKey } from '@/utils/time-zone';
 import { cn } from '@/utils/utils';
 import { formatVolumeDisplay, round2 } from '@/utils/volume';
 
@@ -22,53 +20,38 @@ export const metadata: Metadata = {
   title: '飲んだ記録',
 };
 
-function startOfWeekTokyo(date: Date): Date {
-  const tokyoToday = startOfTokyoDayUtc(date);
-  // Get weekday in Tokyo for "today"
-  const weekday = new Intl.DateTimeFormat('en-US', {
-    timeZone: 'Asia/Tokyo',
-    weekday: 'short',
-  }).format(date);
-  const map: Record<string, number> = {
-    Mon: 0,
-    Tue: 1,
-    Wed: 2,
-    Thu: 3,
-    Fri: 4,
-    Sat: 5,
-    Sun: 6,
-  };
-  const offset = map[weekday] ?? 0;
-  return addUtcDays(tokyoToday, -offset);
-}
-
 export default async function MyLogsPage() {
   const { user, accessToken } = await getOptionalAccessToken();
   if (!user || !accessToken) {
     redirect('/login');
   }
 
-  const weekStart = startOfWeekTokyo(new Date());
-  const weekEnd = addUtcDays(weekStart, 7);
+  const timeZone = await getRequestTimeZone();
+  const now = new Date();
+  const weekStart = startOfWeekZoned(now, timeZone);
+  const weekStartYmd = zonedDayKey(weekStart.toISOString(), timeZone);
+  const weekEnd = new Date(zonedDateToIso(addCalendarYmd(weekStartYmd, 7), timeZone));
+  const weekEndInclusive = new Date(zonedDateToIso(addCalendarYmd(weekStartYmd, 6), timeZone));
   const from = weekStart.toISOString();
   const to = weekEnd.toISOString();
 
-  const listFrom = addUtcDays(startOfTokyoDayUtc(new Date()), -29).toISOString();
-  const listTo = addUtcDays(startOfTokyoDayUtc(new Date()), 1).toISOString();
+  const todayYmd = todayYmdInTimeZone(timeZone);
+  const listFrom = zonedDateToIso(addCalendarYmd(todayYmd, -29), timeZone);
+  const listTo = zonedDateToIso(addCalendarYmd(todayYmd, 1), timeZone);
 
   const [summary, logs] = await Promise.all([
     fetchDrinkLogSummary(accessToken, from, to),
     fetchMyDrinkLogs(accessToken, { limit: 100, from: listFrom, to: listTo }),
   ]);
 
-  const daySections = groupLogsByTokyoDay(logs);
+  const daySections = groupLogsByZonedDay(logs, timeZone);
 
   const weekLabel = `${weekStart.toLocaleDateString('ja-JP', {
-    timeZone: 'Asia/Tokyo',
+    timeZone,
     month: 'short',
     day: 'numeric',
-  })} – ${addUtcDays(weekEnd, -1).toLocaleDateString('ja-JP', {
-    timeZone: 'Asia/Tokyo',
+  })} – ${weekEndInclusive.toLocaleDateString('ja-JP', {
+    timeZone,
     month: 'short',
     day: 'numeric',
   })}`;
@@ -122,7 +105,7 @@ export default async function MyLogsPage() {
         )}
       </section>
 
-      <section aria-labelledby="recent-logs-heading" className="space-y-6">
+      <section aria-labelledby="recent-logs-heading" className="flex flex-col gap-6">
         <Heading level="h2" id="recent-logs-heading">
           直近30日の記録
         </Heading>
@@ -139,15 +122,22 @@ export default async function MyLogsPage() {
             <section
               key={section.dayKey}
               aria-labelledby={`day-${section.dayKey}`}
-              className="space-y-3"
+              className="flex flex-col gap-3"
             >
               <div className="flex flex-wrap items-baseline justify-between gap-2 border-b pb-2">
-                <Heading level="h3" id={`day-${section.dayKey}`} className="text-base">
-                  {section.label}
-                </Heading>
+                <div className="flex flex-wrap items-baseline gap-3">
+                  <Heading level="h3" id={`day-${section.dayKey}`} className="text-base">
+                    {section.label}
+                  </Heading>
+                  <Link
+                    href={`/my-logs/days/${section.dayKey}/edit`}
+                    className="text-muted-foreground text-sm underline underline-offset-2"
+                  >
+                    この日を編集
+                  </Link>
+                </div>
                 <p className="text-muted-foreground text-sm tabular-nums">
-                  {section.drinkCount}杯
-                  <span className="mx-1.5">·</span>
+                  {section.drinkCount}杯<span className="mx-1.5">·</span>
                   {section.pureAlcoholGrams}g
                   {section.skippedMissingAbv > 0 && (
                     <span className="ml-2 text-xs">
@@ -157,7 +147,7 @@ export default async function MyLogsPage() {
                 </p>
               </div>
 
-              <ul className="space-y-3">
+              <ul className="flex flex-col gap-3">
                 {section.logs.map((log) => {
                   const presetLabel = log.servingKey
                     ? findServingPreset(log.servingKey)?.label

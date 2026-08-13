@@ -25,6 +25,7 @@ func NewHandler(svc *Service) *Handler {
 func (h *Handler) AuthRoutes(r chi.Router) {
 	r.Get("/", h.List)
 	r.Get("/summary", h.Summary)
+	r.Put("/day", h.ReplaceDay)
 	r.Post("/", h.CreateBatch)
 	r.Get("/{id}", h.Get)
 	r.Patch("/{id}", h.Update)
@@ -135,6 +136,29 @@ func (h *Handler) Summary(w http.ResponseWriter, r *http.Request) {
 	}
 
 	response.JSON(w, http.StatusOK, summary)
+}
+
+func (h *Handler) ReplaceDay(w http.ResponseWriter, r *http.Request) {
+	userID := middleware.UserID(r.Context())
+	if userID == "" {
+		response.Error(w, http.StatusUnauthorized, "unauthorized")
+		return
+	}
+
+	var input ReplaceDayInput
+	if err := json.NewDecoder(r.Body).Decode(&input); err != nil {
+		response.Error(w, http.StatusBadRequest, "invalid json")
+		return
+	}
+	defer r.Body.Close()
+
+	logs, err := h.svc.ReplaceDay(r.Context(), userID, input)
+	if err != nil {
+		writeServiceError(w, err)
+		return
+	}
+
+	response.JSON(w, http.StatusOK, map[string]any{"data": logs})
 }
 
 func (h *Handler) Get(w http.ResponseWriter, r *http.Request) {

@@ -2,15 +2,18 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
+import { getRequestTimeZone } from '@/application/request-time-zone';
+import { DrinkLogBatchForm } from '@/components/drink-logs/drink-log-batch-form';
 import { Heading } from '@/components/ui/heading';
-
-import { NewLogForm } from './new-log-form';
+import { todayYmdInTimeZone } from '@/utils/time-zone';
 
 export const metadata: Metadata = {
   title: '飲んだ記録を追加',
 };
 
-export default function NewDrinkLogPage() {
+export default async function NewDrinkLogPage() {
+  const timeZone = await getRequestTimeZone();
+
   return (
     <div className="mx-auto max-w-2xl px-4 py-12">
       <nav className="mb-6">
@@ -30,7 +33,11 @@ export default function NewDrinkLogPage() {
         いつ・何を・どこで飲んだかをまとめて残せます。カタログに無い銘柄もそのまま追加できます。
       </p>
 
-      <NewLogForm />
+      <DrinkLogBatchForm
+        mode="create"
+        timeZone={timeZone}
+        initialDrankAt={todayYmdInTimeZone(timeZone)}
+      />
     </div>
   );
 }

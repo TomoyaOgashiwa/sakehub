@@ -3,6 +3,8 @@ package drinklog
 import (
 	"context"
 	"database/sql"
+	"errors"
+	"fmt"
 	"testing"
 	"time"
 )
@@ -59,7 +61,59 @@ func (s *stubRepo) ListByUser(ctx context.Context, userID string, params ListPar
 }
 
 func (s *stubRepo) Delete(ctx context.Context, id, userID string) error {
+	if s.byID != nil {
+		delete(s.byID, id)
+	}
 	return nil
+}
+
+func (s *stubRepo) ReplaceInRange(ctx context.Context, userID string, from, to time.Time, incoming []Log) ([]Log, error) {
+	if s.byID == nil {
+		s.byID = map[string]*Log{}
+	}
+
+	existingInRange := map[string]struct{}{}
+	for id, log := range s.byID {
+		if log.UserID != userID {
+			continue
+		}
+		if (log.DrankAt.Equal(from) || log.DrankAt.After(from)) && log.DrankAt.Before(to) {
+			existingInRange[id] = struct{}{}
+		}
+	}
+
+	incomingIDs := map[string]struct{}{}
+	for i := range incoming {
+		id := incoming[i].ID
+		if id == "" {
+			continue
+		}
+		if _, ok := existingInRange[id]; !ok {
+			return nil, fmt.Errorf("%w: item id not in range", ErrValidation)
+		}
+		incomingIDs[id] = struct{}{}
+	}
+
+	for id := range existingInRange {
+		if _, keep := incomingIDs[id]; !keep {
+			delete(s.byID, id)
+		}
+	}
+
+	out := make([]Log, 0, len(incoming))
+	for i := range incoming {
+		log := incoming[i]
+		log.UserID = userID
+		if log.ID == "" {
+			log.ID = fmt.Sprintf("new-%d", i)
+			log.CreatedAt = time.Now().UTC()
+		}
+		log.UpdatedAt = time.Now().UTC()
+		cp := log
+		s.byID[log.ID] = &cp
+		out = append(out, cp)
+	}
+	return out, nil
 }
 
 func (s *stubRepo) Summary(ctx context.Context, userID string, from, to time.Time) (int, int, float64, error) {
@@ -322,6 +376,220 @@ func TestUpdateCustomDrinkClearsPreset(t *testing.T) {
 	}
 	if updated.PlaceName == nil || *updated.PlaceName != "居酒屋" {
 		t.Fatalf("place = %v", updated.PlaceName)
+	}
+}
+
+func TestCreateBatchRejectsFutureDrankAt(t *testing.T) {
+	repo := &stubRepo{meta: &drinkMeta{Category: "beer"}}
+	svc := NewService(repo)
+
+	id := "drink-1"
+	future := time.Now().UTC().Add(48 * time.Hour)
+	_, err := svc.CreateBatch(context.Background(), CreateBatchInput{
+		DrankAt: &future,
+		Items: []CreateItemInput{{
+			DrinkID:         &id,
+			InputUnit:       UnitML,
+			InputValue:      300,
+			VolumePrecision: PrecisionExact,
+		}},
+	}, "user-1")
+	if !errors.Is(err, ErrValidation) {
+		t.Fatalf("err = %v, want validation", err)
+	}
+}
+
+func TestCreateBatchRejectsTooOldDrankAt(t *testing.T) {
+	repo := &stubRepo{meta: &drinkMeta{Category: "beer"}}
+	svc := NewService(repo)
+
+	id := "drink-1"
+	old := time.Now().UTC().AddDate(-11, 0, 0)
+	_, err := svc.CreateBatch(context.Background(), CreateBatchInput{
+		DrankAt: &old,
+		Items: []CreateItemInput{{
+			DrinkID:         &id,
+			InputUnit:       UnitML,
+			InputValue:      300,
+			VolumePrecision: PrecisionExact,
+		}},
+	}, "user-1")
+	if !errors.Is(err, ErrValidation) {
+		t.Fatalf("err = %v, want validation", err)
+	}
+}
+
+func TestUpdateRejectsFutureDrankAt(t *testing.T) {
+	drinkID := "drink-1"
+	existing := &Log{ID: "log-1", UserID: "user-1", DrinkID: &drinkID, DrankAt: time.Now().UTC()}
+	repo := &stubRepo{
+		meta: &drinkMeta{Category: "beer"},
+		byID: map[string]*Log{"log-1": existing},
+	}
+	svc := NewService(repo)
+
+	future := time.Now().UTC().Add(48 * time.Hour)
+	_, err := svc.Update(context.Background(), "log-1", "user-1", UpdateInput{
+		DrinkID:         &drinkID,
+		InputUnit:       UnitML,
+		InputValue:      100,
+		VolumePrecision: PrecisionExact,
+		DrankAt:         &future,
+	})
+	if !errors.Is(err, ErrValidation) {
+		t.Fatalf("err = %v, want validation", err)
+	}
+}
+
+func TestReplaceDayInsertUpdateDelete(t *testing.T) {
+	drinkID := "drink-1"
+	from := time.Now().UTC().Truncate(time.Hour).Add(-24 * time.Hour)
+	to := from.Add(24 * time.Hour)
+	keep := &Log{
+		ID:         "keep-1",
+		UserID:     "user-1",
+		DrinkID:    &drinkID,
+		DrankAt:    from.Add(time.Hour),
+		VolumeML:   180,
+		Quantity:   1,
+		InputUnit:  UnitML,
+		InputValue: 180,
+	}
+	drop := &Log{
+		ID:         "drop-1",
+		UserID:     "user-1",
+		DrinkID:    &drinkID,
+		DrankAt:    from.Add(2 * time.Hour),
+		VolumeML:   300,
+		Quantity:   1,
+		InputUnit:  UnitML,
+		InputValue: 300,
+	}
+	repo := &stubRepo{
+		meta: &drinkMeta{Category: "sake"},
+		byID: map[string]*Log{"keep-1": keep, "drop-1": drop},
+	}
+	svc := NewService(repo)
+
+	name := "新規カスタム"
+	drankAt := from
+	keepID := "keep-1"
+	logs, err := svc.ReplaceDay(context.Background(), "user-1", ReplaceDayInput{
+		RangeFrom: &from,
+		RangeTo:   &to,
+		DrankAt:   &drankAt,
+		PlaceName: strPtr("自宅"),
+		Items: []ReplaceDayItem{
+			{
+				ID: &keepID,
+				CreateItemInput: CreateItemInput{
+					DrinkID:         &drinkID,
+					InputUnit:       UnitML,
+					InputValue:      90,
+					VolumePrecision: PrecisionExact,
+					Quantity:        2,
+				},
+			},
+			{
+				CreateItemInput: CreateItemInput{
+					CustomDrinkName: &name,
+					InputUnit:       UnitML,
+					InputValue:      120,
+					VolumePrecision: PrecisionExact,
+				},
+			},
+		},
+	})
+	if err != nil {
+		t.Fatalf("ReplaceDay: %v", err)
+	}
+	if len(logs) != 2 {
+		t.Fatalf("len(logs) = %d, want 2", len(logs))
+	}
+	if _, ok := repo.byID["drop-1"]; ok {
+		t.Fatal("expected drop-1 to be deleted")
+	}
+	if repo.byID["keep-1"].Quantity != 2 {
+		t.Fatalf("keep quantity = %d, want 2", repo.byID["keep-1"].Quantity)
+	}
+	if repo.byID["keep-1"].PlaceName == nil || *repo.byID["keep-1"].PlaceName != "自宅" {
+		t.Fatalf("place = %v", repo.byID["keep-1"].PlaceName)
+	}
+	foundNew := false
+	for _, log := range logs {
+		if log.CustomDrinkName != nil && *log.CustomDrinkName == name {
+			foundNew = true
+		}
+	}
+	if !foundNew {
+		t.Fatal("expected inserted custom drink")
+	}
+}
+
+func TestReplaceDayRejectsIDOutsideRange(t *testing.T) {
+	drinkID := "drink-1"
+	from := time.Now().UTC().Truncate(time.Hour).Add(-24 * time.Hour)
+	to := from.Add(24 * time.Hour)
+	outside := &Log{
+		ID:         "outside-1",
+		UserID:     "user-1",
+		DrinkID:    &drinkID,
+		DrankAt:    from.Add(-time.Hour),
+		VolumeML:   180,
+		Quantity:   1,
+		InputUnit:  UnitML,
+		InputValue: 180,
+	}
+	repo := &stubRepo{
+		meta: &drinkMeta{Category: "sake"},
+		byID: map[string]*Log{"outside-1": outside},
+	}
+	svc := NewService(repo)
+
+	outsideID := "outside-1"
+	drankAt := from
+	_, err := svc.ReplaceDay(context.Background(), "user-1", ReplaceDayInput{
+		RangeFrom: &from,
+		RangeTo:   &to,
+		DrankAt:   &drankAt,
+		Items: []ReplaceDayItem{{
+			ID: &outsideID,
+			CreateItemInput: CreateItemInput{
+				DrinkID:         &drinkID,
+				InputUnit:       UnitML,
+				InputValue:      180,
+				VolumePrecision: PrecisionExact,
+			},
+		}},
+	})
+	if !errors.Is(err, ErrValidation) {
+		t.Fatalf("err = %v, want validation", err)
+	}
+}
+
+func TestReplaceDayRejectsLongRange(t *testing.T) {
+	repo := &stubRepo{meta: &drinkMeta{Category: "beer"}}
+	svc := NewService(repo)
+
+	from := time.Now().UTC().Add(-72 * time.Hour)
+	to := time.Now().UTC()
+	drankAt := from
+	id := "drink-1"
+	_, err := svc.ReplaceDay(context.Background(), "user-1", ReplaceDayInput{
+		RangeFrom: &from,
+		RangeTo:   &to,
+		DrankAt:   &drankAt,
+		Items: []ReplaceDayItem{{
+			CreateItemInput: CreateItemInput{
+				DrinkID:         &id,
+				InputUnit:       UnitML,
+				InputValue:      180,
+				VolumePrecision: PrecisionExact,
+			},
+		}},
+	})
+	if !errors.Is(err, ErrValidation) {
+		t.Fatalf("err = %v, want validation", err)
 	}
 }
 

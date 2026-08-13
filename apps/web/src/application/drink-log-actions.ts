@@ -2,28 +2,27 @@
 
 import { revalidatePath } from 'next/cache';
 import type { DrinkLog } from '@sakehub/types';
-import { z } from 'zod';
 
 import { toDrinkLog, type ApiDrinkLog } from '@/application/drink-log-mappers';
 import { requireAccessToken } from '@/application/require-access-token';
 import { authServerFetch } from '@/application/server-api';
 import {
   drinkLogBatchSchema,
+  drinkLogDayReplaceSchema,
   drinkLogUpdateSchema,
   firstZodErrorMessage,
-  tokyoDateToIso,
+  zonedDateToIso,
+  zodIssuesToFieldErrors,
 } from '@/utils/drink-log-schema';
 
 export type DrinkLogActionState =
   | { ok: true; data?: DrinkLog | DrinkLog[] }
-  | { ok: false; error: string; fieldErrors?: Record<string, string[]> };
+  | { ok: false; error: string; fieldErrors?: Record<string, string> };
 
 function authError(tokenError: string, verb: string): DrinkLogActionState {
   return {
     ok: false,
-    error: tokenError.includes('ログイン')
-      ? `${verb}するにはログインが必要です。`
-      : tokenError,
+    error: tokenError.includes('ログイン') ? `${verb}するにはログインが必要です。` : tokenError,
   };
 }
 
@@ -36,6 +35,7 @@ export async function createDrinkLogBatch(
     return authError(token.error, '記録');
   }
 
+  const timeZone = ((formData.get('time_zone') as string | null) ?? '').trim();
   const drankAtRaw = ((formData.get('drank_at') as string | null) ?? '').trim();
   const placeName = ((formData.get('place_name') as string | null) ?? '').trim();
   const placeUrl = ((formData.get('place_url') as string | null) ?? '').trim();
@@ -49,6 +49,7 @@ export async function createDrinkLogBatch(
   }
 
   const parsed = drinkLogBatchSchema.safeParse({
+    time_zone: timeZone,
     ...(drankAtRaw ? { drank_at: drankAtRaw } : {}),
     place_name: placeName,
     place_url: placeUrl,
@@ -56,23 +57,87 @@ export async function createDrinkLogBatch(
   });
 
   if (!parsed.success) {
-    const flat = z.flattenError(parsed.error);
     return {
       ok: false,
       error: firstZodErrorMessage(parsed.error),
-      fieldErrors: flat.fieldErrors,
+      fieldErrors: zodIssuesToFieldErrors(parsed.error),
     };
   }
 
-  const { drank_at, place_name, place_url, items } = parsed.data;
+  const { drank_at, place_name, place_url, items, time_zone } = parsed.data;
 
   const result = await authServerFetch<{ data: ApiDrinkLog[] }>('/api/auth/drink-logs', {
     accessToken: token.accessToken,
     method: 'POST',
     body: {
-      ...(drank_at ? { drank_at: tokyoDateToIso(drank_at) } : {}),
+      ...(drank_at ? { drank_at: zonedDateToIso(drank_at, time_zone) } : {}),
       ...(place_name ? { place_name } : {}),
       ...(place_url ? { place_url } : {}),
+      items,
+    },
+  });
+
+  if (!result.ok) {
+    return { ok: false, error: result.error };
+  }
+
+  revalidatePath('/my-logs');
+  return { ok: true, data: (result.data.data ?? []).map(toDrinkLog) };
+}
+
+export async function replaceDrinkLogsForDay(
+  _prevState: DrinkLogActionState,
+  formData: FormData,
+): Promise<DrinkLogActionState> {
+  const token = await requireAccessToken();
+  if (!token.ok) {
+    return authError(token.error, '編集');
+  }
+
+  const timeZone = ((formData.get('time_zone') as string | null) ?? '').trim();
+  const rangeFrom = ((formData.get('range_from') as string | null) ?? '').trim();
+  const rangeTo = ((formData.get('range_to') as string | null) ?? '').trim();
+  const drankAtRaw = ((formData.get('drank_at') as string | null) ?? '').trim();
+  const placeName = ((formData.get('place_name') as string | null) ?? '').trim();
+  const placeUrl = ((formData.get('place_url') as string | null) ?? '').trim();
+  const itemsJSON = ((formData.get('items_json') as string | null) ?? '').trim();
+
+  let itemsUnknown: unknown;
+  try {
+    itemsUnknown = JSON.parse(itemsJSON);
+  } catch {
+    return { ok: false, error: 'お酒リストの形式が不正です。' };
+  }
+
+  const parsed = drinkLogDayReplaceSchema.safeParse({
+    time_zone: timeZone,
+    range_from: rangeFrom,
+    range_to: rangeTo,
+    drank_at: drankAtRaw,
+    place_name: placeName,
+    place_url: placeUrl,
+    items: itemsUnknown,
+  });
+
+  if (!parsed.success) {
+    return {
+      ok: false,
+      error: firstZodErrorMessage(parsed.error),
+      fieldErrors: zodIssuesToFieldErrors(parsed.error),
+    };
+  }
+
+  const { drank_at, place_name, place_url, items, time_zone, range_from, range_to } = parsed.data;
+
+  const result = await authServerFetch<{ data: ApiDrinkLog[] }>('/api/auth/drink-logs/day', {
+    accessToken: token.accessToken,
+    method: 'PUT',
+    body: {
+      range_from,
+      range_to,
+      drank_at: zonedDateToIso(drank_at, time_zone),
+      place_name: place_name ?? null,
+      place_url: place_url ?? null,
       items,
     },
   });
@@ -99,6 +164,7 @@ export async function updateDrinkLog(
     return { ok: false, error: '記録 ID が不正です。' };
   }
 
+  const timeZone = ((formData.get('time_zone') as string | null) ?? '').trim();
   const drankAtRaw = ((formData.get('drank_at') as string | null) ?? '').trim();
   const placeName = ((formData.get('place_name') as string | null) ?? '').trim();
   const placeUrl = ((formData.get('place_url') as string | null) ?? '').trim();
@@ -112,11 +178,10 @@ export async function updateDrinkLog(
   }
 
   const itemObj =
-    itemUnknown && typeof itemUnknown === 'object'
-      ? (itemUnknown as Record<string, unknown>)
-      : {};
+    itemUnknown && typeof itemUnknown === 'object' ? (itemUnknown as Record<string, unknown>) : {};
 
   const parsed = drinkLogUpdateSchema.safeParse({
+    time_zone: timeZone,
     ...(drankAtRaw ? { drank_at: drankAtRaw } : {}),
     place_name: placeName,
     place_url: placeUrl,
@@ -124,11 +189,10 @@ export async function updateDrinkLog(
   });
 
   if (!parsed.success) {
-    const flat = z.flattenError(parsed.error);
     return {
       ok: false,
       error: firstZodErrorMessage(parsed.error),
-      fieldErrors: flat.fieldErrors,
+      fieldErrors: zodIssuesToFieldErrors(parsed.error),
     };
   }
 
@@ -139,7 +203,7 @@ export async function updateDrinkLog(
       accessToken: token.accessToken,
       method: 'PATCH',
       body: {
-        ...(data.drank_at ? { drank_at: tokyoDateToIso(data.drank_at) } : {}),
+        ...(data.drank_at ? { drank_at: zonedDateToIso(data.drank_at, data.time_zone) } : {}),
         place_name: data.place_name ?? null,
         place_url: data.place_url ?? null,
         ...(data.drink_id ? { drink_id: data.drink_id } : {}),

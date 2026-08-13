@@ -1,11 +1,10 @@
 import type { DrinkLog } from '@sakehub/types';
 
+import { addCalendarYmd, zonedDateToIso, zonedDayKey } from '@/utils/time-zone';
 import { pureAlcoholGrams, round2 } from '@/utils/volume';
 
-const TOKYO = 'Asia/Tokyo';
-
 export interface DrinkLogDaySection {
-  /** YYYY-MM-DD in Asia/Tokyo */
+  /** YYYY-MM-DD in the viewer's time zone */
   dayKey: string;
   label: string;
   logs: DrinkLog[];
@@ -14,22 +13,8 @@ export interface DrinkLogDaySection {
   skippedMissingAbv: number;
 }
 
-export function tokyoDayKey(iso: string): string {
-  const parts = new Intl.DateTimeFormat('en-CA', {
-    timeZone: TOKYO,
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  }).formatToParts(new Date(iso));
-  const year = parts.find((p) => p.type === 'year')?.value;
-  const month = parts.find((p) => p.type === 'month')?.value;
-  const day = parts.find((p) => p.type === 'day')?.value;
-  return `${year}-${month}-${day}`;
-}
-
-export function formatTokyoDayLabel(dayKey: string): string {
+export function formatZonedDayLabel(dayKey: string): string {
   const [y, m, d] = dayKey.split('-').map(Number);
-  // Noon UTC on that calendar day is unambiguous for weekday labeling.
   const date = new Date(Date.UTC(y, m - 1, d, 12));
   return new Intl.DateTimeFormat('ja-JP', {
     timeZone: 'UTC',
@@ -39,23 +24,29 @@ export function formatTokyoDayLabel(dayKey: string): string {
   }).format(date);
 }
 
-export function startOfTokyoDayUtc(reference = new Date()): Date {
-  const key = tokyoDayKey(reference.toISOString());
-  const [y, m, d] = key.split('-').map(Number);
-  // Tokyo midnight = UTC previous day 15:00
-  return new Date(Date.UTC(y, m - 1, d, 0, 0, 0) - 9 * 60 * 60 * 1000);
+export function startOfWeekZoned(date: Date, timeZone: string): Date {
+  const todayYmd = zonedDayKey(date.toISOString(), timeZone);
+  const weekday = new Intl.DateTimeFormat('en-US', {
+    timeZone,
+    weekday: 'short',
+  }).format(date);
+  const map: Record<string, number> = {
+    Mon: 0,
+    Tue: 1,
+    Wed: 2,
+    Thu: 3,
+    Fri: 4,
+    Sat: 5,
+    Sun: 6,
+  };
+  const offset = map[weekday] ?? 0;
+  return new Date(zonedDateToIso(addCalendarYmd(todayYmd, -offset), timeZone));
 }
 
-export function addUtcDays(date: Date, days: number): Date {
-  const next = new Date(date);
-  next.setUTCDate(next.getUTCDate() + days);
-  return next;
-}
-
-export function groupLogsByTokyoDay(logs: DrinkLog[]): DrinkLogDaySection[] {
+export function groupLogsByZonedDay(logs: DrinkLog[], timeZone: string): DrinkLogDaySection[] {
   const map = new Map<string, DrinkLog[]>();
   for (const log of logs) {
-    const key = tokyoDayKey(log.drankAt);
+    const key = zonedDayKey(log.drankAt, timeZone);
     const bucket = map.get(key);
     if (bucket) {
       bucket.push(log);
@@ -81,7 +72,7 @@ export function groupLogsByTokyoDay(logs: DrinkLog[]): DrinkLogDaySection[] {
     }
     return {
       dayKey,
-      label: formatTokyoDayLabel(dayKey),
+      label: formatZonedDayLabel(dayKey),
       logs: dayLogs,
       drinkCount,
       pureAlcoholGrams: round2(grams),

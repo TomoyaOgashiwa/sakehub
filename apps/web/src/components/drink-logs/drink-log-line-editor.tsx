@@ -1,71 +1,28 @@
 'use client';
 
-import type { DrinkCategoryProduct, VolumePrecision, VolumeUnit } from '@sakehub/types';
+import type { VolumeUnit } from '@sakehub/types';
 
+import { type DrinkLogLine, type DrinkLogLineErrors } from '@/components/drink-logs/drink-log-line';
 import { Button } from '@/components/ui/button';
+import { Field, FieldError, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { findServingPreset, presetsForCategory } from '@/config/serving-presets';
 import { cn } from '@/utils/utils';
 import { convertVolumeValue, round2 } from '@/utils/volume';
 
-export interface DrinkLogLine {
-  localId: string;
-  kind: 'catalog' | 'custom';
-  drinkId?: string;
-  name: string;
-  category?: DrinkCategoryProduct;
-  unit: VolumeUnit;
-  value: string;
-  servingKey: string | null;
-  precision: VolumePrecision;
-  quantity: number;
-}
+export type { DrinkLogLine, DrinkLogLineErrors } from '@/components/drink-logs/drink-log-line';
+export {
+  createLineFromSelection,
+  lineToApiItem,
+  logToLine,
+} from '@/components/drink-logs/drink-log-line';
 
 interface DrinkLogLineEditorProps {
   line: DrinkLogLine;
   onChange: (patch: Partial<DrinkLogLine>) => void;
   onRemove?: () => void;
   showRemove?: boolean;
-}
-
-export function createLineFromSelection(option: {
-  kind: 'catalog' | 'custom';
-  drinkId?: string;
-  name: string;
-  category?: DrinkCategoryProduct;
-}): DrinkLogLine {
-  const firstPreset =
-    option.kind === 'catalog' && option.category
-      ? presetsForCategory(option.category)[0]
-      : undefined;
-  const defaultMl = firstPreset?.volumeMl ?? 180;
-
-  return {
-    localId: crypto.randomUUID(),
-    kind: option.kind,
-    drinkId: option.drinkId,
-    name: option.name,
-    category: option.category,
-    unit: 'ml',
-    value: String(defaultMl),
-    servingKey: firstPreset?.key ?? null,
-    precision: firstPreset?.defaultPrecision ?? 'exact',
-    quantity: 1,
-  };
-}
-
-export function lineToApiItem(line: DrinkLogLine) {
-  return {
-    ...(line.kind === 'catalog' && line.drinkId
-      ? { drink_id: line.drinkId }
-      : { custom_drink_name: line.name }),
-    input_unit: line.unit,
-    input_value: Number(line.value),
-    volume_precision: line.precision,
-    quantity: line.quantity,
-    ...(line.servingKey ? { serving_key: line.servingKey } : {}),
-  };
+  errors?: DrinkLogLineErrors;
 }
 
 export function DrinkLogLineEditor({
@@ -73,8 +30,12 @@ export function DrinkLogLineEditor({
   onChange,
   onRemove,
   showRemove = true,
+  errors,
 }: DrinkLogLineEditorProps) {
   const presets = line.category ? presetsForCategory(line.category) : [];
+  const drinkInvalid = Boolean(errors?.drink);
+  const qtyInvalid = Boolean(errors?.quantity);
+  const volInvalid = Boolean(errors?.input_value);
 
   function selectPreset(key: string) {
     const preset = findServingPreset(key);
@@ -123,13 +84,14 @@ export function DrinkLogLineEditor({
   }
 
   return (
-    <div className="space-y-3 rounded-xl border p-4">
+    <div className="flex flex-col gap-3 rounded-xl border p-4">
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="font-medium">{line.name}</p>
           <p className="text-muted-foreground text-xs">
             {line.kind === 'custom' ? 'カタログ外（自由入力）' : line.category}
           </p>
+          {drinkInvalid && <FieldError>{errors?.drink}</FieldError>}
         </div>
         {showRemove && onRemove && (
           <Button type="button" variant="ghost" size="sm" onClick={onRemove}>
@@ -155,8 +117,8 @@ export function DrinkLogLineEditor({
       )}
 
       <div className="flex flex-wrap items-end gap-4">
-        <div className="space-y-1">
-          <Label htmlFor={`qty-${line.localId}`}>杯数</Label>
+        <Field data-invalid={qtyInvalid ? true : undefined} className="w-auto">
+          <FieldLabel htmlFor={`qty-${line.localId}`}>杯数</FieldLabel>
           <div className="flex items-center gap-1">
             <Button
               type="button"
@@ -176,6 +138,7 @@ export function DrinkLogLineEditor({
               max={20}
               step={1}
               required
+              aria-invalid={qtyInvalid}
               value={line.quantity}
               onChange={(e) => {
                 const n = Number.parseInt(e.target.value, 10);
@@ -198,10 +161,11 @@ export function DrinkLogLineEditor({
               ＋
             </Button>
           </div>
-        </div>
+          {qtyInvalid && <FieldError>{errors?.quantity}</FieldError>}
+        </Field>
 
-        <div className="space-y-1">
-          <Label htmlFor={`vol-${line.localId}`}>1杯あたりの量</Label>
+        <Field data-invalid={volInvalid ? true : undefined} className="w-auto">
+          <FieldLabel htmlFor={`vol-${line.localId}`}>1杯あたりの量</FieldLabel>
           <div className="flex flex-wrap items-center gap-2">
             <Input
               id={`vol-${line.localId}`}
@@ -211,6 +175,7 @@ export function DrinkLogLineEditor({
               max={line.unit === 'oz' ? 70 : 2000}
               step="any"
               required
+              aria-invalid={volInvalid}
               value={line.value}
               onChange={(e) => handleValueChange(e.target.value)}
               className="max-w-40"
@@ -238,7 +203,8 @@ export function DrinkLogLineEditor({
               ))}
             </div>
           </div>
-        </div>
+          {volInvalid && <FieldError>{errors?.input_value}</FieldError>}
+        </Field>
       </div>
     </div>
   );

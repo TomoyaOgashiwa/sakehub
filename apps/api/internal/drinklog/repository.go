@@ -4,6 +4,8 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+	"fmt"
+	"strings"
 	"time"
 	"unicode/utf8"
 )
@@ -20,6 +22,7 @@ type Repository interface {
 	Update(ctx context.Context, log *Log) error
 	ListByUser(ctx context.Context, userID string, params ListParams) ([]Log, error)
 	Delete(ctx context.Context, id, userID string) error
+	ReplaceInRange(ctx context.Context, userID string, from, to time.Time, incoming []Log) ([]Log, error)
 	Summary(ctx context.Context, userID string, from, to time.Time) (logCount, skipped int, pureGrams float64, err error)
 	InsertSearchMiss(ctx context.Context, userID, queryRaw string) error
 }
@@ -214,6 +217,121 @@ func (r *repository) Delete(ctx context.Context, id, userID string) error {
 		return ErrForbidden
 	}
 	return nil
+}
+
+func (r *repository) ReplaceInRange(ctx context.Context, userID string, from, to time.Time, incoming []Log) ([]Log, error) {
+	tx, err := r.db.BeginTx(ctx, nil)
+	if err != nil {
+		return nil, err
+	}
+	defer func() { _ = tx.Rollback() }()
+
+	rows, err := tx.QueryContext(ctx, `
+		SELECT id FROM drink_logs
+		WHERE user_id = $1 AND drank_at >= $2 AND drank_at < $3
+		FOR UPDATE`, userID, from, to)
+	if err != nil {
+		return nil, err
+	}
+	existing := make(map[string]struct{})
+	for rows.Next() {
+		var id string
+		if err := rows.Scan(&id); err != nil {
+			rows.Close()
+			return nil, err
+		}
+		existing[id] = struct{}{}
+	}
+	if err := rows.Err(); err != nil {
+		rows.Close()
+		return nil, err
+	}
+	rows.Close()
+
+	incomingIDs := make(map[string]struct{}, len(incoming))
+	for i := range incoming {
+		id := strings.TrimSpace(incoming[i].ID)
+		if id == "" {
+			continue
+		}
+		if _, ok := existing[id]; !ok {
+			return nil, fmt.Errorf("%w: item id not in range", ErrValidation)
+		}
+		incomingIDs[id] = struct{}{}
+		incoming[i].ID = id
+	}
+
+	for id := range existing {
+		if _, keep := incomingIDs[id]; keep {
+			continue
+		}
+		if _, err := tx.ExecContext(ctx, `DELETE FROM drink_logs WHERE id = $1 AND user_id = $2`, id, userID); err != nil {
+			return nil, err
+		}
+	}
+
+	const insertQ = `
+		INSERT INTO drink_logs (
+			user_id, drink_id, custom_drink_name, drank_at, volume_ml, quantity, input_unit, input_value,
+			serving_key, volume_precision, place_name, place_url
+		)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
+		RETURNING id, created_at, updated_at`
+
+	const updateQ = `
+		UPDATE drink_logs SET
+			drink_id = $1,
+			custom_drink_name = $2,
+			drank_at = $3,
+			volume_ml = $4,
+			quantity = $5,
+			input_unit = $6,
+			input_value = $7,
+			serving_key = $8,
+			volume_precision = $9,
+			place_name = $10,
+			place_url = $11
+		WHERE id = $12 AND user_id = $13
+		RETURNING updated_at`
+
+	resultIDs := make([]string, 0, len(incoming))
+	for i := range incoming {
+		log := &incoming[i]
+		log.UserID = userID
+		if log.ID != "" {
+			err := tx.QueryRowContext(ctx, updateQ,
+				log.DrinkID, log.CustomDrinkName, log.DrankAt, log.VolumeML, log.Quantity, log.InputUnit, log.InputValue,
+				log.ServingKey, log.VolumePrecision, log.PlaceName, log.PlaceURL,
+				log.ID, userID,
+			).Scan(&log.UpdatedAt)
+			if err != nil {
+				return nil, err
+			}
+		} else {
+			err := tx.QueryRowContext(ctx, insertQ,
+				userID, log.DrinkID, log.CustomDrinkName, log.DrankAt, log.VolumeML, log.Quantity, log.InputUnit, log.InputValue,
+				log.ServingKey, log.VolumePrecision, log.PlaceName, log.PlaceURL,
+			).Scan(&log.ID, &log.CreatedAt, &log.UpdatedAt)
+			if err != nil {
+				return nil, err
+			}
+		}
+		resultIDs = append(resultIDs, log.ID)
+	}
+
+	if err := tx.Commit(); err != nil {
+		return nil, err
+	}
+
+	out := make([]Log, 0, len(resultIDs))
+	for _, id := range resultIDs {
+		found, err := r.FindByID(ctx, id, userID)
+		if err != nil {
+			return nil, err
+		}
+		out = append(out, *found)
+	}
+	return out, nil
 }
 
 func (r *repository) Summary(

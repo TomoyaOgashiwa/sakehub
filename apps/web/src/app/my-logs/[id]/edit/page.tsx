@@ -4,6 +4,7 @@ import { notFound, redirect } from 'next/navigation';
 import { ArrowLeft } from 'lucide-react';
 
 import { fetchDrinkLogById } from '@/application/drink-logs-api.server';
+import { getRequestTimeZone } from '@/application/request-time-zone';
 import { getOptionalAccessToken } from '@/application/require-access-token';
 import { Heading } from '@/components/ui/heading';
 
@@ -29,6 +30,8 @@ export default async function EditDrinkLogPage({ params }: PageProps) {
     notFound();
   }
 
+  const timeZone = await getRequestTimeZone();
+
   return (
     <div className="mx-auto max-w-2xl px-4 py-12">
       <nav className="mb-6">
@@ -44,11 +47,9 @@ export default async function EditDrinkLogPage({ params }: PageProps) {
       <Heading level="h1" className="mb-2">
         記録を編集
       </Heading>
-      <p className="text-muted-foreground mb-8 text-sm">
-        銘柄・量・日時・場所を修正できます。
-      </p>
+      <p className="text-muted-foreground mb-8 text-sm">銘柄・量・日時・場所を修正できます。</p>
 
-      <EditLogForm log={log} />
+      <EditLogForm log={log} timeZone={timeZone} />
     </div>
   );
 }

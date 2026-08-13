@@ -2,9 +2,12 @@ package drinklog
 
 import (
 	"context"
+	"errors"
 	"fmt"
+	"net/url"
 	"strings"
 	"time"
+	_ "time/tzdata"
 	"unicode/utf8"
 
 	"github.com/sakehub/api/internal/searchmiss"
@@ -16,6 +19,8 @@ const (
 	maxPlaceNameLen  = 200
 	maxPlaceURLLen   = 2000
 	maxQuantity      = 20
+	maxDrankAtFuture = 36 * time.Hour
+	maxDayRange      = 50 * time.Hour
 )
 
 type Service struct {
@@ -38,7 +43,7 @@ func (s *Service) CreateBatch(ctx context.Context, input CreateBatchInput, userI
 	if err != nil {
 		return nil, err
 	}
-	placeURL, err := optionalTrimmed(input.PlaceURL, maxPlaceURLLen, "place_url")
+	placeURL, err := optionalPlaceURL(input.PlaceURL)
 	if err != nil {
 		return nil, err
 	}
@@ -47,24 +52,15 @@ func (s *Service) CreateBatch(ctx context.Context, input CreateBatchInput, userI
 	if input.DrankAt != nil {
 		drankAt = input.DrankAt.UTC()
 	}
+	if err := validateDrankAt(drankAt, time.Now()); err != nil {
+		return nil, err
+	}
 
 	logs := make([]Log, 0, len(input.Items))
 	for i, item := range input.Items {
-		normalized, err := normalizeItem(item)
+		normalized, err := s.prepareItem(ctx, item)
 		if err != nil {
-			return nil, fmt.Errorf("%w: items[%d]: %v", ErrValidation, i, err)
-		}
-
-		if normalized.DrinkID != nil {
-			meta, err := s.repo.FindDrinkMeta(ctx, *normalized.DrinkID)
-			if err != nil {
-				return nil, fmt.Errorf("drinklog.CreateBatch: %w", err)
-			}
-			applyServingRules(normalized, meta.Category)
-		} else {
-			// Custom drinks cannot use category presets.
-			normalized.ServingKey = nil
-			normalized.VolumePrecision = PrecisionExact
+			return nil, wrapItemError("CreateBatch", i, err)
 		}
 
 		log := Log{
@@ -106,6 +102,43 @@ type normalizedItem struct {
 	VolumePrecision VolumePrecision
 	VolumeML        float64
 	Quantity        int
+}
+
+func validateDrankAt(t, now time.Time) error {
+	utc := t.UTC()
+	n := now.UTC()
+	if utc.After(n.Add(maxDrankAtFuture)) {
+		return fmt.Errorf("%w: drank_at is in the future", ErrValidation)
+	}
+	if utc.Before(n.AddDate(-10, 0, 0)) {
+		return fmt.Errorf("%w: drank_at is too far in the past", ErrValidation)
+	}
+	return nil
+}
+
+func wrapItemError(op string, i int, err error) error {
+	if errors.Is(err, ErrDrinkNotFound) {
+		return fmt.Errorf("drinklog.%s: %w", op, err)
+	}
+	return fmt.Errorf("%w: items[%d]: %v", ErrValidation, i, err)
+}
+
+func (s *Service) prepareItem(ctx context.Context, item CreateItemInput) (*normalizedItem, error) {
+	normalized, err := normalizeItem(item)
+	if err != nil {
+		return nil, err
+	}
+	if normalized.DrinkID != nil {
+		meta, err := s.repo.FindDrinkMeta(ctx, *normalized.DrinkID)
+		if err != nil {
+			return nil, err
+		}
+		applyServingRules(normalized, meta.Category)
+	} else {
+		normalized.ServingKey = nil
+		normalized.VolumePrecision = PrecisionExact
+	}
+	return normalized, nil
 }
 
 func normalizeItem(input CreateItemInput) (*normalizedItem, error) {
@@ -225,6 +258,35 @@ func optionalTrimmed(raw *string, maxLen int, field string) (*string, error) {
 	return &v, nil
 }
 
+func optionalPlaceURL(raw *string) (*string, error) {
+	v, err := optionalTrimmed(raw, maxPlaceURLLen, "place_url")
+	if err != nil || v == nil {
+		return v, err
+	}
+	u, err := url.ParseRequestURI(*v)
+	if err != nil || (u.Scheme != "http" && u.Scheme != "https") || u.Host == "" {
+		return nil, fmt.Errorf("%w: place_url must be http(s)", ErrValidation)
+	}
+	return v, nil
+}
+
+func zonedDayRange(timeZone, ymd string) (time.Time, time.Time, error) {
+	tz := strings.TrimSpace(timeZone)
+	if tz == "" {
+		return time.Time{}, time.Time{}, fmt.Errorf("%w: time_zone is required", ErrValidation)
+	}
+	loc, err := time.LoadLocation(tz)
+	if err != nil {
+		return time.Time{}, time.Time{}, fmt.Errorf("%w: invalid time_zone", ErrValidation)
+	}
+	trimmed := strings.TrimSpace(ymd)
+	start, err := time.ParseInLocation("2006-01-02", trimmed, loc)
+	if err != nil || start.Format("2006-01-02") != trimmed {
+		return time.Time{}, time.Time{}, fmt.Errorf("%w: invalid date", ErrValidation)
+	}
+	return start, start.AddDate(0, 0, 1), nil
+}
+
 func (s *Service) List(ctx context.Context, userID string, params ListParams) ([]Log, error) {
 	if params.Limit <= 0 || params.Limit > 100 {
 		params.Limit = 50
@@ -261,7 +323,7 @@ func (s *Service) Update(ctx context.Context, id, userID string, input UpdateInp
 		return nil, fmt.Errorf("drinklog.Update: %w", err)
 	}
 
-	normalized, err := normalizeItem(CreateItemInput{
+	normalized, err := s.prepareItem(ctx, CreateItemInput{
 		DrinkID:         input.DrinkID,
 		CustomDrinkName: input.CustomDrinkName,
 		InputUnit:       input.InputUnit,
@@ -271,25 +333,17 @@ func (s *Service) Update(ctx context.Context, id, userID string, input UpdateInp
 		Quantity:        input.Quantity,
 	})
 	if err != nil {
-		return nil, fmt.Errorf("%w: %v", ErrValidation, err)
-	}
-
-	if normalized.DrinkID != nil {
-		meta, err := s.repo.FindDrinkMeta(ctx, *normalized.DrinkID)
-		if err != nil {
+		if errors.Is(err, ErrDrinkNotFound) {
 			return nil, fmt.Errorf("drinklog.Update: %w", err)
 		}
-		applyServingRules(normalized, meta.Category)
-	} else {
-		normalized.ServingKey = nil
-		normalized.VolumePrecision = PrecisionExact
+		return nil, fmt.Errorf("%w: %v", ErrValidation, err)
 	}
 
 	placeName, err := optionalTrimmed(input.PlaceName, maxPlaceNameLen, "place_name")
 	if err != nil {
 		return nil, err
 	}
-	placeURL, err := optionalTrimmed(input.PlaceURL, maxPlaceURLLen, "place_url")
+	placeURL, err := optionalPlaceURL(input.PlaceURL)
 	if err != nil {
 		return nil, err
 	}
@@ -297,6 +351,9 @@ func (s *Service) Update(ctx context.Context, id, userID string, input UpdateInp
 	drankAt := existing.DrankAt
 	if input.DrankAt != nil {
 		drankAt = input.DrankAt.UTC()
+		if err := validateDrankAt(drankAt, time.Now()); err != nil {
+			return nil, err
+		}
 	}
 
 	log := Log{
@@ -329,6 +386,92 @@ func (s *Service) Update(ctx context.Context, id, userID string, input UpdateInp
 		return nil, fmt.Errorf("drinklog.Update: %w", err)
 	}
 	return updated, nil
+}
+
+func (s *Service) ReplaceDay(ctx context.Context, userID string, input ReplaceDayInput) ([]Log, error) {
+	if input.DrankAt == nil {
+		return nil, fmt.Errorf("%w: drank_at is required", ErrValidation)
+	}
+
+	from, to, err := zonedDayRange(input.TimeZone, input.Date)
+	if err != nil {
+		return nil, err
+	}
+	if to.Sub(from) > maxDayRange {
+		return nil, fmt.Errorf("%w: day range is too long", ErrValidation)
+	}
+
+	count, err := s.repo.CountInRange(ctx, userID, from, to)
+	if err != nil {
+		return nil, fmt.Errorf("drinklog.ReplaceDay: %w", err)
+	}
+	if count > maxItemsPerBatch {
+		return nil, fmt.Errorf("%w: too many logs in day to replace (max %d)", ErrConflict, maxItemsPerBatch)
+	}
+
+	drankAt := input.DrankAt.UTC()
+	if err := validateDrankAt(drankAt, time.Now()); err != nil {
+		return nil, err
+	}
+
+	if len(input.Items) == 0 {
+		return nil, fmt.Errorf("%w: items is required", ErrValidation)
+	}
+	if len(input.Items) > maxItemsPerBatch {
+		return nil, fmt.Errorf("%w: too many items (max %d)", ErrValidation, maxItemsPerBatch)
+	}
+
+	placeName, err := optionalTrimmed(input.PlaceName, maxPlaceNameLen, "place_name")
+	if err != nil {
+		return nil, err
+	}
+	placeURL, err := optionalPlaceURL(input.PlaceURL)
+	if err != nil {
+		return nil, err
+	}
+
+	incoming := make([]Log, 0, len(input.Items))
+	for i, item := range input.Items {
+		normalized, err := s.prepareItem(ctx, item.CreateItemInput)
+		if err != nil {
+			return nil, wrapItemError("ReplaceDay", i, err)
+		}
+
+		log := Log{
+			UserID:          userID,
+			DrinkID:         normalized.DrinkID,
+			CustomDrinkName: normalized.CustomDrinkName,
+			DrankAt:         drankAt,
+			VolumeML:        normalized.VolumeML,
+			Quantity:        normalized.Quantity,
+			InputUnit:       normalized.InputUnit,
+			InputValue:      normalized.InputValue,
+			ServingKey:      normalized.ServingKey,
+			VolumePrecision: normalized.VolumePrecision,
+			PlaceName:       placeName,
+			PlaceURL:        placeURL,
+		}
+		if item.ID != nil {
+			id := strings.TrimSpace(*item.ID)
+			if id != "" {
+				log.ID = id
+			}
+		}
+		incoming = append(incoming, log)
+	}
+
+	logs, err := s.repo.ReplaceInRange(ctx, userID, from, to, incoming)
+	if err != nil {
+		return nil, fmt.Errorf("drinklog.ReplaceDay: %w", err)
+	}
+
+	for _, log := range incoming {
+		if log.CustomDrinkName != nil {
+			_ = s.repo.InsertSearchMiss(ctx, userID, *log.CustomDrinkName)
+		}
+	}
+
+	return logs, nil
 }
 
 func (s *Service) Delete(ctx context.Context, id, userID string) error {

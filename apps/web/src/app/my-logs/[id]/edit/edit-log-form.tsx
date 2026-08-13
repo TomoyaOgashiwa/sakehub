@@ -13,57 +13,31 @@ import {
   createLineFromSelection,
   DrinkLogLineEditor,
   lineToApiItem,
+  logToLine,
   type DrinkLogLine,
 } from '@/components/drink-logs/drink-log-line-editor';
 import { Button } from '@/components/ui/button';
+import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import {
-  drinkLogUpdateSchema,
-  isoToTokyoDateInput,
-  tokyoTodayYmd,
-} from '@/utils/drink-log-schema';
+import { useBrowserTimeZone, useBrowserTodayYmd } from '@/hooks/use-browser-calendar';
+import { isoToZonedDateInput } from '@/utils/time-zone';
 
 const initialState: DrinkLogActionState = { ok: false, error: '' };
 
-function logToLine(log: DrinkLog): DrinkLogLine {
-  if (log.drink) {
-    return {
-      localId: log.id,
-      kind: 'catalog',
-      drinkId: log.drink.id,
-      name: log.drink.name,
-      category: log.drink.category,
-      unit: log.inputUnit,
-      value: String(log.inputValue),
-      servingKey: log.servingKey ?? null,
-      precision: log.volumePrecision,
-      quantity: log.quantity,
-    };
-  }
-  return {
-    localId: log.id,
-    kind: 'custom',
-    name: log.customDrinkName ?? '不明な銘柄',
-    unit: log.inputUnit,
-    value: String(log.inputValue),
-    servingKey: null,
-    precision: log.volumePrecision,
-    quantity: log.quantity,
-  };
-}
-
 interface EditLogFormProps {
   log: DrinkLog;
+  timeZone: string;
 }
 
-export function EditLogForm({ log }: EditLogFormProps) {
+export function EditLogForm({ log, timeZone }: EditLogFormProps) {
   const router = useRouter();
-  const [drankAt, setDrankAt] = useState(() => isoToTokyoDateInput(log.drankAt));
+  const tz = useBrowserTimeZone(timeZone);
+  const maxDate = useBrowserTodayYmd();
+  const [drankAt, setDrankAt] = useState<string | null>(null);
   const [placeName, setPlaceName] = useState(log.placeName ?? '');
   const [placeUrl, setPlaceUrl] = useState(log.placeUrl ?? '');
   const [line, setLine] = useState<DrinkLogLine>(() => logToLine(log));
-  const maxDate = tokyoTodayYmd();
+  const drankAtValue = drankAt ?? isoToZonedDateInput(log.drankAt, tz);
 
   const boundUpdate = updateDrinkLog.bind(null, log.id);
 
@@ -80,84 +54,93 @@ export function EditLogForm({ log }: EditLogFormProps) {
   );
 
   const itemJSON = useMemo(() => JSON.stringify(lineToApiItem(line)), [line]);
-
-  const canSubmit = useMemo(() => {
-    const parsed = drinkLogUpdateSchema.safeParse({
-      drank_at: drankAt,
-      place_name: placeName,
-      place_url: placeUrl,
-      ...lineToApiItem(line),
-    });
-    return parsed.success;
-  }, [drankAt, placeName, placeUrl, line]);
+  const fieldErrors = !state.ok ? state.fieldErrors : undefined;
+  const drankInvalid = Boolean(fieldErrors?.drank_at);
+  const placeNameInvalid = Boolean(fieldErrors?.place_name);
+  const placeUrlInvalid = Boolean(fieldErrors?.place_url);
 
   function replaceDrink(option: SelectedDrinkOption) {
     setLine(createLineFromSelection(option));
   }
 
   return (
-    <form action={formAction} className="space-y-8">
+    <form action={formAction} className="flex flex-col gap-8">
+      <input type="hidden" name="time_zone" value={tz} />
+      <input type="hidden" name="original_drank_at" value={log.drankAt} />
       <input type="hidden" name="item_json" value={itemJSON} />
 
-      <div className="space-y-2">
-        <Label htmlFor="drank_at">いつ飲んだか</Label>
-        <Input
-          id="drank_at"
-          name="drank_at"
-          type="date"
-          required
-          max={maxDate}
-          value={drankAt}
-          onChange={(e) => setDrankAt(e.target.value)}
-          className="max-w-xs"
-        />
-      </div>
+      <FieldGroup>
+        <Field data-invalid={drankInvalid ? true : undefined}>
+          <FieldLabel htmlFor="drank_at">いつ飲んだか</FieldLabel>
+          <Input
+            id="drank_at"
+            name="drank_at"
+            type="date"
+            required
+            max={maxDate || undefined}
+            value={drankAtValue}
+            aria-invalid={drankInvalid}
+            onChange={(e) => setDrankAt(e.target.value)}
+            className="max-w-xs"
+          />
+          <FieldDescription>
+            日付を変えない場合は元の時刻のままです。今日にすると記録した時刻（UTC）になります。
+          </FieldDescription>
+          {drankInvalid && <FieldError>{fieldErrors?.drank_at}</FieldError>}
+        </Field>
 
-      <div className="space-y-4">
-        <div className="space-y-2">
-          <Label>銘柄を変更</Label>
+        <Field>
+          <FieldLabel>銘柄を変更</FieldLabel>
           <DrinkAutocomplete onSelect={replaceDrink} />
-        </div>
-        <DrinkLogLineEditor
-          line={line}
-          onChange={(patch) => setLine((prev) => ({ ...prev, ...patch }))}
-          showRemove={false}
-        />
-      </div>
+          <DrinkLogLineEditor
+            line={line}
+            onChange={(patch) => setLine((prev) => ({ ...prev, ...patch }))}
+            showRemove={false}
+            errors={{
+              drink: fieldErrors?.drink_id ?? fieldErrors?.custom_drink_name,
+              input_value: fieldErrors?.input_value,
+              quantity: fieldErrors?.quantity,
+            }}
+          />
+        </Field>
 
-      <div className="space-y-4">
-        <div className="space-y-2">
-          <Label htmlFor="place_name">どこで飲んだか（任意）</Label>
+        <Field data-invalid={placeNameInvalid ? true : undefined}>
+          <FieldLabel htmlFor="place_name">どこで飲んだか（任意）</FieldLabel>
           <Input
             id="place_name"
             name="place_name"
             placeholder="例: 自宅、〇〇酒店"
             value={placeName}
+            aria-invalid={placeNameInvalid}
             onChange={(e) => setPlaceName(e.target.value)}
             maxLength={200}
           />
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="place_url">場所の URL（任意）</Label>
+          {placeNameInvalid && <FieldError>{fieldErrors?.place_name}</FieldError>}
+        </Field>
+
+        <Field data-invalid={placeUrlInvalid ? true : undefined}>
+          <FieldLabel htmlFor="place_url">場所の URL（任意）</FieldLabel>
           <Input
             id="place_url"
             name="place_url"
             placeholder="Google マップや店舗サイトの URL"
             value={placeUrl}
+            aria-invalid={placeUrlInvalid}
             onChange={(e) => setPlaceUrl(e.target.value)}
             maxLength={2000}
           />
-        </div>
-      </div>
+          {placeUrlInvalid && <FieldError>{fieldErrors?.place_url}</FieldError>}
+        </Field>
+      </FieldGroup>
 
-      {!state.ok && state.error && (
+      {!state.ok && state.error && (!fieldErrors || fieldErrors.time_zone || fieldErrors._form) && (
         <p className="text-destructive text-sm" role="alert">
           {state.error}
         </p>
       )}
 
       <div className="flex flex-wrap gap-3">
-        <Button type="submit" disabled={isPending || !canSubmit}>
+        <Button type="submit" disabled={isPending}>
           {isPending ? '保存中…' : '変更を保存'}
         </Button>
         <Button

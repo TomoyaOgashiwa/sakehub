@@ -78,6 +78,23 @@ type UpdateInput struct {
 	PlaceURL        *string         `json:"place_url,omitempty"`
 }
 
+// ReplaceDayItem is one line in a calendar-day replace payload.
+type ReplaceDayItem struct {
+	ID *string `json:"id,omitempty"`
+	CreateItemInput
+}
+
+// ReplaceDayInput replaces all logs in one local calendar day.
+// The delete window is computed on the server from time_zone + date (not client instants).
+type ReplaceDayInput struct {
+	TimeZone  string           `json:"time_zone"`
+	Date      string           `json:"date"`
+	DrankAt   *time.Time       `json:"drank_at"`
+	PlaceName *string          `json:"place_name"`
+	PlaceURL  *string          `json:"place_url"`
+	Items     []ReplaceDayItem `json:"items"`
+}
+
 // Summary is a period aggregate for pure alcohol intake.
 type Summary struct {
 	From              time.Time `json:"from"`

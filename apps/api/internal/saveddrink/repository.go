@@ -4,12 +4,11 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+	"fmt"
 )
 
 type Repository interface {
 	DrinkExists(ctx context.Context, drinkID string) (bool, error)
-	CountProvisionalByUser(ctx context.Context, userID string) (int, error)
-	ProvisionalNameExists(ctx context.Context, userID, nameNormalized string) (bool, error)
 	Upsert(ctx context.Context, userID, drinkID, status string) (*SavedDrink, error)
 	UpsertProvisional(ctx context.Context, userID, name, nameNormalized, status string) (*SavedDrink, error)
 	Update(ctx context.Context, drinkID, userID string, status, note *string) (*SavedDrink, error)
@@ -30,28 +29,6 @@ func (r *repository) DrinkExists(ctx context.Context, drinkID string) (bool, err
 	const q = `SELECT EXISTS(SELECT 1 FROM drinks WHERE id = $1 AND visibility = 'published')`
 	var exists bool
 	if err := r.db.QueryRowContext(ctx, q, drinkID).Scan(&exists); err != nil {
-		return false, err
-	}
-	return exists, nil
-}
-
-func (r *repository) CountProvisionalByUser(ctx context.Context, userID string) (int, error) {
-	const q = `SELECT COUNT(*) FROM drinks WHERE visibility = 'provisional' AND submitted_by = $1`
-	var n int
-	if err := r.db.QueryRowContext(ctx, q, userID).Scan(&n); err != nil {
-		return 0, err
-	}
-	return n, nil
-}
-
-func (r *repository) ProvisionalNameExists(ctx context.Context, userID, nameNormalized string) (bool, error) {
-	const q = `
-		SELECT EXISTS(
-			SELECT 1 FROM drinks
-			WHERE visibility = 'provisional' AND submitted_by = $1 AND name_normalized = $2
-		)`
-	var exists bool
-	if err := r.db.QueryRowContext(ctx, q, userID, nameNormalized).Scan(&exists); err != nil {
 		return false, err
 	}
 	return exists, nil
@@ -80,6 +57,31 @@ func (r *repository) UpsertProvisional(ctx context.Context, userID, name, nameNo
 		return nil, err
 	}
 	defer tx.Rollback()
+
+	// Owner-scoped lock so COUNT + INSERT cannot race past MaxProvisionalPerUser.
+	if _, err := tx.ExecContext(ctx, `SELECT pg_advisory_xact_lock(hashtext($1))`, userID); err != nil {
+		return nil, err
+	}
+
+	var exists bool
+	if err := tx.QueryRowContext(ctx, `
+		SELECT EXISTS(
+			SELECT 1 FROM drinks
+			WHERE visibility = 'provisional' AND submitted_by = $1 AND name_normalized = $2
+		)`, userID, nameNormalized).Scan(&exists); err != nil {
+		return nil, err
+	}
+	if !exists {
+		var n int
+		if err := tx.QueryRowContext(ctx, `
+			SELECT COUNT(*) FROM drinks
+			WHERE visibility = 'provisional' AND submitted_by = $1`, userID).Scan(&n); err != nil {
+			return nil, err
+		}
+		if n >= MaxProvisionalPerUser {
+			return nil, fmt.Errorf("%w: provisional limit reached", ErrValidation)
+		}
+	}
 
 	const insertDrink = `
 		INSERT INTO drinks (

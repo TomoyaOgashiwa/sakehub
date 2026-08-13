@@ -70,20 +70,6 @@ func (s *Service) SaveProvisional(ctx context.Context, userID string, input Save
 		return nil, fmt.Errorf("%w: name is invalid", ErrValidation)
 	}
 
-	exists, err := s.repo.ProvisionalNameExists(ctx, userID, normalized)
-	if err != nil {
-		return nil, fmt.Errorf("saveddrink.SaveProvisional: %w", err)
-	}
-	if !exists {
-		count, err := s.repo.CountProvisionalByUser(ctx, userID)
-		if err != nil {
-			return nil, fmt.Errorf("saveddrink.SaveProvisional: %w", err)
-		}
-		if count >= MaxProvisionalPerUser {
-			return nil, fmt.Errorf("%w: provisional limit reached", ErrValidation)
-		}
-	}
-
 	row, err := s.repo.UpsertProvisional(ctx, userID, name, normalized, input.Status)
 	if err != nil {
 		return nil, fmt.Errorf("saveddrink.SaveProvisional: %w", err)

@@ -3,45 +3,34 @@ package saveddrink
 import (
 	"context"
 	"errors"
+	"fmt"
 	"strings"
 	"testing"
 )
 
 type stubRepo struct {
-	exists           bool
-	existsErr        error
-	provCount        int
-	provCountErr     error
-	provNameExists   bool
-	provNameExistErr error
-	upsertRow        *SavedDrink
-	upsertErr        error
-	provisionalRow   *SavedDrink
-	provisionalErr   error
-	updateRow        *SavedDrink
-	updateErr        error
-	findRow          *SavedDrink
-	findErr          error
-	listRows         []SavedDrink
-	listErr          error
-	deleteErr        error
-	deletedFor       string
-	lastStatus       string
-	lastNote         *string
-	lastProvName     string
-	lastProvNorm     string
+	exists         bool
+	existsErr      error
+	upsertRow      *SavedDrink
+	upsertErr      error
+	provisionalRow *SavedDrink
+	provisionalErr error
+	updateRow      *SavedDrink
+	updateErr      error
+	findRow        *SavedDrink
+	findErr        error
+	listRows       []SavedDrink
+	listErr        error
+	deleteErr      error
+	deletedFor     string
+	lastStatus     string
+	lastNote       *string
+	lastProvName   string
+	lastProvNorm   string
 }
 
 func (s *stubRepo) DrinkExists(context.Context, string) (bool, error) {
 	return s.exists, s.existsErr
-}
-
-func (s *stubRepo) CountProvisionalByUser(context.Context, string) (int, error) {
-	return s.provCount, s.provCountErr
-}
-
-func (s *stubRepo) ProvisionalNameExists(context.Context, string, string) (bool, error) {
-	return s.provNameExists, s.provNameExistErr
 }
 
 func (s *stubRepo) Upsert(_ context.Context, _, _, status string) (*SavedDrink, error) {
@@ -213,36 +202,17 @@ func TestSaveProvisionalUpsertsNormalizedName(t *testing.T) {
 	}
 }
 
-func TestSaveProvisionalRejectsWhenAtLimit(t *testing.T) {
+func TestSaveProvisionalPropagatesLimitError(t *testing.T) {
 	t.Parallel()
-	svc := NewService(&stubRepo{provCount: MaxProvisionalPerUser})
+	svc := NewService(&stubRepo{
+		provisionalErr: fmt.Errorf("%w: provisional limit reached", ErrValidation),
+	})
 	_, err := svc.SaveProvisional(context.Background(), "user", SaveProvisionalInput{
 		Name:   "禅人未登録ラベル",
 		Status: StatusDrank,
 	})
 	if !errors.Is(err, ErrValidation) {
 		t.Fatalf("expected ErrValidation, got %v", err)
-	}
-}
-
-func TestSaveProvisionalAllowsReuseWhenAtLimit(t *testing.T) {
-	t.Parallel()
-	want := &SavedDrink{ID: "s1", Status: StatusDrank}
-	repo := &stubRepo{
-		provCount:      MaxProvisionalPerUser,
-		provNameExists: true,
-		provisionalRow: want,
-	}
-	svc := NewService(repo)
-	got, err := svc.SaveProvisional(context.Background(), "user", SaveProvisionalInput{
-		Name:   "禅人未登録ラベル",
-		Status: StatusDrank,
-	})
-	if err != nil {
-		t.Fatalf("SaveProvisional: %v", err)
-	}
-	if got != want {
-		t.Fatalf("got %+v, want %+v", got, want)
 	}
 }
 

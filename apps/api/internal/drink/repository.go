@@ -201,7 +201,8 @@ func (r *repository) SuggestSimilar(ctx context.Context, query string, limit int
 	}
 	defer tx.Rollback()
 
-	// % uses gin_trgm_ops (idx_drinks_name_trgm). similarity() > n does not.
+	// % uses gin_trgm_ops: idx_drinks_name_trgm and idx_drinks_aliases_trgm
+	// (array_to_string_immutable(aliases, ' ')). similarity() > n does not.
 	// Threshold is a package constant, not request input.
 	setLocal := fmt.Sprintf("SET LOCAL pg_trgm.similarity_threshold = %g", SimilarityThreshold)
 	if _, err := tx.ExecContext(ctx, setLocal); err != nil {
@@ -214,13 +215,13 @@ func (r *repository) SuggestSimilar(ctx context.Context, query string, limit int
 			SELECT %s,
 				GREATEST(
 					similarity(name, $1),
-					COALESCE((SELECT max(similarity(a, $1)) FROM unnest(aliases) a), 0)
+					similarity(array_to_string_immutable(aliases, ' '), $1)
 				) AS sim
 			FROM drinks
 			WHERE visibility = 'published'
 			  AND (
 				name %% $1
-				OR EXISTS (SELECT 1 FROM unnest(aliases) a WHERE a %% $1)
+				OR array_to_string_immutable(aliases, ' ') %% $1
 			  )
 		) ranked
 		ORDER BY sim DESC

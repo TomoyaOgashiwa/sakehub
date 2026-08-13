@@ -1,5 +1,7 @@
 import type { DrinkCategory } from './drink';
 
+export type SavedDrinkStatus = 'drank' | 'want';
+
 export interface SavedDrinkCatalog {
   id: string;
   slug: string;
@@ -14,6 +16,8 @@ export interface SavedDrink {
   id: string;
   userId: string;
   drinkId: string;
+  status: SavedDrinkStatus;
+  note: string;
   createdAt: string;
   drink?: SavedDrinkCatalog;
   rating?: number;

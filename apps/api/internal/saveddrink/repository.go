@@ -8,7 +8,8 @@ import (
 
 type Repository interface {
 	DrinkExists(ctx context.Context, drinkID string) (bool, error)
-	Upsert(ctx context.Context, userID, drinkID string) (*SavedDrink, error)
+	Upsert(ctx context.Context, userID, drinkID, status string) (*SavedDrink, error)
+	Update(ctx context.Context, drinkID, userID string, status, note *string) (*SavedDrink, error)
 	FindByDrinkAndUser(ctx context.Context, drinkID, userID string) (*SavedDrink, error)
 	ListByUser(ctx context.Context, userID string, params ListParams) ([]SavedDrink, error)
 	DeleteByDrinkAndUser(ctx context.Context, drinkID, userID string) error
@@ -31,18 +32,40 @@ func (r *repository) DrinkExists(ctx context.Context, drinkID string) (bool, err
 	return exists, nil
 }
 
-func (r *repository) Upsert(ctx context.Context, userID, drinkID string) (*SavedDrink, error) {
+func (r *repository) Upsert(ctx context.Context, userID, drinkID, status string) (*SavedDrink, error) {
 	const q = `
-		INSERT INTO saved_drinks (user_id, drink_id)
-		VALUES ($1, $2)
+		INSERT INTO saved_drinks (user_id, drink_id, status)
+		VALUES ($1, $2, $3)
 		ON CONFLICT (user_id, drink_id)
-		DO UPDATE SET drink_id = EXCLUDED.drink_id
-		RETURNING id, user_id, drink_id, created_at`
+		DO UPDATE SET status = EXCLUDED.status
+		RETURNING id, user_id, drink_id, status, note, created_at`
 
 	var row SavedDrink
-	if err := r.db.QueryRowContext(ctx, q, userID, drinkID).Scan(
-		&row.ID, &row.UserID, &row.DrinkID, &row.CreatedAt,
+	if err := r.db.QueryRowContext(ctx, q, userID, drinkID, status).Scan(
+		&row.ID, &row.UserID, &row.DrinkID, &row.Status, &row.Note, &row.CreatedAt,
 	); err != nil {
+		return nil, err
+	}
+	return &row, nil
+}
+
+func (r *repository) Update(ctx context.Context, drinkID, userID string, status, note *string) (*SavedDrink, error) {
+	const q = `
+		UPDATE saved_drinks
+		SET
+			status = COALESCE($3, status),
+			note = COALESCE($4, note)
+		WHERE drink_id = $1 AND user_id = $2
+		RETURNING id, user_id, drink_id, status, note, created_at`
+
+	var row SavedDrink
+	err := r.db.QueryRowContext(ctx, q, drinkID, userID, status, note).Scan(
+		&row.ID, &row.UserID, &row.DrinkID, &row.Status, &row.Note, &row.CreatedAt,
+	)
+	if errors.Is(err, sql.ErrNoRows) {
+		return nil, ErrNotFound
+	}
+	if err != nil {
 		return nil, err
 	}
 	return &row, nil
@@ -50,13 +73,13 @@ func (r *repository) Upsert(ctx context.Context, userID, drinkID string) (*Saved
 
 func (r *repository) FindByDrinkAndUser(ctx context.Context, drinkID, userID string) (*SavedDrink, error) {
 	const q = `
-		SELECT id, user_id, drink_id, created_at
+		SELECT id, user_id, drink_id, status, note, created_at
 		FROM saved_drinks
 		WHERE drink_id = $1 AND user_id = $2`
 
 	var row SavedDrink
 	err := r.db.QueryRowContext(ctx, q, drinkID, userID).Scan(
-		&row.ID, &row.UserID, &row.DrinkID, &row.CreatedAt,
+		&row.ID, &row.UserID, &row.DrinkID, &row.Status, &row.Note, &row.CreatedAt,
 	)
 	if errors.Is(err, sql.ErrNoRows) {
 		return nil, ErrNotFound
@@ -70,7 +93,7 @@ func (r *repository) FindByDrinkAndUser(ctx context.Context, drinkID, userID str
 func (r *repository) ListByUser(ctx context.Context, userID string, params ListParams) ([]SavedDrink, error) {
 	const q = `
 		SELECT
-			s.id, s.user_id, s.drink_id, s.created_at,
+			s.id, s.user_id, s.drink_id, s.status, s.note, s.created_at,
 			d.id, d.slug, d.name, d.name_en, d.category, d.image_url,
 			r.rating, r.comment
 		FROM saved_drinks s
@@ -116,7 +139,7 @@ func scanListed(rows *sql.Rows) (SavedDrink, error) {
 		comment  sql.NullString
 	)
 	err := rows.Scan(
-		&item.ID, &item.UserID, &item.DrinkID, &item.CreatedAt,
+		&item.ID, &item.UserID, &item.DrinkID, &item.Status, &item.Note, &item.CreatedAt,
 		&drink.ID, &drink.Slug, &drink.Name, &nameEn, &drink.Category, &imageURL,
 		&rating, &comment,
 	)

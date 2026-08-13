@@ -135,10 +135,12 @@ export default async function DrinkDetailPage({ params }: PageProps) {
                 {user ? (
                   <div className="bg-muted/40 rounded-xl border p-4">
                     <DrinkReviewWidget
-                      key={`${mySaved?.id ?? 'unsaved'}-${myReview?.updatedAt ?? 'none'}`}
+                      key={`${mySaved?.id ?? 'unsaved'}-${mySaved?.status ?? 'none'}-${myReview?.updatedAt ?? 'none'}`}
                       drinkId={drink.id}
                       drinkSlug={slug}
                       initialSaved={mySaved != null}
+                      initialStatus={mySaved?.status ?? null}
+                      initialNote={mySaved?.note ?? ''}
                       initialReview={myReview}
                     />
                   </div>
@@ -148,7 +150,7 @@ export default async function DrinkDetailPage({ params }: PageProps) {
                       href={`/login?next=${encodeURIComponent(`/drinks/${slug}`)}`}
                       className="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-9 items-center rounded-md px-4 text-sm font-medium"
                     >
-                      ログインしてリストに残す
+                      ログインして残す
                     </Link>
                   </div>
                 )}

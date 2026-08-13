@@ -2,6 +2,12 @@ package saveddrink
 
 import "time"
 
+const (
+	StatusDrank = "drank"
+	StatusWant  = "want"
+	MaxNoteLen  = 280
+)
+
 // DrinkSummary is the catalog slice embedded on list responses.
 type DrinkSummary struct {
 	ID       string  `json:"id"`
@@ -17,6 +23,8 @@ type SavedDrink struct {
 	ID        string        `json:"id"`
 	UserID    string        `json:"user_id"`
 	DrinkID   string        `json:"drink_id"`
+	Status    string        `json:"status"`
+	Note      string        `json:"note"`
 	CreatedAt time.Time     `json:"created_at"`
 	Drink     *DrinkSummary `json:"drink,omitempty"`
 	Rating    *int          `json:"rating,omitempty"`
@@ -25,6 +33,12 @@ type SavedDrink struct {
 
 type SaveInput struct {
 	DrinkID string `json:"drink_id"`
+	Status  string `json:"status"`
+}
+
+type PatchInput struct {
+	Status *string `json:"status"`
+	Note   *string `json:"note"`
 }
 
 type ListParams struct {

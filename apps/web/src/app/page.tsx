@@ -73,10 +73,10 @@ async function DrinkListLoader({ searchParams }: PageProps) {
     user && accessToken ? fetchMySavedDrinks(accessToken, { limit: 8 }) : Promise.resolve([]),
   ]);
 
-  const recentSaves = saved
-    .map((item) => item.drink)
-    .filter((drink): drink is NonNullable<typeof drink> => drink != null)
-    .map((drink) => ({ slug: drink.slug, name: drink.name }));
+  const recentSaves = saved.flatMap((item) => {
+    if (!item.drink) return [];
+    return [{ slug: item.drink.slug, name: item.drink.name, status: item.status }];
+  });
 
   return (
     <DrinkListClient

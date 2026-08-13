@@ -3,6 +3,7 @@ package saveddrink
 import (
 	"context"
 	"errors"
+	"strings"
 	"testing"
 )
 
@@ -11,20 +12,33 @@ type stubRepo struct {
 	existsErr  error
 	upsertRow  *SavedDrink
 	upsertErr  error
+	updateRow  *SavedDrink
+	updateErr  error
 	findRow    *SavedDrink
 	findErr    error
 	listRows   []SavedDrink
 	listErr    error
 	deleteErr  error
 	deletedFor string
+	lastStatus string
+	lastNote   *string
 }
 
 func (s *stubRepo) DrinkExists(context.Context, string) (bool, error) {
 	return s.exists, s.existsErr
 }
 
-func (s *stubRepo) Upsert(context.Context, string, string) (*SavedDrink, error) {
+func (s *stubRepo) Upsert(_ context.Context, _, _, status string) (*SavedDrink, error) {
+	s.lastStatus = status
 	return s.upsertRow, s.upsertErr
+}
+
+func (s *stubRepo) Update(_ context.Context, _, _ string, status, note *string) (*SavedDrink, error) {
+	if status != nil {
+		s.lastStatus = *status
+	}
+	s.lastNote = note
+	return s.updateRow, s.updateErr
 }
 
 func (s *stubRepo) FindByDrinkAndUser(context.Context, string, string) (*SavedDrink, error) {
@@ -45,7 +59,25 @@ const testDrinkID = "11111111-1111-1111-1111-111111111111"
 func TestSaveRejectsInvalidDrinkID(t *testing.T) {
 	t.Parallel()
 	svc := NewService(&stubRepo{})
-	_, err := svc.Save(context.Background(), "user", SaveInput{DrinkID: "not-a-uuid"})
+	_, err := svc.Save(context.Background(), "user", SaveInput{DrinkID: "not-a-uuid", Status: StatusDrank})
+	if !errors.Is(err, ErrValidation) {
+		t.Fatalf("expected ErrValidation, got %v", err)
+	}
+}
+
+func TestSaveRejectsMissingStatus(t *testing.T) {
+	t.Parallel()
+	svc := NewService(&stubRepo{exists: true})
+	_, err := svc.Save(context.Background(), "user", SaveInput{DrinkID: testDrinkID})
+	if !errors.Is(err, ErrValidation) {
+		t.Fatalf("expected ErrValidation, got %v", err)
+	}
+}
+
+func TestSaveRejectsInvalidStatus(t *testing.T) {
+	t.Parallel()
+	svc := NewService(&stubRepo{exists: true})
+	_, err := svc.Save(context.Background(), "user", SaveInput{DrinkID: testDrinkID, Status: "have"})
 	if !errors.Is(err, ErrValidation) {
 		t.Fatalf("expected ErrValidation, got %v", err)
 	}
@@ -54,7 +86,7 @@ func TestSaveRejectsInvalidDrinkID(t *testing.T) {
 func TestSaveRejectsMissingDrink(t *testing.T) {
 	t.Parallel()
 	svc := NewService(&stubRepo{exists: false})
-	_, err := svc.Save(context.Background(), "user", SaveInput{DrinkID: testDrinkID})
+	_, err := svc.Save(context.Background(), "user", SaveInput{DrinkID: testDrinkID, Status: StatusWant})
 	if !errors.Is(err, ErrDrinkNotFound) {
 		t.Fatalf("expected ErrDrinkNotFound, got %v", err)
 	}
@@ -62,14 +94,55 @@ func TestSaveRejectsMissingDrink(t *testing.T) {
 
 func TestSaveUpsertsWhenDrinkExists(t *testing.T) {
 	t.Parallel()
-	want := &SavedDrink{ID: "s1", DrinkID: testDrinkID}
-	svc := NewService(&stubRepo{exists: true, upsertRow: want})
-	got, err := svc.Save(context.Background(), "user", SaveInput{DrinkID: testDrinkID})
+	want := &SavedDrink{ID: "s1", DrinkID: testDrinkID, Status: StatusDrank}
+	repo := &stubRepo{exists: true, upsertRow: want}
+	svc := NewService(repo)
+	got, err := svc.Save(context.Background(), "user", SaveInput{DrinkID: testDrinkID, Status: StatusDrank})
 	if err != nil {
 		t.Fatalf("Save: %v", err)
 	}
 	if got != want {
 		t.Fatalf("got %+v, want %+v", got, want)
+	}
+	if repo.lastStatus != StatusDrank {
+		t.Fatalf("upserted status %q, want %q", repo.lastStatus, StatusDrank)
+	}
+}
+
+func TestPatchRejectsEmptyBody(t *testing.T) {
+	t.Parallel()
+	svc := NewService(&stubRepo{})
+	_, err := svc.Patch(context.Background(), testDrinkID, "user", PatchInput{})
+	if !errors.Is(err, ErrValidation) {
+		t.Fatalf("expected ErrValidation, got %v", err)
+	}
+}
+
+func TestPatchRejectsLongNote(t *testing.T) {
+	t.Parallel()
+	svc := NewService(&stubRepo{})
+	note := strings.Repeat("あ", MaxNoteLen+1)
+	_, err := svc.Patch(context.Background(), testDrinkID, "user", PatchInput{Note: &note})
+	if !errors.Is(err, ErrValidation) {
+		t.Fatalf("expected ErrValidation, got %v", err)
+	}
+}
+
+func TestPatchUpdatesStatus(t *testing.T) {
+	t.Parallel()
+	status := StatusWant
+	want := &SavedDrink{ID: "s1", DrinkID: testDrinkID, Status: StatusWant}
+	repo := &stubRepo{updateRow: want}
+	svc := NewService(repo)
+	got, err := svc.Patch(context.Background(), testDrinkID, "user", PatchInput{Status: &status})
+	if err != nil {
+		t.Fatalf("Patch: %v", err)
+	}
+	if got != want {
+		t.Fatalf("got %+v, want %+v", got, want)
+	}
+	if repo.lastStatus != StatusWant {
+		t.Fatalf("patched status %q, want %q", repo.lastStatus, StatusWant)
 	}
 }
 

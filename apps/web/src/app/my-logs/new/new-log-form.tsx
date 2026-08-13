@@ -26,18 +26,19 @@ interface LogDrinkLine {
   value: string;
   servingKey: string | null;
   precision: VolumePrecision;
+  quantity: number;
 }
 
 const initialState: DrinkLogActionState = { ok: false, error: '' };
 
-function toDatetimeLocalValue(date: Date): string {
+function toDateInputValue(date: Date): string {
   const pad = (n: number) => String(n).padStart(2, '0');
-  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
 }
 
 export function NewLogForm() {
   const router = useRouter();
-  const [drankAt, setDrankAt] = useState(() => toDatetimeLocalValue(new Date()));
+  const [drankAt, setDrankAt] = useState(() => toDateInputValue(new Date()));
   const [placeName, setPlaceName] = useState('');
   const [placeUrl, setPlaceUrl] = useState('');
   const [lines, setLines] = useState<LogDrinkLine[]>([]);
@@ -64,6 +65,7 @@ export function NewLogForm() {
           input_unit: line.unit,
           input_value: Number(line.value),
           volume_precision: line.precision,
+          quantity: line.quantity,
           ...(line.servingKey ? { serving_key: line.servingKey } : {}),
         })),
       ),
@@ -92,12 +94,15 @@ export function NewLogForm() {
         value: String(defaultMl),
         servingKey: firstPreset?.key ?? null,
         precision: firstPreset?.defaultPrecision ?? 'exact',
+        quantity: 1,
       },
     ]);
   }
 
   function updateLine(localId: string, patch: Partial<LogDrinkLine>) {
-    setLines((prev) => prev.map((line) => (line.localId === localId ? { ...line, ...patch } : line)));
+    setLines((prev) =>
+      prev.map((line) => (line.localId === localId ? { ...line, ...patch } : line)),
+    );
   }
 
   function removeLine(localId: string) {
@@ -151,7 +156,15 @@ export function NewLogForm() {
   }
 
   const canSubmit =
-    lines.length > 0 && lines.every((l) => Number.isFinite(Number(l.value)) && Number(l.value) > 0);
+    lines.length > 0 &&
+    lines.every(
+      (l) =>
+        Number.isFinite(Number(l.value)) &&
+        Number(l.value) > 0 &&
+        Number.isInteger(l.quantity) &&
+        l.quantity >= 1 &&
+        l.quantity <= 20,
+    );
 
   return (
     <form action={formAction} className="space-y-8">
@@ -162,7 +175,7 @@ export function NewLogForm() {
         <Input
           id="drank_at"
           name="drank_at"
-          type="datetime-local"
+          type="date"
           required
           value={drankAt}
           onChange={(e) => setDrankAt(e.target.value)}
@@ -214,43 +227,96 @@ export function NewLogForm() {
                     </div>
                   )}
 
-                  <div className="flex flex-wrap items-center gap-2">
-                    <Label htmlFor={`vol-${line.localId}`} className="sr-only">
-                      量
-                    </Label>
-                    <Input
-                      id={`vol-${line.localId}`}
-                      type="number"
-                      inputMode="decimal"
-                      min={line.unit === 'oz' ? 0.5 : 1}
-                      max={line.unit === 'oz' ? 70 : 2000}
-                      step="any"
-                      required
-                      value={line.value}
-                      onChange={(e) => handleValueChange(line, e.target.value)}
-                      className="max-w-40"
-                    />
-                    <div
-                      className="border-border inline-flex rounded-lg border p-0.5"
-                      role="group"
-                      aria-label="単位"
-                    >
-                      {(['ml', 'oz'] as const).map((u) => (
-                        <button
-                          key={u}
+                  <div className="flex flex-wrap items-end gap-4">
+                    <div className="space-y-1">
+                      <Label htmlFor={`qty-${line.localId}`}>杯数</Label>
+                      <div className="flex items-center gap-1">
+                        <Button
                           type="button"
-                          className={cn(
-                            'rounded-md px-2.5 py-1 text-sm font-medium transition-colors',
-                            line.unit === u
-                              ? 'bg-primary text-primary-foreground'
-                              : 'text-muted-foreground hover:text-foreground',
-                          )}
-                          onClick={() => handleUnitChange(line, u)}
-                          aria-pressed={line.unit === u}
+                          variant="outline"
+                          size="icon-sm"
+                          aria-label="1杯減らす"
+                          disabled={line.quantity <= 1}
+                          onClick={() =>
+                            updateLine(line.localId, { quantity: Math.max(1, line.quantity - 1) })
+                          }
                         >
-                          {u}
-                        </button>
-                      ))}
+                          −
+                        </Button>
+                        <Input
+                          id={`qty-${line.localId}`}
+                          type="number"
+                          inputMode="numeric"
+                          min={1}
+                          max={20}
+                          step={1}
+                          required
+                          value={line.quantity}
+                          onChange={(e) => {
+                            const n = Number.parseInt(e.target.value, 10);
+                            if (!Number.isFinite(n)) {
+                              updateLine(line.localId, { quantity: 1 });
+                              return;
+                            }
+                            updateLine(line.localId, {
+                              quantity: Math.min(20, Math.max(1, n)),
+                            });
+                          }}
+                          className="w-14 text-center"
+                        />
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="icon-sm"
+                          aria-label="1杯増やす"
+                          disabled={line.quantity >= 20}
+                          onClick={() =>
+                            updateLine(line.localId, { quantity: Math.min(20, line.quantity + 1) })
+                          }
+                        >
+                          ＋
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <Label htmlFor={`vol-${line.localId}`}>1杯あたりの量</Label>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <Input
+                          id={`vol-${line.localId}`}
+                          type="number"
+                          inputMode="decimal"
+                          min={line.unit === 'oz' ? 0.5 : 1}
+                          max={line.unit === 'oz' ? 70 : 2000}
+                          step="any"
+                          required
+                          value={line.value}
+                          onChange={(e) => handleValueChange(line, e.target.value)}
+                          className="max-w-40"
+                        />
+                        <div
+                          className="border-border inline-flex rounded-lg border p-0.5"
+                          role="group"
+                          aria-label="単位"
+                        >
+                          {(['ml', 'oz'] as const).map((u) => (
+                            <button
+                              key={u}
+                              type="button"
+                              className={cn(
+                                'rounded-md px-2.5 py-1 text-sm font-medium transition-colors',
+                                line.unit === u
+                                  ? 'bg-primary text-primary-foreground'
+                                  : 'text-muted-foreground hover:text-foreground',
+                              )}
+                              onClick={() => handleUnitChange(line, u)}
+                              aria-pressed={line.unit === u}
+                            >
+                              {u}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </li>
@@ -282,7 +348,9 @@ export function NewLogForm() {
             onChange={(e) => setPlaceUrl(e.target.value)}
             maxLength={2000}
           />
-          <p className="text-muted-foreground text-xs">お店の場合など、分かるときだけ入力してください。</p>
+          <p className="text-muted-foreground text-xs">
+            お店の場合など、分かるときだけ入力してください。
+          </p>
         </div>
       </div>
 

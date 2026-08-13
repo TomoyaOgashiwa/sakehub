@@ -15,6 +15,7 @@ const (
 	maxCustomNameLen = 200
 	maxPlaceNameLen  = 200
 	maxPlaceURLLen   = 2000
+	maxQuantity      = 20
 )
 
 type Service struct {
@@ -72,6 +73,7 @@ func (s *Service) CreateBatch(ctx context.Context, input CreateBatchInput, userI
 			CustomDrinkName: normalized.CustomDrinkName,
 			DrankAt:         drankAt,
 			VolumeML:        normalized.VolumeML,
+			Quantity:        normalized.Quantity,
 			InputUnit:       normalized.InputUnit,
 			InputValue:      normalized.InputValue,
 			ServingKey:      normalized.ServingKey,
@@ -103,6 +105,7 @@ type normalizedItem struct {
 	ServingKey      *string
 	VolumePrecision VolumePrecision
 	VolumeML        float64
+	Quantity        int
 }
 
 func normalizeItem(input CreateItemInput) (*normalizedItem, error) {
@@ -167,6 +170,14 @@ func normalizeItem(input CreateItemInput) (*normalizedItem, error) {
 		servingKey = nil
 	}
 
+	quantity := input.Quantity
+	if quantity == 0 {
+		quantity = 1
+	}
+	if quantity < 1 || quantity > maxQuantity {
+		return nil, fmt.Errorf("quantity must be between 1 and %d", maxQuantity)
+	}
+
 	return &normalizedItem{
 		DrinkID:         drinkID,
 		CustomDrinkName: customName,
@@ -175,6 +186,7 @@ func normalizeItem(input CreateItemInput) (*normalizedItem, error) {
 		ServingKey:      servingKey,
 		VolumePrecision: precision,
 		VolumeML:        volumeML,
+		Quantity:        quantity,
 	}, nil
 }
 

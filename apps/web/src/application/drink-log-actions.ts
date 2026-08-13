@@ -18,6 +18,7 @@ interface BatchItemPayload {
   input_value: number;
   serving_key?: string;
   volume_precision: VolumePrecision;
+  quantity?: number;
 }
 
 export async function createDrinkLogBatch(
@@ -52,9 +53,21 @@ export async function createDrinkLogBatch(
 
   let drankAt: string | undefined;
   if (drankAtRaw) {
-    const parsed = new Date(drankAtRaw);
-    if (Number.isNaN(parsed.getTime())) {
-      return { ok: false, error: '日時が不正です。' };
+    const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(drankAtRaw);
+    if (!match) {
+      return { ok: false, error: '日付が不正です。' };
+    }
+    const year = Number(match[1]);
+    const month = Number(match[2]);
+    const day = Number(match[3]);
+    const parsed = new Date(year, month - 1, day);
+    if (
+      Number.isNaN(parsed.getTime()) ||
+      parsed.getFullYear() !== year ||
+      parsed.getMonth() !== month - 1 ||
+      parsed.getDate() !== day
+    ) {
+      return { ok: false, error: '日付が不正です。' };
     }
     drankAt = parsed.toISOString();
   }

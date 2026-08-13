@@ -153,6 +153,7 @@ export interface DrinkLog {
   customDrinkName?: string;
   drankAt: string;
   volumeMl: number;
+  quantity: number;
   inputUnit: VolumeUnit;
   inputValue: number;
   servingKey?: string;
@@ -171,6 +172,7 @@ export interface DrinkLogItemInput {
   inputValue: number;
   servingKey?: string;
   volumePrecision: VolumePrecision;
+  quantity?: number;
 }
 
 export interface DrinkLogBatchCreateInput {

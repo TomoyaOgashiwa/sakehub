@@ -33,6 +33,7 @@ type Log struct {
 	CustomDrinkName *string         `json:"custom_drink_name,omitempty"`
 	DrankAt         time.Time       `json:"drank_at"`
 	VolumeML        float64         `json:"volume_ml"`
+	Quantity        int             `json:"quantity"`
 	InputUnit       VolumeUnit      `json:"input_unit"`
 	InputValue      float64         `json:"input_value"`
 	ServingKey      *string         `json:"serving_key,omitempty"`
@@ -52,6 +53,7 @@ type CreateItemInput struct {
 	InputValue      float64         `json:"input_value"`
 	ServingKey      *string         `json:"serving_key,omitempty"`
 	VolumePrecision VolumePrecision `json:"volume_precision"`
+	Quantity        int             `json:"quantity,omitempty"`
 }
 
 // CreateBatchInput creates one or more logs that share drank_at / place.

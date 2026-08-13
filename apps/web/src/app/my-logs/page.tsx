@@ -32,13 +32,11 @@ function addDays(date: Date, days: number): Date {
   return d;
 }
 
-function formatJaDateTime(iso: string): string {
-  return new Date(iso).toLocaleString('ja-JP', {
+function formatJaDate(iso: string): string {
+  return new Date(iso).toLocaleDateString('ja-JP', {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
   });
 }
 
@@ -100,7 +98,7 @@ export default async function MyLogsPage() {
               </dd>
             </div>
             <div>
-              <dt className="text-muted-foreground text-xs">記録件数</dt>
+              <dt className="text-muted-foreground text-xs">杯数</dt>
               <dd className="text-2xl font-semibold tabular-nums">{summary.logCount}</dd>
             </div>
             {summary.skippedMissingAbv > 0 && (
@@ -165,6 +163,9 @@ export default async function MyLogsPage() {
                     )}
                     <p className="text-muted-foreground text-sm">
                       {presetLabel ? `${presetLabel} · ${volumeLabel}` : volumeLabel}
+                      {log.quantity > 1 && (
+                        <span className="tabular-nums"> × {log.quantity}杯</span>
+                      )}
                       {log.volumePrecision === 'estimated' && (
                         <span className="ml-2">
                           <Badge variant="secondary">目安</Badge>
@@ -192,7 +193,7 @@ export default async function MyLogsPage() {
                       </p>
                     )}
                     <p className="text-muted-foreground text-xs">
-                      {formatJaDateTime(log.drankAt)}
+                      {formatJaDate(log.drankAt)}
                     </p>
                   </div>
                   <DeleteLogButton logId={log.id} />

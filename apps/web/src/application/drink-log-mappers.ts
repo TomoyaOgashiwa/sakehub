@@ -21,6 +21,7 @@ export interface ApiDrinkLog {
   custom_drink_name?: string | null;
   drank_at: string;
   volume_ml: number;
+  quantity: number;
   input_unit: VolumeUnit;
   input_value: number;
   serving_key?: string | null;
@@ -48,6 +49,7 @@ export function toDrinkLog(api: ApiDrinkLog): DrinkLog {
     customDrinkName: api.custom_drink_name ?? undefined,
     drankAt: api.drank_at,
     volumeMl: api.volume_ml,
+    quantity: api.quantity ?? 1,
     inputUnit: api.input_unit,
     inputValue: api.input_value,
     servingKey: api.serving_key ?? undefined,

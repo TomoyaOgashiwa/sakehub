@@ -148,4 +148,66 @@ func TestCreateBatchOzManual(t *testing.T) {
 	}
 }
 
+func TestCreateBatchQuantity(t *testing.T) {
+	repo := &stubRepo{meta: &drinkMeta{Category: "beer"}}
+	svc := NewService(repo)
+
+	id := "drink-1"
+	logs, err := svc.CreateBatch(context.Background(), CreateBatchInput{
+		Items: []CreateItemInput{{
+			DrinkID:         &id,
+			InputUnit:       UnitML,
+			InputValue:      300,
+			VolumePrecision: PrecisionExact,
+			Quantity:        3,
+		}},
+	}, "user-1")
+	if err != nil {
+		t.Fatalf("CreateBatch: %v", err)
+	}
+	if logs[0].Quantity != 3 {
+		t.Fatalf("quantity = %d, want 3", logs[0].Quantity)
+	}
+}
+
+func TestCreateBatchDefaultQuantity(t *testing.T) {
+	repo := &stubRepo{meta: &drinkMeta{Category: "beer"}}
+	svc := NewService(repo)
+
+	id := "drink-1"
+	logs, err := svc.CreateBatch(context.Background(), CreateBatchInput{
+		Items: []CreateItemInput{{
+			DrinkID:         &id,
+			InputUnit:       UnitML,
+			InputValue:      300,
+			VolumePrecision: PrecisionExact,
+		}},
+	}, "user-1")
+	if err != nil {
+		t.Fatalf("CreateBatch: %v", err)
+	}
+	if logs[0].Quantity != 1 {
+		t.Fatalf("quantity = %d, want 1", logs[0].Quantity)
+	}
+}
+
+func TestCreateBatchRejectsInvalidQuantity(t *testing.T) {
+	repo := &stubRepo{meta: &drinkMeta{Category: "beer"}}
+	svc := NewService(repo)
+
+	id := "drink-1"
+	_, err := svc.CreateBatch(context.Background(), CreateBatchInput{
+		Items: []CreateItemInput{{
+			DrinkID:         &id,
+			InputUnit:       UnitML,
+			InputValue:      300,
+			VolumePrecision: PrecisionExact,
+			Quantity:        21,
+		}},
+	}, "user-1")
+	if err == nil {
+		t.Fatal("expected validation error")
+	}
+}
+
 func strPtr(s string) *string { return &s }

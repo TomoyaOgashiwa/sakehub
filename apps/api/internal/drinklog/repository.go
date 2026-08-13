@@ -47,14 +47,14 @@ func (r *repository) FindDrinkMeta(ctx context.Context, drinkID string) (*drinkM
 func (r *repository) Insert(ctx context.Context, log *Log) error {
 	const q = `
 		INSERT INTO drink_logs (
-			user_id, drink_id, custom_drink_name, drank_at, volume_ml, input_unit, input_value,
+			user_id, drink_id, custom_drink_name, drank_at, volume_ml, quantity, input_unit, input_value,
 			serving_key, volume_precision, place_name, place_url
 		)
-		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
 		RETURNING id, created_at, updated_at`
 
 	return r.db.QueryRowContext(ctx, q,
-		log.UserID, log.DrinkID, log.CustomDrinkName, log.DrankAt, log.VolumeML, log.InputUnit, log.InputValue,
+		log.UserID, log.DrinkID, log.CustomDrinkName, log.DrankAt, log.VolumeML, log.Quantity, log.InputUnit, log.InputValue,
 		log.ServingKey, log.VolumePrecision, log.PlaceName, log.PlaceURL,
 	).Scan(&log.ID, &log.CreatedAt, &log.UpdatedAt)
 }
@@ -62,7 +62,7 @@ func (r *repository) Insert(ctx context.Context, log *Log) error {
 func (r *repository) ListByUser(ctx context.Context, userID string, params ListParams) ([]Log, error) {
 	const q = `
 		SELECT
-			l.id, l.user_id, l.drink_id, l.custom_drink_name, l.drank_at, l.volume_ml, l.input_unit, l.input_value,
+			l.id, l.user_id, l.drink_id, l.custom_drink_name, l.drank_at, l.volume_ml, l.quantity, l.input_unit, l.input_value,
 			l.serving_key, l.volume_precision, l.place_name, l.place_url, l.created_at, l.updated_at,
 			d.id, d.slug, d.name, d.category, d.abv
 		FROM drink_logs l
@@ -95,7 +95,7 @@ func (r *repository) ListByUser(ctx context.Context, userID string, params ListP
 			abv      sql.NullFloat64
 		)
 		if err := rows.Scan(
-			&log.ID, &log.UserID, &drinkID, &custom, &log.DrankAt, &log.VolumeML, &log.InputUnit, &log.InputValue,
+			&log.ID, &log.UserID, &drinkID, &custom, &log.DrankAt, &log.VolumeML, &log.Quantity, &log.InputUnit, &log.InputValue,
 			&sk, &log.VolumePrecision, &place, &placeURL, &log.CreatedAt, &log.UpdatedAt,
 			&dID, &dSlug, &dName, &dCat, &abv,
 		); err != nil {
@@ -162,13 +162,13 @@ func (r *repository) Summary(
 ) (logCount, skipped int, pureGrams float64, err error) {
 	const q = `
 		SELECT
-			COUNT(*)::int AS log_count,
-			COUNT(*) FILTER (WHERE d.abv IS NULL)::int AS skipped,
+			COALESCE(SUM(l.quantity), 0)::int AS log_count,
+			COALESCE(SUM(l.quantity) FILTER (WHERE d.abv IS NULL), 0)::int AS skipped,
 			COALESCE(
 				SUM(
 					CASE
 						WHEN d.abv IS NULL THEN 0
-						ELSE l.volume_ml * (d.abv / 100.0) * 0.789
+						ELSE l.volume_ml * l.quantity * (d.abv / 100.0) * 0.789
 					END
 				),
 				0

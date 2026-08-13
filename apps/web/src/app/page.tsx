@@ -1,29 +1,40 @@
 import { Suspense } from 'react';
 
-import { JsonLd } from '@/components/json-ld';
-import { DrinkListClient } from '@/components/drinks/drink-list-client';
-import { DrinkGridSkeleton } from '@/components/drinks/drink-card-skeleton';
-import { Heading } from '@/components/ui/heading';
 import { fetchDrinksServer } from '@/application/drinks-api.server';
+import { getOptionalAccessToken } from '@/application/require-access-token';
+import { fetchMySavedDrinks } from '@/application/saved-drinks-api.server';
+import { DrinkGridSkeleton } from '@/components/drinks/drink-card-skeleton';
+import { DrinkListClient } from '@/components/drinks/drink-list-client';
+import { JsonLd } from '@/components/json-ld';
+import { Heading } from '@/components/ui/heading';
+import { DRINK_LIST_PAGE_SIZE } from '@/config/drinks';
 
 export const dynamic = 'force-dynamic';
 
-export default function Home() {
+type PageProps = {
+  searchParams: Promise<{
+    q?: string;
+    category?: string;
+    offset?: string;
+  }>;
+};
+
+function parseOffset(raw: string | undefined): number {
+  const n = Number(raw);
+  if (!Number.isFinite(n) || n < 0) return 0;
+  return Math.floor(n);
+}
+
+export default function Home({ searchParams }: PageProps) {
   return (
     <>
-      {/*
-        SEO: Schema.org の WebSite 構造化データ（JSON-LD）を埋め込む。
-        検索エンジンがサイト名・説明・検索 URL を機械可読に解釈でき、
-        サイトリンク検索ボックス等のリッチリザルト表示につながりやすい。
-      */}
       <JsonLd
         data={{
           '@context': 'https://schema.org',
           '@type': 'WebSite',
           name: 'SakeHub',
           url: 'https://sakehub.com',
-          description:
-            'Explore, review, and share your favorite spirits. From whisky to sake, beer to cocktails.',
+          description: 'ラベルや名前の手がかりから、商品単位で銘柄を探す。',
           potentialAction: {
             '@type': 'SearchAction',
             target: 'https://sakehub.com/?q={search_term_string}',
@@ -33,20 +44,44 @@ export default function Home() {
       />
       <div className="mx-auto max-w-7xl px-4 py-8">
         <div className="mb-8">
-          <Heading level="h1">Discover Spirits</Heading>
-          <p className="text-muted-foreground mt-2">
-            お気に入りのお酒を見つけて、レビューを共有しましょう
-          </p>
+          <Heading level="h1">銘柄を特定する</Heading>
+          <p className="text-muted-foreground mt-2">ラベルや名前の手がかりから、商品単位で探す</p>
         </div>
         <Suspense fallback={<DrinkGridSkeleton />}>
-          <DrinkListLoader />
+          <DrinkListLoader searchParams={searchParams} />
         </Suspense>
       </div>
     </>
   );
 }
 
-async function DrinkListLoader() {
-  const result = await fetchDrinksServer({ limit: 20 });
-  return <DrinkListClient fallbackData={result} />;
+async function DrinkListLoader({ searchParams }: PageProps) {
+  const sp = await searchParams;
+  const q = sp.q?.trim() ?? '';
+  const category = sp.category?.trim() ?? '';
+  const filtered = Boolean(q || (category && category !== 'all'));
+  const offset = filtered ? parseOffset(sp.offset) : 0;
+
+  const { user, accessToken } = await getOptionalAccessToken();
+  const [result, saved] = await Promise.all([
+    fetchDrinksServer({
+      q: q || undefined,
+      category: category && category !== 'all' ? category : undefined,
+      limit: DRINK_LIST_PAGE_SIZE,
+      offset,
+    }),
+    user && accessToken ? fetchMySavedDrinks(accessToken, { limit: 8 }) : Promise.resolve([]),
+  ]);
+
+  const recentSaves = saved
+    .map((item) => item.drink)
+    .filter((drink): drink is NonNullable<typeof drink> => drink != null)
+    .map((drink) => ({ slug: drink.slug, name: drink.name }));
+
+  return (
+    <DrinkListClient
+      fallbackData={result}
+      recentSaves={recentSaves.length > 0 ? recentSaves : undefined}
+    />
+  );
 }

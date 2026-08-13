@@ -1,5 +1,6 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
 import type { DrinkReview } from '@sakehub/types';
 
 import { toDrinkReview, type ApiDrinkReview } from '@/application/drink-mappers';
@@ -16,7 +17,7 @@ export async function submitReview(
   _prevState: ReviewState,
   formData: FormData,
 ): Promise<ReviewState> {
-  return upsertEntityRating<ApiDrinkReview, DrinkReview>({
+  const result = await upsertEntityRating<ApiDrinkReview, DrinkReview>({
     formData,
     entityIdField: 'drink_id',
     missingIdError: 'drink_id が見つかりません。',
@@ -28,6 +29,11 @@ export async function submitReview(
     },
     mapResponse: toDrinkReview,
   });
+  if (result.ok) {
+    revalidatePath('/list');
+    revalidatePath('/');
+  }
+  return result;
 }
 
 export async function deleteReview(reviewId: string, drinkSlug: string): Promise<ReviewState> {

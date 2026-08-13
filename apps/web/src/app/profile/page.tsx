@@ -76,10 +76,10 @@ export default async function ProfilePage() {
 
         <div className="border-t pt-6">
           <Link
-            href="/my-logs"
+            href="/list"
             className="text-foreground text-sm font-medium underline-offset-4 hover:underline"
           >
-            飲んだ記録を見る
+            リスト
           </Link>
         </div>
 

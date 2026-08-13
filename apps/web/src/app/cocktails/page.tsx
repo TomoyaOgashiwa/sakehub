@@ -13,7 +13,7 @@ import { COCKTAIL_LIST_PAGE_SIZE } from '@/config/cocktails';
 
 export const metadata: Metadata = {
   title: 'カクテル一覧',
-  description: '定番カクテルのレシピを探して、自分のアレンジを投稿しましょう。',
+  description: '名前やベースからカクテルを特定し、公式レシピを見る。',
 };
 
 export const dynamic = 'force-dynamic';
@@ -38,7 +38,7 @@ export default function CocktailsPage({ searchParams }: PageProps) {
       <div className="mb-8">
         <Heading level="h1">カクテルを探す</Heading>
         <p className="text-muted-foreground mt-2">
-          定番カクテルの基本レシピと、みんなのアレンジを見つけましょう。
+          名前やベースからカクテルを特定する。
           <Link href="/" className="text-foreground ml-2 underline-offset-4 hover:underline">
             お酒一覧へ
           </Link>

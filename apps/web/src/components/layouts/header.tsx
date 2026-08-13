@@ -19,8 +19,14 @@ export async function Header() {
           <Link href="/" className="text-xl font-bold">
             SakeHub
           </Link>
-          <nav className="hidden items-center gap-4 text-sm font-medium sm:flex" aria-label="メイン">
-            <Link href="/" className="text-muted-foreground hover:text-foreground transition-colors">
+          <nav
+            className="hidden items-center gap-4 text-sm font-medium sm:flex"
+            aria-label="メイン"
+          >
+            <Link
+              href="/"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
               お酒
             </Link>
             <Link
@@ -31,10 +37,10 @@ export async function Header() {
             </Link>
             {user && (
               <Link
-                href="/my-logs"
+                href="/list"
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
-                記録
+                リスト
               </Link>
             )}
           </nav>

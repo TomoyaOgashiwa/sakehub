@@ -10,6 +10,7 @@ import { Separator } from '@/components/ui/separator';
 import { StarRatingDisplay } from '@/components/ui/star-rating';
 import { JsonLd } from '@/components/json-ld';
 import { fetchCocktailBySlugServer } from '@/application/cocktails-api.server';
+import { drinkCategoryForBaseSpirit, drinksByCategoryHref } from '@/config/drink-cocktail-bridge';
 import { getCatalogImageSourceLabel } from '@/utils/catalog-image-source-label';
 import { buildRecipeJsonLd } from '@/utils/recipe-json-ld';
 
@@ -68,6 +69,7 @@ export default async function CocktailDetailPage({ params, searchParams }: PageP
   const prevRecipesOffset = Math.max(0, recipesOffset - RECIPE_PAGE_SIZE);
   const official = cocktail.officialRecipe;
   const imageSourceLabel = getCatalogImageSourceLabel(cocktail.imageSource);
+  const drinkCategory = drinkCategoryForBaseSpirit(cocktail.baseSpirit);
 
   return (
     <>
@@ -147,6 +149,17 @@ export default async function CocktailDetailPage({ params, searchParams }: PageP
             </div>
           </div>
 
+          {drinkCategory ? (
+            <p className="mb-8">
+              <Link
+                href={drinksByCategoryHref(drinkCategory)}
+                className="text-foreground text-sm font-medium underline underline-offset-2"
+              >
+                同じベースの銘柄を探す
+              </Link>
+            </p>
+          ) : null}
+
           {official && (
             <section aria-labelledby="official-recipe-heading" className="mb-8 space-y-6">
               <div className="flex flex-wrap items-center gap-3">
@@ -187,7 +200,7 @@ export default async function CocktailDetailPage({ params, searchParams }: PageP
                         >
                           {idx + 1}
                         </span>
-                        <p className="text-foreground/90 leading-relaxed pt-1">{step.body}</p>
+                        <p className="text-foreground/90 pt-1 leading-relaxed">{step.body}</p>
                       </li>
                     ))}
                   </ol>
@@ -197,7 +210,7 @@ export default async function CocktailDetailPage({ params, searchParams }: PageP
               {official.memo && (
                 <div className="space-y-2">
                   <Heading level="h3">コツ・ポイント</Heading>
-                  <p className="text-foreground/90 leading-relaxed whitespace-pre-wrap text-sm">
+                  <p className="text-foreground/90 text-sm leading-relaxed whitespace-pre-wrap">
                     {official.memo}
                   </p>
                 </div>

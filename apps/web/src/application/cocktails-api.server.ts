@@ -8,6 +8,8 @@ import type {
   CocktailRecipe,
 } from '@sakehub/types';
 
+import { BRIDGE_PREVIEW_LIMIT } from '@/config/drink-cocktail-bridge';
+
 import {
   toCocktail,
   toCocktailRecipe,
@@ -54,6 +56,19 @@ export async function fetchCocktailItemsServer(
 ): Promise<Cocktail[]> {
   const { cocktails } = await fetchCocktailsServer(params);
   return cocktails;
+}
+
+/** Drink / list bridge preview. Fail closed so a cocktail API error does not drop the page. */
+export async function fetchCocktailBridgePreview(baseSpirit: string): Promise<Cocktail[]> {
+  try {
+    const { cocktails } = await fetchCocktailsServer({
+      baseSpirit,
+      limit: BRIDGE_PREVIEW_LIMIT,
+    });
+    return cocktails;
+  } catch {
+    return [];
+  }
 }
 
 interface FetchCocktailBySlugOptions {

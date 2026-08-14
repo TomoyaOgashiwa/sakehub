@@ -9,10 +9,16 @@ import { Heading } from '@/components/ui/heading';
 import { Separator } from '@/components/ui/separator';
 import { StarRatingDisplay } from '@/components/ui/star-rating';
 import { JsonLd } from '@/components/json-ld';
+import { fetchCocktailBridgePreview } from '@/application/cocktails-api.server';
 import { fetchDrinkBySlugServer } from '@/application/drinks-api.server';
 import { getOptionalAccessToken } from '@/application/require-access-token';
 import { fetchMySavedDrink } from '@/application/saved-drinks-api.server';
 import { fetchMyReview, fetchReviewsByDrinkId } from '@/application/reviews-api.server';
+import { BaseCocktailPreview } from '@/components/cocktails/base-cocktail-preview';
+import {
+  baseSpiritForDrinkCategory,
+  cocktailsByBaseSpiritHref,
+} from '@/config/drink-cocktail-bridge';
 import { getCatalogImageSourceLabel } from '@/utils/catalog-image-source-label';
 import { DrinkReviewWidget } from './drink-review-widget';
 
@@ -53,11 +59,13 @@ export default async function DrinkDetailPage({ params }: PageProps) {
   }
 
   const { user, accessToken } = await getOptionalAccessToken();
+  const baseSpirit = baseSpiritForDrinkCategory(drink.category);
 
-  const [reviews, myReview, mySaved] = await Promise.all([
+  const [reviews, myReview, mySaved, bridgeCocktails] = await Promise.all([
     fetchReviewsByDrinkId(drink.id),
     user && accessToken ? fetchMyReview(drink.id, accessToken) : Promise.resolve(null),
     user && accessToken ? fetchMySavedDrink(drink.id, accessToken) : Promise.resolve(null),
+    baseSpirit ? fetchCocktailBridgePreview(baseSpirit) : Promise.resolve([]),
   ]);
 
   const displayName = drink.nameEn ? `${drink.name} (${drink.nameEn})` : drink.name;
@@ -155,6 +163,19 @@ export default async function DrinkDetailPage({ params }: PageProps) {
                   </div>
                 )}
               </section>
+
+              {baseSpirit && bridgeCocktails.length > 0 ? (
+                <>
+                  <Separator />
+                  <BaseCocktailPreview
+                    heading="このベースで作れる"
+                    headingId="base-cocktails-heading"
+                    description={`${baseSpirit} ベースの公式カクテル`}
+                    cocktails={bridgeCocktails}
+                    moreHref={cocktailsByBaseSpiritHref(baseSpirit)}
+                  />
+                </>
+              ) : null}
 
               <Separator />
 

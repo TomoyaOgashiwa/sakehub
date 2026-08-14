@@ -44,6 +44,7 @@ function toCatalog(api: ApiSavedDrinkCatalog): SavedDrinkCatalog {
 
 export interface ApiListDepth {
   specialty: { category: string; drank: number; total: number } | null;
+  categories?: { category: string; drank: number; total: number }[];
   makers: {
     manufacturer: string;
     drank: number;
@@ -52,15 +53,18 @@ export interface ApiListDepth {
   maker_scope?: 'specialty' | 'all';
 }
 
+function toSpecialty(row: { category: string; drank: number; total: number }): ListDepthSpecialty {
+  return {
+    category: row.category as ListDepthSpecialty['category'],
+    drank: row.drank,
+    total: row.total,
+  };
+}
+
 export function toListDepth(api: ApiListDepth): ListDepth {
   return {
-    specialty: api.specialty
-      ? {
-          category: api.specialty.category as ListDepthSpecialty['category'],
-          drank: api.specialty.drank,
-          total: api.specialty.total,
-        }
-      : null,
+    specialty: api.specialty ? toSpecialty(api.specialty) : null,
+    categories: (api.categories ?? []).map(toSpecialty),
     makers: (api.makers ?? []).map((maker) => ({
       manufacturer: maker.manufacturer,
       drank: maker.drank,

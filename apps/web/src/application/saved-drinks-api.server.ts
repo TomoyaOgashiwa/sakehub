@@ -46,7 +46,7 @@ export async function fetchMyListDepth(accessToken: string): Promise<ListDepth> 
     },
   );
   if (!result.ok || !result.data.data) {
-    return { specialty: null, makers: [], makerScope: 'all' };
+    return { specialty: null, categories: [], makers: [], makerScope: 'all' };
   }
   return toListDepth(result.data.data);
 }

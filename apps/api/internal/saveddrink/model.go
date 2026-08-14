@@ -100,7 +100,8 @@ type DepthMaker struct {
 
 // ListDepth is the personal fill map for /list. Not a title ladder.
 type ListDepth struct {
-	Specialty  *DepthSpecialty `json:"specialty"`
-	Makers     []DepthMaker    `json:"makers"`
-	MakerScope string          `json:"maker_scope"`
+	Specialty  *DepthSpecialty  `json:"specialty"`
+	Categories []DepthSpecialty `json:"categories"`
+	Makers     []DepthMaker     `json:"makers"`
+	MakerScope string           `json:"maker_scope"`
 }

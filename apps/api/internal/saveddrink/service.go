@@ -144,11 +144,17 @@ func (s *Service) Depth(ctx context.Context, userID string) (*ListDepth, error) 
 		totalByCat[t.Category] = t.Total
 	}
 
-	specialty := pickSpecialty(drank, totalByCat)
+	categories := filledCategories(drank, totalByCat)
 	makers := []DepthMaker{}
-	if specialty == nil {
-		return &ListDepth{Specialty: nil, Makers: makers, MakerScope: "all"}, nil
+	if len(categories) == 0 {
+		return &ListDepth{
+			Specialty:  nil,
+			Categories: categories,
+			Makers:     makers,
+			MakerScope: "all",
+		}, nil
 	}
+	specialty := categories[0]
 
 	scoped := clusterMakers(drank, &specialty.Category)
 	nextCategory := &specialty.Category
@@ -184,26 +190,30 @@ func (s *Service) Depth(ctx context.Context, userID string) (*ListDepth, error) 
 		})
 	}
 
-	return &ListDepth{Specialty: specialty, Makers: makers, MakerScope: makerScope}, nil
+	return &ListDepth{
+		Specialty:  &specialty,
+		Categories: categories,
+		Makers:     makers,
+		MakerScope: makerScope,
+	}, nil
 }
 
-func pickSpecialty(drank []DrankDrink, totals map[string]int) *DepthSpecialty {
-	if len(drank) == 0 {
-		return nil
-	}
+func filledCategories(drank []DrankDrink, totals map[string]int) []DepthSpecialty {
 	counts := map[string]int{}
 	for _, d := range drank {
 		counts[d.Category]++
 	}
-	var best *DepthSpecialty
+	out := make([]DepthSpecialty, 0, len(counts))
 	for cat, n := range counts {
-		cand := DepthSpecialty{Category: cat, Drank: n, Total: totals[cat]}
-		if betterSpecialty(cand, best) {
-			c := cand
-			best = &c
+		if n <= 0 {
+			continue
 		}
+		out = append(out, DepthSpecialty{Category: cat, Drank: n, Total: totals[cat]})
 	}
-	return best
+	sort.Slice(out, func(i, j int) bool {
+		return betterSpecialty(out[i], &out[j])
+	})
+	return out
 }
 
 func betterSpecialty(cand DepthSpecialty, best *DepthSpecialty) bool {

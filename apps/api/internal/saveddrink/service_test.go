@@ -266,6 +266,9 @@ func TestDepthEmptyWhenNoDrank(t *testing.T) {
 	if got.Specialty != nil {
 		t.Fatalf("specialty %+v, want nil", got.Specialty)
 	}
+	if len(got.Categories) != 0 {
+		t.Fatalf("categories %d, want 0", len(got.Categories))
+	}
 	if len(got.Makers) != 0 {
 		t.Fatalf("makers %d, want 0", len(got.Makers))
 	}
@@ -292,6 +295,12 @@ func TestDepthPicksSpecialtyByCount(t *testing.T) {
 	}
 	if got.Specialty == nil || got.Specialty.Category != "sake" || got.Specialty.Drank != 3 || got.Specialty.Total != 200 {
 		t.Fatalf("specialty %+v", got.Specialty)
+	}
+	if len(got.Categories) != 2 {
+		t.Fatalf("categories %d, want 2", len(got.Categories))
+	}
+	if got.Categories[0].Category != "sake" || got.Categories[1].Category != "whisky" {
+		t.Fatalf("categories %+v", got.Categories)
 	}
 	if got.MakerScope != "specialty" {
 		t.Fatalf("makerScope %q", got.MakerScope)
@@ -455,6 +464,27 @@ func TestDepthSkipsEmptyManufacturer(t *testing.T) {
 	}
 	if len(got.Makers) != 0 {
 		t.Fatalf("makers %+v", got.Makers)
+	}
+}
+
+func TestDepthOmitsZeroCategories(t *testing.T) {
+	t.Parallel()
+	svc := NewService(&stubRepo{
+		drank: []DrankDrink{
+			{DrinkID: "1", Category: "sake", Manufacturer: "A"},
+		},
+		categoryTotals: []CategoryTotal{
+			{Category: "sake", Total: 200},
+			{Category: "beer", Total: 150},
+			{Category: "whisky", Total: 180},
+		},
+	})
+	got, err := svc.Depth(context.Background(), "user")
+	if err != nil {
+		t.Fatalf("Depth: %v", err)
+	}
+	if len(got.Categories) != 1 || got.Categories[0].Category != "sake" {
+		t.Fatalf("categories %+v, want sake only", got.Categories)
 	}
 }
 

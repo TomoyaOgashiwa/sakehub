@@ -35,6 +35,8 @@ export interface ListDepthMaker {
 /** Personal fill map for /list. Not a title ladder. */
 export interface ListDepth {
   specialty: ListDepthSpecialty | null;
+  /** Categories with drank > 0 only. Sorted by count, then fill ratio. */
+  categories: ListDepthSpecialty[];
   makers: ListDepthMaker[];
   /** specialty = makers are in the top category; all = fallback across categories. */
   makerScope: 'specialty' | 'all';

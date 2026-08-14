@@ -80,7 +80,7 @@ export default async function ListPage({ searchParams }: PageProps) {
         <p className="text-muted-foreground text-sm">記録した銘柄の埋まりを見返す</p>
       </div>
 
-      {items.length === 0 && !depth.specialty ? (
+      {items.length === 0 && depth.categories.length === 0 ? (
         <div className="rounded-lg border border-dashed p-8 text-center">
           <p className="text-muted-foreground mb-3 text-sm">まだリストに銘柄がありません</p>
           <Link href="/" className="text-foreground text-sm font-medium underline">

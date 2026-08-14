@@ -4,7 +4,7 @@ todos:
     status: completed
     content: catalog log → saved_drinks バックフィル + トリガー、GET /api/auth/saved-drinks/depth（union SQL は saveddrink リポジトリに閉じる）、types
   - id: category-specialty
-    content: /list 上部に得意カテゴリ 1 行（drank / published 実数）。status/q フィルタは行だけ
+    content: /list 上部に drank>0 のカテゴリをすべて出す（0件は出さない）。status/q フィルタは行だけ
     status: completed
   - id: maker-return
     content: 得意（または全体）で作り手 2 銘柄以上を出し、未 drank の published 少数 + /?q= / ?category= へ戻す
@@ -68,7 +68,7 @@ flowchart LR
 
 深さの単位（2段）:
 
-1. **カテゴリ**: 飲んだ数 / そのカテゴリの published 数。件数が最大のカテゴリを得意として **1行**。同数なら埋まり率（drank/total）、なお同数なら `category` 名。
+1. **カテゴリ**: 飲んだ数 / そのカテゴリの published 数。**`drank > 0` のカテゴリをすべて出す。0件のカテゴリは出さない**（12個の未着手棚にしない）。並びは件数が多い順。同数なら埋まり率（drank/total）、なお同数なら `category` 名。先頭（最も厚い）を得意とし、作り手クラスタのスコープに使う。
 2. **作り手**: 得意カテゴリに、同一 `manufacturer`（TEXT 完全一致）が 2 銘柄以上あるものだけ。無ければ **全体** で同じ条件。`manufacturer` が NULL / 空はクラスタしない。シリーズエンティティは作らない。
 
 所有権: 両テーブルとも `user_id =` JWT のユーザー。Go は RLS をバイパスするので SQL で必ず絞る。
@@ -87,7 +87,7 @@ flowchart LR
 - **`drink_logs` をリストの正にする**: 1人1銘柄にならない。量・日付が付き、日記を主経路に戻す。禁止。
 - **日記 UI 復活**（`/my-logs` 一覧、銘柄から `/my-logs/new`）: 入力先を `/list` にしない。サブルート直打ちは現状維持。
 - **Web だけ雑に二重カウント**: リスト 100 件 + ログ数ページを JS で足すと、100 件超・分母・manufacturer 欠落で分子が欠ける。同じ `drink_id` を二重に数えやすい。
-- **全カテゴリのバッジ棚**: 12 個並べると称号ラダーに寄る。得意は 1 行。
+- **全カテゴリのバッジ棚（0件含む 12 個）**: 未着手を並べると称号ラダーに寄る。**drank > 0 の実数行は出す。0件は出さない。**
 - **リスト 100 件のメモリ集計だけ**: 分母（published 実数）とログ union と「未 drank の同作り手」が揃わない。`maxListLimit` 拡張も同時にやらない。
 - **`GET /api/auth/saved-drinks` に集計を混ぜる**: 一覧は limit/offset。深さは全件 union。応答がページと混ざる。
 - **ワンショットだけ（トリガーなし）**: 直打ちの新規ログが行に載らず、集計とリストがまた割れる。
@@ -174,6 +174,11 @@ interface ListDepth {
     drank: number;
     total: number;
   } | null;
+  categories: {
+    category: Exclude<DrinkCategory, 'all'>;
+    drank: number;
+    total: number;
+  }[];
   makers: {
     manufacturer: string;
     drank: number; // >= 2
@@ -182,7 +187,8 @@ interface ListDepth {
 }
 ```
 
-- `specialty` が無い（drank 0）とき `makers` は空。
+- `categories` は **drank > 0 だけ**。0件カテゴリは入れない。並びは件数 → 埋まり率 → 名前。
+- `specialty` は `categories[0]`（最も厚い）。無い（drank 0）とき `makers` は空。
 - `makers` は得意カテゴリで 2+ があればそちら。無ければ全体。最大 3。
 - `nextDrinks` は **先頭の作り手だけ** 最大 3（薄くカタログへ戻す）。他の作り手は件数と検索リンクだけ。
 - 検索 URL は Web が既存の `/?q={manufacturer}&category={specialty}` を組む。`GET /api/drinks` の `q` は manufacturer も見る。新規検索 API は作らない。
@@ -226,7 +232,7 @@ interface ListDepth {
 
 - 見出し: リスト
 - 補足: 記録した銘柄の埋まりを見返す
-- 得意: `{Label} {drank} / {total}`（例: `Sake 12 / 200`）
+- カテゴリ（drank > 0）: `{Label} {drank} / {total}`（例: `Sake 12 / 200`）。0件カテゴリは出さない。
 - 作り手: `{manufacturer} {n}種`
 - 次の 1 手: 銘柄名 → `/drinks/{slug}`。まとめて見る → `/?q={manufacturer}&category={category}`
 - 深さ空: まだ記録した銘柄がありません → 銘柄を探す（`/`）
@@ -255,7 +261,7 @@ interface ListDepth {
 
 ## 受け入れ条件
 
-- ログインして `/list` を開くと、残した直後でなくても、得意カテゴリの「N / そのカテゴリの published 数」が見える（drank が 1 件以上あるとき）。
+- ログインして `/list` を開くと、残した直後でなくても、**記録したカテゴリそれぞれの**「N / そのカテゴリの published 数」が見える（drank が 1 件以上あるカテゴリだけ。0件は出ない）。
 - 同じ作り手が 2 銘柄以上あるとき「{作り手} N種」が見える。リンクからその作り手の銘柄詳細、または `/?q=` / `?category=` のカタログに戻れる。
 - `want` だけの銘柄は N に入らない。深さ 0 のときは「まだ記録した銘柄がありません」。
 - カタログ付きの過去ログ（`drink_id` あり・published）は深さの N に入る。既存の `want` / `note` は上書きされない。自由入力ログはリスト行にも深さにも入らない。
@@ -272,7 +278,7 @@ interface ListDepth {
 日記を主経路に戻さない。100 件超のリスト拡張と同時にやらない。
 
 1. **union 集計** — migration（バックフィル + トリガー）→ `GET /depth`（SQL を saveddrink に閉じる）→ types / server fetch。`go test ./internal/saveddrink` で得意の選出と want 除外。
-2. **カテゴリ偏りと得意** — `/list` 上部に 1 行。フィルタは行だけ。空状態は上記。
+2. **カテゴリ偏り** — `/list` 上部に drank > 0 のカテゴリをすべて出す。0件は出さない。フィルタは行だけ。空状態は上記。
 3. **作り手まとまりとカタログへ戻る** — 2 の `specialty` がコード上で足りてから。2+ 作り手、次の 1 手、行の manufacturer リンク。
 
 検証: `pnpm lint` / `pnpm type-check` / `cd apps/api && go vet ./...` / `go test ./internal/saveddrink`。
@@ -318,3 +324,5 @@ interface ListDepth {
 - `/list` の深さブロックは [`apps/web/src/app/list/list-depth.tsx`](apps/web/src/app/list/list-depth.tsx)（プランで許可した 1 ファイル）。
 - カテゴリ表示と作り手検索 URL は [`apps/web/src/config/drinks.ts`](apps/web/src/config/drinks.ts) の `drinkCategoryLabel` / `makerSearchHref`。
 - 保存先: [`.cursor/plans/list_depth_map_1b590ec1.plan.md`](.cursor/plans/list_depth_map_1b590ec1.plan.md)
+
+**カテゴリ表示の覆し（後から）:** 当初の「得意 1 行」をやめ、**drank > 0 のカテゴリをすべて出す。0件は出さない。** 12個の未着手バッジ棚・称号は出さない。作り手クラスタのスコープは、いまも最も厚いカテゴリ（`specialty`）を使う。

@@ -88,7 +88,7 @@ export async function saveProvisionalDrink(
 
   revalidatePath('/');
   revalidatePath('/list');
-  redirect('/list');
+  redirect('/list?pending=1');
 }
 
 export async function updateSavedDrink(

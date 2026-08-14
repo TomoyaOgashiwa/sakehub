@@ -75,7 +75,8 @@ async function DrinkListLoader({ searchParams }: PageProps) {
 
   const recentSaves = saved.flatMap((item) => {
     if (!item.drink) return [];
-    const href = item.drink.visibility === 'provisional' ? '/list' : `/drinks/${item.drink.slug}`;
+    const href =
+      item.drink.visibility === 'provisional' ? '/list?pending=1' : `/drinks/${item.drink.slug}`;
     return [{ drinkId: item.drink.id, name: item.drink.name, status: item.status, href }];
   });
 

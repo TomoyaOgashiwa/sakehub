@@ -46,16 +46,19 @@ DATABASE_URL=... pnpm seed:drinks:demand [limit]   # search_misses Top N → dat
 OPENAI_API_KEY=... pnpm seed:drinks:draft           # data/drafts/*.json（identity のみ）
 pnpm seed:drinks:validate                           # DB CHECK と同等の検証
 pnpm seed:drinks:build                              # supabase/seeds/drinks.sql を再生成
+pnpm seed:drinks:merge                              # published 投入後、仮の印を正規化名の完全一致で付け替える
 ```
 
+`seed:drinks:merge` は demand / draft / build からは呼ばない。公開カタログを DB に入れたあと、明示実行する。入力は仮の印（`drinks` provisional）であり、`search_misses` ではない。
+
 `supabase db reset` 時は `config.toml` の `[db.seed]` が
-`official_cocktails.sql` → `drinks.sql` → `local_demo.sql` の順で流す。
+`official_cocktails.sql` → `drinks.sql` → `local_demo.sql` → `local_zero_hit.sql` の順で流す。
 
 ## 重複検知
 
 `export-demand.ts` は2段階でチェックする:
 
-1. **ローカル**: `data/drinks/*.json` の name/nameEn/aliases を（Go の `NormalizeQuery` と同じ
+1. **ローカル**: `data/drinks/*.json` の name/nameEn/aliases を（Go の `pkg/normalize.Query` と同じ
    かな畳み込みロジックで）正規化し、完全一致すればスキップ。
 2. **DB**: `pg_trgm` の `similarity()` で `drinks.name` **および `aliases` の各要素**との
    類似度（`GREATEST`）が閾値を超えるものを「要確認」として `data/pending.txt` に
@@ -71,10 +74,10 @@ pnpm seed:drinks:build                              # supabase/seeds/drinks.sql 
 - `pnpm seed:drinks:validate` — DB CHECK 制約と同等の検証（aliases の空文字・重複・
   上限、ファイル名と `slug` の一致など）。
 - `pnpm check:normalize-sync`（`pnpm --filter @sakehub/drink-seed test`）—
-  `normalizeJa`（TS）が `NormalizeQuery`（Go, `apps/api/internal/searchmiss`）と
+  `normalizeJa`（TS）が `pkg/normalize.Query`（Go）と
   同じ結果を返すかを、共有フィクスチャ `testdata/normalize-cases.json`
   （リポジトリルート）に対して検証する契約テスト。ケースを追加・変更したら
-  Go 側（`cd apps/api && go test ./internal/searchmiss/...`）も忘れずに実行する。
+  Go 側（`cd apps/api && go test ./pkg/normalize`）も忘れずに実行する。
 
 ## 解決済み・現在の設計
 

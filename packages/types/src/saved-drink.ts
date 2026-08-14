@@ -41,6 +41,8 @@ export interface ListDepth {
   makers: ListDepthMaker[];
   /** specialty = makers are in the top category; all = fallback across categories. */
   makerScope: 'specialty' | 'all';
+  /** saved_drinks on provisional drinks. Not included in drank / total. */
+  provisionalCount: number;
 }
 
 /** One personal mark per user per catalog drink. Rating is an optional annotation.

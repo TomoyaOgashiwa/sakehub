@@ -7,6 +7,8 @@ import (
 	"fmt"
 	"strings"
 	"time"
+
+	"github.com/lib/pq"
 )
 
 type Repository interface {
@@ -19,8 +21,13 @@ type Repository interface {
 	DeleteByDrinkAndUser(ctx context.Context, drinkID, userID string) error
 	CountDrankByCategory(ctx context.Context, userID string) ([]CategoryCount, error)
 	CountPublishedByCategory(ctx context.Context) ([]CategoryTotal, error)
+	CountProvisional(ctx context.Context, userID string) (int, error)
 	ListMakers(ctx context.Context, userID string, category *string) ([]DepthMaker, error)
 	ListUnsavedByManufacturer(ctx context.Context, userID, manufacturer string, category *string, limit int) ([]DepthNextDrink, error)
+	ListPublishedIdentities(ctx context.Context) ([]PublishedIdentity, error)
+	ListUnmergedProvisionals(ctx context.Context) ([]ProvisionalCandidate, error)
+	MergeProvisionalInto(ctx context.Context, provisionalID, publishedID string) (MergeOneResult, error)
+	DeleteMergedOrphans(ctx context.Context) (int, error)
 }
 
 // drankUnionCTE is unique published drink_id: saved.drank ∪ catalog drink_logs.
@@ -214,7 +221,11 @@ func (r *repository) ListByUser(ctx context.Context, userID string, params ListP
 		args = append(args, params.Category)
 		n++
 	}
-	if params.PublishedOnly {
+	if params.Visibility != "" {
+		fmt.Fprintf(&b, " AND d.visibility = $%d", n)
+		args = append(args, params.Visibility)
+		n++
+	} else if params.PublishedOnly {
 		b.WriteString(" AND d.visibility = 'published'")
 	}
 	fmt.Fprintf(&b, " ORDER BY s.created_at DESC LIMIT $%d OFFSET $%d", n, n+1)
@@ -335,6 +346,20 @@ func (r *repository) CountDrankByCategory(ctx context.Context, userID string) ([
 	return items, rows.Err()
 }
 
+func (r *repository) CountProvisional(ctx context.Context, userID string) (int, error) {
+	const q = `
+		SELECT COUNT(*)::int
+		FROM saved_drinks s
+		INNER JOIN drinks d ON d.id = s.drink_id
+		WHERE s.user_id = $1
+		  AND d.visibility = 'provisional'`
+	var n int
+	if err := r.db.QueryRowContext(ctx, q, userID).Scan(&n); err != nil {
+		return 0, err
+	}
+	return n, nil
+}
+
 func (r *repository) CountPublishedByCategory(ctx context.Context) ([]CategoryTotal, error) {
 	const q = `
 		SELECT category, COUNT(*)::int
@@ -442,6 +467,146 @@ func (r *repository) ListUnsavedByManufacturer(
 		items = []DepthNextDrink{}
 	}
 	return items, rows.Err()
+}
+
+func (r *repository) ListPublishedIdentities(ctx context.Context) ([]PublishedIdentity, error) {
+	const q = `
+		SELECT id, slug, name, aliases
+		FROM drinks
+		WHERE visibility = 'published'`
+	rows, err := r.db.QueryContext(ctx, q)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var items []PublishedIdentity
+	for rows.Next() {
+		var item PublishedIdentity
+		var aliases pq.StringArray
+		if err := rows.Scan(&item.ID, &item.Slug, &item.Name, &aliases); err != nil {
+			return nil, err
+		}
+		item.Aliases = []string(aliases)
+		if item.Aliases == nil {
+			item.Aliases = []string{}
+		}
+		items = append(items, item)
+	}
+	if items == nil {
+		items = []PublishedIdentity{}
+	}
+	return items, rows.Err()
+}
+
+func (r *repository) ListUnmergedProvisionals(ctx context.Context) ([]ProvisionalCandidate, error) {
+	const q = `
+		SELECT id, name_normalized
+		FROM drinks
+		WHERE visibility = 'provisional'
+		  AND merged_into_id IS NULL
+		  AND name_normalized IS NOT NULL`
+	rows, err := r.db.QueryContext(ctx, q)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var items []ProvisionalCandidate
+	for rows.Next() {
+		var item ProvisionalCandidate
+		if err := rows.Scan(&item.ID, &item.NameNormalized); err != nil {
+			return nil, err
+		}
+		items = append(items, item)
+	}
+	if items == nil {
+		items = []ProvisionalCandidate{}
+	}
+	return items, rows.Err()
+}
+
+func (r *repository) MergeProvisionalInto(ctx context.Context, provisionalID, publishedID string) (MergeOneResult, error) {
+	tx, err := r.db.BeginTx(ctx, nil)
+	if err != nil {
+		return MergeOneResult{}, err
+	}
+	defer tx.Rollback()
+
+	if _, err := tx.ExecContext(ctx, `
+		UPDATE drinks
+		SET merged_into_id = $2
+		WHERE id = $1
+		  AND visibility = 'provisional'
+		  AND merged_into_id IS NULL`, provisionalID, publishedID); err != nil {
+		return MergeOneResult{}, err
+	}
+
+	remap, err := tx.ExecContext(ctx, `
+		UPDATE saved_drinks s
+		SET drink_id = $2
+		WHERE s.drink_id = $1
+		  AND NOT EXISTS (
+			SELECT 1 FROM saved_drinks x
+			WHERE x.user_id = s.user_id AND x.drink_id = $2
+		  )`, provisionalID, publishedID)
+	if err != nil {
+		return MergeOneResult{}, err
+	}
+	remapped, err := remap.RowsAffected()
+	if err != nil {
+		return MergeOneResult{}, err
+	}
+
+	discard, err := tx.ExecContext(ctx, `DELETE FROM saved_drinks WHERE drink_id = $1`, provisionalID)
+	if err != nil {
+		return MergeOneResult{}, err
+	}
+	discarded, err := discard.RowsAffected()
+	if err != nil {
+		return MergeOneResult{}, err
+	}
+
+	del, err := tx.ExecContext(ctx, `
+		DELETE FROM drinks
+		WHERE id = $1
+		  AND visibility = 'provisional'
+		  AND NOT EXISTS (SELECT 1 FROM saved_drinks s WHERE s.drink_id = drinks.id)
+		  AND NOT EXISTS (SELECT 1 FROM drink_logs l WHERE l.drink_id = drinks.id)`, provisionalID)
+	if err != nil {
+		return MergeOneResult{}, err
+	}
+	deletedRows, err := del.RowsAffected()
+	if err != nil {
+		return MergeOneResult{}, err
+	}
+
+	if err := tx.Commit(); err != nil {
+		return MergeOneResult{}, err
+	}
+	return MergeOneResult{
+		Remapped:  int(remapped),
+		Discarded: int(discarded),
+		Deleted:   deletedRows > 0,
+	}, nil
+}
+
+func (r *repository) DeleteMergedOrphans(ctx context.Context) (int, error) {
+	const q = `
+		DELETE FROM drinks
+		WHERE visibility = 'provisional'
+		  AND merged_into_id IS NOT NULL
+		  AND NOT EXISTS (SELECT 1 FROM saved_drinks s WHERE s.drink_id = drinks.id)
+		  AND NOT EXISTS (SELECT 1 FROM drink_logs l WHERE l.drink_id = drinks.id)`
+	res, err := r.db.ExecContext(ctx, q)
+	if err != nil {
+		return 0, err
+	}
+	n, err := res.RowsAffected()
+	if err != nil {
+		return 0, err
+	}
+	return int(n), nil
 }
 
 func scanListed(rows *sql.Rows) (SavedDrink, error) {

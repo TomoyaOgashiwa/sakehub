@@ -64,8 +64,40 @@ type ListParams struct {
 	Status        string
 	Category      string
 	PublishedOnly bool
+	// Visibility filters catalog visibility when set (published | provisional).
+	Visibility string
 	// DrankUnion lists saved.drank ∪ catalog drink_logs (same numerator as Depth).
 	DrankUnion bool
+}
+
+// PublishedIdentity is the catalog slice used to match provisional names.
+type PublishedIdentity struct {
+	ID      string
+	Slug    string
+	Name    string
+	Aliases []string
+}
+
+// ProvisionalCandidate is an unmerged stake row.
+type ProvisionalCandidate struct {
+	ID             string
+	NameNormalized string
+}
+
+// MergeOneResult is the outcome of remapping one provisional drink.
+type MergeOneResult struct {
+	Remapped  int
+	Discarded int
+	Deleted   bool
+}
+
+// MergeReport is the ops-command summary. Not an HTTP contract.
+type MergeReport struct {
+	Remapped         int
+	Discarded        int
+	Deleted          int
+	SkippedAmbiguous int
+	AmbiguousSlugs   []string
 }
 
 func validProductCategory(category string) bool {
@@ -112,9 +144,11 @@ type DepthMaker struct {
 
 // ListDepth is the personal fill map for /list. Not a title ladder.
 // Categories.drank is unique published drink_id in saved.drank ∪ catalog drink_logs.
+// ProvisionalCount is saved_drinks on provisional drinks and is not in drank/total.
 type ListDepth struct {
-	Specialty  *DepthSpecialty  `json:"specialty"`
-	Categories []DepthSpecialty `json:"categories"`
-	Makers     []DepthMaker     `json:"makers"`
-	MakerScope string           `json:"maker_scope"`
+	Specialty        *DepthSpecialty  `json:"specialty"`
+	Categories       []DepthSpecialty `json:"categories"`
+	Makers           []DepthMaker     `json:"makers"`
+	MakerScope       string           `json:"maker_scope"`
+	ProvisionalCount int              `json:"provisional_count"`
 }

@@ -19,6 +19,7 @@
     "seed:drinks:validate": "pnpm --filter @sakehub/drink-seed validate",
     "seed:drinks:build": "pnpm --filter @sakehub/drink-seed build",
     "seed:drinks:draft": "pnpm --filter @sakehub/drink-seed draft",
+    "seed:drinks:merge": "go -C apps/api run ./cmd/mergeprovisional",
     "seed:images:generate": "pnpm --filter @sakehub/catalog-image-seed generate",
     "seed:images:upload": "pnpm --filter @sakehub/catalog-image-seed upload"
   },

@@ -1,8 +1,13 @@
 import 'server-only';
 
-import type { SavedDrink } from '@sakehub/types';
+import type { ListDepth, SavedDrink } from '@sakehub/types';
 
-import { toSavedDrink, type ApiSavedDrink } from '@/application/saved-drink-mappers';
+import {
+  toListDepth,
+  toSavedDrink,
+  type ApiListDepth,
+  type ApiSavedDrink,
+} from '@/application/saved-drink-mappers';
 import { authServerFetch } from '@/application/server-api';
 
 export async function fetchMySavedDrinks(
@@ -31,4 +36,14 @@ export async function fetchMySavedDrink(
   );
   if (!result.ok) return null;
   return result.data.data ? toSavedDrink(result.data.data) : null;
+}
+
+export async function fetchMyListDepth(accessToken: string): Promise<ListDepth> {
+  const result = await authServerFetch<{ data: ApiListDepth | null }>('/api/auth/saved-drinks/depth', {
+    accessToken,
+  });
+  if (!result.ok || !result.data.data) {
+    return { specialty: null, makers: [], makerScope: 'all' };
+  }
+  return toListDepth(result.data.data);
 }

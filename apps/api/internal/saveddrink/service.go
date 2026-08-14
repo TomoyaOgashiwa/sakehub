@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"regexp"
+	"sort"
 	"strings"
 	"unicode/utf8"
 
@@ -126,6 +127,135 @@ func (s *Service) List(ctx context.Context, userID string, params ListParams) ([
 		return nil, fmt.Errorf("saveddrink.List: %w", err)
 	}
 	return items, nil
+}
+
+func (s *Service) Depth(ctx context.Context, userID string) (*ListDepth, error) {
+	drank, err := s.repo.ListDrankPublished(ctx, userID)
+	if err != nil {
+		return nil, fmt.Errorf("saveddrink.Depth: %w", err)
+	}
+	totals, err := s.repo.CountPublishedByCategory(ctx)
+	if err != nil {
+		return nil, fmt.Errorf("saveddrink.Depth: %w", err)
+	}
+
+	totalByCat := make(map[string]int, len(totals))
+	for _, t := range totals {
+		totalByCat[t.Category] = t.Total
+	}
+
+	specialty := pickSpecialty(drank, totalByCat)
+	makers := []DepthMaker{}
+	if specialty == nil {
+		return &ListDepth{Specialty: nil, Makers: makers, MakerScope: "all"}, nil
+	}
+
+	scoped := clusterMakers(drank, &specialty.Category)
+	nextCategory := &specialty.Category
+	makerScope := "specialty"
+	if len(scoped) == 0 {
+		scoped = clusterMakers(drank, nil)
+		nextCategory = nil
+		makerScope = "all"
+	}
+
+	excludeIDs := make([]string, 0, len(drank))
+	for _, d := range drank {
+		excludeIDs = append(excludeIDs, d.DrinkID)
+	}
+
+	for i, m := range scoped {
+		next := []DepthNextDrink{}
+		if i == 0 {
+			next, err = s.repo.ListUnsavedByManufacturer(
+				ctx, excludeIDs, m.Manufacturer, nextCategory, maxDepthNextDrinks,
+			)
+			if err != nil {
+				return nil, fmt.Errorf("saveddrink.Depth: %w", err)
+			}
+			if next == nil {
+				next = []DepthNextDrink{}
+			}
+		}
+		makers = append(makers, DepthMaker{
+			Manufacturer: m.Manufacturer,
+			Drank:        m.Drank,
+			NextDrinks:   next,
+		})
+	}
+
+	return &ListDepth{Specialty: specialty, Makers: makers, MakerScope: makerScope}, nil
+}
+
+func pickSpecialty(drank []DrankDrink, totals map[string]int) *DepthSpecialty {
+	if len(drank) == 0 {
+		return nil
+	}
+	counts := map[string]int{}
+	for _, d := range drank {
+		counts[d.Category]++
+	}
+	var best *DepthSpecialty
+	for cat, n := range counts {
+		cand := DepthSpecialty{Category: cat, Drank: n, Total: totals[cat]}
+		if betterSpecialty(cand, best) {
+			c := cand
+			best = &c
+		}
+	}
+	return best
+}
+
+func betterSpecialty(cand DepthSpecialty, best *DepthSpecialty) bool {
+	if best == nil {
+		return true
+	}
+	if cand.Drank != best.Drank {
+		return cand.Drank > best.Drank
+	}
+	candRatio := fillRatio(cand.Drank, cand.Total)
+	bestRatio := fillRatio(best.Drank, best.Total)
+	if candRatio != bestRatio {
+		return candRatio > bestRatio
+	}
+	return cand.Category < best.Category
+}
+
+func fillRatio(n, d int) float64 {
+	if d <= 0 {
+		return 0
+	}
+	return float64(n) / float64(d)
+}
+
+func clusterMakers(drank []DrankDrink, category *string) []DepthMaker {
+	counts := map[string]int{}
+	for _, d := range drank {
+		if category != nil && d.Category != *category {
+			continue
+		}
+		m := strings.TrimSpace(d.Manufacturer)
+		if m == "" {
+			continue
+		}
+		counts[m]++
+	}
+	out := make([]DepthMaker, 0, len(counts))
+	for m, n := range counts {
+		if n >= minMakerDrank {
+			out = append(out, DepthMaker{Manufacturer: m, Drank: n})
+		}
+	}
+	sort.Slice(out, func(i, j int) bool {
+		if out[i].Drank != out[j].Drank {
+			return out[i].Drank > out[j].Drank
+		}
+		return out[i].Manufacturer < out[j].Manufacturer
+	})
+	if len(out) > maxDepthMakers {
+		out = out[:maxDepthMakers]
+	}
+	return out
 }
 
 func (s *Service) Unsave(ctx context.Context, drinkID, userID string) error {

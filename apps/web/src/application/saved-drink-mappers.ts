@@ -1,4 +1,10 @@
-import type { SavedDrink, SavedDrinkCatalog, SavedDrinkStatus } from '@sakehub/types';
+import type {
+  ListDepth,
+  ListDepthSpecialty,
+  SavedDrink,
+  SavedDrinkCatalog,
+  SavedDrinkStatus,
+} from '@sakehub/types';
 
 export interface ApiSavedDrinkCatalog {
   id: string;
@@ -8,6 +14,7 @@ export interface ApiSavedDrinkCatalog {
   category: string;
   image_url?: string;
   visibility?: 'published' | 'provisional';
+  manufacturer?: string;
 }
 
 export interface ApiSavedDrink {
@@ -31,6 +38,38 @@ function toCatalog(api: ApiSavedDrinkCatalog): SavedDrinkCatalog {
     category: api.category as SavedDrinkCatalog['category'],
     imageUrl: api.image_url,
     visibility: api.visibility === 'provisional' ? 'provisional' : 'published',
+    manufacturer: api.manufacturer,
+  };
+}
+
+export interface ApiListDepth {
+  specialty: { category: string; drank: number; total: number } | null;
+  makers: {
+    manufacturer: string;
+    drank: number;
+    next_drinks?: { slug: string; name: string }[];
+  }[];
+  maker_scope?: 'specialty' | 'all';
+}
+
+export function toListDepth(api: ApiListDepth): ListDepth {
+  return {
+    specialty: api.specialty
+      ? {
+          category: api.specialty.category as ListDepthSpecialty['category'],
+          drank: api.specialty.drank,
+          total: api.specialty.total,
+        }
+      : null,
+    makers: (api.makers ?? []).map((maker) => ({
+      manufacturer: maker.manufacturer,
+      drank: maker.drank,
+      nextDrinks: (maker.next_drinks ?? []).map((drink) => ({
+        slug: drink.slug,
+        name: drink.name,
+      })),
+    })),
+    makerScope: api.maker_scope === 'all' ? 'all' : 'specialty',
   };
 }
 

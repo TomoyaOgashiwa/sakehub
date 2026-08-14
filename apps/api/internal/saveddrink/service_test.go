@@ -27,6 +27,14 @@ type stubRepo struct {
 	lastNote       *string
 	lastProvName   string
 	lastProvNorm   string
+	drank          []DrankDrink
+	drankErr       error
+	categoryTotals []CategoryTotal
+	totalsErr      error
+	nextDrinks     []DepthNextDrink
+	nextErr        error
+	nextForMaker   string
+	nextCategory   *string
 }
 
 func (s *stubRepo) DrinkExists(context.Context, string) (bool, error) {
@@ -64,6 +72,26 @@ func (s *stubRepo) ListByUser(context.Context, string, ListParams) ([]SavedDrink
 func (s *stubRepo) DeleteByDrinkAndUser(_ context.Context, drinkID, _ string) error {
 	s.deletedFor = drinkID
 	return s.deleteErr
+}
+
+func (s *stubRepo) ListDrankPublished(context.Context, string) ([]DrankDrink, error) {
+	return s.drank, s.drankErr
+}
+
+func (s *stubRepo) CountPublishedByCategory(context.Context) ([]CategoryTotal, error) {
+	return s.categoryTotals, s.totalsErr
+}
+
+func (s *stubRepo) ListUnsavedByManufacturer(
+	_ context.Context,
+	_ []string,
+	manufacturer string,
+	category *string,
+	_ int,
+) ([]DepthNextDrink, error) {
+	s.nextForMaker = manufacturer
+	s.nextCategory = category
+	return s.nextDrinks, s.nextErr
 }
 
 const testDrinkID = "11111111-1111-1111-1111-111111111111"
@@ -222,6 +250,211 @@ func TestUnsaveRejectsInvalidDrinkID(t *testing.T) {
 	err := svc.Unsave(context.Background(), "bad", "user")
 	if !errors.Is(err, ErrValidation) {
 		t.Fatalf("expected ErrValidation, got %v", err)
+	}
+}
+
+func TestDepthEmptyWhenNoDrank(t *testing.T) {
+	t.Parallel()
+	svc := NewService(&stubRepo{
+		drank:          []DrankDrink{},
+		categoryTotals: []CategoryTotal{{Category: "sake", Total: 200}},
+	})
+	got, err := svc.Depth(context.Background(), "user")
+	if err != nil {
+		t.Fatalf("Depth: %v", err)
+	}
+	if got.Specialty != nil {
+		t.Fatalf("specialty %+v, want nil", got.Specialty)
+	}
+	if len(got.Makers) != 0 {
+		t.Fatalf("makers %d, want 0", len(got.Makers))
+	}
+}
+
+func TestDepthPicksSpecialtyByCount(t *testing.T) {
+	t.Parallel()
+	svc := NewService(&stubRepo{
+		drank: []DrankDrink{
+			{DrinkID: "1", Category: "sake", Manufacturer: "Asahi"},
+			{DrinkID: "2", Category: "sake", Manufacturer: "Asahi"},
+			{DrinkID: "3", Category: "sake", Manufacturer: "Kubo"},
+			{DrinkID: "4", Category: "whisky", Manufacturer: "Nikka"},
+			{DrinkID: "5", Category: "whisky", Manufacturer: "Nikka"},
+		},
+		categoryTotals: []CategoryTotal{
+			{Category: "sake", Total: 200},
+			{Category: "whisky", Total: 180},
+		},
+	})
+	got, err := svc.Depth(context.Background(), "user")
+	if err != nil {
+		t.Fatalf("Depth: %v", err)
+	}
+	if got.Specialty == nil || got.Specialty.Category != "sake" || got.Specialty.Drank != 3 || got.Specialty.Total != 200 {
+		t.Fatalf("specialty %+v", got.Specialty)
+	}
+	if got.MakerScope != "specialty" {
+		t.Fatalf("makerScope %q", got.MakerScope)
+	}
+}
+
+func TestDepthTieBreaksByFillRatio(t *testing.T) {
+	t.Parallel()
+	svc := NewService(&stubRepo{
+		drank: []DrankDrink{
+			{DrinkID: "1", Category: "sake", Manufacturer: "A"},
+			{DrinkID: "2", Category: "sake", Manufacturer: "B"},
+			{DrinkID: "3", Category: "whisky", Manufacturer: "C"},
+			{DrinkID: "4", Category: "whisky", Manufacturer: "D"},
+		},
+		categoryTotals: []CategoryTotal{
+			{Category: "sake", Total: 200},
+			{Category: "whisky", Total: 10},
+		},
+	})
+	got, err := svc.Depth(context.Background(), "user")
+	if err != nil {
+		t.Fatalf("Depth: %v", err)
+	}
+	if got.Specialty == nil || got.Specialty.Category != "whisky" {
+		t.Fatalf("specialty %+v, want whisky", got.Specialty)
+	}
+}
+
+func TestDepthTieBreaksByCategoryName(t *testing.T) {
+	t.Parallel()
+	svc := NewService(&stubRepo{
+		drank: []DrankDrink{
+			{DrinkID: "1", Category: "sake", Manufacturer: "A"},
+			{DrinkID: "2", Category: "beer", Manufacturer: "B"},
+		},
+		categoryTotals: []CategoryTotal{
+			{Category: "sake", Total: 100},
+			{Category: "beer", Total: 100},
+		},
+	})
+	got, err := svc.Depth(context.Background(), "user")
+	if err != nil {
+		t.Fatalf("Depth: %v", err)
+	}
+	if got.Specialty == nil || got.Specialty.Category != "beer" {
+		t.Fatalf("specialty %+v, want beer", got.Specialty)
+	}
+}
+
+func TestDepthMakersInSpecialtyWhenTwoPlus(t *testing.T) {
+	t.Parallel()
+	next := []DepthNextDrink{{Slug: "dassai-45", Name: "Dassai 45"}}
+	repo := &stubRepo{
+		drank: []DrankDrink{
+			{DrinkID: "1", Category: "sake", Manufacturer: "Asahi Shuzo"},
+			{DrinkID: "2", Category: "sake", Manufacturer: "Asahi Shuzo"},
+			{DrinkID: "3", Category: "sake", Manufacturer: "Kubo"},
+			{DrinkID: "4", Category: "whisky", Manufacturer: "Nikka"},
+			{DrinkID: "5", Category: "whisky", Manufacturer: "Nikka"},
+		},
+		categoryTotals: []CategoryTotal{
+			{Category: "sake", Total: 200},
+			{Category: "whisky", Total: 180},
+		},
+		nextDrinks: next,
+	}
+	svc := NewService(repo)
+	got, err := svc.Depth(context.Background(), "user")
+	if err != nil {
+		t.Fatalf("Depth: %v", err)
+	}
+	if len(got.Makers) != 1 || got.Makers[0].Manufacturer != "Asahi Shuzo" || got.Makers[0].Drank != 2 {
+		t.Fatalf("makers %+v", got.Makers)
+	}
+	if repo.nextForMaker != "Asahi Shuzo" {
+		t.Fatalf("next maker %q", repo.nextForMaker)
+	}
+	if repo.nextCategory == nil || *repo.nextCategory != "sake" {
+		t.Fatalf("next category %v", repo.nextCategory)
+	}
+	if len(got.Makers[0].NextDrinks) != 1 || got.Makers[0].NextDrinks[0].Slug != "dassai-45" {
+		t.Fatalf("nextDrinks %+v", got.Makers[0].NextDrinks)
+	}
+}
+
+func TestDepthMakersFallBackToOverall(t *testing.T) {
+	t.Parallel()
+	repo := &stubRepo{
+		drank: []DrankDrink{
+			{DrinkID: "1", Category: "sake", Manufacturer: "Asahi Shuzo"},
+			{DrinkID: "2", Category: "sake", Manufacturer: "Kubo"},
+			{DrinkID: "3", Category: "sake", Manufacturer: "Dewazakura"},
+			{DrinkID: "4", Category: "whisky", Manufacturer: "Nikka"},
+			{DrinkID: "5", Category: "whisky", Manufacturer: "Nikka"},
+		},
+		categoryTotals: []CategoryTotal{
+			{Category: "sake", Total: 200},
+			{Category: "whisky", Total: 180},
+		},
+	}
+	svc := NewService(repo)
+	got, err := svc.Depth(context.Background(), "user")
+	if err != nil {
+		t.Fatalf("Depth: %v", err)
+	}
+	if got.Specialty == nil || got.Specialty.Category != "sake" {
+		t.Fatalf("specialty %+v", got.Specialty)
+	}
+	if len(got.Makers) != 1 || got.Makers[0].Manufacturer != "Nikka" {
+		t.Fatalf("makers %+v, want overall Nikka", got.Makers)
+	}
+	if repo.nextCategory != nil {
+		t.Fatalf("next category %v, want nil for overall fallback", repo.nextCategory)
+	}
+	if got.MakerScope != "all" {
+		t.Fatalf("makerScope %q, want all", got.MakerScope)
+	}
+}
+
+func TestDepthNextDrinksOnlyOnFirstMaker(t *testing.T) {
+	t.Parallel()
+	svc := NewService(&stubRepo{
+		drank: []DrankDrink{
+			{DrinkID: "1", Category: "sake", Manufacturer: "Asahi Shuzo"},
+			{DrinkID: "2", Category: "sake", Manufacturer: "Asahi Shuzo"},
+			{DrinkID: "3", Category: "sake", Manufacturer: "Kubo"},
+			{DrinkID: "4", Category: "sake", Manufacturer: "Kubo"},
+		},
+		categoryTotals: []CategoryTotal{{Category: "sake", Total: 200}},
+		nextDrinks:     []DepthNextDrink{{Slug: "a", Name: "A"}},
+	})
+	got, err := svc.Depth(context.Background(), "user")
+	if err != nil {
+		t.Fatalf("Depth: %v", err)
+	}
+	if len(got.Makers) != 2 {
+		t.Fatalf("makers %d", len(got.Makers))
+	}
+	if len(got.Makers[0].NextDrinks) != 1 {
+		t.Fatalf("first nextDrinks %+v", got.Makers[0].NextDrinks)
+	}
+	if len(got.Makers[1].NextDrinks) != 0 {
+		t.Fatalf("second nextDrinks %+v", got.Makers[1].NextDrinks)
+	}
+}
+
+func TestDepthSkipsEmptyManufacturer(t *testing.T) {
+	t.Parallel()
+	svc := NewService(&stubRepo{
+		drank: []DrankDrink{
+			{DrinkID: "1", Category: "sake", Manufacturer: ""},
+			{DrinkID: "2", Category: "sake", Manufacturer: ""},
+			{DrinkID: "3", Category: "sake", Manufacturer: "  "},
+		},
+		categoryTotals: []CategoryTotal{{Category: "sake", Total: 200}},
+	})
+	got, err := svc.Depth(context.Background(), "user")
+	if err != nil {
+		t.Fatalf("Depth: %v", err)
+	}
+	if len(got.Makers) != 0 {
+		t.Fatalf("makers %+v", got.Makers)
 	}
 }
 

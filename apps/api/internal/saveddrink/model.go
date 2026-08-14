@@ -20,13 +20,14 @@ const (
 
 // DrinkSummary is the catalog slice embedded on list responses.
 type DrinkSummary struct {
-	ID         string  `json:"id"`
-	Slug       string  `json:"slug"`
-	Name       string  `json:"name"`
-	NameEn     *string `json:"name_en,omitempty"`
-	Category   string  `json:"category"`
-	ImageURL   *string `json:"image_url,omitempty"`
-	Visibility string  `json:"visibility"`
+	ID           string  `json:"id"`
+	Slug         string  `json:"slug"`
+	Name         string  `json:"name"`
+	NameEn       *string `json:"name_en,omitempty"`
+	Category     string  `json:"category"`
+	ImageURL     *string `json:"image_url,omitempty"`
+	Visibility   string  `json:"visibility"`
+	Manufacturer *string `json:"manufacturer,omitempty"`
 }
 
 // SavedDrink is a personal 1-per-user catalog mark. Rating is optional.
@@ -60,4 +61,46 @@ type PatchInput struct {
 type ListParams struct {
 	Limit  int
 	Offset int
+}
+
+const (
+	maxDepthMakers     = 3
+	maxDepthNextDrinks = 3
+	minMakerDrank      = 2
+)
+
+// DrankDrink is one published unique drink_id in the drank union.
+type DrankDrink struct {
+	DrinkID      string
+	Category     string
+	Manufacturer string
+}
+
+type CategoryTotal struct {
+	Category string
+	Total    int
+}
+
+type DepthNextDrink struct {
+	Slug string `json:"slug"`
+	Name string `json:"name"`
+}
+
+type DepthSpecialty struct {
+	Category string `json:"category"`
+	Drank    int    `json:"drank"`
+	Total    int    `json:"total"`
+}
+
+type DepthMaker struct {
+	Manufacturer string           `json:"manufacturer"`
+	Drank        int              `json:"drank"`
+	NextDrinks   []DepthNextDrink `json:"next_drinks"`
+}
+
+// ListDepth is the personal fill map for /list. Not a title ladder.
+type ListDepth struct {
+	Specialty  *DepthSpecialty `json:"specialty"`
+	Makers     []DepthMaker    `json:"makers"`
+	MakerScope string          `json:"maker_scope"`
 }

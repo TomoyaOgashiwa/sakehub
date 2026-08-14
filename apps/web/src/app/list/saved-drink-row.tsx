@@ -5,20 +5,22 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState, useTransition } from 'react';
 import { Wine } from 'lucide-react';
-import type { SavedDrink, SavedDrinkStatus } from '@sakehub/types';
+import type { DrinkCategory, SavedDrink, SavedDrinkStatus } from '@sakehub/types';
 
 import { updateSavedDrink } from '@/application/saved-drink-actions';
 import { Button } from '@/components/ui/button';
 import { StarRatingDisplay } from '@/components/ui/star-rating';
+import { makerSearchHref } from '@/config/drinks';
 import { oppositeSavedDrinkStatus, savedDrinkStatusLabel } from '@/utils/saved-drink-status';
 
 import { UnsaveDrinkButton } from './unsave-drink-button';
 
 interface SavedDrinkRowProps {
   item: SavedDrink;
+  specialtyCategory?: Exclude<DrinkCategory, 'all'>;
 }
 
-export function SavedDrinkRow({ item }: SavedDrinkRowProps) {
+export function SavedDrinkRow({ item, specialtyCategory }: SavedDrinkRowProps) {
   const drink = item.drink;
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
@@ -86,6 +88,14 @@ export function SavedDrinkRow({ item }: SavedDrinkRowProps) {
             <span className="rounded-full border px-2 py-0.5 text-xs">カタログ未登録</span>
           )}
         </div>
+        {!isProvisional && drink.manufacturer ? (
+          <Link
+            href={makerSearchHref(drink.manufacturer, specialtyCategory)}
+            className="text-muted-foreground text-xs hover:underline"
+          >
+            {drink.manufacturer}
+          </Link>
+        ) : null}
         {!isProvisional && item.rating != null && (
           <StarRatingDisplay value={item.rating} size="sm" showValue={false} />
         )}

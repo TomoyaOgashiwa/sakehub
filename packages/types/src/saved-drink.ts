@@ -12,6 +12,32 @@ export interface SavedDrinkCatalog {
   category: Exclude<DrinkCategory, 'all'>;
   imageUrl?: string;
   visibility: DrinkVisibility;
+  manufacturer?: string;
+}
+
+export interface ListDepthSpecialty {
+  category: Exclude<DrinkCategory, 'all'>;
+  drank: number;
+  total: number;
+}
+
+export interface ListDepthNextDrink {
+  slug: string;
+  name: string;
+}
+
+export interface ListDepthMaker {
+  manufacturer: string;
+  drank: number;
+  nextDrinks: ListDepthNextDrink[];
+}
+
+/** Personal fill map for /list. Not a title ladder. */
+export interface ListDepth {
+  specialty: ListDepthSpecialty | null;
+  makers: ListDepthMaker[];
+  /** specialty = makers are in the top category; all = fallback across categories. */
+  makerScope: 'specialty' | 'all';
 }
 
 /** One personal mark per user per catalog drink. Rating is an optional annotation. */

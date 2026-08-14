@@ -1,15 +1,17 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import { Hourglass } from 'lucide-react';
 import type { DrinkCategory, SavedDrinkStatus } from '@sakehub/types';
 
 import { getOptionalAccessToken } from '@/application/require-access-token';
 import { fetchMyListDepth, fetchMySavedDrinks } from '@/application/saved-drinks-api.server';
 import { ConfirmedSearchInput } from '@/components/catalog/confirmed-search-input';
+import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Heading } from '@/components/ui/heading';
 import { drinkCategoryLabel, isProductDrinkCategory } from '@/config/drinks';
 
-import { ListDepthMap } from './list-depth';
+import { DrinkCategoryGlyph, ListDepthMap } from './list-depth';
 import { SavedDrinkRow } from './saved-drink-row';
 
 export const metadata: Metadata = {
@@ -41,17 +43,34 @@ function matchesQuery(
   return haystack.includes(q);
 }
 
+function PendingGlyph() {
+  return (
+    <span
+      className="bg-drink-pending text-drink-pending-foreground flex size-8 items-center justify-center rounded-lg [&>svg]:size-4"
+      aria-hidden="true"
+    >
+      <Hourglass />
+    </span>
+  );
+}
+
 function PendingCountLink({ count }: { count: number }) {
   if (count <= 0) return null;
   return (
-    <div className="space-y-1">
-      <p>
-        <Link href="/list?pending=1" className="text-muted-foreground text-sm hover:underline">
-          図鑑待ち {count}
-        </Link>
-      </p>
-      <p className="text-muted-foreground text-xs">図鑑待ちのマスは分数に入れていません</p>
-    </div>
+    <Link
+      href="/list?pending=1"
+      className="group focus-visible:ring-ring/50 block rounded-xl outline-none focus-visible:ring-3"
+    >
+      <Card className="border-border border border-dashed ring-0 transition-shadow group-hover:shadow-md">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <PendingGlyph />
+            図鑑待ち {count}
+          </CardTitle>
+          <CardDescription>図鑑待ちのマスは分数に入れていません</CardDescription>
+        </CardHeader>
+      </Card>
+    </Link>
   );
 }
 
@@ -113,7 +132,19 @@ export default async function ListPage({ searchParams }: PageProps) {
             </Link>
           </p>
         ) : null}
-        <Heading level="h1" className="mb-2">
+        <Heading
+          level="h1"
+          className={
+            (isCategoryView && categoryFilter) || isPendingView
+              ? 'mb-2 flex items-center gap-3'
+              : 'mb-2'
+          }
+        >
+          {isCategoryView && categoryFilter ? (
+            <DrinkCategoryGlyph category={categoryFilter} />
+          ) : isPendingView ? (
+            <PendingGlyph />
+          ) : null}
           {isWantView
             ? '飲みたい'
             : isPendingView
@@ -136,7 +167,7 @@ export default async function ListPage({ searchParams }: PageProps) {
       </div>
 
       {overviewEmpty ? (
-        <div className="space-y-4">
+        <div className="flex flex-col gap-4">
           <div className="rounded-lg border border-dashed p-8 text-center">
             <p className="text-muted-foreground mb-3 text-sm">まだ記録した銘柄がありません</p>
             <Link href="/" className="text-foreground text-sm font-medium underline">
@@ -153,7 +184,7 @@ export default async function ListPage({ searchParams }: PageProps) {
           </p>
         </div>
       ) : (
-        <div className="space-y-6">
+        <div className="flex flex-col gap-6">
           {depthFailed && !isWantView && !isPendingView ? (
             <section
               aria-label="記録した銘柄の埋まり"

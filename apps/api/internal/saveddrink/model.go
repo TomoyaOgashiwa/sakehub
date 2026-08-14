@@ -64,6 +64,8 @@ type ListParams struct {
 	Status        string
 	Category      string
 	PublishedOnly bool
+	// DrankUnion lists saved.drank ∪ catalog drink_logs (same numerator as Depth).
+	DrankUnion bool
 }
 
 func validProductCategory(category string) bool {
@@ -81,11 +83,9 @@ const (
 	minMakerDrank      = 2
 )
 
-// DrankDrink is one published unique drink_id in the drank union.
-type DrankDrink struct {
-	DrinkID      string
-	Category     string
-	Manufacturer string
+type CategoryCount struct {
+	Category string
+	Drank    int
 }
 
 type CategoryTotal struct {
@@ -111,6 +111,7 @@ type DepthMaker struct {
 }
 
 // ListDepth is the personal fill map for /list. Not a title ladder.
+// Categories.drank is unique published drink_id in saved.drank ∪ catalog drink_logs.
 type ListDepth struct {
 	Specialty  *DepthSpecialty  `json:"specialty"`
 	Categories []DepthSpecialty `json:"categories"`

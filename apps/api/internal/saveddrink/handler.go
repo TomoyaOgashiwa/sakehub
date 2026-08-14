@@ -177,7 +177,16 @@ func (h *Handler) List(w http.ResponseWriter, r *http.Request) {
 	if v := r.URL.Query().Get("category"); validProductCategory(v) {
 		params.Category = v
 	}
-	if params.Category != "" && params.Status != StatusWant {
+	if params.Category != "" && params.Status != StatusWant && !params.DrankUnion {
+		params.PublishedOnly = true
+	}
+	if v := r.URL.Query().Get("union"); v != "" {
+		if v != "drank" {
+			response.Error(w, http.StatusBadRequest, "invalid union")
+			return
+		}
+		params.DrankUnion = true
+		params.Status = ""
 		params.PublishedOnly = true
 	}
 

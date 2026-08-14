@@ -29,6 +29,7 @@ export function SavedDrinkRow({ item, specialtyCategory }: SavedDrinkRowProps) {
   if (!drink) return null;
 
   const isProvisional = drink.visibility === 'provisional';
+  const canMutate = Boolean(item.id);
 
   const handleToggle = () => {
     const next: SavedDrinkStatus = oppositeSavedDrinkStatus(item.status);
@@ -110,16 +111,20 @@ export function SavedDrinkRow({ item, specialtyCategory }: SavedDrinkRowProps) {
       </div>
 
       <div className="flex shrink-0 flex-col items-end gap-1">
-        <Button
-          type="button"
-          variant="outline"
-          size="sm"
-          disabled={isPending}
-          onClick={handleToggle}
-        >
-          {item.status === 'drank' ? '飲みたいにする' : '飲んだにする'}
-        </Button>
-        <UnsaveDrinkButton drinkId={item.drinkId} drinkSlug={drink.slug} />
+        {canMutate ? (
+          <>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              disabled={isPending}
+              onClick={handleToggle}
+            >
+              {item.status === 'drank' ? '飲みたいにする' : '飲んだにする'}
+            </Button>
+            <UnsaveDrinkButton drinkId={item.drinkId} drinkSlug={drink.slug} />
+          </>
+        ) : null}
       </div>
     </li>
   );

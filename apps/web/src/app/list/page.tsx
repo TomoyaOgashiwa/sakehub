@@ -58,7 +58,7 @@ export default async function ListPage({ searchParams }: PageProps) {
       ? fetchMySavedDrinks(accessToken, {
           limit: 100,
           category: categoryFilter,
-          status: 'drank',
+          union: 'drank',
         })
       : isWantView
         ? fetchMySavedDrinks(accessToken, { limit: 100, status: 'want' })
@@ -75,11 +75,13 @@ export default async function ListPage({ searchParams }: PageProps) {
     return true;
   });
 
+  const depthFailed = depth === null;
   const activeFill =
-    categoryFilter != null
+    categoryFilter != null && depth
       ? (depth.categories.find((row) => row.category === categoryFilter) ?? null)
       : null;
-  const overviewEmpty = !isWantView && !isCategoryView && depth.categories.length === 0;
+  const overviewEmpty =
+    !depthFailed && !isWantView && !isCategoryView && depth.categories.length === 0;
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-12">
@@ -128,7 +130,20 @@ export default async function ListPage({ searchParams }: PageProps) {
         </div>
       ) : (
         <div className="space-y-6">
-          {!isWantView ? (
+          {depthFailed && !isWantView ? (
+            <section
+              aria-label="記録した銘柄の埋まり"
+              className="rounded-lg border border-dashed p-4"
+              role="alert"
+            >
+              <p className="text-muted-foreground mb-2 text-sm">深さを読み込めませんでした</p>
+              <Link href="/list" className="text-foreground text-sm font-medium underline">
+                再試行
+              </Link>
+            </section>
+          ) : null}
+
+          {!isWantView && depth ? (
             <ListDepthMap
               depth={depth}
               activeCategory={isCategoryView ? categoryFilter : null}
@@ -172,7 +187,7 @@ export default async function ListPage({ searchParams }: PageProps) {
                 <ul className="flex flex-col gap-3">
                   {filtered.map((item) => (
                     <SavedDrinkRow
-                      key={item.id}
+                      key={item.id || item.drinkId}
                       item={item}
                       specialtyCategory={categoryFilter ?? undefined}
                     />

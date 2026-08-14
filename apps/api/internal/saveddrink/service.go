@@ -137,7 +137,7 @@ func (s *Service) List(ctx context.Context, userID string, params ListParams) ([
 }
 
 func (s *Service) Depth(ctx context.Context, userID, makerCategory string) (*ListDepth, error) {
-	drank, err := s.repo.ListDrankPublished(ctx, userID)
+	counts, err := s.repo.CountDrankByCategory(ctx, userID)
 	if err != nil {
 		return nil, fmt.Errorf("saveddrink.Depth: %w", err)
 	}
@@ -151,7 +151,7 @@ func (s *Service) Depth(ctx context.Context, userID, makerCategory string) (*Lis
 		totalByCat[t.Category] = t.Total
 	}
 
-	categories := filledCategories(drank, totalByCat)
+	categories := filledCategories(counts, totalByCat)
 	makers := []DepthMaker{}
 	if len(categories) == 0 {
 		return &ListDepth{
@@ -163,36 +163,31 @@ func (s *Service) Depth(ctx context.Context, userID, makerCategory string) (*Lis
 	}
 	specialty := categories[0]
 
-	var (
-		scoped       []DepthMaker
-		nextCategory *string
-		makerScope   string
-	)
+	scopeCategory := &specialty.Category
+	makerScope := "specialty"
 	if validProductCategory(makerCategory) {
-		scoped = clusterMakers(drank, &makerCategory)
-		nextCategory = &makerCategory
-		makerScope = "specialty"
-	} else {
-		scoped = clusterMakers(drank, &specialty.Category)
-		nextCategory = &specialty.Category
-		makerScope = "specialty"
-		if len(scoped) == 0 {
-			scoped = clusterMakers(drank, nil)
-			nextCategory = nil
-			makerScope = "all"
-		}
+		scopeCategory = &makerCategory
 	}
 
-	excludeIDs := make([]string, 0, len(drank))
-	for _, d := range drank {
-		excludeIDs = append(excludeIDs, d.DrinkID)
+	scoped, err := s.repo.ListMakers(ctx, userID, scopeCategory)
+	if err != nil {
+		return nil, fmt.Errorf("saveddrink.Depth: %w", err)
+	}
+	nextCategory := scopeCategory
+	if len(scoped) == 0 && !validProductCategory(makerCategory) {
+		scoped, err = s.repo.ListMakers(ctx, userID, nil)
+		if err != nil {
+			return nil, fmt.Errorf("saveddrink.Depth: %w", err)
+		}
+		nextCategory = nil
+		makerScope = "all"
 	}
 
 	for i, m := range scoped {
 		next := []DepthNextDrink{}
 		if i == 0 {
 			next, err = s.repo.ListUnsavedByManufacturer(
-				ctx, excludeIDs, m.Manufacturer, nextCategory, maxDepthNextDrinks,
+				ctx, userID, m.Manufacturer, nextCategory, maxDepthNextDrinks,
 			)
 			if err != nil {
 				return nil, fmt.Errorf("saveddrink.Depth: %w", err)
@@ -216,17 +211,13 @@ func (s *Service) Depth(ctx context.Context, userID, makerCategory string) (*Lis
 	}, nil
 }
 
-func filledCategories(drank []DrankDrink, totals map[string]int) []DepthSpecialty {
-	counts := map[string]int{}
-	for _, d := range drank {
-		counts[d.Category]++
-	}
+func filledCategories(counts []CategoryCount, totals map[string]int) []DepthSpecialty {
 	out := make([]DepthSpecialty, 0, len(counts))
-	for cat, n := range counts {
-		if n <= 0 {
+	for _, c := range counts {
+		if c.Drank <= 0 {
 			continue
 		}
-		out = append(out, DepthSpecialty{Category: cat, Drank: n, Total: totals[cat]})
+		out = append(out, DepthSpecialty{Category: c.Category, Drank: c.Drank, Total: totals[c.Category]})
 	}
 	sort.Slice(out, func(i, j int) bool {
 		return betterSpecialty(out[i], &out[j])
@@ -254,36 +245,6 @@ func fillRatio(n, d int) float64 {
 		return 0
 	}
 	return float64(n) / float64(d)
-}
-
-func clusterMakers(drank []DrankDrink, category *string) []DepthMaker {
-	counts := map[string]int{}
-	for _, d := range drank {
-		if category != nil && d.Category != *category {
-			continue
-		}
-		m := strings.TrimSpace(d.Manufacturer)
-		if m == "" {
-			continue
-		}
-		counts[m]++
-	}
-	out := make([]DepthMaker, 0, len(counts))
-	for m, n := range counts {
-		if n >= minMakerDrank {
-			out = append(out, DepthMaker{Manufacturer: m, Drank: n})
-		}
-	}
-	sort.Slice(out, func(i, j int) bool {
-		if out[i].Drank != out[j].Drank {
-			return out[i].Drank > out[j].Drank
-		}
-		return out[i].Manufacturer < out[j].Manufacturer
-	})
-	if len(out) > maxDepthMakers {
-		out = out[:maxDepthMakers]
-	}
-	return out
 }
 
 func (s *Service) Unsave(ctx context.Context, drinkID, userID string) error {

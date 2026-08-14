@@ -349,3 +349,9 @@ interface ListDepth {
 **カテゴリ表示の覆し（後から）:** 当初の「得意 1 行」をやめ、**drank > 0 のカテゴリをすべて出す。0件は出さない。** 12個の未着手バッジ棚・称号は出さない。作り手クラスタのスコープは、概要では最も厚いカテゴリ（`specialty`）、カテゴリ詳細では表示中カテゴリ。全体フォールバックは概要だけ。
 
 **リスト IA の覆し（後から）:** `/list` に深さマップと時系列全件を並べるのをやめ、**概要はカテゴリの埋まりだけ**。クリックで `/list?category=` にそのカテゴリの飲んだリスト。カテゴリリンクは `/?category=` にしない。飲みたいは `/list?status=want`。一覧 GET に任意の `category` / `status` を足す（未指定の契約は維持）。`maxListLimit=100` は触らない。
+
+**Medium レビュー対応（後から）:**
+
+- カテゴリ掘り下げ一覧は `GET /api/auth/saved-drinks?union=drank&category=`。分子は Depth と同じ `saved.drank ∪ catalog drink_logs`。`status=drank` だけだと want + ログが埋まりにあって行に出ない。
+- Depth の specialty / maker 集計は repository の `GROUP BY`。`next_drinks` の除外は union CTE の `NOT EXISTS`（UUID 配列の往復をやめる）。tie-break は service。
+- `fetchMyListDepth` 失敗は `null`。overview を「記録ゼロ」に畳まない。短いエラーと再試行。

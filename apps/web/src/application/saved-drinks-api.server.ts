@@ -12,13 +12,20 @@ import { authServerFetch } from '@/application/server-api';
 
 export async function fetchMySavedDrinks(
   accessToken: string,
-  options?: { limit?: number; offset?: number; category?: string; status?: SavedDrink['status'] },
+  options?: {
+    limit?: number;
+    offset?: number;
+    category?: string;
+    status?: SavedDrink['status'];
+    union?: 'drank';
+  },
 ): Promise<SavedDrink[]> {
   const params: Record<string, string> = {};
   if (options?.limit != null) params.limit = String(options.limit);
   if (options?.offset != null) params.offset = String(options.offset);
   if (options?.category) params.category = options.category;
   if (options?.status) params.status = options.status;
+  if (options?.union) params.union = options.union;
 
   const result = await authServerFetch<{ data: ApiSavedDrink[] | null }>('/api/auth/saved-drinks', {
     accessToken,
@@ -43,7 +50,7 @@ export async function fetchMySavedDrink(
 export async function fetchMyListDepth(
   accessToken: string,
   options?: { category?: string },
-): Promise<ListDepth> {
+): Promise<ListDepth | null> {
   const params: Record<string, string> = {};
   if (options?.category) params.category = options.category;
 
@@ -55,7 +62,7 @@ export async function fetchMyListDepth(
     },
   );
   if (!result.ok || !result.data.data) {
-    return { specialty: null, categories: [], makers: [], makerScope: 'all' };
+    return null;
   }
   return toListDepth(result.data.data);
 }

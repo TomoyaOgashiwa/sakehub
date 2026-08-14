@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import type { SavedDrinkStatus } from '@sakehub/types';
+import type { DrinkCategory, SavedDrinkStatus } from '@sakehub/types';
 
 import { getOptionalAccessToken } from '@/application/require-access-token';
 import { fetchMyListDepth, fetchMySavedDrinks } from '@/application/saved-drinks-api.server';
 import { ConfirmedSearchInput } from '@/components/catalog/confirmed-search-input';
 import { Heading } from '@/components/ui/heading';
-import { cn } from '@/utils/utils';
+import { drinkCategoryLabel, isProductDrinkCategory } from '@/config/drinks';
 
 import { ListDepthMap } from './list-depth';
 import { SavedDrinkRow } from './saved-drink-row';
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 type PageProps = {
-  searchParams: Promise<{ q?: string; status?: string }>;
+  searchParams: Promise<{ q?: string; status?: string; category?: string }>;
 };
 
 function parseStatus(raw: string | undefined): SavedDrinkStatus | null {
@@ -25,12 +25,9 @@ function parseStatus(raw: string | undefined): SavedDrinkStatus | null {
   return null;
 }
 
-function listHref(status: SavedDrinkStatus | null, q: string): string {
-  const params = new URLSearchParams();
-  if (status) params.set('status', status);
-  if (q) params.set('q', q);
-  const qs = params.toString();
-  return qs ? `/list?${qs}` : '/list';
+function parseListCategory(raw: string | undefined): Exclude<DrinkCategory, 'all'> | null {
+  if (!isProductDrinkCategory(raw)) return null;
+  return raw;
 }
 
 function matchesQuery(
@@ -52,55 +49,94 @@ export default async function ListPage({ searchParams }: PageProps) {
 
   const sp = await searchParams;
   const q = sp.q?.trim() ?? '';
-  const statusFilter = parseStatus(sp.status);
+  const categoryFilter = parseListCategory(sp.category);
+  const isWantView = parseStatus(sp.status) === 'want';
+  const isCategoryView = categoryFilter != null && !isWantView;
+
   const [items, depth] = await Promise.all([
-    fetchMySavedDrinks(accessToken, { limit: 100 }),
-    fetchMyListDepth(accessToken),
+    isCategoryView
+      ? fetchMySavedDrinks(accessToken, {
+          limit: 100,
+          category: categoryFilter,
+          status: 'drank',
+        })
+      : isWantView
+        ? fetchMySavedDrinks(accessToken, { limit: 100, status: 'want' })
+        : Promise.resolve([]),
+    fetchMyListDepth(
+      accessToken,
+      isCategoryView && categoryFilter ? { category: categoryFilter } : undefined,
+    ),
   ]);
 
   const filtered = items.filter((item) => {
     if (!item.drink) return false;
-    if (statusFilter && item.status !== statusFilter) return false;
     if (q && !matchesQuery(item, q.toLowerCase())) return false;
     return true;
   });
 
-  const filters: { key: SavedDrinkStatus | null; label: string }[] = [
-    { key: null, label: 'すべて' },
-    { key: 'drank', label: '飲んだ' },
-    { key: 'want', label: '飲みたい' },
-  ];
+  const activeFill =
+    categoryFilter != null
+      ? (depth.categories.find((row) => row.category === categoryFilter) ?? null)
+      : null;
+  const overviewEmpty = !isWantView && !isCategoryView && depth.categories.length === 0;
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-12">
       <div className="mb-8">
+        {isCategoryView || isWantView ? (
+          <p className="mb-2">
+            <Link href="/list" className="text-muted-foreground text-sm hover:underline">
+              カテゴリ一覧へ
+            </Link>
+          </p>
+        ) : null}
         <Heading level="h1" className="mb-2">
-          リスト
+          {isWantView
+            ? '飲みたい'
+            : isCategoryView && categoryFilter
+              ? drinkCategoryLabel(categoryFilter)
+              : 'リスト'}
         </Heading>
-        <p className="text-muted-foreground text-sm">記録した銘柄の埋まりを見返す</p>
+        <p className="text-muted-foreground text-sm">
+          {isWantView
+            ? 'まだ飲んでいない銘柄'
+            : isCategoryView
+              ? activeFill
+                ? `${activeFill.drank} / ${activeFill.total}`
+                : 'このカテゴリで飲んだ銘柄'
+              : 'どれをどれくらい飲んだか'}
+        </p>
       </div>
 
-      {items.length === 0 && depth.categories.length === 0 ? (
-        <div className="rounded-lg border border-dashed p-8 text-center">
-          <p className="text-muted-foreground mb-3 text-sm">まだリストに銘柄がありません</p>
-          <Link href="/" className="text-foreground text-sm font-medium underline">
-            銘柄を探す
-          </Link>
+      {overviewEmpty ? (
+        <div className="space-y-4">
+          <div className="rounded-lg border border-dashed p-8 text-center">
+            <p className="text-muted-foreground mb-3 text-sm">まだ記録した銘柄がありません</p>
+            <Link href="/" className="text-foreground text-sm font-medium underline">
+              銘柄を探す
+            </Link>
+          </div>
+          <p>
+            <Link
+              href="/list?status=want"
+              className="text-muted-foreground text-sm hover:underline"
+            >
+              飲みたいを見る
+            </Link>
+          </p>
         </div>
       ) : (
         <div className="space-y-6">
-          <ListDepthMap depth={depth} />
-
-          {items.length === 0 ? (
-            <div className="rounded-lg border border-dashed p-8 text-center">
-              <p className="text-muted-foreground mb-3 text-sm">まだリストに銘柄がありません</p>
-              <Link href="/" className="text-foreground text-sm font-medium underline">
-                銘柄を探す
-              </Link>
-            </div>
+          {!isWantView ? (
+            <ListDepthMap
+              depth={depth}
+              activeCategory={isCategoryView ? categoryFilter : null}
+              showMakers={isCategoryView}
+            />
           ) : null}
 
-          {items.length > 0 ? (
+          {isWantView || isCategoryView ? (
             <>
               <div className="w-full sm:max-w-md">
                 <ConfirmedSearchInput
@@ -110,34 +146,23 @@ export default async function ListPage({ searchParams }: PageProps) {
                 />
               </div>
 
-              <nav aria-label="意図で絞る" className="flex flex-wrap gap-2">
-                {filters.map((filter) => {
-                  const active = statusFilter === filter.key;
-                  return (
-                    <Link
-                      key={filter.label}
-                      href={listHref(filter.key, q)}
-                      className={cn(
-                        'rounded-full border px-3 py-1 text-sm',
-                        active
-                          ? 'bg-foreground text-background border-foreground'
-                          : 'text-muted-foreground hover:text-foreground border-border',
-                      )}
-                      aria-current={active ? 'page' : undefined}
-                    >
-                      {filter.label}
-                    </Link>
-                  );
-                })}
-              </nav>
-
               {filtered.length === 0 ? (
                 <div className="rounded-lg border border-dashed p-8 text-center">
                   <p className="text-muted-foreground mb-3 text-sm">
-                    リストに一致する銘柄がありません
+                    {q
+                      ? 'リストに一致する銘柄がありません'
+                      : isWantView
+                        ? '飲みたい銘柄はまだありません'
+                        : 'このカテゴリで飲んだ銘柄はまだありません'}
                   </p>
                   <Link
-                    href={q ? `/?q=${encodeURIComponent(q)}` : '/'}
+                    href={
+                      q
+                        ? `/?q=${encodeURIComponent(q)}`
+                        : categoryFilter
+                          ? `/?category=${encodeURIComponent(categoryFilter)}`
+                          : '/'
+                    }
                     className="text-foreground text-sm font-medium underline"
                   >
                     カタログで探す
@@ -149,15 +174,22 @@ export default async function ListPage({ searchParams }: PageProps) {
                     <SavedDrinkRow
                       key={item.id}
                       item={item}
-                      specialtyCategory={
-                        depth.makerScope === 'specialty' ? depth.specialty?.category : undefined
-                      }
+                      specialtyCategory={categoryFilter ?? undefined}
                     />
                   ))}
                 </ul>
               )}
             </>
-          ) : null}
+          ) : (
+            <p>
+              <Link
+                href="/list?status=want"
+                className="text-muted-foreground text-sm hover:underline"
+              >
+                飲みたいを見る
+              </Link>
+            </p>
+          )}
         </div>
       )}
     </div>

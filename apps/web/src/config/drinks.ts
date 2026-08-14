@@ -43,6 +43,12 @@ export function drinkCategoryLabel(category: string): string {
   return category;
 }
 
+export function isProductDrinkCategory(
+  value: string | undefined,
+): value is Exclude<DrinkCategory, 'all'> {
+  return Boolean(value) && value !== 'all' && value in CATEGORY_LABELS;
+}
+
 export function makerSearchHref(manufacturer: string, category?: string): string {
   const params = new URLSearchParams();
   params.set('q', manufacturer);

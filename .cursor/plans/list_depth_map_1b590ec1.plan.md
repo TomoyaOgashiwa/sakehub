@@ -4,15 +4,16 @@ todos:
     status: completed
     content: catalog log → saved_drinks バックフィル + トリガー、GET /api/auth/saved-drinks/depth（union SQL は saveddrink リポジトリに閉じる）、types
   - id: category-specialty
-    content: /list 上部に drank>0 のカテゴリをすべて出す（0件は出さない）。status/q フィルタは行だけ
+    content: /list は drank>0 のカテゴリ埋まりだけ。クリックで /list?category= の飲んだリスト
     status: completed
   - id: maker-return
-    content: 得意（または全体）で作り手 2 銘柄以上を出し、未 drank の published 少数 + /?q= / ?category= へ戻す
+    content: カテゴリ詳細でのみ作り手 2 銘柄以上。未 drank の published 少数 + /?q= へ戻す
     status: completed
 name: List Depth Map
-overview: '`/list` に自分用の深さマップを置く。飲んだの正は published のユニーク drink_id（saved_drinks.drank ∪ カタログ付き drink_logs）。称号・公開プロフィール・日記復活はやらない。'
+overview: '`/list` はカテゴリごとにどれをどれくらい飲んだかを見返し、クリックでそのカテゴリの飲んだリストへ進む。飲んだの正は published のユニーク drink_id（saved_drinks.drank ∪ カタログ付き drink_logs）。称号・公開プロフィール・日記復活はやらない。'
 isProject: false
 ---
+
 # リストに深さマップを置く
 
 対象は **Web のみ**。技術スタックは現状踏襲（Next.js 16 App Router、Server Actions、Go API、Supabase）。新規外部サービスは増やさない。既存ファイルの編集を優先する。
@@ -21,9 +22,10 @@ isProject: false
 flowchart LR
   Home["/ 特定する"] --> Drink["/drinks/slug"]
   Drink -->|"飲んだ / 飲みたい"| Saved["saved_drinks"]
-  Drink --> List["/list 深さマップ"]
-  List -->|"得意 / 作り手"| Search["/?q= または ?category="]
-  List --> Drink
+  Drink --> List["/list カテゴリの埋まり"]
+  List -->|"クリック"| Cat["/list?category= 飲んだリスト"]
+  Cat --> Drink
+  Cat -->|"同じ作り手"| Search["/?q= または ?category="]
   Logs["drink_logs カタログ付き"] -->|"union + バックフィル"| Depth["深さの分子"]
 ```
 
@@ -161,7 +163,9 @@ ON CONFLICT (user_id, drink_id) DO NOTHING;
 
 ## API
 
-**専用** `GET /api/auth/saved-drinks/depth`（認証必須）。既存の一覧 GET は契約を変えない（limit 100 のまま）。
+**専用** `GET /api/auth/saved-drinks/depth`（認証必須）。`?category=` は作り手クラスタのスコープだけ変える。`categories`（drank>0 の全部）は常に返す。`all` と未知カテゴリは無視して概要と同じ（全体フォールバックあり）。**有効な商品カテゴリが付いているときは、そのカテゴリだけで作り手を出し、全体へフォールバックしない。**
+
+**一覧** `GET /api/auth/saved-drinks` に任意の `category` / `status` を足す（未指定は従来どおり全ステータス）。プレースホルダのみ。`maxListLimit=100` は触らない。カテゴリ付きかつ `status` が `want` 以外のときは `d.visibility = 'published'` も絞る（図鑑の「飲んだ」と揃える）。無効な `status` は 400。無効な `category` / `all` はフィルタなし。ホームの「最近残した」はパラメータ無しのまま動く。
 
 [`apps/api/internal/saveddrink`](apps/api/internal/saveddrink) を拡張。`r.Get("/depth", ...)` を `/mine` の隣に足す。`drinklog` は import しない。SQL は repository に閉じ、service が得意・作り手（上限 3、2 銘柄以上）・次の 1 手を組む。
 
@@ -201,26 +205,40 @@ interface ListDepth {
 
 ## Web: `/list` の情報設計
 
-深さは **フィルタの上**。`?status=` / `?q=` は **行だけ**。深さは常に union 全体（want で絞っても得意は変わらない）。
+`/list` は **カテゴリごとの埋まり** が主語。時系列の全件ダンプは出さない。カテゴリ行のリンクは **`/list?category=`**（ホーム `/?category=` ではない）。作り手の「同じ作り手」だけ従来どおり `/?q=` / `?category=`。
 
 ```
-見出し
-補足
-[深さマップ]     ← 新規。RSC。同ディレクトリに list-depth.tsx を 1 ファイル足してよい
-検索
-すべて / 飲んだ / 飲みたい
-行（既存 SavedDrinkRow）
+/list
+  見出し: リスト
+  補足: どれをどれくらい飲んだか
+  [カテゴリの埋まり]  Beer 3 / 150  …  ← クリックでカテゴリ詳細
+  飲みたいを見る → /list?status=want
+
+/list?category=sake
+  戻る → /list
+  見出し: Sake
+  補足: {drank} / {total}
+  [カテゴリの埋まり]（切替用。作り手はこのカテゴリ）
+  検索（任意）
+  このカテゴリで飲んだ published の行
+
+/list?status=want
+  戻る → /list
+  飲みたい行だけ（薄い避難口。カテゴリ埋まりの主仮説ではない）
 ```
+
+深さブロックは RSC。[`list-depth.tsx`](apps/web/src/app/list/list-depth.tsx)。無効な `category` / `all` は概要。`status=want` が付いているときは want ビューを優先。
 
 空状態:
 
-- **リスト 0 件かつ深さ 0**: 現行どおり「まだリストに銘柄がありません」→ `/`。深さブロックは出さない。
-- **リストあり・深さ 0**（want だけ）: 深さに「まだ記録した銘柄がありません」→ `/`。行は現状どおり。want の死蔵解消は主仮説ではない。
-- 検索ゼロ（全体は空でない）: 現行の「リストに一致する銘柄がありません」。深さは出したまま。
+- **概要で深さ 0**: 「まだ記録した銘柄がありません」→ `/`。飲みたい避難口は残してよい。
+- **カテゴリ詳細で行 0**: 「このカテゴリで飲んだ銘柄はまだありません」。カタログ `/?category=` へ。
+- **want で行 0**: 「飲みたい銘柄はまだありません」。
+- 検索ゼロ（行はある）: 「リストに一致する銘柄がありません」。
 
 `/profile` は **触らない**。「リスト」リンクは既にある。深さは出さない。
 
-行: published は既存どおり詳細へ。`manufacturer` があれば薄いテキストで `/?q={encode(manufacturer)}`（得意カテゴリがあれば `&category=` も）。仮の印は非リンクのまま。
+行: published は既存どおり詳細へ。`manufacturer` があれば薄いテキストで `/?q={encode(manufacturer)}`（表示中カテゴリがあれば `&category=` も）。仮の印は非リンクのまま。カテゴリ詳細の行は published の `drank` だけ。
 
 `/` の骨格・最近残した・ゼロ件出口は触らない。
 
@@ -230,13 +248,15 @@ interface ListDepth {
 
 カテゴリ名は既存 [`CATEGORY_LABELS`](apps/web/src/config/drinks.ts)（Sake / Whisky …）。トップのチップと揃える。日本語別名（日本酒）は新設しない（i18n しない）。
 
-- 見出し: リスト
-- 補足: 記録した銘柄の埋まりを見返す
-- カテゴリ（drank > 0）: `{Label} {drank} / {total}`（例: `Sake 12 / 200`）。0件カテゴリは出さない。
-- 作り手: `{manufacturer} {n}種`
+- 見出し（概要）: リスト
+- 補足（概要）: どれをどれくらい飲んだか
+- カテゴリ（drank > 0）: `{Label} {drank} / {total}`（例: `Sake 12 / 200`）。0件カテゴリは出さない。リンク先は `/list?category=`。
+- 見出し（カテゴリ）: `{Label}`。補足: `{drank} / {total}`。戻る: カテゴリ一覧へ
+- 作り手（カテゴリ詳細のみ）: `{manufacturer} {n}種`
 - 次の 1 手: 銘柄名 → `/drinks/{slug}`。まとめて見る → `/?q={manufacturer}&category={category}`
 - 深さ空: まだ記録した銘柄がありません → 銘柄を探す（`/`）
-- リスト空（全体）: 現行のまま
+- カテゴリの行が空: このカテゴリで飲んだ銘柄はまだありません
+- 飲みたい避難口: 飲みたいを見る → `/list?status=want`
 
 使わない: お酒博士、マイスター、図鑑コンプ、今夜あと 1 杯、ストリーク、弱点、ランク、飲めば強くなる、固定 200 種類。
 
@@ -261,9 +281,10 @@ interface ListDepth {
 
 ## 受け入れ条件
 
-- ログインして `/list` を開くと、残した直後でなくても、**記録したカテゴリそれぞれの**「N / そのカテゴリの published 数」が見える（drank が 1 件以上あるカテゴリだけ。0件は出ない）。
-- 同じ作り手が 2 銘柄以上あるとき「{作り手} N種」が見える。リンクからその作り手の銘柄詳細、または `/?q=` / `?category=` のカタログに戻れる。
-- `want` だけの銘柄は N に入らない。深さ 0 のときは「まだ記録した銘柄がありません」。
+- ログインして `/list` を開くと、残した直後でなくても、**記録したカテゴリそれぞれの**「N / そのカテゴリの published 数」が見える（drank が 1 件以上あるカテゴリだけ。0件は出ない）。時系列の全件ダンプは出ない。
+- カテゴリ行をクリックすると `/list?category=` に進み、**そのカテゴリで飲んだ銘柄**がリストで見える。カテゴリリンクはホーム検索ではない。
+- 同じ作り手が 2 銘柄以上あるとき、カテゴリ詳細で「{作り手} N種」が見える。リンクからその作り手の銘柄詳細、または `/?q=` / `?category=` のカタログに戻れる。
+- `want` だけの銘柄は N に入らない。深さ 0 のときは「まだ記録した銘柄がありません」。飲みたいは `/list?status=want`。
 - カタログ付きの過去ログ（`drink_id` あり・published）は深さの N に入る。既存の `want` / `note` は上書きされない。自由入力ログはリスト行にも深さにも入らない。
 - 仮の印は深さに入らない。リスト行としては既存どおり残る。
 - `/` の見出し・検索・棚の順は変わらない。ログイン後もダッシュボードにならない。
@@ -278,8 +299,8 @@ interface ListDepth {
 日記を主経路に戻さない。100 件超のリスト拡張と同時にやらない。
 
 1. **union 集計** — migration（バックフィル + トリガー）→ `GET /depth`（SQL を saveddrink に閉じる）→ types / server fetch。`go test ./internal/saveddrink` で得意の選出と want 除外。
-2. **カテゴリ偏り** — `/list` 上部に drank > 0 のカテゴリをすべて出す。0件は出さない。フィルタは行だけ。空状態は上記。
-3. **作り手まとまりとカタログへ戻る** — 2 の `specialty` がコード上で足りてから。2+ 作り手、次の 1 手、行の manufacturer リンク。
+2. **カテゴリ偏り** — `/list` に drank > 0 のカテゴリをすべて出す。0件は出さない。クリックで `/list?category=`。空状態は上記。
+3. **作り手まとまりとカタログへ戻る** — カテゴリ詳細で。2+ 作り手、次の 1 手、行の manufacturer リンク。
 
 検証: `pnpm lint` / `pnpm type-check` / `cd apps/api && go vet ./...` / `go test ./internal/saveddrink`。
 
@@ -325,4 +346,6 @@ interface ListDepth {
 - カテゴリ表示と作り手検索 URL は [`apps/web/src/config/drinks.ts`](apps/web/src/config/drinks.ts) の `drinkCategoryLabel` / `makerSearchHref`。
 - 保存先: [`.cursor/plans/list_depth_map_1b590ec1.plan.md`](.cursor/plans/list_depth_map_1b590ec1.plan.md)
 
-**カテゴリ表示の覆し（後から）:** 当初の「得意 1 行」をやめ、**drank > 0 のカテゴリをすべて出す。0件は出さない。** 12個の未着手バッジ棚・称号は出さない。作り手クラスタのスコープは、いまも最も厚いカテゴリ（`specialty`）を使う。
+**カテゴリ表示の覆し（後から）:** 当初の「得意 1 行」をやめ、**drank > 0 のカテゴリをすべて出す。0件は出さない。** 12個の未着手バッジ棚・称号は出さない。作り手クラスタのスコープは、概要では最も厚いカテゴリ（`specialty`）、カテゴリ詳細では表示中カテゴリ。全体フォールバックは概要だけ。
+
+**リスト IA の覆し（後から）:** `/list` に深さマップと時系列全件を並べるのをやめ、**概要はカテゴリの埋まりだけ**。クリックで `/list?category=` にそのカテゴリの飲んだリスト。カテゴリリンクは `/?category=` にしない。飲みたいは `/list?status=want`。一覧 GET に任意の `category` / `status` を足す（未指定の契約は維持）。`maxListLimit=100` は触らない。

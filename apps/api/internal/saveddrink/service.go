@@ -112,6 +112,13 @@ func (s *Service) GetMine(ctx context.Context, drinkID, userID string) (*SavedDr
 }
 
 func (s *Service) List(ctx context.Context, userID string, params ListParams) ([]SavedDrink, error) {
+	if params.Status != "" && !validStatus(params.Status) {
+		return nil, fmt.Errorf("%w: status must be drank or want", ErrValidation)
+	}
+	if params.Category != "" && !validProductCategory(params.Category) {
+		params.Category = ""
+		params.PublishedOnly = false
+	}
 	if params.Limit <= 0 {
 		params.Limit = defaultListLimit
 	}
@@ -129,7 +136,7 @@ func (s *Service) List(ctx context.Context, userID string, params ListParams) ([
 	return items, nil
 }
 
-func (s *Service) Depth(ctx context.Context, userID string) (*ListDepth, error) {
+func (s *Service) Depth(ctx context.Context, userID, makerCategory string) (*ListDepth, error) {
 	drank, err := s.repo.ListDrankPublished(ctx, userID)
 	if err != nil {
 		return nil, fmt.Errorf("saveddrink.Depth: %w", err)
@@ -156,13 +163,24 @@ func (s *Service) Depth(ctx context.Context, userID string) (*ListDepth, error) 
 	}
 	specialty := categories[0]
 
-	scoped := clusterMakers(drank, &specialty.Category)
-	nextCategory := &specialty.Category
-	makerScope := "specialty"
-	if len(scoped) == 0 {
-		scoped = clusterMakers(drank, nil)
-		nextCategory = nil
-		makerScope = "all"
+	var (
+		scoped       []DepthMaker
+		nextCategory *string
+		makerScope   string
+	)
+	if validProductCategory(makerCategory) {
+		scoped = clusterMakers(drank, &makerCategory)
+		nextCategory = &makerCategory
+		makerScope = "specialty"
+	} else {
+		scoped = clusterMakers(drank, &specialty.Category)
+		nextCategory = &specialty.Category
+		makerScope = "specialty"
+		if len(scoped) == 0 {
+			scoped = clusterMakers(drank, nil)
+			nextCategory = nil
+			makerScope = "all"
+		}
 	}
 
 	excludeIDs := make([]string, 0, len(drank))

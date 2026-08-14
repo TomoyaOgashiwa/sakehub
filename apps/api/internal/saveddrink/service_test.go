@@ -21,6 +21,7 @@ type stubRepo struct {
 	findErr        error
 	listRows       []SavedDrink
 	listErr        error
+	lastList       ListParams
 	deleteErr      error
 	deletedFor     string
 	lastStatus     string
@@ -65,7 +66,8 @@ func (s *stubRepo) FindByDrinkAndUser(context.Context, string, string) (*SavedDr
 	return s.findRow, s.findErr
 }
 
-func (s *stubRepo) ListByUser(context.Context, string, ListParams) ([]SavedDrink, error) {
+func (s *stubRepo) ListByUser(_ context.Context, _ string, params ListParams) ([]SavedDrink, error) {
+	s.lastList = params
 	return s.listRows, s.listErr
 }
 
@@ -259,7 +261,7 @@ func TestDepthEmptyWhenNoDrank(t *testing.T) {
 		drank:          []DrankDrink{},
 		categoryTotals: []CategoryTotal{{Category: "sake", Total: 200}},
 	})
-	got, err := svc.Depth(context.Background(), "user")
+	got, err := svc.Depth(context.Background(), "user", "")
 	if err != nil {
 		t.Fatalf("Depth: %v", err)
 	}
@@ -289,7 +291,7 @@ func TestDepthPicksSpecialtyByCount(t *testing.T) {
 			{Category: "whisky", Total: 180},
 		},
 	})
-	got, err := svc.Depth(context.Background(), "user")
+	got, err := svc.Depth(context.Background(), "user", "")
 	if err != nil {
 		t.Fatalf("Depth: %v", err)
 	}
@@ -321,7 +323,7 @@ func TestDepthTieBreaksByFillRatio(t *testing.T) {
 			{Category: "whisky", Total: 10},
 		},
 	})
-	got, err := svc.Depth(context.Background(), "user")
+	got, err := svc.Depth(context.Background(), "user", "")
 	if err != nil {
 		t.Fatalf("Depth: %v", err)
 	}
@@ -342,7 +344,7 @@ func TestDepthTieBreaksByCategoryName(t *testing.T) {
 			{Category: "beer", Total: 100},
 		},
 	})
-	got, err := svc.Depth(context.Background(), "user")
+	got, err := svc.Depth(context.Background(), "user", "")
 	if err != nil {
 		t.Fatalf("Depth: %v", err)
 	}
@@ -369,7 +371,7 @@ func TestDepthMakersInSpecialtyWhenTwoPlus(t *testing.T) {
 		nextDrinks: next,
 	}
 	svc := NewService(repo)
-	got, err := svc.Depth(context.Background(), "user")
+	got, err := svc.Depth(context.Background(), "user", "")
 	if err != nil {
 		t.Fatalf("Depth: %v", err)
 	}
@@ -403,7 +405,7 @@ func TestDepthMakersFallBackToOverall(t *testing.T) {
 		},
 	}
 	svc := NewService(repo)
-	got, err := svc.Depth(context.Background(), "user")
+	got, err := svc.Depth(context.Background(), "user", "")
 	if err != nil {
 		t.Fatalf("Depth: %v", err)
 	}
@@ -433,7 +435,7 @@ func TestDepthNextDrinksOnlyOnFirstMaker(t *testing.T) {
 		categoryTotals: []CategoryTotal{{Category: "sake", Total: 200}},
 		nextDrinks:     []DepthNextDrink{{Slug: "a", Name: "A"}},
 	})
-	got, err := svc.Depth(context.Background(), "user")
+	got, err := svc.Depth(context.Background(), "user", "")
 	if err != nil {
 		t.Fatalf("Depth: %v", err)
 	}
@@ -458,7 +460,7 @@ func TestDepthSkipsEmptyManufacturer(t *testing.T) {
 		},
 		categoryTotals: []CategoryTotal{{Category: "sake", Total: 200}},
 	})
-	got, err := svc.Depth(context.Background(), "user")
+	got, err := svc.Depth(context.Background(), "user", "")
 	if err != nil {
 		t.Fatalf("Depth: %v", err)
 	}
@@ -479,12 +481,129 @@ func TestDepthOmitsZeroCategories(t *testing.T) {
 			{Category: "whisky", Total: 180},
 		},
 	})
-	got, err := svc.Depth(context.Background(), "user")
+	got, err := svc.Depth(context.Background(), "user", "")
 	if err != nil {
 		t.Fatalf("Depth: %v", err)
 	}
 	if len(got.Categories) != 1 || got.Categories[0].Category != "sake" {
 		t.Fatalf("categories %+v, want sake only", got.Categories)
+	}
+}
+
+func TestDepthRequestedCategoryScopesMakersWithoutFallback(t *testing.T) {
+	t.Parallel()
+	repo := &stubRepo{
+		drank: []DrankDrink{
+			{DrinkID: "1", Category: "sake", Manufacturer: "Asahi Shuzo"},
+			{DrinkID: "2", Category: "sake", Manufacturer: "Kubo"},
+			{DrinkID: "3", Category: "sake", Manufacturer: "Dewazakura"},
+			{DrinkID: "4", Category: "whisky", Manufacturer: "Nikka"},
+			{DrinkID: "5", Category: "whisky", Manufacturer: "Nikka"},
+		},
+		categoryTotals: []CategoryTotal{
+			{Category: "sake", Total: 200},
+			{Category: "whisky", Total: 180},
+		},
+	}
+	svc := NewService(repo)
+
+	sake, err := svc.Depth(context.Background(), "user", "sake")
+	if err != nil {
+		t.Fatalf("Depth sake: %v", err)
+	}
+	if len(sake.Categories) != 2 {
+		t.Fatalf("categories %d, want all filled", len(sake.Categories))
+	}
+	if len(sake.Makers) != 0 {
+		t.Fatalf("sake makers %+v, want none without overall fallback", sake.Makers)
+	}
+	if sake.MakerScope != "specialty" {
+		t.Fatalf("makerScope %q, want specialty", sake.MakerScope)
+	}
+
+	whisky, err := svc.Depth(context.Background(), "user", "whisky")
+	if err != nil {
+		t.Fatalf("Depth whisky: %v", err)
+	}
+	if len(whisky.Makers) != 1 || whisky.Makers[0].Manufacturer != "Nikka" {
+		t.Fatalf("whisky makers %+v, want Nikka", whisky.Makers)
+	}
+	if repo.nextCategory == nil || *repo.nextCategory != "whisky" {
+		t.Fatalf("next category %v, want whisky", repo.nextCategory)
+	}
+}
+
+func TestDepthInvalidCategoryUsesOverviewFallback(t *testing.T) {
+	t.Parallel()
+	repo := &stubRepo{
+		drank: []DrankDrink{
+			{DrinkID: "1", Category: "sake", Manufacturer: "Asahi Shuzo"},
+			{DrinkID: "2", Category: "sake", Manufacturer: "Kubo"},
+			{DrinkID: "3", Category: "sake", Manufacturer: "Dewazakura"},
+			{DrinkID: "4", Category: "whisky", Manufacturer: "Nikka"},
+			{DrinkID: "5", Category: "whisky", Manufacturer: "Nikka"},
+		},
+		categoryTotals: []CategoryTotal{
+			{Category: "sake", Total: 200},
+			{Category: "whisky", Total: 180},
+		},
+	}
+	svc := NewService(repo)
+	got, err := svc.Depth(context.Background(), "user", "all")
+	if err != nil {
+		t.Fatalf("Depth: %v", err)
+	}
+	if got.MakerScope != "all" {
+		t.Fatalf("makerScope %q, want all", got.MakerScope)
+	}
+	if len(got.Makers) != 1 || got.Makers[0].Manufacturer != "Nikka" {
+		t.Fatalf("makers %+v, want overall Nikka", got.Makers)
+	}
+}
+
+func TestListRejectsInvalidStatus(t *testing.T) {
+	t.Parallel()
+	svc := NewService(&stubRepo{})
+	_, err := svc.List(context.Background(), "user", ListParams{Status: "have"})
+	if !errors.Is(err, ErrValidation) {
+		t.Fatalf("expected ErrValidation, got %v", err)
+	}
+}
+
+func TestListPassesCategoryAndStatus(t *testing.T) {
+	t.Parallel()
+	repo := &stubRepo{listRows: []SavedDrink{}}
+	svc := NewService(repo)
+	_, err := svc.List(context.Background(), "user", ListParams{
+		Limit:         100,
+		Status:        StatusDrank,
+		Category:      "sake",
+		PublishedOnly: true,
+	})
+	if err != nil {
+		t.Fatalf("List: %v", err)
+	}
+	if repo.lastList.Status != StatusDrank || repo.lastList.Category != "sake" || !repo.lastList.PublishedOnly {
+		t.Fatalf("list params %+v", repo.lastList)
+	}
+	if repo.lastList.Limit != 100 {
+		t.Fatalf("limit %d", repo.lastList.Limit)
+	}
+}
+
+func TestListDropsInvalidCategory(t *testing.T) {
+	t.Parallel()
+	repo := &stubRepo{listRows: []SavedDrink{}}
+	svc := NewService(repo)
+	_, err := svc.List(context.Background(), "user", ListParams{
+		Category:      "all",
+		PublishedOnly: true,
+	})
+	if err != nil {
+		t.Fatalf("List: %v", err)
+	}
+	if repo.lastList.Category != "" || repo.lastList.PublishedOnly {
+		t.Fatalf("list params %+v, want category cleared", repo.lastList)
 	}
 }
 

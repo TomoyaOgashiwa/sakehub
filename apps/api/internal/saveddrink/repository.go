@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"strings"
 
 	"github.com/lib/pq"
 )
@@ -168,7 +169,8 @@ func (r *repository) FindByDrinkAndUser(ctx context.Context, drinkID, userID str
 }
 
 func (r *repository) ListByUser(ctx context.Context, userID string, params ListParams) ([]SavedDrink, error) {
-	const q = `
+	var b strings.Builder
+	b.WriteString(`
 		SELECT
 			s.id, s.user_id, s.drink_id, s.status, s.note, s.created_at,
 			d.id, d.slug, d.name, d.name_en, d.category, d.image_url, d.visibility, d.manufacturer,
@@ -176,11 +178,26 @@ func (r *repository) ListByUser(ctx context.Context, userID string, params ListP
 		FROM saved_drinks s
 		INNER JOIN drinks d ON d.id = s.drink_id
 		LEFT JOIN ratings r ON r.drink_id = s.drink_id AND r.user_id = s.user_id
-		WHERE s.user_id = $1
-		ORDER BY s.created_at DESC
-		LIMIT $2 OFFSET $3`
+		WHERE s.user_id = $1`)
+	args := []any{userID}
+	n := 2
+	if params.Status != "" {
+		fmt.Fprintf(&b, " AND s.status = $%d", n)
+		args = append(args, params.Status)
+		n++
+	}
+	if params.Category != "" {
+		fmt.Fprintf(&b, " AND d.category = $%d", n)
+		args = append(args, params.Category)
+		n++
+	}
+	if params.PublishedOnly {
+		b.WriteString(" AND d.visibility = 'published'")
+	}
+	fmt.Fprintf(&b, " ORDER BY s.created_at DESC LIMIT $%d OFFSET $%d", n, n+1)
+	args = append(args, params.Limit, params.Offset)
 
-	rows, err := r.db.QueryContext(ctx, q, userID, params.Limit, params.Offset)
+	rows, err := r.db.QueryContext(ctx, b.String(), args...)
 	if err != nil {
 		return nil, err
 	}

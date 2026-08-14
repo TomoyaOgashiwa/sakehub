@@ -1,13 +1,20 @@
 import Link from 'next/link';
-import type { ListDepth } from '@sakehub/types';
+import type { DrinkCategory, ListDepth } from '@sakehub/types';
 
 import { drinkCategoryLabel, makerSearchHref } from '@/config/drinks';
+import { cn } from '@/utils/utils';
 
 interface ListDepthMapProps {
   depth: ListDepth;
+  activeCategory?: Exclude<DrinkCategory, 'all'> | null;
+  showMakers?: boolean;
 }
 
-export function ListDepthMap({ depth }: ListDepthMapProps) {
+export function ListDepthMap({
+  depth,
+  activeCategory = null,
+  showMakers = false,
+}: ListDepthMapProps) {
   if (depth.categories.length === 0) {
     return (
       <section aria-label="記録した銘柄の埋まり" className="rounded-lg border border-dashed p-4">
@@ -19,27 +26,31 @@ export function ListDepthMap({ depth }: ListDepthMapProps) {
     );
   }
 
-  const { categories, makers, specialty } = depth;
-  const makerCategory = depth.makerScope === 'specialty' ? specialty?.category : undefined;
+  const { categories, makers } = depth;
+  const makerCategory = activeCategory ?? undefined;
 
   return (
     <section aria-label="記録した銘柄の埋まり" className="space-y-3 rounded-lg border p-4">
       <ul className="space-y-1">
-        {categories.map((row) => (
-          <li key={row.category} className="text-sm">
-            <Link
-              href={`/?category=${encodeURIComponent(row.category)}`}
-              className="hover:underline"
-            >
-              <span className="font-medium">{drinkCategoryLabel(row.category)}</span>{' '}
-              <span className="text-muted-foreground">
-                {row.drank} / {row.total}
-              </span>
-            </Link>
-          </li>
-        ))}
+        {categories.map((row) => {
+          const active = row.category === activeCategory;
+          return (
+            <li key={row.category} className="text-sm">
+              <Link
+                href={`/list?category=${encodeURIComponent(row.category)}`}
+                className={cn('hover:underline', active && 'font-semibold')}
+                aria-current={active ? 'page' : undefined}
+              >
+                <span className="font-medium">{drinkCategoryLabel(row.category)}</span>{' '}
+                <span className="text-muted-foreground">
+                  {row.drank} / {row.total}
+                </span>
+              </Link>
+            </li>
+          );
+        })}
       </ul>
-      {makers.length > 0 ? (
+      {showMakers && makers.length > 0 ? (
         <ul className="space-y-2">
           {makers.map((maker) => {
             const searchHref = makerSearchHref(maker.manufacturer, makerCategory);

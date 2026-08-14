@@ -12,11 +12,13 @@ import { authServerFetch } from '@/application/server-api';
 
 export async function fetchMySavedDrinks(
   accessToken: string,
-  options?: { limit?: number; offset?: number },
+  options?: { limit?: number; offset?: number; category?: string; status?: SavedDrink['status'] },
 ): Promise<SavedDrink[]> {
   const params: Record<string, string> = {};
   if (options?.limit != null) params.limit = String(options.limit);
   if (options?.offset != null) params.offset = String(options.offset);
+  if (options?.category) params.category = options.category;
+  if (options?.status) params.status = options.status;
 
   const result = await authServerFetch<{ data: ApiSavedDrink[] | null }>('/api/auth/saved-drinks', {
     accessToken,
@@ -38,11 +40,18 @@ export async function fetchMySavedDrink(
   return result.data.data ? toSavedDrink(result.data.data) : null;
 }
 
-export async function fetchMyListDepth(accessToken: string): Promise<ListDepth> {
+export async function fetchMyListDepth(
+  accessToken: string,
+  options?: { category?: string },
+): Promise<ListDepth> {
+  const params: Record<string, string> = {};
+  if (options?.category) params.category = options.category;
+
   const result = await authServerFetch<{ data: ApiListDepth | null }>(
     '/api/auth/saved-drinks/depth',
     {
       accessToken,
+      params,
     },
   );
   if (!result.ok || !result.data.data) {

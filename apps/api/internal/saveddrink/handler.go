@@ -129,7 +129,12 @@ func (h *Handler) Depth(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	depth, err := h.svc.Depth(r.Context(), userID)
+	makerCategory := r.URL.Query().Get("category")
+	if !validProductCategory(makerCategory) {
+		makerCategory = ""
+	}
+
+	depth, err := h.svc.Depth(r.Context(), userID, makerCategory)
 	if err != nil {
 		writeServiceError(w, err)
 		return
@@ -161,6 +166,19 @@ func (h *Handler) List(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		params.Offset = n
+	}
+	if v := r.URL.Query().Get("status"); v != "" {
+		if v != StatusDrank && v != StatusWant {
+			response.Error(w, http.StatusBadRequest, "invalid status")
+			return
+		}
+		params.Status = v
+	}
+	if v := r.URL.Query().Get("category"); validProductCategory(v) {
+		params.Category = v
+	}
+	if params.Category != "" && params.Status != StatusWant {
+		params.PublishedOnly = true
 	}
 
 	items, err := h.svc.List(r.Context(), userID, params)

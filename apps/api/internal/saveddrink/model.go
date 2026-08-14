@@ -59,8 +59,20 @@ type PatchInput struct {
 }
 
 type ListParams struct {
-	Limit  int
-	Offset int
+	Limit         int
+	Offset        int
+	Status        string
+	Category      string
+	PublishedOnly bool
+}
+
+func validProductCategory(category string) bool {
+	switch category {
+	case "beer", "wine", "whisky", "sake", "shochu", "vodka", "gin", "rum", "tequila", "brandy", "liqueur", "other":
+		return true
+	default:
+		return false
+	}
 }
 
 const (

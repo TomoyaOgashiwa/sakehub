@@ -1,14 +1,14 @@
 ---
 todos:
   - id: union-depth-api
-    status: in_progress
+    status: completed
     content: catalog log → saved_drinks バックフィル + トリガー、GET /api/auth/saved-drinks/depth（union SQL は saveddrink リポジトリに閉じる）、types
   - id: category-specialty
     content: /list 上部に得意カテゴリ 1 行（drank / published 実数）。status/q フィルタは行だけ
-    status: pending
+    status: completed
   - id: maker-return
     content: 得意（または全体）で作り手 2 銘柄以上を出し、未 drank の published 少数 + /?q= / ?category= へ戻す
-    status: pending
+    status: completed
 name: List Depth Map
 overview: '`/list` に自分用の深さマップを置く。飲んだの正は published のユニーク drink_id（saved_drinks.drank ∪ カタログ付き drink_logs）。称号・公開プロフィール・日記復活はやらない。'
 isProject: false
@@ -306,3 +306,15 @@ interface ListDepth {
 1. **`local_demo` の ratings が published 全件 CROSS JOIN** のため、`rater01` 等はほぼ全カタログが `drank`。深さは満杯に見える。デモシードの改変は今回やらない。受け入れの目視は非デモユーザー、または want だけの行で行う。
 2. **得意行のカテゴリ名は英語ラベル**（Sake）。プロンプト例の「日本酒」とは表記が違う。トップチップと揃えるため。i18n はしない。
 3. **シードに `drink_logs` は 0 件**。バックフィルの目視は `/my-logs/new` 直打ちでカタログ銘柄を 1 件記録して確認する（ナビには出さない）。
+
+---
+
+## 実際の実装との差分
+
+本文の決定は書き換えていない。実装で足した細部だけ。
+
+- `ListDepth` に `maker_scope`（`specialty` | `all`）を足した。作り手が得意カテゴリに無く全体へ落ちたとき、`/?q=` に得意 `category` を付けない。
+- 一覧 GET の `drink` に `manufacturer` を足した（プランどおり）。行から同作り手検索へ戻す。
+- `/list` の深さブロックは [`apps/web/src/app/list/list-depth.tsx`](apps/web/src/app/list/list-depth.tsx)（プランで許可した 1 ファイル）。
+- カテゴリ表示と作り手検索 URL は [`apps/web/src/config/drinks.ts`](apps/web/src/config/drinks.ts) の `drinkCategoryLabel` / `makerSearchHref`。
+- 保存先: [`.cursor/plans/list_depth_map_1b590ec1.plan.md`](.cursor/plans/list_depth_map_1b590ec1.plan.md)

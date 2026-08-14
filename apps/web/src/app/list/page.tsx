@@ -4,11 +4,14 @@ import { redirect } from 'next/navigation';
 import { Hourglass } from 'lucide-react';
 import type { DrinkCategory, SavedDrinkStatus } from '@sakehub/types';
 
+import { fetchCocktailBridgePreview } from '@/application/cocktails-api.server';
 import { getOptionalAccessToken } from '@/application/require-access-token';
 import { fetchMyListDepth, fetchMySavedDrinks } from '@/application/saved-drinks-api.server';
 import { ConfirmedSearchInput } from '@/components/catalog/confirmed-search-input';
+import { BaseCocktailPreview } from '@/components/cocktails/base-cocktail-preview';
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Heading } from '@/components/ui/heading';
+import { cocktailsByBaseSpiritHref, firstMappedBaseSpirit } from '@/config/drink-cocktail-bridge';
 import { drinkCategoryLabel, isProductDrinkCategory } from '@/config/drinks';
 
 import { DrinkCategoryGlyph, ListDepthMap } from './list-depth';
@@ -121,6 +124,8 @@ export default async function ListPage({ searchParams }: PageProps) {
   const overviewEmpty =
     !depthFailed && isOverview && depth.categories.length === 0 && provisionalCount === 0;
   const showRows = isWantView || isCategoryView || isPendingView;
+  const mappedBaseSpirit = isOverview && depth ? firstMappedBaseSpirit(depth.categories) : null;
+  const shelfCocktails = mappedBaseSpirit ? await fetchCocktailBridgePreview(mappedBaseSpirit) : [];
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-12">
@@ -207,6 +212,16 @@ export default async function ListPage({ searchParams }: PageProps) {
           ) : null}
 
           {isOverview ? <PendingCountLink count={provisionalCount} /> : null}
+
+          {isOverview && mappedBaseSpirit && shelfCocktails.length > 0 ? (
+            <BaseCocktailPreview
+              heading="棚で作れる"
+              headingId="list-shelf-heading"
+              description={`飲んだ ${mappedBaseSpirit} ベース`}
+              cocktails={shelfCocktails}
+              moreHref={cocktailsByBaseSpiritHref(mappedBaseSpirit)}
+            />
+          ) : null}
 
           {showRows ? (
             <>

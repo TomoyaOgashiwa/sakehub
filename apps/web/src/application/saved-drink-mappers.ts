@@ -51,6 +51,7 @@ export interface ApiListDepth {
     next_drinks?: { slug: string; name: string }[];
   }[];
   maker_scope?: 'specialty' | 'all';
+  provisional_count?: number;
 }
 
 function toSpecialty(row: { category: string; drank: number; total: number }): ListDepthSpecialty {
@@ -74,6 +75,7 @@ export function toListDepth(api: ApiListDepth): ListDepth {
       })),
     })),
     makerScope: api.maker_scope === 'all' ? 'all' : 'specialty',
+    provisionalCount: api.provisional_count ?? 0,
   };
 }
 

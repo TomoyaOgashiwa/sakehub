@@ -115,6 +115,14 @@ func (s *Service) List(ctx context.Context, userID string, params ListParams) ([
 	if params.Status != "" && !validStatus(params.Status) {
 		return nil, fmt.Errorf("%w: status must be drank or want", ErrValidation)
 	}
+	if params.Visibility != "" {
+		if params.Visibility != VisibilityPublished && params.Visibility != VisibilityProvisional {
+			return nil, fmt.Errorf("%w: visibility must be published or provisional", ErrValidation)
+		}
+		if params.DrankUnion || params.Category != "" {
+			return nil, fmt.Errorf("%w: visibility cannot be combined with category or union", ErrValidation)
+		}
+	}
 	if params.Category != "" && !validProductCategory(params.Category) {
 		params.Category = ""
 		params.PublishedOnly = false
@@ -145,6 +153,10 @@ func (s *Service) Depth(ctx context.Context, userID, makerCategory string) (*Lis
 	if err != nil {
 		return nil, fmt.Errorf("saveddrink.Depth: %w", err)
 	}
+	provisionalCount, err := s.repo.CountProvisional(ctx, userID)
+	if err != nil {
+		return nil, fmt.Errorf("saveddrink.Depth: %w", err)
+	}
 
 	totalByCat := make(map[string]int, len(totals))
 	for _, t := range totals {
@@ -155,10 +167,11 @@ func (s *Service) Depth(ctx context.Context, userID, makerCategory string) (*Lis
 	makers := []DepthMaker{}
 	if len(categories) == 0 {
 		return &ListDepth{
-			Specialty:  nil,
-			Categories: categories,
-			Makers:     makers,
-			MakerScope: "all",
+			Specialty:        nil,
+			Categories:       categories,
+			Makers:           makers,
+			MakerScope:       "all",
+			ProvisionalCount: provisionalCount,
 		}, nil
 	}
 	specialty := categories[0]
@@ -204,10 +217,11 @@ func (s *Service) Depth(ctx context.Context, userID, makerCategory string) (*Lis
 	}
 
 	return &ListDepth{
-		Specialty:  &specialty,
-		Categories: categories,
-		Makers:     makers,
-		MakerScope: makerScope,
+		Specialty:        &specialty,
+		Categories:       categories,
+		Makers:           makers,
+		MakerScope:       makerScope,
+		ProvisionalCount: provisionalCount,
 	}, nil
 }
 
@@ -245,6 +259,56 @@ func fillRatio(n, d int) float64 {
 		return 0
 	}
 	return float64(n) / float64(d)
+}
+
+func (s *Service) MergeExactNames(ctx context.Context) (*MergeReport, error) {
+	published, err := s.repo.ListPublishedIdentities(ctx)
+	if err != nil {
+		return nil, fmt.Errorf("saveddrink.MergeExactNames: %w", err)
+	}
+	provisionals, err := s.repo.ListUnmergedProvisionals(ctx)
+	if err != nil {
+		return nil, fmt.Errorf("saveddrink.MergeExactNames: %w", err)
+	}
+
+	index := publishedKeyIndex(published)
+	report := &MergeReport{AmbiguousSlugs: []string{}}
+	seenAmbiguous := make(map[string]struct{})
+
+	for _, prov := range provisionals {
+		hit, slugs, unique := uniquePublishedForKey(index[prov.NameNormalized])
+		if !unique {
+			if len(slugs) > 0 {
+				report.SkippedAmbiguous++
+				for _, slug := range slugs {
+					if _, ok := seenAmbiguous[slug]; ok {
+						continue
+					}
+					seenAmbiguous[slug] = struct{}{}
+					report.AmbiguousSlugs = append(report.AmbiguousSlugs, slug)
+				}
+			}
+			continue
+		}
+
+		one, err := s.repo.MergeProvisionalInto(ctx, prov.ID, hit.ID)
+		if err != nil {
+			return nil, fmt.Errorf("saveddrink.MergeExactNames: %w", err)
+		}
+		report.Remapped += one.Remapped
+		report.Discarded += one.Discarded
+		if one.Deleted {
+			report.Deleted++
+		}
+	}
+
+	orphans, err := s.repo.DeleteMergedOrphans(ctx)
+	if err != nil {
+		return nil, fmt.Errorf("saveddrink.MergeExactNames: %w", err)
+	}
+	report.Deleted += orphans
+	sort.Strings(report.AmbiguousSlugs)
+	return report, nil
 }
 
 func (s *Service) Unsave(ctx context.Context, drinkID, userID string) error {

@@ -86,7 +86,7 @@ export function SavedDrinkRow({ item, specialtyCategory }: SavedDrinkRowProps) {
             {savedDrinkStatusLabel(item.status)}
           </span>
           {isProvisional && (
-            <span className="rounded-full border px-2 py-0.5 text-xs">カタログ未登録</span>
+            <span className="rounded-full border px-2 py-0.5 text-xs">図鑑待ち</span>
           )}
         </div>
         {!isProvisional && drink.manufacturer ? (

@@ -1,12 +1,12 @@
 /**
  * normalizeJa の契約テスト。
  *
- * apps/api/internal/searchmiss/normalize.go の NormalizeQuery と
- * normalize.ts の normalizeJa は「ランタイム共有依存ゼロ」方針のため
+ * 正本は apps/api/pkg/normalize.Query。normalize.ts の normalizeJa と
+ * searchmiss.NormalizeQuery は「ランタイム共有依存ゼロ」方針のため
  * 意図的に二重実装している。同期ずれを検知するため、両方とも
  * testdata/normalize-cases.json（リポジトリルート）に対してテストする。
  *
- * Go 側: cd apps/api && go test ./internal/searchmiss/...
+ * Go 側: cd apps/api && go test ./pkg/normalize
  * TS 側（このファイル）: pnpm --filter @sakehub/drink-seed test
  */
 
@@ -38,7 +38,9 @@ async function main(): Promise<void> {
     const got = normalizeJa(input);
     if (got !== want) {
       failures++;
-      console.error(`normalizeJa(${JSON.stringify(input)}) = ${JSON.stringify(got)}, want ${JSON.stringify(want)}`);
+      console.error(
+        `normalizeJa(${JSON.stringify(input)}) = ${JSON.stringify(got)}, want ${JSON.stringify(want)}`,
+      );
     }
   }
 

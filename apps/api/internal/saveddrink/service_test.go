@@ -9,37 +9,46 @@ import (
 )
 
 type stubRepo struct {
-	exists         bool
-	existsErr      error
-	upsertRow      *SavedDrink
-	upsertErr      error
-	provisionalRow *SavedDrink
-	provisionalErr error
-	updateRow      *SavedDrink
-	updateErr      error
-	findRow        *SavedDrink
-	findErr        error
-	listRows       []SavedDrink
-	listErr        error
-	lastList       ListParams
-	deleteErr      error
-	deletedFor     string
-	lastStatus     string
-	lastNote       *string
-	lastProvName   string
-	lastProvNorm   string
-	drankCounts    []CategoryCount
-	drankErr       error
-	categoryTotals []CategoryTotal
-	totalsErr      error
-	makersByScope  map[string][]DepthMaker
-	makersErr      error
-	makerKeys      []string
-	nextDrinks     []DepthNextDrink
-	nextErr        error
-	nextForMaker   string
-	nextCategory   *string
-	nextForUser    string
+	exists               bool
+	existsErr            error
+	upsertRow            *SavedDrink
+	upsertErr            error
+	provisionalRow       *SavedDrink
+	provisionalErr       error
+	updateRow            *SavedDrink
+	updateErr            error
+	findRow              *SavedDrink
+	findErr              error
+	listRows             []SavedDrink
+	listErr              error
+	lastList             ListParams
+	deleteErr            error
+	deletedFor           string
+	lastStatus           string
+	lastNote             *string
+	lastProvName         string
+	lastProvNorm         string
+	drankCounts          []CategoryCount
+	drankErr             error
+	categoryTotals       []CategoryTotal
+	totalsErr            error
+	makersByScope        map[string][]DepthMaker
+	makersErr            error
+	makerKeys            []string
+	nextDrinks           []DepthNextDrink
+	nextErr              error
+	nextForMaker         string
+	nextCategory         *string
+	nextForUser          string
+	provisionalCount     int
+	provisionalCountErr  error
+	publishedIdentities  []PublishedIdentity
+	unmergedProvisionals []ProvisionalCandidate
+	mergeOne             MergeOneResult
+	mergeErr             error
+	mergedPairs          [][2]string
+	orphanDeleted        int
+	orphanErr            error
 }
 
 func (s *stubRepo) DrinkExists(context.Context, string) (bool, error) {
@@ -91,6 +100,10 @@ func (s *stubRepo) CountPublishedByCategory(context.Context) ([]CategoryTotal, e
 	return s.categoryTotals, s.totalsErr
 }
 
+func (s *stubRepo) CountProvisional(context.Context, string) (int, error) {
+	return s.provisionalCount, s.provisionalCountErr
+}
+
 func (s *stubRepo) ListMakers(_ context.Context, _ string, category *string) ([]DepthMaker, error) {
 	key := ""
 	if category != nil {
@@ -108,6 +121,29 @@ func (s *stubRepo) ListMakers(_ context.Context, _ string, category *string) ([]
 		return []DepthMaker{}, nil
 	}
 	return out, nil
+}
+
+func (s *stubRepo) ListPublishedIdentities(context.Context) ([]PublishedIdentity, error) {
+	if s.publishedIdentities == nil {
+		return []PublishedIdentity{}, nil
+	}
+	return s.publishedIdentities, nil
+}
+
+func (s *stubRepo) ListUnmergedProvisionals(context.Context) ([]ProvisionalCandidate, error) {
+	if s.unmergedProvisionals == nil {
+		return []ProvisionalCandidate{}, nil
+	}
+	return s.unmergedProvisionals, nil
+}
+
+func (s *stubRepo) MergeProvisionalInto(_ context.Context, provisionalID, publishedID string) (MergeOneResult, error) {
+	s.mergedPairs = append(s.mergedPairs, [2]string{provisionalID, publishedID})
+	return s.mergeOne, s.mergeErr
+}
+
+func (s *stubRepo) DeleteMergedOrphans(context.Context) (int, error) {
+	return s.orphanDeleted, s.orphanErr
 }
 
 func (s *stubRepo) ListUnsavedByManufacturer(
@@ -299,6 +335,28 @@ func TestDepthEmptyWhenNoDrank(t *testing.T) {
 	}
 	if len(got.Makers) != 0 {
 		t.Fatalf("makers %d, want 0", len(got.Makers))
+	}
+	if got.ProvisionalCount != 0 {
+		t.Fatalf("provisionalCount %d, want 0", got.ProvisionalCount)
+	}
+}
+
+func TestDepthIncludesProvisionalCount(t *testing.T) {
+	t.Parallel()
+	svc := NewService(&stubRepo{
+		drankCounts:      []CategoryCount{{Category: "sake", Drank: 1}},
+		categoryTotals:   []CategoryTotal{{Category: "sake", Total: 200}},
+		provisionalCount: 3,
+	})
+	got, err := svc.Depth(context.Background(), "user", "")
+	if err != nil {
+		t.Fatalf("Depth: %v", err)
+	}
+	if got.ProvisionalCount != 3 {
+		t.Fatalf("provisionalCount %d, want 3", got.ProvisionalCount)
+	}
+	if got.Specialty == nil || got.Specialty.Category != "sake" {
+		t.Fatalf("specialty %+v", got.Specialty)
 	}
 }
 
@@ -648,6 +706,112 @@ func TestListPassesDrankUnion(t *testing.T) {
 	}
 	if !repo.lastList.DrankUnion || repo.lastList.Category != "sake" {
 		t.Fatalf("list params %+v", repo.lastList)
+	}
+}
+
+func TestListPassesProvisionalVisibility(t *testing.T) {
+	t.Parallel()
+	repo := &stubRepo{listRows: []SavedDrink{}}
+	svc := NewService(repo)
+	_, err := svc.List(context.Background(), "user", ListParams{
+		Limit:      100,
+		Visibility: VisibilityProvisional,
+	})
+	if err != nil {
+		t.Fatalf("List: %v", err)
+	}
+	if repo.lastList.Visibility != VisibilityProvisional {
+		t.Fatalf("list params %+v", repo.lastList)
+	}
+}
+
+func TestListRejectsVisibilityWithCategory(t *testing.T) {
+	t.Parallel()
+	svc := NewService(&stubRepo{})
+	_, err := svc.List(context.Background(), "user", ListParams{
+		Visibility: VisibilityProvisional,
+		Category:   "sake",
+	})
+	if !errors.Is(err, ErrValidation) {
+		t.Fatalf("expected ErrValidation, got %v", err)
+	}
+}
+
+func TestListRejectsInvalidVisibility(t *testing.T) {
+	t.Parallel()
+	svc := NewService(&stubRepo{})
+	_, err := svc.List(context.Background(), "user", ListParams{Visibility: "hidden"})
+	if !errors.Is(err, ErrValidation) {
+		t.Fatalf("expected ErrValidation, got %v", err)
+	}
+}
+
+func TestMergeExactNamesRemapsUniqueMatch(t *testing.T) {
+	t.Parallel()
+	repo := &stubRepo{
+		publishedIdentities: []PublishedIdentity{{
+			ID:   "pub-1",
+			Slug: "zh-unlisted-label",
+			Name: "禅人未登録ラベル",
+		}},
+		unmergedProvisionals: []ProvisionalCandidate{{
+			ID:             "prov-1",
+			NameNormalized: "禅人未登録らべる",
+		}},
+		mergeOne: MergeOneResult{Remapped: 1, Deleted: true},
+	}
+	got, err := NewService(repo).MergeExactNames(context.Background())
+	if err != nil {
+		t.Fatalf("MergeExactNames: %v", err)
+	}
+	if got.Remapped != 1 || got.Deleted != 1 || got.SkippedAmbiguous != 0 {
+		t.Fatalf("report %+v", got)
+	}
+	if len(repo.mergedPairs) != 1 || repo.mergedPairs[0] != [2]string{"prov-1", "pub-1"} {
+		t.Fatalf("merged pairs %+v", repo.mergedPairs)
+	}
+}
+
+func TestMergeExactNamesSkipsAmbiguous(t *testing.T) {
+	t.Parallel()
+	repo := &stubRepo{
+		publishedIdentities: []PublishedIdentity{
+			{ID: "a", Slug: "sku-a", Name: "Sku A", Aliases: []string{"共有名"}},
+			{ID: "b", Slug: "sku-b", Name: "Sku B", Aliases: []string{"共有名"}},
+		},
+		unmergedProvisionals: []ProvisionalCandidate{{
+			ID:             "prov-1",
+			NameNormalized: "共有名",
+		}},
+	}
+	got, err := NewService(repo).MergeExactNames(context.Background())
+	if err != nil {
+		t.Fatalf("MergeExactNames: %v", err)
+	}
+	if got.SkippedAmbiguous != 1 || got.Remapped != 0 || len(repo.mergedPairs) != 0 {
+		t.Fatalf("report %+v pairs %+v", got, repo.mergedPairs)
+	}
+}
+
+func TestMergeExactNamesLeavesUnmatched(t *testing.T) {
+	t.Parallel()
+	repo := &stubRepo{
+		publishedIdentities: []PublishedIdentity{{
+			ID:   "d45",
+			Slug: "dassai-45",
+			Name: "獺祭 純米大吟醸 磨き四割五分",
+		}},
+		unmergedProvisionals: []ProvisionalCandidate{{
+			ID:             "prov-1",
+			NameNormalized: "獺祭",
+		}},
+	}
+	got, err := NewService(repo).MergeExactNames(context.Background())
+	if err != nil {
+		t.Fatalf("MergeExactNames: %v", err)
+	}
+	if got.Remapped != 0 || got.SkippedAmbiguous != 0 || len(repo.mergedPairs) != 0 {
+		t.Fatalf("report %+v pairs %+v", got, repo.mergedPairs)
 	}
 }
 

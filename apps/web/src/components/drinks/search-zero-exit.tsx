@@ -54,11 +54,11 @@ export function SearchZeroExit({ query, suggestions, isAuthenticated }: SearchZe
       <div className="mt-8 max-w-md space-y-3">
         {suggestions.length > 0 && (
           <p className="text-muted-foreground text-sm">
-            どれでもない場合は、この名前でリストに残せます
+            どれでもない場合は、この名前でマスを押さえる
           </p>
         )}
         <p className="text-muted-foreground text-sm">
-          カタログにはまだありません。リストにだけ残します
+          図鑑にはまだ無いマスです。先に押さえておけます
         </p>
 
         {isAuthenticated ? (
@@ -77,7 +77,7 @@ export function SearchZeroExit({ query, suggestions, isAuthenticated }: SearchZe
           </div>
         ) : (
           <Link href={loginHref} className={cn(buttonVariants())}>
-            ログインしてこの名前で残す
+            ログインしてこのマスを押さえる
           </Link>
         )}
 

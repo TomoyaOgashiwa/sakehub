@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 type PageProps = {
-  searchParams: Promise<{ q?: string; status?: string; category?: string }>;
+  searchParams: Promise<{ q?: string; status?: string; category?: string; pending?: string }>;
 };
 
 function parseStatus(raw: string | undefined): SavedDrinkStatus | null {
@@ -41,6 +41,20 @@ function matchesQuery(
   return haystack.includes(q);
 }
 
+function PendingCountLink({ count }: { count: number }) {
+  if (count <= 0) return null;
+  return (
+    <div className="space-y-1">
+      <p>
+        <Link href="/list?pending=1" className="text-muted-foreground text-sm hover:underline">
+          図鑑待ち {count}
+        </Link>
+      </p>
+      <p className="text-muted-foreground text-xs">図鑑待ちのマスは分数に入れていません</p>
+    </div>
+  );
+}
+
 export default async function ListPage({ searchParams }: PageProps) {
   const { user, accessToken } = await getOptionalAccessToken();
   if (!user || !accessToken) {
@@ -51,7 +65,9 @@ export default async function ListPage({ searchParams }: PageProps) {
   const q = sp.q?.trim() ?? '';
   const categoryFilter = parseListCategory(sp.category);
   const isWantView = parseStatus(sp.status) === 'want';
-  const isCategoryView = categoryFilter != null && !isWantView;
+  const isPendingView = sp.pending === '1' && !isWantView;
+  const isCategoryView = categoryFilter != null && !isWantView && !isPendingView;
+  const isOverview = !isWantView && !isPendingView && !isCategoryView;
 
   const [items, depth] = await Promise.all([
     isCategoryView
@@ -62,7 +78,9 @@ export default async function ListPage({ searchParams }: PageProps) {
         })
       : isWantView
         ? fetchMySavedDrinks(accessToken, { limit: 100, status: 'want' })
-        : Promise.resolve([]),
+        : isPendingView
+          ? fetchMySavedDrinks(accessToken, { limit: 100, visibility: 'provisional' })
+          : Promise.resolve([]),
     fetchMyListDepth(
       accessToken,
       isCategoryView && categoryFilter ? { category: categoryFilter } : undefined,
@@ -76,17 +94,19 @@ export default async function ListPage({ searchParams }: PageProps) {
   });
 
   const depthFailed = depth === null;
+  const provisionalCount = depth?.provisionalCount ?? 0;
   const activeFill =
     categoryFilter != null && depth
       ? (depth.categories.find((row) => row.category === categoryFilter) ?? null)
       : null;
   const overviewEmpty =
-    !depthFailed && !isWantView && !isCategoryView && depth.categories.length === 0;
+    !depthFailed && isOverview && depth.categories.length === 0 && provisionalCount === 0;
+  const showRows = isWantView || isCategoryView || isPendingView;
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-12">
       <div className="mb-8">
-        {isCategoryView || isWantView ? (
+        {isCategoryView || isWantView || isPendingView ? (
           <p className="mb-2">
             <Link href="/list" className="text-muted-foreground text-sm hover:underline">
               カテゴリ一覧へ
@@ -96,18 +116,22 @@ export default async function ListPage({ searchParams }: PageProps) {
         <Heading level="h1" className="mb-2">
           {isWantView
             ? '飲みたい'
-            : isCategoryView && categoryFilter
-              ? drinkCategoryLabel(categoryFilter)
-              : 'リスト'}
+            : isPendingView
+              ? '図鑑待ち'
+              : isCategoryView && categoryFilter
+                ? drinkCategoryLabel(categoryFilter)
+                : 'リスト'}
         </Heading>
         <p className="text-muted-foreground text-sm">
           {isWantView
             ? 'まだ飲んでいない銘柄'
-            : isCategoryView
-              ? activeFill
-                ? `${activeFill.drank} / ${activeFill.total}`
-                : 'このカテゴリで飲んだ銘柄'
-              : 'どれをどれくらい飲んだか'}
+            : isPendingView
+              ? '図鑑にまだ無いマス'
+              : isCategoryView
+                ? activeFill
+                  ? `${activeFill.drank} / ${activeFill.total}`
+                  : 'このカテゴリで飲んだ銘柄'
+                : 'どれをどれくらい飲んだか'}
         </p>
       </div>
 
@@ -130,7 +154,7 @@ export default async function ListPage({ searchParams }: PageProps) {
         </div>
       ) : (
         <div className="space-y-6">
-          {depthFailed && !isWantView ? (
+          {depthFailed && !isWantView && !isPendingView ? (
             <section
               aria-label="記録した銘柄の埋まり"
               className="rounded-lg border border-dashed p-4"
@@ -143,7 +167,7 @@ export default async function ListPage({ searchParams }: PageProps) {
             </section>
           ) : null}
 
-          {!isWantView && depth ? (
+          {!isWantView && !isPendingView && depth && depth.categories.length > 0 ? (
             <ListDepthMap
               depth={depth}
               activeCategory={isCategoryView ? categoryFilter : null}
@@ -151,7 +175,9 @@ export default async function ListPage({ searchParams }: PageProps) {
             />
           ) : null}
 
-          {isWantView || isCategoryView ? (
+          {isOverview ? <PendingCountLink count={provisionalCount} /> : null}
+
+          {showRows ? (
             <>
               <div className="w-full sm:max-w-md">
                 <ConfirmedSearchInput
@@ -168,7 +194,9 @@ export default async function ListPage({ searchParams }: PageProps) {
                       ? 'リストに一致する銘柄がありません'
                       : isWantView
                         ? '飲みたい銘柄はまだありません'
-                        : 'このカテゴリで飲んだ銘柄はまだありません'}
+                        : isPendingView
+                          ? '図鑑待ちのマスはありません'
+                          : 'このカテゴリで飲んだ銘柄はまだありません'}
                   </p>
                   <Link
                     href={

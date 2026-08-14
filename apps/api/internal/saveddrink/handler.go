@@ -189,6 +189,17 @@ func (h *Handler) List(w http.ResponseWriter, r *http.Request) {
 		params.Status = ""
 		params.PublishedOnly = true
 	}
+	if v := r.URL.Query().Get("visibility"); v != "" {
+		if v != VisibilityPublished && v != VisibilityProvisional {
+			response.Error(w, http.StatusBadRequest, "invalid visibility")
+			return
+		}
+		if params.DrankUnion || params.Category != "" {
+			response.Error(w, http.StatusBadRequest, "visibility cannot be combined with category or union")
+			return
+		}
+		params.Visibility = v
+	}
 
 	items, err := h.svc.List(r.Context(), userID, params)
 	if err != nil {

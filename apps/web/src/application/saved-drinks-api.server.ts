@@ -1,6 +1,6 @@
 import 'server-only';
 
-import type { ListDepth, SavedDrink } from '@sakehub/types';
+import type { DrinkVisibility, ListDepth, SavedDrink } from '@sakehub/types';
 
 import {
   toListDepth,
@@ -18,6 +18,7 @@ export async function fetchMySavedDrinks(
     category?: string;
     status?: SavedDrink['status'];
     union?: 'drank';
+    visibility?: DrinkVisibility;
   },
 ): Promise<SavedDrink[]> {
   const params: Record<string, string> = {};
@@ -26,6 +27,7 @@ export async function fetchMySavedDrinks(
   if (options?.category) params.category = options.category;
   if (options?.status) params.status = options.status;
   if (options?.union) params.union = options.union;
+  if (options?.visibility) params.visibility = options.visibility;
 
   const result = await authServerFetch<{ data: ApiSavedDrink[] | null }>('/api/auth/saved-drinks', {
     accessToken,

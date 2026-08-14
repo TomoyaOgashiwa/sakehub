@@ -214,6 +214,7 @@ supabase db push
 | `seeds/drinks.sql`             | drinks マスタ                                      | ✅       | ✅   |
 | `seeds/local_demo.sql`         | デモユーザー・ドリンク評価・個別レシピ・レシピ評価 | ✅       | ❌   |
 | `seeds/local_zero_hit.sql`     | お酒検索ゼロ件の再現（類似フィクスチャ・仮の印）   | ✅       | ❌   |
+| `seeds/local_stake_merge_published.sql` | 杭マージ再現用 published（手動。自動 seed しない） | 手動     | ❌   |
 
 `config.toml` の `[db.seed].sql_paths` はローカル用に上記 4 ファイルを順に指定しています。
 
@@ -238,7 +239,16 @@ pnpm supabase:seed:prod     # リンク済みリモート: 共通のみ（local_
 
 `drinks.sql` / `official_cocktails.sql` / `local_zero_hit.sql` は upsert（`ON CONFLICT`）です。`local_demo.sql` は基本的に **INSERT のみ**で、既に同じ行がある状態で再実行すると UNIQUE 制約で失敗します。空の状態から入れるなら `db reset` を使ってください。
 
-ゼロ件画面の再現クエリは `seeds/local_zero_hit.sql` 先頭コメントを参照（類似あり: `Zenhito Cedr Malt`、類似なし: `xqzt9zeroHitNoCatalog`）。仮の印は `rater01@example.com` / `password123`。
+ゼロ件画面の再現クエリは `seeds/local_zero_hit.sql` 先頭コメントを参照（類似あり: `Zenhito Cedr Malt`、類似なし: `xqzt9zeroHitNoCatalog`）。仮の印は `rater01@example.com` / `password123`（バッジは「図鑑待ち」、見返しは `/list?pending=1`）。
+
+杭を published に付け替えるローカル再現は自動 seed に載せない。`local_zero_hit.sql` 投入後に:
+
+```bash
+supabase db query --local --file supabase/seeds/local_stake_merge_published.sql
+pnpm seed:drinks:merge
+```
+
+`pnpm supabase:seed:prod` の対象に `local_zero_hit.sql` / `local_stake_merge_published.sql` は無い。
 
 ### カタログ画像（Storage）
 

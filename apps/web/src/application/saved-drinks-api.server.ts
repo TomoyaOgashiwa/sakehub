@@ -39,9 +39,12 @@ export async function fetchMySavedDrink(
 }
 
 export async function fetchMyListDepth(accessToken: string): Promise<ListDepth> {
-  const result = await authServerFetch<{ data: ApiListDepth | null }>('/api/auth/saved-drinks/depth', {
-    accessToken,
-  });
+  const result = await authServerFetch<{ data: ApiListDepth | null }>(
+    '/api/auth/saved-drinks/depth',
+    {
+      accessToken,
+    },
+  );
   if (!result.ok || !result.data.data) {
     return { specialty: null, makers: [], makerScope: 'all' };
   }

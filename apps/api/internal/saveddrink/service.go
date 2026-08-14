@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"regexp"
+	"sort"
 	"strings"
 	"unicode/utf8"
 
@@ -111,6 +112,13 @@ func (s *Service) GetMine(ctx context.Context, drinkID, userID string) (*SavedDr
 }
 
 func (s *Service) List(ctx context.Context, userID string, params ListParams) ([]SavedDrink, error) {
+	if params.Status != "" && !validStatus(params.Status) {
+		return nil, fmt.Errorf("%w: status must be drank or want", ErrValidation)
+	}
+	if params.Category != "" && !validProductCategory(params.Category) {
+		params.Category = ""
+		params.PublishedOnly = false
+	}
 	if params.Limit <= 0 {
 		params.Limit = defaultListLimit
 	}
@@ -126,6 +134,117 @@ func (s *Service) List(ctx context.Context, userID string, params ListParams) ([
 		return nil, fmt.Errorf("saveddrink.List: %w", err)
 	}
 	return items, nil
+}
+
+func (s *Service) Depth(ctx context.Context, userID, makerCategory string) (*ListDepth, error) {
+	counts, err := s.repo.CountDrankByCategory(ctx, userID)
+	if err != nil {
+		return nil, fmt.Errorf("saveddrink.Depth: %w", err)
+	}
+	totals, err := s.repo.CountPublishedByCategory(ctx)
+	if err != nil {
+		return nil, fmt.Errorf("saveddrink.Depth: %w", err)
+	}
+
+	totalByCat := make(map[string]int, len(totals))
+	for _, t := range totals {
+		totalByCat[t.Category] = t.Total
+	}
+
+	categories := filledCategories(counts, totalByCat)
+	makers := []DepthMaker{}
+	if len(categories) == 0 {
+		return &ListDepth{
+			Specialty:  nil,
+			Categories: categories,
+			Makers:     makers,
+			MakerScope: "all",
+		}, nil
+	}
+	specialty := categories[0]
+
+	scopeCategory := &specialty.Category
+	makerScope := "specialty"
+	if validProductCategory(makerCategory) {
+		scopeCategory = &makerCategory
+	}
+
+	scoped, err := s.repo.ListMakers(ctx, userID, scopeCategory)
+	if err != nil {
+		return nil, fmt.Errorf("saveddrink.Depth: %w", err)
+	}
+	nextCategory := scopeCategory
+	if len(scoped) == 0 && !validProductCategory(makerCategory) {
+		scoped, err = s.repo.ListMakers(ctx, userID, nil)
+		if err != nil {
+			return nil, fmt.Errorf("saveddrink.Depth: %w", err)
+		}
+		nextCategory = nil
+		makerScope = "all"
+	}
+
+	for i, m := range scoped {
+		next := []DepthNextDrink{}
+		if i == 0 {
+			next, err = s.repo.ListUnsavedByManufacturer(
+				ctx, userID, m.Manufacturer, nextCategory, maxDepthNextDrinks,
+			)
+			if err != nil {
+				return nil, fmt.Errorf("saveddrink.Depth: %w", err)
+			}
+			if next == nil {
+				next = []DepthNextDrink{}
+			}
+		}
+		makers = append(makers, DepthMaker{
+			Manufacturer: m.Manufacturer,
+			Drank:        m.Drank,
+			NextDrinks:   next,
+		})
+	}
+
+	return &ListDepth{
+		Specialty:  &specialty,
+		Categories: categories,
+		Makers:     makers,
+		MakerScope: makerScope,
+	}, nil
+}
+
+func filledCategories(counts []CategoryCount, totals map[string]int) []DepthSpecialty {
+	out := make([]DepthSpecialty, 0, len(counts))
+	for _, c := range counts {
+		if c.Drank <= 0 {
+			continue
+		}
+		out = append(out, DepthSpecialty{Category: c.Category, Drank: c.Drank, Total: totals[c.Category]})
+	}
+	sort.Slice(out, func(i, j int) bool {
+		return betterSpecialty(out[i], &out[j])
+	})
+	return out
+}
+
+func betterSpecialty(cand DepthSpecialty, best *DepthSpecialty) bool {
+	if best == nil {
+		return true
+	}
+	if cand.Drank != best.Drank {
+		return cand.Drank > best.Drank
+	}
+	candRatio := fillRatio(cand.Drank, cand.Total)
+	bestRatio := fillRatio(best.Drank, best.Total)
+	if candRatio != bestRatio {
+		return candRatio > bestRatio
+	}
+	return cand.Category < best.Category
+}
+
+func fillRatio(n, d int) float64 {
+	if d <= 0 {
+		return 0
+	}
+	return float64(n) / float64(d)
 }
 
 func (s *Service) Unsave(ctx context.Context, drinkID, userID string) error {

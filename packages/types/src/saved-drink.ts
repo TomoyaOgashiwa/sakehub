@@ -12,9 +12,39 @@ export interface SavedDrinkCatalog {
   category: Exclude<DrinkCategory, 'all'>;
   imageUrl?: string;
   visibility: DrinkVisibility;
+  manufacturer?: string;
 }
 
-/** One personal mark per user per catalog drink. Rating is an optional annotation. */
+export interface ListDepthSpecialty {
+  category: Exclude<DrinkCategory, 'all'>;
+  drank: number;
+  total: number;
+}
+
+export interface ListDepthNextDrink {
+  slug: string;
+  name: string;
+}
+
+export interface ListDepthMaker {
+  manufacturer: string;
+  drank: number;
+  nextDrinks: ListDepthNextDrink[];
+}
+
+/** Personal fill map for /list. Not a title ladder. */
+export interface ListDepth {
+  specialty: ListDepthSpecialty | null;
+  /** Categories with drank > 0 only. Sorted by count, then fill ratio.
+   *  drank is unique published drink_id in saved.drank ∪ catalog drink_logs. */
+  categories: ListDepthSpecialty[];
+  makers: ListDepthMaker[];
+  /** specialty = makers are in the top category; all = fallback across categories. */
+  makerScope: 'specialty' | 'all';
+}
+
+/** One personal mark per user per catalog drink. Rating is an optional annotation.
+ *  `id` is empty when the drink is in the drank union but has no saved_drinks row. */
 export interface SavedDrink {
   id: string;
   userId: string;

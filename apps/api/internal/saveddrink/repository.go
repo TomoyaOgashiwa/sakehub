@@ -5,6 +5,8 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"strings"
+	"time"
 )
 
 type Repository interface {
@@ -15,7 +17,30 @@ type Repository interface {
 	FindByDrinkAndUser(ctx context.Context, drinkID, userID string) (*SavedDrink, error)
 	ListByUser(ctx context.Context, userID string, params ListParams) ([]SavedDrink, error)
 	DeleteByDrinkAndUser(ctx context.Context, drinkID, userID string) error
+	CountDrankByCategory(ctx context.Context, userID string) ([]CategoryCount, error)
+	CountPublishedByCategory(ctx context.Context) ([]CategoryTotal, error)
+	ListMakers(ctx context.Context, userID string, category *string) ([]DepthMaker, error)
+	ListUnsavedByManufacturer(ctx context.Context, userID, manufacturer string, category *string, limit int) ([]DepthNextDrink, error)
 }
+
+// drankUnionCTE is unique published drink_id: saved.drank ∪ catalog drink_logs.
+// Placeholder $1 must be user_id. Matches category-list union=drank.
+const drankUnionCTE = `
+drank AS (
+	SELECT s.drink_id
+	FROM saved_drinks s
+	INNER JOIN drinks d ON d.id = s.drink_id
+	WHERE s.user_id = $1
+	  AND s.status = 'drank'
+	  AND d.visibility = 'published'
+	UNION
+	SELECT l.drink_id
+	FROM drink_logs l
+	INNER JOIN drinks d ON d.id = l.drink_id
+	WHERE l.user_id = $1
+	  AND l.drink_id IS NOT NULL
+	  AND d.visibility = 'published'
+)`
 
 type repository struct {
 	db *sql.DB
@@ -163,19 +188,39 @@ func (r *repository) FindByDrinkAndUser(ctx context.Context, drinkID, userID str
 }
 
 func (r *repository) ListByUser(ctx context.Context, userID string, params ListParams) ([]SavedDrink, error) {
-	const q = `
+	if params.DrankUnion {
+		return r.listDrankUnion(ctx, userID, params)
+	}
+
+	var b strings.Builder
+	b.WriteString(`
 		SELECT
 			s.id, s.user_id, s.drink_id, s.status, s.note, s.created_at,
-			d.id, d.slug, d.name, d.name_en, d.category, d.image_url, d.visibility,
+			d.id, d.slug, d.name, d.name_en, d.category, d.image_url, d.visibility, d.manufacturer,
 			r.rating, r.comment
 		FROM saved_drinks s
 		INNER JOIN drinks d ON d.id = s.drink_id
 		LEFT JOIN ratings r ON r.drink_id = s.drink_id AND r.user_id = s.user_id
-		WHERE s.user_id = $1
-		ORDER BY s.created_at DESC
-		LIMIT $2 OFFSET $3`
+		WHERE s.user_id = $1`)
+	args := []any{userID}
+	n := 2
+	if params.Status != "" {
+		fmt.Fprintf(&b, " AND s.status = $%d", n)
+		args = append(args, params.Status)
+		n++
+	}
+	if params.Category != "" {
+		fmt.Fprintf(&b, " AND d.category = $%d", n)
+		args = append(args, params.Category)
+		n++
+	}
+	if params.PublishedOnly {
+		b.WriteString(" AND d.visibility = 'published'")
+	}
+	fmt.Fprintf(&b, " ORDER BY s.created_at DESC LIMIT $%d OFFSET $%d", n, n+1)
+	args = append(args, params.Limit, params.Offset)
 
-	rows, err := r.db.QueryContext(ctx, q, userID, params.Limit, params.Offset)
+	rows, err := r.db.QueryContext(ctx, b.String(), args...)
 	if err != nil {
 		return nil, err
 	}
@@ -184,6 +229,47 @@ func (r *repository) ListByUser(ctx context.Context, userID string, params ListP
 	var items []SavedDrink
 	for rows.Next() {
 		item, err := scanListed(rows)
+		if err != nil {
+			return nil, err
+		}
+		items = append(items, item)
+	}
+	if items == nil {
+		items = []SavedDrink{}
+	}
+	return items, rows.Err()
+}
+
+func (r *repository) listDrankUnion(ctx context.Context, userID string, params ListParams) ([]SavedDrink, error) {
+	q := `
+		WITH ` + drankUnionCTE + `
+		SELECT
+			s.id, s.user_id, u.drink_id, s.status, s.note, s.created_at,
+			d.id, d.slug, d.name, d.name_en, d.category, d.image_url, d.visibility, d.manufacturer,
+			r.rating, r.comment,
+			d.created_at
+		FROM drank u
+		INNER JOIN drinks d ON d.id = u.drink_id
+		LEFT JOIN saved_drinks s ON s.drink_id = u.drink_id AND s.user_id = $1
+		LEFT JOIN ratings r ON r.drink_id = u.drink_id AND r.user_id = $1
+		WHERE ($2::text IS NULL OR d.category = $2)
+		ORDER BY COALESCE(s.created_at, d.created_at) DESC
+		LIMIT $3 OFFSET $4`
+
+	var cat any
+	if params.Category != "" {
+		cat = params.Category
+	}
+
+	rows, err := r.db.QueryContext(ctx, q, userID, cat, params.Limit, params.Offset)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var items []SavedDrink
+	for rows.Next() {
+		item, err := scanListedUnion(rows, userID)
 		if err != nil {
 			return nil, err
 		}
@@ -221,18 +307,156 @@ func (r *repository) DeleteByDrinkAndUser(ctx context.Context, drinkID, userID s
 	return tx.Commit()
 }
 
+func (r *repository) CountDrankByCategory(ctx context.Context, userID string) ([]CategoryCount, error) {
+	q := `
+		WITH ` + drankUnionCTE + `
+		SELECT d.category, COUNT(*)::int
+		FROM drank u
+		INNER JOIN drinks d ON d.id = u.drink_id
+		GROUP BY d.category`
+
+	rows, err := r.db.QueryContext(ctx, q, userID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var items []CategoryCount
+	for rows.Next() {
+		var item CategoryCount
+		if err := rows.Scan(&item.Category, &item.Drank); err != nil {
+			return nil, err
+		}
+		items = append(items, item)
+	}
+	if items == nil {
+		items = []CategoryCount{}
+	}
+	return items, rows.Err()
+}
+
+func (r *repository) CountPublishedByCategory(ctx context.Context) ([]CategoryTotal, error) {
+	const q = `
+		SELECT category, COUNT(*)::int
+		FROM drinks
+		WHERE visibility = 'published'
+		GROUP BY category`
+
+	rows, err := r.db.QueryContext(ctx, q)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var items []CategoryTotal
+	for rows.Next() {
+		var item CategoryTotal
+		if err := rows.Scan(&item.Category, &item.Total); err != nil {
+			return nil, err
+		}
+		items = append(items, item)
+	}
+	if items == nil {
+		items = []CategoryTotal{}
+	}
+	return items, rows.Err()
+}
+
+func (r *repository) ListMakers(ctx context.Context, userID string, category *string) ([]DepthMaker, error) {
+	q := fmt.Sprintf(`
+		WITH `+drankUnionCTE+`
+		SELECT d.manufacturer, COUNT(*)::int
+		FROM drank u
+		INNER JOIN drinks d ON d.id = u.drink_id
+		WHERE ($2::text IS NULL OR d.category = $2)
+		  AND d.manufacturer IS NOT NULL
+		  AND btrim(d.manufacturer) <> ''
+		GROUP BY d.manufacturer
+		HAVING COUNT(*) >= %d
+		ORDER BY COUNT(*) DESC, d.manufacturer
+		LIMIT %d`, minMakerDrank, maxDepthMakers)
+
+	var cat any
+	if category != nil && *category != "" {
+		cat = *category
+	}
+
+	rows, err := r.db.QueryContext(ctx, q, userID, cat)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var items []DepthMaker
+	for rows.Next() {
+		var item DepthMaker
+		if err := rows.Scan(&item.Manufacturer, &item.Drank); err != nil {
+			return nil, err
+		}
+		item.NextDrinks = []DepthNextDrink{}
+		items = append(items, item)
+	}
+	if items == nil {
+		items = []DepthMaker{}
+	}
+	return items, rows.Err()
+}
+
+func (r *repository) ListUnsavedByManufacturer(
+	ctx context.Context,
+	userID, manufacturer string,
+	category *string,
+	limit int,
+) ([]DepthNextDrink, error) {
+	q := `
+		WITH ` + drankUnionCTE + `
+		SELECT d.slug, d.name
+		FROM drinks d
+		WHERE d.visibility = 'published'
+		  AND d.manufacturer = $2
+		  AND ($3::text IS NULL OR d.category = $3)
+		  AND NOT EXISTS (SELECT 1 FROM drank u WHERE u.drink_id = d.id)
+		ORDER BY d.name
+		LIMIT $4`
+
+	var cat any
+	if category != nil && *category != "" {
+		cat = *category
+	}
+
+	rows, err := r.db.QueryContext(ctx, q, userID, manufacturer, cat, limit)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var items []DepthNextDrink
+	for rows.Next() {
+		var item DepthNextDrink
+		if err := rows.Scan(&item.Slug, &item.Name); err != nil {
+			return nil, err
+		}
+		items = append(items, item)
+	}
+	if items == nil {
+		items = []DepthNextDrink{}
+	}
+	return items, rows.Err()
+}
+
 func scanListed(rows *sql.Rows) (SavedDrink, error) {
 	var (
-		item     SavedDrink
-		drink    DrinkSummary
-		nameEn   sql.NullString
-		imageURL sql.NullString
-		rating   sql.NullInt64
-		comment  sql.NullString
+		item         SavedDrink
+		drink        DrinkSummary
+		nameEn       sql.NullString
+		imageURL     sql.NullString
+		manufacturer sql.NullString
+		rating       sql.NullInt64
+		comment      sql.NullString
 	)
 	err := rows.Scan(
 		&item.ID, &item.UserID, &item.DrinkID, &item.Status, &item.Note, &item.CreatedAt,
-		&drink.ID, &drink.Slug, &drink.Name, &nameEn, &drink.Category, &imageURL, &drink.Visibility,
+		&drink.ID, &drink.Slug, &drink.Name, &nameEn, &drink.Category, &imageURL, &drink.Visibility, &manufacturer,
 		&rating, &comment,
 	)
 	if err != nil {
@@ -243,6 +467,71 @@ func scanListed(rows *sql.Rows) (SavedDrink, error) {
 	}
 	if imageURL.Valid {
 		drink.ImageURL = &imageURL.String
+	}
+	if manufacturer.Valid && manufacturer.String != "" {
+		drink.Manufacturer = &manufacturer.String
+	}
+	item.Drink = &drink
+	if rating.Valid {
+		v := int(rating.Int64)
+		item.Rating = &v
+	}
+	if comment.Valid {
+		item.Comment = &comment.String
+	}
+	return item, nil
+}
+
+func scanListedUnion(rows *sql.Rows, userID string) (SavedDrink, error) {
+	var (
+		item         SavedDrink
+		drink        DrinkSummary
+		savedID      sql.NullString
+		savedUser    sql.NullString
+		status       sql.NullString
+		note         sql.NullString
+		savedAt      sql.NullTime
+		nameEn       sql.NullString
+		imageURL     sql.NullString
+		manufacturer sql.NullString
+		rating       sql.NullInt64
+		comment      sql.NullString
+		drinkCreated time.Time
+	)
+	err := rows.Scan(
+		&savedID, &savedUser, &item.DrinkID, &status, &note, &savedAt,
+		&drink.ID, &drink.Slug, &drink.Name, &nameEn, &drink.Category, &imageURL, &drink.Visibility, &manufacturer,
+		&rating, &comment,
+		&drinkCreated,
+	)
+	if err != nil {
+		return SavedDrink{}, err
+	}
+	if savedID.Valid {
+		item.ID = savedID.String
+		item.UserID = savedUser.String
+		item.Status = status.String
+		if note.Valid {
+			item.Note = note.String
+		}
+		if savedAt.Valid {
+			item.CreatedAt = savedAt.Time
+		}
+	} else {
+		item.ID = ""
+		item.UserID = userID
+		item.Status = StatusDrank
+		item.Note = ""
+		item.CreatedAt = drinkCreated
+	}
+	if nameEn.Valid {
+		drink.NameEn = &nameEn.String
+	}
+	if imageURL.Valid {
+		drink.ImageURL = &imageURL.String
+	}
+	if manufacturer.Valid && manufacturer.String != "" {
+		drink.Manufacturer = &manufacturer.String
 	}
 	item.Drink = &drink
 	if rating.Valid {

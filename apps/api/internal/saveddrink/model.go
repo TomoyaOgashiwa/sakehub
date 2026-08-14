@@ -20,13 +20,14 @@ const (
 
 // DrinkSummary is the catalog slice embedded on list responses.
 type DrinkSummary struct {
-	ID         string  `json:"id"`
-	Slug       string  `json:"slug"`
-	Name       string  `json:"name"`
-	NameEn     *string `json:"name_en,omitempty"`
-	Category   string  `json:"category"`
-	ImageURL   *string `json:"image_url,omitempty"`
-	Visibility string  `json:"visibility"`
+	ID           string  `json:"id"`
+	Slug         string  `json:"slug"`
+	Name         string  `json:"name"`
+	NameEn       *string `json:"name_en,omitempty"`
+	Category     string  `json:"category"`
+	ImageURL     *string `json:"image_url,omitempty"`
+	Visibility   string  `json:"visibility"`
+	Manufacturer *string `json:"manufacturer,omitempty"`
 }
 
 // SavedDrink is a personal 1-per-user catalog mark. Rating is optional.
@@ -58,6 +59,62 @@ type PatchInput struct {
 }
 
 type ListParams struct {
-	Limit  int
-	Offset int
+	Limit         int
+	Offset        int
+	Status        string
+	Category      string
+	PublishedOnly bool
+	// DrankUnion lists saved.drank ∪ catalog drink_logs (same numerator as Depth).
+	DrankUnion bool
+}
+
+func validProductCategory(category string) bool {
+	switch category {
+	case "beer", "wine", "whisky", "sake", "shochu", "vodka", "gin", "rum", "tequila", "brandy", "liqueur", "other":
+		return true
+	default:
+		return false
+	}
+}
+
+const (
+	maxDepthMakers     = 3
+	maxDepthNextDrinks = 3
+	minMakerDrank      = 2
+)
+
+type CategoryCount struct {
+	Category string
+	Drank    int
+}
+
+type CategoryTotal struct {
+	Category string
+	Total    int
+}
+
+type DepthNextDrink struct {
+	Slug string `json:"slug"`
+	Name string `json:"name"`
+}
+
+type DepthSpecialty struct {
+	Category string `json:"category"`
+	Drank    int    `json:"drank"`
+	Total    int    `json:"total"`
+}
+
+type DepthMaker struct {
+	Manufacturer string           `json:"manufacturer"`
+	Drank        int              `json:"drank"`
+	NextDrinks   []DepthNextDrink `json:"next_drinks"`
+}
+
+// ListDepth is the personal fill map for /list. Not a title ladder.
+// Categories.drank is unique published drink_id in saved.drank ∪ catalog drink_logs.
+type ListDepth struct {
+	Specialty  *DepthSpecialty  `json:"specialty"`
+	Categories []DepthSpecialty `json:"categories"`
+	Makers     []DepthMaker     `json:"makers"`
+	MakerScope string           `json:"maker_scope"`
 }

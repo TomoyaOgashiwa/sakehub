@@ -24,6 +24,7 @@ func NewHandler(svc *Service) *Handler {
 func (h *Handler) AuthRoutes(r chi.Router) {
 	r.Get("/", h.List)
 	r.Get("/mine", h.GetMine)
+	r.Get("/depth", h.Depth)
 	r.Post("/", h.Save)
 	r.Post("/provisional", h.SaveProvisional)
 	r.Patch("/{drink_id}", h.Patch)
@@ -121,6 +122,27 @@ func (h *Handler) GetMine(w http.ResponseWriter, r *http.Request) {
 	response.JSON(w, http.StatusOK, map[string]any{"data": row})
 }
 
+func (h *Handler) Depth(w http.ResponseWriter, r *http.Request) {
+	userID := middleware.UserID(r.Context())
+	if userID == "" {
+		response.Error(w, http.StatusUnauthorized, "unauthorized")
+		return
+	}
+
+	makerCategory := r.URL.Query().Get("category")
+	if !validProductCategory(makerCategory) {
+		makerCategory = ""
+	}
+
+	depth, err := h.svc.Depth(r.Context(), userID, makerCategory)
+	if err != nil {
+		writeServiceError(w, err)
+		return
+	}
+
+	response.JSON(w, http.StatusOK, map[string]any{"data": depth})
+}
+
 func (h *Handler) List(w http.ResponseWriter, r *http.Request) {
 	userID := middleware.UserID(r.Context())
 	if userID == "" {
@@ -144,6 +166,28 @@ func (h *Handler) List(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		params.Offset = n
+	}
+	if v := r.URL.Query().Get("status"); v != "" {
+		if v != StatusDrank && v != StatusWant {
+			response.Error(w, http.StatusBadRequest, "invalid status")
+			return
+		}
+		params.Status = v
+	}
+	if v := r.URL.Query().Get("category"); validProductCategory(v) {
+		params.Category = v
+	}
+	if params.Category != "" && params.Status != StatusWant && !params.DrankUnion {
+		params.PublishedOnly = true
+	}
+	if v := r.URL.Query().Get("union"); v != "" {
+		if v != "drank" {
+			response.Error(w, http.StatusBadRequest, "invalid union")
+			return
+		}
+		params.DrankUnion = true
+		params.Status = ""
+		params.PublishedOnly = true
 	}
 
 	items, err := h.svc.List(r.Context(), userID, params)

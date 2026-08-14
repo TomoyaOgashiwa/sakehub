@@ -36,5 +36,26 @@ export const MAIN_FILTER_CATEGORIES: FilterCategory[] = DRINK_CATEGORIES.map((va
   label: CATEGORY_LABELS[value],
 }));
 
+export function drinkCategoryLabel(category: string): string {
+  if (category in CATEGORY_LABELS) {
+    return CATEGORY_LABELS[category as DrinkCategory];
+  }
+  return category;
+}
+
+export function isProductDrinkCategory(
+  value: string | undefined,
+): value is Exclude<DrinkCategory, 'all'> {
+  if (!value || value === 'all') return false;
+  return value in CATEGORY_LABELS;
+}
+
+export function makerSearchHref(manufacturer: string, category?: string): string {
+  const params = new URLSearchParams();
+  params.set('q', manufacturer);
+  if (category) params.set('category', category);
+  return `/?${params.toString()}`;
+}
+
 /** Home shelf and filtered-result page size. */
 export const DRINK_LIST_PAGE_SIZE = 20;

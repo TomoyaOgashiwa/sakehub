@@ -24,7 +24,9 @@ supabase/
 └── seeds/
     ├── official_cocktails.sql  # 公式カクテル（ローカル / 本番 共通）
     ├── drinks.sql              # drinks マスタ（ローカル / 本番 共通）
-    └── local_demo.sql          # デモユーザー・評価・個別レシピ（ローカル専用）
+    ├── local_demo.sql          # デモユーザー・評価・個別レシピ（ローカル専用）
+    ├── local_zero_hit.sql      # お酒検索ゼロ件の再現（ローカル専用）
+    └── local_admin.sql         # 運営アカウント（ローカル専用。本番に入れない）
 ```
 
 ## 必要なツール
@@ -94,7 +96,7 @@ Docker Desktop（または同等）が動いていることと、事前に `**su
 
 - ローカル Postgres が **現在の migrations セットに準拠した状態までリセット**される
 - `migrations/` 内のファイルが **ファイル名順（タイムスタンプ順）で順番に適用**される
-- 処理の最後に `config.toml` の `[db.seed].sql_paths`（公式カクテル → drinks → local_demo）が自動実行される
+- 処理の最後に `config.toml` の `[db.seed].sql_paths`（公式カクテル → drinks → local_demo → local_zero_hit → local_admin）が自動実行される
 
 起動状態やキーを再確認するときは `supabase status` を使えます。
 
@@ -208,15 +210,16 @@ supabase db push
 
 シードは用途別に `supabase/seeds/` へ分割しています。
 
-| ファイル                       | 内容                                               | ローカル | 本番 |
-| ------------------------------ | -------------------------------------------------- | -------- | ---- |
-| `seeds/official_cocktails.sql` | 公式カクテルマスタ・公式レシピ（生成物）           | ✅       | ✅   |
-| `seeds/drinks.sql`             | drinks マスタ                                      | ✅       | ✅   |
-| `seeds/local_demo.sql`         | デモユーザー・ドリンク評価・個別レシピ・レシピ評価 | ✅       | ❌   |
-| `seeds/local_zero_hit.sql`     | お酒検索ゼロ件の再現（類似フィクスチャ・仮の印）   | ✅       | ❌   |
+| ファイル                                | 内容                                               | ローカル | 本番 |
+| --------------------------------------- | -------------------------------------------------- | -------- | ---- |
+| `seeds/official_cocktails.sql`          | 公式カクテルマスタ・公式レシピ（生成物）           | ✅       | ✅   |
+| `seeds/drinks.sql`                      | drinks マスタ                                      | ✅       | ✅   |
+| `seeds/local_demo.sql`                  | デモユーザー・ドリンク評価・個別レシピ・レシピ評価 | ✅       | ❌   |
+| `seeds/local_zero_hit.sql`              | お酒検索ゼロ件の再現（類似フィクスチャ・仮の印）   | ✅       | ❌   |
+| `seeds/local_admin.sql`                 | 運営アカウント（`admin@sakehub.local`）            | ✅       | ❌   |
 | `seeds/local_stake_merge_published.sql` | 杭マージ再現用 published（手動。自動 seed しない） | 手動     | ❌   |
 
-`config.toml` の `[db.seed].sql_paths` はローカル用に上記 4 ファイルを順に指定しています。
+`config.toml` の `[db.seed].sql_paths` はローカル用に上記を `official_cocktails` → `drinks` → `local_demo` → `local_zero_hit` → `local_admin` の順で指定しています。`local_admin.sql` は `pnpm supabase:seed:prod` に入れない。
 
 ### いつ実行されるか
 
@@ -228,9 +231,9 @@ supabase db push
 ### シードだけ再実行したい（リポジトリルートで）
 
 ```bash
-pnpm supabase:seed          # ローカル: 共通 + local_demo + local_zero_hit
-pnpm supabase:seed:shared   # ローカル: 共通のみ（評価・個別レシピなし）
-pnpm supabase:seed:prod     # リンク済みリモート: 共通のみ（local_demo なし）
+pnpm supabase:seed          # ローカル: 共通 + local_demo + local_zero_hit + local_admin
+pnpm supabase:seed:shared   # ローカル: 共通のみ（評価・個別レシピ・運営なし）
+pnpm supabase:seed:prod     # リンク済みリモート: 共通のみ（local_demo / local_admin なし）
 ```
 
 `migration up` だけでは seed は走りません。初期データが欲しいときは上記か `db reset` を使ってください。
@@ -248,7 +251,9 @@ supabase db query --local --file supabase/seeds/local_stake_merge_published.sql
 pnpm seed:drinks:merge
 ```
 
-`pnpm supabase:seed:prod` の対象に `local_zero_hit.sql` / `local_stake_merge_published.sql` は無い。
+`pnpm supabase:seed:prod` の対象に `local_zero_hit.sql` / `local_admin.sql` / `local_stake_merge_published.sql` は無い。
+
+ローカル運営の確認は `admin@sakehub.local` / `password123`（ヘッダー「運営」→ `/admin`）。`rater01@example.com` は member のまま。本番の最初の admin はシードせず、Studio で対象行の `app_role` を `UPDATE` する。
 
 ### カタログ画像（Storage）
 

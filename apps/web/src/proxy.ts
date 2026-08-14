@@ -3,7 +3,7 @@ import { createServerClient } from '@supabase/ssr';
 
 import { safeNextPath } from '@/utils/safe-next-path';
 
-const protectedRoutes = ['/profile', '/my-cocktails', '/my-logs', '/list'];
+const protectedRoutes = ['/profile', '/my-cocktails', '/my-logs', '/list', '/admin'];
 
 export async function proxy(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });

@@ -26,6 +26,10 @@ data/drinks/*.json → validate.ts → build-seed.ts → supabase/seeds/drinks.s
   （RBAC 基盤ゼロ）。非エンジニア運営メンバーが承認に入る、または週次の処理件数が
   数十件を超えて PR 運用が回らなくなるまでは、管理画面 + RBAC への先行投資はしない。
 
+閲覧コンソール（需要と仮の印の確認）は Web の `/admin` にある。公開マスタの承認は
+今どおり PR。画面から `visibility='published'` にはしない。`seed:drinks:merge` も
+Web からは呼ばない。
+
 ## AI 下書きの制限（重要）
 
 `draft.ts` は **name / nameEn / category / slug / aliases のみ** を生成する。
@@ -52,7 +56,7 @@ pnpm seed:drinks:merge                              # published 投入後、仮�
 `seed:drinks:merge` は demand / draft / build からは呼ばない。公開カタログを DB に入れたあと、明示実行する。入力は仮の印（`drinks` provisional）であり、`search_misses` ではない。
 
 `supabase db reset` 時は `config.toml` の `[db.seed]` が
-`official_cocktails.sql` → `drinks.sql` → `local_demo.sql` → `local_zero_hit.sql` の順で流す。
+`official_cocktails.sql` → `drinks.sql` → `local_demo.sql` → `local_zero_hit.sql` → `local_admin.sql` の順で流す。
 
 ## 重複検知
 

@@ -2,7 +2,7 @@
 todos:
   - id: phase-1-gate
     content: 'Phase 1: app_role migration + 自己昇格防止（deny-by-default トリガー + 列 REVOKE）+ search_miss_ranking の REVOKE/security_invoker + local_admin.sql + /admin ゲート + 静的ルート。Go 読み取り API は作らない'
-    status: pending
+    status: completed
   - id: phase-2-overview
     content: 'Phase 2: admin.IsAdmin + GET /api/admin/overview（1クエリ）+ /admin にライブ件数 + admin layout サブナビ。RequireAdmin は auth.go に置かない'
     status: pending
@@ -453,3 +453,13 @@ Cursor 上の初稿からの差分。本文の歴史は書き換えず、採用�
 - Phase 3 一覧は view ではなく **export-demand と同じ集計**（`sample_query_raw`、`unique_searchers` 順）。
 - overview は **SELECT 4 本ではなく 1 クエリ**。
 - miss フィクスチャは決定的 UUID で **再 seed しても増殖しない**。正規化値は `xqzt9zerohitnocatalog`。
+
+---
+
+## 実際の実装との差分
+
+Phase 1 実装時。本文の歴史は書き換えていない。
+
+- `/admin/search-misses` と `/admin/provisional` は作っていない。下層は「準備中」の文言だけ（依頼: 次 Phase の下層ページは作らない）。
+- `ops-runbook.tsx` は作らず、CLI 説明は `/admin` のカードに置いた。
+- 列 GRANT はプランの `REVOKE UPDATE (app_role)` に加え、table-level `UPDATE` を `anon` / `authenticated` から外し、`display_name` / `avatar_url` だけ `GRANT UPDATE` し直した。Supabase の default `GRANT ALL` があると列 REVOKE だけでは全列更新が残るため。

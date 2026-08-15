@@ -239,15 +239,104 @@ func TestSearchMissesRejectsInvalidLimit(t *testing.T) {
 	}
 }
 
-func TestSearchMissesUnknownPathIs404(t *testing.T) {
+func TestProvisionalDrinksRejectsMissingUserID(t *testing.T) {
 	t.Parallel()
-	h := mountAdmin(t, &stubRepo{role: AppRoleAdmin}, "admin-1")
+	h := mountAdmin(t, &stubRepo{role: AppRoleAdmin, provisionals: fixtureProvisionalDrinks()}, "")
 
 	req := httptest.NewRequest(http.MethodGet, "/provisional-drinks", nil)
 	rec := httptest.NewRecorder()
 	h.ServeHTTP(rec, req)
 
-	if rec.Code != http.StatusNotFound {
-		t.Fatalf("status = %d, want 404 for Phase 4 path", rec.Code)
+	if rec.Code != http.StatusUnauthorized {
+		t.Fatalf("status = %d, want 401", rec.Code)
+	}
+}
+
+func TestProvisionalDrinksRejectsMember(t *testing.T) {
+	t.Parallel()
+	h := mountAdmin(t, &stubRepo{role: "member", provisionals: fixtureProvisionalDrinks()}, "member-1")
+
+	req := httptest.NewRequest(http.MethodGet, "/provisional-drinks", nil)
+	rec := httptest.NewRecorder()
+	h.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusForbidden {
+		t.Fatalf("status = %d, want 403", rec.Code)
+	}
+}
+
+func TestProvisionalDrinksRejectsMissingUser(t *testing.T) {
+	t.Parallel()
+	h := mountAdmin(t, &stubRepo{roleErr: ErrNotFound, provisionals: fixtureProvisionalDrinks()}, "ghost")
+
+	req := httptest.NewRequest(http.MethodGet, "/provisional-drinks", nil)
+	rec := httptest.NewRecorder()
+	h.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusForbidden {
+		t.Fatalf("status = %d, want 403", rec.Code)
+	}
+}
+
+func TestProvisionalDrinksAllowsAdminProvisionalOnly(t *testing.T) {
+	t.Parallel()
+	want := fixtureProvisionalDrinks()
+	h := mountAdmin(t, &stubRepo{role: AppRoleAdmin, provisionals: want}, "admin-1")
+
+	req := httptest.NewRequest(http.MethodGet, "/provisional-drinks", nil)
+	rec := httptest.NewRecorder()
+	h.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("status = %d, want 200 body=%s", rec.Code, rec.Body.String())
+	}
+
+	var got ProvisionalDrinkListResult
+	if err := json.NewDecoder(rec.Body).Decode(&got); err != nil {
+		t.Fatalf("decode: %v", err)
+	}
+	if got.Total != len(want) || len(got.Data) != len(want) {
+		t.Fatalf("total=%d len=%d, want %d", got.Total, len(got.Data), len(want))
+	}
+	if got.Limit != DefaultProvisionalLimit || got.Offset != 0 {
+		t.Fatalf("bounds limit=%d offset=%d", got.Limit, got.Offset)
+	}
+	for _, row := range got.Data {
+		if row.Name != "禅人未登録ラベル" || row.NameNormalized != "禅人未登録らべる" {
+			t.Fatalf("non-provisional or unexpected row %+v", row)
+		}
+		if row.SubmittedBy == "" || row.SubmitterEmail == "" {
+			t.Fatalf("submitter missing %+v", row)
+		}
+		if !row.HasSavedDrink {
+			t.Fatalf("fixture stakes must have saved_drinks %+v", row)
+		}
+	}
+}
+
+func TestProvisionalDrinksRejectsInvalidLimit(t *testing.T) {
+	t.Parallel()
+	h := mountAdmin(t, &stubRepo{role: AppRoleAdmin, provisionals: fixtureProvisionalDrinks()}, "admin-1")
+
+	req := httptest.NewRequest(http.MethodGet, "/provisional-drinks?limit=nope", nil)
+	rec := httptest.NewRecorder()
+	h.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusBadRequest {
+		t.Fatalf("status = %d, want 400", rec.Code)
+	}
+}
+
+func TestProvisionalDrinksWriteMethodsAreNotRegistered(t *testing.T) {
+	t.Parallel()
+	h := mountAdmin(t, &stubRepo{role: AppRoleAdmin, provisionals: fixtureProvisionalDrinks()}, "admin-1")
+
+	for _, method := range []string{http.MethodPost, http.MethodPatch, http.MethodPut, http.MethodDelete} {
+		req := httptest.NewRequest(method, "/provisional-drinks", nil)
+		rec := httptest.NewRecorder()
+		h.ServeHTTP(rec, req)
+		if rec.Code != http.StatusMethodNotAllowed {
+			t.Fatalf("%s status = %d, want 405", method, rec.Code)
+		}
 	}
 }

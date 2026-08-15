@@ -11,7 +11,7 @@ todos:
     status: completed
   - id: phase-4-provisional
     content: 'Phase 4: GET /api/admin/provisional-drinks（read-only）。マージボタンなし。/list?pending=1 は触らない'
-    status: pending
+    status: completed
 name: Admin Ops Console
 overview: 運営がローカルで「需要が溜まる → 仮の印がある → 公開カタログは人手」を Web の `/admin` で見られる閲覧コンソールを、権限列・ゲート・静的画面から Go の read-only admin API まで4 Phase で足す。公開マスタの画面承認・自動公開はやらない。
 isProject: false
@@ -479,3 +479,12 @@ Phase 3 実装時。本文の歴史は書き換えていない。
 - miss フィクスチャは新規 seed ファイルではなく `local_admin.sql` 末尾。drink 3 クエリ（`xqzt9zeroHitNoCatalog` + 造語 2）と cocktail 1 クエリ。`supabase:seed:prod` には入れない。
 - HTTP テストは overview に加え `GET /search-misses` の 401 / 403 / 200 / scope フィルタ / 不正 scope・limit 400。Phase 4 の `/provisional-drinks` は 404 のまま。
 - 承認ボタン・pending.txt 書き出し・仮の印一覧・一般向け search-miss GET は作っていない。
+
+Phase 4 実装時。本文の歴史は書き換えていない。
+
+- DTO は Phase 3 に合わせ `packages/types` の `AdminProvisionalDrinkRow` / `AdminProvisionalDrinkListResult`（プランは `admin-api.ts` に閉じると書いていた）。
+- 依頼の列「email または display_name」に合わせ `submitter_email` も返す（プラン本文は email 非返却だった。admin 専用の識別用。一般 API には出さない）。
+- `has_saved_drink`（有無）と `saved_status`（drank/want/null）の両方。slug は返さない（詳細 404 へのリンクを作らない）。
+- HTTP テストは 401 / 403 / admin 200（禅人未登録ラベルのみ）/ 不正 limit 400 / POST・PATCH・PUT・DELETE は 405。書き込み HTTP は無い。
+- 新規 drink フィクスチャは足していない。`local_zero_hit.sql` の rater01/02 杭で埋まる。
+- `/list?pending=1`・一般向け provisional GET・マージ CLI の Web 化は触っていない。

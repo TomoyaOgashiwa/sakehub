@@ -101,7 +101,11 @@ export default async function AdminPage() {
               <pre className="bg-muted overflow-x-auto rounded-lg p-3 text-xs">
                 <code>pnpm seed:drinks:merge</code>
               </pre>
-              <p>図鑑待ち一覧は Phase 4。</p>
+              <p>
+                <Link href="/admin/provisional" className="underline underline-offset-4">
+                  図鑑待ち一覧を見る
+                </Link>
+              </p>
             </CardContent>
           </Card>
         </li>

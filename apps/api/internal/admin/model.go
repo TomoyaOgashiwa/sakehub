@@ -15,10 +15,14 @@ const (
 	AppRoleAdmin            = "admin"
 	DefaultSearchMissLimit  = 100
 	MaxSearchMissLimit      = 100
+	DefaultProvisionalLimit = 100
+	MaxProvisionalLimit     = 100
 	searchMissScopeAll      = "all"
 	searchMissScopeDrink    = "drink"
 	searchMissScopeCocktail = "cocktail"
 	searchMissScopeIng      = "ingredient"
+	savedStatusDrank        = "drank"
+	savedStatusWant         = "want"
 )
 
 type Overview struct {
@@ -48,4 +52,30 @@ type SearchMissListResult struct {
 	Total  int             `json:"total"`
 	Limit  int             `json:"limit"`
 	Offset int             `json:"offset"`
+}
+
+type ProvisionalDrinkListParams struct {
+	Limit  int
+	Offset int
+}
+
+// ProvisionalDrinkRow is one unmerged personal stake across all users.
+// Visibility is always provisional; published catalog rows are never included.
+type ProvisionalDrinkRow struct {
+	ID                   string    `json:"id"`
+	Name                 string    `json:"name"`
+	NameNormalized       string    `json:"name_normalized"`
+	SubmittedBy          string    `json:"submitted_by"`
+	SubmitterDisplayName string    `json:"submitter_display_name"`
+	SubmitterEmail       string    `json:"submitter_email"`
+	CreatedAt            time.Time `json:"created_at"`
+	HasSavedDrink        bool      `json:"has_saved_drink"`
+	SavedStatus          *string   `json:"saved_status"`
+}
+
+type ProvisionalDrinkListResult struct {
+	Data   []ProvisionalDrinkRow `json:"data"`
+	Total  int                   `json:"total"`
+	Limit  int                   `json:"limit"`
+	Offset int                   `json:"offset"`
 }

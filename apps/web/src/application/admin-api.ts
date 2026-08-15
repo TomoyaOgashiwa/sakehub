@@ -1,9 +1,13 @@
 import 'server-only';
 
 import type {
+  AdminProvisionalDrinkListParams,
+  AdminProvisionalDrinkListResult,
+  AdminProvisionalDrinkRow,
   AdminSearchMissListParams,
   AdminSearchMissListResult,
   AdminSearchMissRow,
+  SavedDrinkStatus,
   SearchMissScope,
 } from '@sakehub/types';
 
@@ -146,6 +150,98 @@ export async function fetchAdminSearchMisses(
   const data = toAdminSearchMissList(result.data);
   if (!data) {
     return { ok: false, status: 200, error: 'invalid search-miss payload' };
+  }
+  return { ok: true, data };
+}
+
+function isSavedDrinkStatus(value: unknown): value is SavedDrinkStatus {
+  return value === 'drank' || value === 'want';
+}
+
+function toAdminProvisionalDrinkRow(row: unknown): AdminProvisionalDrinkRow | null {
+  if (typeof row !== 'object' || row === null) {
+    return null;
+  }
+  const rec = row as Record<string, unknown>;
+  if (
+    typeof rec.id !== 'string' ||
+    typeof rec.name !== 'string' ||
+    typeof rec.name_normalized !== 'string' ||
+    typeof rec.submitted_by !== 'string' ||
+    typeof rec.submitter_display_name !== 'string' ||
+    typeof rec.submitter_email !== 'string' ||
+    typeof rec.created_at !== 'string' ||
+    typeof rec.has_saved_drink !== 'boolean' ||
+    (rec.saved_status !== null && !isSavedDrinkStatus(rec.saved_status))
+  ) {
+    return null;
+  }
+  return {
+    id: rec.id,
+    name: rec.name,
+    nameNormalized: rec.name_normalized,
+    submittedBy: rec.submitted_by,
+    submitterDisplayName: rec.submitter_display_name,
+    submitterEmail: rec.submitter_email,
+    createdAt: rec.created_at,
+    hasSavedDrink: rec.has_saved_drink,
+    savedStatus: isSavedDrinkStatus(rec.saved_status) ? rec.saved_status : null,
+  };
+}
+
+function toAdminProvisionalDrinkList(payload: unknown): AdminProvisionalDrinkListResult | null {
+  if (typeof payload !== 'object' || payload === null) {
+    return null;
+  }
+  const rec = payload as Record<string, unknown>;
+  if (
+    !Array.isArray(rec.data) ||
+    !isFiniteNumber(rec.total) ||
+    !isFiniteNumber(rec.limit) ||
+    !isFiniteNumber(rec.offset)
+  ) {
+    return null;
+  }
+  const data: AdminProvisionalDrinkRow[] = [];
+  for (const item of rec.data) {
+    const row = toAdminProvisionalDrinkRow(item);
+    if (!row) {
+      return null;
+    }
+    data.push(row);
+  }
+  return {
+    data,
+    total: rec.total,
+    limit: rec.limit,
+    offset: rec.offset,
+  };
+}
+
+export async function fetchAdminProvisionalDrinks(
+  accessToken: string,
+  params: AdminProvisionalDrinkListParams = {},
+): Promise<AuthServerFetchResult<AdminProvisionalDrinkListResult>> {
+  const query: Record<string, string> = {};
+  if (params.limit != null) {
+    query.limit = String(params.limit);
+  }
+  if (params.offset != null) {
+    query.offset = String(params.offset);
+  }
+
+  const result = await authServerFetch<unknown>('/api/admin/provisional-drinks', {
+    accessToken,
+    cache: 'no-store',
+    params: query,
+  });
+  if (!result.ok) {
+    return result;
+  }
+
+  const data = toAdminProvisionalDrinkList(result.data);
+  if (!data) {
+    return { ok: false, status: 200, error: 'invalid provisional payload' };
   }
   return { ok: true, data };
 }

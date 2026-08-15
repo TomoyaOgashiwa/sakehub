@@ -8,7 +8,7 @@ interface AdminNavItem {
 
 const items: readonly AdminNavItem[] = [
   { href: '/admin', label: '概要' },
-  { label: '需要', phase: 'Phase 3' },
+  { href: '/admin/search-misses', label: '需要' },
   { label: '図鑑待ち', phase: 'Phase 4' },
 ];
 

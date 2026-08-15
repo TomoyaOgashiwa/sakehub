@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import { fetchAdminOverview } from '@/application/admin-api';
 import { getOptionalAccessToken } from '@/application/require-access-token';
 import { Badge } from '@/components/ui/badge';
@@ -46,7 +48,11 @@ export default async function AdminPage() {
               <pre className="bg-muted overflow-x-auto rounded-lg p-3 text-xs">
                 <code>DATABASE_URL=... pnpm seed:drinks:demand</code>
               </pre>
-              <p>需要一覧は Phase 3。</p>
+              <p>
+                <Link href="/admin/search-misses" className="underline underline-offset-4">
+                  需要一覧を見る
+                </Link>
+              </p>
             </CardContent>
           </Card>
         </li>

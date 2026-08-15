@@ -9,6 +9,7 @@ import (
 type Repository interface {
 	AppRole(ctx context.Context, userID string) (string, error)
 	Overview(ctx context.Context) (*Overview, error)
+	ListSearchMisses(ctx context.Context, p SearchMissListParams) ([]SearchMissRow, int, error)
 }
 
 type repository struct {
@@ -55,4 +56,68 @@ SELECT
 		return nil, err
 	}
 	return &o, nil
+}
+
+func (r *repository) ListSearchMisses(ctx context.Context, p SearchMissListParams) ([]SearchMissRow, int, error) {
+	var scope any
+	if p.Scope != "" {
+		scope = p.Scope
+	}
+
+	const countQ = `
+SELECT COUNT(*)::int FROM (
+  SELECT 1
+  FROM search_misses sm
+  WHERE sm.result_count = 0
+    AND ($1::text IS NULL OR sm.scope = $1)
+  GROUP BY sm.scope, sm.query_normalized
+) grouped`
+
+	var total int
+	if err := r.db.QueryRowContext(ctx, countQ, scope).Scan(&total); err != nil {
+		return nil, 0, err
+	}
+
+	// export-demand.ts と同じ集計（sample_query_raw / unique_searchers）に
+	// scope 列を足す。view は元クエリを持たないので SELECT しない。
+	const listQ = `
+SELECT
+  sm.scope,
+  sm.query_normalized,
+  (ARRAY_AGG(sm.query_raw ORDER BY sm.created_at DESC))[1] AS sample_query_raw,
+  COUNT(*)::int AS miss_count,
+  COUNT(DISTINCT COALESCE(sm.user_id::text, sm.client_hash))::int AS unique_searchers,
+  MAX(sm.created_at) AS last_seen_at
+FROM search_misses sm
+WHERE sm.result_count = 0
+  AND ($1::text IS NULL OR sm.scope = $1)
+GROUP BY sm.scope, sm.query_normalized
+ORDER BY miss_count DESC, unique_searchers DESC
+LIMIT $2 OFFSET $3`
+
+	rows, err := r.db.QueryContext(ctx, listQ, scope, p.Limit, p.Offset)
+	if err != nil {
+		return nil, 0, err
+	}
+	defer rows.Close()
+
+	out := make([]SearchMissRow, 0)
+	for rows.Next() {
+		var row SearchMissRow
+		if err := rows.Scan(
+			&row.Scope,
+			&row.QueryNormalized,
+			&row.SampleQueryRaw,
+			&row.MissCount,
+			&row.UniqueSearchers,
+			&row.LastSeenAt,
+		); err != nil {
+			return nil, 0, err
+		}
+		out = append(out, row)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, 0, err
+	}
+	return out, total, nil
 }

@@ -8,7 +8,7 @@ todos:
     status: completed
   - id: phase-3-search-misses
     content: 'Phase 3: GET /api/admin/search-misses（export-demand と同じ集計 + sample_query_raw）+ local_admin.sql に決定的 UUID の miss フィクスチャ。一般 /api/search-misses に GET を足さない'
-    status: pending
+    status: completed
   - id: phase-4-provisional
     content: 'Phase 4: GET /api/admin/provisional-drinks（read-only）。マージボタンなし。/list?pending=1 は触らない'
     status: pending
@@ -471,3 +471,11 @@ Phase 2 実装時。本文の歴史は書き換えていない。
 - `/admin/search-misses` と `/admin/provisional` の一覧は作っていない。layout サブナビと概要カードに Phase 3/4 と書くが、未実装ルートへはリンクしない（404 に落とさない）。
 - パッケージ名はプランどおり `internal/admin`（依頼例の `adminops` にはしていない）。`RequireAdmin` は `auth.go` に足さず、handler の `requireAdmin` が `users.app_role` を見る。API の非 admin は 403（プラン）。Web ゲートは Phase 1 どおり `notFound()`。
 - 新しいローカル CLI では `postgres` 所有テーブルの default ACL に `authenticated` の SELECT が無い。`users_select_authenticated` だけでは PostgREST が 42501 になり、Header / `/admin` が member 扱いになる。`GRANT SELECT ON public.users TO authenticated` を新規 migration で足した（anon には付けない。UPDATE は Phase 1 の列 GRANT のまま）。
+
+Phase 3 実装時。本文の歴史は書き換えていない。
+
+- 一覧はプランの drink 固定ではなく、依頼どおり `?scope=drink|cocktail|ingredient|all`（空 / `all` は全部）。UI は drink / cocktail / 全部。並べ替えは export-demand と同じ `miss_count DESC, unique_searchers DESC`。
+- DTO は `packages/types` の `AdminSearchMissRow` / `AdminSearchMissListResult`（プランは `admin-api.ts` に閉じると書いていた）。
+- miss フィクスチャは新規 seed ファイルではなく `local_admin.sql` 末尾。drink 3 クエリ（`xqzt9zeroHitNoCatalog` + 造語 2）と cocktail 1 クエリ。`supabase:seed:prod` には入れない。
+- HTTP テストは overview に加え `GET /search-misses` の 401 / 403 / 200 / scope フィルタ / 不正 scope・limit 400。Phase 4 の `/provisional-drinks` は 404 のまま。
+- 承認ボタン・pending.txt 書き出し・仮の印一覧・一般向け search-miss GET は作っていない。

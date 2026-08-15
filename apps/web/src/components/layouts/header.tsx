@@ -1,13 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { createClient } from '@/lib/supabase/server';
+import { getAuthProfile } from '@/lib/auth/app-role';
 
 export async function Header() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { user, appRole } = await getAuthProfile();
 
   const displayName = user?.email?.split('@')[0] || 'User';
   const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=random&size=32`;
@@ -41,6 +38,14 @@ export async function Header() {
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 リスト
+              </Link>
+            )}
+            {appRole === 'admin' && (
+              <Link
+                href="/admin"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                運営
               </Link>
             )}
           </nav>

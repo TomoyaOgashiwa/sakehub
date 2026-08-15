@@ -5,7 +5,7 @@ todos:
     status: completed
   - id: phase-2-overview
     content: 'Phase 2: admin.IsAdmin + GET /api/admin/overview（1クエリ）+ /admin にライブ件数 + admin layout サブナビ。RequireAdmin は auth.go に置かない'
-    status: pending
+    status: completed
   - id: phase-3-search-misses
     content: 'Phase 3: GET /api/admin/search-misses（export-demand と同じ集計 + sample_query_raw）+ local_admin.sql に決定的 UUID の miss フィクスチャ。一般 /api/search-misses に GET を足さない'
     status: pending
@@ -463,3 +463,10 @@ Phase 1 実装時。本文の歴史は書き換えていない。
 - `/admin/search-misses` と `/admin/provisional` は作っていない。下層は「準備中」の文言だけ（依頼: 次 Phase の下層ページは作らない）。
 - `ops-runbook.tsx` は作らず、CLI 説明は `/admin` のカードに置いた。
 - 列 GRANT はプランの `REVOKE UPDATE (app_role)` に加え、table-level `UPDATE` を `anon` / `authenticated` から外し、`display_name` / `avatar_url` だけ `GRANT UPDATE` し直した。Supabase の default `GRANT ALL` があると列 REVOKE だけでは全列更新が残るため。
+
+Phase 2 実装時。本文の歴史は書き換えていない。
+
+- 図鑑待ち件数はプラン SQL の `visibility = 'provisional'` に加え、`merged_into_id IS NULL` を付けた（依頼のカード定義 / Phase 4 キューと同じ。マージ済み杭を待件数に入れない）。
+- HTTP の拒否テストを `handler_test.go` に足した（空 UID は 401、member / 欠落は 403、admin は 200）。プランは `service_test.go` の `IsAdmin` のみだった。
+- `/admin/search-misses` と `/admin/provisional` の一覧は作っていない。layout サブナビと概要カードから Phase 3/4 と書いてリンクする（未実装なので 404）。
+- パッケージ名はプランどおり `internal/admin`（依頼例の `adminops` にはしていない）。`RequireAdmin` は `auth.go` に足さず、handler の `requireAdmin` が `users.app_role` を見る。API の非 admin は 403（プラン）。Web ゲートは Phase 1 どおり `notFound()`。

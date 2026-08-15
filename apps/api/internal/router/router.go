@@ -11,6 +11,7 @@ import (
 	"go.uber.org/zap"
 	"golang.org/x/time/rate"
 
+	"github.com/sakehub/api/internal/admin"
 	"github.com/sakehub/api/internal/cocktail"
 	"github.com/sakehub/api/internal/drink"
 	"github.com/sakehub/api/internal/drinklog"
@@ -41,6 +42,7 @@ func New(logger *zap.Logger, db *sql.DB, cfg *config.Config, kf keyfunc.Keyfunc)
 		MaxAge:           300,
 	}))
 
+	adminH := admin.NewHandler(admin.NewService(admin.NewRepository(db)))
 	userH := user.NewHandler(user.NewService(user.NewRepository(db)))
 	drinkH := drink.NewHandler(drink.NewService(drink.NewRepository(db), logger))
 	cocktailH := cocktail.NewHandler(cocktail.NewService(cocktail.NewRepository(db)))
@@ -89,6 +91,11 @@ func New(logger *zap.Logger, db *sql.DB, cfg *config.Config, kf keyfunc.Keyfunc)
 		r.Group(func(r chi.Router) {
 			r.Use(middleware.RequireAuth(kf))
 			r.Route("/users", userH.Routes)
+		})
+
+		r.Route("/admin", func(r chi.Router) {
+			r.Use(middleware.RequireAuth(kf))
+			adminH.Routes(r)
 		})
 	})
 

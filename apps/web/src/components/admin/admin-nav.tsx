@@ -1,36 +1,37 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-interface AdminNavItem {
-  href?: string;
-  label: string;
-  phase?: string;
-}
+import { cn } from '@/utils/utils';
 
-const items: readonly AdminNavItem[] = [
-  { href: '/admin', label: '概要' },
-  { href: '/admin/search-misses', label: '需要' },
-  { label: '図鑑待ち', phase: 'Phase 4' },
-];
+const items = [
+  { href: '/admin', label: '概要', exact: true },
+  { href: '/admin/search-misses', label: '需要', exact: false },
+  { href: '/admin/provisional', label: '図鑑待ち', exact: false },
+] as const;
 
 export function AdminNav() {
+  const pathname = usePathname();
+
   return (
     <nav aria-label="運営" className="mb-8 flex flex-wrap gap-4 text-sm font-medium">
-      {items.map((item) =>
-        item.href ? (
+      {items.map((item) => {
+        const active = item.exact ? pathname === item.href : pathname.startsWith(item.href);
+        return (
           <Link
-            key={item.label}
+            key={item.href}
             href={item.href}
-            className="text-muted-foreground hover:text-foreground transition-colors"
+            aria-current={active ? 'page' : undefined}
+            className={cn(
+              'transition-colors',
+              active ? 'text-foreground' : 'text-muted-foreground hover:text-foreground',
+            )}
           >
             {item.label}
           </Link>
-        ) : (
-          <span key={item.label} className="text-muted-foreground/70">
-            {item.label}
-            {item.phase ? <span className="ml-1 text-xs font-normal">({item.phase})</span> : null}
-          </span>
-        ),
-      )}
+        );
+      })}
     </nav>
   );
 }

@@ -10,6 +10,7 @@ type Repository interface {
 	AppRole(ctx context.Context, userID string) (string, error)
 	Overview(ctx context.Context) (*Overview, error)
 	ListSearchMisses(ctx context.Context, p SearchMissListParams) ([]SearchMissRow, int, error)
+	ListProvisionalDrinks(ctx context.Context, p ProvisionalDrinkListParams) ([]ProvisionalDrinkRow, int, error)
 }
 
 type repository struct {
@@ -113,6 +114,81 @@ LIMIT $2 OFFSET $3`
 			&row.LastSeenAt,
 		); err != nil {
 			return nil, 0, err
+		}
+		out = append(out, row)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, 0, err
+	}
+	return out, total, nil
+}
+
+func (r *repository) ListProvisionalDrinks(ctx context.Context, p ProvisionalDrinkListParams) ([]ProvisionalDrinkRow, int, error) {
+	const countQ = `
+SELECT COUNT(*)::int
+FROM drinks
+WHERE visibility = 'provisional'
+  AND merged_into_id IS NULL`
+
+	var total int
+	if err := r.db.QueryRowContext(ctx, countQ).Scan(&total); err != nil {
+		return nil, 0, err
+	}
+
+	// 全ユーザーの未マージ仮の印だけ。published は出さない。
+	// slug は詳細 404 なので返さない。一般 API には足さない。
+	const listQ = `
+SELECT
+  d.id,
+  d.name,
+  d.name_normalized,
+  d.submitted_by,
+  COALESCE(u.display_name, ''),
+  COALESCE(u.email, ''),
+  d.created_at,
+  EXISTS (
+    SELECT 1 FROM saved_drinks s WHERE s.drink_id = d.id
+  ) AS has_saved_drink,
+  (
+    SELECT s.status
+    FROM saved_drinks s
+    WHERE s.drink_id = d.id
+    ORDER BY s.created_at ASC
+    LIMIT 1
+  ) AS saved_status
+FROM drinks d
+LEFT JOIN users u ON u.id = d.submitted_by
+WHERE d.visibility = 'provisional'
+  AND d.merged_into_id IS NULL
+ORDER BY d.created_at DESC, d.name_normalized ASC, d.submitted_by ASC
+LIMIT $1 OFFSET $2`
+
+	rows, err := r.db.QueryContext(ctx, listQ, p.Limit, p.Offset)
+	if err != nil {
+		return nil, 0, err
+	}
+	defer rows.Close()
+
+	out := make([]ProvisionalDrinkRow, 0)
+	for rows.Next() {
+		var row ProvisionalDrinkRow
+		var savedStatus sql.NullString
+		if err := rows.Scan(
+			&row.ID,
+			&row.Name,
+			&row.NameNormalized,
+			&row.SubmittedBy,
+			&row.SubmitterDisplayName,
+			&row.SubmitterEmail,
+			&row.CreatedAt,
+			&row.HasSavedDrink,
+			&savedStatus,
+		); err != nil {
+			return nil, 0, err
+		}
+		if savedStatus.Valid {
+			status := savedStatus.String
+			row.SavedStatus = &status
 		}
 		out = append(out, row)
 	}

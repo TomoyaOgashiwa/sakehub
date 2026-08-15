@@ -22,6 +22,7 @@ func (h *Handler) Routes(r chi.Router) {
 	r.Use(h.requireAdmin)
 	r.Get("/overview", h.Overview)
 	r.Get("/search-misses", h.SearchMisses)
+	r.Get("/provisional-drinks", h.ProvisionalDrinks)
 }
 
 func (h *Handler) requireAdmin(next http.Handler) http.Handler {
@@ -71,6 +72,25 @@ func (h *Handler) SearchMisses(w http.ResponseWriter, r *http.Request) {
 			response.Error(w, http.StatusBadRequest, "validation error")
 			return
 		}
+		response.Error(w, http.StatusInternalServerError, "internal server error")
+		return
+	}
+	response.JSON(w, http.StatusOK, result)
+}
+
+func (h *Handler) ProvisionalDrinks(w http.ResponseWriter, r *http.Request) {
+	q := r.URL.Query()
+	limit, offset, err := parseLimitOffset(q.Get("limit"), q.Get("offset"))
+	if err != nil {
+		response.Error(w, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	result, err := h.svc.ListProvisionalDrinks(r.Context(), ProvisionalDrinkListParams{
+		Limit:  limit,
+		Offset: offset,
+	})
+	if err != nil {
 		response.Error(w, http.StatusInternalServerError, "internal server error")
 		return
 	}

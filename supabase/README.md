@@ -216,7 +216,7 @@ supabase db push
 | `seeds/drinks.sql`                      | drinks マスタ                                      | ✅       | ✅   |
 | `seeds/local_demo.sql`                  | デモユーザー・ドリンク評価・個別レシピ・レシピ評価 | ✅       | ❌   |
 | `seeds/local_zero_hit.sql`              | お酒検索ゼロ件の再現（類似フィクスチャ・仮の印）   | ✅       | ❌   |
-| `seeds/local_admin.sql`                 | 運営アカウント（`admin@sakehub.local`）            | ✅       | ❌   |
+| `seeds/local_admin.sql`                 | 運営アカウントと需要ログ用 miss フィクスチャ       | ✅       | ❌   |
 | `seeds/local_stake_merge_published.sql` | 杭マージ再現用 published（手動。自動 seed しない） | 手動     | ❌   |
 
 `config.toml` の `[db.seed].sql_paths` はローカル用に上記を `official_cocktails` → `drinks` → `local_demo` → `local_zero_hit` → `local_admin` の順で指定しています。`local_admin.sql` は `pnpm supabase:seed:prod` に入れない。
@@ -253,7 +253,7 @@ pnpm seed:drinks:merge
 
 `pnpm supabase:seed:prod` の対象に `local_zero_hit.sql` / `local_admin.sql` / `local_stake_merge_published.sql` は無い。
 
-ローカル運営の確認は `admin@sakehub.local` / `password123`（ヘッダー「運営」→ `/admin`）。`rater01@example.com` は member のまま。本番の最初の admin はシードせず、Studio で対象行の `app_role` を `UPDATE` する。
+ローカル運営の確認は `admin@sakehub.local` / `password123`（ヘッダー「運営」→ `/admin` → `/admin/search-misses`）。`rater01@example.com` は member のまま（`/admin` は 404）。需要一覧の seed 行は造語クエリ（`xqzt9zeroHitNoCatalog` / `qlm8vortanox` / `voxternis malt` / `zynthrel fizz`）。本番の最初の admin はシードせず、Studio で対象行の `app_role` を `UPDATE` する。
 
 ### カタログ画像（Storage）
 

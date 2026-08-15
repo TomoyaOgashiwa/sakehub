@@ -3,6 +3,7 @@ package admin
 import (
 	"errors"
 	"net/http"
+	"strconv"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/sakehub/api/internal/middleware"
@@ -20,6 +21,7 @@ func NewHandler(svc *Service) *Handler {
 func (h *Handler) Routes(r chi.Router) {
 	r.Use(h.requireAdmin)
 	r.Get("/overview", h.Overview)
+	r.Get("/search-misses", h.SearchMisses)
 }
 
 func (h *Handler) requireAdmin(next http.Handler) http.Handler {
@@ -49,4 +51,48 @@ func (h *Handler) Overview(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	response.JSON(w, http.StatusOK, o)
+}
+
+func (h *Handler) SearchMisses(w http.ResponseWriter, r *http.Request) {
+	q := r.URL.Query()
+	limit, offset, err := parseLimitOffset(q.Get("limit"), q.Get("offset"))
+	if err != nil {
+		response.Error(w, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	result, err := h.svc.ListSearchMisses(r.Context(), SearchMissListParams{
+		Scope:  q.Get("scope"),
+		Limit:  limit,
+		Offset: offset,
+	})
+	if err != nil {
+		if errors.Is(err, ErrValidation) {
+			response.Error(w, http.StatusBadRequest, "validation error")
+			return
+		}
+		response.Error(w, http.StatusInternalServerError, "internal server error")
+		return
+	}
+	response.JSON(w, http.StatusOK, result)
+}
+
+func parseLimitOffset(limitRaw, offsetRaw string) (int, int, error) {
+	limit := 0
+	if limitRaw != "" {
+		n, err := strconv.Atoi(limitRaw)
+		if err != nil || n <= 0 {
+			return 0, 0, errors.New("invalid limit")
+		}
+		limit = n
+	}
+	offset := 0
+	if offsetRaw != "" {
+		n, err := strconv.Atoi(offsetRaw)
+		if err != nil || n < 0 {
+			return 0, 0, errors.New("invalid offset")
+		}
+		offset = n
+	}
+	return limit, offset, nil
 }

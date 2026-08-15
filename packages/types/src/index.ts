@@ -5,3 +5,4 @@ export * from './user';
 export * from './api';
 export * from './cocktail-recipe';
 export * from './cocktail';
+export * from './admin';

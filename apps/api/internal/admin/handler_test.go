@@ -119,3 +119,135 @@ func TestOverviewRepoErrorIs500(t *testing.T) {
 		t.Fatalf("status = %d, want 500", rec.Code)
 	}
 }
+
+func TestSearchMissesRejectsMissingUserID(t *testing.T) {
+	t.Parallel()
+	h := mountAdmin(t, &stubRepo{role: AppRoleAdmin, misses: fixtureSearchMisses()}, "")
+
+	req := httptest.NewRequest(http.MethodGet, "/search-misses", nil)
+	rec := httptest.NewRecorder()
+	h.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusUnauthorized {
+		t.Fatalf("status = %d, want 401", rec.Code)
+	}
+}
+
+func TestSearchMissesRejectsMember(t *testing.T) {
+	t.Parallel()
+	h := mountAdmin(t, &stubRepo{role: "member", misses: fixtureSearchMisses()}, "member-1")
+
+	req := httptest.NewRequest(http.MethodGet, "/search-misses", nil)
+	rec := httptest.NewRecorder()
+	h.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusForbidden {
+		t.Fatalf("status = %d, want 403", rec.Code)
+	}
+}
+
+func TestSearchMissesRejectsMissingUser(t *testing.T) {
+	t.Parallel()
+	h := mountAdmin(t, &stubRepo{roleErr: ErrNotFound, misses: fixtureSearchMisses()}, "ghost")
+
+	req := httptest.NewRequest(http.MethodGet, "/search-misses", nil)
+	rec := httptest.NewRecorder()
+	h.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusForbidden {
+		t.Fatalf("status = %d, want 403", rec.Code)
+	}
+}
+
+func TestSearchMissesAllowsAdmin(t *testing.T) {
+	t.Parallel()
+	want := fixtureSearchMisses()
+	h := mountAdmin(t, &stubRepo{role: AppRoleAdmin, misses: want}, "admin-1")
+
+	req := httptest.NewRequest(http.MethodGet, "/search-misses", nil)
+	rec := httptest.NewRecorder()
+	h.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("status = %d, want 200 body=%s", rec.Code, rec.Body.String())
+	}
+
+	var got SearchMissListResult
+	if err := json.NewDecoder(rec.Body).Decode(&got); err != nil {
+		t.Fatalf("decode: %v", err)
+	}
+	if got.Total != len(want) || len(got.Data) != len(want) {
+		t.Fatalf("total=%d len=%d, want %d", got.Total, len(got.Data), len(want))
+	}
+	if got.Limit != DefaultSearchMissLimit || got.Offset != 0 {
+		t.Fatalf("bounds limit=%d offset=%d", got.Limit, got.Offset)
+	}
+	if got.Data[0].QueryNormalized != "xqzt9zerohitnocatalog" || got.Data[0].SampleQueryRaw == "" {
+		t.Fatalf("first row %+v", got.Data[0])
+	}
+}
+
+func TestSearchMissesFiltersScope(t *testing.T) {
+	t.Parallel()
+	h := mountAdmin(t, &stubRepo{role: AppRoleAdmin, misses: fixtureSearchMisses()}, "admin-1")
+
+	req := httptest.NewRequest(http.MethodGet, "/search-misses?scope=drink", nil)
+	rec := httptest.NewRecorder()
+	h.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("status = %d, want 200 body=%s", rec.Code, rec.Body.String())
+	}
+
+	var got SearchMissListResult
+	if err := json.NewDecoder(rec.Body).Decode(&got); err != nil {
+		t.Fatalf("decode: %v", err)
+	}
+	if got.Total != 2 || len(got.Data) != 2 {
+		t.Fatalf("total=%d len=%d, want 2 drink rows", got.Total, len(got.Data))
+	}
+	for _, row := range got.Data {
+		if row.Scope != "drink" {
+			t.Fatalf("scope = %q, want drink", row.Scope)
+		}
+	}
+}
+
+func TestSearchMissesRejectsInvalidScope(t *testing.T) {
+	t.Parallel()
+	h := mountAdmin(t, &stubRepo{role: AppRoleAdmin, misses: fixtureSearchMisses()}, "admin-1")
+
+	req := httptest.NewRequest(http.MethodGet, "/search-misses?scope=users", nil)
+	rec := httptest.NewRecorder()
+	h.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusBadRequest {
+		t.Fatalf("status = %d, want 400", rec.Code)
+	}
+}
+
+func TestSearchMissesRejectsInvalidLimit(t *testing.T) {
+	t.Parallel()
+	h := mountAdmin(t, &stubRepo{role: AppRoleAdmin, misses: fixtureSearchMisses()}, "admin-1")
+
+	req := httptest.NewRequest(http.MethodGet, "/search-misses?limit=nope", nil)
+	rec := httptest.NewRecorder()
+	h.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusBadRequest {
+		t.Fatalf("status = %d, want 400", rec.Code)
+	}
+}
+
+func TestSearchMissesUnknownPathIs404(t *testing.T) {
+	t.Parallel()
+	h := mountAdmin(t, &stubRepo{role: AppRoleAdmin}, "admin-1")
+
+	req := httptest.NewRequest(http.MethodGet, "/provisional-drinks", nil)
+	rec := httptest.NewRecorder()
+	h.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusNotFound {
+		t.Fatalf("status = %d, want 404 for Phase 4 path", rec.Code)
+	}
+}

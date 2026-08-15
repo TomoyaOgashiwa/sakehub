@@ -46,14 +46,14 @@ export async function serverFetch<T>(
 }
 
 export type AuthServerFetchResult<T> =
-  | { ok: true; data: T }
-  | { ok: false; status: number; error: string };
+  { ok: true; data: T } | { ok: false; status: number; error: string };
 
 type AuthServerFetchOptions = {
   accessToken: string;
   method?: RequestInit['method'];
   body?: unknown;
   params?: Record<string, string>;
+  cache?: RequestCache;
   /** When true, skip JSON parsing (e.g. 204 No Content). */
   emptyResponse?: boolean;
 };
@@ -66,12 +66,13 @@ export async function authServerFetch<T = undefined>(
   endpoint: string,
   options: AuthServerFetchOptions,
 ): Promise<AuthServerFetchResult<T>> {
-  const { accessToken, method = 'GET', body, params, emptyResponse } = options;
+  const { accessToken, method = 'GET', body, params, cache, emptyResponse } = options;
 
   let response: Response;
   try {
     response = await fetch(buildUrl(endpoint, params), {
       method,
+      cache,
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${accessToken}`,

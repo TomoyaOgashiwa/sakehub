@@ -5,7 +5,6 @@ import "errors"
 var (
 	ErrNotFound     = errors.New("admin subject not found")
 	ErrUnauthorized = errors.New("unauthorized")
-	ErrForbidden    = errors.New("forbidden")
 )
 
 const AppRoleAdmin = "admin"

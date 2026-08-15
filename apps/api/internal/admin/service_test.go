@@ -81,7 +81,7 @@ func TestIsAdminWrapsRepositoryError(t *testing.T) {
 	if err == nil {
 		t.Fatal("expected error")
 	}
-	if errors.Is(err, ErrUnauthorized) || errors.Is(err, ErrForbidden) {
+	if errors.Is(err, ErrUnauthorized) {
 		t.Fatalf("repo failure must not look like authz: %v", err)
 	}
 	if ok {

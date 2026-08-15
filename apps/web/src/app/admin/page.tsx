@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import { fetchAdminOverview } from '@/application/admin-api';
 import { getOptionalAccessToken } from '@/application/require-access-token';
 import { Badge } from '@/components/ui/badge';
@@ -22,6 +20,11 @@ export default async function AdminPage() {
       <p className="text-muted-foreground mt-2">
         需要が溜まる → 仮の印がある → 公開カタログは人手。画面から公開しない。
       </p>
+      {counts === null ? (
+        <p className="text-muted-foreground mt-4 text-sm">
+          件数を取得できませんでした。静的な運用手順は各カードにあります。
+        </p>
+      ) : null}
 
       <ol className="mt-8 grid gap-4">
         <li>
@@ -43,12 +46,7 @@ export default async function AdminPage() {
               <pre className="bg-muted overflow-x-auto rounded-lg p-3 text-xs">
                 <code>DATABASE_URL=... pnpm seed:drinks:demand</code>
               </pre>
-              <p>
-                <Link href="/admin/search-misses" className="underline underline-offset-4">
-                  需要一覧
-                </Link>
-                は Phase 3。
-              </p>
+              <p>需要一覧は Phase 3。</p>
             </CardContent>
           </Card>
         </li>
@@ -97,12 +95,7 @@ export default async function AdminPage() {
               <pre className="bg-muted overflow-x-auto rounded-lg p-3 text-xs">
                 <code>pnpm seed:drinks:merge</code>
               </pre>
-              <p>
-                <Link href="/admin/provisional" className="underline underline-offset-4">
-                  図鑑待ち一覧
-                </Link>
-                は Phase 4。
-              </p>
+              <p>図鑑待ち一覧は Phase 4。</p>
             </CardContent>
           </Card>
         </li>

@@ -468,6 +468,6 @@ Phase 2 実装時。本文の歴史は書き換えていない。
 
 - 図鑑待ち件数はプラン SQL の `visibility = 'provisional'` に加え、`merged_into_id IS NULL` を付けた（依頼のカード定義 / Phase 4 キューと同じ。マージ済み杭を待件数に入れない）。
 - HTTP の拒否テストを `handler_test.go` に足した（空 UID は 401、member / 欠落は 403、admin は 200）。プランは `service_test.go` の `IsAdmin` のみだった。
-- `/admin/search-misses` と `/admin/provisional` の一覧は作っていない。layout サブナビと概要カードから Phase 3/4 と書いてリンクする（未実装なので 404）。
+- `/admin/search-misses` と `/admin/provisional` の一覧は作っていない。layout サブナビと概要カードに Phase 3/4 と書くが、未実装ルートへはリンクしない（404 に落とさない）。
 - パッケージ名はプランどおり `internal/admin`（依頼例の `adminops` にはしていない）。`RequireAdmin` は `auth.go` に足さず、handler の `requireAdmin` が `users.app_role` を見る。API の非 admin は 403（プラン）。Web ゲートは Phase 1 どおり `notFound()`。
 - 新しいローカル CLI では `postgres` 所有テーブルの default ACL に `authenticated` の SELECT が無い。`users_select_authenticated` だけでは PostgREST が 42501 になり、Header / `/admin` が member 扱いになる。`GRANT SELECT ON public.users TO authenticated` を新規 migration で足した（anon には付けない。UPDATE は Phase 1 の列 GRANT のまま）。

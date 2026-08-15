@@ -5,7 +5,8 @@ on:
   pull_request: # PR作成・更新時
   push:
     branches:
-      - main # mainにpushされた時
+      - dev # devブランチにpushされた時
+      - prod # prodブランチにpushされた時
 
 jobs:
   check:

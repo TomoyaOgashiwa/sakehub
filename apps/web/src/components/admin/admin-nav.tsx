@@ -7,8 +7,8 @@ import { cn } from '@/utils/utils';
 
 const items = [
   { href: '/admin', label: '概要', exact: true },
-  { href: '/admin/search-misses', label: '需要' },
-  { href: '/admin/provisional', label: '図鑑待ち' },
+  { href: '/admin/search-misses', label: '需要', exact: false },
+  { href: '/admin/provisional', label: '図鑑待ち', exact: false },
 ] as const;
 
 export function AdminNav() {

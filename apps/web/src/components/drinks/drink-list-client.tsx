@@ -80,23 +80,6 @@ export function DrinkListClient({
 
       <CategoryFilter />
 
-      {recentSaves && recentSaves.length > 0 && (
-        <section aria-labelledby="recent-saves-heading" className="space-y-2">
-          <h2 id="recent-saves-heading" className="text-muted-foreground text-sm font-medium">
-            最近残した
-          </h2>
-          <ul className="flex flex-wrap gap-x-4 gap-y-1 text-sm">
-            {recentSaves.map((item) => (
-              <li key={item.drinkId}>
-                <Link href={item.href} className="hover:underline">
-                  {item.name}（{savedDrinkStatusLabel(item.status)}）
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
       {q && (
         <SearchMissLogger
           scope="drink"
@@ -105,6 +88,14 @@ export function DrinkListClient({
           filtersActive={categoryFilterActive}
           ready={missLogReady}
         />
+      )}
+
+      {result.total > 0 && (
+        <p className="text-muted-foreground text-sm">
+          {filtered
+            ? `${result.total}件中 ${offset + 1}–${offset + result.drinks.length}件を表示`
+            : `${result.total}件中 ${result.drinks.length}件を表示`}
+        </p>
       )}
 
       {isLoading ? (
@@ -117,14 +108,6 @@ export function DrinkListClient({
         />
       ) : (
         <DrinkGrid drinks={result.drinks} />
-      )}
-
-      {result.total > 0 && (
-        <p className="text-muted-foreground text-center text-sm">
-          {filtered
-            ? `${result.total}件中 ${offset + 1}–${offset + result.drinks.length}件を表示`
-            : `${result.total}件中 ${result.drinks.length}件を表示`}
-        </p>
       )}
 
       {(hasPrev || hasNext) && (
@@ -150,6 +133,23 @@ export function DrinkListClient({
             <span className="text-muted-foreground text-sm">次へ</span>
           )}
         </nav>
+      )}
+
+      {recentSaves && recentSaves.length > 0 && (
+        <section aria-labelledby="recent-saves-heading" className="space-y-2">
+          <h2 id="recent-saves-heading" className="text-muted-foreground text-sm font-medium">
+            最近残した
+          </h2>
+          <ul className="flex flex-wrap gap-x-4 gap-y-1 text-sm">
+            {recentSaves.map((item) => (
+              <li key={item.drinkId}>
+                <Link href={item.href} className="hover:underline">
+                  {item.name}（{savedDrinkStatusLabel(item.status)}）
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
       )}
     </div>
   );

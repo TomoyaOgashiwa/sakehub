@@ -11,6 +11,11 @@ export const DRINK_CATEGORIES = ['all', ...PRODUCT_DRINK_CATEGORIES] as const;
 
 export type DrinkCategory = (typeof DRINK_CATEGORIES)[number];
 
+/** GET /api/drinks `sort`. Empty / unknown values fall back to `newest`. */
+export const DRINK_LIST_SORTS = ['newest', 'abv_desc', 'abv_asc'] as const;
+
+export type DrinkListSort = (typeof DRINK_LIST_SORTS)[number];
+
 /** Catalog master image attribution for UI disclosure labels. */
 export type CatalogImageSource = 'none' | 'generated' | 'brand';
 

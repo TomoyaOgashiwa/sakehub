@@ -43,6 +43,7 @@ func (h *Handler) List(w http.ResponseWriter, r *http.Request) {
 	params := ListParams{
 		Category: category,
 		Query:    strings.TrimSpace(q.Get("q")),
+		Sort:     ParseSort(q.Get("sort")),
 		Limit:    limit,
 		Offset:   offset,
 	}

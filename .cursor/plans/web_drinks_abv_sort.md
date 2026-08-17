@@ -33,9 +33,10 @@ shadcn Select は [`apps/web/src/components/ui/select.tsx`](../../apps/web/src/c
 
 ## 決定（固定）
 
-- クエリは `sort` のみ。許可値: `newest`（デフォルト、`created_at DESC`。省略時もこれ） / `abv_desc` / `abv_asc`。
+- クエリは `sort` のみ。許可値: `newest`（デフォルト、`created_at DESC, id DESC`。省略時もこれ） / `abv_desc` / `abv_asc`。
 - 不正値は `newest` にフォールバック。400/500 にしない。
 - `abv IS NULL` は常に末尾（`NULLS LAST`）。PostgreSQL の `DESC` 既定は NULLS FIRST なので **両方明示**する。
+- **タイブレーカは PK `id DESC`。** `abv` は `NUMERIC(4,1)` でカーディナリティが低い（ウイスキー 40% など）。`(abv, created_at)` だけだと同値行の順序がリクエスト間で不定になり、OFFSET ページで欠落・重複する。`newest` にも足す（`created_at` が異なれば現行と同じ。シードの同タイムスタンプだけ決定的になる）。キーセット化はしない。
 - UI はセレクト1つ。カテゴリチップ列にチップ種を増やさない。レイアウト変更後の件数と同じ段（件数左、セレクト右）。
 - デフォルトは newest。カテゴリ未選択でも ABV ソートは動いてよい。検収の主ケースはカテゴリ選択後。
 - `sort` がデフォルト以外なら、未検索・未カテゴリでも **ページネーション対象**。
@@ -88,9 +89,9 @@ Go:
 - handler で `ParseSort(q.Get("sort"))`。空・不正 → `newest`。
 - repository は switch で定数を返すだけ:
 
-  - `newest`: `ORDER BY created_at DESC`
-  - `abv_desc`: `ORDER BY abv DESC NULLS LAST, created_at DESC`
-  - `abv_asc`: `ORDER BY abv ASC NULLS LAST, created_at DESC`
+  - `newest`: `ORDER BY created_at DESC, id DESC`
+  - `abv_desc`: `ORDER BY abv DESC NULLS LAST, created_at DESC, id DESC`
+  - `abv_asc`: `ORDER BY abv ASC NULLS LAST, created_at DESC, id DESC`
 
 - `fmt.Sprintf` に載せるのはこの定数だけ。`params.Sort` 生文字は載せない。
 - カタログが小さいので ABV 用 INDEX は v1 で足さない。
@@ -126,7 +127,8 @@ Web:
 
 - `?category=beer&sort=abv_desc` でビールが度数降順。NULL ABV は末尾。
 - `?sort=abv_asc` のみ（q/category なし）で全 published が度数昇順になり、20件超なら前へ/次へが出る。件数はレンジ文言。
-- `sort` 省略と `sort=newest` は現状と同じ `created_at DESC`。棚の短文言とページネーション無しを維持。
+- `sort` 省略と `sort=newest` は `created_at DESC, id DESC`。`created_at` が異なれば現行と同じ。棚の短文言とページネーション無しを維持。
+- 同一 ABV が 20 件を超えても「次へ」で重複・欠落しない（`id` タイブレーカ）。
 - `?category=all&offset=20`（sort 省略）は棚と同じく offset 無視。件数は短文言、ページネーション無し。`?category=all&sort=abv_desc` はページネーション対象（sort が newest 以外）。
 - `sort=nope` は 200 で newest。UI は新着。Go `ParseSort` と Web `parseDrinkListSort` のフォールバックが一致する。
 - ソート変更で offset が 0 に戻る。
@@ -151,3 +153,4 @@ Web:
 - `paged` 判定を `drink-list-query.ts` に集約。Go / Web の sort 許可値を受け入れ条件に明記。
 - INDEX は v1 で足さないが、後続の検討条件を残す。
 - `paged` の短縮式から `category !== 'all'` が落ちないよう `isCategoryFilterActive` を固定。`?category=all&offset=20` を受け入れに追加。
+- OFFSET 安定化のため全 sort 定数の末尾に `id DESC`。キーセット化はしない。

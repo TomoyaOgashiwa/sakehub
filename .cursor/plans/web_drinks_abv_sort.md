@@ -69,6 +69,7 @@ shadcn Select は [`apps/web/src/components/ui/select.tsx`](../../apps/web/src/c
 - 既存 `GET /api/drinks` を伸ばす。新エンドポイント禁止。
 - ORDER BY はホワイトリスト定数のみ。ユーザー入力を SQL に連結しない。
 - ABV 用 INDEX は v1 で足さない。カタログが小さい前提。成長後に seq scan が増えたら `(visibility, abv)` の部分 INDEX を別 PR で検討する（この PR で推測追加しない）。
+- **`GET /api/drinks` の `limit` 上限はこの PR で足さない。** 現行は `<= 0` のときだけ 20。カクテルは `clampListBounds`（max 200）がある。ただし [`sitemap.ts`](../../apps/web/src/app/sitemap.ts) が `fetchDrinksServer({ limit: 1000 })` を直叩きするため、PR-A で `max=100` やカクテルと同じ 200 にすると sitemap が黙って欠ける。上限は sitemap のページング（drinks / cocktails とも `limit: 1000` 直叩き）とセットの別 PR。Web UI は `DRINK_LIST_PAGE_SIZE=20` のまま。
 
 度数レンジ（スライダー、5–15% 等）は実装しない。より広いテストユーザーから再要望が出たら別プランで検討する。
 
@@ -99,9 +100,19 @@ Go:
 Web:
 
 - [`packages/types`](../../packages/types) に `DrinkListSort = 'newest' | 'abv_desc' | 'abv_asc'` を足して前後で型を共有してよい。
-- [`apps/web/src/utils/drink-list-query.ts`](../../apps/web/src/utils/drink-list-query.ts): `parseDrinkListSort` / `isCategoryFilterActive` / `isDrinkListPaged` / この2ファイル用の `parseOffset`。`page.tsx` と `drink-list-client.tsx` はこれを import するだけ。他ページの `parseOffset` はこの PR でまとめない。
-- `FetchDrinksParams.sort` を client/server 両方に。`newest` のときは URL と API クエリから省略してよい（デフォルト）。
-- `useDrinks` のキーに `sort` を足す。
+- [`apps/web/src/utils/drink-list-query.ts`](../../apps/web/src/utils/drink-list-query.ts): `parseDrinkListSort` / `isCategoryFilterActive` / `isDrinkListPaged` / この2ファイル用の `parseOffset`。`page.tsx` と `drink-list-client.tsx` はこれを import するだけ。[`drinks-api.ts`](../../apps/web/src/application/drinks-api.ts) / [`drinks-api.server.ts`](../../apps/web/src/application/drinks-api.server.ts) も `isCategoryFilterActive` を import し、`category !== 'all'` を再実装しない。他ページの `parseOffset` はこの PR でまとめない。
+- `FetchDrinksParams.sort` を client/server 両方に。**URL と API クエリは `parseDrinkListSort` 後に `newest` のときだけ省略。** 空・不正も newest 扱いなので省略。
+- **SWR キーは URL/API の省略前に正規化する。** 生の `params.sort`（`undefined` / `''` / `'newest'`）を足すと newest 結果のキーが分裂し、SSR `fallbackData` とクライアントが別エントリになる。
+
+  ```ts
+  const sort = parseDrinkListSort(params.sort); // 常に DrinkListSort
+  const categoryKey = isCategoryFilterActive(params.category ?? '')
+    ? (params.category ?? '')
+    : '';
+  const key = ['drinks', categoryKey, q, sort, params.limit, params.offset];
+  ```
+
+  `fetchDrinks` / `fetchDrinksServer` も同じ `parseDrinkListSort` を通し、`newest` ならクエリから `sort` を付けない。
 - [`page.tsx`](../../apps/web/src/app/page.tsx) の `searchParams` に `sort`。`isDrinkListPaged` のときだけ URL の offset を使う。
 - [`drink-list-client.tsx`](../../apps/web/src/components/drinks/drink-list-client.tsx): 件数と同じ段に Select。ラベル: 「新着」「度数が高い順」「度数が低い順」。`aria-label="並び順"`。
 - セレクト変更: `sort` を set / newest なら delete。`offset` を delete。`router.push`。
@@ -128,6 +139,7 @@ Web:
 - `?category=beer&sort=abv_desc` でビールが度数降順。NULL ABV は末尾。
 - `?sort=abv_asc` のみ（q/category なし）で全 published が度数昇順になり、20件超なら前へ/次へが出る。件数はレンジ文言。
 - `sort` 省略と `sort=newest` は `created_at DESC, id DESC`。`created_at` が異なれば現行と同じ。棚の短文言とページネーション無しを維持。
+- `sort` 省略と `sort=newest` で SWR キーが一致する（キー上の sort は常に `'newest'`）。SSR fallback とクライアント結果が同じ並びに見える。
 - 同一 ABV が 20 件を超えても「次へ」で重複・欠落しない（`id` タイブレーカ）。
 - `?category=all&offset=20`（sort 省略）は棚と同じく offset 無視。件数は短文言、ページネーション無し。`?category=all&sort=abv_desc` はページネーション対象（sort が newest 以外）。
 - `sort=nope` は 200 で newest。UI は新着。Go `ParseSort` と Web `parseDrinkListSort` のフォールバックが一致する。
@@ -143,6 +155,7 @@ Web:
 - カテゴリチップ増設、トップの閲覧ポータル化
 - 別 COUNT クエリ、新エンドポイント
 - 推測での INDEX 追加（成長後の `(visibility, abv)` 部分 INDEX は別 PR）
+- `GET /api/drinks` の `limit` 上限（sitemap の `limit: 1000` 直叩きを欠ける。sitemap ページングとセットの別 PR）
 
 ## PR
 
@@ -154,3 +167,6 @@ Web:
 - INDEX は v1 で足さないが、後続の検討条件を残す。
 - `paged` の短縮式から `category !== 'all'` が落ちないよう `isCategoryFilterActive` を固定。`?category=all&offset=20` を受け入れに追加。
 - OFFSET 安定化のため全 sort 定数の末尾に `id DESC`。キーセット化はしない。
+- SWR キーの `sort` は `parseDrinkListSort` 後の正規値。URL/API の newest 省略と分け、`category=all` もキー上は空文字。
+- drinks `limit` 上限は PR-A に入れない（sitemap `limit: 1000`）。別 PR。
+- `drinks-api.ts` / `.server.ts` も `isCategoryFilterActive` を使う。

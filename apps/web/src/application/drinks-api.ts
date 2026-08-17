@@ -1,5 +1,7 @@
 import type { CatalogImageSource, Drink } from '@sakehub/types';
 
+import { isCategoryFilterActive, parseDrinkListSort } from '@/utils/drink-list-query';
+
 import { apiClient } from './api-client';
 
 interface ApiDrink {
@@ -61,17 +63,22 @@ export interface DrinkListResult {
 export interface FetchDrinksParams {
   category?: string;
   q?: string;
+  sort?: string;
   limit?: number;
   offset?: number;
 }
 
 export async function fetchDrinks(params: FetchDrinksParams = {}): Promise<DrinkListResult> {
   const queryParams: Record<string, string> = {};
-  if (params.category && params.category !== 'all') {
-    queryParams.category = params.category;
+  if (isCategoryFilterActive(params.category ?? '')) {
+    queryParams.category = params.category ?? '';
   }
   if (params.q) {
     queryParams.q = params.q;
+  }
+  const sort = parseDrinkListSort(params.sort);
+  if (sort !== 'newest') {
+    queryParams.sort = sort;
   }
   if (params.limit) {
     queryParams.limit = String(params.limit);

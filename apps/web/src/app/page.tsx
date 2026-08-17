@@ -8,6 +8,12 @@ import { DrinkListClient } from '@/components/drinks/drink-list-client';
 import { JsonLd } from '@/components/json-ld';
 import { Heading } from '@/components/ui/heading';
 import { DRINK_LIST_PAGE_SIZE } from '@/config/drinks';
+import {
+  isCategoryFilterActive,
+  isDrinkListPaged,
+  parseDrinkListSort,
+  parseOffset,
+} from '@/utils/drink-list-query';
 
 export const dynamic = 'force-dynamic';
 
@@ -15,15 +21,10 @@ type PageProps = {
   searchParams: Promise<{
     q?: string;
     category?: string;
+    sort?: string;
     offset?: string;
   }>;
 };
-
-function parseOffset(raw: string | undefined): number {
-  const n = Number(raw);
-  if (!Number.isFinite(n) || n < 0) return 0;
-  return Math.floor(n);
-}
 
 export default function Home({ searchParams }: PageProps) {
   return (
@@ -59,14 +60,16 @@ async function DrinkListLoader({ searchParams }: PageProps) {
   const sp = await searchParams;
   const q = sp.q?.trim() ?? '';
   const category = sp.category?.trim() ?? '';
-  const filtered = Boolean(q || (category && category !== 'all'));
-  const offset = filtered ? parseOffset(sp.offset) : 0;
+  const sort = parseDrinkListSort(sp.sort);
+  const paged = isDrinkListPaged({ q, category, sort });
+  const offset = paged ? parseOffset(sp.offset) : 0;
 
   const { user, accessToken } = await getOptionalAccessToken();
   const [result, saved] = await Promise.all([
     fetchDrinksServer({
       q: q || undefined,
-      category: category && category !== 'all' ? category : undefined,
+      category: isCategoryFilterActive(category) ? category : undefined,
+      sort,
       limit: DRINK_LIST_PAGE_SIZE,
       offset,
     }),

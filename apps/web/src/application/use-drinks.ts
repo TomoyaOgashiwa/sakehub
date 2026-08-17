@@ -4,6 +4,7 @@ import useSWR from 'swr';
 
 import type { DrinkListResult, FetchDrinksParams } from '@/application/drinks-api';
 import { fetchDrinks } from '@/application/drinks-api';
+import { isCategoryFilterActive, parseDrinkListSort } from '@/utils/drink-list-query';
 
 export function useDrinks(
   params: FetchDrinksParams,
@@ -11,9 +12,9 @@ export function useDrinks(
   enabled = true,
 ) {
   const q = params.q ?? '';
-  const key = enabled
-    ? ['drinks', params.category ?? '', q, params.limit, params.offset]
-    : null;
+  const sort = parseDrinkListSort(params.sort);
+  const categoryKey = isCategoryFilterActive(params.category ?? '') ? (params.category ?? '') : '';
+  const key = enabled ? ['drinks', categoryKey, q, sort, params.limit, params.offset] : null;
 
   return useSWR<DrinkListResult>(key, () => fetchDrinks(params), {
     fallbackData,

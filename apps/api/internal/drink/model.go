@@ -37,14 +37,30 @@ type CreateInput struct {
 type ListParams struct {
 	Category string
 	Query    string
+	Sort     string
 	Limit    int
 	Offset   int
 }
 
 const (
+	SortNewest  = "newest"
+	SortAbvDesc = "abv_desc"
+	SortAbvAsc  = "abv_asc"
+
 	SimilarityThreshold = 0.3
 	MaxSuggestions      = 5
 	// MinSuggestQueryLen skips trgm suggestions for 1-rune queries (e.g. 「酒」「あ」).
 	// Aligned with saveddrink.MinNormalizedLen.
 	MinSuggestQueryLen = 2
 )
+
+// ParseSort maps the `sort` query to a whitelist value.
+// Empty and unknown values become newest so the handler can stay 200.
+func ParseSort(raw string) string {
+	switch raw {
+	case SortNewest, SortAbvDesc, SortAbvAsc:
+		return raw
+	default:
+		return SortNewest
+	}
+}

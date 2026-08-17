@@ -133,9 +133,10 @@ OR EXISTS (SELECT 1 FROM unnest(aliases) AS alias WHERE strpos(lower(alias), low
 
 	// COUNT(*) OVER() returns the total matching rows alongside each data row,
 	// eliminating the need for a separate COUNT query.
+	// listOrderBy returns a whitelist constant only; never interpolate params.Sort.
 	q := fmt.Sprintf(
-		`SELECT %s, COUNT(*) OVER() AS total FROM drinks %s ORDER BY created_at DESC LIMIT %s OFFSET %s`,
-		allColumns, where, limitPlaceholder, offsetPlaceholder,
+		`SELECT %s, COUNT(*) OVER() AS total FROM drinks %s %s LIMIT %s OFFSET %s`,
+		allColumns, where, listOrderBy(params.Sort), limitPlaceholder, offsetPlaceholder,
 	)
 
 	rows, err := r.db.QueryContext(ctx, q, args...)
@@ -168,6 +169,18 @@ OR EXISTS (SELECT 1 FROM unnest(aliases) AS alias WHERE strpos(lower(alias), low
 	}
 
 	return drinks, total, nil
+}
+
+func listOrderBy(sort string) string {
+	switch sort {
+	case SortAbvDesc:
+		// PostgreSQL DESC is NULLS FIRST by default; keep NULL ABV at the end for both directions.
+		return "ORDER BY abv DESC NULLS LAST, created_at DESC, id DESC"
+	case SortAbvAsc:
+		return "ORDER BY abv ASC NULLS LAST, created_at DESC, id DESC"
+	default:
+		return "ORDER BY created_at DESC, id DESC"
+	}
 }
 
 // suggestionColumns is a thin projection for zero-hit similar drinks.

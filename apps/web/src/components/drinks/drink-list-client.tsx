@@ -1,15 +1,30 @@
 'use client';
 
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
-import type { SavedDrinkStatus } from '@sakehub/types';
+import type { DrinkListSort, SavedDrinkStatus } from '@sakehub/types';
 
 import type { DrinkListResult } from '@/application/drinks-api';
 import { useDrinks } from '@/application/use-drinks';
 import { SearchMissLogger } from '@/components/catalog/search-miss-logger';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { DRINK_LIST_PAGE_SIZE } from '@/config/drinks';
+import {
+  isCategoryFilterActive,
+  isDrinkListPaged,
+  parseDrinkListSort,
+  parseOffset,
+} from '@/utils/drink-list-query';
 import { savedDrinkStatusLabel } from '@/utils/saved-drink-status';
+import { cn } from '@/utils/utils';
 
 import { CategoryFilter } from './category-filter';
 import { DrinkGrid } from './drink-grid';
@@ -30,27 +45,29 @@ interface DrinkListClientProps {
   isAuthenticated?: boolean;
 }
 
-function parseOffset(raw: string | null): number {
-  const n = Number(raw);
-  if (!Number.isFinite(n) || n < 0) return 0;
-  return Math.floor(n);
-}
+const DRINK_LIST_SORT_ITEMS = [
+  { value: 'newest', label: '新着' },
+  { value: 'abv_desc', label: '度数が高い順' },
+  { value: 'abv_asc', label: '度数が低い順' },
+] as const satisfies ReadonlyArray<{ value: DrinkListSort; label: string }>;
 
 export function DrinkListClient({
   fallbackData,
   recentSaves,
   isAuthenticated = false,
 }: DrinkListClientProps) {
+  const router = useRouter();
   const searchParams = useSearchParams();
 
   const category = searchParams.get('category') ?? '';
   const q = searchParams.get('q') ?? '';
-  const categoryFilterActive = category !== '' && category !== 'all';
-  const filtered = Boolean(q || categoryFilterActive);
-  const offset = filtered ? parseOffset(searchParams.get('offset')) : 0;
+  const sort = parseDrinkListSort(searchParams.get('sort'));
+  const categoryFilterActive = isCategoryFilterActive(category);
+  const paged = isDrinkListPaged({ q, category, sort });
+  const offset = paged ? parseOffset(searchParams.get('offset')) : 0;
 
   const { data, isLoading, isValidating } = useDrinks(
-    { category, q, limit: DRINK_LIST_PAGE_SIZE, offset },
+    { category, q, sort, limit: DRINK_LIST_PAGE_SIZE, offset },
     fallbackData,
   );
   const result = data ?? fallbackData;
@@ -58,8 +75,8 @@ export function DrinkListClient({
 
   const nextOffset = offset + result.drinks.length;
   const prevOffset = Math.max(0, offset - DRINK_LIST_PAGE_SIZE);
-  const hasPrev = filtered && offset > 0;
-  const hasNext = filtered && nextOffset < result.total;
+  const hasPrev = paged && offset > 0;
+  const hasNext = paged && nextOffset < result.total;
 
   function hrefFor(next: number): string {
     const params = new URLSearchParams(searchParams.toString());
@@ -70,6 +87,18 @@ export function DrinkListClient({
     }
     const qs = params.toString();
     return qs ? `/?${qs}` : '/';
+  }
+
+  function handleSortChange(next: DrinkListSort) {
+    const params = new URLSearchParams(searchParams.toString());
+    if (next === 'newest') {
+      params.delete('sort');
+    } else {
+      params.set('sort', next);
+    }
+    params.delete('offset');
+    const qs = params.toString();
+    router.push(qs ? `/?${qs}` : '/', { scroll: false });
   }
 
   return (
@@ -90,13 +119,21 @@ export function DrinkListClient({
         />
       )}
 
-      {result.total > 0 && (
-        <p className="text-muted-foreground text-sm">
-          {filtered
-            ? `${result.total}件中 ${offset + 1}–${offset + result.drinks.length}件を表示`
-            : `${result.total}件中 ${result.drinks.length}件を表示`}
-        </p>
-      )}
+      <div
+        className={cn(
+          'flex items-center gap-4',
+          result.total > 0 ? 'justify-between' : 'justify-end',
+        )}
+      >
+        {result.total > 0 && (
+          <p className="text-muted-foreground text-sm">
+            {paged
+              ? `${result.total}件中 ${offset + 1}–${offset + result.drinks.length}件を表示`
+              : `${result.total}件中 ${result.drinks.length}件を表示`}
+          </p>
+        )}
+        <DrinkListSortSelect value={sort} onValueChange={handleSortChange} />
+      </div>
 
       {isLoading ? (
         <DrinkGridSkeleton />
@@ -152,5 +189,37 @@ export function DrinkListClient({
         </section>
       )}
     </div>
+  );
+}
+
+function DrinkListSortSelect({
+  value,
+  onValueChange,
+}: {
+  value: DrinkListSort;
+  onValueChange: (value: DrinkListSort) => void;
+}) {
+  return (
+    <Select
+      items={DRINK_LIST_SORT_ITEMS}
+      value={value}
+      onValueChange={(next) => {
+        if (typeof next !== 'string') return;
+        onValueChange(parseDrinkListSort(next));
+      }}
+    >
+      <SelectTrigger size="sm" className="min-w-40" aria-label="並び順">
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent align="end">
+        <SelectGroup>
+          {DRINK_LIST_SORT_ITEMS.map((item) => (
+            <SelectItem key={item.value} value={item.value}>
+              {item.label}
+            </SelectItem>
+          ))}
+        </SelectGroup>
+      </SelectContent>
+    </Select>
   );
 }

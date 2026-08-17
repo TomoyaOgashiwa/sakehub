@@ -102,10 +102,15 @@ isProject: false
   - 公開済み・非公式レシピ: `user_id` を NULL にして本文を残す。
   - 下書き（`status = 'draft'`）は個人データとして残さない。**DB が保証する。** `CHECK (status = 'published' OR user_id IS NOT NULL)` で `draft AND user_id IS NULL` を禁止する。FK を `ON DELETE SET NULL` にしたあと draft が残ったまま `deleteUser` すると SET NULL が CHECK に落ち、Auth 削除は失敗する（fail-closed。孤児 draft を作らない）。
   - アプリは退会前に **ユーザーセッションの server client** で draft を DELETE する（既存 `cocktail_recipes_delete`。service role は使わない）。失敗したら `deleteUser` しない。
+  - **既知のトレードオフ（逆方向の部分破壊）:** Auth Admin API と draft DELETE は同一トランザクションにできない。draft DELETE 成功後に `deleteUser` が失敗すると **下書きだけ消え、Auth / `public.users` は残る**。CHECK は孤児 draft を防ぐ方向にしか効かない。
+    - 受け入れる。下書きは未公開で再作成できる。再試行時は残 draft が無ければ `deleteUser` だけになる。
+    - `deleteUser` 失敗時のエラーは「下書きは既に削除済みの可能性があります。再試行してください」を含める。下書きの復元はしない。
+    - レース（DELETE と `deleteUser` の間に新規 draft）: Auth は CHECK で失敗し、旧 draft は消える。再試行は残 draft を消してから `deleteUser`。
+    - 原子性のために draft 事前削除をやめる案は採らない（下書きがあるユーザーが退会不能になる）。`public.users` / `auth.users` トリガーも足さない。
   - 公式（`is_official = true`）は一般退会の対象外。`CHECK (NOT is_official OR user_id IS NOT NULL)` で公式の孤児化を禁止する。
-- 表示は「退会したユーザー」。Web は const、Go は同名の const。文字列を SQL リテラルと JSON-LD に散らさない。packages を跨ぐ単一バイナリは作らない（TS と Go で同じ文言を各 const に置く）。
+- 表示は「退会したユーザー」。定数名は Web/Go とも `WITHDRAWN_AUTHOR_LABEL`（値だけ二重管理）。文字列を SQL リテラルと JSON-LD に散らさない。packages を跨ぐ単一バイナリは作らない。
 - 暫定銘柄 `submitted_by ON DELETE CASCADE`、リスト/評価/ログ/レシピ評価は個人データとして消えてよい。`search_misses` は既存 SET NULL。
-- 退会後は `/` へ。`signOut` はベストエフォート（Cookie 破棄に失敗しても redirect する）。同じメールで再ログインできないこと。
+- 退会**成功後**は `/` へ。`signOut` はベストエフォート（Cookie 破棄に失敗しても redirect する）。`deleteUser` が失敗したときはセッションを維持し、プロフィールに留まる。同じメールで再ログインできないこと（成功時）。
 - 運営セルフ退会を塞ぐ: `app_role = 'admin'`、または `is_official = true` のレシピ保有、または email が `official@sakehub.app`。該当者には危険ゾーンを出さない（公式シードを UI から消せるのは不合格）。
 - 退会は Go に寄せない。理由: Auth Admin API と service role が Web Server Action の仕事であり、Go `internal/user` は GET のみ。特権面を増やさない。
 - `auth.users` へのトリガーは足さない（managed schema）。下書き削除の防衛線は CHECK + アプリの fail-closed。
@@ -118,9 +123,10 @@ flowchart TD
   Guard --> Drafts["Delete drafts via session RLS"]
   Drafts -->|fail| Abort["Return error. No deleteUser"]
   Drafts -->|ok| AuthDel["service role deleteUser only"]
-  AuthDel --> FkSetNull["Published recipes SET NULL"]
-  AuthDel --> Cascade["Personal rows CASCADE"]
-  AuthDel --> SignOut["signOut cookies best-effort"]
+  AuthDel -->|fail| AuthFail["Stay on profile. Drafts may already be gone"]
+  AuthDel -->|ok| FkSetNull["Published recipes SET NULL"]
+  AuthDel -->|ok| Cascade["Personal rows CASCADE"]
+  AuthDel -->|ok| SignOut["signOut cookies best-effort"]
   SignOut --> Home["redirect /"]
 ```
 
@@ -133,8 +139,10 @@ Migration（新規ファイル。既存 migration は書き換えない）:
 
 Go（退会 PR に含める。リスト並びは変えない）:
 
-- レシピの `UserID` を `*string`（または NullString）にし、NULL を scan できるようにする。
-- `author_name` は LEFT JOIN 3箇所で `COALESCE(NULLIF(TRIM(u.display_name), ''), CASE WHEN r.user_id IS NULL THEN <Go const> END)`。SQL に日本語リテラルを直書きしない。
+- レスポンス DTO（`RecipeSummary` / `Recipe`）の `UserID` を `*string`（または NullString）にし、NULL を scan できるようにする。
+- JSON 契約: **`json:"user_id"`（`omitempty` なし）**。退会後は常に JSON `null`。フィールド欠落も空文字 `""` も使わない（`*string` + `omitempty` だと欠落／`null`／`""` が混在する）。
+- `CreateInput.UserID` と評価 DTO の `user_id` は非ポインタのまま（作成時は必ず自分、評価行は CASCADE で消える）。
+- `author_name` は LEFT JOIN 3箇所で `COALESCE(NULLIF(TRIM(u.display_name), ''), CASE WHEN r.user_id IS NULL THEN <Go const> END)`。SQL に日本語リテラルを直書きしない。退会後は必ず「退会したユーザー」が入る（UI の `recipe.authorName && …` が消えない）。在籍ユーザーで display_name が空のときは NULL のまま（現行どおり著者名を出さない。「退会したユーザー」にしない）。
 - カクテル一覧の `ORDER BY` は変えない。
 - 公開一覧／詳細は現状どおり `status = 'published'`。CHECK があるので孤児 draft は作れないが、Go は RLS をバイパスするため **status フィルタを外すな**。
 
@@ -144,10 +152,12 @@ Web:
 - `deleteAccount` Server Action:
   1. セッション client でガード（admin / official / 公式メール）
   2. 同 client で draft DELETE（既存 RLS）。失敗なら `{ ok: false, error }` で中断。`deleteUser` しない
-  3. service role で `deleteUser` のみ
-  4. `signOut` はベストエフォート → 必ず `redirect('/')`
+  3. service role で `deleteUser` のみ。失敗なら `{ ok: false, error }`（下書き削除済みの可能性を含める）。**`signOut` も redirect もしない**（アカウントは残っている）
+  4. `deleteUser` 成功後のみ: `signOut` はベストエフォート → 必ず `redirect('/')`
 - 確認は既存 Dialog。チェックボックス必須（リスト・評価・ログ削除の理解）。Sign Out と退会を同じボタンにしない。
-- 著者表示が空で消えないこと（SQL COALESCE 後は `authorName` が入る）。[`recipe-json-ld.ts`](../../apps/web/src/utils/recipe-json-ld.ts) の個人フォールバックを Web const「退会したユーザー」に。
+- 著者表示が空で消えないこと（SQL COALESCE 後は退会者の `authorName` が入る）。[`recipe-json-ld.ts`](../../apps/web/src/utils/recipe-json-ld.ts) は退会後も API の `authorName` を使う。現行フォールバック `'SakeHub ユーザー'` は **在籍ユーザーで display_name が空のとき** 用に残す。`WITHDRAWN_AUTHOR_LABEL` に置換しない（在籍者を退会扱いにする）。
+- [`packages/types`](../../packages/types/src/cocktail-recipe.ts) と [`cocktail-mappers.ts`](../../apps/web/src/application/cocktail-mappers.ts): レシピの `userId: string | null`（退会後 `null`）。評価の `userId` は `string` のまま。編集 UI は `userId === 自分`。`null` は一致しないので退会後レシピに編集が出ない。
+- 定数名は Web/Go とも `WITHDRAWN_AUTHOR_LABEL`（値の二重管理は現状方針どおり）。
 - [`.env.example`](../../.env.example) の service role コメントに「Web の退会 Server Action（`deleteUser` のみ）」を追記。値はコミットしない。
 
 ### 対象ファイル
@@ -157,7 +167,7 @@ Web:
 - [`apps/web/src/app/profile/actions.ts`](../../apps/web/src/app/profile/actions.ts)（delete 追加）
 - プロフィール危険ゾーン UI
 - [`apps/api/internal/cocktail/model.go`](../../apps/api/internal/cocktail/model.go) / [`repository.go`](../../apps/api/internal/cocktail/repository.go)（NULL user_id と著者名のみ）
-- [`packages/types/src/cocktail-recipe.ts`](../../packages/types/src/cocktail-recipe.ts) / cocktail mapper（`userId` optional）
+- [`packages/types/src/cocktail-recipe.ts`](../../packages/types/src/cocktail-recipe.ts) / [`cocktail.ts`](../../packages/types/src/cocktail.ts) / cocktail mapper（レシピ `userId: string | null`）
 - [`apps/web/src/utils/recipe-json-ld.ts`](../../apps/web/src/utils/recipe-json-ld.ts)
 - [`.env.example`](../../.env.example)
 
@@ -166,7 +176,9 @@ Web:
 - 一般ユーザーが確認後に退会できる。以降そのメールでログインできない。`/` に戻る。
 - `saved_drinks` / `ratings` / `drink_logs` / 下書きレシピ / 暫定銘柄は消える。
 - **`status = 'draft' AND user_id IS NULL` の行が 0 件。** draft DELETE 失敗時は Auth ユーザーが残る（部分削除しない）。
-- 公開済みユーザーレシピは残り、著者名が「退会したユーザー」。公式レシピは残る。
+- `deleteUser` 失敗時はアカウントが残る（下書きだけ消えている可能性あり）。エラーに再試行を案内する。再試行で退会できる。
+- 公開済みユーザーレシピは残り、著者名が「退会したユーザー」。公式レシピは残る。公開レシピ JSON の `user_id` は退会後 `null`（省略なし、`""` なし）。
+- JSON-LD: 退会者は `authorName` が「退会したユーザー」。在籍ユーザーの空表示名は `'SakeHub ユーザー'` のまま。
 - admin / 公式アカウントでは退会 UI が出ない。出してもサーバーが拒否する。
 - service role キーがクライアントバンドルに含まれない。draft DELETE に service role を使わない。
 - `pnpm lint` / `pnpm type-check`。Go 変更があるので `cd apps/api && go vet ./...`。
@@ -200,3 +212,5 @@ Web:
 - 孤児 draft: アプリ削除だけに頼らず `CHECK (status = 'published' OR user_id IS NOT NULL)` で DB 保証。
 - draft DELETE はセッション RLS。service role は `deleteUser` のみ。
 - 表示名の空禁止は Server Action のみと明文化。`resolveDisplayLabel` に寄せる。
+- 逆方向の部分破壊（draft 成功 → `deleteUser` 失敗）は既知のトレードオフとしてロック。事前削除廃止は採らない。
+- レシピ JSON の `user_id` は `string | null`（`omitempty` なし）。JSON-LD の `'SakeHub ユーザー'` は在籍者の空表示名用に残す。

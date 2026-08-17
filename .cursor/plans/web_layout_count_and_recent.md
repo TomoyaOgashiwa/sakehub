@@ -59,7 +59,7 @@ isProject: false
 
 既存 JSX の並べ替えが本体。銘柄は（レイアウト後）`件数 | ソート Select`、カクテルは件数のみなので、**共通の CatalogResultToolbar は作らない**。同一 PR（PR-A）でセレクトも足すため、抽出して差分を小さくするメリットも無い。
 
-件数コピーは `drink-list-client.tsx` 内の短い分岐で足りる。純関数化は任意（必須にしない）。
+件数コピーは `drink-list-client.tsx` 内の短い分岐で足りる。純関数化は任意（必須にしない）。抽出するなら銘柄とカクテルの **2箇所だけ**。admin の件数文言はこの PR で触らない。カクテルは常時レンジ。銘柄の棚短文（`N件中 {len}件`）をカクテルに使わない。
 
 [`drink-list-client.tsx`](../../apps/web/src/components/drinks/drink-list-client.tsx):
 
@@ -102,3 +102,4 @@ isProject: false
 ## レビュー反映（PR #119）
 
 - 件数行の共通コンポーネント化はしない（銘柄とカクテルで段の形が違う。PR-A で並べ替えとセレクトを同時に入れる）。
+- `formatCatalogCount` は任意のまま。必須にしない。抽出しても admin は触らず、カクテルに棚短文を使わない。

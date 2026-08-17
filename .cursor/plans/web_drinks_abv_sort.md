@@ -38,8 +38,27 @@ shadcn Select は [`apps/web/src/components/ui/select.tsx`](../../apps/web/src/c
 - `abv IS NULL` は常に末尾（`NULLS LAST`）。PostgreSQL の `DESC` 既定は NULLS FIRST なので **両方明示**する。
 - UI はセレクト1つ。カテゴリチップ列にチップ種を増やさない。レイアウト変更後の件数と同じ段（件数左、セレクト右）。
 - デフォルトは newest。カテゴリ未選択でも ABV ソートは動いてよい。検収の主ケースはカテゴリ選択後。
-- `sort` がデフォルト以外なら、未検索・未カテゴリでも **ページネーション対象**。`filtered = q || category` を `paged = q || category || sort !== 'newest'` に拡張する。
-- **`paged` / `parseDrinkListSort` は1箇所。** [`apps/web/src/utils/drink-list-query.ts`](../../apps/web/src/utils/drink-list-query.ts)（新規）。`page.tsx`（RSC）と `drink-list-client.tsx`（client）に複製しない。片一方だけ更新すると SSR fallback と SWR 表示がズレる。
+- `sort` がデフォルト以外なら、未検索・未カテゴリでも **ページネーション対象**。
+- **`category=all` はカテゴリ未選択と同じ**（チップの「すべて」は URL から `category` を消すが、手打ち・共有 URL で `?category=all` は残る）。現行は `filtered = q || (category && category !== 'all')`。`paged = q || category || sort !== 'newest'` と短縮すると `?category=all` が truthy になり、棚なのに offset が有効化される。
+- `paged` の仕様（`drink-list-query.ts` に固定。複製しない）:
+
+  ```ts
+  export function isCategoryFilterActive(category: string): boolean {
+    return category !== '' && category !== 'all';
+  }
+  export function isDrinkListPaged(input: {
+    q: string;
+    category: string;
+    sort: DrinkListSort;
+  }): boolean {
+    return Boolean(
+      input.q || isCategoryFilterActive(input.category) || input.sort !== 'newest',
+    );
+  }
+  ```
+
+  このヘルパーで `q` を trim しない。RSC は既存どおり渡す前に trim、client は `searchParams` のまま。空白 `q` の扱いはこの PR で変えない。
+- **`paged` / `parseDrinkListSort` / `isCategoryFilterActive` は1箇所。** [`apps/web/src/utils/drink-list-query.ts`](../../apps/web/src/utils/drink-list-query.ts)（新規）。`page.tsx`（RSC）と `drink-list-client.tsx`（client）に複製しない。片一方だけ更新すると SSR fallback と SWR 表示がズレる。API へ渡す `category` も `isCategoryFilterActive` が false なら省略（現行 `drinks-api.ts` と同じ）。
 - Go の `ParseSort` と Web の `parseDrinkListSort` は **同じ許可値・同じデフォルト（空・不正 → `newest`）**。
 - ソート変更時は `offset` をリセット。
 - 評価順・関連度は足さない。`q` ありのデフォルトも newest。
@@ -59,7 +78,7 @@ flowchart TD
   URL["URL sort newest abv_desc abv_asc"] --> Parse["ParseSort whitelist"]
   Parse --> Params["ListParams.Sort"]
   Params --> SQL["ORDER BY constant + COUNT OVER"]
-  URL --> Client["paged = q or category or sort != newest"]
+  URL --> Client["paged = q or categoryActive or sort != newest"]
   Client --> Page["offset and prev/next"]
 ```
 
@@ -79,7 +98,7 @@ Go:
 Web:
 
 - [`packages/types`](../../packages/types) に `DrinkListSort = 'newest' | 'abv_desc' | 'abv_asc'` を足して前後で型を共有してよい。
-- [`apps/web/src/utils/drink-list-query.ts`](../../apps/web/src/utils/drink-list-query.ts): `parseDrinkListSort` / `isDrinkListPaged` / この2ファイル用の `parseOffset`。`page.tsx` と `drink-list-client.tsx` はこれを import するだけ。他ページの `parseOffset` はこの PR でまとめない。
+- [`apps/web/src/utils/drink-list-query.ts`](../../apps/web/src/utils/drink-list-query.ts): `parseDrinkListSort` / `isCategoryFilterActive` / `isDrinkListPaged` / この2ファイル用の `parseOffset`。`page.tsx` と `drink-list-client.tsx` はこれを import するだけ。他ページの `parseOffset` はこの PR でまとめない。
 - `FetchDrinksParams.sort` を client/server 両方に。`newest` のときは URL と API クエリから省略してよい（デフォルト）。
 - `useDrinks` のキーに `sort` を足す。
 - [`page.tsx`](../../apps/web/src/app/page.tsx) の `searchParams` に `sort`。`isDrinkListPaged` のときだけ URL の offset を使う。
@@ -108,6 +127,7 @@ Web:
 - `?category=beer&sort=abv_desc` でビールが度数降順。NULL ABV は末尾。
 - `?sort=abv_asc` のみ（q/category なし）で全 published が度数昇順になり、20件超なら前へ/次へが出る。件数はレンジ文言。
 - `sort` 省略と `sort=newest` は現状と同じ `created_at DESC`。棚の短文言とページネーション無しを維持。
+- `?category=all&offset=20`（sort 省略）は棚と同じく offset 無視。件数は短文言、ページネーション無し。`?category=all&sort=abv_desc` はページネーション対象（sort が newest 以外）。
 - `sort=nope` は 200 で newest。UI は新着。Go `ParseSort` と Web `parseDrinkListSort` のフォールバックが一致する。
 - ソート変更で offset が 0 に戻る。
 - ゼロ件＋ `q` あり＋カテゴリ無しの miss 計測が、`sort=abv_desc` でも記録される（`filtersActive` が sort で true にならない）。
@@ -130,3 +150,4 @@ Web:
 
 - `paged` 判定を `drink-list-query.ts` に集約。Go / Web の sort 許可値を受け入れ条件に明記。
 - INDEX は v1 で足さないが、後続の検討条件を残す。
+- `paged` の短縮式から `category !== 'all'` が落ちないよう `isCategoryFilterActive` を固定。`?category=all&offset=20` を受け入れに追加。

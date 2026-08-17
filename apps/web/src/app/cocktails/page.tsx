@@ -101,13 +101,13 @@ async function CocktailListLoader({ searchParams }: PageProps) {
         />
       )}
 
-      <CocktailGrid cocktails={result.cocktails} />
-
       {result.total > 0 && (
-        <p className="text-muted-foreground text-center text-sm">
+        <p className="text-muted-foreground text-sm">
           {result.total}件中 {offset + 1}–{offset + result.cocktails.length}件を表示
         </p>
       )}
+
+      <CocktailGrid cocktails={result.cocktails} />
 
       {(hasPrev || hasNext) && (
         <nav aria-label="ページネーション" className="flex justify-center gap-4">

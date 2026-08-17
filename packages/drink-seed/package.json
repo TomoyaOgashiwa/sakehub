@@ -14,11 +14,11 @@
   },
   "dependencies": {
     "@sakehub/seed-utils": "workspace:*",
-    "pg": "^8.16.3"
+    "pg": "^8.23.0"
   },
   "devDependencies": {
-    "@types/node": "^26.1.2",
-    "@types/pg": "^8.15.6",
+    "@types/node": "^26.2.0",
+    "@types/pg": "^8.21.0",
     "typescript": "^6.0.3"
   }
 }

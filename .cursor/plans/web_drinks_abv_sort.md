@@ -39,6 +39,8 @@ shadcn Select は [`apps/web/src/components/ui/select.tsx`](../../apps/web/src/c
 - UI はセレクト1つ。カテゴリチップ列にチップ種を増やさない。レイアウト変更後の件数と同じ段（件数左、セレクト右）。
 - デフォルトは newest。カテゴリ未選択でも ABV ソートは動いてよい。検収の主ケースはカテゴリ選択後。
 - `sort` がデフォルト以外なら、未検索・未カテゴリでも **ページネーション対象**。`filtered = q || category` を `paged = q || category || sort !== 'newest'` に拡張する。
+- **`paged` / `parseDrinkListSort` は1箇所。** [`apps/web/src/utils/drink-list-query.ts`](../../apps/web/src/utils/drink-list-query.ts)（新規）。`page.tsx`（RSC）と `drink-list-client.tsx`（client）に複製しない。片一方だけ更新すると SSR fallback と SWR 表示がズレる。
+- Go の `ParseSort` と Web の `parseDrinkListSort` は **同じ許可値・同じデフォルト（空・不正 → `newest`）**。
 - ソート変更時は `offset` をリセット。
 - 評価順・関連度は足さない。`q` ありのデフォルトも newest。
 - 国パラメータ、`abv_min` / `abv_max`、スライダーは出さない。
@@ -46,6 +48,7 @@ shadcn Select は [`apps/web/src/components/ui/select.tsx`](../../apps/web/src/c
 - `COUNT(*) OVER()` を復活させない。別 COUNT クエリを足さない。
 - 既存 `GET /api/drinks` を伸ばす。新エンドポイント禁止。
 - ORDER BY はホワイトリスト定数のみ。ユーザー入力を SQL に連結しない。
+- ABV 用 INDEX は v1 で足さない。カタログが小さい前提。成長後に seq scan が増えたら `(visibility, abv)` の部分 INDEX を別 PR で検討する（この PR で推測追加しない）。
 
 度数レンジ（スライダー、5–15% 等）は実装しない。より広いテストユーザーから再要望が出たら別プランで検討する。
 
@@ -76,9 +79,10 @@ Go:
 Web:
 
 - [`packages/types`](../../packages/types) に `DrinkListSort = 'newest' | 'abv_desc' | 'abv_asc'` を足して前後で型を共有してよい。
+- [`apps/web/src/utils/drink-list-query.ts`](../../apps/web/src/utils/drink-list-query.ts): `parseDrinkListSort` / `isDrinkListPaged` / この2ファイル用の `parseOffset`。`page.tsx` と `drink-list-client.tsx` はこれを import するだけ。他ページの `parseOffset` はこの PR でまとめない。
 - `FetchDrinksParams.sort` を client/server 両方に。`newest` のときは URL と API クエリから省略してよい（デフォルト）。
 - `useDrinks` のキーに `sort` を足す。
-- [`page.tsx`](../../apps/web/src/app/page.tsx) の `searchParams` に `sort`。`paged` のときだけ URL の offset を使う。
+- [`page.tsx`](../../apps/web/src/app/page.tsx) の `searchParams` に `sort`。`isDrinkListPaged` のときだけ URL の offset を使う。
 - [`drink-list-client.tsx`](../../apps/web/src/components/drinks/drink-list-client.tsx): 件数と同じ段に Select。ラベル: 「新着」「度数が高い順」「度数が低い順」。`aria-label="並び順"`。
 - セレクト変更: `sort` を set / newest なら delete。`offset` を delete。`router.push`。
 - [`category-filter.tsx`](../../apps/web/src/components/drinks/category-filter.tsx) と [`confirmed-search-input.tsx`](../../apps/web/src/components/catalog/confirmed-search-input.tsx) は既に `URLSearchParams` コピー＋ `offset` 削除なので、`sort` は自動で残る。追加改修は不要（残ることを受け入れで確認する）。
@@ -94,6 +98,7 @@ Web:
 - [`apps/web/src/application/drinks-api.ts`](../../apps/web/src/application/drinks-api.ts)
 - [`apps/web/src/application/drinks-api.server.ts`](../../apps/web/src/application/drinks-api.server.ts)
 - [`apps/web/src/application/use-drinks.ts`](../../apps/web/src/application/use-drinks.ts)
+- [`apps/web/src/utils/drink-list-query.ts`](../../apps/web/src/utils/drink-list-query.ts)（新規）
 - [`packages/types`](../../packages/types)（任意の union）
 
 触らない: カクテル handler/repository/list、詳細ページ並び、`SearchMissLogger` の契約変更。
@@ -103,7 +108,7 @@ Web:
 - `?category=beer&sort=abv_desc` でビールが度数降順。NULL ABV は末尾。
 - `?sort=abv_asc` のみ（q/category なし）で全 published が度数昇順になり、20件超なら前へ/次へが出る。件数はレンジ文言。
 - `sort` 省略と `sort=newest` は現状と同じ `created_at DESC`。棚の短文言とページネーション無しを維持。
-- `sort=nope` は 200 で newest。UI は新着。
+- `sort=nope` は 200 で newest。UI は新着。Go `ParseSort` と Web `parseDrinkListSort` のフォールバックが一致する。
 - ソート変更で offset が 0 に戻る。
 - ゼロ件＋ `q` あり＋カテゴリ無しの miss 計測が、`sort=abv_desc` でも記録される（`filtersActive` が sort で true にならない）。
 - カードの ABV 表示は現状のまま。
@@ -115,8 +120,13 @@ Web:
 - 評価順・関連度・カクテル sort
 - カテゴリチップ増設、トップの閲覧ポータル化
 - 別 COUNT クエリ、新エンドポイント
-- 推測での INDEX 追加
+- 推測での INDEX 追加（成長後の `(visibility, abv)` 部分 INDEX は別 PR）
 
 ## PR
 
 [レイアウト変更](web_layout_count_and_recent.md) と **同一 PR（PR-A）**。表示名・退会には混ぜない。
+
+## レビュー反映（PR #119）
+
+- `paged` 判定を `drink-list-query.ts` に集約。Go / Web の sort 許可値を受け入れ条件に明記。
+- INDEX は v1 で足さないが、後続の検討条件を残す。

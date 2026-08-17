@@ -57,7 +57,9 @@ isProject: false
 
 ## 実装方針
 
-既存 JSX の並べ替えだけ。共通コンポーネント新設はしない（銘柄は棚/レンジの二系統、カクテルはレンジのみで、抽出するほどではない）。
+既存 JSX の並べ替えが本体。銘柄は（レイアウト後）`件数 | ソート Select`、カクテルは件数のみなので、**共通の CatalogResultToolbar は作らない**。同一 PR（PR-A）でセレクトも足すため、抽出して差分を小さくするメリットも無い。
+
+件数コピーは `drink-list-client.tsx` 内の短い分岐で足りる。純関数化は任意（必須にしない）。
 
 [`drink-list-client.tsx`](../../apps/web/src/components/drinks/drink-list-client.tsx):
 
@@ -91,7 +93,12 @@ isProject: false
 - カクテルの並び順変更、カクテルへの「最近残した」
 - `/list` の改修、Mobile
 - 棚のページネーション（それは [度数ソート](web_drinks_abv_sort.md) の `sort` 連動）
+- 銘柄とカクテルで共通の件数ツールバー
 
 ## PR
 
 [表示名編集・退会](web_profile_edit_and_delete.md) の PR 分割どおり、このセクションは度数ソートと **同一 PR（PR-A）** にする。
+
+## レビュー反映（PR #119）
+
+- 件数行の共通コンポーネント化はしない（銘柄とカクテルで段の形が違う。PR-A で並べ替えとセレクトを同時に入れる）。

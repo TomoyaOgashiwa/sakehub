@@ -9,7 +9,7 @@ allowBuilds:
   unrs-resolver: false
 overrides:
   lightningcss: 1.33.0
-  expo-constants: 56.0.23
+  expo-constants: 56.0.24
 # pnpm ≥11.1.3 re-validates lockfile entries against minimumReleaseAge (default 1440m).
 # These Expo packages were pinned while <24h old; exclude so frozen installs stay reproducible.
 # See https://pnpm.io/blog/releases/11.1 and https://pnpm.io/settings#minimumreleaseageexclude
@@ -25,3 +25,9 @@ minimumReleaseAgeExclude:
   - expo-modules-core
   - expo-router
   - expo-symbols
+  - '@expo/config-plugins'
+  - '@expo/prebuild-config'
+  - '@expo/router-server'
+  - expo-linking
+  - expo-modules-autolinking
+  - expo-server

@@ -6,6 +6,7 @@ import type {
   CocktailListParams,
   CocktailListResult,
   CocktailRecipe,
+  MyCocktailRecipeListResult,
 } from '@sakehub/types';
 
 import { BRIDGE_PREVIEW_LIMIT } from '@/config/drink-cocktail-bridge';
@@ -13,12 +14,14 @@ import { BRIDGE_PREVIEW_LIMIT } from '@/config/drink-cocktail-bridge';
 import {
   toCocktail,
   toCocktailRecipe,
+  toMyRecipeSummary,
   toRecipeSummary,
   type ApiCocktail,
   type ApiCocktailDetail,
+  type ApiMyRecipeListResponse,
   type ApiRecipe,
 } from './cocktail-mappers';
-import { serverFetch } from './server-api';
+import { authServerFetch, serverFetch } from './server-api';
 
 interface ApiCocktailListResponse {
   data: ApiCocktail[] | null;
@@ -101,4 +104,27 @@ export async function fetchCocktailBySlugServer(
 export async function fetchCocktailRecipeServer(id: string): Promise<CocktailRecipe> {
   const res = await serverFetch<ApiRecipe>(`/api/cocktail-recipes/${encodeURIComponent(id)}`);
   return toCocktailRecipe(res);
+}
+
+/** Authenticated owner's draft + published recipes. Fail closed to null. */
+export async function fetchMyCocktailRecipes(
+  accessToken: string,
+  options?: { limit?: number; offset?: number },
+): Promise<MyCocktailRecipeListResult | null> {
+  const params: Record<string, string> = {};
+  if (options?.limit != null) params.limit = String(options.limit);
+  if (options?.offset != null) params.offset = String(options.offset);
+
+  const result = await authServerFetch<ApiMyRecipeListResponse>('/api/auth/cocktail-recipes/mine', {
+    accessToken,
+    params,
+  });
+  if (!result.ok) return null;
+
+  return {
+    recipes: (result.data.data ?? []).map(toMyRecipeSummary),
+    total: result.data.total ?? 0,
+    limit: result.data.limit ?? options?.limit ?? 0,
+    offset: result.data.offset ?? options?.offset ?? 0,
+  };
 }

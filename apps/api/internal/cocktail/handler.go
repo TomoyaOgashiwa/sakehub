@@ -38,6 +38,12 @@ func (h *Handler) AuthRecipeRoutes(r chi.Router) {
 	r.Post("/", h.Create)
 }
 
+// AuthMineRoutes registers the authenticated owner's recipe list.
+// Mounted at /api/auth/cocktail-recipes
+func (h *Handler) AuthMineRoutes(r chi.Router) {
+	r.Get("/mine", h.ListMine)
+}
+
 // ListCocktails returns cocktail master records with published recipe counts.
 // GET /api/cocktails?q=&base_spirit=&limit=&offset=
 // Default sort: recipe_count DESC, name ASC.
@@ -82,6 +88,31 @@ func (h *Handler) GetCocktailBySlug(w http.ResponseWriter, r *http.Request) {
 	}
 
 	response.JSON(w, http.StatusOK, detail)
+}
+
+// ListMine returns the authenticated user's draft + published recipes.
+// GET /api/auth/cocktail-recipes/mine?limit=&offset=
+func (h *Handler) ListMine(w http.ResponseWriter, r *http.Request) {
+	userID := middleware.UserID(r.Context())
+	if userID == "" {
+		response.Error(w, http.StatusUnauthorized, "unauthorized")
+		return
+	}
+
+	limit, offset := parseLimitOffset(r, DefaultMineRecipeLimit, MaxMineRecipeLimit)
+
+	recipes, total, err := h.svc.ListMine(r.Context(), userID, limit, offset)
+	if err != nil {
+		response.Error(w, http.StatusInternalServerError, "internal server error")
+		return
+	}
+
+	response.JSON(w, http.StatusOK, map[string]any{
+		"data":   recipes,
+		"total":  total,
+		"limit":  limit,
+		"offset": offset,
+	})
 }
 
 // GetRecipe returns a published recipe with ingredients and rating aggregates.

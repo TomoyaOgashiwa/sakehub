@@ -42,6 +42,7 @@ type Repository interface {
 	ListCocktails(ctx context.Context, params ListParams) ([]Cocktail, int, error)
 	FindCocktailBySlug(ctx context.Context, slug string) (*Cocktail, error)
 	ListPublishedRecipes(ctx context.Context, cocktailID string, limit, offset int) ([]RecipeSummary, bool, error)
+	ListMine(ctx context.Context, userID string, limit, offset int) ([]MyRecipeSummary, int, error)
 	FindPublishedRecipeByID(ctx context.Context, id string) (*Recipe, error)
 	FindOfficialRecipeByCocktailID(ctx context.Context, cocktailID string) (*Recipe, error)
 	RatableRecipeExists(ctx context.Context, id string) error
@@ -230,6 +231,50 @@ func (r *repository) ListPublishedRecipes(ctx context.Context, cocktailID string
 		recipes = recipes[:limit]
 	}
 	return recipes, hasMore, nil
+}
+
+// ListMine returns the caller's non-official recipes (draft + published) with
+// the parent cocktail slug/name. Official rows are excluded by design.
+func (r *repository) ListMine(ctx context.Context, userID string, limit, offset int) ([]MyRecipeSummary, int, error) {
+	if limit <= 0 {
+		limit = DefaultMineRecipeLimit
+	}
+	if offset < 0 {
+		offset = 0
+	}
+
+	const q = `
+		SELECT r.id, r.name, r.status, r.image_url, r.updated_at,
+			r.cocktail_id, c.slug, c.name,
+			COUNT(*) OVER() AS total
+		FROM cocktail_recipes r
+		INNER JOIN cocktails c ON c.id = r.cocktail_id
+		WHERE r.user_id = $1 AND NOT r.is_official
+		ORDER BY r.updated_at DESC
+		LIMIT $2 OFFSET $3`
+
+	rows, err := r.db.QueryContext(ctx, q, userID, limit, offset)
+	if err != nil {
+		return nil, 0, err
+	}
+	defer rows.Close()
+
+	recipes := make([]MyRecipeSummary, 0, limit)
+	var total int
+	for rows.Next() {
+		var rec MyRecipeSummary
+		if err := rows.Scan(
+			&rec.ID, &rec.Name, &rec.Status, &rec.ImageURL, &rec.UpdatedAt,
+			&rec.CocktailID, &rec.CocktailSlug, &rec.CocktailName, &total,
+		); err != nil {
+			return nil, 0, err
+		}
+		recipes = append(recipes, rec)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, 0, err
+	}
+	return recipes, total, nil
 }
 
 func (r *repository) findIngredients(ctx context.Context, recipeID string) ([]Ingredient, error) {
@@ -461,6 +506,20 @@ func (r *repository) Insert(ctx context.Context, input CreateInput) (*Recipe, er
 			return nil, fmt.Errorf("cocktail.Insert step: %w", err)
 		}
 		recipe.Steps = append(recipe.Steps, inserted)
+	}
+
+	// Same tx: Web must not guess slug from cocktail_id. Missing parent is
+	// a Create failure (FK normally makes this unreachable).
+	err = tx.QueryRowContext(ctx, `SELECT slug FROM cocktails WHERE id = $1`, input.CocktailID).
+		Scan(&recipe.CocktailSlug)
+	if errors.Is(err, sql.ErrNoRows) {
+		return nil, validationErrorf("cocktail_id does not exist")
+	}
+	if err != nil {
+		return nil, fmt.Errorf("cocktail.Insert slug: %w", err)
+	}
+	if strings.TrimSpace(recipe.CocktailSlug) == "" {
+		return nil, fmt.Errorf("cocktail.Insert slug: empty")
 	}
 
 	if err := tx.Commit(); err != nil {

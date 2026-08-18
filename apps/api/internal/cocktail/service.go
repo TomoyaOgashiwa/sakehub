@@ -75,6 +75,16 @@ func (s *Service) GetCocktailBySlug(ctx context.Context, slug string, limit, off
 	return detail, nil
 }
 
+func (s *Service) ListMine(ctx context.Context, userID string, limit, offset int) ([]MyRecipeSummary, int, error) {
+	limit, offset = clampListBounds(limit, offset, DefaultMineRecipeLimit, MaxMineRecipeLimit)
+
+	recipes, total, err := s.repo.ListMine(ctx, userID, limit, offset)
+	if err != nil {
+		return nil, 0, fmt.Errorf("cocktail.ListMine: %w", err)
+	}
+	return recipes, total, nil
+}
+
 func (s *Service) GetRecipeByID(ctx context.Context, id string) (*Recipe, error) {
 	if !isUUID(id) {
 		return nil, ErrInvalidUUID

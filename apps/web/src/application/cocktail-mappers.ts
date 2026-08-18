@@ -4,6 +4,7 @@ import type {
   CocktailRecipe,
   CocktailRecipeRating,
   CocktailRecipeSummary,
+  MyCocktailRecipeSummary,
 } from '@sakehub/types';
 
 export interface ApiCocktail {
@@ -78,6 +79,24 @@ export interface ApiRecipeRating {
   updated_at: string;
 }
 
+export interface ApiMyRecipeSummary {
+  id: string;
+  name: string;
+  status: 'draft' | 'published';
+  image_url?: string;
+  updated_at: string;
+  cocktail_id: string;
+  cocktail_slug: string;
+  cocktail_name: string;
+}
+
+export interface ApiMyRecipeListResponse {
+  data: ApiMyRecipeSummary[] | null;
+  total: number;
+  limit: number;
+  offset: number;
+}
+
 export function toCocktail(api: ApiCocktail): Cocktail {
   return {
     id: api.id,
@@ -146,5 +165,18 @@ export function toRecipeRating(api: ApiRecipeRating): CocktailRecipeRating {
     comment: api.comment,
     createdAt: api.created_at,
     updatedAt: api.updated_at,
+  };
+}
+
+export function toMyRecipeSummary(api: ApiMyRecipeSummary): MyCocktailRecipeSummary {
+  return {
+    id: api.id,
+    name: api.name,
+    status: api.status,
+    imageUrl: api.image_url,
+    updatedAt: api.updated_at,
+    cocktailId: api.cocktail_id,
+    cocktailSlug: api.cocktail_slug ?? '',
+    cocktailName: api.cocktail_name,
   };
 }

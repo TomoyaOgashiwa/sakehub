@@ -19,9 +19,11 @@ var (
 // Default list caps keep detail payloads bounded as recipes/ratings grow.
 const (
 	DefaultPublishedRecipeLimit = 50
+	DefaultMineRecipeLimit      = 50
 	DefaultRatingListLimit      = 20
 	DefaultCocktailListLimit    = 100
 	MaxPublishedRecipeLimit     = 100
+	MaxMineRecipeLimit          = 100
 	MaxRatingListLimit          = 50
 	MaxCocktailListLimit        = 200
 
@@ -75,6 +77,19 @@ type Cocktail struct {
 	RecipeCount   int       `json:"recipe_count"`
 	CreatedAt     time.Time `json:"created_at"`
 	UpdatedAt     time.Time `json:"updated_at"`
+}
+
+// MyRecipeSummary is the authenticated owner's draft + published list item.
+// Official recipes are excluded; rating aggregates are omitted on purpose.
+type MyRecipeSummary struct {
+	ID           string    `json:"id"`
+	Name         string    `json:"name"`
+	Status       string    `json:"status"`
+	ImageURL     *string   `json:"image_url,omitempty"`
+	UpdatedAt    time.Time `json:"updated_at"`
+	CocktailID   string    `json:"cocktail_id"`
+	CocktailSlug string    `json:"cocktail_slug"`
+	CocktailName string    `json:"cocktail_name"`
 }
 
 // RecipeSummary is a lightweight recipe representation used in list views.

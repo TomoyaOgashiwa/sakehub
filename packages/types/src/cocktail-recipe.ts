@@ -73,3 +73,23 @@ export interface CreateCocktailRecipeInput {
   ingredients: CreateCocktailRecipeIngredientInput[];
   steps: CreateCocktailRecipeStepInput[];
 }
+
+/** GET /api/auth/cocktail-recipes/mine item (draft + published, never official). */
+export interface MyCocktailRecipeSummary {
+  id: string;
+  name: string;
+  status: CocktailRecipeStatus;
+  imageUrl?: string;
+  updatedAt: string;
+  cocktailId: string;
+  cocktailSlug: string;
+  cocktailName: string;
+}
+
+/** GET /api/auth/cocktail-recipes/mine paginated response. */
+export interface MyCocktailRecipeListResult {
+  recipes: MyCocktailRecipeSummary[];
+  total: number;
+  limit: number;
+  offset: number;
+}

@@ -13,3 +13,6 @@ export const BASE_SPIRIT_FILTERS = [
 ] as const;
 
 export const COCKTAIL_LIST_PAGE_SIZE = 48;
+
+/** Default page size for GET /api/auth/cocktail-recipes/mine (v1). */
+export const MY_COCKTAIL_RECIPE_PAGE_SIZE = 50;

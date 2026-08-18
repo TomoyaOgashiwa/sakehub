@@ -42,12 +42,15 @@ export async function updateDisplayName(
     };
   }
 
-  const { error } = await supabase
+  const { data: updated, error } = await supabase
     .from('users')
     .update({ display_name: displayName })
-    .eq('id', user.id);
+    .eq('id', user.id)
+    .eq('status', 'active')
+    .select('id')
+    .maybeSingle();
 
-  if (error) {
+  if (error || !updated) {
     return { ok: false, error: 'Failed to update display name.' };
   }
 
@@ -95,6 +98,11 @@ export async function deleteAccount(
 
   if (draftError) {
     return { ok: false, error: '下書きの削除に失敗しました。退会を中止しました。' };
+  }
+
+  const { error: withdrawError } = await supabase.rpc('withdraw_own_account');
+  if (withdrawError) {
+    return { ok: false, error: '退会処理に失敗しました。再試行してください。' };
   }
 
   try {

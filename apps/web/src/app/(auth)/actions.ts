@@ -46,9 +46,23 @@ export async function signUp(_prevState: AuthState, formData: FormData): Promise
   }
 
   const supabase = await createClient();
+  const { data: registrationBlocked, error: blockCheckError } = await supabase.rpc(
+    'email_registration_blocked',
+    { p_email: email },
+  );
+  if (blockCheckError) {
+    return { ok: false, error: '登録を確認できませんでした。しばらくしてから再試行してください。' };
+  }
+  if (registrationBlocked === true) {
+    return { ok: false, error: 'このメールアドレスでは登録できません。' };
+  }
+
   const { error } = await supabase.auth.signUp({ email, password });
 
   if (error) {
+    if (error.message.includes('EMAIL_FORCE_WITHDRAWN')) {
+      return { ok: false, error: 'このメールアドレスでは登録できません。' };
+    }
     return { ok: false, error: error.message };
   }
 

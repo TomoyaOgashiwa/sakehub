@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import Link from 'next/link';
 
+import { Button } from '@/components/ui/button';
 import { Heading } from '@/components/ui/heading';
 import { CocktailGrid } from '@/components/cocktails/cocktail-grid';
 import { CocktailSearch } from '@/components/cocktails/cocktail-search';
@@ -10,6 +11,8 @@ import { SearchMissLogger } from '@/components/catalog/search-miss-logger';
 import { DrinkGridSkeleton } from '@/components/drinks/drink-card-skeleton';
 import { fetchCocktailsServer } from '@/application/cocktails-api.server';
 import { COCKTAIL_LIST_PAGE_SIZE } from '@/config/cocktails';
+import { getAuthProfile } from '@/lib/auth/app-role';
+import { recipeComposeHref } from '@/utils/recipe-compose-href';
 
 export const metadata: Metadata = {
   title: 'カクテル一覧',
@@ -32,13 +35,21 @@ function parseOffset(raw: string | undefined): number {
   return Math.floor(n);
 }
 
-export default function CocktailsPage({ searchParams }: PageProps) {
+export default async function CocktailsPage({ searchParams }: PageProps) {
+  const { user } = await getAuthProfile();
+  const composeHref = recipeComposeHref({ loggedIn: user != null });
+
   return (
     <div className="mx-auto max-w-7xl px-4 py-8">
       <div className="mb-8">
-        <Heading level="h1">カクテルを探す</Heading>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <Heading level="h1">カクテルを探す</Heading>
+          <Button variant="secondary" render={<Link href={composeHref} />} nativeButton={false}>
+            レシピを投稿
+          </Button>
+        </div>
         <p className="text-muted-foreground mt-2">
-          名前やベースからカクテルを特定する。
+          名前やベースからカクテルを特定する。公式を見て、自分のアレンジも残せる。
           <Link href="/" className="text-foreground ml-2 underline-offset-4 hover:underline">
             お酒一覧へ
           </Link>

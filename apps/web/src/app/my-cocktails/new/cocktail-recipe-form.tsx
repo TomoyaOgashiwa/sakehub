@@ -365,7 +365,7 @@ export function CocktailRecipeForm({ cocktails, defaultCocktailId }: CocktailRec
             isPending && 'cursor-not-allowed',
           )}
         >
-          {isPending ? '登録中...' : 'レシピを登録する'}
+          {isPending ? '投稿中...' : 'レシピを投稿する'}
         </button>
       </div>
     </form>

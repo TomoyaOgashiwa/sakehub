@@ -2,14 +2,16 @@ import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
 import { Heading } from '@/components/ui/heading';
-import { createClient } from '@/lib/supabase/server';
 import { fetchCocktailItemsServer } from '@/application/cocktails-api.server';
+import { createClient } from '@/lib/supabase/server';
+import { loginHref } from '@/utils/login-href';
+import { recipeComposePath } from '@/utils/recipe-compose-href';
 
 import { CocktailRecipeForm } from './cocktail-recipe-form';
 
 export const metadata: Metadata = {
-  title: '新しいレシピを登録する',
-  description: 'あなたのオリジナルカクテルをライブラリに追加しましょう',
+  title: 'アレンジレシピを投稿',
+  description: '公式レシピをアレンジして投稿できます。親カクテルの指定が必要です。',
 };
 
 type PageProps = {
@@ -17,16 +19,16 @@ type PageProps = {
 };
 
 export default async function NewCocktailRecipePage({ searchParams }: PageProps) {
+  const { cocktail_id: cocktailIdRaw } = await searchParams;
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect('/login');
+    redirect(loginHref(recipeComposePath(cocktailIdRaw)));
   }
 
-  const { cocktail_id: cocktailIdRaw } = await searchParams;
   const cocktails = await fetchCocktailItemsServer({ limit: 200 });
   const defaultCocktailId =
     cocktailIdRaw && cocktails.some((c) => c.id === cocktailIdRaw) ? cocktailIdRaw : undefined;
@@ -35,12 +37,12 @@ export default async function NewCocktailRecipePage({ searchParams }: PageProps)
     <div className="mx-auto max-w-2xl px-4 py-10">
       <div className="mb-10 space-y-1">
         <Heading level="h1">
-          新しいレシピを
+          アレンジレシピを
           <br />
-          <span className="text-amber">登録する</span>
+          <span className="text-amber">投稿する</span>
         </Heading>
         <p className="text-muted-foreground text-sm">
-          あなたのオリジナルカクテルをライブラリに追加しましょう
+          公式レシピをアレンジして投稿できます。親カクテルの指定が必要です。
         </p>
       </div>
 

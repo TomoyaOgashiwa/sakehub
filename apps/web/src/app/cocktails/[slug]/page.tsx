@@ -1,17 +1,21 @@
 import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowLeft, Martini } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Heading } from '@/components/ui/heading';
 import { Separator } from '@/components/ui/separator';
 import { StarRatingDisplay } from '@/components/ui/star-rating';
 import { JsonLd } from '@/components/json-ld';
 import { fetchCocktailBySlugServer } from '@/application/cocktails-api.server';
 import { drinkCategoryForBaseSpirit, drinksByCategoryHref } from '@/config/drink-cocktail-bridge';
+import { getAuthProfile } from '@/lib/auth/app-role';
 import { getCatalogImageSourceLabel } from '@/utils/catalog-image-source-label';
+import { recipeComposeHref } from '@/utils/recipe-compose-href';
 import { buildRecipeJsonLd } from '@/utils/recipe-json-ld';
 
 const RECIPE_PAGE_SIZE = 50;
@@ -51,8 +55,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function CocktailDetailPage({ params, searchParams }: PageProps) {
-  const { slug } = await params;
-  const { recipes_offset: recipesOffsetRaw } = await searchParams;
+  const [{ slug }, { recipes_offset: recipesOffsetRaw }, { user }] = await Promise.all([
+    params,
+    searchParams,
+    getAuthProfile(),
+  ]);
   const recipesOffset = parseOffset(recipesOffsetRaw);
 
   let cocktail;
@@ -70,6 +77,10 @@ export default async function CocktailDetailPage({ params, searchParams }: PageP
   const official = cocktail.officialRecipe;
   const imageSourceLabel = getCatalogImageSourceLabel(cocktail.imageSource);
   const drinkCategory = drinkCategoryForBaseSpirit(cocktail.baseSpirit);
+  const composeHref = recipeComposeHref({
+    loggedIn: user != null,
+    cocktailId: cocktail.id,
+  });
 
   return (
     <>
@@ -217,12 +228,9 @@ export default async function CocktailDetailPage({ params, searchParams }: PageP
               )}
 
               <p>
-                <Link
-                  href={`/my-cocktails/new?cocktail_id=${cocktail.id}`}
-                  className="text-foreground text-sm font-medium underline underline-offset-2"
-                >
+                <RecipeComposeButton href={composeHref}>
                   このレシピをアレンジして投稿する
-                </Link>
+                </RecipeComposeButton>
               </p>
             </section>
           )}
@@ -234,12 +242,7 @@ export default async function CocktailDetailPage({ params, searchParams }: PageP
               <Heading level="h2" id="recipes-heading">
                 みんなのレシピ ({cocktail.recipeCount}件)
               </Heading>
-              <Link
-                href={`/my-cocktails/new?cocktail_id=${cocktail.id}`}
-                className="text-muted-foreground hover:text-foreground text-sm underline underline-offset-2 transition-colors"
-              >
-                レシピを投稿する
-              </Link>
+              <RecipeComposeButton href={composeHref}>レシピを投稿する</RecipeComposeButton>
             </div>
 
             {cocktail.recipes.length === 0 ? (
@@ -249,13 +252,17 @@ export default async function CocktailDetailPage({ params, searchParams }: PageP
                     ? 'このページにはレシピがありません。'
                     : 'まだレシピがありません。最初のレシピを投稿してみましょう。'}
                 </p>
-                {recipesOffset > 0 && (
+                {recipesOffset > 0 ? (
                   <Link
                     href={`/cocktails/${cocktail.slug}`}
                     className="text-foreground mt-3 inline-block text-sm underline underline-offset-2"
                   >
                     最初のページへ戻る
                   </Link>
+                ) : (
+                  <div className="mt-4">
+                    <RecipeComposeButton href={composeHref}>レシピを投稿する</RecipeComposeButton>
+                  </div>
                 )}
               </div>
             ) : (
@@ -355,5 +362,13 @@ export default async function CocktailDetailPage({ params, searchParams }: PageP
         </article>
       </div>
     </>
+  );
+}
+
+function RecipeComposeButton({ href, children }: { href: string; children: ReactNode }) {
+  return (
+    <Button render={<Link href={href} />} nativeButton={false}>
+      {children}
+    </Button>
   );
 }

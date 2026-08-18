@@ -10,7 +10,7 @@ todos:
     status: completed
   - id: pr3-profile-hub
     content: "PR3: /profile を行リストハブにし、表示名・退会をドリルインへ移設"
-    status: pending
+    status: completed
 isProject: false
 ---
 
@@ -432,3 +432,14 @@ Step 6 は各 PR の完了条件。
 - 公開保存 → レシピ詳細。draft → `/my-cocktails`。ホームに捨てない
 - モバイル: アバター → ハブ → リスト / 自分のレシピが 2 タップ
 - プロフィール FV にインラインの表示名フォーム・退会フォームが無い
+
+---
+
+## 実際の実装との差分
+
+PR3（プロフィールハブ）:
+
+- ハブ行の見た目を揃えるため [`profile-hub-row.tsx`](apps/web/src/app/profile/profile-hub-row.tsx) と [`profile-hub-styles.ts`](apps/web/src/app/profile/profile-hub-styles.ts) を追加した。プラン対象ファイルには無かったが、Link + Chevron の重複と SignOut 行のクラス共有のため。
+- ドリルイン未ログインは `loginHref('/profile/display-name')` / `loginHref('/profile/delete')`。ハブはプランどおり `loginHref('/profile')`。
+- ハブの退会行は `text-destructive`。確認 Dialog 本体はドリルイン側のまま。
+- `SignOutButton` から `'use client'` を外した（hooks が無く、form action は RSC で足りる）。仕様（成功後 `/login`）は変えていない。

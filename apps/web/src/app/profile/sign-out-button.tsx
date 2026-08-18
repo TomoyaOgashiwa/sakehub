@@ -1,15 +1,17 @@
-'use client';
-
-import { Button } from '@/components/ui/button';
+import { cn } from '@/utils/utils';
 
 import { signOut } from '../(auth)/actions';
+import { profileHubRowClassName } from './profile-hub-styles';
 
 export function SignOutButton() {
   return (
     <form action={signOut}>
-      <Button type="submit" variant="outline">
-        Sign Out
-      </Button>
+      <button
+        type="submit"
+        className={cn(profileHubRowClassName, 'cursor-pointer border-0 bg-transparent')}
+      >
+        ログアウト
+      </button>
     </form>
   );
 }

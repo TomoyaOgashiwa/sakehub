@@ -24,6 +24,10 @@ const (
 	MaxPublishedRecipeLimit     = 100
 	MaxRatingListLimit          = 50
 	MaxCocktailListLimit        = 200
+
+	// WITHDRAWN_AUTHOR_LABEL is shown when a published recipe's author has left.
+	// Keep in sync with apps/web/src/utils/withdrawn-author.ts.
+	WITHDRAWN_AUTHOR_LABEL = "退会したユーザー"
 )
 
 // ListParams filters and paginates the cocktails master list.
@@ -78,7 +82,7 @@ type Cocktail struct {
 type RecipeSummary struct {
 	ID            string    `json:"id"`
 	CocktailID    string    `json:"cocktail_id"`
-	UserID        string    `json:"user_id"`
+	UserID        *string   `json:"user_id"`
 	AuthorName    *string   `json:"author_name,omitempty"`
 	Name          string    `json:"name"`
 	Memo          *string   `json:"memo,omitempty"`
@@ -122,7 +126,7 @@ type Recipe struct {
 	ID            string       `json:"id"`
 	CocktailID    string       `json:"cocktail_id"`
 	CocktailSlug  string       `json:"cocktail_slug,omitempty"`
-	UserID        string       `json:"user_id"`
+	UserID        *string      `json:"user_id"`
 	AuthorName    *string      `json:"author_name,omitempty"`
 	Name          string       `json:"name"`
 	Memo          *string      `json:"memo,omitempty"`

@@ -50,7 +50,7 @@ export interface SearchMissCreateInput {
 export interface CocktailRecipeSummary {
   id: string;
   cocktailId: string;
-  userId: string;
+  userId: string | null;
   authorName?: string;
   name: string;
   memo?: string;

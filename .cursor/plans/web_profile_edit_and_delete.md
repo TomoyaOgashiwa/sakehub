@@ -214,3 +214,9 @@ Web:
 - 表示名の空禁止は Server Action のみと明文化。`resolveDisplayLabel` に寄せる。
 - 逆方向の部分破壊（draft 成功 → `deleteUser` 失敗）は既知のトレードオフとしてロック。事前削除廃止は採らない。
 - レシピ JSON の `user_id` は `string | null`（`omitempty` なし）。JSON-LD の `'SakeHub ユーザー'` は在籍者の空表示名用に残す。
+
+## 実際の実装との差分
+
+- 依頼がプラン全体の実装だったため、3A（表示名）と 3B（退会）を同一作業ツリーで実装した。PR 分割はコミット時に行う。
+- `deleteUser` の前に Admin client を組み立て、`SUPABASE_SERVICE_ROLE_KEY` 欠落時は draft DELETE しない（設定不備で下書きだけ消すのを避ける）。draft 成功後の `deleteUser` 失敗トレードオフはプランどおり残す。
+- Base UI Checkbox は FormData に載らないため、確認フラグは hidden `confirm=1` で Server Action に渡す。

@@ -25,7 +25,7 @@ export interface ApiCocktail {
 export interface ApiRecipeSummary {
   id: string;
   cocktail_id: string;
-  user_id: string;
+  user_id: string | null;
   author_name?: string;
   name: string;
   memo?: string;
@@ -100,7 +100,7 @@ export function toRecipeSummary(api: ApiRecipeSummary): CocktailRecipeSummary {
   return {
     id: api.id,
     cocktailId: api.cocktail_id,
-    userId: api.user_id,
+    userId: api.user_id ?? null,
     authorName: api.author_name,
     name: api.name,
     memo: api.memo,

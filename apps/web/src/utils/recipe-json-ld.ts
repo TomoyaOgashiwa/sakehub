@@ -10,7 +10,11 @@ export function buildRecipeJsonLd(recipe: CocktailRecipe): Record<string, unknow
     ...(recipe.memo && { description: recipe.memo }),
     author: recipe.isOfficial
       ? { '@type': 'Organization', name: 'SakeHub' }
-      : { '@type': 'Person', name: recipe.authorName ?? 'SakeHub ユーザー' },
+      : {
+          '@type': 'Person',
+          // 在籍ユーザーで display_name が空のとき用。退会者は API の authorName が入る。
+          name: recipe.authorName ?? 'SakeHub ユーザー',
+        },
     datePublished: recipe.createdAt,
     recipeCategory: 'カクテル',
     recipeYield: '1杯',

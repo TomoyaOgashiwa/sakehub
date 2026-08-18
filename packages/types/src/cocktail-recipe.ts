@@ -37,7 +37,7 @@ export interface CocktailRecipe {
   cocktailId: string;
   /** Canonical cocktail master slug; used for URL validation without a second fetch. */
   cocktailSlug: string;
-  userId: string;
+  userId: string | null;
   authorName?: string;
   name: string;
   memo?: string;

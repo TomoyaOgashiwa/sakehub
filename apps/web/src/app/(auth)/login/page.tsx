@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Heading } from '@/components/ui/heading';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { isRecipeComposeNext } from '@/utils/recipe-compose-href';
 import { safeNextPath } from '@/utils/safe-next-path';
 
 import { type AuthState, signIn } from '../actions';
@@ -19,12 +20,15 @@ export default function LoginPage() {
   const next = safeNextPath(searchParams.get('next'));
   const [state, formAction, isPending] = useActionState(signIn, initialState);
   const signupHref = next === '/' ? '/signup' : `/signup?next=${encodeURIComponent(next)}`;
+  const copy = isRecipeComposeNext(next)
+    ? 'アレンジレシピを投稿するためにログイン'
+    : '飲んだ／飲みたいを残すためにログイン';
 
   return (
     <div className="space-y-6">
       <div className="space-y-2 text-center">
         <Heading level="h1">Sign In</Heading>
-        <p className="text-muted-foreground text-sm">飲んだ／飲みたいを残すためにログイン</p>
+        <p className="text-muted-foreground text-sm">{copy}</p>
       </div>
 
       <form action={formAction} className="space-y-4">

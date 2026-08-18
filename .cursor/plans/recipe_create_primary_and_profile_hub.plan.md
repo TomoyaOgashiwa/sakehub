@@ -4,10 +4,10 @@ overview: カクテルレシピ投稿の一次導線をヘッダーに出し、�
 todos:
   - id: pr1-api-list-redirect
     content: "PR1: GET /api/auth/cocktail-recipes/mine + /my-cocktails 一覧 + Create に cocktail_slug を返して投稿後 redirect"
-    status: pending
+    status: completed
   - id: pr2-chrome-cta-auth
     content: "PR2: ヘッダー「レシピを投稿」/ 詳細 Button 格上げ / 一覧 secondary / login next とコピー / フォームの登録・オリジナル文言"
-    status: pending
+    status: completed
   - id: pr3-profile-hub
     content: "PR3: /profile を行リストハブにし、表示名・退会をドリルインへ移設"
     status: pending

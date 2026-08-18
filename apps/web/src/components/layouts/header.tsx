@@ -1,11 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { Button } from '@/components/ui/button';
 import { getAuthProfile } from '@/lib/auth/app-role';
 import { resolveDisplayLabel } from '@/utils/display-label';
+import { recipeComposeHref } from '@/utils/recipe-compose-href';
 
 export async function Header() {
   const { user, appRole, displayName } = await getAuthProfile();
+  const loggedIn = user != null;
+  const composeHref = recipeComposeHref({ loggedIn });
 
   const label = resolveDisplayLabel(displayName, user?.email);
   const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(label)}&background=random&size=32`;
@@ -51,7 +55,15 @@ export async function Header() {
             )}
           </nav>
         </div>
-        <nav className="flex items-center gap-6">
+        <nav className="flex shrink-0 items-center gap-2 sm:gap-4">
+          <Button
+            variant={loggedIn ? 'default' : 'outline'}
+            size="sm"
+            render={<Link href={composeHref} />}
+            nativeButton={false}
+          >
+            レシピを投稿
+          </Button>
           {user ? (
             <Link href="/profile" className="flex items-center">
               <Image src={avatarUrl} alt={label} className="rounded-full" width={32} height={32} />

@@ -29,6 +29,15 @@ const cocktailRecipeCountJoin = `LEFT JOIN LATERAL (
 const recipeAggregates = `COALESCE((SELECT AVG(rt.rating)::NUMERIC(3,2) FROM cocktail_recipe_ratings rt WHERE rt.recipe_id = r.id), 0) AS average_rating,
 	COALESCE((SELECT COUNT(*) FROM cocktail_recipe_ratings rt WHERE rt.recipe_id = r.id), 0)::INTEGER AS total_ratings`
 
+// authorNameSQL is COALESCE(display_name, withdrawn label when user_id IS NULL).
+// placeholder is the bind index for WITHDRAWN_AUTHOR_LABEL — do not inline Japanese.
+func authorNameSQL(placeholder int) string {
+	return fmt.Sprintf(
+		`COALESCE(NULLIF(TRIM(u.display_name), ''), CASE WHEN r.user_id IS NULL THEN $%d END) AS author_name`,
+		placeholder,
+	)
+}
+
 type Repository interface {
 	ListCocktails(ctx context.Context, params ListParams) ([]Cocktail, int, error)
 	FindCocktailBySlug(ctx context.Context, slug string) (*Cocktail, error)
@@ -184,16 +193,16 @@ func (r *repository) ListPublishedRecipes(ctx context.Context, cocktailID string
 	// Official recipes are excluded; they surface via OfficialRecipe instead.
 	q := fmt.Sprintf(`
 		SELECT r.id, r.cocktail_id, r.user_id,
-			NULLIF(TRIM(u.display_name), '') AS author_name,
+			%s,
 			r.name, r.memo, r.image_url, r.status, r.is_official,
 			%s, r.created_at, r.updated_at
 		FROM cocktail_recipes r
 		LEFT JOIN public.users u ON u.id = r.user_id
 		WHERE r.cocktail_id = $1 AND r.status = 'published' AND NOT r.is_official
 		ORDER BY r.created_at DESC
-		LIMIT $2 OFFSET $3`, recipeAggregates)
+		LIMIT $2 OFFSET $3`, authorNameSQL(4), recipeAggregates)
 
-	rows, err := r.db.QueryContext(ctx, q, cocktailID, limit+1, offset)
+	rows, err := r.db.QueryContext(ctx, q, cocktailID, limit+1, offset, WITHDRAWN_AUTHOR_LABEL)
 	if err != nil {
 		return nil, false, err
 	}
@@ -312,15 +321,15 @@ func (r *repository) loadRecipeChildren(ctx context.Context, rec *Recipe) error 
 func (r *repository) FindPublishedRecipeByID(ctx context.Context, id string) (*Recipe, error) {
 	recipeQ := fmt.Sprintf(`
 		SELECT r.id, r.cocktail_id, c.slug, r.user_id,
-			NULLIF(TRIM(u.display_name), '') AS author_name,
+			%s,
 			r.name, r.memo, r.image_url, r.status, r.is_official,
 			%s, r.created_at, r.updated_at
 		FROM cocktail_recipes r
 		INNER JOIN cocktails c ON c.id = r.cocktail_id
 		LEFT JOIN public.users u ON u.id = r.user_id
-		WHERE r.id = $1 AND r.status = 'published'`, recipeAggregates)
+		WHERE r.id = $1 AND r.status = 'published'`, authorNameSQL(2), recipeAggregates)
 
-	rec, err := r.scanRecipeRow(r.db.QueryRowContext(ctx, recipeQ, id))
+	rec, err := r.scanRecipeRow(r.db.QueryRowContext(ctx, recipeQ, id, WITHDRAWN_AUTHOR_LABEL))
 	if errors.Is(err, sql.ErrNoRows) {
 		return nil, ErrNotFound
 	}
@@ -339,15 +348,15 @@ func (r *repository) FindPublishedRecipeByID(ctx context.Context, id string) (*R
 func (r *repository) FindOfficialRecipeByCocktailID(ctx context.Context, cocktailID string) (*Recipe, error) {
 	recipeQ := fmt.Sprintf(`
 		SELECT r.id, r.cocktail_id, c.slug, r.user_id,
-			NULLIF(TRIM(u.display_name), '') AS author_name,
+			%s,
 			r.name, r.memo, r.image_url, r.status, r.is_official,
 			%s, r.created_at, r.updated_at
 		FROM cocktail_recipes r
 		INNER JOIN cocktails c ON c.id = r.cocktail_id
 		LEFT JOIN public.users u ON u.id = r.user_id
-		WHERE r.cocktail_id = $1 AND r.is_official`, recipeAggregates)
+		WHERE r.cocktail_id = $1 AND r.is_official`, authorNameSQL(2), recipeAggregates)
 
-	rec, err := r.scanRecipeRow(r.db.QueryRowContext(ctx, recipeQ, cocktailID))
+	rec, err := r.scanRecipeRow(r.db.QueryRowContext(ctx, recipeQ, cocktailID, WITHDRAWN_AUTHOR_LABEL))
 	if errors.Is(err, sql.ErrNoRows) {
 		return nil, ErrNotFound
 	}
@@ -388,8 +397,9 @@ func (r *repository) Insert(ctx context.Context, input CreateInput) (*Recipe, er
 		VALUES ($1, $2, $3, $4, $5, $6)
 		RETURNING id, is_official, created_at, updated_at`
 
+	userID := input.UserID
 	recipe := &Recipe{
-		UserID:     input.UserID,
+		UserID:     &userID,
 		CocktailID: input.CocktailID,
 		Name:       input.Name,
 		Memo:       input.Memo,

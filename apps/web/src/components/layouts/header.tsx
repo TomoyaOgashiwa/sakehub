@@ -2,12 +2,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { getAuthProfile } from '@/lib/auth/app-role';
+import { resolveDisplayLabel } from '@/utils/display-label';
 
 export async function Header() {
-  const { user, appRole } = await getAuthProfile();
+  const { user, appRole, displayName } = await getAuthProfile();
 
-  const displayName = user?.email?.split('@')[0] || 'User';
-  const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(displayName)}&background=random&size=32`;
+  const label = resolveDisplayLabel(displayName, user?.email);
+  const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(label)}&background=random&size=32`;
 
   return (
     <header className="border-b">
@@ -53,13 +54,7 @@ export async function Header() {
         <nav className="flex items-center gap-6">
           {user ? (
             <Link href="/profile" className="flex items-center">
-              <Image
-                src={avatarUrl}
-                alt={displayName}
-                className="rounded-full"
-                width={32}
-                height={32}
-              />
+              <Image src={avatarUrl} alt={label} className="rounded-full" width={32} height={32} />
             </Link>
           ) : (
             <Link

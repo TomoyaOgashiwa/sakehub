@@ -214,3 +214,14 @@ Web:
 - 表示名の空禁止は Server Action のみと明文化。`resolveDisplayLabel` に寄せる。
 - 逆方向の部分破壊（draft 成功 → `deleteUser` 失敗）は既知のトレードオフとしてロック。事前削除廃止は採らない。
 - レシピ JSON の `user_id` は `string | null`（`omitempty` なし）。JSON-LD の `'SakeHub ユーザー'` は在籍者の空表示名用に残す。
+
+## 実際の実装との差分
+
+- 依頼がプラン全体の実装だったため、3A（表示名）と 3B（退会）を同一作業ツリーで実装した。PR 分割はコミット時に行う。
+- `deleteUser` の前に Admin client を組み立て、`SUPABASE_SERVICE_ROLE_KEY` 欠落時は draft DELETE しない（設定不備で下書きだけ消すのを避ける）。draft 成功後の `deleteUser` 失敗トレードオフはプランどおり残す。
+- Base UI Checkbox は FormData に載らないため、確認フラグは hidden `confirm=1` で Server Action に渡す。
+- 退会は `auth.users` を消すが `public.users` は残す（`users_id_fkey` ON DELETE CASCADE を外した）。
+- `users.status`（`active` / `inactive` / `withdrawal` / `force_withdrawal`）と `withdrawal_at` / `force_withdrawal_at` を追加。自主退会は `withdraw_own_account` RPC のあと `deleteUser`。
+- 在籍中メールだけ UNIQUE（`uq_users_email_in_use`）。自主退会後は同じメールで新しい UUID として再登録できる。
+- 強制退会メールは `force_withdrawal_emails` に分離。signup は `email_registration_blocked` で拒否。本人は復帰不可。運営 UI は未接続（`force_withdraw_account` RPC のみ）。
+- `delete_rating_when_unsave` を `SECURITY DEFINER` + `SET search_path = public` にした。GoTrue の `supabase_auth_admin` 経路で `relation "ratings" does not exist` になって deleteUser が落ちていた。

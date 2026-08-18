@@ -1,5 +1,6 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import { createClient } from '@/lib/supabase/server';
@@ -133,5 +134,22 @@ export async function createCocktailRecipe(
     };
   }
 
-  redirect('/');
+  let created: { id?: string; status?: string; cocktail_slug?: string } = {};
+  try {
+    created = (await apiRes.json()) as typeof created;
+  } catch {
+    created = {};
+  }
+
+  const id = created.id?.trim() ?? '';
+  const slug = created.cocktail_slug?.trim() ?? '';
+  const published = created.status === 'published' && id !== '' && slug !== '';
+
+  revalidatePath('/my-cocktails');
+  if (published) {
+    revalidatePath(`/cocktails/${slug}`);
+    revalidatePath(`/cocktails/${slug}/recipes/${id}`);
+    redirect(`/cocktails/${slug}/recipes/${id}`);
+  }
+  redirect('/my-cocktails');
 }

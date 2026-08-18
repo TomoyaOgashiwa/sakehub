@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
 import { Heading } from '@/components/ui/heading';
@@ -7,9 +6,9 @@ import { isAccountDeletionBlocked } from '@/lib/auth/account-deletion';
 import { getAuthProfile } from '@/lib/auth/app-role';
 import { createClient } from '@/lib/supabase/server';
 import { resolveDisplayLabel } from '@/utils/display-label';
+import { loginHref } from '@/utils/login-href';
 
-import { DeleteAccountSection } from './delete-account-section';
-import { DisplayNameForm } from './display-name-form';
+import { ProfileHubLink } from './profile-hub-row';
 import { SignOutButton } from './sign-out-button';
 
 export const metadata = {
@@ -20,16 +19,10 @@ export default async function ProfilePage() {
   const { user, appRole, displayName } = await getAuthProfile();
 
   if (!user) {
-    redirect('/login');
+    redirect(loginHref('/profile'));
   }
 
   const supabase = await createClient();
-  const { data: profile } = await supabase
-    .from('users')
-    .select('login_type')
-    .eq('id', user.id)
-    .maybeSingle();
-
   const label = resolveDisplayLabel(displayName, user.email);
   const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(label)}&background=random&size=96`;
   const showDeletion = !(await isAccountDeletionBlocked({ user, appRole, supabase }));
@@ -40,7 +33,7 @@ export default async function ProfilePage() {
         Profile
       </Heading>
 
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-8">
         <div className="flex items-center gap-4">
           <Image src={avatarUrl} alt={label} className="rounded-full" width={96} height={96} />
           <div>
@@ -49,51 +42,46 @@ export default async function ProfilePage() {
           </div>
         </div>
 
-        <div className="border-t pt-6">
-          <dl className="flex flex-col gap-4">
-            <div>
-              <dt className="text-muted-foreground text-sm font-medium">Email</dt>
-              <dd>{user.email}</dd>
-            </div>
-            <div>
-              <dt className="text-muted-foreground text-sm font-medium">Login Type</dt>
-              <dd className="capitalize">{profile?.login_type || 'email'}</dd>
-            </div>
-            <div>
-              <dt className="text-muted-foreground text-sm font-medium">Member Since</dt>
-              <dd>
-                {new Date(user.created_at).toLocaleDateString('ja-JP', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}
-              </dd>
-            </div>
-          </dl>
-        </div>
-
-        <div className="border-t pt-6">
-          <DisplayNameForm defaultDisplayName={displayName?.trim() ?? ''} />
-        </div>
-
-        <div className="border-t pt-6">
-          <Link
-            href="/list"
-            className="text-foreground text-sm font-medium underline-offset-4 hover:underline"
+        <section aria-labelledby="profile-my-content">
+          <h2
+            id="profile-my-content"
+            className="text-muted-foreground mb-1 px-3 text-sm font-medium"
           >
-            リスト
-          </Link>
-        </div>
+            マイコンテンツ
+          </h2>
+          <ul>
+            <li>
+              <ProfileHubLink href="/list">リスト</ProfileHubLink>
+            </li>
+            <li>
+              <ProfileHubLink href="/my-cocktails">カクテルレシピ</ProfileHubLink>
+            </li>
+          </ul>
+        </section>
 
-        <div className="border-t pt-6">
-          <SignOutButton />
-        </div>
-
-        {showDeletion ? (
-          <div className="border-t pt-6">
-            <DeleteAccountSection />
-          </div>
-        ) : null}
+        <section aria-labelledby="profile-account">
+          <h2 id="profile-account" className="text-muted-foreground mb-1 px-3 text-sm font-medium">
+            アカウント
+          </h2>
+          <ul>
+            <li>
+              <ProfileHubLink href="/profile/display-name">表示名を変更</ProfileHubLink>
+            </li>
+            <li>
+              <SignOutButton />
+            </li>
+            {showDeletion ? (
+              <li>
+                <ProfileHubLink
+                  href="/profile/delete"
+                  className="text-destructive hover:bg-destructive/10"
+                >
+                  退会
+                </ProfileHubLink>
+              </li>
+            ) : null}
+          </ul>
+        </section>
       </div>
     </div>
   );

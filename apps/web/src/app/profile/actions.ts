@@ -56,6 +56,7 @@ export async function updateDisplayName(
 
   revalidatePath('/', 'layout');
   revalidatePath('/profile');
+  revalidatePath('/profile/display-name');
   return { ok: true, error: '' };
 }
 

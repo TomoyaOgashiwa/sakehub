@@ -181,6 +181,36 @@ type CreateInput struct {
 	Steps       []StepInput       `json:"steps"`
 }
 
+// DraftUpdateInput is the full-replace payload for a draft PATCH.
+// image_url / memo omit-vs-null is resolved in the service before this is built.
+type DraftUpdateInput struct {
+	CocktailID  string
+	Name        string
+	Memo        *string
+	ImageURL    *string
+	Status      string
+	Ingredients []IngredientInput
+	Steps       []StepInput
+}
+
+func (in DraftUpdateInput) asCreateInput() CreateInput {
+	return CreateInput{
+		CocktailID:  in.CocktailID,
+		Name:        in.Name,
+		Memo:        in.Memo,
+		ImageURL:    in.ImageURL,
+		Status:      in.Status,
+		Ingredients: in.Ingredients,
+		Steps:       in.Steps,
+	}
+}
+
+const (
+	msgPublishedCannotUpdate = "published recipes cannot be updated"
+	msgPublishedCannotDelete = "published recipes cannot be deleted"
+	msgIsOfficialForbidden   = "is_official cannot be set"
+)
+
 // RecipeRating is a user's star rating and optional comment for a recipe.
 type RecipeRating struct {
 	ID        string    `json:"id"`

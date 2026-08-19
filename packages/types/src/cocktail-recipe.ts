@@ -74,6 +74,20 @@ export interface CreateCocktailRecipeInput {
   steps: CreateCocktailRecipeStepInput[];
 }
 
+/**
+ * PATCH /api/auth/cocktail-recipes/{id} for a draft (full replace of body fields).
+ * imageUrl / memo: omit to keep the stored value, null to clear.
+ */
+export interface PatchCocktailRecipeInput {
+  cocktailId: string;
+  name: string;
+  status: CocktailRecipeStatus;
+  ingredients: CreateCocktailRecipeIngredientInput[];
+  steps: CreateCocktailRecipeStepInput[];
+  memo?: string | null;
+  imageUrl?: string | null;
+}
+
 /** GET /api/auth/cocktail-recipes/mine item (draft + published, never official). */
 export interface MyCocktailRecipeSummary {
   id: string;

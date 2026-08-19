@@ -44,9 +44,12 @@ type Repository interface {
 	ListPublishedRecipes(ctx context.Context, cocktailID string, limit, offset int) ([]RecipeSummary, bool, error)
 	ListMine(ctx context.Context, userID string, limit, offset int) ([]MyRecipeSummary, int, error)
 	FindPublishedRecipeByID(ctx context.Context, id string) (*Recipe, error)
+	FindOwnedRecipeByID(ctx context.Context, id, userID string) (*Recipe, error)
 	FindOfficialRecipeByCocktailID(ctx context.Context, cocktailID string) (*Recipe, error)
 	RatableRecipeExists(ctx context.Context, id string) error
 	Insert(ctx context.Context, input CreateInput) (*Recipe, error)
+	UpdateDraft(ctx context.Context, id, userID string, input DraftUpdateInput) (*Recipe, error)
+	DeleteDraft(ctx context.Context, id, userID string) error
 
 	FindRatingByRecipeAndUser(ctx context.Context, recipeID, userID string) (*RecipeRating, error)
 	ListRatingsByRecipe(ctx context.Context, recipeID string, limit, offset int) ([]RecipeRating, bool, error)
@@ -456,77 +459,248 @@ func (r *repository) Insert(ctx context.Context, input CreateInput) (*Recipe, er
 		input.UserID, input.CocktailID, input.Name, input.Memo, input.ImageURL, input.Status,
 	).Scan(&recipe.ID, &recipe.IsOfficial, &recipe.CreatedAt, &recipe.UpdatedAt)
 	if err != nil {
-		var pqErr *pq.Error
-		// 23503 = foreign_key_violation: the referenced cocktail does not exist.
-		if errors.As(err, &pqErr) && pqErr.Code == "23503" {
+		if isFKViolation(err) {
 			return nil, validationErrorf("cocktail_id does not exist")
 		}
 		return nil, fmt.Errorf("cocktail.Insert recipe: %w", err)
 	}
 
-	recipe.Ingredients = make([]Ingredient, 0, len(input.Ingredients))
-	for _, ing := range input.Ingredients {
-		const ingQ = `
-			INSERT INTO cocktail_recipe_ingredients (recipe_id, name, amount, unit, sort_order)
-			VALUES ($1, $2, $3, $4, $5)
-			RETURNING id, created_at`
-
-		var inserted Ingredient
-		inserted.RecipeID = recipe.ID
-		inserted.Name = ing.Name
-		inserted.Amount = ing.Amount
-		inserted.Unit = ing.Unit
-		inserted.SortOrder = ing.SortOrder
-
-		err = tx.QueryRowContext(ctx, ingQ,
-			recipe.ID, ing.Name, ing.Amount, ing.Unit, ing.SortOrder,
-		).Scan(&inserted.ID, &inserted.CreatedAt)
-		if err != nil {
-			return nil, fmt.Errorf("cocktail.Insert ingredient: %w", err)
-		}
-		recipe.Ingredients = append(recipe.Ingredients, inserted)
+	recipe.Ingredients, err = insertRecipeIngredients(ctx, tx, recipe.ID, input.Ingredients)
+	if err != nil {
+		return nil, fmt.Errorf("cocktail.Insert ingredient: %w", err)
 	}
 
-	recipe.Steps = make([]Step, 0, len(input.Steps))
-	for _, stepIn := range input.Steps {
-		const stepQ = `
-			INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order)
-			VALUES ($1, $2, $3)
-			RETURNING id, created_at`
-
-		var inserted Step
-		inserted.RecipeID = recipe.ID
-		inserted.Body = stepIn.Body
-		inserted.SortOrder = stepIn.SortOrder
-
-		err = tx.QueryRowContext(ctx, stepQ,
-			recipe.ID, stepIn.Body, stepIn.SortOrder,
-		).Scan(&inserted.ID, &inserted.CreatedAt)
-		if err != nil {
-			return nil, fmt.Errorf("cocktail.Insert step: %w", err)
-		}
-		recipe.Steps = append(recipe.Steps, inserted)
+	recipe.Steps, err = insertRecipeSteps(ctx, tx, recipe.ID, input.Steps)
+	if err != nil {
+		return nil, fmt.Errorf("cocktail.Insert step: %w", err)
 	}
 
 	// Same tx: Web must not guess slug from cocktail_id. Missing parent is
 	// a Create failure (FK normally makes this unreachable).
-	err = tx.QueryRowContext(ctx, `SELECT slug FROM cocktails WHERE id = $1`, input.CocktailID).
-		Scan(&recipe.CocktailSlug)
-	if errors.Is(err, sql.ErrNoRows) {
-		return nil, validationErrorf("cocktail_id does not exist")
-	}
+	slug, err := cocktailSlugByID(ctx, tx, input.CocktailID)
 	if err != nil {
+		if errors.Is(err, ErrValidation) {
+			return nil, err
+		}
 		return nil, fmt.Errorf("cocktail.Insert slug: %w", err)
 	}
-	if strings.TrimSpace(recipe.CocktailSlug) == "" {
-		return nil, fmt.Errorf("cocktail.Insert slug: empty")
-	}
+	recipe.CocktailSlug = slug
 
 	if err := tx.Commit(); err != nil {
 		return nil, fmt.Errorf("cocktail.Insert commit: %w", err)
 	}
 
 	return recipe, nil
+}
+
+func insertRecipeIngredients(ctx context.Context, tx *sql.Tx, recipeID string, inputs []IngredientInput) ([]Ingredient, error) {
+	out := make([]Ingredient, 0, len(inputs))
+	for _, ing := range inputs {
+		const ingQ = `
+			INSERT INTO cocktail_recipe_ingredients (recipe_id, name, amount, unit, sort_order)
+			VALUES ($1, $2, $3, $4, $5)
+			RETURNING id, created_at`
+
+		var inserted Ingredient
+		inserted.RecipeID = recipeID
+		inserted.Name = ing.Name
+		inserted.Amount = ing.Amount
+		inserted.Unit = ing.Unit
+		inserted.SortOrder = ing.SortOrder
+
+		if err := tx.QueryRowContext(ctx, ingQ,
+			recipeID, ing.Name, ing.Amount, ing.Unit, ing.SortOrder,
+		).Scan(&inserted.ID, &inserted.CreatedAt); err != nil {
+			return nil, err
+		}
+		out = append(out, inserted)
+	}
+	return out, nil
+}
+
+func insertRecipeSteps(ctx context.Context, tx *sql.Tx, recipeID string, inputs []StepInput) ([]Step, error) {
+	out := make([]Step, 0, len(inputs))
+	for _, stepIn := range inputs {
+		const stepQ = `
+			INSERT INTO cocktail_recipe_steps (recipe_id, body, sort_order)
+			VALUES ($1, $2, $3)
+			RETURNING id, created_at`
+
+		var inserted Step
+		inserted.RecipeID = recipeID
+		inserted.Body = stepIn.Body
+		inserted.SortOrder = stepIn.SortOrder
+
+		if err := tx.QueryRowContext(ctx, stepQ,
+			recipeID, stepIn.Body, stepIn.SortOrder,
+		).Scan(&inserted.ID, &inserted.CreatedAt); err != nil {
+			return nil, err
+		}
+		out = append(out, inserted)
+	}
+	return out, nil
+}
+
+func cocktailSlugByID(ctx context.Context, tx *sql.Tx, cocktailID string) (string, error) {
+	var slug string
+	err := tx.QueryRowContext(ctx, `SELECT slug FROM cocktails WHERE id = $1`, cocktailID).Scan(&slug)
+	if errors.Is(err, sql.ErrNoRows) {
+		return "", validationErrorf("cocktail_id does not exist")
+	}
+	if err != nil {
+		return "", err
+	}
+	if strings.TrimSpace(slug) == "" {
+		return "", fmt.Errorf("empty slug")
+	}
+	return slug, nil
+}
+
+func isFKViolation(err error) bool {
+	var pqErr *pq.Error
+	return errors.As(err, &pqErr) && pqErr.Code == "23503"
+}
+
+// FindOwnedRecipeByID returns the caller's non-official recipe (draft or
+// published) with children and parent slug. Official / other owners → ErrNotFound.
+func (r *repository) FindOwnedRecipeByID(ctx context.Context, id, userID string) (*Recipe, error) {
+	recipeQ := fmt.Sprintf(`
+		SELECT r.id, r.cocktail_id, c.slug, r.user_id,
+			%s,
+			r.name, r.memo, r.image_url, r.status, r.is_official,
+			%s, r.created_at, r.updated_at
+		FROM cocktail_recipes r
+		INNER JOIN cocktails c ON c.id = r.cocktail_id
+		LEFT JOIN public.users u ON u.id = r.user_id
+		WHERE r.id = $1 AND r.user_id = $2 AND NOT r.is_official`, authorNameSQL(3), recipeAggregates)
+
+	rec, err := r.scanRecipeRow(r.db.QueryRowContext(ctx, recipeQ, id, userID, WITHDRAWN_AUTHOR_LABEL))
+	if errors.Is(err, sql.ErrNoRows) {
+		return nil, ErrNotFound
+	}
+	if err != nil {
+		return nil, err
+	}
+
+	if err := r.loadRecipeChildren(ctx, rec); err != nil {
+		return nil, err
+	}
+	return rec, nil
+}
+
+// UpdateDraft replaces a draft's parent fields and children in one tx.
+// Locks the owner row first so a concurrent publish cannot be overwritten.
+func (r *repository) UpdateDraft(ctx context.Context, id, userID string, input DraftUpdateInput) (*Recipe, error) {
+	tx, err := r.db.BeginTx(ctx, nil)
+	if err != nil {
+		return nil, fmt.Errorf("cocktail.UpdateDraft begin tx: %w", err)
+	}
+	defer tx.Rollback() //nolint:errcheck
+
+	const lockQ = `
+		SELECT status FROM cocktail_recipes
+		WHERE id = $1 AND user_id = $2 AND NOT is_official
+		FOR UPDATE`
+
+	var status string
+	err = tx.QueryRowContext(ctx, lockQ, id, userID).Scan(&status)
+	if errors.Is(err, sql.ErrNoRows) {
+		return nil, ErrNotFound
+	}
+	if err != nil {
+		return nil, fmt.Errorf("cocktail.UpdateDraft lock: %w", err)
+	}
+	if status != "draft" {
+		return nil, validationErrorf("%s", msgPublishedCannotUpdate)
+	}
+
+	const updateQ = `
+		UPDATE cocktail_recipes
+		SET cocktail_id = $3, name = $4, memo = $5, image_url = $6, status = $7
+		WHERE id = $1 AND user_id = $2 AND status = 'draft' AND NOT is_official
+		RETURNING id, is_official, created_at, updated_at`
+
+	recipe := &Recipe{
+		CocktailID: input.CocktailID,
+		Name:       input.Name,
+		Memo:       input.Memo,
+		ImageURL:   input.ImageURL,
+		Status:     input.Status,
+	}
+	ownerID := userID
+	recipe.UserID = &ownerID
+
+	err = tx.QueryRowContext(ctx, updateQ,
+		id, userID, input.CocktailID, input.Name, input.Memo, input.ImageURL, input.Status,
+	).Scan(&recipe.ID, &recipe.IsOfficial, &recipe.CreatedAt, &recipe.UpdatedAt)
+	if errors.Is(err, sql.ErrNoRows) {
+		return nil, validationErrorf("%s", msgPublishedCannotUpdate)
+	}
+	if err != nil {
+		if isFKViolation(err) {
+			return nil, validationErrorf("cocktail_id does not exist")
+		}
+		return nil, fmt.Errorf("cocktail.UpdateDraft recipe: %w", err)
+	}
+
+	if _, err := tx.ExecContext(ctx, `DELETE FROM cocktail_recipe_ingredients WHERE recipe_id = $1`, recipe.ID); err != nil {
+		return nil, fmt.Errorf("cocktail.UpdateDraft delete ingredients: %w", err)
+	}
+	if _, err := tx.ExecContext(ctx, `DELETE FROM cocktail_recipe_steps WHERE recipe_id = $1`, recipe.ID); err != nil {
+		return nil, fmt.Errorf("cocktail.UpdateDraft delete steps: %w", err)
+	}
+
+	recipe.Ingredients, err = insertRecipeIngredients(ctx, tx, recipe.ID, input.Ingredients)
+	if err != nil {
+		return nil, fmt.Errorf("cocktail.UpdateDraft ingredient: %w", err)
+	}
+	recipe.Steps, err = insertRecipeSteps(ctx, tx, recipe.ID, input.Steps)
+	if err != nil {
+		return nil, fmt.Errorf("cocktail.UpdateDraft step: %w", err)
+	}
+
+	slug, err := cocktailSlugByID(ctx, tx, input.CocktailID)
+	if err != nil {
+		if errors.Is(err, ErrValidation) {
+			return nil, err
+		}
+		return nil, fmt.Errorf("cocktail.UpdateDraft slug: %w", err)
+	}
+	recipe.CocktailSlug = slug
+
+	if err := tx.Commit(); err != nil {
+		return nil, fmt.Errorf("cocktail.UpdateDraft commit: %w", err)
+	}
+	return recipe, nil
+}
+
+// DeleteDraft removes a draft in one statement so a just-published row cannot
+// be deleted. 0 rows: re-read as owner — published → 400, else 404.
+func (r *repository) DeleteDraft(ctx context.Context, id, userID string) error {
+	const q = `
+		DELETE FROM cocktail_recipes
+		WHERE id = $1 AND user_id = $2 AND status = 'draft' AND NOT is_official`
+
+	result, err := r.db.ExecContext(ctx, q, id, userID)
+	if err != nil {
+		return err
+	}
+	n, err := result.RowsAffected()
+	if err != nil {
+		return err
+	}
+	if n == 1 {
+		return nil
+	}
+
+	owned, findErr := r.FindOwnedRecipeByID(ctx, id, userID)
+	if findErr != nil {
+		return findErr
+	}
+	if owned.Status == "published" {
+		return validationErrorf("%s", msgPublishedCannotDelete)
+	}
+	return ErrNotFound
 }
 
 func (r *repository) FindRatingByRecipeAndUser(ctx context.Context, recipeID, userID string) (*RecipeRating, error) {

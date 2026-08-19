@@ -571,3 +571,15 @@ PR1 の PATCH が published 行をフル更新できてはいけない。ロッ�
 - PostgREST 経由で owner が published 本体を直接 UPDATE できる RLS のまま（本線書き込みは Go）
 - Storage 上の旧画像 GC
 - 公式アカウントが mine を開いても公式行は出ない（除外仕様の維持）
+
+---
+
+## 実際の実装との差分
+
+PR1（`feat/web-cocktail-recipe-draft-edit`）時点。本文の方針は変えていない。
+
+- 所有者 GET/PATCH/DELETE は肥大化回避のため `handler_mine.go` / `service_owned.go` に分割した。マウントは計画どおり既存 `AuthMineRoutes`（`/mine` を `/{id}` より先）。
+- PATCH の draft フル置換は `DraftUpdateInput` を足し、検証は既存 `validate`（`asCreateInput()`）に寄せた。
+- Web の FormData 検証は `recipe-form-data.ts`、結果型は `recipe-form-state.ts`。`new/actions.ts` の Create ループは未変更。
+- edit の metadata title は「アレンジレシピを編集」（「登録」は使わない）。
+- PR2（公開後メタ / 公開詳細の入口 / フォーム published モード）は未着手。published PATCH は service で全拒否のまま。

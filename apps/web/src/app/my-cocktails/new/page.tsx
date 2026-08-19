@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
-import { Heading } from '@/components/ui/heading';
 import { fetchCocktailItemsServer } from '@/application/cocktails-api.server';
+import { Heading } from '@/components/ui/heading';
 import { createClient } from '@/lib/supabase/server';
 import { loginHref } from '@/utils/login-href';
 import { recipeComposePath } from '@/utils/recipe-compose-href';
 
-import { CocktailRecipeForm } from './cocktail-recipe-form';
+import { CocktailRecipeForm } from '../cocktail-recipe-form';
+import { createCocktailRecipe } from './actions';
 
 export const metadata: Metadata = {
   title: 'アレンジレシピを投稿',
@@ -46,7 +47,12 @@ export default async function NewCocktailRecipePage({ searchParams }: PageProps)
         </p>
       </div>
 
-      <CocktailRecipeForm cocktails={cocktails} defaultCocktailId={defaultCocktailId} />
+      <CocktailRecipeForm
+        mode="create"
+        action={createCocktailRecipe}
+        cocktails={cocktails}
+        defaultCocktailId={defaultCocktailId}
+      />
     </div>
   );
 }

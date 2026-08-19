@@ -27,11 +27,7 @@ function RecipeMeta({ recipe, isDraft }: { recipe: MyCocktailRecipeSummary; isDr
   return (
     <div className="min-w-0 flex-1">
       <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
-        {isDraft ? (
-          <span className="font-medium">{recipe.name}</span>
-        ) : (
-          <span className="font-medium group-hover:underline">{recipe.name}</span>
-        )}
+        <span className="font-medium group-hover:underline">{recipe.name}</span>
         {isDraft ? <Badge variant="secondary">下書き</Badge> : null}
       </div>
       <p className="text-muted-foreground mt-0.5 text-xs">{recipe.cocktailName}</p>
@@ -41,9 +37,10 @@ function RecipeMeta({ recipe, isDraft }: { recipe: MyCocktailRecipeSummary; isDr
 
 export function MyRecipeRow({ recipe }: MyRecipeRowProps) {
   const isDraft = recipe.status !== 'published';
-  // Published without slug is fail-closed: not a link (public GET would 404).
-  const href =
-    !isDraft && recipe.cocktailSlug
+  // Draft → edit. Published without slug is fail-closed (public GET would 404).
+  const href = isDraft
+    ? `/my-cocktails/${recipe.id}/edit`
+    : recipe.cocktailSlug
       ? `/cocktails/${recipe.cocktailSlug}/recipes/${recipe.id}`
       : null;
 

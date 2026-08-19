@@ -106,6 +106,24 @@ export async function fetchCocktailRecipeServer(id: string): Promise<CocktailRec
   return toCocktailRecipe(res);
 }
 
+export type FetchMyCocktailRecipeResult =
+  { ok: true; recipe: CocktailRecipe } | { ok: false; status: number; error: string };
+
+/** Authenticated owner's single recipe (draft + published). Does not throw. */
+export async function fetchMyCocktailRecipe(
+  accessToken: string,
+  id: string,
+): Promise<FetchMyCocktailRecipeResult> {
+  const result = await authServerFetch<ApiRecipe>(
+    `/api/auth/cocktail-recipes/${encodeURIComponent(id)}`,
+    { accessToken },
+  );
+  if (!result.ok) {
+    return { ok: false, status: result.status, error: result.error };
+  }
+  return { ok: true, recipe: toCocktailRecipe(result.data) };
+}
+
 /** Authenticated owner's draft + published recipes. Fail closed to null. */
 export async function fetchMyCocktailRecipes(
   accessToken: string,

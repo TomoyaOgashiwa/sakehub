@@ -1,7 +1,7 @@
 'use client';
 
 import { useActionState, useRef, useState } from 'react';
-import type { Cocktail } from '@sakehub/types';
+import type { Cocktail, CocktailRecipe } from '@sakehub/types';
 import { PlusIcon, Trash2Icon, UploadIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -10,7 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/utils/utils';
 
-import { type RecipeFormState, createCocktailRecipe } from './actions';
+import type { RecipeFormState } from './recipe-form-state';
 
 const UNITS = ['ml', 'g', 'tsp', 'tbsp', 'oz', 'cl', 'dash', 'drop', 'piece'] as const;
 type Unit = (typeof UNITS)[number];
@@ -37,16 +37,53 @@ function makeStep(): StepRow {
   return { id: crypto.randomUUID(), body: '' };
 }
 
-interface CocktailRecipeFormProps {
-  cocktails: Cocktail[];
-  defaultCocktailId?: string;
+function isUnit(value: string | undefined): value is Unit {
+  return value !== undefined && (UNITS as readonly string[]).includes(value);
 }
 
-export function CocktailRecipeForm({ cocktails, defaultCocktailId }: CocktailRecipeFormProps) {
-  const [state, formAction, isPending] = useActionState(createCocktailRecipe, initialState);
-  const [ingredients, setIngredients] = useState<IngredientRow[]>([makeIngredient()]);
-  const [steps, setSteps] = useState<StepRow[]>([makeStep()]);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+function initialIngredients(recipe?: CocktailRecipe): IngredientRow[] {
+  if (!recipe || recipe.ingredients.length === 0) return [makeIngredient()];
+  return [...recipe.ingredients]
+    .sort((a, b) => a.sortOrder - b.sortOrder)
+    .map((ing) => ({
+      id: ing.id,
+      name: ing.name,
+      amount: ing.amount != null ? String(ing.amount) : '',
+      unit: isUnit(ing.unit) ? ing.unit : 'ml',
+    }));
+}
+
+function initialSteps(recipe?: CocktailRecipe): StepRow[] {
+  if (!recipe || recipe.steps.length === 0) return [makeStep()];
+  return [...recipe.steps]
+    .sort((a, b) => a.sortOrder - b.sortOrder)
+    .map((step) => ({
+      id: step.id,
+      body: step.body,
+    }));
+}
+
+type RecipeFormMode = 'create' | 'draft';
+
+interface CocktailRecipeFormProps {
+  mode: RecipeFormMode;
+  action: (state: RecipeFormState, formData: FormData) => Promise<RecipeFormState>;
+  cocktails: Cocktail[];
+  defaultCocktailId?: string;
+  recipe?: CocktailRecipe;
+}
+
+export function CocktailRecipeForm({
+  mode,
+  action,
+  cocktails,
+  defaultCocktailId,
+  recipe,
+}: CocktailRecipeFormProps) {
+  const [state, formAction, isPending] = useActionState(action, initialState);
+  const [ingredients, setIngredients] = useState<IngredientRow[]>(() => initialIngredients(recipe));
+  const [steps, setSteps] = useState<StepRow[]>(() => initialSteps(recipe));
+  const [previewUrl, setPreviewUrl] = useState<string | null>(recipe?.imageUrl ?? null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const serializedIngredients = JSON.stringify(
@@ -113,10 +150,16 @@ export function CocktailRecipeForm({ cocktails, defaultCocktailId }: CocktailRec
     setSteps((prev) => prev.map((step) => (step.id === id ? { ...step, body } : step)));
   }
 
+  const defaultCocktail = recipe?.cocktailId ?? defaultCocktailId ?? '';
+
   return (
     <form action={formAction} className="space-y-8">
+      {mode === 'draft' && recipe ? (
+        <input type="hidden" name="id" value={recipe.id} readOnly />
+      ) : null}
       <input type="hidden" name="ingredients" value={serializedIngredients} readOnly />
       <input type="hidden" name="steps" value={serializedSteps} readOnly />
+      <input type="hidden" name="image_cleared" value={previewUrl ? '' : '1'} readOnly />
 
       {/* Image upload */}
       <div className="space-y-2">
@@ -183,7 +226,7 @@ export function CocktailRecipeForm({ cocktails, defaultCocktailId }: CocktailRec
           id="cocktail_id"
           name="cocktail_id"
           required
-          defaultValue={defaultCocktailId ?? ''}
+          defaultValue={defaultCocktail}
           className="border-input dark:bg-input/30 h-12 w-full rounded-lg border bg-transparent px-3 text-sm outline-none focus-visible:ring-2"
         >
           <option value="" disabled>
@@ -212,6 +255,7 @@ export function CocktailRecipeForm({ cocktails, defaultCocktailId }: CocktailRec
           placeholder="例：東京ミュール、桜マティーニ..."
           maxLength={100}
           required
+          defaultValue={recipe?.name ?? ''}
           className="h-12"
         />
       </div>
@@ -335,6 +379,7 @@ export function CocktailRecipeForm({ cocktails, defaultCocktailId }: CocktailRec
           placeholder="氷は大きめのものを使うと薄まりにくい..."
           maxLength={1000}
           rows={4}
+          defaultValue={recipe?.memo ?? ''}
           className="resize-none"
         />
       </div>
@@ -343,30 +388,35 @@ export function CocktailRecipeForm({ cocktails, defaultCocktailId }: CocktailRec
       {!state.ok && state.error && <p className="text-destructive text-sm">{state.error}</p>}
 
       {/* Submit buttons */}
-      <div className="flex gap-3 pt-2">
-        <Button
-          type="submit"
-          name="status"
-          value="draft"
-          variant="outline"
-          disabled={isPending}
-          className="flex-1"
-        >
-          下書き保存
-        </Button>
-        <button
-          type="submit"
-          name="status"
-          value="published"
-          disabled={isPending}
-          className={cn(
-            'flex-1 rounded-lg px-4 py-2 text-sm font-medium transition-opacity',
-            'bg-amber text-amber-foreground hover:opacity-90 disabled:opacity-50',
-            isPending && 'cursor-not-allowed',
-          )}
-        >
-          {isPending ? '投稿中...' : 'レシピを投稿する'}
-        </button>
+      <div className="space-y-3 pt-2">
+        <p className="text-muted-foreground text-xs">
+          投稿すると材料・作り方・親カクテルは変えられません。
+        </p>
+        <div className="flex gap-3">
+          <Button
+            type="submit"
+            name="status"
+            value="draft"
+            variant="outline"
+            disabled={isPending}
+            className="flex-1"
+          >
+            下書き保存
+          </Button>
+          <button
+            type="submit"
+            name="status"
+            value="published"
+            disabled={isPending}
+            className={cn(
+              'flex-1 rounded-lg px-4 py-2 text-sm font-medium transition-opacity',
+              'bg-amber text-amber-foreground hover:opacity-90 disabled:opacity-50',
+              isPending && 'cursor-not-allowed',
+            )}
+          >
+            {isPending ? '投稿中...' : 'レシピを投稿する'}
+          </button>
+        </div>
       </div>
     </form>
   );

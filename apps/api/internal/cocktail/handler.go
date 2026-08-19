@@ -38,10 +38,14 @@ func (h *Handler) AuthRecipeRoutes(r chi.Router) {
 	r.Post("/", h.Create)
 }
 
-// AuthMineRoutes registers the authenticated owner's recipe list.
+// AuthMineRoutes registers the authenticated owner's recipe list and
+// single-recipe GET / PATCH / DELETE. /mine must stay registered before /{id}.
 // Mounted at /api/auth/cocktail-recipes
 func (h *Handler) AuthMineRoutes(r chi.Router) {
 	r.Get("/mine", h.ListMine)
+	r.Get("/{id}", h.GetOwnedRecipe)
+	r.Patch("/{id}", h.PatchOwnedRecipe)
+	r.Delete("/{id}", h.DeleteOwnedDraft)
 }
 
 // ListCocktails returns cocktail master records with published recipe counts.

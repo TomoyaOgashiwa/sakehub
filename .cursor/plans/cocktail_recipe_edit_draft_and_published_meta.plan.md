@@ -4,13 +4,13 @@ overview: カクテルレシピの下書き編集・公開と、公開後の見�
 todos:
   - id: pr1-api-owner-get-patch-delete
     content: "PR1: GET/PATCH/DELETE /api/auth/cocktail-recipes/{id}（draft フル + publish、published は PATCH 全拒否、draft のみ削除）+ CORS PATCH"
-    status: pending
+    status: completed
   - id: pr1-web-draft-edit-delete
     content: "PR1: /my-cocktails/[id]/edit（下書きのみ）+ 既存フォーム再利用 + 一覧下書き行を入口に + 下書き削除 Dialog"
-    status: pending
+    status: completed
   - id: pr2-published-meta
     content: "PR2: PATCH の published マスク（name/image_url/memo）+ フォーム published モード（本体フィールドを出さない）+ 公開詳細の入口"
-    status: pending
+    status: completed
 isProject: false
 ---
 
@@ -583,3 +583,10 @@ PR1（`feat/web-cocktail-recipe-draft-edit`）時点。本文の方針は変え�
 - Web の FormData 検証は `recipe-form-data.ts`、結果型は `recipe-form-state.ts`。`new/actions.ts` の Create ループは未変更。
 - edit の metadata title は「アレンジレシピを編集」（「登録」は使わない）。
 - PR2（公開後メタ / 公開詳細の入口 / フォーム published モード）は未着手。published PATCH は service で全拒否のまま。
+
+PR2（`feat/web-cocktail-recipe-published-meta`）時点。本文の方針は変えていない。
+
+- published PATCH は `allowedPublishedPatchKeys`（name / image_url / memo）以外を 400。`UpdatePublishedMeta` は親行の3列のみ SET。slug JOIN は同一 tx。レスポンスは commit 後に `FindOwnedRecipeByID` で再読込。
+- `service_test.go` の PR1「published + name は 400」を「name のみは通る」に置き換え、ingredients / status / cocktail_id は 400 のまま（`UpdatePublishedMeta` も呼ばない）。
+- Web の公開後保存は `updatePublishedCocktailRecipe` を分離。draft のフル PATCH を巻き込みたくないため。保存前に所有者 GET で status を確認する（フォームの mode を信じると、draft へ meta-only PATCH したとき材料が空置換される）。
+- フォームは discriminated union（`create` | `draft` | `published`）。published では親セレクト・材料・手順をマウントしない。公開詳細の入口コピーは「名前・画像を編集」。

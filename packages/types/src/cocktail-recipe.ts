@@ -88,6 +88,17 @@ export interface PatchCocktailRecipeInput {
   imageUrl?: string | null;
 }
 
+/**
+ * PATCH published appearance only. Sending body keys (ingredients / steps /
+ * cocktailId / status) is rejected by the API.
+ * imageUrl / memo: omit to keep the stored value, null to clear.
+ */
+export interface PatchPublishedCocktailRecipeInput {
+  name?: string;
+  memo?: string | null;
+  imageUrl?: string | null;
+}
+
 /** GET /api/auth/cocktail-recipes/mine item (draft + published, never official). */
 export interface MyCocktailRecipeSummary {
   id: string;

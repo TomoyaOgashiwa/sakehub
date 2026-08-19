@@ -64,6 +64,8 @@ export default async function CocktailRecipeDetailPage({ params, searchParams }:
 
   const { user, accessToken } = await getOptionalAccessToken();
   const showRatings = !recipe.isOfficial;
+  const canEditAppearance =
+    user != null && recipe.userId != null && user.id === recipe.userId && !recipe.isOfficial;
 
   let ratingPage: Awaited<ReturnType<typeof fetchRatingsByRecipeId>>;
   let ratingsLoadFailed = false;
@@ -115,6 +117,16 @@ export default async function CocktailRecipeDetailPage({ params, searchParams }:
             {recipe.authorName && (
               <p className="text-muted-foreground mt-1 text-sm">{recipe.authorName}</p>
             )}
+            {canEditAppearance ? (
+              <p className="mt-3">
+                <Link
+                  href={`/my-cocktails/${recipe.id}/edit`}
+                  className="text-muted-foreground hover:text-foreground text-sm underline underline-offset-2"
+                >
+                  名前・画像を編集
+                </Link>
+              </p>
+            ) : null}
             {showRatings && recipe.averageRating > 0 && (
               <div className="mt-2">
                 <StarRatingDisplay
@@ -163,7 +175,7 @@ export default async function CocktailRecipeDetailPage({ params, searchParams }:
                         >
                           {idx + 1}
                         </span>
-                        <p className="text-foreground/90 leading-relaxed pt-1">{step.body}</p>
+                        <p className="text-foreground/90 pt-1 leading-relaxed">{step.body}</p>
                       </li>
                     ))}
                   </ol>

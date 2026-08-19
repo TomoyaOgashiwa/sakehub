@@ -63,26 +63,40 @@ function initialSteps(recipe?: CocktailRecipe): StepRow[] {
     }));
 }
 
-type RecipeFormMode = 'create' | 'draft';
+type RecipeFormAction = (state: RecipeFormState, formData: FormData) => Promise<RecipeFormState>;
 
-interface CocktailRecipeFormProps {
-  mode: RecipeFormMode;
-  action: (state: RecipeFormState, formData: FormData) => Promise<RecipeFormState>;
-  cocktails: Cocktail[];
-  defaultCocktailId?: string;
-  recipe?: CocktailRecipe;
-}
+type CocktailRecipeFormProps =
+  | {
+      mode: 'create';
+      action: RecipeFormAction;
+      cocktails: Cocktail[];
+      defaultCocktailId?: string;
+    }
+  | {
+      mode: 'draft';
+      action: RecipeFormAction;
+      cocktails: Cocktail[];
+      recipe: CocktailRecipe;
+    }
+  | {
+      mode: 'published';
+      action: RecipeFormAction;
+      recipe: CocktailRecipe;
+    };
 
-export function CocktailRecipeForm({
-  mode,
-  action,
-  cocktails,
-  defaultCocktailId,
-  recipe,
-}: CocktailRecipeFormProps) {
+export function CocktailRecipeForm(props: CocktailRecipeFormProps) {
+  const { mode, action } = props;
+  const recipe = mode === 'create' ? undefined : props.recipe;
+  const cocktails = mode === 'published' ? [] : props.cocktails;
+  const defaultCocktailId = mode === 'create' ? props.defaultCocktailId : undefined;
+  const appearanceOnly = mode === 'published';
   const [state, formAction, isPending] = useActionState(action, initialState);
-  const [ingredients, setIngredients] = useState<IngredientRow[]>(() => initialIngredients(recipe));
-  const [steps, setSteps] = useState<StepRow[]>(() => initialSteps(recipe));
+  const [ingredients, setIngredients] = useState<IngredientRow[]>(() =>
+    appearanceOnly ? [makeIngredient()] : initialIngredients(recipe),
+  );
+  const [steps, setSteps] = useState<StepRow[]>(() =>
+    appearanceOnly ? [makeStep()] : initialSteps(recipe),
+  );
   const [previewUrl, setPreviewUrl] = useState<string | null>(recipe?.imageUrl ?? null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -154,12 +168,21 @@ export function CocktailRecipeForm({
 
   return (
     <form action={formAction} className="space-y-8">
-      {mode === 'draft' && recipe ? (
+      {mode !== 'create' && recipe ? (
         <input type="hidden" name="id" value={recipe.id} readOnly />
       ) : null}
-      <input type="hidden" name="ingredients" value={serializedIngredients} readOnly />
-      <input type="hidden" name="steps" value={serializedSteps} readOnly />
+      {appearanceOnly ? null : (
+        <>
+          <input type="hidden" name="ingredients" value={serializedIngredients} readOnly />
+          <input type="hidden" name="steps" value={serializedSteps} readOnly />
+        </>
+      )}
       <input type="hidden" name="image_cleared" value={previewUrl ? '' : '1'} readOnly />
+      {appearanceOnly ? (
+        <p className="text-muted-foreground text-sm">
+          名前・写真・コツを直せます。材料と作り方は公開後は変更できません。
+        </p>
+      ) : null}
 
       {/* Image upload */}
       <div className="space-y-2">
@@ -217,32 +240,33 @@ export function CocktailRecipeForm({
         )}
       </div>
 
-      {/* Cocktail genre */}
-      <div className="space-y-2">
-        <Label htmlFor="cocktail_id">
-          カクテルの種類 <span className="text-destructive">*</span>
-        </Label>
-        <select
-          id="cocktail_id"
-          name="cocktail_id"
-          required
-          defaultValue={defaultCocktail}
-          className="border-input dark:bg-input/30 h-12 w-full rounded-lg border bg-transparent px-3 text-sm outline-none focus-visible:ring-2"
-        >
-          <option value="" disabled>
-            種類を選択してください
-          </option>
-          {cocktails.map((cocktail) => (
-            <option key={cocktail.id} value={cocktail.id}>
-              {cocktail.name}
-              {cocktail.nameEn ? ` (${cocktail.nameEn})` : ''}
+      {appearanceOnly ? null : (
+        <div className="space-y-2">
+          <Label htmlFor="cocktail_id">
+            カクテルの種類 <span className="text-destructive">*</span>
+          </Label>
+          <select
+            id="cocktail_id"
+            name="cocktail_id"
+            required
+            defaultValue={defaultCocktail}
+            className="border-input dark:bg-input/30 h-12 w-full rounded-lg border bg-transparent px-3 text-sm outline-none focus-visible:ring-2"
+          >
+            <option value="" disabled>
+              種類を選択してください
             </option>
-          ))}
-        </select>
-        <p className="text-muted-foreground text-xs">
-          レシピはこの種類（ジャンル）に紐づいて一覧表示されます
-        </p>
-      </div>
+            {cocktails.map((cocktail) => (
+              <option key={cocktail.id} value={cocktail.id}>
+                {cocktail.name}
+                {cocktail.nameEn ? ` (${cocktail.nameEn})` : ''}
+              </option>
+            ))}
+          </select>
+          <p className="text-muted-foreground text-xs">
+            レシピはこの種類（ジャンル）に紐づいて一覧表示されます
+          </p>
+        </div>
+      )}
 
       {/* Cocktail name */}
       <div className="space-y-2">
@@ -260,115 +284,126 @@ export function CocktailRecipeForm({
         />
       </div>
 
-      {/* Ingredients */}
-      <div className="space-y-4">
-        <Label>
-          材料 <span className="text-destructive">*</span>
-        </Label>
+      {appearanceOnly ? null : (
+        <>
+          <div className="space-y-4">
+            <Label>
+              材料 <span className="text-destructive">*</span>
+            </Label>
 
-        <div className="space-y-3">
-          <div className="grid grid-cols-[1fr_120px_120px_40px] gap-2 px-1">
-            <span className="text-muted-foreground text-xs font-medium">材料名</span>
-            <span className="text-muted-foreground text-xs font-medium">数量</span>
-            <span className="text-muted-foreground text-xs font-medium">単位</span>
-            <span />
+            <div className="space-y-3">
+              <div className="grid grid-cols-[1fr_120px_120px_40px] gap-2 px-1">
+                <span className="text-muted-foreground text-xs font-medium">材料名</span>
+                <span className="text-muted-foreground text-xs font-medium">数量</span>
+                <span className="text-muted-foreground text-xs font-medium">単位</span>
+                <span />
+              </div>
+
+              {ingredients.map((ing, idx) => (
+                <div
+                  key={ing.id}
+                  className="grid grid-cols-[1fr_120px_120px_40px] items-center gap-2"
+                >
+                  <Input
+                    placeholder={`材料 ${idx + 1}`}
+                    value={ing.name}
+                    onChange={(e) => updateIngredient(ing.id, 'name', e.target.value)}
+                    maxLength={100}
+                    required
+                    className="h-10"
+                  />
+                  <Input
+                    type="number"
+                    placeholder="0"
+                    min="0"
+                    step="any"
+                    value={ing.amount}
+                    onChange={(e) => updateIngredient(ing.id, 'amount', e.target.value)}
+                    className="h-10"
+                  />
+                  <select
+                    value={ing.unit}
+                    onChange={(e) => updateIngredient(ing.id, 'unit', e.target.value)}
+                    className="border-input dark:bg-input/30 h-10 w-full rounded-lg border bg-transparent px-2.5 text-sm outline-none focus-visible:ring-2"
+                  >
+                    {UNITS.map((u) => (
+                      <option key={u} value={u}>
+                        {u}
+                      </option>
+                    ))}
+                  </select>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => removeIngredient(ing.id)}
+                    disabled={ingredients.length === 1}
+                    aria-label="材料を削除"
+                    className="text-muted-foreground"
+                  >
+                    <Trash2Icon className="size-4" />
+                  </Button>
+                </div>
+              ))}
+            </div>
+
+            <Button
+              type="button"
+              variant="outline"
+              onClick={addIngredient}
+              className="w-full gap-2"
+            >
+              <PlusIcon className="size-4" />
+              材料を追加
+            </Button>
           </div>
 
-          {ingredients.map((ing, idx) => (
-            <div key={ing.id} className="grid grid-cols-[1fr_120px_120px_40px] items-center gap-2">
-              <Input
-                placeholder={`材料 ${idx + 1}`}
-                value={ing.name}
-                onChange={(e) => updateIngredient(ing.id, 'name', e.target.value)}
-                maxLength={100}
-                required
-                className="h-10"
-              />
-              <Input
-                type="number"
-                placeholder="0"
-                min="0"
-                step="any"
-                value={ing.amount}
-                onChange={(e) => updateIngredient(ing.id, 'amount', e.target.value)}
-                className="h-10"
-              />
-              <select
-                value={ing.unit}
-                onChange={(e) => updateIngredient(ing.id, 'unit', e.target.value)}
-                className="border-input dark:bg-input/30 h-10 w-full rounded-lg border bg-transparent px-2.5 text-sm outline-none focus-visible:ring-2"
-              >
-                {UNITS.map((u) => (
-                  <option key={u} value={u}>
-                    {u}
-                  </option>
-                ))}
-              </select>
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon"
-                onClick={() => removeIngredient(ing.id)}
-                disabled={ingredients.length === 1}
-                aria-label="材料を削除"
-                className="text-muted-foreground"
-              >
-                <Trash2Icon className="size-4" />
-              </Button>
+          {/* Steps */}
+          <div className="space-y-4">
+            <Label>
+              作り方 <span className="text-destructive">*</span>
+            </Label>
+
+            <div className="space-y-3">
+              {steps.map((step, idx) => (
+                <div key={step.id} className="flex items-start gap-2">
+                  <span
+                    className="bg-muted text-muted-foreground mt-2 flex size-7 shrink-0 items-center justify-center rounded-full text-xs font-medium tabular-nums"
+                    aria-hidden="true"
+                  >
+                    {idx + 1}
+                  </span>
+                  <Textarea
+                    placeholder={`手順 ${idx + 1}（例: グラスに氷をたっぷり入れる）`}
+                    value={step.body}
+                    onChange={(e) => updateStep(step.id, e.target.value)}
+                    maxLength={500}
+                    rows={2}
+                    required
+                    className="resize-none"
+                  />
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => removeStep(step.id)}
+                    disabled={steps.length === 1}
+                    aria-label="手順を削除"
+                    className="text-muted-foreground mt-1"
+                  >
+                    <Trash2Icon className="size-4" />
+                  </Button>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
 
-        <Button type="button" variant="outline" onClick={addIngredient} className="w-full gap-2">
-          <PlusIcon className="size-4" />
-          材料を追加
-        </Button>
-      </div>
-
-      {/* Steps */}
-      <div className="space-y-4">
-        <Label>
-          作り方 <span className="text-destructive">*</span>
-        </Label>
-
-        <div className="space-y-3">
-          {steps.map((step, idx) => (
-            <div key={step.id} className="flex items-start gap-2">
-              <span
-                className="bg-muted text-muted-foreground mt-2 flex size-7 shrink-0 items-center justify-center rounded-full text-xs font-medium tabular-nums"
-                aria-hidden="true"
-              >
-                {idx + 1}
-              </span>
-              <Textarea
-                placeholder={`手順 ${idx + 1}（例: グラスに氷をたっぷり入れる）`}
-                value={step.body}
-                onChange={(e) => updateStep(step.id, e.target.value)}
-                maxLength={500}
-                rows={2}
-                required
-                className="resize-none"
-              />
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon"
-                onClick={() => removeStep(step.id)}
-                disabled={steps.length === 1}
-                aria-label="手順を削除"
-                className="text-muted-foreground mt-1"
-              >
-                <Trash2Icon className="size-4" />
-              </Button>
-            </div>
-          ))}
-        </div>
-
-        <Button type="button" variant="outline" onClick={addStep} className="w-full gap-2">
-          <PlusIcon className="size-4" />
-          手順を追加
-        </Button>
-      </div>
+            <Button type="button" variant="outline" onClick={addStep} className="w-full gap-2">
+              <PlusIcon className="size-4" />
+              手順を追加
+            </Button>
+          </div>
+        </>
+      )}
 
       {/* Tips */}
       <div className="space-y-2">
@@ -389,34 +424,50 @@ export function CocktailRecipeForm({
 
       {/* Submit buttons */}
       <div className="space-y-3 pt-2">
-        <p className="text-muted-foreground text-xs">
-          投稿すると材料・作り方・親カクテルは変えられません。
-        </p>
-        <div className="flex gap-3">
-          <Button
-            type="submit"
-            name="status"
-            value="draft"
-            variant="outline"
-            disabled={isPending}
-            className="flex-1"
-          >
-            下書き保存
-          </Button>
+        {appearanceOnly ? (
           <button
             type="submit"
-            name="status"
-            value="published"
             disabled={isPending}
             className={cn(
-              'flex-1 rounded-lg px-4 py-2 text-sm font-medium transition-opacity',
+              'w-full rounded-lg px-4 py-2 text-sm font-medium transition-opacity',
               'bg-amber text-amber-foreground hover:opacity-90 disabled:opacity-50',
               isPending && 'cursor-not-allowed',
             )}
           >
-            {isPending ? '投稿中...' : 'レシピを投稿する'}
+            {isPending ? '保存中...' : '保存する'}
           </button>
-        </div>
+        ) : (
+          <>
+            <p className="text-muted-foreground text-xs">
+              投稿すると材料・作り方・親カクテルは変えられません。
+            </p>
+            <div className="flex gap-3">
+              <Button
+                type="submit"
+                name="status"
+                value="draft"
+                variant="outline"
+                disabled={isPending}
+                className="flex-1"
+              >
+                下書き保存
+              </Button>
+              <button
+                type="submit"
+                name="status"
+                value="published"
+                disabled={isPending}
+                className={cn(
+                  'flex-1 rounded-lg px-4 py-2 text-sm font-medium transition-opacity',
+                  'bg-amber text-amber-foreground hover:opacity-90 disabled:opacity-50',
+                  isPending && 'cursor-not-allowed',
+                )}
+              >
+                {isPending ? '投稿中...' : 'レシピを投稿する'}
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </form>
   );

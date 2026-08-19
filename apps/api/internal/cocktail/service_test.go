@@ -15,16 +15,20 @@ const (
 )
 
 type stubRepo struct {
-	owned        *Recipe
-	ownedErr     error
-	updated      *Recipe
-	updateErr    error
-	updateCalled bool
-	lastUpdate   DraftUpdateInput
-	deleted      bool
-	deleteErr    error
-	published    *Recipe
-	insertErr    error
+	owned            *Recipe
+	ownedErr         error
+	updated          *Recipe
+	updateErr        error
+	updateCalled     bool
+	lastUpdate       DraftUpdateInput
+	metaUpdateCalled bool
+	lastMeta         PublishedMetaInput
+	updatedMeta      *Recipe
+	metaUpdateErr    error
+	deleted          bool
+	deleteErr        error
+	published        *Recipe
+	insertErr        error
 }
 
 func (s *stubRepo) ListCocktails(context.Context, ListParams) ([]Cocktail, int, error) {
@@ -73,6 +77,24 @@ func (s *stubRepo) UpdateDraft(_ context.Context, _ string, _ string, input Draf
 	}
 	return &Recipe{ID: testRecipeID, Status: input.Status, CocktailSlug: "manhattan"}, nil
 }
+func (s *stubRepo) UpdatePublishedMeta(_ context.Context, _ string, _ string, input PublishedMetaInput) (*Recipe, error) {
+	s.metaUpdateCalled = true
+	s.lastMeta = input
+	if s.metaUpdateErr != nil {
+		return nil, s.metaUpdateErr
+	}
+	if s.updatedMeta != nil {
+		return s.updatedMeta, nil
+	}
+	return &Recipe{
+		ID:           testRecipeID,
+		Status:       "published",
+		Name:         input.Name,
+		Memo:         input.Memo,
+		ImageURL:     input.ImageURL,
+		CocktailSlug: "manhattan",
+	}, nil
+}
 func (s *stubRepo) DeleteDraft(context.Context, string, string) error {
 	s.deleted = true
 	return s.deleteErr
@@ -120,22 +142,34 @@ func mustRaw(t *testing.T, v any) json.RawMessage {
 	return b
 }
 
-func TestPatchOwnedPublishedRejectsEvenNameOnly(t *testing.T) {
+func TestPatchOwnedPublishedNameOnlySucceeds(t *testing.T) {
 	t.Parallel()
 	repo := &stubRepo{owned: publishedOwned()}
 	svc := NewService(repo)
 
-	_, err := svc.PatchOwnedRecipe(context.Background(), testUserID, testRecipeID, map[string]json.RawMessage{
+	got, err := svc.PatchOwnedRecipe(context.Background(), testUserID, testRecipeID, map[string]json.RawMessage{
 		"name": mustRaw(t, "New name"),
 	})
-	if !errors.Is(err, ErrValidation) {
-		t.Fatalf("err = %v, want ErrValidation", err)
-	}
-	if !strings.Contains(err.Error(), msgPublishedCannotUpdate) {
-		t.Fatalf("err = %v, want %q", err, msgPublishedCannotUpdate)
+	if err != nil {
+		t.Fatalf("PatchOwnedRecipe: %v", err)
 	}
 	if repo.updateCalled {
 		t.Fatal("UpdateDraft must not run for a published recipe")
+	}
+	if !repo.metaUpdateCalled {
+		t.Fatal("UpdatePublishedMeta should run for name-only published PATCH")
+	}
+	if repo.lastMeta.Name != "New name" {
+		t.Fatalf("name = %q, want New name", repo.lastMeta.Name)
+	}
+	if repo.lastMeta.ImageURL == nil || *repo.lastMeta.ImageURL != "https://example.com/old.jpg" {
+		t.Fatalf("image_url = %v, want existing", repo.lastMeta.ImageURL)
+	}
+	if repo.lastMeta.Memo == nil || *repo.lastMeta.Memo != "keep me" {
+		t.Fatalf("memo = %v, want existing", repo.lastMeta.Memo)
+	}
+	if got == nil || got.CocktailSlug != "manhattan" {
+		t.Fatalf("got = %+v, want slug from UpdatePublishedMeta", got)
 	}
 }
 
@@ -150,8 +184,91 @@ func TestPatchOwnedPublishedRejectsIngredients(t *testing.T) {
 	if !errors.Is(err, ErrValidation) {
 		t.Fatalf("err = %v, want ErrValidation", err)
 	}
+	if !strings.Contains(err.Error(), msgPublishedMetaOnly) {
+		t.Fatalf("err = %v, want %q", err, msgPublishedMetaOnly)
+	}
 	if repo.updateCalled {
 		t.Fatal("UpdateDraft must not run when published + ingredients")
+	}
+	if repo.metaUpdateCalled {
+		t.Fatal("UpdatePublishedMeta must not run when published + ingredients")
+	}
+}
+
+func TestPatchOwnedPublishedRejectsStatusDraft(t *testing.T) {
+	t.Parallel()
+	repo := &stubRepo{owned: publishedOwned()}
+	svc := NewService(repo)
+
+	_, err := svc.PatchOwnedRecipe(context.Background(), testUserID, testRecipeID, map[string]json.RawMessage{
+		"name":   mustRaw(t, "New name"),
+		"status": mustRaw(t, "draft"),
+	})
+	if !errors.Is(err, ErrValidation) {
+		t.Fatalf("err = %v, want ErrValidation", err)
+	}
+	if !strings.Contains(err.Error(), msgPublishedMetaOnly) {
+		t.Fatalf("err = %v, want %q", err, msgPublishedMetaOnly)
+	}
+	if repo.metaUpdateCalled || repo.updateCalled {
+		t.Fatal("no update must run when published + status")
+	}
+}
+
+func TestPatchOwnedPublishedRejectsCocktailID(t *testing.T) {
+	t.Parallel()
+	repo := &stubRepo{owned: publishedOwned()}
+	svc := NewService(repo)
+
+	_, err := svc.PatchOwnedRecipe(context.Background(), testUserID, testRecipeID, map[string]json.RawMessage{
+		"name":        mustRaw(t, "New name"),
+		"cocktail_id": mustRaw(t, testCocktailID),
+	})
+	if !errors.Is(err, ErrValidation) {
+		t.Fatalf("err = %v, want ErrValidation", err)
+	}
+	if repo.metaUpdateCalled || repo.updateCalled {
+		t.Fatal("no update must run when published + cocktail_id")
+	}
+}
+
+func TestPatchOwnedPublishedEmptyNameRejected(t *testing.T) {
+	t.Parallel()
+	repo := &stubRepo{owned: publishedOwned()}
+	svc := NewService(repo)
+
+	_, err := svc.PatchOwnedRecipe(context.Background(), testUserID, testRecipeID, map[string]json.RawMessage{
+		"name": mustRaw(t, "   "),
+	})
+	if !errors.Is(err, ErrValidation) {
+		t.Fatalf("err = %v, want ErrValidation", err)
+	}
+	if !strings.Contains(err.Error(), "name is required") {
+		t.Fatalf("err = %v, want name is required", err)
+	}
+	if repo.metaUpdateCalled {
+		t.Fatal("UpdatePublishedMeta must not run for empty name")
+	}
+}
+
+func TestPatchOwnedPublishedNullImageClears(t *testing.T) {
+	t.Parallel()
+	repo := &stubRepo{owned: publishedOwned()}
+	svc := NewService(repo)
+
+	_, err := svc.PatchOwnedRecipe(context.Background(), testUserID, testRecipeID, map[string]json.RawMessage{
+		"name":      mustRaw(t, "New name"),
+		"image_url": json.RawMessage("null"),
+		"memo":      json.RawMessage("null"),
+	})
+	if err != nil {
+		t.Fatalf("PatchOwnedRecipe: %v", err)
+	}
+	if repo.lastMeta.ImageURL != nil {
+		t.Fatalf("image_url = %v, want nil", repo.lastMeta.ImageURL)
+	}
+	if repo.lastMeta.Memo != nil {
+		t.Fatalf("memo = %v, want nil", repo.lastMeta.Memo)
 	}
 }
 

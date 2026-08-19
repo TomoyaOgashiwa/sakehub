@@ -49,6 +49,7 @@ type Repository interface {
 	RatableRecipeExists(ctx context.Context, id string) error
 	Insert(ctx context.Context, input CreateInput) (*Recipe, error)
 	UpdateDraft(ctx context.Context, id, userID string, input DraftUpdateInput) (*Recipe, error)
+	UpdatePublishedMeta(ctx context.Context, id, userID string, input PublishedMetaInput) (*Recipe, error)
 	DeleteDraft(ctx context.Context, id, userID string) error
 
 	FindRatingByRecipeAndUser(ctx context.Context, recipeID, userID string) (*RecipeRating, error)
@@ -672,6 +673,73 @@ func (r *repository) UpdateDraft(ctx context.Context, id, userID string, input D
 		return nil, fmt.Errorf("cocktail.UpdateDraft commit: %w", err)
 	}
 	return recipe, nil
+}
+
+// UpdatePublishedMeta updates name / memo / image_url only. Ingredients,
+// steps, cocktail_id, status, and is_official are never SET.
+func (r *repository) UpdatePublishedMeta(ctx context.Context, id, userID string, input PublishedMetaInput) (*Recipe, error) {
+	tx, err := r.db.BeginTx(ctx, nil)
+	if err != nil {
+		return nil, fmt.Errorf("cocktail.UpdatePublishedMeta begin tx: %w", err)
+	}
+	defer tx.Rollback() //nolint:errcheck
+
+	const lockQ = `
+		SELECT status, cocktail_id FROM cocktail_recipes
+		WHERE id = $1 AND user_id = $2 AND NOT is_official
+		FOR UPDATE`
+
+	var status, cocktailID string
+	err = tx.QueryRowContext(ctx, lockQ, id, userID).Scan(&status, &cocktailID)
+	if errors.Is(err, sql.ErrNoRows) {
+		return nil, ErrNotFound
+	}
+	if err != nil {
+		return nil, fmt.Errorf("cocktail.UpdatePublishedMeta lock: %w", err)
+	}
+	if status != "published" {
+		return nil, validationErrorf("%s", msgPublishedCannotUpdate)
+	}
+
+	const updateQ = `
+		UPDATE cocktail_recipes
+		SET name = $3, memo = $4, image_url = $5
+		WHERE id = $1 AND user_id = $2 AND status = 'published' AND NOT is_official`
+
+	result, err := tx.ExecContext(ctx, updateQ, id, userID, input.Name, input.Memo, input.ImageURL)
+	if err != nil {
+		return nil, fmt.Errorf("cocktail.UpdatePublishedMeta recipe: %w", err)
+	}
+	n, err := result.RowsAffected()
+	if err != nil {
+		return nil, fmt.Errorf("cocktail.UpdatePublishedMeta rows: %w", err)
+	}
+	if n != 1 {
+		return nil, validationErrorf("%s", msgPublishedCannotUpdate)
+	}
+
+	slug, err := cocktailSlugByID(ctx, tx, cocktailID)
+	if err != nil {
+		if errors.Is(err, ErrValidation) {
+			return nil, err
+		}
+		return nil, fmt.Errorf("cocktail.UpdatePublishedMeta slug: %w", err)
+	}
+
+	if err := tx.Commit(); err != nil {
+		return nil, fmt.Errorf("cocktail.UpdatePublishedMeta commit: %w", err)
+	}
+
+	// Reload after commit so the response matches owner GET (children + aggregates).
+	rec, err := r.FindOwnedRecipeByID(ctx, id, userID)
+	if err != nil {
+		return nil, fmt.Errorf("cocktail.UpdatePublishedMeta reload: %w", err)
+	}
+	// slug was resolved in-tx; keep it if the reload JOIN is empty (fail-closed for Web).
+	if rec.CocktailSlug == "" {
+		rec.CocktailSlug = slug
+	}
+	return rec, nil
 }
 
 // DeleteDraft removes a draft in one statement so a just-published row cannot

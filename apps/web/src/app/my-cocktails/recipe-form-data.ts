@@ -80,3 +80,32 @@ export function parseRecipeFormData(
     },
   };
 }
+
+export interface ParsedPublishedMetaFields {
+  name: string;
+  memo: string;
+  imageFile: File | null;
+  imageCleared: boolean;
+}
+
+/** Appearance-only fields. Does not read cocktail_id / ingredients / steps / status. */
+export function parsePublishedMetaFormData(
+  formData: FormData,
+): { ok: true; data: ParsedPublishedMetaFields } | { ok: false; error: string } {
+  const name = (formData.get('name') as string | null)?.trim() ?? '';
+  const memo = (formData.get('memo') as string | null)?.trim() ?? '';
+  const imageFile = formData.get('image') as File | null;
+  const imageCleared = (formData.get('image_cleared') as string | null) === '1';
+
+  if (!name) {
+    return { ok: false, error: 'カクテル名は必須です。' };
+  }
+  if ([...name].length > 100) {
+    return { ok: false, error: 'カクテル名は100文字以内で入力してください。' };
+  }
+  if (memo && [...memo].length > 1000) {
+    return { ok: false, error: 'コツ・ポイントは1000文字以内で入力してください。' };
+  }
+
+  return { ok: true, data: { name, memo, imageFile, imageCleared } };
+}

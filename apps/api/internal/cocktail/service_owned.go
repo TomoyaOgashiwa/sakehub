@@ -21,6 +21,15 @@ var allowedDraftPatchKeys = map[string]struct{}{
 	"memo":        {},
 }
 
+// allowedPublishedPatchKeys is the appearance-only mask. Body keys that are
+// valid on draft (ingredients / steps / cocktail_id / status) are 400 here so
+// a stale full form cannot silently leave the recipe body unchanged.
+var allowedPublishedPatchKeys = map[string]struct{}{
+	"name":      {},
+	"image_url": {},
+	"memo":      {},
+}
+
 func (s *Service) GetOwnedRecipe(ctx context.Context, userID, id string) (*Recipe, error) {
 	if !isUUID(id) {
 		return nil, ErrInvalidUUID
@@ -52,9 +61,22 @@ func (s *Service) PatchOwnedRecipe(ctx context.Context, userID, id string, raw m
 		return nil, fmt.Errorf("cocktail.PatchOwnedRecipe: %w", err)
 	}
 
-	// PR1: published PATCH is rejected in full. PR2 opens name/image_url/memo.
 	if current.Status == "published" {
-		return nil, validationErrorf("%s", msgPublishedCannotUpdate)
+		if err := validatePublishedPatchKeys(raw); err != nil {
+			return nil, err
+		}
+		input, err := parsePublishedMeta(raw, current)
+		if err != nil {
+			return nil, err
+		}
+		recipe, err := s.repo.UpdatePublishedMeta(ctx, id, userID, input)
+		if err != nil {
+			if errors.Is(err, ErrValidation) || errors.Is(err, ErrNotFound) {
+				return nil, err
+			}
+			return nil, fmt.Errorf("cocktail.PatchOwnedRecipe: %w", err)
+		}
+		return recipe, nil
 	}
 
 	input, err := parseDraftPatch(raw, current)
@@ -99,6 +121,47 @@ func validatePatchKeys(raw map[string]json.RawMessage) error {
 		}
 	}
 	return nil
+}
+
+func validatePublishedPatchKeys(raw map[string]json.RawMessage) error {
+	for key := range raw {
+		if _, ok := allowedPublishedPatchKeys[key]; !ok {
+			return validationErrorf("%s", msgPublishedMetaOnly)
+		}
+	}
+	return nil
+}
+
+func parsePublishedMeta(raw map[string]json.RawMessage, current *Recipe) (PublishedMetaInput, error) {
+	input := PublishedMetaInput{
+		Name:     current.Name,
+		Memo:     current.Memo,
+		ImageURL: current.ImageURL,
+	}
+
+	if err := unmarshalStringField(raw, "name", &input.Name); err != nil {
+		return PublishedMetaInput{}, err
+	}
+	name := strings.TrimSpace(input.Name)
+	if name == "" {
+		return PublishedMetaInput{}, validationErrorf("name is required")
+	}
+	if len([]rune(name)) > 100 {
+		return PublishedMetaInput{}, validationErrorf("name must be 100 characters or fewer")
+	}
+	input.Name = name
+
+	if err := unmarshalNullableString(raw, "image_url", &input.ImageURL); err != nil {
+		return PublishedMetaInput{}, err
+	}
+	if err := unmarshalNullableString(raw, "memo", &input.Memo); err != nil {
+		return PublishedMetaInput{}, err
+	}
+	if input.Memo != nil && len([]rune(*input.Memo)) > 1000 {
+		return PublishedMetaInput{}, validationErrorf("memo must be 1000 characters or fewer")
+	}
+
+	return input, nil
 }
 
 func parseDraftPatch(raw map[string]json.RawMessage, current *Recipe) (DraftUpdateInput, error) {

@@ -205,9 +205,18 @@ func (in DraftUpdateInput) asCreateInput() CreateInput {
 	}
 }
 
+// PublishedMetaInput is the appearance-only payload for a published PATCH.
+// image_url / memo omit-vs-null is resolved in the service before this is built.
+type PublishedMetaInput struct {
+	Name     string
+	Memo     *string
+	ImageURL *string
+}
+
 const (
 	msgPublishedCannotUpdate = "published recipes cannot be updated"
 	msgPublishedCannotDelete = "published recipes cannot be deleted"
+	msgPublishedMetaOnly     = "published recipes can only update name, image_url, and memo"
 	msgIsOfficialForbidden   = "is_official cannot be set"
 )
 

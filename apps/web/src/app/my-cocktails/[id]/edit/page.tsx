@@ -1,3 +1,4 @@
+import type { CocktailRecipe } from '@sakehub/types';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
@@ -12,17 +13,33 @@ import { Heading } from '@/components/ui/heading';
 import { loginHref } from '@/utils/login-href';
 
 import { CocktailRecipeForm } from '../../cocktail-recipe-form';
-import { updateCocktailRecipe } from './actions';
+import { updateCocktailRecipe, updatePublishedCocktailRecipe } from './actions';
 import { DeleteDraftDialog } from './delete-draft-dialog';
-
-export const metadata: Metadata = {
-  title: 'アレンジレシピを編集',
-  description: '下書きのアレンジレシピを直して投稿できます。',
-};
 
 type PageProps = {
   params: Promise<{ id: string }>;
 };
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { id } = await params;
+  const { accessToken } = await getOptionalAccessToken();
+  if (!accessToken) {
+    return { title: 'アレンジレシピを編集' };
+  }
+
+  const result = await fetchMyCocktailRecipe(accessToken, id);
+  if (result.ok && result.recipe.status === 'published') {
+    return {
+      title: '名前・画像を編集',
+      description: '公開したレシピの名前・写真・コツを直せます。',
+    };
+  }
+
+  return {
+    title: 'アレンジレシピを編集',
+    description: '下書きのアレンジレシピを直して投稿できます。',
+  };
+}
 
 export default async function EditCocktailRecipePage({ params }: PageProps) {
   const { id } = await params;
@@ -40,15 +57,7 @@ export default async function EditCocktailRecipePage({ params }: PageProps) {
   }
 
   const recipe = result.recipe;
-  if (recipe.status === 'published') {
-    const slug = recipe.cocktailSlug.trim();
-    if (slug) {
-      redirect(`/cocktails/${slug}/recipes/${recipe.id}`);
-    }
-    redirect('/my-cocktails');
-  }
-
-  const cocktails = await fetchCocktailItemsServer({ limit: 200 });
+  const published = recipe.status === 'published';
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-10">
@@ -64,23 +73,44 @@ export default async function EditCocktailRecipePage({ params }: PageProps) {
 
       <div className="mb-10 space-y-1">
         <Heading level="h1">
-          アレンジレシピを
+          {published ? '名前・画像を' : 'アレンジレシピを'}
           <br />
           <span className="text-amber">編集する</span>
         </Heading>
         <p className="text-muted-foreground text-sm">
-          下書きを直して投稿できます。投稿すると材料・作り方・親カクテルは変えられません。
+          {published
+            ? '名前・写真・コツを直せます。材料と作り方は公開後は変更できません。'
+            : '下書きを直して投稿できます。投稿すると材料・作り方・親カクテルは変えられません。'}
         </p>
       </div>
 
+      {published ? (
+        <CocktailRecipeForm
+          key={recipe.id}
+          mode="published"
+          action={updatePublishedCocktailRecipe}
+          recipe={recipe}
+        />
+      ) : (
+        <DraftEditForm recipe={recipe} />
+      )}
+    </div>
+  );
+}
+
+async function DraftEditForm({ recipe }: { recipe: CocktailRecipe }) {
+  const cocktails = await fetchCocktailItemsServer({ limit: 200 });
+
+  return (
+    <>
       <CocktailRecipeForm
+        key={recipe.id}
         mode="draft"
         action={updateCocktailRecipe}
         cocktails={cocktails}
         recipe={recipe}
       />
-
       <DeleteDraftDialog recipeId={recipe.id} />
-    </div>
+    </>
   );
 }

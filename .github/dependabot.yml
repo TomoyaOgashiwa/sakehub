@@ -6,7 +6,8 @@ updates:
   # =========================================
   # pnpm の lockfile はルートだけなので、/apps/* に別エントリを置くと
   # package.json だけ更新されて pnpm-lock.yaml が追従せず CI が落ちる。
-  # Expo / RN は SDK 互換が必要なため Dependabot 対象外（手動で expo install）。
+  # Expo / RN / React（mobile のピン）は SDK 互換が必要なため Dependabot 対象外。
+  #   Expo SDK 56/57 は react@19.2.3 固定。web の React 更新は手動で apps/web だけ上げる。
   - package-ecosystem: 'npm' # pnpm でも npm として扱う
     directory: '/' # ルート（pnpm-lock.yaml がある場所）
     schedule:
@@ -26,6 +27,8 @@ updates:
     ignore:
       - dependency-name: 'expo'
       - dependency-name: 'expo-*'
+      - dependency-name: 'react'
+      - dependency-name: 'react-dom'
       - dependency-name: 'react-native'
       - dependency-name: 'react-native-*'
       - dependency-name: 'nativewind'
